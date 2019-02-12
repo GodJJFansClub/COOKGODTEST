@@ -1,7 +1,7 @@
 package com.auth.model;
 
 public class AuthVO {
-	private String emp_id;
+	private String empId;
 	private String fun_id;
 	public String getEmp_id() {
 		return emp_id;
