@@ -53,11 +53,11 @@ public class AdVO {
 	public void setAdCon(String adCon) {
 		this.adCon = adCon;
 	}
-	
 	public String getFoodSupId() {
 		return foodSupId;
 	}
 	public void setFoodSupId(String foodSupId) {
 		this.foodSupId = foodSupId;
 	}
+	
 }

@@ -21,12 +21,12 @@ public class AdDAO implements AdDAO_interface {
 		}
 	}
 	
-	private static final String INSERTSTMT =
+	private static final String INSERT_STMT =
 			"INSERT INTO AD (ADID,ADSTATUS,ADSTART,ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID) VALUES (ADSeq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALLSTMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd')ADSTART,toChar(ADEND,'yyyy-mm-dd')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD order by ADID";
-	private static final String GET_ONESTMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd')ADSTART,toChar(ADEND,'yyyy-mm-dd')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD where ADID = ?";
+	private static final String GET_ALL_STMT = 
+			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd hh24:mi:ss')ADSTART,toChar(ADEND,'yyyy-mm-dd hh24:mi:ss')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD order by ADID";
+	private static final String GET_ONE_STMT = 
+			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd hh24:mi:ss')ADSTART,toChar(ADEND,'yyyy-mm-dd hh24:mi:ss')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD where ADID = ?";
 	private static final String DELETE =
 			"DELETE FROM AD where ADID=? ";
 	private static final String UPDATE =
@@ -39,7 +39,7 @@ public class AdDAO implements AdDAO_interface {
 		
 		try {
 			con =ds.getConnection();
-			pstmt = con.prepareStatement(INSERTSTMT);
+			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1, adVO.getAdStatus());
 			pstmt.setTimestamp(2, adVO.getAdStart());
@@ -152,7 +152,7 @@ public class AdDAO implements AdDAO_interface {
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONESTMT);
+			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
 			pstmt.setString(1, adid);
 			
@@ -211,7 +211,7 @@ public class AdDAO implements AdDAO_interface {
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALLSTMT);
+			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
