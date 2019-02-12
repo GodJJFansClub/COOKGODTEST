@@ -2,18 +2,18 @@ package com.auth.model;
 
 public class AuthVO {
 	private String empId;
-	private String fun_id;
-	public String getEmp_id() {
-		return emp_id;
+	private String funId;
+	public String getEmpId() {
+		return empId;
 	}
-	public void setEmp_id(String emp_id) {
-		this.emp_id = emp_id;
+	public void setEmpId(String empId) {
+		this.empId = empId;
 	}
-	public String getFun_id() {
-		return fun_id;
+	public String getFunId() {
+		return funId;
 	}
-	public void setFun_id(String fun_id) {
-		this.fun_id = fun_id;
+	public void setFunId(String funId) {
+		this.funId = funId;
 	}
 	
 }

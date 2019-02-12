@@ -1,32 +1,34 @@
 package com.emp.model;
 
 public class EmpVO {
-	private String emp_id;
-	private String emp_acc;
-	private String emp_pwd;
-	private String emp_name;
-	public String getEmp_id() {
-		return emp_id;
+	private String empId;
+	private String empAcc;
+	private String empPwd;
+	private String empName;
+	
+	public String getEmpId() {
+		return empId;
 	}
-	public void setEmp_id(String emp_id) {
-		this.emp_id = emp_id;
+	public void setEmpId(String empId) {
+		this.empId = empId;
 	}
-	public String getEmp_acc() {
-		return emp_acc;
+	public String getEmpAcc() {
+		return empAcc;
 	}
-	public void setEmp_acc(String emp_acc) {
-		this.emp_acc = emp_acc;
+	public void setEmpAcc(String empAcc) {
+		this.empAcc = empAcc;
 	}
-	public String getEmp_pwd() {
-		return emp_pwd;
+	public String getEmpPwd() {
+		return empPwd;
 	}
-	public void setEmp_pwd(String emp_pwd) {
-		this.emp_pwd = emp_pwd;
+	public void setEmpPwd(String empPwd) {
+		this.empPwd = empPwd;
 	}
-	public String getEmp_name() {
-		return emp_name;
+	public String getEmpName() {
+		return empName;
 	}
-	public void setEmp_name(String emp_name) {
-		this.emp_name = emp_name;
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
+	
 }
