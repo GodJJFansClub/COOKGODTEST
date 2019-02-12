@@ -6,8 +6,8 @@ public interface ChefDAO_Interface {
 	public void insert(ChefVO chefVO);
     public void update(ChefVO chefVO);
     public void delete(String chefId);
-    public ChefVO findByPrimaryKey(Integer chefId);
+    public ChefVO findByPrimaryKey(String chefId);
     public List<ChefVO> getAll();
-//    ¸U¥Î½Æ¦X¬d¸ß(¶Ç¤J°Ñ¼Æ«¬ºAMap)(¦^¶Ç List)
-//    public List<EmpVO> getAll(Map<String, String[]> map); 
+//  è¬ç”¨è¤‡åˆæŸ¥è©¢(å‚³å…¥åƒæ•¸å‹æ…‹Map)(å›å‚³ List)
+//  public List<ChefVO> getAll(Map<String, String[]> map);
 }

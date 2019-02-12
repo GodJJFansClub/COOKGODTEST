@@ -5,21 +5,21 @@ import java.util.*;
 import javax.naming.*;
 import javax.sql.*;
 
-public class ChefDAO implements ChefDAO_Interface{
+
+public class ChefJNDIDAO implements ChefDAO_Interface{
 	
 	private static DataSource ds = null;
 	static {
-		Context ctx;
 		try {
-			ctx = new InitialContext();
-			ds=(DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 	
 	private static final String Insert_Stmt = 
-			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, '2', 'NoChannel', ? )";
+			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, '2', 'NoChannel', ?)";
 	private static final String Updata_Stmt_From_Emp = 
 			"UPDATE CHEF SET CHEF_STATUS=?, CHEF_CHANNEL=? WHERE CHEF_ID= ?";
 	private static final String Updata_Stmt_From_Chef = 
@@ -42,7 +42,7 @@ public class ChefDAO implements ChefDAO_Interface{
 			
 			pstmt.setString(1, chefVO.getChefId());
 			pstmt.setString(2, chefVO.getChefArea());
-			pstmt.setClob(3, chefVO.getChefResume());
+			pstmt.setString(3, chefVO.getChefResume());
 			
 			pstmt.executeUpdate();
 			
@@ -136,7 +136,7 @@ public class ChefDAO implements ChefDAO_Interface{
 	}
 
 	@Override
-	public ChefVO findByPrimaryKey(Integer chefId) {
+	public ChefVO findByPrimaryKey(String chefId) {
 		
 		ChefVO chefVO = null;
 		Connection con = null;
@@ -147,13 +147,13 @@ public class ChefDAO implements ChefDAO_Interface{
 			con = ds.getConnection();			
 			pstmt = con.prepareStatement(Get_One_Chef_From_Emp);
 			
-			pstmt.setInt(1, chefId);
+			pstmt.setString(1, chefId);
 			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {				
 				chefVO = new ChefVO();				
-				chefVO.setChefID(rs.getString("CHEF_ID"));
+				chefVO.setChefId(rs.getString("CHEF_ID"));
 				chefVO.setChefName(rs.getString("CUST_NAME"));
 				chefVO.setChefAddr(rs.getString("CUST_ADDR"));
 				chefVO.setChefTel(rs.getString("CUST_TEL"));
@@ -203,7 +203,7 @@ public class ChefDAO implements ChefDAO_Interface{
 
 			while (rs.next()) {
 				chefVO = new ChefVO();				
-				chefVO.setChefID(rs.getString("CHEF_ID"));
+				chefVO.setChefId(rs.getString("CHEF_ID"));
 				chefVO.setChefName(rs.getString("CUST_NAME"));
 				chefVO.setChefAddr(rs.getString("CUST_ADDR"));
 				chefVO.setChefTel(rs.getString("CUST_TEL"));

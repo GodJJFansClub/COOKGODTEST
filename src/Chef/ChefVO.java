@@ -11,12 +11,12 @@ public class ChefVO {
 	private String ChefArea;
 	private String ChefStatus;
 	private String ChefChannel;
-	private Clob ChefResume;
+	private String ChefResume;
 	
 	public String getChefId() {
 		return ChefId;
 	}
-	public void setChefID(String chefId) {
+	public void setChefId(String chefId) {
 		ChefId = chefId;
 	}
 	public String getChefName() {
@@ -55,10 +55,10 @@ public class ChefVO {
 	public void setChefChannel(String chefChannel) {
 		ChefChannel = chefChannel;
 	}
-	public Clob getChefResume() {
+	public String getChefResume() {
 		return ChefResume;
 	}
-	public void setChefResume(Clob chefResume) {
+	public void setChefResume(String chefResume) {
 		ChefResume = chefResume;
 	}
 }
