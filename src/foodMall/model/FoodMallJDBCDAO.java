@@ -1,5 +1,10 @@
 package foodMall.model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -167,7 +172,45 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	
 	public static void main(String[] args) {
 		// 新增
-		
+		FoodMallVO foodMallVO = new FoodMallVO();
+		foodMallVO.setFoodSupId(foodSupId);
 	}
-
+	
+	private byte[] getPictureByteArray(String filePath) {
+		File pic = new File(filePath);
+		FileInputStream fis = null;
+		ByteArrayOutputStream baos = null;
+		
+		try {
+			fis = new FileInputStream(pic);
+			baos = new ByteArrayOutputStream();
+			byte[] buffer = new byte[fis.available()];
+			int i;
+			
+			while (( i = fis.read(buffer)) != -1) {
+				baos.write(buffer, 0, i);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(baos != null) {
+				try {
+					baos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		return baos.toByteArray();
+	}
 }

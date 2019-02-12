@@ -3,11 +3,9 @@ package foodSup.model;
 public class FoodSupVO {
 	private String foodSupId;
 	private String foodSupName;
-	private Integer foodSupStatus;
-	private byte[] foodSupPic;
+	private String foodSupTel;
+	private String foodSupStatus;
 	private String foodSupResume;
-	private byte[] foodSupLicense;
-	
 	public String getFoodSupId() {
 		return foodSupId;
 	}
@@ -20,29 +18,23 @@ public class FoodSupVO {
 	public void setFoodSupName(String foodSupName) {
 		this.foodSupName = foodSupName;
 	}
-	public Integer getFoodSupStatus() {
+	public String getFoodSupTel() {
+		return foodSupTel;
+	}
+	public void setFoodSupTel(String foodSupTel) {
+		this.foodSupTel = foodSupTel;
+	}
+	public String getFoodSupStatus() {
 		return foodSupStatus;
 	}
-	public void setFoodSupStatus(Integer foodSupStatus) {
+	public void setFoodSupStatus(String foodSupStatus) {
 		this.foodSupStatus = foodSupStatus;
-	}
-	public byte[] getFoodSupPic() {
-		return foodSupPic;
-	}
-	public void setFoodSupPic(byte[] foodSupPic) {
-		this.foodSupPic = foodSupPic;
 	}
 	public String getFoodSupResume() {
 		return foodSupResume;
 	}
 	public void setFoodSupResume(String foodSupResume) {
 		this.foodSupResume = foodSupResume;
-	}
-	public byte[] getFoodSupLicense() {
-		return foodSupLicense;
-	}
-	public void setFoodSupLicense(byte[] foodSupLicense) {
-		this.foodSupLicense = foodSupLicense;
 	}
 	
 	

@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class FoodOrderVO {
 	private String foodOrId;
-	private Integer foodOrStatus;
+	private String foodOrStatus;
 	private Date foodOrStart;
 	private Date foodOrSend;
 	private Date foodOrRcv;
 	private Date foodOrEnd;
 	private String foodOrName;
 	private String foodOrAddr;
-	private Integer foodOrTel;
+	private String foodOrTel;
 	private String custId;
 	public String getFoodOrId() {
 		return foodOrId;
@@ -19,10 +19,10 @@ public class FoodOrderVO {
 	public void setFoodOrId(String foodOrId) {
 		this.foodOrId = foodOrId;
 	}
-	public Integer getFoodOrStatus() {
+	public String getFoodOrStatus() {
 		return foodOrStatus;
 	}
-	public void setFoodOrStatus(Integer foodOrStatus) {
+	public void setFoodOrStatus(String foodOrStatus) {
 		this.foodOrStatus = foodOrStatus;
 	}
 	public Date getFoodOrStart() {
@@ -61,10 +61,10 @@ public class FoodOrderVO {
 	public void setFoodOrAddr(String foodOrAddr) {
 		this.foodOrAddr = foodOrAddr;
 	}
-	public Integer getFoodOrTel() {
+	public String getFoodOrTel() {
 		return foodOrTel;
 	}
-	public void setFoodOrTel(Integer foodOrTel) {
+	public void setFoodOrTel(String foodOrTel) {
 		this.foodOrTel = foodOrTel;
 	}
 	public String getCustId() {
