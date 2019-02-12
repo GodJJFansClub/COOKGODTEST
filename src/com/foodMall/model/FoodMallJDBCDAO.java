@@ -1,4 +1,4 @@
-package foodMall.model;
+package com.foodMall.model;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
