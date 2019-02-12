@@ -139,21 +139,19 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 	}
 
 	@Override
-	public ChefVO findByPrimaryKey(String chefId) {
-		
+	public ChefVO findByPrimaryKey(String chefId) {		
 		ChefVO chefVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
-
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);			
 			pstmt = con.prepareStatement(Get_One_Chef_From_Emp);
 			
-			pstmt.setString(1, chefId);
-			
-			rs = pstmt.executeQuery();
+			pstmt.setString(1, chefId);			
+			rs = pstmt.executeQuery();	
 			
 			while (rs.next()) {				
 				chefVO = new ChefVO();				
@@ -161,7 +159,7 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 				chefVO.setChefName(rs.getString("CUST_NAME"));
 				chefVO.setChefAddr(rs.getString("CUST_ADDR"));
 				chefVO.setChefTel(rs.getString("CUST_TEL"));
-			}
+			}			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
 		} catch (SQLException se) {
@@ -203,7 +201,7 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);	
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(Get_All_Chef_From_Emp);
 			rs = pstmt.executeQuery();
 
