@@ -41,10 +41,10 @@ public class AdDAO implements AdDAO_interface {
 			con =ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, adVO.getAdStatus());
+			pstmt.setInt(1, adVO.getAdStatus());
 			pstmt.setTimestamp(2, adVO.getAdStart());
 			pstmt.setTimestamp(3, adVO.getAdEnd());
-			pstmt.setString(4, adVO.getAdType());
+			pstmt.setInt(4, adVO.getAdType());
 			pstmt.setString(5, adVO.getAdTitle());
 			pstmt.setString(6, adVO.getAdCon());
 			pstmt.setString(7, adVO.getFoodSupId());
@@ -79,10 +79,10 @@ public class AdDAO implements AdDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, adVO.getAdStatus());
+			pstmt.setInt(1, adVO.getAdStatus());
 			pstmt.setTimestamp(2, adVO.getAdStart());
 			pstmt.setTimestamp(3, adVO.getAdEnd());
-			pstmt.setString(4, adVO.getAdType());
+			pstmt.setInt(4, adVO.getAdType());
 			pstmt.setString(5, adVO.getAdTitle());
 			pstmt.setString(6, adVO.getAdCon());
 			pstmt.setString(7, adVO.getFoodSupId());
@@ -161,10 +161,10 @@ public class AdDAO implements AdDAO_interface {
 			while (rs.next()) {
 				adVO = new AdVO();
 				adVO.setAdId(rs.getString("AdID"));
-				adVO.setAdStatus(rs.getString("AdSTATUS"));
+				adVO.setAdStatus(rs.getInt("AdSTATUS"));
 				adVO.setAdStart(rs.getTimestamp("AdSTART"));
 				adVO.setAdEnd(rs.getTimestamp("AdEND"));
-				adVO.setAdType(rs.getString("AdTYPE"));
+				adVO.setAdType(rs.getInt("AdTYPE"));
 				adVO.setAdTitle(rs.getString("AdTITLE"));
 				adVO.setAdCon(rs.getString("AdCON"));
 				adVO.setFoodSupId(rs.getString("foodSupId"));
@@ -217,10 +217,10 @@ public class AdDAO implements AdDAO_interface {
 			while (rs.next()) {
 				adVO = new AdVO();
 				adVO.setAdId(rs.getString("AdID"));
-				adVO.setAdStatus(rs.getString("AdSTATUS"));
+				adVO.setAdStatus(rs.getInt("AdSTATUS"));
 				adVO.setAdStart(rs.getTimestamp("AdSTART"));
 				adVO.setAdEnd(rs.getTimestamp("AdEND"));
-				adVO.setAdType(rs.getString("AdTYPE"));
+				adVO.setAdType(rs.getInt("AdTYPE"));
 				adVO.setAdTitle(rs.getString("AdTITLE"));
 				adVO.setAdCon(rs.getString("AdCON"));
 				adVO.setFoodSupId(rs.getString("foodSupId"));
