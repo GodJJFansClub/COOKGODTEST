@@ -17,7 +17,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 	String passwd = "123456";
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO AD (ADID,ADSTATUS,ADSTART,ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID) VALUES (ADSeq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ? ,?)";
 	private static final String GET_ALL_STMT = 
 			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd')ADSTART,toChar(ADEND,'yyyy-mm-dd')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD order by ADID";
 	private static final String GET_ONE_STMT = 
@@ -285,11 +285,12 @@ public class AdJDBCDAO implements AdDAO_interface {
 		AdJDBCDAO dao = new AdJDBCDAO();
 		AdVO adVO1 = new AdVO();
 		adVO1.setAdStatus(1);
-		adVO1.setAdStart(java.sql.Timestamp.valueOf("2019-03-05 00:00:00"));
-		adVO1.setAdEnd(java.sql.Timestamp.valueOf("2019-06-30 00:00:00"));
-		adVO1.setAdId("AD0001");
-		adVO1.setAdTitle("ด๚ธี");
+		adVO1.setAdStart(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
+		adVO1.setAdEnd(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
+		adVO1.setAdTitle("test");
 		adVO1.setAdType(2);
-		adVO1.setAdCon("d555555555555d5dd5dd5d5d5");
+		adVO1.setAdCon("12313");
+		adVO1.setFoodSupId("T00003");
+		dao.insert(adVO1);
 	}
 }
