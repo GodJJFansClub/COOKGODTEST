@@ -67,8 +67,7 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 	}
 
 	@Override
-	public void update(ChefVO chefVO) {
-		
+	public void update(ChefVO chefVO) {		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -136,8 +135,7 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 	}
 
 	@Override
-	public ChefVO findByPrimaryKey(String chefId) {
-		
+	public ChefVO findByPrimaryKey(String chefId) {		
 		ChefVO chefVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -147,8 +145,7 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 			con = ds.getConnection();			
 			pstmt = con.prepareStatement(Get_One_Chef_From_Emp);
 			
-			pstmt.setString(1, chefId);
-			
+			pstmt.setString(1, chefId);			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {				
@@ -189,14 +186,12 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 	@Override
 	public List<ChefVO> getAll() {
 		List<ChefVO> listAllChef = new ArrayList<ChefVO>();
-		ChefVO chefVO = null;
-		
+		ChefVO chefVO = null;		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Get_All_Chef_From_Emp);
 			rs = pstmt.executeQuery();
