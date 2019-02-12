@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -12,7 +13,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import piciotest.PicIOTest;
 
 public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
@@ -168,6 +172,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
+		piciotest.PicIOTest picIOTest = new PicIOTest();
 		
 			try {
 				Class.forName(DRIVER);
@@ -188,43 +193,127 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 					foodMallVO.setFoodMPrice(rs.getInt(5));
 					foodMallVO.setFoodMUnit(rs.getString(6));
 					foodMallVO.setFoodMPlace(rs.getString(7));
-					
-//					foodMallVO.setFoodMPic();
+					foodMallVO.setFoodMPic(rs.getBytes(8));
+					foodMallVO.setFoodMResume(rs.getString(9));
+					foodMallVO.setFoodMRate(rs.getInt(10));
 					
 				}
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				if(rs != null) {
+					try {
+						rs.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace();
+					}
+				}
+				
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			
 			
 		
-		return null;
+		return foodMallVO;
 	}
 
 	@Override
 	public List<FoodMallVO> getAll() {
-
-		return null;
+		List<FoodMallVO> foodMallVOAL = new ArrayList<FoodMallVO>(); 
+		FoodMallVO foodMallVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		piciotest.PicIOTest picIOTest = new PicIOTest();
+		
+			try {
+				Class.forName(DRIVER);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				pstmt = con.prepareStatement(GET_ALL_STMT);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					foodMallVO = new FoodMallVO();
+					foodMallVO.setFoodSupId(rs.getString(1));
+					foodMallVO.setFoodId(rs.getString(2));
+					foodMallVO.setFoodMName(rs.getString(3));
+					foodMallVO.setFoodMStatus(rs.getString(4));
+					foodMallVO.setFoodMPrice(rs.getInt(5));
+					foodMallVO.setFoodMUnit(rs.getString(6));
+					foodMallVO.setFoodMPlace(rs.getString(7));
+					foodMallVO.setFoodMPic(rs.getBytes(8));
+					foodMallVO.setFoodMResume(rs.getString(9));
+					foodMallVO.setFoodMRate(rs.getInt(10));
+					foodMallVOAL.add(foodMallVO);
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				if(rs != null) {
+					try {
+						rs.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace();
+					}
+				}
+				
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		return foodMallVOAL;
 	}
 	
 	public static void main(String[] args) {
 		FoodMallJDBCDAO fMDao = new FoodMallJDBCDAO();
+		piciotest.PicIOTest picIOTest = new piciotest.PicIOTest();
 		
 		// 新增
-		FoodMallVO foodMallVO = new FoodMallVO();
-		foodMallVO.setFoodSupId("C00005");
-		foodMallVO.setFoodId("F00001");
-		foodMallVO.setFoodMName("五穀米");
-		foodMallVO.setFoodMStatus("p2");
-		foodMallVO.setFoodMPrice(300);
-		foodMallVO.setFoodMUnit("1kg");
-		foodMallVO.setFoodMPlace("台灣");
-		foodMallVO.setFoodMPic(fMDao.getPictureByteArray("P:/pic/澳洲牛頰肉.png"));
-		foodMallVO.setFoodMResume("飽滿");
-		foodMallVO.setFoodMRate(5);
-		fMDao.insert(foodMallVO);
+//		FoodMallVO foodMallVO = new FoodMallVO();
+//		foodMallVO.setFoodSupId("C00005");
+//		foodMallVO.setFoodId("F00001");
+//		foodMallVO.setFoodMName("五穀米");
+//		foodMallVO.setFoodMStatus("p2");
+//		foodMallVO.setFoodMPrice(300);
+//		foodMallVO.setFoodMUnit("1kg");
+//		foodMallVO.setFoodMPlace("台灣");
+//		foodMallVO.setFoodMPic(picIOTest.getPictureByteArray("P:/pic/澳洲牛頰肉.png"));
+//		foodMallVO.setFoodMResume("飽滿");
+//		foodMallVO.setFoodMRate(5);
+//		fMDao.insert(foodMallVO);
 		// 更新
 //		FoodMallVO foodMallVO = new FoodMallVO();
 //		foodMallVO.setFoodSupId("C00005");
@@ -234,69 +323,43 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 //		foodMallVO.setFoodMPrice(250);
 //		foodMallVO.setFoodMUnit("0.6kg");
 //		foodMallVO.setFoodMPlace("馬玉山");
-//		foodMallVO.setFoodMPic(fMDao.getPictureByteArray("P:/pic/馬玉山五穀米.jpg"));
+//		foodMallVO.setFoodMPic(picIOTest.getPictureByteArray("P:/pic/馬玉山五穀米.jpg"));
 //		foodMallVO.setFoodMResume("煮起來又香又好吃, 對身體的健康又很有幫助");
 //		foodMallVO.setFoodMRate(4);
 //		fMDao.update(foodMallVO);
 		// 刪除
 //		fMDao.delete("C00005", "F00001");
+		// 查一筆
+//		FoodMallVO foodMallVO = fMDao.findByPrimaryKey("C00005", "F00001");
+//		System.out.println(foodMallVO.getFoodSupId());
+//		System.out.println(foodMallVO.getFoodId());
+//		System.out.println(foodMallVO.getFoodMName());
+//		System.out.println(foodMallVO.getFoodMStatus());
+//		System.out.println(foodMallVO.getFoodMPrice());
+//		System.out.println(foodMallVO.getFoodMUnit());
+//		System.out.println(foodMallVO.getFoodMPlace());
+//		picIOTest.byteArrToFile(foodMallVO.getFoodMPic(), "P:/pic/1.png");
+//		System.out.println(foodMallVO.getFoodMResume());
+//		System.out.println(foodMallVO.getFoodMRate());
+		// 查全部
+//		List<FoodMallVO> foodMallVOs = fMDao.getAll();
+//		int count = 1;
+//		for(FoodMallVO foodMallVO:foodMallVOs) {
+//			System.out.print(foodMallVO.getFoodSupId() + " ");
+//			System.out.print(foodMallVO.getFoodId() + " ");
+//			System.out.print(foodMallVO.getFoodMName() + " ");
+//			System.out.print(foodMallVO.getFoodMStatus() + " ");
+//			System.out.print(foodMallVO.getFoodMPrice() + " ");
+//			System.out.print(foodMallVO.getFoodMUnit() + " ");
+//			System.out.print(foodMallVO.getFoodMPlace() + " ");
+//			picIOTest.byteArrToFile(foodMallVO.getFoodMPic(), "P:/pic/"+ count +".png");
+//			System.out.print(foodMallVO.getFoodMResume() + " ");
+//			System.out.print(foodMallVO.getFoodMRate() + " ");
+//			System.out.println();
+//			count++;
+//		}
+		
 	}
 	
-	private byte[] getPictureByteArray(String filePath) {
-		File pic = new File(filePath);
-		FileInputStream fis = null;
-		ByteArrayOutputStream baos = null;
-		byte[] buffer =null;
-		try {
-			fis = new FileInputStream(pic);
-			baos = new ByteArrayOutputStream();
-			buffer = new byte[fis.available()];
-			// 如果我用
-//			byte[] buffer = new byte[fis.available()];
-//			int i;			
-//			while (( i = fis.read(buffer)) != -1) {
-//				baos.write(buffer, 0, i);
-//			}
-			
-			fis.read(buffer);
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			if(baos != null) {
-				try {
-					baos.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if(fis != null) {
-				try {
-					fis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}
-		return buffer;
-//		return baos.toByteArray();
-	}
 	
-	private byte[] getPictureByteArray(InputStream in) {
-		BufferedInputStream bIn = new BufferedInputStream(in);
-		ByteArrayOutputStream baos = null;
-		byte[] buf = new byte[4 * 1024];
-		int len;
-		try {
-			while((len = bIn.read(buf)) != -1) {
-				baos.write(buf);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return baos.toByteArray();
-	}
 }
