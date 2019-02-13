@@ -22,15 +22,15 @@ public class AdDAO implements AdDAO_interface {
 	}
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO AD (ADID,ADSTATUS,ADSTART,ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID) VALUES (ADSeq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID) VALUES (ADSeq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd hh24:mi:ss')ADSTART,toChar(ADEND,'yyyy-mm-dd hh24:mi:ss')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD order by ADID";
+			"SELECT AD_ID,AD_STATUS,toChar(AD_START,'yyyy-mm-dd hh24:mi:ss')AD_START,toChar(AD_END,'yyyy-mm-dd hh24:mi:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD order by AD_ID";
 	private static final String GET_ONE_STMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd hh24:mi:ss')ADSTART,toChar(ADEND,'yyyy-mm-dd hh24:mi:ss')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD where ADID = ?";
+			"SELECT AD_ID,AD_STATUS,toChar(AD_START,'yyyy-mm-dd hh24:mi:ss')AD_START,toChar(AD_END,'yyyy-mm-dd hh24:mi:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD where AD_ID = ?";
 	private static final String DELETE =
-			"DELETE FROM AD where ADID=? ";
+			"DELETE FROM AD where AD_ID=? ";
 	private static final String UPDATE =
-			"UPDATE AD set ADSTATUS=?, ADSTART=?, ADEND=?, ADTYPE=?, ADTITLE=?, ADCON=?, FOODSUPID=? where ADID=?";
+			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
 	@Override
 	public void insert(AdVO adVO) {
 		// TODO Auto-generated method stub
