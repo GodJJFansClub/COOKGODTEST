@@ -1,18 +1,15 @@
 package com.chefOdDetail.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.sql.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class ChefOdDetailDAO implements ChefOdDetailDAO_interface{
+public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -28,7 +25,6 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface{
 	private static final String GET_ONE_STMT = "SELECT * FROM CHEF_OD_DETAIL WHERE CHEF_OR_ID = ?";
 	private static final String DELETE = "DELETE FROM CHEF_OD_DETAIL WHERE CHEF_OR_ID = ?";
 	private static final String UPDATE = "UPDATE CHEF_OD_DETAIL SET FOOD_SUP_ID= ?, FOOD_ID= ?, CHEF_OD_QTY= ?, CHEF_OD_STOTAL= ? WHERE CHEF_OR_ID = ?";
-
 
 	@Override
 	public void insert(ChefOdDetailVO chefOdDetailVO) {
@@ -80,11 +76,11 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, chefOdDetailVO.getChefOrId());
-			pstmt.setString(2, chefOdDetailVO.getFoodSupId());
-			pstmt.setString(3, chefOdDetailVO.getFoodId());
-			pstmt.setInt(4, chefOdDetailVO.getChefOdQty());
-			pstmt.setInt(5, chefOdDetailVO.getChefOdStotal());
+			pstmt.setString(1, chefOdDetailVO.getFoodSupId());
+			pstmt.setString(2, chefOdDetailVO.getFoodId());
+			pstmt.setInt(3, chefOdDetailVO.getChefOdQty());
+			pstmt.setInt(4, chefOdDetailVO.getChefOdStotal());
+			pstmt.setString(5, chefOdDetailVO.getChefOrId());
 
 			pstmt.executeUpdate();
 
@@ -96,7 +92,7 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface{
 					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
-				} 
+				}
 			}
 			if (con != null) {
 				try {
@@ -116,7 +112,6 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface{
 		try {
 
 			con = ds.getConnection();
-
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, chefOrId);
 			pstmt.executeUpdate();

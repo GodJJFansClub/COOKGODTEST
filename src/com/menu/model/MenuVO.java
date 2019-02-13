@@ -1,15 +1,27 @@
 package com.menu.model;
 
 public class MenuVO implements java.io.Serializable {
+	
 	private String menuId;
 	private String menuName;
 	private String menuResume;
 	private byte[] menuPic;
-	private Integer menuStatus;
+	private String menuStatus;
 	private Integer menuPrice;
-
+	
 	public MenuVO() {
 		super();
+	}
+	
+	public MenuVO(String menuId, String menuName, String menuResume, byte[] menuPic, String menuStatus,
+			Integer menuPrice) {
+		super();
+		this.menuId = menuId;
+		this.menuName = menuName;
+		this.menuResume = menuResume;
+		this.menuPic = menuPic;
+		this.menuStatus = menuStatus;
+		this.menuPrice = menuPrice;
 	}
 
 	public String getMenuId() {
@@ -44,11 +56,11 @@ public class MenuVO implements java.io.Serializable {
 		this.menuPic = menuPic;
 	}
 
-	public Integer getMenuStatus() {
+	public String getMenuStatus() {
 		return menuStatus;
 	}
 
-	public void setMenuStatus(Integer menuStatus) {
+	public void setMenuStatus(String menuStatus) {
 		this.menuStatus = menuStatus;
 	}
 

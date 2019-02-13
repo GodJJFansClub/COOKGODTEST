@@ -1,11 +1,7 @@
 package com.favChef.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.sql.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,6 +10,7 @@ import javax.sql.DataSource;
 
 
 public class FavChefDAO implements FavChefDAO_interface {
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -47,7 +44,7 @@ public class FavChefDAO implements FavChefDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
-		} finally {
+		}finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -75,10 +72,10 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-
-			pstmt.setString(1, favChefVO.getCustId());
-			pstmt.setString(2, favChefVO.getChefId());
-
+			
+			pstmt.setString(1, favChefVO.getChefId());
+			pstmt.setString(2, favChefVO.getCustId());
+			
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -109,7 +106,6 @@ public class FavChefDAO implements FavChefDAO_interface {
 		try {
 
 			con = ds.getConnection();
-
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, custId);
 			pstmt.executeUpdate();
@@ -161,7 +157,7 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-		} finally {
+		}  finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -211,7 +207,7 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-		} finally {
+		}finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -236,4 +232,5 @@ public class FavChefDAO implements FavChefDAO_interface {
 		}
 		return list;
 	}
+
 }

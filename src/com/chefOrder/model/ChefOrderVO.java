@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ChefOrderVO {
 	private String chefOrId;
-	private Integer chefOrStatus;
+	private String chefOrStatus;
 	private Date chefOrStart;
 	private Date chefOrSend;
 	private Date chefOrRcv;
@@ -18,7 +18,7 @@ public class ChefOrderVO {
 		super();
 	}
 
-	public ChefOrderVO(String chefOrId, Integer chefOrStatus, Date chefOrStart, Date chefOrSend, Date chefOrRcv,
+	public ChefOrderVO(String chefOrId, String chefOrStatus, Date chefOrStart, Date chefOrSend, Date chefOrRcv,
 			Date chefOrEnd, String chefOrName, String chefOrAddr, Integer chefOrTel, String chefId) {
 		super();
 		this.chefOrId = chefOrId;
@@ -41,11 +41,11 @@ public class ChefOrderVO {
 		this.chefOrId = chefOrId;
 	}
 
-	public Integer getChefOrStatus() {
+	public String getChefOrStatus() {
 		return chefOrStatus;
 	}
 
-	public void setChefOrStatus(Integer chefOrStatus) {
+	public void setChefOrStatus(String chefOrStatus) {
 		this.chefOrStatus = chefOrStatus;
 	}
 

@@ -8,12 +8,10 @@ public class FavChefVO {
 		super();
 	}
 
-	public String getChefId() {
-		return chefId;
-	}
-
-	public void setChefId(String chefId) {
+	public FavChefVO(String chefId, String custId) {
+		super();
 		this.chefId = chefId;
+		this.custId = custId;
 	}
 
 	public String getCustId() {
@@ -24,10 +22,12 @@ public class FavChefVO {
 		this.custId = custId;
 	}
 
-	public FavChefVO(String chefId, String custId) {
-		super();
+	public String getChefId() {
+		return chefId;
+	}
+
+	public void setChefId(String chefId) {
 		this.chefId = chefId;
-		this.custId = custId;
 	}
 
 }

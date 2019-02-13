@@ -11,6 +11,15 @@ public class ChefOdDetailVO {
 		super();
 	}
 
+	public ChefOdDetailVO(String chefOrId, String foodSupId, String foodId, Integer chefOdQty, Integer chefOdStotal) {
+		super();
+		this.chefOrId = chefOrId;
+		this.foodSupId = foodSupId;
+		this.foodId = foodId;
+		this.chefOdQty = chefOdQty;
+		this.chefOdStotal = chefOdStotal;
+	}
+
 	public String getChefOrId() {
 		return chefOrId;
 	}
@@ -51,12 +60,4 @@ public class ChefOdDetailVO {
 		this.chefOdStotal = chefOdStotal;
 	}
 
-	public ChefOdDetailVO(String chefOrId, String foodSupId, String foodId, Integer chefOdQty, Integer chefOdStotal) {
-		super();
-		this.chefOrId = chefOrId;
-		this.foodSupId = foodSupId;
-		this.foodId = foodId;
-		this.chefOdQty = chefOdQty;
-		this.chefOdStotal = chefOdStotal;
-	}
 }
