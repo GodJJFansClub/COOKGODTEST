@@ -211,62 +211,60 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 		
 		piciotest.PicIOTest picIOTest = new PicIOTest();
 		
-			try {
-				Class.forName(DRIVER);
-				con = DriverManager.getConnection(URL, USER, PASSWORD);
-				pstmt = con.prepareStatement(GET_ONE_STMT);
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_ONE_STMT);
 				
-				pstmt.setString(1, foodSupId);
-				pstmt.setString(2, foodId);
+			pstmt.setString(1, foodSupId);
+			pstmt.setString(2, foodId);
 				
-				rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
-					foodMallVO = new FoodMallVO();
-					foodMallVO.setFoodSupId(rs.getString(1));
-					foodMallVO.setFoodId(rs.getString(2));
-					foodMallVO.setFoodMName(rs.getString(3));
-					foodMallVO.setFoodMStatus(rs.getString(4));
-					foodMallVO.setFoodMPrice(rs.getInt(5));
-					foodMallVO.setFoodMUnit(rs.getString(6));
-					foodMallVO.setFoodMPlace(rs.getString(7));
-					foodMallVO.setFoodMPic(rs.getBytes(8));
-					foodMallVO.setFoodMResume(rs.getString(9));
-					foodMallVO.setFoodMRate(rs.getInt(10));
+			if(rs.next()) {
+				foodMallVO = new FoodMallVO();
+				foodMallVO.setFoodSupId(rs.getString(1));
+				foodMallVO.setFoodId(rs.getString(2));
+				foodMallVO.setFoodMName(rs.getString(3));
+				foodMallVO.setFoodMStatus(rs.getString(4));
+				foodMallVO.setFoodMPrice(rs.getInt(5));
+				foodMallVO.setFoodMUnit(rs.getString(6));
+				foodMallVO.setFoodMPlace(rs.getString(7));
+				foodMallVO.setFoodMPic(rs.getBytes(8));
+				foodMallVO.setFoodMResume(rs.getString(9));
+				foodMallVO.setFoodMRate(rs.getInt(10));
 					
-				}
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				if(rs != null) {
-					try {
-						rs.close();
-					}catch(SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace();
-					}
-				}
-				
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
 				}
 			}
-			
-			
-		
+				
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+				
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 		return foodMallVO;
 	}
 
