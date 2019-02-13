@@ -150,7 +150,7 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 			con = DriverManager.getConnection(url, userid, passwd);			
 			pstmt = con.prepareStatement(Get_One_Chef_From_Emp);
 			
-			pstmt.setString(1, chefId);			
+			pstmt.setString(1, chefId);
 			rs = pstmt.executeQuery();	
 			
 			while (rs.next()) {				
@@ -242,6 +242,7 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 		}
 		return listAllChef;
 	}
+	
 	public static void main(String[] args) {
 		
 		ChefJDBCDAO dao = new ChefJDBCDAO();

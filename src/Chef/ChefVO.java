@@ -1,64 +1,62 @@
 package Chef;
 
-import java.sql.Clob;
-
 public class ChefVO {
 	
-	private String ChefId;
-	private String ChefName;
-	private String ChefTel;
-	private String ChefAddr;
-	private String ChefArea;
-	private String ChefStatus;
-	private String ChefChannel;
-	private String ChefResume;
+	private String chefId;
+	private String chefName;
+	private String chefTel;
+	private String chefAddr;
+	private String chefArea;
+	private String chefStatus;
+	private String chefChannel;
+	private String chefResume;
 	
 	public String getChefId() {
-		return ChefId;
+		return chefId;
 	}
 	public void setChefId(String chefId) {
-		ChefId = chefId;
+		this.chefId = chefId;
 	}
 	public String getChefName() {
-		return ChefName;
+		return chefName;
 	}
 	public void setChefName(String chefName) {
-		ChefName = chefName;
+		this.chefName = chefName;
 	}
 	public String getChefTel() {
-		return ChefTel;
+		return chefTel;
 	}
 	public void setChefTel(String chefTel) {
-		ChefTel = chefTel;
+		this.chefTel = chefTel;
 	}
 	public String getChefAddr() {
-		return ChefAddr;
+		return chefAddr;
 	}
 	public void setChefAddr(String chefAddr) {
-		ChefAddr = chefAddr;
+		this.chefAddr = chefAddr;
 	}
 	public String getChefArea() {
-		return ChefArea;
+		return chefArea;
 	}
 	public void setChefArea(String chefArea) {
-		ChefArea = chefArea;
+		this.chefArea = chefArea;
 	}
 	public String getChefStatus() {
-		return ChefStatus;
+		return chefStatus;
 	}
 	public void setChefStatus(String chefStatus) {
-		ChefStatus = chefStatus;
+		this.chefStatus = chefStatus;
 	}
 	public String getChefChannel() {
-		return ChefChannel;
+		return chefChannel;
 	}
 	public void setChefChannel(String chefChannel) {
-		ChefChannel = chefChannel;
+		this.chefChannel = chefChannel;
 	}
 	public String getChefResume() {
-		return ChefResume;
+		return chefResume;
 	}
 	public void setChefResume(String chefResume) {
-		ChefResume = chefResume;
+		this.chefResume = chefResume;
 	}
 }

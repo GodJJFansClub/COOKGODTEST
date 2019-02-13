@@ -9,6 +9,7 @@ import javax.sql.*;
 public class ChefJNDIDAO implements ChefDAO_Interface{
 	
 	private static DataSource ds = null;
+	
 	static {
 		try {
 			Context ctx = new InitialContext();
@@ -140,8 +141,8 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
-
 			con = ds.getConnection();			
 			pstmt = con.prepareStatement(Get_One_Chef_From_Emp);
 			
