@@ -28,7 +28,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	private static final String DELETE_STMT = "DELETE FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM FOOD_MALL";
 	private static final String GET_ONE_STMT = "SELECT * FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
-
+	private static final String UPDATE_PIC = "UPDATE FOOD_MALL SET FOOD_M_PIC = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
+	
 	@Override
 	public void insert(FoodMallVO foodMallVO) {
 		Connection con = null;
@@ -94,6 +95,42 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 			pstmt.setInt(8, foodMallVO.getFoodMRate());
 			pstmt.setString(9, foodMallVO.getFoodSupId());
 			pstmt.setString(10, foodMallVO.getFoodId());
+
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void updatePIC(FoodMallVO foodMallVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(UPDATE_STMT);
+
+			pstmt.setBytes(1, foodMallVO.getFoodMPic());
+			pstmt.setString(2, foodMallVO.getFoodSupId());
+			pstmt.setString(3, foodMallVO.getFoodId());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -358,6 +395,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 //			System.out.println();
 //			count++;
 //		}
+		
+		
 		
 	}
 	
