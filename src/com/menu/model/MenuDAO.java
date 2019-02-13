@@ -1,19 +1,15 @@
 package com.menu.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.sql.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class MenuDAO implements MenuDAO_interface{
-	
+public class MenuDAO implements MenuDAO_interface {
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -23,13 +19,12 @@ public class MenuDAO implements MenuDAO_interface{
 			e.printStackTrace();
 		}
 	}
-
-	private static final String INSERT_STMT = "INSERT INTO MENU (MENU_ID,MENU_NAME,MENU_RESUME,MENU_PIC,MENU_STATUS,MENU_PRICE)  VALUES ('M'||MENU_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+	
+	private static final String INSERT_STMT = "INSERT INTO MENU (MENU_ID,MENU_NAME,MENU_RESUME,MENU_PIC,MENU_STATUS,MENU_PRICE) VALUES ('M'||LPAD((MENU_SEQ.NEXTVAL),5,'0'),?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM MENU";
 	private static final String GET_ONE_STMT = "SELECT * FROM MENU WHERE MENU_ID = ?";
 	private static final String DELETE = "DELETE FROM MENU WHERE MENU_ID = ?";
 	private static final String UPDATE = "UPDATE MENU SET MENU_NAME= ?, MENU_RESUME= ?, MENU_PIC= ?, MENU_STATUS= ?, MENU_PRICE= ? WHERE MENU_ID = ?";
-
 
 	@Override
 	public void insert(MenuVO menuVO) {
@@ -41,12 +36,11 @@ public class MenuDAO implements MenuDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, menuVO.getMenuId());
-			pstmt.setString(2, menuVO.getMenuName());
-			pstmt.setString(3, menuVO.getMenuResume());
-			pstmt.setBytes(4, menuVO.getMenuPic());
-			pstmt.setInt(5, menuVO.getMenuStatus());
-			pstmt.setInt(6, menuVO.getMenuPrice());
+			pstmt.setString(1, menuVO.getMenuName());
+			pstmt.setString(2, menuVO.getMenuResume());
+			pstmt.setBytes(3, menuVO.getMenuPic());
+			pstmt.setString(4, menuVO.getMenuStatus());
+			pstmt.setInt(5, menuVO.getMenuPrice());
 
 			pstmt.executeUpdate();
 
@@ -82,12 +76,12 @@ public class MenuDAO implements MenuDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, menuVO.getMenuId());
-			pstmt.setString(2, menuVO.getMenuName());
-			pstmt.setString(3, menuVO.getMenuResume());
-			pstmt.setBytes(4, menuVO.getMenuPic());
-			pstmt.setInt(5, menuVO.getMenuStatus());
-			pstmt.setInt(6, menuVO.getMenuPrice());
+			pstmt.setString(1, menuVO.getMenuName());
+			pstmt.setString(2, menuVO.getMenuResume());
+			pstmt.setBytes(3, menuVO.getMenuPic());
+			pstmt.setString(4, menuVO.getMenuStatus());
+			pstmt.setInt(5, menuVO.getMenuPrice());
+			pstmt.setString(6, menuVO.getMenuId());
 
 			pstmt.executeUpdate();
 
@@ -109,7 +103,7 @@ public class MenuDAO implements MenuDAO_interface{
 				}
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -145,7 +139,7 @@ public class MenuDAO implements MenuDAO_interface{
 				}
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -158,6 +152,7 @@ public class MenuDAO implements MenuDAO_interface{
 		try {
 
 			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, menuId);
@@ -170,7 +165,7 @@ public class MenuDAO implements MenuDAO_interface{
 				menuVO.setMenuName(rs.getString("MENU_NAME"));
 				menuVO.setMenuResume(rs.getString("MENU_RESUME"));
 				menuVO.setMenuPic(rs.getBytes("MENU_PIC"));
-				menuVO.setMenuStatus(rs.getInt("MENU_STATUS"));
+				menuVO.setMenuStatus(rs.getString("MENU_STATUS"));
 				menuVO.setMenuPrice(rs.getInt("MENU_PRICE"));
 			}
 
@@ -223,7 +218,7 @@ public class MenuDAO implements MenuDAO_interface{
 				menuVO.setMenuName(rs.getString("MENU_NAME"));
 				menuVO.setMenuResume(rs.getString("MENU_RESUME"));
 				menuVO.setMenuPic(rs.getBytes("MENU_PIC"));
-				menuVO.setMenuStatus(rs.getInt("MENU_STATUS"));
+				menuVO.setMenuStatus(rs.getString("MENU_STATUS"));
 				menuVO.setMenuPrice(rs.getInt("MENU_PRICE"));
 				list.add(menuVO);
 			}

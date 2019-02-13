@@ -1,11 +1,7 @@
 package com.broadcast.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.sql.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -24,7 +20,7 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO BROADCAST (BROADCAST_ID,BROADCAST_START,BROADCAST_CON,BROADCAST_STATUS,CUST_ID)  VALUES ('B'||LPAD((MENU_SEQ.NEXTVAL),5,'0')), ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO BROADCAST(BROADCAST_ID,BROADCAST_START,BROADCAST_CON,BROADCAST_STATUS,CUST_ID)  VALUES ('B'||LPAD((BROADCAST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM BROADCAST";
 	private static final String GET_ONE_STMT = "SELECT * FROM BROADCAST WHERE BROADCAST_ID = ?";
 	private static final String DELETE = "DELETE FROM BROADCAST WHERE BROADCAST_ID = ?";
@@ -40,11 +36,10 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, broadcastVO.getBroadcastId());
-			pstmt.setTimestamp(2, broadcastVO.getBroadcastStart());
-			pstmt.setString(3, broadcastVO.getBroadcastCon());
-			pstmt.setString(4, broadcastVO.getBroadcastStatus());
-			pstmt.setString(5, broadcastVO.getCustId());
+			pstmt.setTimestamp(1, broadcastVO.getBroadcastStart());
+			pstmt.setString(2, broadcastVO.getBroadcastCon());
+			pstmt.setString(3, broadcastVO.getBroadcastStatus());
+			pstmt.setString(4, broadcastVO.getCustId());
 
 			pstmt.executeUpdate();
 
@@ -80,11 +75,11 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, broadcastVO.getBroadcastId());
-			pstmt.setTimestamp(2, broadcastVO.getBroadcastStart());
-			pstmt.setString(3, broadcastVO.getBroadcastCon());
-			pstmt.setString(4, broadcastVO.getBroadcastStatus());
-			pstmt.setString(5, broadcastVO.getCustId());
+			pstmt.setTimestamp(1, broadcastVO.getBroadcastStart());
+			pstmt.setString(2, broadcastVO.getBroadcastCon());
+			pstmt.setString(3, broadcastVO.getBroadcastStatus());
+			pstmt.setString(4, broadcastVO.getCustId());
+			pstmt.setString(5, broadcastVO.getBroadcastId());
 
 			pstmt.executeUpdate();
 
@@ -96,7 +91,7 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
-				} 
+				}
 			}
 			if (con != null) {
 				try {
@@ -250,5 +245,4 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 		}
 		return list;
 	}
-
 }

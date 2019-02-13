@@ -1,19 +1,15 @@
 package com.chefOrder.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.sql.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+public class ChefOrderDAO implements ChefOrderDAO_interface {
 
-public class ChefOrderDAO implements ChefOrderDAO_interface{
 	private static DataSource ds = null;
 	static {
 		try {
@@ -24,11 +20,11 @@ public class ChefOrderDAO implements ChefOrderDAO_interface{
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO CHEF_ORDER (CHEF_OR_ID,CHEF_OR_STATUS,CHEF_OR_START,CHEF_OR_SEND,CHEF_OR_RCV,CHEF_OR_END,CHEF_OR_NAME,CHEF_OR_ADDR,CHEF_OR_TEL,CHEF_ID)  VALUES ('CF'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD((CHEF_ORDER_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO CHEF_ORDER(CHEF_OR_ID,CHEF_OR_STATUS,CHEF_OR_START,CHEF_OR_SEND,CHEF_OR_RCV,CHEF_OR_END,CHEF_OR_NAME,CHEF_OR_ADDR,CHEF_OR_TEL,CHEF_ID) VALUES ('CF'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD((CHEF_ORDER_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM CHEF_ORDER";
 	private static final String GET_ONE_STMT = "SELECT * FROM CHEF_ORDER WHERE CHEF_OR_ID = ?";
 	private static final String DELETE = "DELETE FROM CHEF_ORDER WHERE CHEF_OR_ID = ?";
-	private static final String UPDATE = "UPDATE CHEF_ORDER SET CHEF_OR_STATUS= ?, CHEF_OR_START= ?, CHEF_OR_SEND= ?, CHEF_OR_RCV= ?, CHEF_OR_END= ?, CHEF_OR_NAME= ?, CHEF_OR_ADDR= ?, CHEF_OR_TEL= ?, CHEF_ID= ?, WHERE CHEF_OR_ID = ?";
+	private static final String UPDATE = "UPDATE CHEF_ORDER SET CHEF_OR_STATUS= ?, CHEF_OR_START= ?, CHEF_OR_SEND= ?, CHEF_OR_RCV= ?, CHEF_OR_END= ?, CHEF_OR_NAME= ?, CHEF_OR_ADDR= ?, CHEF_OR_TEL= ?, CHEF_ID= ? WHERE CHEF_OR_ID = ?";
 
 	@Override
 	public void insert(ChefOrderVO chefOrderVO) {
@@ -40,16 +36,15 @@ public class ChefOrderDAO implements ChefOrderDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, chefOrderVO.getChefOrId());
-			pstmt.setInt(2, chefOrderVO.getChefOrStatus());
-			pstmt.setDate(3, chefOrderVO.getChefOrStart());
-			pstmt.setDate(4, chefOrderVO.getChefOrSend());
-			pstmt.setDate(5, chefOrderVO.getChefOrRcv());
-			pstmt.setDate(6, chefOrderVO.getChefOrEnd());
-			pstmt.setString(7, chefOrderVO.getChefOrName());
-			pstmt.setString(8, chefOrderVO.getChefOrAddr());
-			pstmt.setInt(9, chefOrderVO.getChefOrTel());
-			pstmt.setString(10, chefOrderVO.getChefId());
+			pstmt.setString(1, chefOrderVO.getChefOrStatus());
+			pstmt.setDate(2, chefOrderVO.getChefOrStart());
+			pstmt.setDate(3, chefOrderVO.getChefOrSend());
+			pstmt.setDate(4, chefOrderVO.getChefOrRcv());
+			pstmt.setDate(5, chefOrderVO.getChefOrEnd());
+			pstmt.setString(6, chefOrderVO.getChefOrName());
+			pstmt.setString(7, chefOrderVO.getChefOrAddr());
+			pstmt.setInt(8, chefOrderVO.getChefOrTel());
+			pstmt.setString(9, chefOrderVO.getChefId());
 
 			pstmt.executeUpdate();
 
@@ -84,16 +79,16 @@ public class ChefOrderDAO implements ChefOrderDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, chefOrderVO.getChefOrId());
-			pstmt.setInt(2, chefOrderVO.getChefOrStatus());
-			pstmt.setDate(3, chefOrderVO.getChefOrStart());
-			pstmt.setDate(4, chefOrderVO.getChefOrSend());
-			pstmt.setDate(5, chefOrderVO.getChefOrRcv());
-			pstmt.setDate(6, chefOrderVO.getChefOrEnd());
-			pstmt.setString(7, chefOrderVO.getChefOrName());
-			pstmt.setString(8, chefOrderVO.getChefOrAddr());
-			pstmt.setInt(9, chefOrderVO.getChefOrTel());
-			pstmt.setString(10, chefOrderVO.getChefId());
+			pstmt.setString(1, chefOrderVO.getChefOrStatus());
+			pstmt.setDate(2, chefOrderVO.getChefOrStart());
+			pstmt.setDate(3, chefOrderVO.getChefOrSend());
+			pstmt.setDate(4, chefOrderVO.getChefOrRcv());
+			pstmt.setDate(5, chefOrderVO.getChefOrEnd());
+			pstmt.setString(6, chefOrderVO.getChefOrName());
+			pstmt.setString(7, chefOrderVO.getChefOrAddr());
+			pstmt.setInt(8, chefOrderVO.getChefOrTel());
+			pstmt.setString(9, chefOrderVO.getChefId());
+			pstmt.setString(10, chefOrderVO.getChefOrId());
 
 			pstmt.executeUpdate();
 
@@ -125,7 +120,6 @@ public class ChefOrderDAO implements ChefOrderDAO_interface{
 		try {
 
 			con = ds.getConnection();
-
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, chefOrId);
 			pstmt.executeUpdate();
@@ -172,7 +166,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface{
 			while (rs.next()) {
 				chefOrderVO = new ChefOrderVO();
 				chefOrderVO.setChefOrId(rs.getString("CHEF_OR_ID"));
-				chefOrderVO.setChefOrStatus(rs.getInt("CHEF_OR_STATUS"));
+				chefOrderVO.setChefOrStatus(rs.getString("CHEF_OR_STATUS"));
 				chefOrderVO.setChefOrStart(rs.getDate("CHEF_OR_START"));
 				chefOrderVO.setChefOrEnd(rs.getDate("CHEF_OR_SEND"));
 				chefOrderVO.setChefOrRcv(rs.getDate("CHEF_OR_RCV"));
@@ -229,7 +223,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface{
 			while (rs.next()) {
 				chefOrderVO = new ChefOrderVO();
 				chefOrderVO.setChefOrId(rs.getString("CHEF_OR_ID"));
-				chefOrderVO.setChefOrStatus(rs.getInt("CHEF_OR_STATUS"));
+				chefOrderVO.setChefOrStatus(rs.getString("CHEF_OR_STATUS"));
 				chefOrderVO.setChefOrStart(rs.getDate("CHEF_OR_START"));
 				chefOrderVO.setChefOrEnd(rs.getDate("CHEF_OR_SEND"));
 				chefOrderVO.setChefOrRcv(rs.getDate("CHEF_OR_RCV"));
