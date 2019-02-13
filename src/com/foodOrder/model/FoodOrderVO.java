@@ -1,4 +1,4 @@
-package foodOrder.model;
+package com.foodOrder.model;
 
 import java.sql.Date;
 

@@ -4,10 +4,10 @@ import java.sql.Timestamp;
 
 public class AdVO {
 	private String adId;
-	private String adStatus;
+	private Integer adStatus;
 	private Timestamp adStart;
 	private Timestamp adEnd;
-	private String adType;
+	private Integer adType;
 	private String adTitle;
 	private String adCon;
 	private String foodSupId;
@@ -17,11 +17,11 @@ public class AdVO {
 	public void setAdId(String adId) {
 		this.adId = adId;
 	}
-	public String getAdStatus() {
+	public Integer getAdStatus() {
 		return adStatus;
 	}
-	public void setAdStatus(String adStatus) {
-		this.adStatus = adStatus;
+	public void setAdStatus(int i) {
+		this.adStatus = i;
 	}
 	public Timestamp getAdStart() {
 		return adStart;
@@ -35,11 +35,11 @@ public class AdVO {
 	public void setAdEnd(Timestamp adEnd) {
 		this.adEnd = adEnd;
 	}
-	public String getAdType() {
+	public Integer getAdType() {
 		return adType;
 	}
-	public void setAdType(String adType) {
-		this.adType = adType;
+	public void setAdType(int i) {
+		this.adType = i;
 	}
 	public String getAdTitle() {
 		return adTitle;

@@ -22,15 +22,15 @@ public class AdDAO implements AdDAO_interface {
 	}
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO AD (ADID,ADSTATUS,ADSTART,ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID) VALUES (ADSeq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID) VALUES (ADSeq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd hh24:mi:ss')ADSTART,toChar(ADEND,'yyyy-mm-dd hh24:mi:ss')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD order by ADID";
+			"SELECT AD_ID,AD_STATUS,toChar(AD_START,'yyyy-mm-dd hh24:mi:ss')AD_START,toChar(AD_END,'yyyy-mm-dd hh24:mi:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD order by AD_ID";
 	private static final String GET_ONE_STMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd hh24:mi:ss')ADSTART,toChar(ADEND,'yyyy-mm-dd hh24:mi:ss')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD where ADID = ?";
+			"SELECT AD_ID,AD_STATUS,toChar(AD_START,'yyyy-mm-dd hh24:mi:ss')AD_START,toChar(AD_END,'yyyy-mm-dd hh24:mi:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD where AD_ID = ?";
 	private static final String DELETE =
-			"DELETE FROM AD where ADID=? ";
+			"DELETE FROM AD where AD_ID=? ";
 	private static final String UPDATE =
-			"UPDATE AD set ADSTATUS=?, ADSTART=?, ADEND=?, ADTYPE=?, ADTITLE=?, ADCON=?, FOODSUPID=? where ADID=?";
+			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
 	@Override
 	public void insert(AdVO adVO) {
 		// TODO Auto-generated method stub
@@ -41,10 +41,10 @@ public class AdDAO implements AdDAO_interface {
 			con =ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, adVO.getAdStatus());
+			pstmt.setInt(1, adVO.getAdStatus());
 			pstmt.setTimestamp(2, adVO.getAdStart());
 			pstmt.setTimestamp(3, adVO.getAdEnd());
-			pstmt.setString(4, adVO.getAdType());
+			pstmt.setInt(4, adVO.getAdType());
 			pstmt.setString(5, adVO.getAdTitle());
 			pstmt.setString(6, adVO.getAdCon());
 			pstmt.setString(7, adVO.getFoodSupId());
@@ -79,10 +79,10 @@ public class AdDAO implements AdDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, adVO.getAdStatus());
+			pstmt.setInt(1, adVO.getAdStatus());
 			pstmt.setTimestamp(2, adVO.getAdStart());
 			pstmt.setTimestamp(3, adVO.getAdEnd());
-			pstmt.setString(4, adVO.getAdType());
+			pstmt.setInt(4, adVO.getAdType());
 			pstmt.setString(5, adVO.getAdTitle());
 			pstmt.setString(6, adVO.getAdCon());
 			pstmt.setString(7, adVO.getFoodSupId());
@@ -161,10 +161,10 @@ public class AdDAO implements AdDAO_interface {
 			while (rs.next()) {
 				adVO = new AdVO();
 				adVO.setAdId(rs.getString("AdID"));
-				adVO.setAdStatus(rs.getString("AdSTATUS"));
+				adVO.setAdStatus(rs.getInt("AdSTATUS"));
 				adVO.setAdStart(rs.getTimestamp("AdSTART"));
 				adVO.setAdEnd(rs.getTimestamp("AdEND"));
-				adVO.setAdType(rs.getString("AdTYPE"));
+				adVO.setAdType(rs.getInt("AdTYPE"));
 				adVO.setAdTitle(rs.getString("AdTITLE"));
 				adVO.setAdCon(rs.getString("AdCON"));
 				adVO.setFoodSupId(rs.getString("foodSupId"));
@@ -217,10 +217,10 @@ public class AdDAO implements AdDAO_interface {
 			while (rs.next()) {
 				adVO = new AdVO();
 				adVO.setAdId(rs.getString("AdID"));
-				adVO.setAdStatus(rs.getString("AdSTATUS"));
+				adVO.setAdStatus(rs.getInt("AdSTATUS"));
 				adVO.setAdStart(rs.getTimestamp("AdSTART"));
 				adVO.setAdEnd(rs.getTimestamp("AdEND"));
-				adVO.setAdType(rs.getString("AdTYPE"));
+				adVO.setAdType(rs.getInt("AdTYPE"));
 				adVO.setAdTitle(rs.getString("AdTITLE"));
 				adVO.setAdCon(rs.getString("AdCON"));
 				adVO.setFoodSupId(rs.getString("foodSupId"));
