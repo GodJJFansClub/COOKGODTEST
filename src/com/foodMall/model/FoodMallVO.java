@@ -1,75 +1,75 @@
 package com.foodMall.model;
 
 public class FoodMallVO {
-	private String foodSupId;
-	private String foodId;
-	private String foodMName;
-	private String foodMStatus;
-	private Integer foodMPrice;
-	private String foodMUnit;
-	private String foodMPlace;
-	private byte[] foodMPic;
-	private String foodMResume;
-	private Integer foodMRate;
-	public String getFoodSupId() {
-		return foodSupId;
+	private String food_sup_ID;
+	private String food_ID;
+	private String food_m_name;
+	private String food_m_status;
+	private Integer food_m_price;
+	private String food_m_unit;
+	private String food_m_place;
+	private byte[] food_m_pic;
+	private String food_m_resume;
+	private Integer food_m_rate;
+	public String getFood_sup_ID() {
+		return food_sup_ID;
 	}
-	public void setFoodSupId(String foodSupId) {
-		this.foodSupId = foodSupId;
+	public void setFood_sup_ID(String food_sup_ID) {
+		this.food_sup_ID = food_sup_ID;
 	}
-	public String getFoodId() {
-		return foodId;
+	public String getFood_ID() {
+		return food_ID;
 	}
-	public void setFoodId(String foodId) {
-		this.foodId = foodId;
+	public void setFood_ID(String food_ID) {
+		this.food_ID = food_ID;
 	}
-	public String getFoodMName() {
-		return foodMName;
+	public String getFood_m_name() {
+		return food_m_name;
 	}
-	public void setFoodMName(String foodMName) {
-		this.foodMName = foodMName;
+	public void setFood_m_name(String food_m_name) {
+		this.food_m_name = food_m_name;
 	}
-	public String getFoodMStatus() {
-		return foodMStatus;
+	public String getFood_m_status() {
+		return food_m_status;
 	}
-	public void setFoodMStatus(String foodMStatus) {
-		this.foodMStatus = foodMStatus;
+	public void setFood_m_status(String food_m_status) {
+		this.food_m_status = food_m_status;
 	}
-	public Integer getFoodMPrice() {
-		return foodMPrice;
+	public Integer getFood_m_price() {
+		return food_m_price;
 	}
-	public void setFoodMPrice(Integer foodMPrice) {
-		this.foodMPrice = foodMPrice;
+	public void setFood_m_price(Integer food_m_price) {
+		this.food_m_price = food_m_price;
 	}
-	public String getFoodMUnit() {
-		return foodMUnit;
+	public String getFood_m_unit() {
+		return food_m_unit;
 	}
-	public void setFoodMUnit(String foodMUnit) {
-		this.foodMUnit = foodMUnit;
+	public void setFood_m_unit(String food_m_unit) {
+		this.food_m_unit = food_m_unit;
 	}
-	public String getFoodMPlace() {
-		return foodMPlace;
+	public String getFood_m_place() {
+		return food_m_place;
 	}
-	public void setFoodMPlace(String foodMPlace) {
-		this.foodMPlace = foodMPlace;
+	public void setFood_m_place(String food_m_place) {
+		this.food_m_place = food_m_place;
 	}
-	public byte[] getFoodMPic() {
-		return foodMPic;
+	public byte[] getFood_m_pic() {
+		return food_m_pic;
 	}
-	public void setFoodMPic(byte[] foodMPic) {
-		this.foodMPic = foodMPic;
+	public void setFood_m_pic(byte[] food_m_pic) {
+		this.food_m_pic = food_m_pic;
 	}
-	public String getFoodMResume() {
-		return foodMResume;
+	public String getFood_m_resume() {
+		return food_m_resume;
 	}
-	public void setFoodMResume(String foodMResume) {
-		this.foodMResume = foodMResume;
+	public void setFood_m_resume(String food_m_resume) {
+		this.food_m_resume = food_m_resume;
 	}
-	public Integer getFoodMRate() {
-		return foodMRate;
+	public Integer getFood_m_rate() {
+		return food_m_rate;
 	}
-	public void setFoodMRate(Integer foodMRate) {
-		this.foodMRate = foodMRate;
+	public void setFood_m_rate(Integer food_m_rate) {
+		this.food_m_rate = food_m_rate;
 	}
 	
 	

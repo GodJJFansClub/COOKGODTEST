@@ -104,6 +104,10 @@ public class PicIOTest {
 	
 	public void byteArrToFile(byte[] picByteArr, String filePath) {
 		FileOutputStream fos = null;
+		if(picByteArr == null) {
+			System.out.print("沒有圖片" + " ");
+			return;
+		}
 		
 		try {
 			fos =new FileOutputStream(filePath);
