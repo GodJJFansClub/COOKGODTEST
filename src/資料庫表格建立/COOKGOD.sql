@@ -148,19 +148,11 @@ CREATE TABLE FOOD_SUP (
 ------------------------------------------------------------------
 --建立表格:廣告--
 CREATE TABLE AD (
-<<<<<<< HEAD
- AD_ID                    VARCHAR2(6)      NOT NULL,
- AD_STATUS                NUMBER(1)        NOT NULL,
- AD_START                 DATE             NOT NULL,
- AD_END                   DATE             NOT NULL,
- AD_TYPE                  VARCHAR(3)        NOT NULL,
-=======
  AD_ID                    VARCHAR2(8)      NOT NULL,
  AD_STATUS                VARCHAR2(2)      NOT NULL,
  AD_START                 TIMESTAMP        NOT NULL,
  AD_END                   TIMESTAMP        NOT NULL,
  AD_TYPE                  VARCHAR2(2)      NOT NULL,
->>>>>>> branch 'master' of https://github.com/GodJJFansClub/COOKGODTEST.git
  AD_TITLE                 VARCHAR2(30)     NOT NULL,
  AD_CON                   CLOB             NOT NULL,
  FOOD_SUP_ID              VARCHAR2(6),
