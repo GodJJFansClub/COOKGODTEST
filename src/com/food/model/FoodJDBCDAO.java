@@ -34,23 +34,28 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			pstmt.setString(1, foodVO.getFoodName());
 			
 			pstmt.executeUpdate();
+			// Handle any driver errors
 		}catch (ClassNotFoundException e) {
-			System.out.println(e.getStackTrace());
-		}catch (SQLException e) {
-			System.out.println(e.getStackTrace());
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		}finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch (SQLException e) {
-					System.out.println(e.getStackTrace());
+				}catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				}catch (SQLException e) {
-					System.out.println(e.getStackTrace());
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -70,23 +75,29 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			pstmt.setString( 2, foodVO.getFoodId());
 			
 			pstmt.executeUpdate();
+			
+			// Handle any driver errors
 		}catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		}finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch (SQLException e) {
-					System.out.println(e.getStackTrace());
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				}catch (SQLException e) {
-					System.out.println(e.getStackTrace());
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -100,25 +111,20 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		try {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			con.setAutoCommit(false);
 			
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, foodId);
 			pstmt.executeUpdate();
 			
-			con.commit();
-			con.setAutoCommit(true);
+			// Handle any driver errors
 		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			if(con != null) {
-				try {
-					con.rollback();
-				}catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -158,40 +164,36 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 				foodVO.setFoodId(rs.getString(1));
 				foodVO.setFoodName(rs.getString(2));
 			}
+			// Handle any driver errors
 		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch(SQLException se) {
 			
-			if(con != null) {
-				try {
-					con.rollback();
-				}catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			e.printStackTrace();
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-			
-			if(pstmt != null) {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-			
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -213,38 +215,39 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				foodVO = new FoodVO();
-				
 				foodVO.setFoodId(rs.getString(1));
 				foodVO.setFoodName(rs.getString(2));
-				
 				foodVOAL.add(foodVO);
 			}
+			// Handle any driver errors
 		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-			
-			if(pstmt != null) {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-			
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -265,17 +268,17 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 //		foodVO1.setFoodName("AAA");
 //		dao.update(foodVO1);
 		// 刪除
-//		dao.delete("F00027");
+		dao.delete("F00027");
 		// 查詢
 //		FoodVO foodVO1 = dao.findByPrimaryKey("F00021");
 //		System.out.println(foodVO1.getFoodId());
 //		System.out.println(foodVO1.getFoodName());
 		// 查全部
-		List<FoodVO> foodVOs = dao.getAll();
-		for(FoodVO foodVO:foodVOs) {
-			System.out.print(foodVO.getFoodId());
-			System.out.print(foodVO.getFoodName());
-			System.out.println();
-		}
+//		List<FoodVO> foodVOs = dao.getAll();
+//		for(FoodVO foodVO:foodVOs) {
+//			System.out.print(foodVO.getFoodId());
+//			System.out.print(foodVO.getFoodName());
+//			System.out.println();
+//		}
 	}
 }

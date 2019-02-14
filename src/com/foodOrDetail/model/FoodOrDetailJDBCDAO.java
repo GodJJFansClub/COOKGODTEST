@@ -43,22 +43,26 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -87,22 +91,24 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -129,29 +135,24 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			con.commit();
 			con.setAutoCommit(true);
 		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			if(con != null) {
-				try {
-					con.rollback();
-				}catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -165,8 +166,6 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		piciotest.PicIOTest picIOTest = new PicIOTest();
-		
 		try {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -178,7 +177,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			
 			rs = pstmt.executeQuery();
 				
-			if(rs.next()) {
+			while(rs.next()) {
 				foodOrDetailVO = new FoodOrDetailVO();
 				foodOrDetailVO.setFoodOrId(rs.getString(1));
 				foodOrDetailVO.setFoodSupId(rs.getString(2));
@@ -190,31 +189,31 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 					
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -251,31 +250,31 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 				foodOrDetailVOs.add(foodOrDetailVO);
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-			
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -287,9 +286,9 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 		
 		// 新增
 //		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
-//		foodOrDetailVO.setFoodOrId("FO20190213-000007");
-//		foodOrDetailVO.setFoodSupId("C00001");
-//		foodOrDetailVO.setFoodId("F00009");
+//		foodOrDetailVO.setFoodOrId("FO20181121-000001");
+//		foodOrDetailVO.setFoodSupId("C00004");
+//		foodOrDetailVO.setFoodId("F00023");
 //		foodOrDetailVO.setFoodOdQty(4);
 //		foodOrDetailVO.setFoodOdStotal(260);
 //		foodOrDetailVO.setFoodOdRate(5);
@@ -298,9 +297,9 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 		
 		// 修改
 //		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
-//		foodOrDetailVO.setFoodOrId("FO20190213-000007");
-//		foodOrDetailVO.setFoodSupId("C00001");
-//		foodOrDetailVO.setFoodId("F00009");
+//		foodOrDetailVO.setFoodOrId("FO20181121-000001");
+//		foodOrDetailVO.setFoodSupId("C00004");
+//		foodOrDetailVO.setFoodId("F00023");
 //		foodOrDetailVO.setFoodOdQty(1);
 //		foodOrDetailVO.setFoodOdStotal(65);
 //		foodOrDetailVO.setFoodOdRate(1);
@@ -308,7 +307,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 //		foodOrDetailJDBCDAO.update(foodOrDetailVO);
 		
 		// 刪除
-//		foodOrDetailJDBCDAO.delete("FO20190213-000007", "C00001", "F00009");
+//		foodOrDetailJDBCDAO.delete("FO20181121-000001", "C00004", "F00023");
 		
 		// 查一筆
 //		FoodOrDetailVO foodOrDetailVO = foodOrDetailJDBCDAO.findByPrimaryKey("FO20181124-000002", "C00003", "F00016");
@@ -321,17 +320,17 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 //		System.out.println(foodOrDetailVO.getFoodOdMsg());
 		
 		// 查全部
-		List<FoodOrDetailVO> foodOdDetailVOs = foodOrDetailJDBCDAO.getAll();
-		for(FoodOrDetailVO foodOrDetailVO:foodOdDetailVOs) {
-			System.out.print(foodOrDetailVO.getFoodOrId() + " ");
-			System.out.print(foodOrDetailVO.getFoodSupId() + " ");
-			System.out.print(foodOrDetailVO.getFoodId() + " ");
-			System.out.print(foodOrDetailVO.getFoodOdQty() + " ");
-			System.out.print(foodOrDetailVO.getFoodOdStotal() + " ");
-			System.out.print(foodOrDetailVO.getFoodOdRate() + " ");
-			System.out.print(foodOrDetailVO.getFoodOdMsg() + " ");
-			System.out.println();
-		}
+//		List<FoodOrDetailVO> foodOdDetailVOs = foodOrDetailJDBCDAO.getAll();
+//		for(FoodOrDetailVO foodOrDetailVO:foodOdDetailVOs) {
+//			System.out.print(foodOrDetailVO.getFoodOrId() + " ");
+//			System.out.print(foodOrDetailVO.getFoodSupId() + " ");
+//			System.out.print(foodOrDetailVO.getFoodId() + " ");
+//			System.out.print(foodOrDetailVO.getFoodOdQty() + " ");
+//			System.out.print(foodOrDetailVO.getFoodOdStotal() + " ");
+//			System.out.print(foodOrDetailVO.getFoodOdRate() + " ");
+//			System.out.print(foodOrDetailVO.getFoodOdMsg() + " ");
+//			System.out.println();
+//		}
 		
 	}
 }
