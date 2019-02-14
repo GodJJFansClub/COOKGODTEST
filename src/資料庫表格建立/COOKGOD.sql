@@ -150,7 +150,7 @@ CREATE TABLE AD (
  AD_STATUS                NUMBER(1)        NOT NULL,
  AD_START                 DATE             NOT NULL,
  AD_END                   DATE             NOT NULL,
- AD_TYPE                  NUMBER(1)        NOT NULL,
+ AD_TYPE                  VARCHAR(3)        NOT NULL,
  AD_TITLE                 VARCHAR2(30)     NOT NULL,
  AD_CON                   VARCHAR2(300),
  AD_IMG                   BLOB             NOT NULL,

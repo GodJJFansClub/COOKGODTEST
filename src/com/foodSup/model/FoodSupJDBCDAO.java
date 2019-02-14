@@ -17,8 +17,8 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO FOOD_SUP (FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME) VALUES (?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE FOOD_SUP SET FOOD_SUP_NAME = ?, FOOD_SUP_TEL = ?, FOOD_SUP_STATUS = ?, FOOD_SUP_RESUME = ? WHERE FOOD_SUP_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM FOOD_SUP WHERE FOOD_SUP_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT * FROM FOOD_SUP";
-	private static final String GET_ONE_STMT = "SELECT * FROM FOOD_SUP WHERE FOOD_SUP_ID = ?";
+	private static final String GET_ALL_STMT = "SELECT FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME FROM FOOD_SUP";
+	private static final String GET_ONE_STMT = "SELECT FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME FROM FOOD_SUP WHERE FOOD_SUP_ID = ?";
 	
 	@Override
 	public void insert(FoodSupVO foodSupVO) {
