@@ -33,7 +33,9 @@ DROP TABLE CUST;
 DROP SEQUENCE F_OR_SEQ;
 DROP SEQUENCE CUST_SEQ;
 DROP SEQUENCE FOOD_SEQ;
-
+DROP SEQUENCE AD_SEQ;
+DROP SEQUENCE EMP_SEQ;
+DROP SEQUENCE FUN_SEQ;
 ------------------------------------------------------------------
 --建立表格:顧客--
 CREATE TABLE CUST (
@@ -84,8 +86,8 @@ CREATE TABLE CHEF_SCH (
  CHEF_SCH_DATE            DATE           NOT NULL,
  CHEF_ID                  VARCHAR2(6)    NOT NULL,
  CHEF_SCH_STATUS          NUMBER(1)      NOT NULL,
- CONSTRAINT CHEF_SCH_FK FOREIGN KEY (CUST_ID) REFERENCES CHEF (CHEF_ID),
- PRIMARY KEY (CHEF_SCH_DATE,CUST_ID)
+ CONSTRAINT CHEF_SCH_FK FOREIGN KEY (CHEF_ID) REFERENCES CHEF (CHEF_ID),
+ PRIMARY KEY (CHEF_SCH_DATE,CHEF_ID)
 );
 
 ------------------------------------------------------------------
@@ -146,14 +148,21 @@ CREATE TABLE FOOD_SUP (
 ------------------------------------------------------------------
 --建立表格:廣告--
 CREATE TABLE AD (
+<<<<<<< HEAD
  AD_ID                    VARCHAR2(6)      NOT NULL,
  AD_STATUS                NUMBER(1)        NOT NULL,
  AD_START                 DATE             NOT NULL,
  AD_END                   DATE             NOT NULL,
  AD_TYPE                  VARCHAR(3)        NOT NULL,
+=======
+ AD_ID                    VARCHAR2(8)      NOT NULL,
+ AD_STATUS                VARCHAR2(2)      NOT NULL,
+ AD_START                 TIMESTAMP        NOT NULL,
+ AD_END                   TIMESTAMP        NOT NULL,
+ AD_TYPE                  VARCHAR2(2)      NOT NULL,
+>>>>>>> branch 'master' of https://github.com/GodJJFansClub/COOKGODTEST.git
  AD_TITLE                 VARCHAR2(30)     NOT NULL,
- AD_CON                   VARCHAR2(300),
- AD_IMG                   BLOB             NOT NULL,
+ AD_CON                   CLOB             NOT NULL,
  FOOD_SUP_ID              VARCHAR2(6),
  CONSTRAINT AD_FK FOREIGN KEY (FOOD_SUP_ID) REFERENCES FOOD_SUP (FOOD_SUP_ID),
  PRIMARY KEY (AD_ID) 
@@ -457,7 +466,27 @@ START WITH 1
 NOMAXVALUE
 NOCYCLE
 NOCACHE;
------------------------------------------------------------------
+-----------------------廣告自動編號器-------------------------------
+CREATE SEQUENCE AD_SEQ
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+-----------------------員工自動編號器-------------------------------
+CREATE SEQUENCE EMP_SEQ
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+-----------------------功能自動編號器-------------------------------
+CREATE SEQUENCE FUN_SEQ
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
 
 -------------------------------食材資料----------------------------------------------------------------
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0') , '五穀米');
