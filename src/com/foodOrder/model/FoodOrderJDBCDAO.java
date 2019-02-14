@@ -51,22 +51,24 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -94,22 +96,24 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -123,39 +127,32 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 		try {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			con.setAutoCommit(false);
+
 			
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, foodOrId);
 			
 			pstmt.executeUpdate();
 			
-			con.commit();
-			con.setAutoCommit(true);
 		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			if(con != null) {
-				try {
-					con.rollback();
-				}catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -178,7 +175,7 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 				
 			rs = pstmt.executeQuery();
 				
-			if(rs.next()) {
+			while (rs.next()) {
 				foodOrderVO = new FoodOrderVO();
 				foodOrderVO.setFoodOrId(rs.getString(1));
 				foodOrderVO.setFoodOrStatus(rs.getString(2));
@@ -193,31 +190,31 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 					
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -227,6 +224,7 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 	public List<FoodOrderVO> getAll() {
 		List<FoodOrderVO> foodOrderVOs = new ArrayList<FoodOrderVO>(); 
 		FoodOrderVO foodOrderVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -236,8 +234,6 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
-				
-				
 			rs = pstmt.executeQuery();
 				
 			while(rs.next()) {
@@ -256,31 +252,31 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 					
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -305,7 +301,7 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 //		foodOrderJDBCDAO.insert(foodOrderVO);
 		// 修改
 //		FoodOrderVO foodOrderVO = new FoodOrderVO();
-//		foodOrderVO.setFoodOrId("FO20190213-000008");
+//		foodOrderVO.setFoodOrId("FO20190214-000007");
 //		foodOrderVO.setFoodOrStatus("o1");
 //		foodOrderVO.setFoodOrStart(sqlDate);
 //		foodOrderVO.setFoodOrSend(sqlDate);
@@ -316,9 +312,9 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 //		foodOrderVO.setFoodOrTel("0952777666");
 //		foodOrderJDBCDAO.update(foodOrderVO);
 		// 刪除
-//		foodOrderJDBCDAO.delete("FO20190213-000008");
+//		foodOrderJDBCDAO.delete("FO20190214-000007");
 		// 查詢
-//		FoodOrderVO foodOrderVO = foodOrderJDBCDAO.findByPrimaryKey("FO20190213-000007");
+//		FoodOrderVO foodOrderVO = foodOrderJDBCDAO.findByPrimaryKey("FO20190211-000005");
 //		System.out.println(foodOrderVO.getFoodOrId());
 //		System.out.println(foodOrderVO.getFoodOrStatus());
 //		System.out.println(foodOrderVO.getFoodOrStart());
@@ -330,19 +326,19 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 //		System.out.println(foodOrderVO.getFoodOrTel());
 //		System.out.println(foodOrderVO.getCustId());
 		// 查詢全部
-		List<FoodOrderVO> foodOrderVOs = foodOrderJDBCDAO.getAll();
-		for(FoodOrderVO foodOrderVO: foodOrderVOs) {		
-			System.out.print(foodOrderVO.getFoodOrId());
-			System.out.print(foodOrderVO.getFoodOrStatus());
-			System.out.print(foodOrderVO.getFoodOrStart());
-			System.out.print(foodOrderVO.getFoodOrSend());
-			System.out.print(foodOrderVO.getFoodOrRcv());
-			System.out.print(foodOrderVO.getFoodOrEnd());
-			System.out.print(foodOrderVO.getFoodOrName());
-			System.out.print(foodOrderVO.getFoodOrAddr());
-			System.out.print(foodOrderVO.getFoodOrTel());
-			System.out.print(foodOrderVO.getCustId());
-			System.out.println();
-		}
+//		List<FoodOrderVO> foodOrderVOs = foodOrderJDBCDAO.getAll();
+//		for(FoodOrderVO foodOrderVO: foodOrderVOs) {		
+//			System.out.print(foodOrderVO.getFoodOrId() + " ");
+//			System.out.print(foodOrderVO.getFoodOrStatus() + " ");
+//			System.out.print(foodOrderVO.getFoodOrStart() + " ");
+//			System.out.print(foodOrderVO.getFoodOrSend() + " ");
+//			System.out.print(foodOrderVO.getFoodOrRcv() + " ");
+//			System.out.print(foodOrderVO.getFoodOrEnd() + " ");
+//			System.out.print(foodOrderVO.getFoodOrName() + " ");
+//			System.out.print(foodOrderVO.getFoodOrAddr() + " ");
+//			System.out.print(foodOrderVO.getFoodOrTel() + " ");
+//			System.out.print(foodOrderVO.getCustId() + " ");
+//			System.out.println();
+//		}
 	}
 }

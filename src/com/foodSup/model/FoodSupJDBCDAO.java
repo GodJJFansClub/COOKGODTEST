@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.foodOrDetail.model.FoodOrDetailVO;
-
-import piciotest.PicIOTest;
 
 public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
@@ -42,22 +39,24 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -83,22 +82,24 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -123,29 +124,24 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 			con.commit();
 			con.setAutoCommit(true);
 		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			if(con != null) {
-				try {
-					con.rollback();
-				}catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -158,7 +154,6 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		piciotest.PicIOTest picIOTest = new PicIOTest();
 		
 		try {
 			Class.forName(DRIVER);
@@ -169,7 +164,7 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 			
 			rs = pstmt.executeQuery();
 				
-			if(rs.next()) {
+			while(rs.next()) {
 				foodSupVO = new FoodSupVO();
 				foodSupVO.setFoodSupId(rs.getString(1));
 				foodSupVO.setFoodSupName(rs.getString(2));
@@ -179,31 +174,31 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 									
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -237,31 +232,31 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 				foodSupVOs.add(foodSupVO);
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		}finally {
-			if(rs != null) {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -302,14 +297,14 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 //		System.out.println(foodSupVO.getFoodSupResume());
 		
 		// 查詢全部
-		List<FoodSupVO> foodSupVOs = foodSupJDBCDAO.getAll();
-		for(FoodSupVO foodSupVO:foodSupVOs) {
-			System.out.print(foodSupVO.getFoodSupId() + " ");
-			System.out.print(foodSupVO.getFoodSupName() + " ");
-			System.out.print(foodSupVO.getFoodSupTel() + " ");
-			System.out.print(foodSupVO.getFoodSupStatus() + " ");
-			System.out.println(foodSupVO.getFoodSupResume() + " ");
-		}
+//		List<FoodSupVO> foodSupVOs = foodSupJDBCDAO.getAll();
+//		for(FoodSupVO foodSupVO:foodSupVOs) {
+//			System.out.print(foodSupVO.getFoodSupId() + " ");
+//			System.out.print(foodSupVO.getFoodSupName() + " ");
+//			System.out.print(foodSupVO.getFoodSupTel() + " ");
+//			System.out.print(foodSupVO.getFoodSupStatus() + " ");
+//			System.out.println(foodSupVO.getFoodSupResume() + " ");
+//		}
 		
 	}
 }
