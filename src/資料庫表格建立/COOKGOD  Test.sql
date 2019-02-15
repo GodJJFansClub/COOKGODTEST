@@ -581,10 +581,10 @@ CREATE TABLE FUN(
 );
 REM INSERTING into FUN
 SET DEFINE OFF;
-Insert into FUN (FUN_ID,FUN_NAME) values ('FUN001','廣告管理');
-Insert into FUN (FUN_ID,FUN_NAME) values ('FUN002','菜色管理');
-Insert into FUN (FUN_ID,FUN_NAME) values ('FUN003','合作廠商管理');
-Insert into FUN (FUN_ID,FUN_NAME) values ('FUN004','顧客資料管理');
+Insert into FUN (FUN_ID,FUN_NAME) values ('FU0001','廣告管理');
+Insert into FUN (FUN_ID,FUN_NAME) values ('FU0002','菜色管理');
+Insert into FUN (FUN_ID,FUN_NAME) values ('FU0003','合作廠商管理');
+Insert into FUN (FUN_ID,FUN_NAME) values ('FU0004','顧客資料管理');
 
 -------------------------------------------------------------------------
 --建立表格:權限--
