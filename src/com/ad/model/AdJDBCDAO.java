@@ -38,9 +38,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		int a=1;
-		double b=(double)a;
-		
+				
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);

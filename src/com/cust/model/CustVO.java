@@ -3,105 +3,105 @@ package com.cust.model;
 import java.sql.Date;
 
 public class CustVO {
-	private String custId;
-	private String custAcc;
-	private String custPwd;
-	private String custName;
-	private String custSex;
-	private Integer custTel;
-	private String custAddr;
-	private String custPid;
-	private String custMail;
-	private Date custBrd;
-	private String custReg;
-	private byte[] custPic;
-	private String custStatus;
-	private String niname;
+	private String cust_ID;
+	private String cust_acc;
+	private String cust_pwd;
+	private String cust_name;
+	private String cust_sex;
+	private String cust_tel;
+	private String cust_addr;
+	private String cust_pid;
+	private String cust_mail;
+	private Date cust_brd;
+	private Date cust_reg;
+	private byte[] cust_pic;
+	private String cust_status;
+	private String cust_niname;
 	
-	public String getCustId() {
-		return custId;
+	public String getCust_ID() {
+		return cust_ID;
 	}
-	public void setCustId(String custId) {
-		this.custId = custId;
+	public void setCust_ID(String cust_ID) {
+		this.cust_ID = cust_ID;
 	}
-	public String getCustAcc() {
-		return custAcc;
+	public String getCust_acc() {
+		return cust_acc;
 	}
-	public void setCustAcc(String custAcc) {
-		this.custAcc = custAcc;
+	public void setCust_acc(String cust_acc) {
+		this.cust_acc = cust_acc;
 	}
-	public String getCustPwd() {
-		return custPwd;
+	public String getCust_pwd() {
+		return cust_pwd;
 	}
-	public void setCustPwd(String custPwd) {
-		this.custPwd = custPwd;
+	public void setCust_pwd(String cust_pwd) {
+		this.cust_pwd = cust_pwd;
 	}
-	public String getCustName() {
-		return custName;
+	public String getCust_name() {
+		return cust_name;
 	}
-	public void setCustName(String custName) {
-		this.custName = custName;
+	public void setCust_name(String cust_name) {
+		this.cust_name = cust_name;
 	}
-	public String getCustSex() {
-		return custSex;
+	public String getCust_sex() {
+		return cust_sex;
 	}
-	public void setCustSex(String custSex) {
-		this.custSex = custSex;
+	public void setCust_sex(String cust_sex) {
+		this.cust_sex = cust_sex;
 	}
-	public Integer getCustTel() {
-		return custTel;
+	public String getCust_tel() {
+		return cust_tel;
 	}
-	public void setCustTel(Integer custTel) {
-		this.custTel = custTel;
+	public void setCust_tel(String cust_tel) {
+		this.cust_tel = cust_tel;
 	}
-	public String getCustAddr() {
-		return custAddr;
+	public String getCust_addr() {
+		return cust_addr;
 	}
-	public void setCustAddr(String custAddr) {
-		this.custAddr = custAddr;
+	public void setCust_addr(String cust_addr) {
+		this.cust_addr = cust_addr;
 	}
-	public String getCustPid() {
-		return custPid;
+	public String getCust_pid() {
+		return cust_pid;
 	}
-	public void setCustPid(String custPid) {
-		this.custPid = custPid;
+	public void setCust_pid(String cust_pid) {
+		this.cust_pid = cust_pid;
 	}
-	public String getCustMail() {
-		return custMail;
+	public String getCust_mail() {
+		return cust_mail;
 	}
-	public void setCustMail(String custMail) {
-		this.custMail = custMail;
+	public void setCust_mail(String cust_mail) {
+		this.cust_mail = cust_mail;
 	}
-	public Date getCustBrd() {
-		return custBrd;
+	public Date getCust_brd() {
+		return cust_brd;
 	}
-	public void setCustBrd(Date custBrd) {
-		this.custBrd = custBrd;
+	public void setCust_brd(Date cust_brd) {
+		this.cust_brd = cust_brd;
 	}
-	public String getCustReg() {
-		return custReg;
+	public Date getCust_reg() {
+		return cust_reg;
 	}
-	public void setCustReg(String custReg) {
-		this.custReg = custReg;
+	public void setCust_reg(Date cust_reg) {
+		this.cust_reg = cust_reg;
 	}
-	public byte[] getCustPic() {
-		return custPic;
+	public byte[] getCust_pic() {
+		return cust_pic;
 	}
-	public void setCustPic(byte[] custPic) {
-		this.custPic = custPic;
+	public void setCust_pic(byte[] cust_pic) {
+		this.cust_pic = cust_pic;
 	}
-	public String getCustStatus() {
-		return custStatus;
+	public String getCust_status() {
+		return cust_status;
 	}
-	public void setCustStatus(String custStatus) {
-		this.custStatus = custStatus;
+	public void setCust_status(String cust_status) {
+		this.cust_status = cust_status;
 	}
-	public String getNiname() {
-		return niname;
+	public String getCust_niname() {
+		return cust_niname;
 	}
-	public void setNiname(String niname) {
-		this.niname = niname;
+	public void setCust_niname(String cust_niname) {
+		this.cust_niname = cust_niname;
 	}
 	
-
+	
 }
