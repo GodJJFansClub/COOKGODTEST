@@ -1,40 +1,40 @@
 package com.foodSup.model;
 
 public class FoodSupVO {
-	private String foodSupId;
-	private String foodSupName;
-	private String foodSupTel;
-	private String foodSupStatus;
-	private String foodSupResume;
-	public String getFoodSupId() {
-		return foodSupId;
+	private String food_sup_ID;
+	private String food_sup_name;
+	private String food_sup_tel;
+	private String food_sup_status;
+	private String food_sup_resume;
+	public String getFood_sup_ID() {
+		return food_sup_ID;
 	}
-	public void setFoodSupId(String foodSupId) {
-		this.foodSupId = foodSupId;
+	public void setFood_sup_ID(String food_sup_ID) {
+		this.food_sup_ID = food_sup_ID;
 	}
-	public String getFoodSupName() {
-		return foodSupName;
+	public String getFood_sup_name() {
+		return food_sup_name;
 	}
-	public void setFoodSupName(String foodSupName) {
-		this.foodSupName = foodSupName;
+	public void setFood_sup_name(String food_sup_name) {
+		this.food_sup_name = food_sup_name;
 	}
-	public String getFoodSupTel() {
-		return foodSupTel;
+	public String getFood_sup_tel() {
+		return food_sup_tel;
 	}
-	public void setFoodSupTel(String foodSupTel) {
-		this.foodSupTel = foodSupTel;
+	public void setFood_sup_tel(String food_sup_tel) {
+		this.food_sup_tel = food_sup_tel;
 	}
-	public String getFoodSupStatus() {
-		return foodSupStatus;
+	public String getFood_sup_status() {
+		return food_sup_status;
 	}
-	public void setFoodSupStatus(String foodSupStatus) {
-		this.foodSupStatus = foodSupStatus;
+	public void setFood_sup_status(String food_sup_status) {
+		this.food_sup_status = food_sup_status;
 	}
-	public String getFoodSupResume() {
-		return foodSupResume;
+	public String getFood_sup_resume() {
+		return food_sup_resume;
 	}
-	public void setFoodSupResume(String foodSupResume) {
-		this.foodSupResume = foodSupResume;
+	public void setFood_sup_resume(String food_sup_resume) {
+		this.food_sup_resume = food_sup_resume;
 	}
 	
 	

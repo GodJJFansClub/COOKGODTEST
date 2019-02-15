@@ -30,11 +30,11 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, foodSupVO.getFoodSupId());
-			pstmt.setString(2, foodSupVO.getFoodSupName());
-			pstmt.setString(3, foodSupVO.getFoodSupTel());
-			pstmt.setString(4, foodSupVO.getFoodSupStatus());
-			pstmt.setString(5, foodSupVO.getFoodSupResume());			
+			pstmt.setString(1, foodSupVO.getFood_sup_ID());
+			pstmt.setString(2, foodSupVO.getFood_sup_name());
+			pstmt.setString(3, foodSupVO.getFood_sup_tel());
+			pstmt.setString(4, foodSupVO.getFood_sup_status());
+			pstmt.setString(5, foodSupVO.getFood_sup_resume());			
 			
 
 			pstmt.executeUpdate();
@@ -73,11 +73,11 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, foodSupVO.getFoodSupName());
-			pstmt.setString(2, foodSupVO.getFoodSupTel());
-			pstmt.setString(3, foodSupVO.getFoodSupStatus());
-			pstmt.setString(4, foodSupVO.getFoodSupResume());			
-			pstmt.setString(5, foodSupVO.getFoodSupId());
+			pstmt.setString(1, foodSupVO.getFood_sup_name());
+			pstmt.setString(2, foodSupVO.getFood_sup_tel());
+			pstmt.setString(3, foodSupVO.getFood_sup_status());
+			pstmt.setString(4, foodSupVO.getFood_sup_resume());			
+			pstmt.setString(5, foodSupVO.getFood_sup_ID());
 			
 
 			pstmt.executeUpdate();
@@ -106,7 +106,7 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 	}
 
 	@Override
-	public void delete(String foodSupId) {
+	public void delete(String food_sup_ID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -116,7 +116,7 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 			con.setAutoCommit(false);
 			
 			pstmt = con.prepareStatement(DELETE_STMT);
-			pstmt.setString(1, foodSupId);
+			pstmt.setString(1, food_sup_ID);
 ;
 			
 			pstmt.executeUpdate();
@@ -148,7 +148,7 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 	}
 
 	@Override
-	public FoodSupVO findByPrimaryKey(String foodSupId) {
+	public FoodSupVO findByPrimaryKey(String food_sup_ID) {
 		FoodSupVO foodSupVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -160,17 +160,17 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 				
-			pstmt.setString(1, foodSupId);
+			pstmt.setString(1, food_sup_ID);
 			
 			rs = pstmt.executeQuery();
 				
 			while(rs.next()) {
 				foodSupVO = new FoodSupVO();
-				foodSupVO.setFoodSupId(rs.getString(1));
-				foodSupVO.setFoodSupName(rs.getString(2));
-				foodSupVO.setFoodSupTel(rs.getString(3));
-				foodSupVO.setFoodSupStatus(rs.getString(4));
-				foodSupVO.setFoodSupResume(rs.getString(5));
+				foodSupVO.setFood_sup_ID(rs.getString(1));
+				foodSupVO.setFood_sup_name(rs.getString(2));
+				foodSupVO.setFood_sup_tel(rs.getString(3));
+				foodSupVO.setFood_sup_status(rs.getString(4));
+				foodSupVO.setFood_sup_resume(rs.getString(5));
 									
 			}
 		} catch (ClassNotFoundException e) {
@@ -224,11 +224,11 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 				
 			while(rs.next()) {
 				foodSupVO = new FoodSupVO();
-				foodSupVO.setFoodSupId(rs.getString(1));
-				foodSupVO.setFoodSupName(rs.getString(2));
-				foodSupVO.setFoodSupTel(rs.getString(3));
-				foodSupVO.setFoodSupStatus(rs.getString(4));
-				foodSupVO.setFoodSupResume(rs.getString(5));
+				foodSupVO.setFood_sup_ID(rs.getString(1));
+				foodSupVO.setFood_sup_name(rs.getString(2));
+				foodSupVO.setFood_sup_tel(rs.getString(3));
+				foodSupVO.setFood_sup_status(rs.getString(4));
+				foodSupVO.setFood_sup_resume(rs.getString(5));
 				foodSupVOs.add(foodSupVO);
 			}
 		} catch (ClassNotFoundException e) {
@@ -269,20 +269,20 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 		
 		// 新增
 //		FoodSupVO foodSupVO = new FoodSupVO();
-//		foodSupVO.setFoodSupId("C00007");
-//		foodSupVO.setFoodSupName("DDD");
-//		foodSupVO.setFoodSupTel("03-6555555");
-//		foodSupVO.setFoodSupStatus("s0");
-//		foodSupVO.setFoodSupResume("dddddddd");
+//		foodSupVO.setFood_sup_ID("C00007");
+//		foodSupVO.setFood_sup_name("DDD");
+//		foodSupVO.setFood_sup_tel("03-6555555");
+//		foodSupVO.setFood_sup_status("s0");
+//		foodSupVO.setFood_sup_resume("dddddddd");
 //		foodSupJDBCDAO.insert(foodSupVO);
 		
 		// 修改
 //		FoodSupVO foodSupVO = new FoodSupVO();
-//		foodSupVO.setFoodSupId("C00007");
-//		foodSupVO.setFoodSupName("GGG");
-//		foodSupVO.setFoodSupTel("0958555555");
-//		foodSupVO.setFoodSupStatus("s1");
-//		foodSupVO.setFoodSupResume("AAAAAAA");
+//		foodSupVO.setFood_sup_ID("C00007");
+//		foodSupVO.setFood_sup_name("GGG");
+//		foodSupVO.setFood_sup_tel("0958555555");
+//		foodSupVO.setFood_sup_status("s1");
+//		foodSupVO.setFood_sup_resume("AAAAAAA");
 //		foodSupJDBCDAO.update(foodSupVO);
 		
 		// 刪除
@@ -290,20 +290,20 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 		
 		// 查詢
 //		FoodSupVO foodSupVO = foodSupJDBCDAO.findByPrimaryKey("C00005");
-//		System.out.println(foodSupVO.getFoodSupId());
-//		System.out.println(foodSupVO.getFoodSupName());
-//		System.out.println(foodSupVO.getFoodSupTel());
-//		System.out.println(foodSupVO.getFoodSupStatus());
-//		System.out.println(foodSupVO.getFoodSupResume());
+//		System.out.println(foodSupVO.getFood_sup_ID());
+//		System.out.println(foodSupVO.getFood_sup_name());
+//		System.out.println(foodSupVO.getFood_sup_tel());
+//		System.out.println(foodSupVO.getFood_sup_status());
+//		System.out.println(foodSupVO.getFood_sup_resume());
 		
 		// 查詢全部
 //		List<FoodSupVO> foodSupVOs = foodSupJDBCDAO.getAll();
 //		for(FoodSupVO foodSupVO:foodSupVOs) {
-//			System.out.print(foodSupVO.getFoodSupId() + " ");
-//			System.out.print(foodSupVO.getFoodSupName() + " ");
-//			System.out.print(foodSupVO.getFoodSupTel() + " ");
-//			System.out.print(foodSupVO.getFoodSupStatus() + " ");
-//			System.out.println(foodSupVO.getFoodSupResume() + " ");
+//			System.out.print(foodSupVO.getFood_sup_ID() + " ");
+//			System.out.print(foodSupVO.getFood_sup_name() + " ");
+//			System.out.print(foodSupVO.getFood_sup_tel() + " ");
+//			System.out.print(foodSupVO.getFood_sup_status() + " ");
+//			System.out.println(foodSupVO.getFood_sup_resume() + " ");
 //		}
 		
 	}
