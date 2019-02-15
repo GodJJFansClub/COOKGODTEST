@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.SQLError;
 
 public class FoodJDBCDAO implements FoodDAO_interface {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
@@ -31,7 +30,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, foodVO.getFoodName());
+			pstmt.setString(1, foodVO.getFood_name());
 			
 			pstmt.executeUpdate();
 			// Handle any driver errors
@@ -71,8 +70,8 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			
 			
-			pstmt.setString( 1, foodVO.getFoodName());
-			pstmt.setString( 2, foodVO.getFoodId());
+			pstmt.setString( 1, foodVO.getFood_name());
+			pstmt.setString( 2, foodVO.getFood_ID());
 			
 			pstmt.executeUpdate();
 			
@@ -144,7 +143,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		
 	}
 	@Override
-	public FoodVO findByPrimaryKey(String foodId) {
+	public FoodVO findByPrimaryKey(String food_ID) {
 		FoodVO foodVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -155,14 +154,14 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setString(1, foodId);
+			pstmt.setString(1, food_ID);
 			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				foodVO = new FoodVO();
-				foodVO.setFoodId(rs.getString(1));
-				foodVO.setFoodName(rs.getString(2));
+				foodVO.setFood_ID(rs.getString(1));
+				foodVO.setFood_name(rs.getString(2));
 			}
 			// Handle any driver errors
 		}catch(ClassNotFoundException e) {
@@ -215,8 +214,8 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				foodVO = new FoodVO();
-				foodVO.setFoodId(rs.getString(1));
-				foodVO.setFoodName(rs.getString(2));
+				foodVO.setFood_ID(rs.getString(1));
+				foodVO.setFood_name(rs.getString(2));
 				foodVOAL.add(foodVO);
 			}
 			// Handle any driver errors
@@ -260,24 +259,24 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		FoodJDBCDAO dao = new FoodJDBCDAO();
 		// 新增
 //		FoodVO foodVO1 = new FoodVO();
-//		foodVO1.setFoodName("大白菜");
+//		foodVO1.setFood_name("大白菜");
 //		dao.insert(foodVO1);
 		// 修改
 //		FoodVO foodVO1 = new FoodVO();
-//		foodVO1.setFoodId("F00027");
-//		foodVO1.setFoodName("AAA");
+//		foodVO1.setFood_ID("F00027");
+//		foodVO1.setFood_name("AAA");
 //		dao.update(foodVO1);
 		// 刪除
-		dao.delete("F00027");
+//		dao.delete("F00027");
 		// 查詢
 //		FoodVO foodVO1 = dao.findByPrimaryKey("F00021");
-//		System.out.println(foodVO1.getFoodId());
-//		System.out.println(foodVO1.getFoodName());
+//		System.out.println(foodVO1.getFood_ID());
+//		System.out.println(foodVO1.getFood_name());
 		// 查全部
 //		List<FoodVO> foodVOs = dao.getAll();
 //		for(FoodVO foodVO:foodVOs) {
-//			System.out.print(foodVO.getFoodId());
-//			System.out.print(foodVO.getFoodName());
+//			System.out.print(foodVO.getFood_ID());
+//			System.out.print(foodVO.getFood_name());
 //			System.out.println();
 //		}
 	}

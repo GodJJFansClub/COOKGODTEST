@@ -1,19 +1,20 @@
 package com.food.model;
 
 public class FoodVO {
-	private String foodId;
-	private String foodName;
-	public String getFoodId() {
-		return foodId;
+	private String food_ID;
+	private String food_name;
+	public String getFood_ID() {
+		return food_ID;
 	}
-	public void setFoodId(String foodId) {
-		this.foodId = foodId;
+	public void setFood_ID(String food_ID) {
+		this.food_ID = food_ID;
 	}
-	public String getFoodName() {
-		return foodName;
+	public String getFood_name() {
+		return food_name;
 	}
-	public void setFoodName(String foodName) {
-		this.foodName = foodName;
+	public void setFood_name(String food_name) {
+		this.food_name = food_name;
 	}
+	
 	
 }

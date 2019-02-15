@@ -19,7 +19,6 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	private static final String DELETE_STMT = "DELETE FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM FOOD_MALL";
 	private static final String GET_ONE_STMT = "SELECT * FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
-	private static final String UPDATE_PIC = "UPDATE FOOD_MALL SET FOOD_M_PIC = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	
 	@Override
 	public void insert(FoodMallVO foodMallVO) {
@@ -149,7 +148,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	}
 
 	@Override
-	public void delete(String foodSupId, String foodId) {
+	public void delete(String food_sup_ID, String food_ID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -159,8 +158,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 			con.setAutoCommit(false);
 			
 			pstmt = con.prepareStatement(DELETE_STMT);
-			pstmt.setString(1, foodSupId);
-			pstmt.setString(2, foodId);
+			pstmt.setString(1, food_sup_ID);
+			pstmt.setString(2, food_ID);
 			
 			pstmt.executeUpdate();
 			
@@ -196,7 +195,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	}
 
 	@Override
-	public FoodMallVO findByPrimaryKey(String foodSupId, String foodId) {
+	public FoodMallVO findByPrimaryKey(String food_sup_ID, String food_ID) {
 		FoodMallVO foodMallVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -207,8 +206,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 				
-			pstmt.setString(1, foodSupId);
-			pstmt.setString(2, foodId);
+			pstmt.setString(1, food_sup_ID);
+			pstmt.setString(2, food_ID);
 				
 			rs = pstmt.executeQuery();
 				
@@ -327,7 +326,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 		// 新增
 //		FoodMallVO foodMallVO = new FoodMallVO();
 //		foodMallVO.setFood_sup_ID("C00005");
-//		foodMallVO.setFood_ID("F00001");
+//		foodMallVO.setFood_ID("F00002");
 //		foodMallVO.setFood_m_name("五穀米");
 //		foodMallVO.setFood_m_status("p2");
 //		foodMallVO.setFood_m_price(300);
@@ -353,7 +352,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 		// 刪除
 //		fMDao.delete("C00005", "F00001");
 		// 查一筆
-//		FoodMallVO foodMallVO = fMDao.findByPrimaryKey("C00005", "F00001");
+//		FoodMallVO foodMallVO = fMDao.findByPrimaryKey("C00009", "F00009");
 //		System.out.println(foodMallVO.getFood_sup_ID());
 //		System.out.println(foodMallVO.getFood_ID());
 //		System.out.println(foodMallVO.getFood_m_name());
@@ -365,22 +364,22 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 //		System.out.println(foodMallVO.getFood_m_resume());
 //		System.out.println(foodMallVO.getFood_m_rate());
 		// 查全部
-		List<FoodMallVO> foodMallVOs = fMDao.getAll();
-		int count = 1;
-		for(FoodMallVO foodMallVO:foodMallVOs) {
-			System.out.print(foodMallVO.getFood_sup_ID() + " ");
-			System.out.print(foodMallVO.getFood_ID() + " ");
-			System.out.print(foodMallVO.getFood_m_name() + " ");
-			System.out.print(foodMallVO.getFood_m_status() + " ");
-			System.out.print(foodMallVO.getFood_m_price() + " ");
-			System.out.print(foodMallVO.getFood_m_unit() + " ");
-			System.out.print(foodMallVO.getFood_m_place() + " ");
-			picIOTest.byteArrToFile(foodMallVO.getFood_m_pic(), "P:/pic/"+ count +".png");
-			System.out.print(foodMallVO.getFood_m_resume() + " ");
-			System.out.print(foodMallVO.getFood_m_rate() + " ");
-			System.out.println();
-			count++;
-		}
+//		List<FoodMallVO> foodMallVOs = fMDao.getAll();
+//		int count = 1;
+//		for(FoodMallVO foodMallVO:foodMallVOs) {
+//			System.out.print(foodMallVO.getFood_sup_ID() + " ");
+//			System.out.print(foodMallVO.getFood_ID() + " ");
+//			System.out.print(foodMallVO.getFood_m_name() + " ");
+//			System.out.print(foodMallVO.getFood_m_status() + " ");
+//			System.out.print(foodMallVO.getFood_m_price() + " ");
+//			System.out.print(foodMallVO.getFood_m_unit() + " ");
+//			System.out.print(foodMallVO.getFood_m_place() + " ");
+//			picIOTest.byteArrToFile(foodMallVO.getFood_m_pic(), "P:/pic/"+ count +".png");
+//			System.out.print(foodMallVO.getFood_m_resume() + " ");
+//			System.out.print(foodMallVO.getFood_m_rate() + " ");
+//			System.out.println();
+//			count++;
+//		}
 		
 		
 		
