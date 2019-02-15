@@ -3,76 +3,75 @@ package com.foodOrder.model;
 import java.sql.Date;
 
 public class FoodOrderVO {
-	private String foodOrId;
-	private String foodOrStatus;
-	private Date foodOrStart;
-	private Date foodOrSend;
-	private Date foodOrRcv;
-	private Date foodOrEnd;
-	private String foodOrName;
-	private String foodOrAddr;
-	private String foodOrTel;
-	private String custId;
-	public String getFoodOrId() {
-		return foodOrId;
+	private String food_or_ID;
+	private String food_or_status;
+	private Date food_or_start;
+	private Date food_or_send;
+	private Date food_or_rcv;
+	private Date food_or_end;
+	private String food_or_name;
+	private String food_or_addr;
+	private String food_or_tel;
+	private String cust_ID;
+	public String getFood_or_ID() {
+		return food_or_ID;
 	}
-	public void setFoodOrId(String foodOrId) {
-		this.foodOrId = foodOrId;
+	public void setFood_or_ID(String food_or_ID) {
+		this.food_or_ID = food_or_ID;
 	}
-	public String getFoodOrStatus() {
-		return foodOrStatus;
+	public String getFood_or_status() {
+		return food_or_status;
 	}
-	public void setFoodOrStatus(String foodOrStatus) {
-		this.foodOrStatus = foodOrStatus;
+	public void setFood_or_status(String food_or_status) {
+		this.food_or_status = food_or_status;
 	}
-	public Date getFoodOrStart() {
-		return foodOrStart;
+	public Date getFood_or_start() {
+		return food_or_start;
 	}
-	public void setFoodOrStart(Date foodOrStart) {
-		this.foodOrStart = foodOrStart;
+	public void setFood_or_start(Date food_or_start) {
+		this.food_or_start = food_or_start;
 	}
-	public Date getFoodOrSend() {
-		return foodOrSend;
+	public Date getFood_or_send() {
+		return food_or_send;
 	}
-	public void setFoodOrSend(Date foodOrSend) {
-		this.foodOrSend = foodOrSend;
+	public void setFood_or_send(Date food_or_send) {
+		this.food_or_send = food_or_send;
 	}
-	public Date getFoodOrRcv() {
-		return foodOrRcv;
+	public Date getFood_or_rcv() {
+		return food_or_rcv;
 	}
-	public void setFoodOrRcv(Date foodOrRcv) {
-		this.foodOrRcv = foodOrRcv;
+	public void setFood_or_rcv(Date food_or_rcv) {
+		this.food_or_rcv = food_or_rcv;
 	}
-	public Date getFoodOrEnd() {
-		return foodOrEnd;
+	public Date getFood_or_end() {
+		return food_or_end;
 	}
-	public void setFoodOrEnd(Date foodOrEnd) {
-		this.foodOrEnd = foodOrEnd;
+	public void setFood_or_end(Date food_or_end) {
+		this.food_or_end = food_or_end;
 	}
-	public String getFoodOrName() {
-		return foodOrName;
+	public String getFood_or_name() {
+		return food_or_name;
 	}
-	public void setFoodOrName(String foodOrName) {
-		this.foodOrName = foodOrName;
+	public void setFood_or_name(String food_or_name) {
+		this.food_or_name = food_or_name;
 	}
-	public String getFoodOrAddr() {
-		return foodOrAddr;
+	public String getFood_or_addr() {
+		return food_or_addr;
 	}
-	public void setFoodOrAddr(String foodOrAddr) {
-		this.foodOrAddr = foodOrAddr;
+	public void setFood_or_addr(String food_or_addr) {
+		this.food_or_addr = food_or_addr;
 	}
-	public String getFoodOrTel() {
-		return foodOrTel;
+	public String getFood_or_tel() {
+		return food_or_tel;
 	}
-	public void setFoodOrTel(String foodOrTel) {
-		this.foodOrTel = foodOrTel;
+	public void setFood_or_tel(String food_or_tel) {
+		this.food_or_tel = food_or_tel;
 	}
-	public String getCustId() {
-		return custId;
+	public String getCust_ID() {
+		return cust_ID;
 	}
-	public void setCustId(String custId) {
-		this.custId = custId;
+	public void setCust_ID(String cust_ID) {
+		this.cust_ID = cust_ID;
 	}
-	
-	
+
 }
