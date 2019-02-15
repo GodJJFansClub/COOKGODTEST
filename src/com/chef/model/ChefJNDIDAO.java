@@ -40,9 +40,9 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Insert_Stmt);
 			
-			pstmt.setString(1, chefVO.getChefId());
-			pstmt.setString(2, chefVO.getChefArea());
-			pstmt.setString(3, chefVO.getChefResume());
+			pstmt.setString(1, chefVO.getChef_ID());
+			pstmt.setString(2, chefVO.getChef_area());
+			pstmt.setString(3, chefVO.getChef_resume());
 			
 			pstmt.executeUpdate();
 			
@@ -75,9 +75,9 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Updata_Stmt_From_Emp);
 
-			pstmt.setString(1, chefVO.getChefStatus());
-			pstmt.setString(2, chefVO.getChefChannel());
-			pstmt.setString(3, chefVO.getChefId());
+			pstmt.setString(1, chefVO.getChef_status());
+			pstmt.setString(2, chefVO.getChef_channel());
+			pstmt.setString(3, chefVO.getChef_ID());
 
 			pstmt.executeUpdate();
 
@@ -150,10 +150,10 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 			
 			while (rs.next()) {				
 				chefVO = new ChefVO();				
-				chefVO.setChefId(rs.getString("CHEF_ID"));
-				chefVO.setChefName(rs.getString("CUST_NAME"));
-				chefVO.setChefAddr(rs.getString("CUST_ADDR"));
-				chefVO.setChefTel(rs.getString("CUST_TEL"));
+				chefVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefVO.setChef_name(rs.getString("CUST_NAME"));
+				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
+				chefVO.setChef_tel(rs.getString("CUST_TEL"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : "+ se.getMessage());
@@ -198,10 +198,10 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 
 			while (rs.next()) {
 				chefVO = new ChefVO();				
-				chefVO.setChefId(rs.getString("CHEF_ID"));
-				chefVO.setChefName(rs.getString("CUST_NAME"));
-				chefVO.setChefAddr(rs.getString("CUST_ADDR"));
-				chefVO.setChefTel(rs.getString("CUST_TEL"));
+				chefVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefVO.setChef_name(rs.getString("CUST_NAME"));
+				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
+				chefVO.setChef_tel(rs.getString("CUST_TEL"));
 				listAllChef.add(chefVO); // Store the row in the list
 			}
 		} catch (SQLException se) {

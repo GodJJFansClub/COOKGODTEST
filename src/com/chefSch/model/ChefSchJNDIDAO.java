@@ -4,12 +4,22 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "COOKGOD";
-	String passwd = "123456";
+public class ChefSchJNDIDAO implements ChefSchDAO_Interface {
+
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String Insert_Stmt = 
 			"INSERT INTO CHEF_SCH (CHEF_ID,CHEF_SCH_DATE,CHEF_SCH_STATUS) VALUES (?,?,?)";
@@ -28,8 +38,7 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Insert_Stmt);
 
 			pstmt.setString(1, chefSchVO.getChef_ID());
@@ -38,8 +47,6 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getStackTrace());
 		} finally {
@@ -66,8 +73,7 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Updata_Stmt);
 
 			pstmt.setString(1, chefSchVO.getChef_sch_status());
@@ -76,8 +82,6 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		} finally {
@@ -104,8 +108,7 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Delete_Stmt);
 
 			pstmt.setString(1, chefSchVO.getChef_ID());
@@ -113,8 +116,6 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		} finally {
@@ -144,8 +145,7 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Get_One_Stmt);
 			
 			pstmt.setString(1, chefSchId);
@@ -160,8 +160,6 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 				chefSchVO.setChef_sch_date(rs.getDate("CHEF_SCH_DATE"));
 				chefSchVO.setChef_sch_status(rs.getString("CHEF_SCH_STATUS"));
 			}			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		} finally {
@@ -200,8 +198,7 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Get_All_Stmt);
 			rs = pstmt.executeQuery();
 
@@ -213,8 +210,6 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 				chefSchVO.setChef_sch_status(rs.getString("CHEF_SCH_STATUS"));
 				listAllChefSch.add(chefSchVO);
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		} finally {
@@ -245,7 +240,7 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 
 	public static void main(String[] args) {
 		
-		ChefSchJDBCDAO dao = new ChefSchJDBCDAO();
+		ChefSchJNDIDAO dao = new ChefSchJNDIDAO();
 		
 		// Insert
 //		Calendar calendar = Calendar.getInstance();	//當日日期by哲成
@@ -253,33 +248,33 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 				
 //		java.sql.Date date01=java.sql.Date.valueOf("2019-03-14");	//Date
 //		ChefSchVO chefSch01 = new ChefSchVO();
-//		chefSch01.setChef_ID("C00002");
-//		chefSch01.setChef_sch_date(date01);
-//		chefSch01.setChef_sch_status("3");
+//		chefSch01.setChefId("C00002");
+//		chefSch01.setChefSchDate(date01);
+//		chefSch01.setChefSchStatus("3");
 //		dao.insert(chefSch01);
 		
 		//Update
 //		java.sql.Date date02=java.sql.Date.valueOf("2019-03-14");	//Date
 //		ChefSchVO chefSch02 = new ChefSchVO();
-//		chefSch02.setChef_ID("C00002");
-//		chefSch02.setChef_sch_date(date02);
-//		chefSch02.setChef_sch_status("0");
+//		chefSch02.setChefId("C00002");
+//		chefSch02.setChefSchDate(date02);
+//		chefSch02.setChefSchStatus("0");
 //		dao.update(chefSch02);
 		
 		//Delete
 //		java.sql.Date date03=java.sql.Date.valueOf("2019-03-14");	//Date
 //		ChefSchVO chefSch03 = new ChefSchVO();
-//		chefSch03.setChef_ID("C00002");
-//		chefSch03.setChef_sch_date(date03);
+//		chefSch03.setChefId("C00002");
+//		chefSch03.setChefSchDate(date03);
 //		dao.delete(chefSch03);
 		
-		//Select_One
+		//Select
 //		java.sql.Date date04=java.sql.Date.valueOf("2019-02-20");	//Date
 //		ChefSchVO chefSch04 = dao.findByPrimaryKey("C00002",date04);		
 //		System.out.println(chefSch04.getChef_ID());
 //		System.out.println(chefSch04.getChef_name());
-//		System.out.println(chefSch04.getChef_sch_date());
-//		System.out.println(chefSch04.getChef_sch_status());
+//		System.out.println(chefSch04.getChef_SCH_date());
+//		System.out.println(chefSch04.getChef_SCH_status());
 //		System.out.println("--------------------------------");
 		
 		//Select_All
@@ -287,8 +282,8 @@ public class ChefSchJDBCDAO implements ChefSchDAO_Interface {
 //		for(ChefSchVO chefSch05:list) {
 //			System.out.print(chefSch05.getChef_ID()+ ",");
 //			System.out.print(chefSch05.getChef_name()+ ",");
-//			System.out.print(chefSch05.getChef_sch_date()+",");
-//			System.out.print(chefSch05.getChef_sch_status()+"\n");
+//			System.out.print(chefSch05.getChef_SCH_date()+",");
+//			System.out.print(chefSch05.getChef_SCH_status()+"\n");
 //		}
 	}
 }

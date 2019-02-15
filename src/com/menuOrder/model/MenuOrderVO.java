@@ -4,75 +4,75 @@ import java.sql.*;
 
 public class MenuOrderVO {
 	
-	private String menuOdId;
-	private String menuOdStatus;
-	private Timestamp menuOdStart;
-	private Timestamp menuOdBook;
-	private Date menuOdEnd;
-	private Integer menuOdRate;
-	private String menuOdMsg;
-	private String custId;
-	private String chefId;
-	private String menuId;
+	private String menu_od_ID;
+	private String menu_od_status;
+	private Timestamp menu_od_start;
+	private Timestamp menu_od_book;
+	private Date menu_od_end;
+	private Integer menu_od_rate;
+	private String menu_od_msg;
+	private String cust_ID;
+	private String chef_ID;
+	private String menu_ID;
 	
-	public String getMenuOdId() {
-		return menuOdId;
+	public String getMenu_od_ID() {
+		return menu_od_ID;
 	}
-	public void setMenuOdId(String menuOdId) {
-		this.menuOdId = menuOdId;
+	public void setMenu_od_ID(String menu_od_ID) {
+		this.menu_od_ID = menu_od_ID;
 	}
-	public String getMenuOdStatus() {
-		return menuOdStatus;
+	public String getMenu_od_status() {
+		return menu_od_status;
 	}
-	public void setMenuOdStatus(String menuOdStatus) {
-		this.menuOdStatus = menuOdStatus;
+	public void setMenu_od_status(String menu_od_status) {
+		this.menu_od_status = menu_od_status;
 	}
-	public Timestamp getMenuOdStart() {
-		return menuOdStart;
+	public Timestamp getMenu_od_start() {
+		return menu_od_start;
 	}
-	public void setMenuOdStart(Timestamp menuOdStart) {
-		this.menuOdStart = menuOdStart;
+	public void setMenu_od_start(Timestamp menu_od_start) {
+		this.menu_od_start = menu_od_start;
 	}
-	public Timestamp getMenuOdBook() {
-		return menuOdBook;
+	public Timestamp getMenu_od_book() {
+		return menu_od_book;
 	}
-	public void setMenuOdBook(Timestamp menuOdBook) {
-		this.menuOdBook = menuOdBook;
+	public void setMenu_od_book(Timestamp menu_od_book) {
+		this.menu_od_book = menu_od_book;
 	}
-	public Date getMenuOdEnd() {
-		return menuOdEnd;
+	public Date getMenu_od_end() {
+		return menu_od_end;
 	}
-	public void setMenuOdEnd(Date menuOdEnd) {
-		this.menuOdEnd = menuOdEnd;
+	public void setMenu_od_end(Date menu_od_end) {
+		this.menu_od_end = menu_od_end;
 	}
-	public Integer getMenuOdRate() {
-		return menuOdRate;
+	public Integer getMenu_od_rate() {
+		return menu_od_rate;
 	}
-	public void setMenuOdRate(Integer menuOdRate) {
-		this.menuOdRate = menuOdRate;
+	public void setMenu_od_rate(Integer menu_od_rate) {
+		this.menu_od_rate = menu_od_rate;
 	}
-	public String getMenuOdMsg() {
-		return menuOdMsg;
+	public String getMenu_od_msg() {
+		return menu_od_msg;
 	}
-	public void setMenuOdMsg(String menuOdMsg) {
-		this.menuOdMsg = menuOdMsg;
+	public void setMenu_od_msg(String menu_od_msg) {
+		this.menu_od_msg = menu_od_msg;
 	}
-	public String getCustId() {
-		return custId;
+	public String getCust_ID() {
+		return cust_ID;
 	}
-	public void setCustId(String custId) {
-		this.custId = custId;
+	public void setCust_ID(String cust_ID) {
+		this.cust_ID = cust_ID;
 	}
-	public String getChefId() {
-		return chefId;
+	public String getChef_ID() {
+		return chef_ID;
 	}
-	public void setChefId(String chefId) {
-		this.chefId = chefId;
+	public void setChef_ID(String chef_ID) {
+		this.chef_ID = chef_ID;
 	}
-	public String getMenuId() {
-		return menuId;
+	public String getMenu_ID() {
+		return menu_ID;
 	}
-	public void setMenuId(String menuId) {
-		this.menuId = menuId;
+	public void setMenu_ID(String menu_ID) {
+		this.menu_ID = menu_ID;
 	}
 }

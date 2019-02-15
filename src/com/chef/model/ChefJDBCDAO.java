@@ -36,9 +36,9 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(Insert_Stmt);
 			
-			pstmt.setString(1, chefVO.getChefId());
-			pstmt.setString(2, chefVO.getChefArea());
-			pstmt.setString(3, chefVO.getChefResume());
+			pstmt.setString(1, chefVO.getChef_ID());
+			pstmt.setString(2, chefVO.getChef_area());
+			pstmt.setString(3, chefVO.getChef_resume());
 			
 			pstmt.executeUpdate();
 			
@@ -74,9 +74,9 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(Updata_Stmt_From_Emp);
 
-			pstmt.setString(1, chefVO.getChefStatus());
-			pstmt.setString(2, chefVO.getChefChannel());
-			pstmt.setString(3, chefVO.getChefId());
+			pstmt.setString(1, chefVO.getChef_status());
+			pstmt.setString(2, chefVO.getChef_channel());
+			pstmt.setString(3, chefVO.getChef_ID());
 
 			pstmt.executeUpdate();
 
@@ -155,10 +155,10 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 			
 			while (rs.next()) {				
 				chefVO = new ChefVO();				
-				chefVO.setChefId(rs.getString("CHEF_ID"));
-				chefVO.setChefName(rs.getString("CUST_NAME"));
-				chefVO.setChefAddr(rs.getString("CUST_ADDR"));
-				chefVO.setChefTel(rs.getString("CUST_TEL"));
+				chefVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefVO.setChef_name(rs.getString("CUST_NAME"));
+				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
+				chefVO.setChef_tel(rs.getString("CUST_TEL"));
 			}			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
@@ -207,10 +207,10 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 
 			while (rs.next()) {
 				chefVO = new ChefVO();				
-				chefVO.setChefId(rs.getString("CHEF_ID"));
-				chefVO.setChefName(rs.getString("CUST_NAME"));
-				chefVO.setChefAddr(rs.getString("CUST_ADDR"));
-				chefVO.setChefTel(rs.getString("CUST_TEL"));
+				chefVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefVO.setChef_name(rs.getString("CUST_NAME"));
+				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
+				chefVO.setChef_tel(rs.getString("CUST_TEL"));
 				listAllChef.add(chefVO);
 			}
 		} catch (ClassNotFoundException e) {
@@ -246,38 +246,38 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 		
 		ChefJDBCDAO dao = new ChefJDBCDAO();
 
-		// Insert
+//		// Insert
 //		ChefVO chef01 = new ChefVO();
-//		chef01.setChefId("C00003");
-//		chef01.setChefArea("3");
-//		chef01.setChefResume("這邊應該要輸入CLOB");
+//		chef01.setChef_ID("C00003");
+//		chef01.setChef_area("3");
+//		chef01.setChef_resume("這邊應該要輸入CLOB");
 //		dao.insert(chef01);
-		
-		//Update
+//		
+//		//Update
 //		ChefVO chef02 = new ChefVO();
-//		chef02.setChefStatus("5");
-//		chef02.setChefChannel("twitter");
-//		chef02.setChefId("C00003");
+//		chef02.setChef_status("5");
+//		chef02.setChef_channel("twitter");
+//		chef02.setChef_ID("C00003");
 //		dao.update(chef02);
-		
-		//Delete
+//		
+//		//Delete
 //		dao.delete("C00003");
-		
-		//Select
+//		
+//		//Select
 //		ChefVO chef03 = dao.findByPrimaryKey("C00002");
-//		System.out.println(chef03.getChefId());
-//		System.out.println(chef03.getChefName());
-//		System.out.println(chef03.getChefAddr());
-//		System.out.println(chef03.getChefTel());
+//		System.out.println(chef03.getChef_ID());
+//		System.out.println(chef03.getChef_name());
+//		System.out.println(chef03.getChef_addr());
+//		System.out.println(chef03.getChef_tel());
 //		System.out.println("--------------------------------");
-		
-		//Select_All
+//		
+//		//Select_All
 //		List<ChefVO> list = dao.getAll();
 //		for(ChefVO chef:list) {
-//			System.out.print(chef.getChefId()+ ",");
-//			System.out.print(chef.getChefName()+ ",");
-//			System.out.print(chef.getChefAddr()+ ",");
-//			System.out.print(chef.getChefTel());
+//			System.out.print(chef.getChef_ID()+ ",");
+//			System.out.print(chef.getChef_name()+ ",");
+//			System.out.print(chef.getChef_addr()+ ",");
+//			System.out.print(chef.getChef_tel());
 //		}
 	}
 }
