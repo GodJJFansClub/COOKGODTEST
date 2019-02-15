@@ -3,15 +3,24 @@ package com.menuOrder.model;
 import java.sql.*;
 import java.util.*;
 
+import javax.naming.*;
+import javax.sql.DataSource;
+
 import com.chefSch.model.ChefSchVO;
 
 
-public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
+public class MenuOrderDAO implements MenuOrderDAO_Interface{
 	
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "COOKGOD";
-	String passwd = "123456";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	private static final String Insert_Stmt = 
 			"INSERT INTO MENU_ORDER (MENU_OD_ID,MENU_OD_STATUS,MENU_OD_START,MENU_OD_BOOK,CUST_ID,CHEF_ID,MENU_ID) VALUES ('MU'||TO_CHAR(CURRENT_DATE, 'YYYYMMDD')||'-'||LPAD(TO_CHAR(MENU_OD_ID_SEQ.NEXTVAL), 6, '0'),?,SYSDATE,?,?,?,?)";
@@ -31,8 +40,7 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Insert_Stmt);
 			
 			pstmt.setString(1, menuOrderVO.getMenu_od_status());
@@ -43,8 +51,6 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 			
 			pstmt.executeUpdate();
 		
-		}catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		}catch(SQLException se){
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		}finally {
@@ -71,8 +77,7 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Update_Stmt);
 			
 			pstmt.setString(1, menuOrderVO.getMenu_od_status());
@@ -86,8 +91,6 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		}finally {
@@ -114,16 +117,13 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Delete_Stmt);
 			
 			pstmt.setString(1, menuOrderId);
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		}finally {
@@ -153,8 +153,7 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Get_One_Stmt);
 			
 			pstmt.setString(1, menuOrderId);
@@ -176,8 +175,6 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 			}			
 			return menuOrderVO;
 		
-		}catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		}catch(SQLException se){
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		}finally {
@@ -208,8 +205,7 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(Get_All_Stmt);
 			rs = pstmt.executeQuery();
 
@@ -227,8 +223,6 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 				menuOrderVO.setMenu_ID(rs.getString("MENU_ID"));
 				listAll.add(menuOrderVO);
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		} finally {
@@ -255,66 +249,5 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 			}
 		}
 		return listAll;
-	}
-	
-	public static void main(String[] args) {
-		
-		MenuOrderJDBCDAO dao = new MenuOrderJDBCDAO();
-		
-		//Insert
-//		Timestamp time = Timestamp.valueOf("2019-02-12 01:02:03");
-//		
-//		MenuOrderVO menuOrder01 = new MenuOrderVO();
-//		menuOrder01.setMenu_od_status("8");
-//		menuOrder01.setMenu_od_book(time);
-//		menuOrder01.setCust_ID("C00001");
-//		menuOrder01.setChef_ID("C00002");
-//		menuOrder01.setMenu_ID("M00001");
-//		dao.insert(menuOrder01);
-		
-		//Update
-//		Timestamp bookTime = Timestamp.valueOf("2019-02-25 05:20:13");
-//		java.sql.Date endDate = java.sql.Date.valueOf("2019-03-03");
-//		MenuOrderVO menuOrder02 = new MenuOrderVO(); 
-//		menuOrder02.setMenu_od_ID("MU20190215-000033");
-//		menuOrder02.setMenu_od_status("8");
-//		menuOrder02.setMenu_od_book(bookTime);
-//		menuOrder02.setMenu_od_end(endDate);
-//		menuOrder02.setMenu_od_rate(5);
-//		menuOrder02.setMenu_od_MSG("不好吃");
-//		menuOrder02.setChef_ID("C00004");
-//		menuOrder02.setMenu_ID("M00002");
-//		dao.update(menuOrder02);
-		
-		//Delete
-//		dao.delete("MU20190215-000034");
-		
-		//Select_One
-//		MenuOrderVO menuOrder03 = dao.findByPrimaryKey("MU20121011-000001");
-//		System.out.println(menuOrder03.getMenu_od_ID());
-//		System.out.println(menuOrder03.getMenu_od_status());
-//		System.out.println(menuOrder03.getMenu_od_start());
-//		System.out.println(menuOrder03.getMenu_od_book());
-//		System.out.println(menuOrder03.getMenu_od_end());
-//		System.out.println(menuOrder03.getMenu_od_rate());
-//		System.out.println(menuOrder03.getMenu_od_msg());
-//		System.out.println(menuOrder03.getCust_ID());
-//		System.out.println(menuOrder03.getChef_ID());
-//		System.out.println(menuOrder03.getMenu_ID());
-		
-		//Select_All
-//		List<MenuOrderVO> listAll = dao.getAll();
-//		for(MenuOrderVO menuOrder04:listAll) {
-//			System.out.print(menuOrder04.getMenu_od_ID()+",");
-//			System.out.print(menuOrder04.getMenu_od_status()+",");
-//			System.out.print(menuOrder04.getMenu_od_start()+",");
-//			System.out.print(menuOrder04.getMenu_od_book()+",");
-//			System.out.print(menuOrder04.getMenu_od_end()+",");
-//			System.out.print(menuOrder04.getMenu_od_rate()+",");
-//			System.out.print(menuOrder04.getMenu_od_msg()+",");
-//			System.out.print(menuOrder04.getCust_ID()+",");
-//			System.out.print(menuOrder04.getChef_ID()+",");
-//			System.out.print(menuOrder04.getMenu_ID()+"\n");
-//		}
 	}
 }
