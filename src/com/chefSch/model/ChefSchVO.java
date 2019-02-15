@@ -4,33 +4,33 @@ import java.sql.*;
 
 public class ChefSchVO {
 	
-	private String chefId;
-	private String chefName;
-	private Date chefSchDate;
-	private String chefSchStatus;
+	private String chef_ID;
+	private String chef_name;
+	private Date chef_sch_date;
+	private String chef_sch_status;
 	
-	public String getChefId() {
-		return chefId;
+	public String getChef_ID() {
+		return chef_ID;
 	}
-	public void setChefId(String chefId) {
-		this.chefId = chefId;
+	public void setChef_ID(String chef_ID) {
+		this.chef_ID = chef_ID;
 	}
-	public String getChefName() {
-		return chefName;
+	public String getChef_name() {
+		return chef_name;
 	}
-	public void setChefName(String chefName) {
-		this.chefName = chefName;
+	public void setChef_name(String chef_name) {
+		this.chef_name = chef_name;
 	}
-	public Date getChefSchDate() {
-		return chefSchDate;
+	public Date getChef_sch_date() {
+		return chef_sch_date;
 	}
-	public void setChefSchDate(Date chefSchDate) {
-		this.chefSchDate = chefSchDate;
+	public void setChef_sch_date(Date chef_sch_date) {
+		this.chef_sch_date = chef_sch_date;
 	}
-	public String getChefSchStatus() {
-		return chefSchStatus;
+	public String getChef_sch_status() {
+		return chef_sch_status;
 	}
-	public void setChefSchStatus(String chefSchStatus) {
-		this.chefSchStatus = chefSchStatus;
-	}
+	public void setChef_sch_status(String chef_sch_status) {
+		this.chef_sch_status = chef_sch_status;
+	}	
 }
