@@ -1,4 +1,4 @@
-package com.cust.model;
+package com.emp.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ad.model.AdVO;
 
-public class CustDAO implements CustDAO_interface {
-
+public class EmpDAO implements EmpDAO_interface {
+	
 	private static DataSource ds = null;
 	static {
 		try{
@@ -26,19 +25,18 @@ public class CustDAO implements CustDAO_interface {
 		}
 	}
 	private static final String INSERT_STMT =
-			"INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) "
-			+ "VALUES ('C'||LPAD((AD_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"Insert into EMP (EMP_ID,EMP_ACC,EMP_PWD,EMP_NAME,EMP_PIC) VALUES ('E'||LPAD((EMP_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME FROM CUST order by CUST_ID";
+			"SELECT * FROM EMP order by EMP_ID";
 	private static final String GET_ONE_STMT = 
-			"SELECT CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME FROM CUST where CUST_ID = ?";
+			"SELECT * FROM CUST where EMP_ID = ?";
 	private static final String DELETE =
-			"DELETE FROM CUST where CUST_ID=? ";
+			"DELETE FROM EMP where EMP_ID=? ";
 	private static final String UPDATE =
-			"UPDATE CUST set CUST_ACC=?, CUST_PWD=?, CUST_NAME=?, CUST_SEX=?, CUST_TEL=?, CUST_ADDR=?, CUST_PID=?, CUST_MAIL=? CUST_BRD=?, CUST_REG=?, CUST_PIC=?, CUST_STATUS=?, CUST_NINAME=? WHERE CUST_ID=?";
+			"UPDATE EMP set EMP_ACC=?, EMP_PWD=?, EMP_NAME=?, EMP_PIC=? WHERE EMP_ID=?";
 	
 	@Override
-	public void insert(CustVO custVO) {
+	public void insert(EmpVO empVO) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -47,19 +45,11 @@ public class CustDAO implements CustDAO_interface {
 			con =ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, custVO.getCust_acc());
-			pstmt.setString(2, custVO.getCust_pwd());
-			pstmt.setString(3, custVO.getCust_name());
-			pstmt.setString(4, custVO.getCust_sex());
-			pstmt.setString(5, custVO.getCust_tel());
-			pstmt.setString(6, custVO.getCust_addr());
-			pstmt.setString(7, custVO.getCust_pid());
-			pstmt.setString(8, custVO.getCust_mail());
-			pstmt.setDate(9, custVO.getCust_brd());
-			pstmt.setDate(10, custVO.getCust_reg());
-			pstmt.setBytes(11, custVO.getCust_pic());
-			pstmt.setString(12, custVO.getCust_status());
-			pstmt.setString(13, custVO.getCust_niname());
+			pstmt.setString(1, empVO.getEmp_acc());
+			pstmt.setString(2, empVO.getEmp_pwd());
+			pstmt.setString(3, empVO.getEmp_name());
+			pstmt.setBytes(4, empVO.getEmp_pic());
+			
 			
 			pstmt.executeUpdate();		
 		}catch(SQLException se) {
@@ -80,11 +70,10 @@ public class CustDAO implements CustDAO_interface {
 				}
 			}
 		}
-		
 	}
 
 	@Override
-	public void update(CustVO custVO) {
+	public void update(EmpVO empVO) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -92,20 +81,11 @@ public class CustDAO implements CustDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, custVO.getCust_acc());
-			pstmt.setString(2, custVO.getCust_pwd());
-			pstmt.setString(3, custVO.getCust_name());
-			pstmt.setString(4, custVO.getCust_sex());
-			pstmt.setString(5, custVO.getCust_tel());
-			pstmt.setString(6, custVO.getCust_addr());
-			pstmt.setString(7, custVO.getCust_pid());
-			pstmt.setString(8, custVO.getCust_mail());
-			pstmt.setDate(9, custVO.getCust_brd());
-			pstmt.setDate(10, custVO.getCust_reg());
-			pstmt.setBytes(11, custVO.getCust_pic());
-			pstmt.setString(12, custVO.getCust_status());
-			pstmt.setString(13, custVO.getCust_niname());
-			pstmt.setString(14, custVO.getCust_ID());
+			pstmt.setString(1, empVO.getEmp_acc());
+			pstmt.setString(2, empVO.getEmp_pwd());
+			pstmt.setString(3, empVO.getEmp_name());
+			pstmt.setBytes(4, empVO.getEmp_pic());
+			pstmt.setString(5, empVO.getEmp_ID());
 			
 			
 			pstmt.executeUpdate();		
@@ -131,7 +111,7 @@ public class CustDAO implements CustDAO_interface {
 	}
 
 	@Override
-	public void delete(String cust_ID) {
+	public void delete(String emp_ID) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -141,7 +121,7 @@ public class CustDAO implements CustDAO_interface {
 			pstmt = con.prepareStatement(DELETE);
 			
 			
-			pstmt.setString(1,cust_ID);
+			pstmt.setString(1,emp_ID);
 			
 			pstmt.executeUpdate();		
 		}catch(SQLException se) {
@@ -166,9 +146,9 @@ public class CustDAO implements CustDAO_interface {
 	}
 
 	@Override
-	public CustVO findByPrimaryKey(String cust_ID) {
+	public EmpVO findByPrimaryKey(String emp_ID) {
 		// TODO Auto-generated method stub
-		CustVO custVO = null;
+		EmpVO empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -177,26 +157,17 @@ public class CustDAO implements CustDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setString(1, cust_ID);
+			pstmt.setString(1, emp_ID);
 			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				custVO = new CustVO();
-				custVO.setCust_ID(rs.getString("CUST_ID"));
-				custVO.setCust_acc(rs.getString("CUST_ACC"));
-				custVO.setCust_pwd(rs.getString("CUST_PWD"));
-				custVO.setCust_name(rs.getString("CUST_NAME"));
-				custVO.setCust_sex(rs.getString("CUST_SEX"));
-				custVO.setCust_tel(rs.getString("CUST_TEL"));
-				custVO.setCust_addr(rs.getString("CUST_ADDR"));
-				custVO.setCust_pid(rs.getString("CUST_PID"));
-				custVO.setCust_mail(rs.getString("CUST_MAIL"));
-				custVO.setCust_brd(rs.getDate("CUST_BRD"));
-				custVO.setCust_reg(rs.getDate("CUST_REG"));
-				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
-				custVO.setCust_status(rs.getString("CUST_STATUS"));
-				custVO.setCust_niname(rs.getString("CUST_NINAME"));
+				empVO = new EmpVO();
+				empVO.setEmp_ID(rs.getString("EMP_ID"));
+				empVO.setEmp_acc(rs.getString("EMP_ACC"));
+				empVO.setEmp_pwd(rs.getString("EMP_PWD"));
+				empVO.setEmp_name(rs.getString("EMP_NAME"));
+				empVO.setEmp_pic(rs.getBytes("EMP_PIC"));
 				
 				
 			}
@@ -227,14 +198,14 @@ public class CustDAO implements CustDAO_interface {
 				}
 			}
 		}
-		return custVO;
+		return empVO;
 	}
 
 	@Override
-	public List<CustVO> getAll() {
+	public List<EmpVO> getAll() {
 		// TODO Auto-generated method stub
-		List<CustVO> list = new ArrayList<CustVO>();
-		CustVO custVO = null;
+		List<EmpVO> list = new ArrayList<EmpVO>();
+		EmpVO empVO = null;
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -246,21 +217,13 @@ public class CustDAO implements CustDAO_interface {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				custVO = new CustVO();
-				custVO.setCust_ID(rs.getString("CUST_ID"));
-				custVO.setCust_acc(rs.getString("CUST_ACC"));
-				custVO.setCust_pwd(rs.getString("CUST_PWD"));
-				custVO.setCust_name(rs.getString("CUST_NAME"));
-				custVO.setCust_sex(rs.getString("CUST_SEX"));
-				custVO.setCust_tel(rs.getString("CUST_TEL"));
-				custVO.setCust_addr(rs.getString("CUST_ADDR"));
-				custVO.setCust_pid(rs.getString("CUST_PID"));
-				custVO.setCust_mail(rs.getString("CUST_MAIL"));
-				custVO.setCust_brd(rs.getDate("CUST_BRD"));
-				custVO.setCust_reg(rs.getDate("CUST_REG"));
-				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
-				custVO.setCust_status(rs.getString("CUST_STATUS"));
-				custVO.setCust_niname(rs.getString("CUST_NINAME"));
+				empVO = new EmpVO();
+				empVO.setEmp_ID(rs.getString("EMP_ID"));
+				empVO.setEmp_acc(rs.getString("EMP_ACC"));
+				empVO.setEmp_pwd(rs.getString("EMP_PWD"));
+				empVO.setEmp_name(rs.getString("EMP_NAME"));
+				empVO.setEmp_pic(rs.getBytes("EMP_PIC"));
+				
 			 }
 			}catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
@@ -291,5 +254,5 @@ public class CustDAO implements CustDAO_interface {
 		
 		return list;
 	}
-
 }
+	

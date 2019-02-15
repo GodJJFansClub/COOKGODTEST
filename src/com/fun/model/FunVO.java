@@ -1,19 +1,19 @@
 package com.fun.model;
 
 public class FunVO {
-	private String funId;
-	private String funName;
-	public String getFunId() {
-		return funId;
+	private String fun_ID;
+	private String fun_name;
+	public String getFun_ID() {
+		return fun_ID;
 	}
-	public void setFunId(String funId) {
-		this.funId = funId;
+	public void setFun_ID(String fun_ID) {
+		this.fun_ID = fun_ID;
 	}
-	public String getFunName() {
-		return funName;
+	public String getFun_name() {
+		return fun_name;
 	}
-	public void setFunName(String funName) {
-		this.funName = funName;
+	public void setFun_name(String fun_name) {
+		this.fun_name = fun_name;
 	}
 	
 	
