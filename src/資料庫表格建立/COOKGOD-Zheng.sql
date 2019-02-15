@@ -1,4 +1,4 @@
-���
+﻿菜色
 
 DROP TABLE DISH;
 DROP SEQUENCE DISH_SEQ;
@@ -21,17 +21,17 @@ CREATE TABLE DISH (
    NOCYCLE
    NOCACHE;
    
-   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'�����p�N','D1',NULL,'���8�س����`�ơA�S�O�O�d�M�N�ɺ��X����ح�ġA�[�J�հs�P�v���ժ����N���ץġA�ɥήɦ��H�L�ıa�������V����AŨ���X���ת��A�������C�Y��_��1��28��}��w�ʡA�⧹����A�n�R�n�֭�I','1280');
-   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'����K�_���L��','D1',NULL,'�D�p�S��W�����ͻP�h�جöQ�����A�H���n�B�����Ժ�L4�p�ɡA�����|���A�O���i���l���i�ίʪ��@�D�\�Ҥj��','3600');
-   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'�j�Ǧ��n�s','D1',NULL,'��ŧ���Φ�����i�դ�k�A�S��2������n�Ӥ��C�L4�p�ɡA���s���ťզ⪺�����A���@�Ӥ����A�A�[�J�󳽰��B��y���B���w��B�a�m�סB�ᵬ�B���ѤΥ]�ߥյ�A����A�T�N2�p�ɡA�N��y���Э������B���w�᪺�۵M�᭻�B�n����ؤή������觹������b�������F�n���ֺ��h�ܱo���K�n��B�]�ߥյ�Ƥf�^�̡B�l�����ġC�@�f���A�[�W�@�f�ơA��Ź�ȭ̤f�f�ͭ��B�f�f�����C','1380');
-   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'���N����Prime����','D1',NULL,'��ά���̰�����Prime���סA�׽�P�תդ��G��ҳ��ٳ̨ΡC�ը�������²�믫�A�i�s�u�k�o����ӿ��A�H�¤ѵM�ĩʾM�ƾM�{�û��X�����@�p�ɡA���׭����M����B�n�Ʀ׽�A���h�o�צb�N�N�L�{���A�����J�}��A������@���ץġA�̫�ȥH�ֶq�Q�ڻP�J�ԯ��I�X�@�p�׭��A�����Ť��ת���l������ɨ�i�{�I','1880');
-   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'�ĵ�զ���','D1',NULL,'�D�p�S��W�����ͻP�h�جöQ�����A�H���n�B�����Ժ�L4�p�ɡA�����|���A�O���i���l���i�ίʪ��@�D�\�Ҥj��','900');
-   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'�����Ļ��Q�m�L','D1',NULL,'�Y��W���ޫ�L(�@����600g)�A���t�S�h���{���A�A�H�D�p�S�խ��Ƥνը��ƾM�s�@�Ѥ@�]�A�j����X��η��O����έ��ƺ�1.5�p�ɼ����J����A�A�H200�װ��Ūo����������רùF����ֶp�����ĪG�A�̫�O�W�D�p����H�x�W���a���̡B�гJ���z���A�[�W�h�ثn�v�����ƽջs�Ӧ������������Ļ���A�Y�����@�D�~�ֶp�ܡB�׹�h�Ħ��״I�h���f�P���޸}�Ʋz�C','880');
-   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'���s�_���I��','D1',NULL,'������a�����p�ơA�_�󭻤J��A�P���s�@�P���N5�p�ɡA�n��ƶ��n�J�f','1580');
+   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'雞祥如意','D1',NULL,'精選8種頂級餡料，特別保留烘烤時滲出的精華原汁，加入白酒與洋蔥拌炒成烤雞肉汁，享用時佐以微酸帶甜的蔓越莓醬，襯托出雞肉的鮮甜美味。即日起至1月28日開放預購，售完為止，要買要快唷！','1280');
+   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'砂鍋八寶雞燉翅','D1',NULL,'主廚特選上等魚翅與多種珍貴食材，以恰到好處的火候精燉4小時，味香四溢，是除夕圍爐不可或缺的一道功夫大菜','3600');
+   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'古傳老鴨煲','D1',NULL,'承襲正統江浙菜烹調手法，特選2公斤肥鴨細火慢燉4小時，熬製成乳白色的湯底，味濃而不膩，再加入扁魚乾、邊尖筍、金針花、家鄉肉、蹄筋、海參及包心白菜，文火再燜煮2小時，將邊尖筍鹹香滋味、金針花的自然花香、鴨骨精華及海味膠質完全釋放在湯底中；鴨肉纖維則變得綿密軟嫩、包心白菜滑口回甘、吸滿湯汁。一口湯再加上一口料，讓饕客們口口生香、口口滿足。','1380');
+   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'炙烤美國Prime牛肉','D1',NULL,'選用美國最高等級Prime牛肉，肉質與脂肪分佈比例堪稱最佳。調味堅持極簡精神，烹製工法卻極其細膩，以純天然酸性醃料醃漬並輕柔按摩一小時，讓肉香全然釋放、軟化肉質，表層油脂在燒烤過程中，漸成焦糖色澤並鎖住濃郁肉汁，最後僅以少量鹽巴與胡椒粉點出濃厚肉香，讓頂級牛肉的原始風味能盡其展現！','1880');
+   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'酸菜白肉鍋','D1',NULL,'主廚特選上等魚翅與多種珍貴食材，以恰到好處的火候精燉4小時，味香四溢，是除夕圍爐不可或缺的一道功夫大菜','900');
+   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'泰式酸辣貴妃腿','D1',NULL,'嚴選上等豬後腿(一隻約600g)，先川燙去除腥味，再以主廚特調香料及調味料醃製一天一夜，隔日取出後用當令蔬菜及香料滷1.5小時熟成入味後，再以200度高溫油炸瞬間鎖住肉並達到表皮酥香的效果，最後淋上主廚秘制以台灣本地蝦米、鹹蛋黃爆香再加上多種南洋辛香料調製而成的泰式風味酸辣醬，即完成一道外皮酥脆、肉嫩多汁有豐富層次口感的豬腳料理。','880');
+   INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'紅酒稻草西施牛','D1',NULL,'精選美國帶骨牛小排，稻草香入菜，與紅酒共同熬煮5小時，軟嫩滑順好入口','1580');
    
 --------------------------------------------------------------------------------------------------------------
 
-�D�p�׾¤峹
+主廚論壇文章
 
 DROP TABLE FORUM_ART;
 DROP SEQUENCE FORUM_ART_SEQ;
@@ -57,11 +57,11 @@ CREATE TABLE FORUM_ART(
  NOCYCLE
  NOCACHE;
  
- INSERT INTO FORUM_ART (FORUM_ART_ID,FORUM_ART_NAME,FORUM_ART_CON,FORUM_ART_PIC,FORUM_ART_STATUS,CHEF_ID) VALUES ('A'||LPAD((FORUM_ART_SEQ.NEXTVAL),5,'0'),'�������߽�','�����g��Ʋz�A�ĻĻ������ܶ}�G�U���A����갵�k��²��A�ǳƪ������]���|�Ӧh�A�A�X�b�a�ۤv�ոլݡI',NULL,'D1','C02121');
+ INSERT INTO FORUM_ART (FORUM_ART_ID,FORUM_ART_NAME,FORUM_ART_CON,FORUM_ART_PIC,FORUM_ART_STATUS,CHEF_ID) VALUES ('A'||LPAD((FORUM_ART_SEQ.NEXTVAL),5,'0'),'泰式打拋豬','泰式經典料理，酸酸辣辣的很開胃下飯，但其實做法很簡單，準備的食材也不會太多，適合在家自己試試看！',NULL,'D1','C02121');
  
 -----------------------------------------------------------------------------------------------------------------
 
-�D�p�׾¯d��
+主廚論壇留言
 
 DROP TABLE FORUM_MSG;
 DROP SEQUENCE FORUM_MSG_SEQ;
@@ -86,9 +86,9 @@ CREATE TABLE FORUM_MSG(
  NOCYCLE
  NOCACHE;
  
-INSERT INTO FORUM_MSG (FORUM_MSG_ID,FORUM_MSG_CON,FORUM_MSG_STATUS,FORUM_ART_ID,CUST_ID) VALUES ('MS'||LPAD(FORM_MSG_SEQ.NEXTVAL,4,'0'),'�U�Z�� ���W�����a�H�Y�Y��','D1','A00001','C02121');
+INSERT INTO FORUM_MSG (FORUM_MSG_ID,FORUM_MSG_CON,FORUM_MSG_STATUS,FORUM_ART_ID,CUST_ID) VALUES ('MS'||LPAD(FORM_MSG_SEQ.NEXTVAL,4,'0'),'下班後 馬上做給家人吃吃看','D1','A00001','C02121');
 ------------------------------------------------------------------------------------------------------------------
-���ϥέ���
+菜色使用食材
 
 DROP TABLE DISH_FOOD;
 
@@ -112,7 +112,7 @@ INSERT INTO DISH_FOOD(DISH_ID,FOOD_ID,DISH_F_QTY,DISH_F_UNIT) VALUES('D00003','F
 
 
  ---------------------------------------------------------------------------------------
-�M�\���
+套餐菜色
 
 DROP TABLE MENU_DISH;
 
@@ -140,7 +140,7 @@ CREATE TABLE MENU_DISH (
  INSERT INTO MENU_DISH (DISH_ID,MENU_ID) VALUES('D00007','M00001');
 -----------------------------------------------------------------------------------------
 
-����
+食材
 
 DROP SEQUENCE FOOD_SEQ;
 DROP TABLE FOOD;
@@ -157,13 +157,13 @@ CREATE TABLE FOOD (
  NOCYCLE
  NOCACHE;
 
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'�󳽰�');
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'���n');
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'��y��'); 
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'���w��'); 
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'�a�m��'); 
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'�ᵬ');
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'�]�ߥյ�');
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'扁魚乾');
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'肥鴨');
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'邊尖筍'); 
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'金針花'); 
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'家鄉肉'); 
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'蹄筋');
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME) VALUES('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'包心白菜');
 
 -------------------------------------------------------------------------------------------
 
