@@ -19,32 +19,40 @@ public class AdJDBCDAO implements AdDAO_interface {
 	private static final String INSERT_STMT =
 			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ? ,?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd')ADSTART,toChar(ADEND,'yyyy-mm-dd')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD order by ADID";
+			"SELECT AD_ID,AD_STATUS,to_Char(AD_START,'yyyy-mm-dd hh:mm:ss')AD_START,to_Char(AD_END,'yyyy-mm-dd hh:mm:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD order by AD_ID";
 	private static final String GET_ONE_STMT = 
-			"SELECT ADID,ADSTATUS,toChar(ADSTART,'yyyy-mm-dd')ADSTART,toChar(ADEND,'yyyy-mm-dd')ADEND,ADTYPE,ADTITLE,ADCON,FOODSUPID FROM AD where ADID = ?";
+			"SELECT AD_ID,AD_STATUS,to_Char(AD_START,'yyyy-mm-dd hh:mm:ss')AD_START,to_Char(AD_END,'yyyy-mm-dd hh:mm:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD where AD_ID = ?";
 	private static final String DELETE =
-			"DELETE FROM AD where ADID=? ";
+			"DELETE FROM AD where AD_ID=? ";
 	private static final String UPDATE =
-			"UPDATE AD set ADSTATUS=?, ADSTART=?, ADEND=?, ADTYPE=?, ADTITLE=?, ADCON=?, FOODSUPID=? where ADID=?";
+			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
+
+//	簡易版
+//	private static final String GET_ALL_STMT = 
+//			"SELECT * FROM AD";
+//	private static final String GET_ONE_STMT = 
+//			"SELECT * FROM AD where AD_ID = ?";
 	
 	@Override
 	public void insert(AdVO adVO) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		int a=1;
+		double b=(double)a;
 		
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, adVO.getAdStatus());
-			pstmt.setTimestamp(2, adVO.getAdStart());
-			pstmt.setTimestamp(3, adVO.getAdEnd());
-			pstmt.setInt(4, adVO.getAdType());
-			pstmt.setString(5, adVO.getAdTitle());
-			pstmt.setString(6, adVO.getAdCon());
-			pstmt.setString(7, adVO.getFoodSupId());
+			pstmt.setString(1, adVO.getAd_status());
+			pstmt.setTimestamp(2, adVO.getAd_start());
+			pstmt.setTimestamp(3, adVO.getAd_end());
+			pstmt.setString(4, adVO.getAd_type());
+			pstmt.setString(5, adVO.getAd_title());
+			pstmt.setString(6, adVO.getAd_con());
+			pstmt.setString(7, adVO.getFood_sup_ID());
 			
 			pstmt.executeUpdate();		
 		}catch (ClassNotFoundException e) {
@@ -84,13 +92,14 @@ public class AdJDBCDAO implements AdDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setInt(1, adVO.getAdStatus());
-			pstmt.setTimestamp(2, adVO.getAdStart());
-			pstmt.setTimestamp(3, adVO.getAdEnd());
-			pstmt.setInt(4, adVO.getAdType());
-			pstmt.setString(5, adVO.getAdTitle());
-			pstmt.setString(6, adVO.getAdCon());
-			pstmt.setString(7, adVO.getFoodSupId());
+			pstmt.setString(1, adVO.getAd_status());
+			pstmt.setTimestamp(2, adVO.getAd_start());
+			pstmt.setTimestamp(3, adVO.getAd_end());
+			pstmt.setString(4, adVO.getAd_type());
+			pstmt.setString(5, adVO.getAd_title());
+			pstmt.setString(6, adVO.getAd_con());
+			pstmt.setString(7, adVO.getFood_sup_ID());
+			pstmt.setString(8,adVO.getAd_ID());
 			
 			pstmt.executeUpdate();		
 		}catch (ClassNotFoundException e) {
@@ -119,7 +128,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 		}
 	}
 	@Override
-	public void delete(String adid) {
+	public void delete(String ad_ID) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -129,7 +138,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 			
-			pstmt.setString(1, adid);
+			pstmt.setString(1, ad_ID);
 			pstmt.executeUpdate();
 			
 	}catch (ClassNotFoundException e) {
@@ -158,7 +167,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 	}
 }
 	@Override
-	public AdVO findByPrimaryKey(String adid) {
+	public AdVO findByPrimaryKey(String ad_ID) {
 		// TODO Auto-generated method stub
 		AdVO adVO = null;
 		Connection con = null;
@@ -170,19 +179,20 @@ public class AdJDBCDAO implements AdDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setString(1, adid);
-			pstmt.executeQuery();
+			pstmt.setString(1, ad_ID);
+			
+			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				adVO = new AdVO();
-				adVO.setAdId(rs.getString("AdID"));
-				adVO.setAdStatus(rs.getInt("AdSTATUS"));
-				adVO.setAdStart(rs.getTimestamp("AdSTART"));
-				adVO.setAdEnd(rs.getTimestamp("AdEND"));
-				adVO.setAdType(rs.getInt("AdTYPE"));
-				adVO.setAdTitle(rs.getString("AdTITLE"));
-				adVO.setAdCon(rs.getString("AdCON"));
-				adVO.setFoodSupId(rs.getString("foodSupId"));
+				adVO.setAd_ID(rs.getString("AD_ID"));
+				adVO.setAd_status(rs.getString("AD_STATUS"));
+				adVO.setAd_start(rs.getTimestamp("AD_START"));
+				adVO.setAd_end(rs.getTimestamp("AD_END"));
+				adVO.setAd_type(rs.getString("AD_TYPE"));
+				adVO.setAd_title(rs.getString("AD_TITLE"));
+				adVO.setAd_con(rs.getString("AD_CON"));
+				adVO.setFood_sup_ID(rs.getString("FOOD_SUP_ID"));
 			}
 			
 		}catch (ClassNotFoundException e) {
@@ -235,14 +245,14 @@ public class AdJDBCDAO implements AdDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				adVO = new AdVO();
-				adVO.setAdId(rs.getString("AdID"));
-				adVO.setAdStatus(rs.getInt("AdSTATUS"));
-				adVO.setAdStart(rs.getTimestamp("AdSTART"));
-				adVO.setAdEnd(rs.getTimestamp("AdEND"));
-				adVO.setAdType(rs.getInt("AdTYPE"));
-				adVO.setAdTitle(rs.getString("AdTITLE"));
-				adVO.setAdCon(rs.getString("AdCON"));
-				adVO.setFoodSupId(rs.getString("foodSupId"));
+				adVO.setAd_ID(rs.getString("AD_ID"));
+				adVO.setAd_status(rs.getString("AD_STATUS"));
+				adVO.setAd_start(rs.getTimestamp("AD_START"));
+				adVO.setAd_end(rs.getTimestamp("AD_END"));
+				adVO.setAd_type(rs.getString("AD_TYPE"));
+				adVO.setAd_title(rs.getString("AD_TITLE"));
+				adVO.setAd_con(rs.getString("AD_CON"));
+				adVO.setFood_sup_ID(rs.getString("FOOD_SUP_ID"));
 				list.add(adVO);
 			}
 			
@@ -283,14 +293,55 @@ public class AdJDBCDAO implements AdDAO_interface {
 	public static void main(String[] args) {
 
 		AdJDBCDAO dao = new AdJDBCDAO();
+		
+		//新增
 		AdVO adVO1 = new AdVO();
-		adVO1.setAdStatus(1);
-		adVO1.setAdStart(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
-		adVO1.setAdEnd(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
-		adVO1.setAdTitle("test");
-		adVO1.setAdType(2);
-		adVO1.setAdCon("12313");
-		adVO1.setFoodSupId("T00003");
+		adVO1.setAd_status("1");
+		adVO1.setAd_start(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
+		adVO1.setAd_end(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
+		adVO1.setAd_title("test");
+		adVO1.setAd_type("2");
+		adVO1.setAd_con("12313");
+		adVO1.setFood_sup_ID("T00003");
 		dao.insert(adVO1);
+		
+		//修改
+		AdVO adVO2 = new AdVO();
+		adVO2.setAd_ID("AD000004");
+		adVO2.setAd_status("2");
+		adVO2.setAd_start(java.sql.Timestamp.valueOf("2018-02-12 21:12:24"));
+		adVO2.setAd_end(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
+		adVO2.setAd_title("test123");
+		adVO2.setAd_type("2");
+		adVO2.setAd_con("12313");
+		adVO2.setFood_sup_ID("T00003");
+		dao.update(adVO2);
+		
+		// 刪除
+		dao.delete("AD000006");
+		
+		//查詢
+		AdVO adVO3 = dao.findByPrimaryKey("AD000004");
+		System.out.println(adVO3.getAd_status()+",");
+		System.out.println(adVO3.getAd_start()+",");
+		System.out.println(adVO3.getAd_end()+",");
+		System.out.println(adVO3.getAd_title()+",");
+		System.out.println(adVO3.getAd_type()+",");
+		System.out.println(adVO3.getAd_con()+",");
+		System.out.println(adVO3.getFood_sup_ID()+",");
+		System.out.println("-------");
+		
+		//查詢all
+		List<AdVO> list = dao.getAll();
+		for (AdVO aAd: list) {
+			System.out.println(aAd.getAd_ID()+",");
+			System.out.println(aAd.getAd_status()+",");
+			System.out.println(aAd.getAd_start()+",");
+			System.out.println(aAd.getAd_end());
+			System.out.println(aAd.getAd_title()+",");
+			System.out.println(aAd.getAd_con()+",");
+			System.out.println(aAd.getFood_sup_ID()+",");
+		}
+		
 	}
 }

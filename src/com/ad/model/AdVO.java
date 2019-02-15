@@ -3,61 +3,64 @@ package com.ad.model;
 import java.sql.Timestamp;
 
 public class AdVO {
-	private String adId;
-	private Integer adStatus;
-	private Timestamp adStart;
-	private Timestamp adEnd;
-	private Integer adType;
-	private String adTitle;
-	private String adCon;
-	private String foodSupId;
-	public String getAdId() {
-		return adId;
+	private String ad_ID;
+	private String ad_status;
+	private Timestamp ad_start;
+	private Timestamp ad_end;
+	private String ad_type;
+	private String ad_title;
+	private String ad_con;
+	private String food_sup_ID;
+	public String getAd_ID() {
+		return ad_ID;
 	}
-	public void setAdId(String adId) {
-		this.adId = adId;
+	public void setAd_ID(String ad_ID) {
+		this.ad_ID = ad_ID;
 	}
-	public Integer getAdStatus() {
-		return adStatus;
+	public String getAd_status() {
+		return ad_status;
 	}
-	public void setAdStatus(int i) {
-		this.adStatus = i;
+	public void setAd_status(String ad_status) {
+		this.ad_status = ad_status;
 	}
-	public Timestamp getAdStart() {
-		return adStart;
+	public Timestamp getAd_start() {
+		return ad_start;
 	}
-	public void setAdStart(Timestamp adStart) {
-		this.adStart = adStart;
+	public void setAd_start(Timestamp ad_start) {
+		this.ad_start = ad_start;
 	}
-	public Timestamp getAdEnd() {
-		return adEnd;
+	public Timestamp getAd_end() {
+		return ad_end;
 	}
-	public void setAdEnd(Timestamp adEnd) {
-		this.adEnd = adEnd;
+	public void setAd_end(Timestamp ad_end) {
+		this.ad_end = ad_end;
 	}
-	public Integer getAdType() {
-		return adType;
+	public String getAd_type() {
+		return ad_type;
 	}
-	public void setAdType(int i) {
-		this.adType = i;
+	public void setAd_type(String ad_type) {
+		this.ad_type = ad_type;
 	}
-	public String getAdTitle() {
-		return adTitle;
+	public String getAd_title() {
+		return ad_title;
 	}
-	public void setAdTitle(String adTitle) {
-		this.adTitle = adTitle;
+	public void setAd_title(String ad_title) {
+		this.ad_title = ad_title;
 	}
-	public String getAdCon() {
-		return adCon;
+	public String getAd_con() {
+		return ad_con;
 	}
-	public void setAdCon(String adCon) {
-		this.adCon = adCon;
+	public void setAd_con(String ad_con) {
+		this.ad_con = ad_con;
 	}
-	public String getFoodSupId() {
-		return foodSupId;
+	public String getFood_sup_ID() {
+		return food_sup_ID;
 	}
-	public void setFoodSupId(String foodSupId) {
-		this.foodSupId = foodSupId;
+	public void setFood_sup_ID(String food_sup_ID) {
+		this.food_sup_ID = food_sup_ID;
 	}
+	
+	
+	
 	
 }
