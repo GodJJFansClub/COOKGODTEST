@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import piciotest.PicIOTest;
-
 public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -19,8 +16,8 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 	private static final String INSERT_STMT = "INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE FOOD_OR_DETAIL SET FOOD_OD_QTY = ?, FOOD_OD_STOTAL = ?, FOOD_OD_RATE = ?, FOOD_OD_MSG = ? WHERE FOOD_OR_ID = ? AND FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? AND FOOD_SUP_ID = ? AND FOOD_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT FOOD_OR_ID, FOOD_SUP_ID, FOOD_OD_QTY, FOOD_ID, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG FROM FOOD_OR_DETAIL";
-	private static final String GET_ONE_STMT = "SELECT FOOD_OR_ID, FOOD_SUP_ID, FOOD_OD_QTY, FOOD_ID, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? AND FOOD_SUP_ID = ? AND FOOD_ID = ?";
+	private static final String GET_ALL_STMT = "SELECT FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG FROM FOOD_OR_DETAIL";
+	private static final String GET_ONE_STMT = "SELECT FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? AND FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	
 	@Override
 	public void insert(FoodOrDetailVO foodOrDetailVO) {
@@ -32,13 +29,13 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, foodOrDetailVO.getFoodOrId());
-			pstmt.setString(2, foodOrDetailVO.getFoodSupId());
-			pstmt.setString(3, foodOrDetailVO.getFoodId());
-			pstmt.setInt(4, foodOrDetailVO.getFoodOdQty());
-			pstmt.setInt(5, foodOrDetailVO.getFoodOdStotal());
-			pstmt.setInt(6, foodOrDetailVO.getFoodOdRate());
-			pstmt.setString(7, foodOrDetailVO.getFoodOdMsg());			
+			pstmt.setString(1, foodOrDetailVO.getFood_or_ID());
+			pstmt.setString(2, foodOrDetailVO.getFood_sup_ID());
+			pstmt.setString(3, foodOrDetailVO.getFood_ID());
+			pstmt.setInt(4, foodOrDetailVO.getFood_od_qty());
+			pstmt.setInt(5, foodOrDetailVO.getFood_od_stotal());
+			pstmt.setInt(6, foodOrDetailVO.getFood_od_rate());
+			pstmt.setString(7, foodOrDetailVO.getFood_od_msg());			
 			
 
 			pstmt.executeUpdate();
@@ -80,13 +77,13 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setInt(1, foodOrDetailVO.getFoodOdQty());
-			pstmt.setInt(2, foodOrDetailVO.getFoodOdStotal());
-			pstmt.setInt(3, foodOrDetailVO.getFoodOdRate());
-			pstmt.setString(4, foodOrDetailVO.getFoodOdMsg());			
-			pstmt.setString(5, foodOrDetailVO.getFoodOrId());
-			pstmt.setString(6, foodOrDetailVO.getFoodSupId());
-			pstmt.setString(7, foodOrDetailVO.getFoodId());
+			pstmt.setInt(1, foodOrDetailVO.getFood_od_qty());
+			pstmt.setInt(2, foodOrDetailVO.getFood_od_stotal());
+			pstmt.setInt(3, foodOrDetailVO.getFood_od_rate());
+			pstmt.setString(4, foodOrDetailVO.getFood_od_msg());			
+			pstmt.setString(5, foodOrDetailVO.getFood_or_ID());
+			pstmt.setString(6, foodOrDetailVO.getFood_sup_ID());
+			pstmt.setString(7, foodOrDetailVO.getFood_ID());
 			
 
 			pstmt.executeUpdate();
@@ -116,7 +113,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 	}
 
 	@Override
-	public void delete(String foodOrId, String foodSupId, String foodId) {
+	public void delete(String food_or_ID, String food_sup_ID, String food_ID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -126,9 +123,9 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			con.setAutoCommit(false);
 			
 			pstmt = con.prepareStatement(DELETE_STMT);
-			pstmt.setString(1, foodOrId);
-			pstmt.setString(2, foodSupId);
-			pstmt.setString(3, foodId);
+			pstmt.setString(1, food_or_ID);
+			pstmt.setString(2, food_sup_ID);
+			pstmt.setString(3, food_ID);
 			
 			pstmt.executeUpdate();
 			
@@ -160,7 +157,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 	}
 
 	@Override
-	public FoodOrDetailVO findByPrimaryKey(String foodOrId, String foodSupId, String foodId) {
+	public FoodOrDetailVO findByPrimaryKey(String food_or_ID, String food_sup_ID, String food_ID) {
 		FoodOrDetailVO foodOrDetailVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -171,21 +168,21 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 				
-			pstmt.setString(1, foodOrId);
-			pstmt.setString(2, foodSupId);
-			pstmt.setString(3, foodId);
+			pstmt.setString(1, food_or_ID);
+			pstmt.setString(2, food_sup_ID);
+			pstmt.setString(3, food_ID);
 			
 			rs = pstmt.executeQuery();
 				
 			while(rs.next()) {
 				foodOrDetailVO = new FoodOrDetailVO();
-				foodOrDetailVO.setFoodOrId(rs.getString(1));
-				foodOrDetailVO.setFoodSupId(rs.getString(2));
-				foodOrDetailVO.setFoodId(rs.getString(3));
-				foodOrDetailVO.setFoodOdQty(rs.getInt(4));
-				foodOrDetailVO.setFoodOdStotal(rs.getInt(5));
-				foodOrDetailVO.setFoodOdRate(rs.getInt(6));
-				foodOrDetailVO.setFoodOdMsg(rs.getString(7));
+				foodOrDetailVO.setFood_or_ID(rs.getString(1));
+				foodOrDetailVO.setFood_sup_ID(rs.getString(2));
+				foodOrDetailVO.setFood_ID(rs.getString(3));
+				foodOrDetailVO.setFood_od_qty(rs.getInt(4));
+				foodOrDetailVO.setFood_od_stotal(rs.getInt(5));
+				foodOrDetailVO.setFood_od_rate(rs.getInt(6));
+				foodOrDetailVO.setFood_od_msg(rs.getString(7));
 					
 			}
 		} catch (ClassNotFoundException e) {
@@ -240,13 +237,13 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 				
 			while(rs.next()) {
 				foodOrDetailVO = new FoodOrDetailVO();
-				foodOrDetailVO.setFoodOrId(rs.getString(1));
-				foodOrDetailVO.setFoodSupId(rs.getString(2));
-				foodOrDetailVO.setFoodId(rs.getString(3));
-				foodOrDetailVO.setFoodOdQty(rs.getInt(4));
-				foodOrDetailVO.setFoodOdStotal(rs.getInt(5));
-				foodOrDetailVO.setFoodOdRate(rs.getInt(6));
-				foodOrDetailVO.setFoodOdMsg(rs.getString(7));
+				foodOrDetailVO.setFood_or_ID(rs.getString(1));
+				foodOrDetailVO.setFood_sup_ID(rs.getString(2));
+				foodOrDetailVO.setFood_ID(rs.getString(3));
+				foodOrDetailVO.setFood_od_qty(rs.getInt(4));
+				foodOrDetailVO.setFood_od_stotal(rs.getInt(5));
+				foodOrDetailVO.setFood_od_rate(rs.getInt(6));
+				foodOrDetailVO.setFood_od_msg(rs.getString(7));
 				foodOrDetailVOs.add(foodOrDetailVO);
 			}
 		} catch (ClassNotFoundException e) {
@@ -286,49 +283,49 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 		
 		// 新增
 //		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
-//		foodOrDetailVO.setFoodOrId("FO20181121-000001");
-//		foodOrDetailVO.setFoodSupId("C00004");
-//		foodOrDetailVO.setFoodId("F00023");
-//		foodOrDetailVO.setFoodOdQty(4);
-//		foodOrDetailVO.setFoodOdStotal(260);
-//		foodOrDetailVO.setFoodOdRate(5);
-//		foodOrDetailVO.setFoodOdMsg("AAAA");
+//		foodOrDetailVO.setFood_or_ID("FO20181121-000001");
+//		foodOrDetailVO.setFood_sup_ID("C00004");
+//		foodOrDetailVO.setFood_ID("F00023");
+//		foodOrDetailVO.setFood_od_qty(4);
+//		foodOrDetailVO.setFood_od_stotal(260);
+//		foodOrDetailVO.setFood_od_rate(5);
+//		foodOrDetailVO.setFood_od_msg("AAAA");
 //		foodOrDetailJDBCDAO.insert(foodOrDetailVO);
 		
 		// 修改
 //		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
-//		foodOrDetailVO.setFoodOrId("FO20181121-000001");
-//		foodOrDetailVO.setFoodSupId("C00004");
-//		foodOrDetailVO.setFoodId("F00023");
-//		foodOrDetailVO.setFoodOdQty(1);
-//		foodOrDetailVO.setFoodOdStotal(65);
-//		foodOrDetailVO.setFoodOdRate(1);
-//		foodOrDetailVO.setFoodOdMsg("dddd");
+//		foodOrDetailVO.setFood_or_ID("FO20181121-000001");
+//		foodOrDetailVO.setFood_sup_ID("C00004");
+//		foodOrDetailVO.setFood_ID("F00023");
+//		foodOrDetailVO.setFood_od_qty(1);
+//		foodOrDetailVO.setFood_od_stotal(65);
+//		foodOrDetailVO.setFood_od_rate(1);
+//		foodOrDetailVO.setFood_od_msg("dddd");
 //		foodOrDetailJDBCDAO.update(foodOrDetailVO);
 		
 		// 刪除
 //		foodOrDetailJDBCDAO.delete("FO20181121-000001", "C00004", "F00023");
 		
 		// 查一筆
-//		FoodOrDetailVO foodOrDetailVO = foodOrDetailJDBCDAO.findByPrimaryKey("FO20181124-000002", "C00003", "F00016");
-//		System.out.println(foodOrDetailVO.getFoodOrId());
-//		System.out.println(foodOrDetailVO.getFoodSupId());
-//		System.out.println(foodOrDetailVO.getFoodId());
-//		System.out.println(foodOrDetailVO.getFoodOdQty());
-//		System.out.println(foodOrDetailVO.getFoodOdStotal());
-//		System.out.println(foodOrDetailVO.getFoodOdRate());
-//		System.out.println(foodOrDetailVO.getFoodOdMsg());
+//		FoodOrDetailVO foodOrDetailVO = foodOrDetailJDBCDAO.findByPrimaryKey("FO20181121-000001", "C00004", "F00024");
+//		System.out.println(foodOrDetailVO.getFood_or_ID());
+//		System.out.println(foodOrDetailVO.getFood_sup_ID());
+//		System.out.println(foodOrDetailVO.getFood_ID());
+//		System.out.println(foodOrDetailVO.getFood_od_qty());
+//		System.out.println(foodOrDetailVO.getFood_od_stotal());
+//		System.out.println(foodOrDetailVO.getFood_od_rate());
+//		System.out.println(foodOrDetailVO.getFood_od_msg());
 		
 		// 查全部
 //		List<FoodOrDetailVO> foodOdDetailVOs = foodOrDetailJDBCDAO.getAll();
 //		for(FoodOrDetailVO foodOrDetailVO:foodOdDetailVOs) {
-//			System.out.print(foodOrDetailVO.getFoodOrId() + " ");
-//			System.out.print(foodOrDetailVO.getFoodSupId() + " ");
-//			System.out.print(foodOrDetailVO.getFoodId() + " ");
-//			System.out.print(foodOrDetailVO.getFoodOdQty() + " ");
-//			System.out.print(foodOrDetailVO.getFoodOdStotal() + " ");
-//			System.out.print(foodOrDetailVO.getFoodOdRate() + " ");
-//			System.out.print(foodOrDetailVO.getFoodOdMsg() + " ");
+//			System.out.print(foodOrDetailVO.getFood_or_ID() + " ");
+//			System.out.print(foodOrDetailVO.getFood_sup_ID() + " ");
+//			System.out.print(foodOrDetailVO.getFood_ID() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_qty() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_stotal() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_rate() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_msg() + " ");
 //			System.out.println();
 //		}
 		

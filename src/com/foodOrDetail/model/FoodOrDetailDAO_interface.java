@@ -5,7 +5,7 @@ import java.util.List;
 public interface FoodOrDetailDAO_interface {
 	void insert(FoodOrDetailVO foodOrDetailVO);
 	void update(FoodOrDetailVO foodOrDetailVO);
-	void delete(String foodOrId, String foodSupId, String foodId);
-	FoodOrDetailVO findByPrimaryKey(String foodOrId, String foodSupId, String foodId);
+	void delete(String food_or_ID, String food_sup_ID, String food_ID);
+	FoodOrDetailVO findByPrimaryKey(String food_or_ID, String food_sup_ID, String food_ID);
 	List<FoodOrDetailVO> getAll();
 }

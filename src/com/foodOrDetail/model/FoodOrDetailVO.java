@@ -1,54 +1,55 @@
 package com.foodOrDetail.model;
 
 public class FoodOrDetailVO {
-	private String foodOrId;
-	private String foodSupId;
-	private String foodId;
-	private Integer foodOdQty;
-	private Integer foodOdStotal;
-	private Integer foodOdRate;
-	private String foodOdMsg;
-	public String getFoodOrId() {
-		return foodOrId;
+	private String food_or_ID;
+	private String food_sup_ID;
+	private String food_ID;
+	private Integer food_od_qty;
+	private Integer food_od_stotal;
+	private Integer food_od_rate;
+	private String food_od_msg;
+	public String getFood_or_ID() {
+		return food_or_ID;
 	}
-	public void setFoodOrId(String foodOrId) {
-		this.foodOrId = foodOrId;
+	public void setFood_or_ID(String food_or_ID) {
+		this.food_or_ID = food_or_ID;
 	}
-	public String getFoodSupId() {
-		return foodSupId;
+	public String getFood_sup_ID() {
+		return food_sup_ID;
 	}
-	public void setFoodSupId(String foodSupId) {
-		this.foodSupId = foodSupId;
+	public void setFood_sup_ID(String food_sup_ID) {
+		this.food_sup_ID = food_sup_ID;
 	}
-	public String getFoodId() {
-		return foodId;
+	public String getFood_ID() {
+		return food_ID;
 	}
-	public void setFoodId(String foodId) {
-		this.foodId = foodId;
+	public void setFood_ID(String food_ID) {
+		this.food_ID = food_ID;
 	}
-	public Integer getFoodOdQty() {
-		return foodOdQty;
+	public Integer getFood_od_qty() {
+		return food_od_qty;
 	}
-	public void setFoodOdQty(Integer foodOdQty) {
-		this.foodOdQty = foodOdQty;
+	public void setFood_od_qty(Integer food_od_qty) {
+		this.food_od_qty = food_od_qty;
 	}
-	public Integer getFoodOdStotal() {
-		return foodOdStotal;
+	public Integer getFood_od_stotal() {
+		return food_od_stotal;
 	}
-	public void setFoodOdStotal(Integer foodOdStotal) {
-		this.foodOdStotal = foodOdStotal;
+	public void setFood_od_stotal(Integer food_od_stotal) {
+		this.food_od_stotal = food_od_stotal;
 	}
-	public Integer getFoodOdRate() {
-		return foodOdRate;
+	public Integer getFood_od_rate() {
+		return food_od_rate;
 	}
-	public void setFoodOdRate(Integer foodOdRate) {
-		this.foodOdRate = foodOdRate;
+	public void setFood_od_rate(Integer food_od_rate) {
+		this.food_od_rate = food_od_rate;
 	}
-	public String getFoodOdMsg() {
-		return foodOdMsg;
+	public String getFood_od_msg() {
+		return food_od_msg;
 	}
-	public void setFoodOdMsg(String foodOdMsg) {
-		this.foodOdMsg = foodOdMsg;
+	public void setFood_od_msg(String food_od_msg) {
+		this.food_od_msg = food_od_msg;
 	}
+	
 	
 }
