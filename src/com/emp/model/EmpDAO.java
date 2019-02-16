@@ -24,16 +24,12 @@ public class EmpDAO implements EmpDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_STMT =
-			"Insert into EMP (EMP_ID,EMP_ACC,EMP_PWD,EMP_NAME,EMP_PIC) VALUES ('E'||LPAD((EMP_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = 
-			"SELECT * FROM EMP order by EMP_ID";
-	private static final String GET_ONE_STMT = 
-			"SELECT * FROM CUST where EMP_ID = ?";
-	private static final String DELETE =
-			"DELETE FROM EMP where EMP_ID=? ";
-	private static final String UPDATE =
-			"UPDATE EMP set EMP_ACC=?, EMP_PWD=?, EMP_NAME=?, EMP_PIC=? WHERE EMP_ID=?";
+	private static final String INSERT_STMT = "Insert into EMP (EMP_ID,EMP_ACC,EMP_PWD,EMP_NAME,EMP_PIC) VALUES ('E'||LPAD((EMP_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT * FROM EMP order by EMP_ID";
+	private static final String GET_ONE_STMT = "SELECT * FROM EMP where EMP_ID = ?";
+	private static final String DELETE = "DELETE FROM EMP where EMP_ID=? ";
+	private static final String UPDATE = "UPDATE EMP set EMP_ACC=?, EMP_PWD=?, EMP_NAME=?, EMP_PIC=? WHERE EMP_ID=?";
+
 	
 	@Override
 	public void insert(EmpVO empVO) {

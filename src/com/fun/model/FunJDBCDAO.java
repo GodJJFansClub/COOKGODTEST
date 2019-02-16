@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cust.model.CustJDBCDAO;
+import com.cust.model.CustVO;
 import com.emp.model.EmpVO;
 
 public class FunJDBCDAO implements FunDAO_interface{
@@ -25,7 +27,7 @@ public class FunJDBCDAO implements FunDAO_interface{
 	private static final String DELETE =
 			"DELETE FROM FUN where FUN_ID=? ";
 	private static final String UPDATE =
-			"UPDATE EMP set FUN_NAME=? WHERE FUN_ID=?";
+			"UPDATE FUN set FUN_NAME=? WHERE FUN_ID=?";
 	
 	
 	@Override
@@ -253,5 +255,37 @@ public class FunJDBCDAO implements FunDAO_interface{
 		}
 		return list;
 	}
+	public static void main(String[] args) {
 
+		FunJDBCDAO dao = new FunJDBCDAO();
+		
+//		//new
+//		FunVO funVO1 = new FunVO();
+//		funVO1.setFun_name("ddddd");
+//				dao.insert(funVO1);
+//		
+//		//update
+//		FunVO funVO2 = new FunVO();
+//		funVO2.setFun_ID("FU0005");
+//		funVO2.setFun_name("ddeee");
+//		dao.update(funVO2);
+//		
+//		// delete
+//		dao.delete("FU0005");
+//		
+//		//search
+//		FunVO funVO3 = dao.findByPrimaryKey("FU0004");
+//		System.out.println(funVO3.getFun_ID()+",");
+//		System.out.println(funVO3.getFun_name()+",");
+////		System.out.println("-------");
+		
+//		// search all
+		List<FunVO> list = dao.getAll();
+		for (FunVO aFun: list) {
+			System.out.println(aFun.getFun_ID()+",");
+			System.out.println(aFun.getFun_name()+",");
+			System.out.println("-------");
+		}
+		
+	}
 }

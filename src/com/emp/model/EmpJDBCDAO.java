@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cust.model.CustVO;
+
+import piciotest.PicIOTest;
 
 public class EmpJDBCDAO implements EmpDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -18,9 +19,9 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 
 	private static final String INSERT_STMT = "Insert into EMP (EMP_ID,EMP_ACC,EMP_PWD,EMP_NAME,EMP_PIC) VALUES ('E'||LPAD((EMP_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM EMP order by EMP_ID";
-	private static final String GET_ONE_STMT = "SELECT * FROM CUST where EMP_ID = ?";
+	private static final String GET_ONE_STMT = "SELECT * FROM EMP where EMP_ID = ?";
 	private static final String DELETE = "DELETE FROM EMP where EMP_ID=? ";
-	private static final String UPDATE = "UPDATE EMP set EMP_ACC=?, EMP_PWD=?, EMP_NAME=?, EMP_PIC=? WHERE CUST_ID=?";
+	private static final String UPDATE = "UPDATE EMP set EMP_ACC=?, EMP_PWD=?, EMP_NAME=?, EMP_PIC=? WHERE EMP_ID=?";
 
 	@Override
 	public void insert(EmpVO empVO) {
@@ -262,5 +263,49 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		}
 		return list;
 	}
+	public static void main(String[] args) {
 
+		EmpJDBCDAO dao = new EmpJDBCDAO();
+		
+//		//new
+//		EmpVO empVO1 = new EmpVO();
+//		empVO1.setEmp_acc("555");
+//		empVO1.setEmp_pwd("888");
+//		empVO1.setEmp_name("ttt");
+//		empVO1.setEmp_pic(PicIOTest.getPictureByteArray("C://Pictures/go.jpg"));
+//		dao.insert(empVO1);
+//		
+//		//update
+//		EmpVO empVO2 = new EmpVO();
+//		empVO2.setEmp_ID("E00008");
+//		empVO2.setEmp_acc("7712");
+//		empVO2.setEmp_pwd("115");
+//		empVO2.setEmp_name("eeee");
+//		empVO2.setEmp_pic(PicIOTest.getPictureByteArray("C://Pictures/go.jpg"));
+//		dao.update(empVO2);
+//		
+//		// delete
+//		dao.delete("E00005");
+//		
+//		//search
+//		EmpVO empVO3 = dao.findByPrimaryKey("E00001");
+//		System.out.println(empVO3.getEmp_acc()+",");
+//		System.out.println(empVO3.getEmp_pwd()+",");
+//		System.out.println(empVO3.getEmp_name()+",");
+//		System.out.println(empVO3.getEmp_pic()+",");
+//		System.out.println("-------");
+//		
+//		// search all
+//		List<EmpVO> list = dao.getAll();
+//		for (EmpVO aEmp: list) {
+//		System.out.println(aEmp.getEmp_ID()+",");
+//		System.out.println(aEmp.getEmp_acc()+",");
+//		System.out.println(aEmp.getEmp_pwd()+",");
+//		System.out.println(aEmp.getEmp_name()+",");
+//		System.out.println(aEmp.getEmp_pic()+",");
+//		System.out.println("-------");	
+//		}
+		
+	}
+	
 }
