@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ad.model.AdJDBCDAO;
-import com.ad.model.AdVO;
 
 import piciotest.PicIOTest;
 
