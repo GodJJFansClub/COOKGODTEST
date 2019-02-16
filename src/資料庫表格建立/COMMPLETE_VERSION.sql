@@ -301,7 +301,8 @@ VALUES ('C00002','D00001','C1');
 --建立表格:食材--
 CREATE TABLE FOOD (
  FOOD_ID                  VARCHAR2(6)   NOT NULL,
- FOOD_NAME                VARCHAR2(30)  NOT NULL,
+ FOOD_NAME                VARCHAR2(100) NOT NULL,
+ FOOD_TYPE                VARCHAR2(3),
  PRIMARY KEY (FOOD_ID)
 );
 
