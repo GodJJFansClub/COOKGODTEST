@@ -1,19 +1,28 @@
 package com.food.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-public class FoodJDBCDAO implements FoodDAO_interface {
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static final String USER = "COOKGOD";
-	private static final String PASSWORD = "123456";
+public class FoodJNDIDAO implements FoodDAO_interface {
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static final String INSERT_STMT =
 			"INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), ?, ?)";
 	private static final String GET_ALL_STMT = 
@@ -28,70 +37,65 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 	public void insert(FoodVO foodVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
-			
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT);
+
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1, foodVO.getFood_name());
 			pstmt.setString(2, foodVO.getFood_type());
 			
 			pstmt.executeUpdate();
-			// Handle any driver errors
-		}catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
 			// Handle any SQL errors
-		}catch (SQLException se) {
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		}finally {
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch (SQLException se) {
+				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				}catch (SQLException e) {
+				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
-		
 	}
+
 	@Override
 	public void update(FoodVO foodVO) {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			
-			
+
 			pstmt.setString( 1, foodVO.getFood_name());
 			pstmt.setString( 2, foodVO.getFood_type());
 			pstmt.setString( 3, foodVO.getFood_ID());
 			
 			pstmt.executeUpdate();
-			
+
 			// Handle any driver errors
-		}catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		}finally {
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -109,29 +113,28 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		}
 		
 	}
+
 	@Override
-	public void delete(String foodId) {
+	public void delete(String food_ID) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
-			pstmt.setString(1, foodId);
+
+			pstmt.setString(1, food_ID);
+
 			pstmt.executeUpdate();
-			
+
 			// Handle any driver errors
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		}finally {
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -147,8 +150,8 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 				}
 			}
 		}
-		
 	}
+
 	@Override
 	public FoodVO findByPrimaryKey(String food_ID) {
 		FoodVO foodVO = null;
@@ -157,8 +160,8 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
 			pstmt.setString(1, food_ID);
@@ -172,10 +175,6 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 				foodVO.setFood_type(rs.getString(3));
 			}
 			// Handle any driver errors
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		}catch(SQLException se) {
 			
 			throw new RuntimeException("A database error occured. "
@@ -206,6 +205,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		}
 		return foodVO;
 	}
+
 	@Override
 	public List<FoodVO> getAll() {
 		List<FoodVO> list = new ArrayList<FoodVO>();
@@ -216,8 +216,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -228,10 +227,6 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 				list.add(foodVO);
 			}
 			// Handle any driver errors
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		}catch(SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -263,34 +258,5 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		
 		return list;
 	}
-	
-	public static void main(String[] args) {
-		FoodJDBCDAO dao = new FoodJDBCDAO();
-		// 新增
-//		FoodVO foodVO1 = new FoodVO();
-//		foodVO1.setFood_name("大白菜");
-//		foodVO1.setFood_type("F01");
-//		dao.insert(foodVO1);
-		// 修改
-//		FoodVO foodVO1 = new FoodVO();
-//		foodVO1.setFood_ID("F00027");
-//		foodVO1.setFood_name("AAA");
-//		foodVO1.setFood_type("F03");
-//		dao.update(foodVO1);
-		// 刪除
-//		dao.delete("F00027");
-		// 查詢
-//		FoodVO foodVO1 = dao.findByPrimaryKey("F00021");
-//		System.out.println(foodVO1.getFood_ID());
-//		System.out.println(foodVO1.getFood_name());
-//		System.out.println(foodVO1.getFood_type());
-		// 查全部
-//		List<FoodVO> foodVOs = dao.getAll();
-//		for(FoodVO foodVO:foodVOs) {
-//			System.out.print(foodVO.getFood_ID());
-//			System.out.print(foodVO.getFood_name());
-//			System.out.print(foodVO.getFood_type());
-//			System.out.println();
-//		}
-	}
+
 }

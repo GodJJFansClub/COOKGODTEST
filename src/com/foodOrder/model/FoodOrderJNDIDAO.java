@@ -1,22 +1,30 @@
 package com.foodOrder.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
+public class FoodOrderJNDIDAO implements FoodOrderDAO_interface {
+	
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
-
-
-public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
-	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static final String USER = "COOKGOD";
-	private static final String PASSWORD = "123456";
 	private static final String INSERT_STMT = 
 			"INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_SEND, FOOD_OR_RCV, FOOD_OR_END, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID) VALUES ('FO'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.NEXTVAL), 6, '0'), ?, sysdate, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
@@ -34,9 +42,6 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 		PreparedStatement pstmt = null;
 		try {
 
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, foodOrderVO.getFood_or_status());
 			pstmt.setDate(2, foodOrderVO.getFood_or_send());
@@ -48,9 +53,6 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 			pstmt.setString(8, foodOrderVO.getCust_ID());
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -70,16 +72,16 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 				}
 			}
 		}
-		
 	}
+
 	@Override
 	public void update(FoodOrderVO foodOrderVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+
 		try {
 
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, foodOrderVO.getFood_or_status());
@@ -93,12 +95,12 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 			pstmt.setString(9, foodOrderVO.getFood_or_ID());
 
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
+			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -115,30 +117,27 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 				}
 			}
 		}
-		
 	}
+
 	@Override
 	public void delete(String food_or_ID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
-		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
 
-			
+		try {
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, food_or_ID);
-			
+
 			pstmt.executeUpdate();
-			
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-		}catch(SQLException se) {
+
+			// Handle any driver errors
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-		}finally {
+			// Clean up JDBC resources
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -154,26 +153,26 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 				}
 			}
 		}
-		
 	}
+
 	@Override
 	public FoodOrderVO findByPrimaryKey(String food_or_ID) {
 		FoodOrderVO foodOrderVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		
+
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-				
+
 			pstmt.setString(1, food_or_ID);
-				
+
 			rs = pstmt.executeQuery();
-				
+
 			while (rs.next()) {
+				// empVo 也稱為 Domain objects
 				foodOrderVO = new FoodOrderVO();
 				foodOrderVO.setFood_or_ID(rs.getString(1));
 				foodOrderVO.setFood_or_status(rs.getString(2));
@@ -185,15 +184,14 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 				foodOrderVO.setFood_or_addr(rs.getString(8));
 				foodOrderVO.setFood_or_tel(rs.getString(9));
 				foodOrderVO.setCust_ID(rs.getString(10));
-					
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
+			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-		}finally {
+			// Clean up JDBC resources
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -218,23 +216,24 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 		}
 		return foodOrderVO;
 	}
+
 	@Override
 	public List<FoodOrderVO> getAll() {
 		List<FoodOrderVO> foodOrderVOs = new ArrayList<FoodOrderVO>(); 
 		FoodOrderVO foodOrderVO = null;
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		
+
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-				
-			while(rs.next()) {
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
 				foodOrderVO = new FoodOrderVO();
 				foodOrderVO.setFood_or_ID(rs.getString(1));
 				foodOrderVO.setFood_or_status(rs.getString(2));
@@ -246,16 +245,15 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 				foodOrderVO.setFood_or_addr(rs.getString(8));
 				foodOrderVO.setFood_or_tel(rs.getString(9));
 				foodOrderVO.setCust_ID(rs.getString(10));
-				foodOrderVOs.add(foodOrderVO);
-					
+				foodOrderVOs.add(foodOrderVO); // Store the row in the list
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
+			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-		}finally {
+			// Clean up JDBC resources
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -280,62 +278,5 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 		}
 		return foodOrderVOs;
 	}
-	
-	public static void main(String[] args) {
-		FoodOrderJDBCDAO foodOrderJDBCDAO = new FoodOrderJDBCDAO();
-		java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
-		// 新增
-//		FoodOrderVO foodOrderVO = new FoodOrderVO();
-//		foodOrderVO.setFood_or_status("o0");
-//		foodOrderVO.setFood_or_start(sqlDate);
-//		foodOrderVO.setFood_or_send(sqlDate);
-//		foodOrderVO.setFood_or_rcv(sqlDate);
-//		foodOrderVO.setFood_or_end(sqlDate);
-//		foodOrderVO.setFood_or_name("李舜生");
-//		foodOrderVO.setFood_or_addr("中央大學");
-//		foodOrderVO.setFood_or_tel("0958111222");
-//		foodOrderVO.setCust_ID("C00013");
-//		foodOrderJDBCDAO.insert(foodOrderVO);
-		// 修改
-//		FoodOrderVO foodOrderVO = new FoodOrderVO();
-//		foodOrderVO.setFood_or_ID("FO20190215-000006");
-//		foodOrderVO.setFood_or_status("o1");
-//		foodOrderVO.setFood_or_start(sqlDate);
-//		foodOrderVO.setFood_or_send(sqlDate);
-//		foodOrderVO.setFood_or_rcv(sqlDate);
-//		foodOrderVO.setFood_or_end(sqlDate);
-//		foodOrderVO.setFood_or_name("A李舜生");
-//		foodOrderVO.setFood_or_addr("桃園區");
-//		foodOrderVO.setFood_or_tel("0952777666");
-//		foodOrderJDBCDAO.update(foodOrderVO);
-		// 刪除
-//		foodOrderJDBCDAO.delete("FO20190216-000007");
-		// 查詢
-//		FoodOrderVO foodOrderVO = foodOrderJDBCDAO.findByPrimaryKey("FO20190211-000005");
-//		System.out.println(foodOrderVO.getFood_or_ID());
-//		System.out.println(foodOrderVO.getFood_or_status());
-//		System.out.println(foodOrderVO.getFood_or_start());
-//		System.out.println(foodOrderVO.getFood_or_send());
-//		System.out.println(foodOrderVO.getFood_or_rcv());
-//		System.out.println(foodOrderVO.getFood_or_end());
-//		System.out.println(foodOrderVO.getFood_or_name());
-//		System.out.println(foodOrderVO.getFood_or_addr());
-//		System.out.println(foodOrderVO.getFood_or_tel());
-//		System.out.println(foodOrderVO.getCust_ID());
-		// 查詢全部
-//		List<FoodOrderVO> foodOrderVOs = foodOrderJDBCDAO.getAll();
-//		for(FoodOrderVO foodOrderVO: foodOrderVOs) {		
-//			System.out.print(foodOrderVO.getFood_or_ID() + " ");
-//			System.out.print(foodOrderVO.getFood_or_status() + " ");
-//			System.out.print(foodOrderVO.getFood_or_start() + " ");
-//			System.out.print(foodOrderVO.getFood_or_send() + " ");
-//			System.out.print(foodOrderVO.getFood_or_rcv() + " ");
-//			System.out.print(foodOrderVO.getFood_or_end() + " ");
-//			System.out.print(foodOrderVO.getFood_or_name() + " ");
-//			System.out.print(foodOrderVO.getFood_or_addr() + " ");
-//			System.out.print(foodOrderVO.getFood_or_tel() + " ");
-//			System.out.print(foodOrderVO.getCust_ID() + " ");
-//			System.out.println();
-//		}
-	}
+
 }
