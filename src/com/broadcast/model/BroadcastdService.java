@@ -35,7 +35,7 @@ public class BroadcastdService {
 		return broadcastVO;
 	}
 
-	public void daleteBroadcast(String broadcast_ID) {
+	public void deleteBroadcast(String broadcast_ID) {
 		dao.delete(broadcast_ID);
 	}
 

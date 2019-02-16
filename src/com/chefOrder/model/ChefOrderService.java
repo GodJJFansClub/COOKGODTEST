@@ -47,7 +47,7 @@ public class ChefOrderService {
 		return chefOrderVO;
 	}
 
-	public void daleteChefOrder(String chef_or_ID) {
+	public void deleteChefOrder(String chef_or_ID) {
 		dao.delete(chef_or_ID);
 	}
 

@@ -36,7 +36,7 @@ public class MenuService {
 		return menuVO;
 	}
 
-	public void daleteMenu(String menu_ID) {
+	public void deleteMenu(String menu_ID) {
 		dao.delete(menu_ID);
 	}
 

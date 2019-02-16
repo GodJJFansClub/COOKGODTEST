@@ -27,7 +27,7 @@ public class FavChefService {
 		return favChefVO;
 	}
 
-	public void daleteFavChef(String cust_ID) {
+	public void deleteFavChef(String cust_ID) {
 		dao.delete(cust_ID);
 	}
 
