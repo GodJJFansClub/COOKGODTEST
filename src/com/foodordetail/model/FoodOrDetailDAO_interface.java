@@ -1,4 +1,4 @@
-package com.foodOrDetail.model;
+package com.foodordetail.model;
 
 import java.util.List;
 

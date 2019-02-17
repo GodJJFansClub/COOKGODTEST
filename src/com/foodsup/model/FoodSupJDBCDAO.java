@@ -1,4 +1,4 @@
-package com.foodSup.model;
+package com.foodsup.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

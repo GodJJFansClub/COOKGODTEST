@@ -1,4 +1,4 @@
-package com.foodMall.model;
+package com.foodmall.model;
 
 public class FoodMallVO {
 	private String food_sup_ID;
