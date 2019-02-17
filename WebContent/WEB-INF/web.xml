@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>COOKGOD</display-name>
+  <display-name>CookGoD</display-name>
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -26,6 +26,7 @@
   	<servlet-name>FoodServlet</servlet-name>
   	<url-pattern>/food/food.do</url-pattern>
   </servlet-mapping>
+  
   <servlet>
 	<servlet-name>MenuOrderServlet</servlet-name>
 	<servlet-class>com.menuOrder.controller.MenuOrderServlet</servlet-class>
@@ -34,5 +35,16 @@
 	<servlet-name>MenuOrderServlet</servlet-name>
 	<url-pattern>/menuOrder/menuOrder.do</url-pattern>
   </servlet-mapping>
+  
+  
+   <servlet>
+	<servlet-name>ReportServlet</servlet-name>
+	<servlet-class>com.report.controller.ReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ReportServlet</servlet-name>
+	<url-pattern>/back-end/report/report.do</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

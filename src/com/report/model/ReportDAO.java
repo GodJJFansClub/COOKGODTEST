@@ -41,14 +41,13 @@ public class ReportDAO implements Report_Interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, reportVO.getReport_ID());
-			pstmt.setString(2, reportVO.getReport_title());
-			pstmt.setString(3, reportVO.getReport_sort());
-			pstmt.setTimestamp(4, reportVO.getReport_start());
-			pstmt.setString(5, reportVO.getReport_status());
-			pstmt.setString(6, reportVO.getReport_con());
-			pstmt.setString(7, reportVO.getCust_ID());
-			pstmt.setString(8, reportVO.getForum_art_ID());
+			pstmt.setString(1, reportVO.getReport_title());
+			pstmt.setString(2, reportVO.getReport_sort());
+			pstmt.setTimestamp(3, reportVO.getReport_start());
+			pstmt.setString(4, reportVO.getReport_status());
+			pstmt.setString(5, reportVO.getReport_con());
+			pstmt.setString(6, reportVO.getCust_ID());
+			pstmt.setString(7, reportVO.getForum_art_ID());
 
 			pstmt.executeUpdate();
 

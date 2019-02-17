@@ -12,13 +12,12 @@ public class ReportService {
 		dao = new ReportDAO();
 	}
 
-	public ReportVO addEmp(String report_ID, String report_title,String report_sort,Timestamp report_start,
+	public ReportVO addReport(String report_title,String report_sort,Timestamp report_start,
 			String report_status,String report_con,String cust_ID,String forum_art_ID)
 	{
 
 		ReportVO reportVO = new ReportVO();
 
-		reportVO.setReport_ID(report_ID);
 		reportVO.setReport_title(report_title);
 		reportVO.setReport_sort(report_sort);
 		reportVO.setReport_start(report_start);
@@ -31,7 +30,7 @@ public class ReportService {
 		return reportVO;
 	}
 
-	public ReportVO updateEmp(String report_ID, String report_title,String report_sort,Timestamp report_start,
+	public ReportVO updateReport(String report_ID, String report_title,String report_sort,Timestamp report_start,
 			String report_status,String report_con,String cust_ID,String forum_art_ID) {
 
 		ReportVO reportVO = new ReportVO();
@@ -49,11 +48,11 @@ public class ReportService {
 		return reportVO;
 	}
 
-	public void deleteEmp(String report_ID) {
+	public void deleteReport(String report_ID) {
 		dao.delete(report_ID);
 	}
 
-	public ReportVO getOneEmp(String report_ID) {
+	public ReportVO getOneReport(String report_ID) {
 		return dao.findByPrimaryKey(report_ID);
 	}
 
