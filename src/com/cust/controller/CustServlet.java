@@ -54,11 +54,75 @@ public class CustServlet extends HttpServlet {
 				}
 				
 				
+				String cust_sex = new String (req.getParameter("cust_sex".trim()));
+				if(cust_sex == null || cust_sex.trim().length() ==0) {
+					errorMsgs.add("姓別請勿空白");
+				}
+				
+				String cust_tel = new String (req.getParameter("cust_tel".trim()));
+				if(cust_sex == null || cust_sex.trim().length() ==0) {
+					errorMsgs.add("電話請勿空白");
+				}
+				
+				String cust_addr = new String (req.getParameter("cust_addr".trim()));
+				if(cust_sex == null || cust_sex.trim().length() ==0) {
+					errorMsgs.add("地址請勿空白");
+				}
+				
+				String cust_pid = new String (req.getParameter("cust_pid".trim()));
+				if(cust_sex == null || cust_sex.trim().length() ==0) {
+					errorMsgs.add("身分證字號請勿空白");
+				}
+				
+				String cust_mail = new String (req.getParameter("cust_mail".trim()));
+				if(cust_sex == null || cust_sex.trim().length() ==0) {
+					errorMsgs.add("e-mail請勿空白");
+				}
+				
+				java.sql.Date cust_brd = null;
+				try {
+					cust_brd = java.sql.Date.valueOf(req.getParameter("cust_brd").trim());
+				} catch (IllegalArgumentException e) {
+					cust_brd=new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請輸入日期!");
+				}
+				
+				java.sql.Date cust_reg = null;
+				try {
+					cust_reg = java.sql.Date.valueOf(req.getParameter("cust_reg").trim());
+				} catch (IllegalArgumentException e) {
+					cust_reg =new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請輸入日期!");
+				}
+				
+				String cust_status = new String (req.getParameter("cust_status".trim()));
+				if(cust_status == null || cust_status.trim().length() ==0) {
+					errorMsgs.add("暱稱請勿空白");
+				}
+				String cust_niname = new String (req.getParameter("cust_niname".trim()));
+				if(cust_niname == null || cust_niname.trim().length() ==0) {
+					errorMsgs.add("暱稱請勿空白");
+				}
+				
 				
 				String cust_ID = new String (req.getParameter("cust_ID".trim()));
 				
 				CustVO custVO = new CustVO();
+				custVO.setCust_acc(cust_acc);
 				custVO.setCust_name(cust_name);
+				custVO.setCust_pwd(cust_pwd);
+				custVO.setCust_sex(cust_sex);
+				custVO.setCust_tel(cust_tel);
+				custVO.setCust_addr(cust_addr);
+				custVO.setCust_pid(cust_pid);
+				custVO.setCust_mail(cust_mail);
+				custVO.setCust_brd(cust_brd);
+				custVO.setCust_reg(cust_reg);
+				custVO.setCust_pic(cust_pic);
+				custVO.setCust_status(cust_status);
+				custVO.setCust_niname(cust_niname);
+				
+				
 				
 				//如果以上格式有錯
 				if(!errorMsgs.isEmpty()) {

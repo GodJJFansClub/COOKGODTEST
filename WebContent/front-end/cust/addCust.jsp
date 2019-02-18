@@ -64,18 +64,80 @@ th, td {
 		</ul>
 	</c:if>
 	<FORM METHOD="post" ACTION="cust.do" name="form1">
+		
 		<table>
 			<tr>
-				<td>員工姓名:</td>
-				<td><input type="TEXT" name="ename" size="45"
+				<td>會員帳號:</td>
+				<td><input type="TEXT" name="cust_acc" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+			</tr>
+		
+			<tr>
+				<td>會員密碼:</td>
+				<td><input type="TEXT" name="cust_pwd" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員姓名:</td>
+				<td><input type="TEXT" name="cust_name" size="45"
 					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
 			</tr>
+			
+			<tr>
+				<td>會員身分證字號:</td>
+				<td><input type="TEXT" name="cust_pid" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員性別:</td>
+				<td><input type="checkbox" name="cust_sex" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員生日:</td>
+				<td><input type="date" name="cust_brd" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員電話:</td>
+				<td><input type="TEXT" name="cust_tel" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員地址:</td>
+				<td><input type="TEXT" name="cust_addr" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員信箱:</td>
+				<td><input type="TEXT" name="cust_mail" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員暱稱:</td>
+				<td><input type="TEXT" name="cust_niname" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>會員大頭照:</td>
+				<td><input type="TEXT" name="cust_pic" size="45"
+					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
+			</tr>
+			
 
 
 		</table>
 		<br> <input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
-	</FORM>
+	
 	</FORM>
 </body>
 
