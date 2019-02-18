@@ -318,7 +318,7 @@ public class ReportJDBCDAO implements Report_Interface {
 //		dao.delete("8");
 		
 		// 查詢
-//        ReportVO reportVO = dao.findByPrimaryKey("6");
+//      FestMenuVO festMenuVO=new FestMenuVO();
 //		System.out.println(reportVO.getReport_ID());
 //		System.out.println(reportVO.getReport_title());
 //		System.out.println(reportVO.getReport_sort());

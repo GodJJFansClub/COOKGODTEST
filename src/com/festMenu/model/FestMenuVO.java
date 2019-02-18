@@ -11,11 +11,11 @@ public class FestMenuVO {
 	private Date fest_m_start;
 	private Date fest_m_end;
 	private byte[] fest_m_pic;
-	private Clob fest_m_resume;
+	private String fest_m_resume;
 	private Date fest_m_send;
 	private String fest_m_status;
 	private String fest_m_kind;
-	private String chif_ID;
+	private String chef_ID;
 
 	public String getFest_m_ID() {
 		return fest_m_ID;
@@ -65,11 +65,11 @@ public class FestMenuVO {
 		this.fest_m_pic = fest_m_pic;
 	}
 
-	public Clob getFest_m_resume() {
+	public String getFest_m_resume() {
 		return fest_m_resume;
 	}
 
-	public void setFest_m_resume(Clob fest_m_resume) {
+	public void setFest_m_resume(String fest_m_resume) {
 		this.fest_m_resume = fest_m_resume;
 	}
 
@@ -97,12 +97,11 @@ public class FestMenuVO {
 		this.fest_m_kind = fest_m_kind;
 	}
 
-	public String getChif_ID() {
-		return chif_ID;
+	public String getChef_ID() {
+		return chef_ID;
 	}
 
-	public void setChif_ID(String chif_ID) {
-		this.chif_ID = chif_ID;
+	public void setChef_ID(String chef_ID) {
+		this.chef_ID = chef_ID;
 	}
-
 }

@@ -289,8 +289,8 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetailDAO_interface {
 		
 		FestOrderDetailVO festOrderDetailVO=new FestOrderDetailVO();
 		
-		festOrderDetailVO.setFest_or_ID("FM20120217-00001");
-		festOrderDetailVO.setFest_m_ID("FM0001");
+		festOrderDetailVO.setFest_or_ID("FM2019-000001");
+		festOrderDetailVO.setFest_m_ID("FM0003");
 		festOrderDetailVO.setFest_or_rate(80);
 		festOrderDetailVO.setFest_or_msg("很不錯喔, 下次仍會繼續購買");
 		festOrderDetailVO.setFest_or_qty(50);
