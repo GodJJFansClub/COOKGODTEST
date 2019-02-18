@@ -72,6 +72,8 @@
 		<c:forEach var="foodVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<tr>
 				<td>${foodVO.food_ID}</td>
+				<td>${foodVO.food_name}</td>
+				<td>${foodVO.food_type}</td>
 			</tr>
 		</c:forEach>
 	</table>

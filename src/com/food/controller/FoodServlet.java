@@ -26,9 +26,9 @@ public class FoodServlet extends HttpServlet {
 		throws ServletException, IOException{
 		
 		req.setCharacterEncoding("UTF-8");
-		// 利用action參數來決定要做哪個區塊的事
+		//	利用action參數來決定要做哪個區塊的事
 		String action = req.getParameter("action");
-		// 字串.equals(放字串變數), 這樣就可以避免NullPointerException
+		//	字串.equals(放字串變數), 這樣就可以避免NullPointerException
 		if("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 			//	完了只記得LinkedList的特性是插拔比較有利, 但errorMsgs為什麼用這個忘記了
 			List<String> errorMsgs = new LinkedList<String>();
@@ -59,7 +59,7 @@ public class FoodServlet extends HttpServlet {
 				// 這裡也許可以用正規表示式來檢查
 				String food_ID = str;
 				// Send the use back to the form, if there were errors
-				// 錯誤訊息不是空就是有錯, 就回select_page.jsp
+				// 	錯誤訊息不是空就是有錯, 就回select_page.jsp
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/back-end/food/select_page.jsp");
@@ -82,8 +82,8 @@ public class FoodServlet extends HttpServlet {
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				// 記住喔, 多數的JSP是對到左邊的字串, 反正就是用key取值, 左邊是key
-				req.setAttribute("foodVO", foodVO); // 資料庫取出的empVO物件,存入req
+				//	記住喔, 多數的JSP是對到左邊的字串, 反正就是用key取值, 左邊是key
+				req.setAttribute("foodVO", foodVO); //	資料庫取出的empVO物件,存入req
 				String url = "/back-end/food/listOneFood.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
