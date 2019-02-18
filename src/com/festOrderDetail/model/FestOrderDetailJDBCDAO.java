@@ -15,7 +15,7 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetailDAO_interface {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String USER = "COOKGOD";
 	private static final String PASSWORD = "123456";
-	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_RATE,FEST_OR_MSG,FEST_OR_QTY,FEST_OR_STOTAL) VALUES (?,?,?,?,? ?)";
+	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_RATE,FEST_OR_MSG,FEST_OR_QTY,FEST_OR_STOTAL) VALUES (?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE FEST_ORDER_DETAIL SET FEST_M_ID = ?,FEST_OR_RATE = ?,FEST_OR_MSG = ?,FEST_OR_QTY = ?,FEST_OR_STOTAL = ? WHERE FEST_OR_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM FEST_ORDER_DETAIL WHERE FEST_OR_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER_DETAIL";
@@ -289,9 +289,9 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetailDAO_interface {
 		
 		FestOrderDetailVO festOrderDetailVO=new FestOrderDetailVO();
 		
-		festOrderDetailVO.setFest_or_ID("FM2019-000001");
+		festOrderDetailVO.setFest_or_ID("FM20190219-000001");
 		festOrderDetailVO.setFest_m_ID("FM0003");
-		festOrderDetailVO.setFest_or_rate(80);
+		festOrderDetailVO.setFest_or_rate(1);
 		festOrderDetailVO.setFest_or_msg("很不錯喔, 下次仍會繼續購買");
 		festOrderDetailVO.setFest_or_qty(50);
 		festOrderDetailVO.setFest_or_stotal(80);
