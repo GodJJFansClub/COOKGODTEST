@@ -50,7 +50,7 @@
 	<table id="table-1">
 		<tr><td>
 			<h3>所有食材資料 - listAllFood.jsp</h3>
-			<h4><a href="<%=request.getContextPath()%>/back-end/food/select_page.jsp"><img src="<%=request.getContextPath()%>/images/back.gif" width="100" height="32" border="0">回首頁</a></h4>
+			<h4><a href="<%=request.getContextPath()%>/back-end/food/select_page.jsp"><img src="<%=request.getContextPath()%>/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 		</td></tr>
 	</table>
 	<%-- 錯誤列表 --%>
@@ -74,6 +74,20 @@
 				<td>${foodVO.food_ID}</td>
 				<td>${foodVO.food_name}</td>
 				<td>${foodVO.food_type}</td>
+				<td>
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" style="margin-bottom: 0px;">
+						<input type="submit" value="修改">
+						<input type="hidden" name="food_ID" value="${foodVO.food_ID}">
+						<input type="hidden" name="action" value="getOne_For_Udate">
+					</FORM>
+				</td>
+				<td>
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" style="margin-bottom: 0px;">
+						<input type="submit" value="刪除">
+						<input type="hidden" name="food_ID" value="${foodVO.food_ID}">
+						<input type="hidden" name="action" value="delete">
+					</FORM>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

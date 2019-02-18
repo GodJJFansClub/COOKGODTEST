@@ -24,6 +24,8 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			"DELETE FROM FOOD WHERE FOOD_ID = ?";
 	private static final String UPDATE = 
 			"UPDATE FOOD SET FOOD_NAME = ?, FOOD_TYPE = ? WHERE FOOD_ID = ?";
+	private static final String GET_ALL_FOOD_STMT =
+			"SELECT FOOD_TYPE FROM FOOD";
 	@Override
 	public void insert(FoodVO foodVO) {
 		Connection con = null;
@@ -206,6 +208,60 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		}
 		return foodVO;
 	}
+	
+	@Override
+	public List<String> getAllFood_type(){
+		List<String> list = new ArrayList<String>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_FOOD_STMT);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+			// Handle any driver errors
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		
+		return list;
+	}
+	
 	@Override
 	public List<FoodVO> getAll() {
 		List<FoodVO> list = new ArrayList<FoodVO>();
@@ -291,6 +347,11 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 //			System.out.print(foodVO.getFood_name());
 //			System.out.print(foodVO.getFood_type());
 //			System.out.println();
+//		}
+		
+//		List<String> food_types = dao.getAllFood_type();
+//		for(String food_type:food_types) {
+//			System.out.println(food_type);
 //		}
 	}
 }

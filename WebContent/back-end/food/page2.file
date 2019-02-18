@@ -3,12 +3,12 @@
   <%if (rowsPerPage<rowNumber) {%>
     <%if(pageIndex>=rowsPerPage){%>
         <a href="<%=request.getRequestURI()%>?whichPage=1">至第一頁</a>&nbsp;
-        <a href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">上一頁</a>$nbsp;
+        <a href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">上一頁</a>&nbsp;
     <%}%>
     
     <%if (pageIndex<pageIndexArray[pageNumber-1]){%>
     	<a href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>">至下一頁</a>&nbsp;
-    	<a href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">至最後一頁</a>"&nbsp;
+    	<a href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">至最後一頁</a>&nbsp;
     <%}%>
   <%}%>
 <br><br>

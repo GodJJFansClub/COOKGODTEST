@@ -8,4 +8,5 @@ public interface FoodDAO_interface {
 	void delete(String food_ID);
 	FoodVO findByPrimaryKey(String food_ID);
 	List<FoodVO> getAll();
+	List<String> getAllFood_type();
 }

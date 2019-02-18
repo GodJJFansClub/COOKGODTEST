@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.food.model.*"%>
 
-<jsp:useBean id="foodVO" scope="request" type=com.food.model.FoodVO/>
+
+<% FoodVO foodVO = (FoodVO) request.getAttribute("foodVO"); %>
 
 <html>
 <head>
@@ -63,17 +64,17 @@
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="emp.do" name="form1">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" name="form1">
 	<table>
 		<tr>
-			<td>員工姓名:</td>
-			<td><input type="TEXT" name="ename" size="45" 
-				 value="<%= (foodVO==null)? "吳永志" : foodVO.getFood_name()%>" /></td>
+			<td>食材名稱:</td>
+			<td><input type="TEXT" name="food_name" size="45" 
+				 value="<%= (foodVO==null)? "大白菜" : foodVO.getFood_name()%>" /></td>
 		</tr>
 		<tr>
-			<td>職位:</td>
-			<td><input type="TEXT" name="job" size="45"
-				 value="<%= (foodVO==null)? "MANAGER" : foodVO.getFood_type()%>" /></td>
+			<td>食材種類:</td>
+			<td><input type="TEXT" name="food_type" size="45"
+				 value="<%= (foodVO==null)? "g01" : foodVO.getFood_type()%>" /></td>
 		</tr>
 	
 	

@@ -28,6 +28,7 @@ public class FoodServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		//	利用action參數來決定要做哪個區塊的事
 		String action = req.getParameter("action");
+		
 		//	字串.equals(放字串變數), 這樣就可以避免NullPointerException
 		if("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 			//	完了只記得LinkedList的特性是插拔比較有利, 但errorMsgs為什麼用這個忘記了
@@ -83,7 +84,7 @@ public class FoodServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				//	記住喔, 多數的JSP是對到左邊的字串, 反正就是用key取值, 左邊是key
-				req.setAttribute("foodVO", foodVO); //	資料庫取出的empVO物件,存入req
+				req.setAttribute("foodVO", foodVO); //	資料庫取出的foodVO物件,存入req
 				String url = "/back-end/food/listOneFood.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -97,14 +98,14 @@ public class FoodServlet extends HttpServlet {
 			}
 		}
 		
-		if("getOne_For_Udate".equals(action)) {
+		if("getOne_For_Udate".equals(action)) { // 來自listAllFood.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try {
-				// 因為update頁面會有之前資料庫的food_ID, 所以可不用,
+				// 因為listAllFood頁面會有之前資料庫的food_ID, 所以可不用,
 				// 不知道Google改的方式和如果程式發get請求應該都有機會可以破
 				/***************************1.接收請求參數****************************************/
 				String food_ID = req.getParameter("food_ID");
@@ -112,9 +113,9 @@ public class FoodServlet extends HttpServlet {
 				FoodService foodSvc = new FoodService();
 				FoodVO foodVO = foodSvc.getOneFood(food_ID);
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				req.setAttribute("foodVO", foodVO);				// 資料庫取出的empVO物件,存入req
-				String url = "/back-end/update_food_input.jsp";
-				RequestDispatcher sucessView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				req.setAttribute("foodVO", foodVO);				// 資料庫取出的foodVO物件,存入req
+				String url = "/back-end/food/update_food_input.jsp";
+				RequestDispatcher sucessView = req.getRequestDispatcher(url);// 成功轉交 update_food_input.jsp
 				sucessView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
@@ -128,7 +129,7 @@ public class FoodServlet extends HttpServlet {
 			}
 		}
 		
-		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
+		if ("update".equals(action)) { // 來自update_food_input.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -182,7 +183,80 @@ public class FoodServlet extends HttpServlet {
 			} catch(Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/food/update_emp_input.jsp");
+						.getRequestDispatcher("/back-end/food/update_food_input.jsp");
+				failureView.forward(req, res);
+			}
+			
+		}
+		
+
+		if("insert".equals(action)) { // 來自addFood.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+				String food_name = req.getParameter("food_name");
+				String food_nameReg = "^[(\u4e00-\u9fa5)]{1,30}$";
+				if (food_name == null || food_name.trim().length() == 0) {
+					errorMsgs.add("食材名稱: 起勿空白");
+				} else if(!food_name.trim().matches(food_nameReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("食材名稱: 只能是中文且長度必需在1到30之間");
+	            } 
+				
+				String food_type = req.getParameter("food_type").trim();
+				if (food_type == null || food_type.trim().length() == 0) {
+					errorMsgs.add("食材種類請勿空白");
+				}
+				
+				FoodVO foodVO = new FoodVO();
+				foodVO.setFood_name(food_name);
+				foodVO.setFood_type(food_type);
+				
+				if(!errorMsgs.isEmpty()) {
+					req.setAttribute("foodVO", foodVO);
+					RequestDispatcher failureView = req
+						.getRequestDispatcher("/back-end/food/addFood.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/***************************2.開始新增資料***************************************/
+				FoodService foodSvc = new FoodService();
+				foodVO = foodSvc.addFood(food_name, food_type);
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				String url = "/back-end/food/listFood.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			}catch(Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back-end/food/addFood.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+ 		if("delete".equals(action)) {  //來自listAllFood.jsp  
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				/***************************1.接收請求參數***************************************/
+				String food_ID = req.getParameter("food_ID");
+				
+				/***************************2.開始刪除資料***************************************/
+				FoodService foodSvc = new FoodService();
+				foodSvc.deleteFood(food_ID);
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
+				String url = "/back-end/food/listAllFood.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back-end/food/listAllFood.jsp");
 				failureView.forward(req, res);
 			}
 		}
