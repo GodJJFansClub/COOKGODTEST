@@ -54,7 +54,7 @@
   
   <li>
     <FORM METHOD="post" ACTION="cust.do" >
-        <b>輸入會員編號 (如7001):</b>
+        <b>輸入會員編號:</b>
         <input type="text" name="cust_ID">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
@@ -64,9 +64,8 @@
   <jsp:useBean id="custSvc" scope="page" class="com.cust.model.CustService" />
   
   <li>
-   
-     <FORM METHOD="post" ACTION="cust.do" >
-       <b>選擇會員編號:</b>
+   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" >
+       <b>選擇員工編號:</b>
        <select size="1" name="cust_ID">
          <c:forEach var="custVO" items="${custSvc.all}" > 
           <option value="${custVO.cust_ID}">${custVO.cust_ID}

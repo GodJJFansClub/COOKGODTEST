@@ -31,8 +31,8 @@
     <servlet-class>com.cust.controller.CustServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FoodServlet</servlet-name>
-    <url-pattern>/food/food.do</url-pattern>
+    <servlet-name>CustServlet</servlet-name>
+    <url-pattern>/cust/cust.do</url-pattern>
   </servlet-mapping>
   
   <servlet>

@@ -13,16 +13,15 @@ import com.cust.model.CustVO;
 
 public class CustServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3897186035274844243L;
-
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse res) 
+		throws ServletException, IOException {
 		doPost(req, res);
 	}
-
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	@Override
+	public void doPost(HttpServletRequest req, HttpServletResponse res)
+		throws ServletException, IOException {
+		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
@@ -144,7 +143,7 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/cust/addCust.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -157,13 +156,13 @@ public class CustServlet extends HttpServlet {
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
 //				custVO = custSvc.addCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
 
-				String url = "/cust/listAllcust.jsp";
+				String url = "/front-end/cust/listAllCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/cust/addCust.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -183,7 +182,7 @@ public class CustServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/cust/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -196,7 +195,7 @@ public class CustServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/cust/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -209,21 +208,21 @@ public class CustServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/cust/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("custVO", custVO); // 資料庫取出的custVO物件,存入req
-				String url = "/cust/listOneCust.jsp";
+				String url = "/front-end/cust/listOneCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneCust.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/cust/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/cust/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -245,14 +244,14 @@ public class CustServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("custVO", custVO); // 資料庫取出的custVO物件,存入req
-				String url = "/cust/update_cust_input.jsp";
+				String url = "/front-end/cust/update_cust_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_cust_input.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/cust/listAllEmp.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -379,7 +378,7 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/cust/addCust.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -392,13 +391,13 @@ public class CustServlet extends HttpServlet {
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
 //				custVO = custSvc.addCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
 
-				String url = "/cust/listAllcust.jsp";
+				String url = "/front-end/cust/listAllCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/cust/addCust.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -419,7 +418,7 @@ public class CustServlet extends HttpServlet {
 				custSvc.deleteCust(cust_ID);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/cust/listAllCust.jsp";
+				String url = "/front-end/cust/listAllCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
@@ -427,7 +426,7 @@ public class CustServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/cust/listAllCust.jsp");
+						.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
 				failureView.forward(req, res);
 			}
 		}

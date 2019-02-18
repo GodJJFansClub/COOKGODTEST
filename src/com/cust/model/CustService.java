@@ -1,7 +1,10 @@
 package com.cust.model;
 
+
 import java.sql.Date;
 import java.util.List;
+
+
 
 public class CustService {
 	private CustDAO_interface dao;
@@ -15,6 +18,7 @@ public class CustService {
 			String cust_status, String cust_niname) {
 
 		CustVO custVO = new CustVO();
+		
 		custVO.setCust_acc(cust_acc);
 		custVO.setCust_pwd(cust_pwd);
 		custVO.setCust_name(cust_name);
@@ -37,6 +41,7 @@ public class CustService {
 			String cust_tel, String cust_addr, String cust_pid, String cust_mail, Date cust_brd, Date cust_reg,
 			byte[] cust_pic, String cust_status, String cust_niname) {
 		CustVO custVO = new CustVO();
+		custVO.setCust_ID(cust_ID);
 		custVO.setCust_acc(cust_acc);
 		custVO.setCust_pwd(cust_pwd);
 		custVO.setCust_name(cust_name);
@@ -50,7 +55,7 @@ public class CustService {
 		custVO.setCust_pic(cust_pic);
 		custVO.setCust_status(cust_status);
 		custVO.setCust_niname(cust_niname);
-		custVO.setCust_ID(cust_ID);
+		
 		dao.update(custVO);
 
 		return custVO;
@@ -64,7 +69,7 @@ public class CustService {
 		return dao.findByPrimaryKey(cust_ID);
 	}
 
-	public List<CustVO> gelAllCust() {
+	public List<CustVO> getAll() {
 		return dao.getAll();
 	}
 

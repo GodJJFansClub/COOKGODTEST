@@ -1,12 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.cust.model.*"%>
-<%-- ¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È --%>
+<%-- æ­¤é ç·´ç¿’æŽ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
 
 <%
     CustService custSvc = new CustService();
-    List<CustVO> list = custSvc.gelAllCust();
+    List<CustVO> list = custSvc.getAll();;
     pageContext.setAttribute("list",list);
 %>
 
@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>©Ò¦³·|­û¸ê®Æ - listAllCust.jsp</title>
+<title>æ‰€æœ‰æœƒå“¡è³‡æ–™ - listAllCust.jsp</title>
 
 <style>
   table#table-1 {
@@ -52,17 +52,17 @@
 </head>
 <body bgcolor='white'>
 
-<h4>¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È:</h4>
+<h4>æ­¤é ç·´ç¿’æŽ¡ç”¨ EL çš„å¯«æ³•å–å€¼:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>©Ò¦³·|­û¸ê®Æ - listAllCust.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>æ‰€æœ‰æœƒå“¡è³‡æ–™ - listAllCust.jsp</h3>
+		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">å›žé¦–é </a></h4>
 	</td></tr>
 </table>
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -72,20 +72,20 @@
 
 <table>
 	<tr>
-		<th>·|­û½s¸¹</th>
-		<th>·|­û±b¸¹</th>
-		<th>·|­û±K½X</th>
-		<th>·|­û©m¦W</th>
-		<th>·|­û©m§O</th>
-		<th>·|­û¹q¸Ü</th>
-		<th>·|­û¦a§}</th>
-		<th>·|­û¨­¥÷ÃÒ¦r¸¹</th>
+		<th>æœƒå“¡ç·¨è™Ÿ</th>
+		<th>æœƒå“¡å¸³è™Ÿ</th>
+		<th>æœƒå“¡å¯†ç¢¼</th>
+		<th>æœƒå“¡å§“å</th>
+		<th>æœƒå“¡å§“åˆ¥</th>
+		<th>æœƒå“¡é›»è©±</th>
+		<th>æœƒå“¡åœ°å€</th>
+		<th>æœƒå“¡èº«ä»½è­‰å­—è™Ÿ</th>
 		<th>email</th>
-		<th>·|­û¥Í¤é</th>
-		<th>·|­ûµù¥U¤é</th>
-		<th>¤jÀY·Ó</th>
-		<th>·|­ûª¬ºA</th>
-		<th>·|­û¼ÊºÙ</th>
+		<th>æœƒå“¡ç”Ÿæ—¥</th>
+		<th>æœƒå“¡è¨»å†Šæ—¥</th>
+		<th>å¤§é ­ç…§</th>
+		<th>æœƒå“¡ç‹€æ…‹</th>
+		<th>æœƒå“¡æš±ç¨±</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="custVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -108,13 +108,13 @@
 						
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="­×§ï">
+			     <input type="submit" value="ä¿®æ”¹">
 			     <input type="hidden" name="cust_ID"  value="${custVO.cust_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="§R°£">
+			     <input type="submit" value="åˆªé™¤">
 			     <input type="hidden" name="cust_ID"  value="${custVO.cust_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>

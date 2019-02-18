@@ -260,7 +260,9 @@ public class CustDAO implements CustDAO_interface {
 				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
 				custVO.setCust_status(rs.getString("CUST_STATUS"));
 				custVO.setCust_niname(rs.getString("CUST_NINAME"));
-			 }
+				list.add(custVO);
+			 
+			}
 			}catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
 						+ se.getMessage());

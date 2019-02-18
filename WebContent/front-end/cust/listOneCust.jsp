@@ -1,14 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cust.model.*"%>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%-- æ­¤é æš«ç·´ç¿’æŽ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 
 <%
-  CustVO custVO = (CustVO) request.getAttribute("custVO"); //EmpServlet.java(Concroller), ¦s¤JreqªºcustVOª«¥ó
+  CustVO custVO = (CustVO) request.getAttribute("custVO"); //SustServlet.java(Concroller), å­˜å…¥reqçš„custVOç‰©ä»¶
 %>
 
 <html>
 <head>
-<title>·|­û¸ê®Æ - listOneCust.jsp</title>
+<title>æœƒå“¡è³‡æ–™ - listOneCust.jsp</title>
 
 <style>
   table#table-1 {
@@ -46,30 +46,30 @@
 </head>
 <body bgcolor='white'>
 
-<h4>¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È:</h4>
+<h4>æ­¤é æš«ç·´ç¿’æŽ¡ç”¨ Script çš„å¯«æ³•å–å€¼:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>­û¤u¸ê®Æ - ListOneCust.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>å“¡å·¥è³‡æ–™ - ListOneCust.jsp</h3>
+		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">å›žé¦–é </a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>·|­û½s¸¹</th>
-		<th>·|­û±b¸¹</th>
-		<th>·|­û±K½X</th>
-		<th>·|­û©m¦W</th>
-		<th>·|­û©m§O</th>
-		<th>·|­û¹q¸Ü</th>
-		<th>·|­û¦a§}</th>
-		<th>·|­û¨­¥÷ÃÒ¦r¸¹</th>
+		<th>æœƒå“¡ç·¨è™Ÿ</th>
+		<th>æœƒå“¡å¸³è™Ÿ</th>
+		<th>æœƒå“¡å¯†ç¢¼</th>
+		<th>æœƒå“¡å§“å</th>
+		<th>æœƒå“¡å§“åˆ¥</th>
+		<th>æœƒå“¡é›»è©±</th>
+		<th>æœƒå“¡åœ°å€</th>
+		<th>æœƒå“¡èº«ä»½è­‰å­—è™Ÿ</th>
 		<th>email</th>
-		<th>·|­û¥Í¤é</th>
-		<th>·|­ûµù¥U¤é</th>
-		<th>¤jÀY·Ó</th>
-		<th>·|­ûª¬ºA</th>
-		<th>·|­û¼ÊºÙ</th>
+		<th>æœƒå“¡ç”Ÿæ—¥</th>
+		<th>æœƒå“¡è¨»å†Šæ—¥</th>
+		<th>å¤§é ­ç…§</th>
+		<th>æœƒå“¡ç‹€æ…‹</th>
+		<th>æœƒå“¡æš±ç¨±</th>
 	</tr>
 	<tr>
 		<td><%=custVO.getCust_ID()%></td>
