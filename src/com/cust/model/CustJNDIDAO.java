@@ -2,29 +2,25 @@ package com.cust.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-
-
-public class CustDAO implements CustDAO_interface {
-
+public class CustJNDIDAO implements CustDAO_interface {
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
-		try{
+		try {
 			Context ctx = new InitialContext();
-			ds =(DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
-		}catch(NamingException e) {
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
+
 	private static final String INSERT_STMT =
 			"INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) VALUES ('C'||LPAD((CUST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
@@ -35,7 +31,7 @@ public class CustDAO implements CustDAO_interface {
 			"DELETE FROM CUST where CUST_ID=? ";
 	private static final String UPDATE =
 			"UPDATE CUST set CUST_ACC=?, CUST_PWD=?, CUST_NAME=?, CUST_SEX=?, CUST_TEL=?, CUST_ADDR=?, CUST_PID=?, CUST_MAIL=?, CUST_BRD=?, CUST_REG=?, CUST_PIC=?, CUST_STATUS=?, CUST_NINAME=? WHERE CUST_ID=?";
-	
+
 	@Override
 	public void insert(CustVO custVO) {
 		// TODO Auto-generated method stub
@@ -62,24 +58,26 @@ public class CustDAO implements CustDAO_interface {
 			
 			pstmt.executeUpdate();		
 		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured."+se.getMessage());
-		}finally {
-			if(pstmt != null) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch(SQLException se) {
+				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
-				}catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -109,100 +107,101 @@ public class CustDAO implements CustDAO_interface {
 			
 			pstmt.executeUpdate();		
 		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured."+se.getMessage());
-		}finally {
-			if(pstmt != null) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch(SQLException se) {
+				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
-				}catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
-		
+
 	}
 
 	@Override
-	public void delete(String cust_ID) {
-		// TODO Auto-generated method stub
+	public void delete(Integer empno) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
-			
-			
-			pstmt.setString(1,cust_ID);
-			
-			pstmt.executeUpdate();		
-		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured."+se.getMessage());
-		}finally {
-			if(pstmt != null) {
+
+			pstmt.setInt(1, empno);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
-				}catch(SQLException se) {
+				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
-				}catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
-		
+
 	}
 
 	@Override
-	public CustVO findByPrimaryKey(String cust_ID) {
-		// TODO Auto-generated method stub
-		CustVO custVO = null;
+	public EmpVO findByPrimaryKey(Integer empno) {
+
+		EmpVO empVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-			
-			pstmt.setString(1, cust_ID);
-			
+
+			pstmt.setInt(1, empno);
+
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				custVO = new CustVO();
-				custVO.setCust_ID(rs.getString("CUST_ID"));
-				custVO.setCust_acc(rs.getString("CUST_ACC"));
-				custVO.setCust_pwd(rs.getString("CUST_PWD"));
-				custVO.setCust_name(rs.getString("CUST_NAME"));
-				custVO.setCust_sex(rs.getString("CUST_SEX"));
-				custVO.setCust_tel(rs.getString("CUST_TEL"));
-				custVO.setCust_addr(rs.getString("CUST_ADDR"));
-				custVO.setCust_pid(rs.getString("CUST_PID"));
-				custVO.setCust_mail(rs.getString("CUST_MAIL"));
-				custVO.setCust_brd(rs.getDate("CUST_BRD"));
-				custVO.setCust_reg(rs.getDate("CUST_REG"));
-				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
-				custVO.setCust_status(rs.getString("CUST_STATUS"));
-				custVO.setCust_niname(rs.getString("CUST_NINAME"));
-				
-				
+				// empVo 也稱為 Domain objects
+				empVO = new EmpVO();
+				empVO.setEmpno(rs.getInt("empno"));
+				empVO.setEname(rs.getString("ename"));
+				empVO.setJob(rs.getString("job"));
+				empVO.setHiredate(rs.getDate("hiredate"));
+				empVO.setSal(rs.getDouble("sal"));
+				empVO.setComm(rs.getDouble("comm"));
+				empVO.setDeptno(rs.getInt("deptno"));
 			}
-			
-		}catch (SQLException se) {
+
+			// Handle any driver errors
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -226,69 +225,65 @@ public class CustDAO implements CustDAO_interface {
 				}
 			}
 		}
-		return custVO;
+		return empVO;
 	}
 
 	@Override
-	public List<CustVO> getAll() {
-		// TODO Auto-generated method stub
-		List<CustVO> list = new ArrayList<CustVO>();
-		CustVO custVO = null;
-		
+	public List<EmpVO> getAll() {
+		List<EmpVO> list = new ArrayList<EmpVO>();
+		EmpVO empVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				custVO = new CustVO();
-				custVO.setCust_ID(rs.getString("CUST_ID"));
-				custVO.setCust_acc(rs.getString("CUST_ACC"));
-				custVO.setCust_pwd(rs.getString("CUST_PWD"));
-				custVO.setCust_name(rs.getString("CUST_NAME"));
-				custVO.setCust_sex(rs.getString("CUST_SEX"));
-				custVO.setCust_tel(rs.getString("CUST_TEL"));
-				custVO.setCust_addr(rs.getString("CUST_ADDR"));
-				custVO.setCust_pid(rs.getString("CUST_PID"));
-				custVO.setCust_mail(rs.getString("CUST_MAIL"));
-				custVO.setCust_brd(rs.getDate("CUST_BRD"));
-				custVO.setCust_reg(rs.getDate("CUST_REG"));
-				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
-				custVO.setCust_status(rs.getString("CUST_STATUS"));
-				custVO.setCust_niname(rs.getString("CUST_NINAME"));
-			 }
-			}catch (SQLException se) {
-				throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
+				// empVO 也稱為 Domain objects
+				empVO = new EmpVO();
+				empVO.setEmpno(rs.getInt("empno"));
+				empVO.setEname(rs.getString("ename"));
+				empVO.setJob(rs.getString("job"));
+				empVO.setHiredate(rs.getDate("hiredate"));
+				empVO.setSal(rs.getDouble("sal"));
+				empVO.setComm(rs.getDouble("comm"));
+				empVO.setDeptno(rs.getInt("deptno"));
+				list.add(empVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-		
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 		return list;
 	}
 
-}

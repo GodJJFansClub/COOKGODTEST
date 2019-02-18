@@ -69,13 +69,13 @@ th, td {
 			<tr>
 				<td>會員帳號:</td>
 				<td><input type="TEXT" name="cust_acc" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "a123" : custVO.getCust_ID()%>" /></td>
 			</tr>
 		
 			<tr>
 				<td>會員密碼:</td>
 				<td><input type="TEXT" name="cust_pwd" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "Aa123456" : custVO.getCust_pwd()%>" /></td>
 			</tr>
 			
 			<tr>
@@ -87,49 +87,49 @@ th, td {
 			<tr>
 				<td>會員身分證字號:</td>
 				<td><input type="TEXT" name="cust_pid" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
+					value="<%= (custVO==null)? "a987654321" : custVO.getCust_pid()%>" /></td>
 			</tr>
 			
 			<tr>
 				<td>會員性別:</td>
-				<td><input type="checkbox" name="cust_sex" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+				<td><input type="text" name="cust_sex" size="45"
+					value="<%= (custVO==null)? "d" : custVO.getCust_sex()%>" /></td>
 			</tr>
 			
 			<tr>
 				<td>會員生日:</td>
 				<td><input type="date" name="cust_brd" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+					/></td>
 			</tr>
 			
 			<tr>
 				<td>會員電話:</td>
 				<td><input type="TEXT" name="cust_tel" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "09090909" : custVO.getCust_tel()%>" /></td>
 			</tr>
 			
 			<tr>
 				<td>會員地址:</td>
 				<td><input type="TEXT" name="cust_addr" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "中央大學" : custVO.getCust_addr()%>" /></td>
 			</tr>
 			
 			<tr>
 				<td>會員信箱:</td>
 				<td><input type="TEXT" name="cust_mail" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "gggccc@yahoo" : custVO.getCust_mail()%>" /></td>
 			</tr>
 			
 			<tr>
 				<td>會員暱稱:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
+					value="<%= (custVO==null)? "吳志" : custVO.getCust_niname()%>" /></td>
 			</tr>
 			
 			<tr>
 				<td>會員大頭照:</td>
-				<td><input type="TEXT" name="cust_pic" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
+				<td><input type="file" name="cust_pic" size="45"
+					 /></td>
 			</tr>
 			
 
@@ -140,7 +140,14 @@ th, td {
 	
 	</FORM>
 </body>
-
+<% 
+  java.sql.Date cust_brd = null;
+  try {
+	  cust_brd = custVO.getCust_brd();
+   } catch (Exception e) {
+	   cust_brd = new java.sql.Date(System.currentTimeMillis());
+   }
+%>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />

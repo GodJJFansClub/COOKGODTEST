@@ -56,7 +56,7 @@ public class CustService {
 		return custVO;
 	}
 
-	public void daleteCust(String cust_ID) {
+	public void deleteCust(String cust_ID) {
 		dao.delete(cust_ID);
 	}
 
