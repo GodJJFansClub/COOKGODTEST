@@ -31,7 +31,9 @@ public class ReportJDBCDAO implements Report_Interface {
 			
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			
 			pstmt = con.prepareStatement(INSERT_STMT);
+			con.setAutoCommit(true);
 			
 			
 			pstmt.setString(1, reportVO.getReport_title());
@@ -43,7 +45,7 @@ public class ReportJDBCDAO implements Report_Interface {
 			pstmt.setString(7, reportVO.getForum_art_ID());
 			
 			pstmt.executeUpdate();
-			
+			con.commit();
 		}catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "
 					+ e.getMessage());
@@ -77,6 +79,7 @@ public class ReportJDBCDAO implements Report_Interface {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE_STMT);
+			con.setAutoCommit(false);
 			
 			pstmt.setString(1, reportVO.getReport_title());
 			pstmt.setString(2, reportVO.getReport_sort());

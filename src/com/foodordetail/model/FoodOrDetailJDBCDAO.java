@@ -279,7 +279,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 	}
 	
 	public static void main(String[] args) {
-		FoodOrDetailJDBCDAO foodOrDetailJDBCDAO = new FoodOrDetailJDBCDAO();
+		FoodOrDetailJDBCDAO dao = new FoodOrDetailJDBCDAO();
 		
 		// 新增
 //		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
