@@ -68,7 +68,7 @@
 			<th>食材名稱</th>
 			<th>食材種類</th>
 		</tr>
-		<%@ include file="/back-end/food/page1.file" %>
+		<%@ include file="/page/page1.file" %>
 		<c:forEach var="foodVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<tr>
 				<td>${foodVO.food_ID}</td>
@@ -91,6 +91,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="/back-end/food/page2.file" %>
+	<%@ include file="/page/page2.file" %>
 </body>
 </html>

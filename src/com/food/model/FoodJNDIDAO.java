@@ -46,7 +46,7 @@ public class FoodJNDIDAO implements FoodDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1, foodVO.getFood_name());
-			pstmt.setString(2, foodVO.getFood_type());
+			pstmt.setString(2, foodVO.getFood_type_ID());
 			
 			pstmt.executeUpdate();
 
@@ -85,7 +85,7 @@ public class FoodJNDIDAO implements FoodDAO_interface {
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString( 1, foodVO.getFood_name());
-			pstmt.setString( 2, foodVO.getFood_type());
+			pstmt.setString( 2, foodVO.getFood_type_ID());
 			pstmt.setString( 3, foodVO.getFood_ID());
 			
 			pstmt.executeUpdate();
@@ -172,7 +172,7 @@ public class FoodJNDIDAO implements FoodDAO_interface {
 				foodVO = new FoodVO();
 				foodVO.setFood_ID(rs.getString(1));
 				foodVO.setFood_name(rs.getString(2));
-				foodVO.setFood_type(rs.getString(3));
+				foodVO.setFood_type_ID(rs.getString(3));
 			}
 			// Handle any driver errors
 		}catch(SQLException se) {
@@ -223,7 +223,7 @@ public class FoodJNDIDAO implements FoodDAO_interface {
 				foodVO = new FoodVO();
 				foodVO.setFood_ID(rs.getString(1));
 				foodVO.setFood_name(rs.getString(2));
-				foodVO.setFood_type(rs.getString(3));
+				foodVO.setFood_type_ID(rs.getString(3));
 				list.add(foodVO);
 			}
 			// Handle any driver errors

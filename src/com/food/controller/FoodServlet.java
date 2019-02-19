@@ -1,10 +1,16 @@
 package com.food.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +18,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.food.model.FoodService;
 import com.food.model.FoodVO;
+import com.google.gson.stream.JsonReader;
 
 public class FoodServlet extends HttpServlet {
+	
+	@Override
+	public void init() {
+		Map< String, String> food_type_map = new HashMap< String, String>();
+		ServletContext servletContext = getServletContext();
+		try {
+			JsonReader jsonReader = new JsonReader(new FileReader(new File(servletContext.getContextPath() + "/resource")));
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -157,7 +178,7 @@ public class FoodServlet extends HttpServlet {
 				FoodVO foodVO = new FoodVO();
 				foodVO.setFood_ID(food_ID);
 				foodVO.setFood_name(food_name);
-				foodVO.setFood_type(food_type);
+				foodVO.setFood_type_ID(food_type);
 				
 				// Send the use back to the form, if there were errors
 				if(!errorMsgs.isEmpty()) {
@@ -211,7 +232,7 @@ public class FoodServlet extends HttpServlet {
 				
 				FoodVO foodVO = new FoodVO();
 				foodVO.setFood_name(food_name);
-				foodVO.setFood_type(food_type);
+				foodVO.setFood_type_ID(food_type);
 				
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("foodVO", foodVO);

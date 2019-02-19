@@ -266,7 +266,7 @@ commit;
 --建立表格:菜色--
 CREATE TABLE DISH (
  DISH_ID                  VARCHAR2(6)    NOT NULL,
- DISH_NAME                VARCHAR2(30)   NOT NULL,
+ DISH_NAME                VARCHAR2(100)   NOT NULL,
  DISH_STATUS              VARCHAR2(2)      NOT NULL,
  DISH_PIC                 BLOB,
  DISH_RESUME              CLOB ,
@@ -302,7 +302,7 @@ VALUES ('C00002','D00001','C1');
 CREATE TABLE FOOD (
  FOOD_ID                  VARCHAR2(6)   NOT NULL,
  FOOD_NAME                VARCHAR2(100) NOT NULL,
- FOOD_TYPE                VARCHAR2(3),
+ FOOD_TYPE_ID             VARCHAR2(3),
  PRIMARY KEY (FOOD_ID)
 );
 
@@ -366,7 +366,7 @@ INSERT INTO DISH_FOOD(DISH_ID,FOOD_ID,DISH_F_QTY,DISH_F_UNIT) VALUES('D00003','F
 --建立表格:食材供應商--
 CREATE TABLE FOOD_SUP (
  FOOD_SUP_ID                VARCHAR2(6)   NOT NULL,
- FOOD_SUP_NAME              VARCHAR2(30)  NOT NULL,
+ FOOD_SUP_NAME              VARCHAR2(100)  NOT NULL,
  FOOD_SUP_TEL               VARCHAR2(20)  NOT NULL,
  FOOD_SUP_STATUS            VARCHAR2(2)   NOT NULL,
  FOOD_SUP_RESUME            CLOB,
@@ -389,7 +389,7 @@ CREATE TABLE AD (
  AD_START                 TIMESTAMP        NOT NULL,
  AD_END                   TIMESTAMP        NOT NULL,
  AD_TYPE                  VARCHAR2(2)      NOT NULL,
- AD_TITLE                 VARCHAR2(30)     NOT NULL,
+ AD_TITLE                 VARCHAR2(100)     NOT NULL,
  AD_CON                   CLOB             NOT NULL,
  FOOD_SUP_ID              VARCHAR2(6),
  CONSTRAINT AD_FK FOREIGN KEY (FOOD_SUP_ID) REFERENCES FOOD_SUP (FOOD_SUP_ID),
@@ -422,11 +422,11 @@ VALUES ('C00008','C00005','THE BEST',1);
 CREATE TABLE FOOD_MALL (
  FOOD_SUP_ID                VARCHAR2(6)   NOT NULL,
  FOOD_ID                    VARCHAR2(6)   NOT NULL,
- FOOD_M_NAME                VARCHAR2(30)  NOT NULL,
+ FOOD_M_NAME                VARCHAR2(100)  NOT NULL,
  FOOD_M_STATUS              VARCHAR2(2)     NOT NULL,
  FOOD_M_PRICE               NUMBER(6)     NOT NULL,
  FOOD_M_UNIT                VARCHAR2(8)   NOT NULL,
- FOOD_M_PLACE               VARCHAR2(30)  NOT NULL,
+ FOOD_M_PLACE               VARCHAR2(100)  NOT NULL,
  FOOD_M_PIC                 BLOB,
  FOOD_M_RESUME              CLOB,
  FOOD_M_RATE                NUMBER(1),
@@ -537,7 +537,7 @@ CREATE TABLE FOOD_ORDER (
  FOOD_OR_SEND              DATE           NOT NULL,
  FOOD_OR_RCV               DATE,
  FOOD_OR_END               DATE,
- FOOD_OR_NAME              VARCHAR2(30)   NOT NULL,
+ FOOD_OR_NAME              VARCHAR2(100)   NOT NULL,
  FOOD_OR_ADDR              VARCHAR2(200)  NOT NULL,
  FOOD_OR_TEL               VARCHAR2(20)     NOT NULL,
  CUST_ID                   VARCHAR2(6)    NOT NULL,
@@ -641,7 +641,7 @@ CREATE TABLE CHEF_ORDER (
  CHEF_OR_SEND               DATE          NOT NULL,
  CHEF_OR_RCV                DATE,
  CHEF_OR_END                DATE,
- CHEF_OR_NAME               VARCHAR2(30)  NOT NULL,
+ CHEF_OR_NAME               VARCHAR2(100)  NOT NULL,
  CHEF_OR_ADDR               VARCHAR2(200) NOT NULL,
  CHEF_OR_TEL                VARCHAR2(20)    NOT NULL,
  CHEF_ID                    VARCHAR2(6)   NOT NULL,
@@ -684,7 +684,7 @@ VALUES('CF'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD((CHEF_ORDER_SEQ.CURRVAL),6,'
 --建立表格:節慶主題料理--
 CREATE TABLE FEST_MENU (
  FEST_M_ID               VARCHAR2(6)          NOT NULL,
- FEST_M_NAME             VARCHAR2(30)         NOT NULL,
+ FEST_M_NAME             VARCHAR2(100)         NOT NULL,
  FEST_M_QTY              NUMBER(4)            NOT NULL,
  FEST_M_START            DATE                 NOT NULL,
  FEST_M_END              DATE                 NOT NULL,
@@ -823,7 +823,7 @@ Insert into EMP (EMP_ID,EMP_ACC,EMP_PWD,EMP_NAME,EMP_PIC) values ('E'||LPAD((EMP
 --建立表格:功能--
 CREATE TABLE FUN(
  FUN_ID		              VARCHAR2(6)      NOT NULL,		
- FUN_NAME	              VARCHAR2(30)     NOT NULL,	
+ FUN_NAME	              VARCHAR2(100)     NOT NULL,	
  PRIMARY KEY (FUN_ID)
 );
 REM INSERTING into FUN
@@ -850,7 +850,7 @@ Insert into AUTH (EMP_ID,FUN_ID) values ('E00001','FU0001');
 --建立表格:主廚論壇文章--
 CREATE TABLE FORUM_ART(
  FORUM_ART_ID		        VARCHAR2(6)      NOT NULL,
- FORUM_ART_NAME		        VARCHAR2(90)   NOT NULL,
+ FORUM_ART_NAME		        VARCHAR2(100)   NOT NULL,
  FORUM_ART_CON		        CLOB ,  
  FORUM_ART_START		    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
  FORUM_ART_PIC		        BLOB,
@@ -877,7 +877,7 @@ INSERT INTO FORUM_MSG (FORUM_MSG_ID,FORUM_MSG_CON,FORUM_MSG_STATUS,FORUM_ART_ID,
 --建立表格:檢舉--
 CREATE TABLE REPORT(
  REPORT_ID		          VARCHAR2(6)    NOT NULL,
- REPORT_TITLE  	          VARCHAR2(30)   NOT NULL,
+ REPORT_TITLE  	          VARCHAR2(100)   NOT NULL,
  REPORT_SORT		      VARCHAR2(30)   NOT NULL,
  REPORT_START		      TIMESTAMP      NOT NULL,
  REPORT_STATUS	      VARCHAR2(2)      NOT NULL,

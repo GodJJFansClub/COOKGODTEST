@@ -24,8 +24,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			"DELETE FROM FOOD WHERE FOOD_ID = ?";
 	private static final String UPDATE = 
 			"UPDATE FOOD SET FOOD_NAME = ?, FOOD_TYPE = ? WHERE FOOD_ID = ?";
-	private static final String GET_ALL_FOOD_STMT =
-			"SELECT FOOD_TYPE FROM FOOD";
+	
 	@Override
 	public void insert(FoodVO foodVO) {
 		Connection con = null;
@@ -38,7 +37,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1, foodVO.getFood_name());
-			pstmt.setString(2, foodVO.getFood_type());
+			pstmt.setString(2, foodVO.getFood_type_ID());
 			
 			pstmt.executeUpdate();
 			// Handle any driver errors
@@ -79,7 +78,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			
 			
 			pstmt.setString( 1, foodVO.getFood_name());
-			pstmt.setString( 2, foodVO.getFood_type());
+			pstmt.setString( 2, foodVO.getFood_type_ID());
 			pstmt.setString( 3, foodVO.getFood_ID());
 			
 			pstmt.executeUpdate();
@@ -171,7 +170,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 				foodVO = new FoodVO();
 				foodVO.setFood_ID(rs.getString(1));
 				foodVO.setFood_name(rs.getString(2));
-				foodVO.setFood_type(rs.getString(3));
+				foodVO.setFood_type_ID(rs.getString(3));
 			}
 			// Handle any driver errors
 		}catch(ClassNotFoundException e) {
@@ -209,58 +208,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		return foodVO;
 	}
 	
-	@Override
-	public List<String> getAllFood_type(){
-		List<String> list = new ArrayList<String>();
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			pstmt = con.prepareStatement(GET_ALL_FOOD_STMT);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				list.add(rs.getString(1));
-			}
-			// Handle any driver errors
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		}finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		
-		return list;
-	}
+	
 	
 	@Override
 	public List<FoodVO> getAll() {
@@ -280,7 +228,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 				foodVO = new FoodVO();
 				foodVO.setFood_ID(rs.getString(1));
 				foodVO.setFood_name(rs.getString(2));
-				foodVO.setFood_type(rs.getString(3));
+				foodVO.setFood_type_ID(rs.getString(3));
 				list.add(foodVO);
 			}
 			// Handle any driver errors
@@ -349,9 +297,6 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 //			System.out.println();
 //		}
 		
-//		List<String> food_types = dao.getAllFood_type();
-//		for(String food_type:food_types) {
-//			System.out.println(food_type);
-//		}
+
 	}
 }

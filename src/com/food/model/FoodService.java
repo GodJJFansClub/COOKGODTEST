@@ -13,7 +13,7 @@ public class FoodService {
 		FoodVO foodVO = new FoodVO();
 		
 		foodVO.setFood_name(food_name);
-		foodVO.setFood_type(food_type);
+		foodVO.setFood_type_ID(food_type);
 		dao.insert(foodVO);
 		
 		return foodVO;
@@ -23,7 +23,7 @@ public class FoodService {
 		FoodVO foodVO = new FoodVO();
 		foodVO.setFood_ID(food_ID);
 		foodVO.setFood_name(food_name);
-		foodVO.setFood_type(food_type);
+		foodVO.setFood_type_ID(food_type);
 		dao.insert(foodVO);
 		
 		return foodVO;
