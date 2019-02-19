@@ -50,7 +50,7 @@ th, td {
 </style>
 
 </head>
-<body>
+
 <body bgcolor='white'>
 	<h3>資料新增:</h3>
 
@@ -159,5 +159,5 @@ th, td {
 
 
 
-</script>
+
 </html>

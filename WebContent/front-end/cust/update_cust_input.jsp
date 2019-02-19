@@ -49,7 +49,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>員工資料修改 - update_cust_input.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/cust/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -122,6 +122,12 @@
 			</tr>
 			
 			<tr>
+				<td>會員狀態:</td>
+				<td><input type="TEXT" name="cust_status" size="45"
+					value="<%=custVO.getCust_status()%>" /></td>
+			</tr>
+			
+			<tr>
 				<td>會員暱稱:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
 					value="<%=custVO.getCust_niname()%>" /></td>
@@ -136,9 +142,11 @@
 
 </table>
 <br>
+
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="custno" value="<%=custVO.getCust_ID()%>">
-<input type="submit" value="送出修改"></FORM>
+<input type="hidden" name="cust_ID" value="<%=custVO.getCust_ID()%>">
+<input type="submit" value="送出修改">
+</FORM>
 </body>
 
 
