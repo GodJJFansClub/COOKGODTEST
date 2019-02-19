@@ -20,6 +20,8 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetailDAO_interface {
 	private static final String DELETE_STMT = "DELETE FROM FEST_ORDER_DETAIL WHERE FEST_OR_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER_DETAIL";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER_DETAIL WHERE FEST_OR_ID = ?";
+	
+//	UPDATE FEST_ORDER_DETAIL SET FEST_M_ID = ?,FEST_OR_RATE = ?,FEST_OR_MSG = ?,FEST_OR_QTY = ?,FEST_OR_STOTAL = ? WHERE FEST_OR_ID = ?
 	@Override
 	public void insert(FestOrderDetailVO festOrderDetailVO) {
 		Connection con = null;
@@ -73,12 +75,12 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetailDAO_interface {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			
-			pstmt.setString(1, festOrderDetailVO.getFest_or_ID());
-			pstmt.setString(2, festOrderDetailVO.getFest_m_ID());
-			pstmt.setInt(3, festOrderDetailVO.getFest_or_rate());
-			pstmt.setString(4, festOrderDetailVO.getFest_or_msg());
-			pstmt.setInt(5, festOrderDetailVO.getFest_or_qty());
-			pstmt.setInt(6, festOrderDetailVO.getFest_or_stotal());
+			pstmt.setString(1, festOrderDetailVO.getFest_m_ID());
+			pstmt.setInt(2, festOrderDetailVO.getFest_or_rate());
+			pstmt.setString(3, festOrderDetailVO.getFest_or_msg());
+			pstmt.setInt(4, festOrderDetailVO.getFest_or_qty());
+			pstmt.setInt(5, festOrderDetailVO.getFest_or_stotal());
+			pstmt.setString(6, festOrderDetailVO.getFest_or_ID());
 			
 			pstmt.executeUpdate();
 		}catch (ClassNotFoundException e) {
@@ -287,47 +289,51 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetailDAO_interface {
 		FestOrderDetailJDBCDAO dao = new FestOrderDetailJDBCDAO();
 		// 新增
 		
-		FestOrderDetailVO festOrderDetailVO=new FestOrderDetailVO();
-		
-		festOrderDetailVO.setFest_or_ID("FM20190219-000001");
-		festOrderDetailVO.setFest_m_ID("FM0003");
-		festOrderDetailVO.setFest_or_rate(1);
-		festOrderDetailVO.setFest_or_msg("很不錯喔, 下次仍會繼續購買");
-		festOrderDetailVO.setFest_or_qty(50);
-		festOrderDetailVO.setFest_or_stotal(80);
-		dao.insert(festOrderDetailVO);
+//		FestOrderDetailVO festOrderDetailVO=new FestOrderDetailVO();
+//		
+//		festOrderDetailVO.setFest_or_ID("FM20190219-000003");
+//		festOrderDetailVO.setFest_m_ID("FM0003");
+//		festOrderDetailVO.setFest_or_rate(1);
+//		festOrderDetailVO.setFest_or_msg("很不錯喔, 下次仍會繼續購買");
+//		festOrderDetailVO.setFest_or_qty(70);
+//		festOrderDetailVO.setFest_or_stotal(80);
+//		dao.insert(festOrderDetailVO);
 		
 		//修改
-//		FestOrderDetailVO festFestOrderDetailVO=new FestOrderDetailVO();
+		FestOrderDetailVO festOrderDetailVO=new FestOrderDetailVO();	
 		
-//		  festFestOrderDetailVO.setFestOrId("FR0000");
-//        festFestOrderDetailVO.setFestMId("FM0001");
-//        festFestOrderDetailVO.setFestOrRate(30);
-//        festFestOrderDetailVO.setFestOrMsg("很不錯喔");
-//        festFestOrderDetailVO.setFestOrQty(40);
-//        festFestOrderDetailVO.setFestOrStotal(90);
+		festOrderDetailVO.setFest_or_ID("FM20190219-000003");
+		festOrderDetailVO.setFest_m_ID("FM0003");
+		festOrderDetailVO.setFest_or_rate(2);
+		festOrderDetailVO.setFest_or_msg("很不錯喔, 下次仍會繼續購買");
+		festOrderDetailVO.setFest_or_qty(100);
+		festOrderDetailVO.setFest_or_stotal(120);
+		
+		
+		dao.update(festOrderDetailVO);
 		
 		//刪除
-//		festOrderDetailJDBCDAO.delete("FR0000");
+//		dao.delete("FM20190219-000003");
 		
 		// 查詢
-//		FestOrderDetailVO festFestOrderDetailVO = festFestOrderDetailJDBCDAO.findByPrimaryKey("FR00001");
-//		System.out.println(festFestOrderDetailVO.getFestOrId());
-//		System.out.println(festFestOrderDetailVO.getFestMId());
-//		System.out.println(festFestOrderDetailVO.getFestOrRate());
-//		System.out.println(festFestOrderDetailVO.getFestOrQty());
-//		System.out.println(festFestOrderDetailVO.getFestOrStotal());
+//		FestOrderDetailVO festFestOrderDetailVO = dao.findByPrimaryKey("FM20190219-000003");
+//		System.out.println(festFestOrderDetailVO.getFest_or_ID() + ",");
+//		System.out.println(festFestOrderDetailVO.getFest_m_ID() + ",");
+//		System.out.println(festFestOrderDetailVO.getFest_or_rate() + ",");
+//		System.out.println(festFestOrderDetailVO.getFest_or_qty() + ",");
+//		System.out.println(festFestOrderDetailVO.getFest_or_stotal() + ",");
 		
-//		List<FestOrderDetailVO> festOrderDetailVOs = festOrderDetailJDBCDAO.getAll();
-//		for(FestOrderDetailVO festOrderDetailVO:festOrderDetailVOs) {
+//		List<FestOrderDetailVO> list = dao.getAll();
+//		for(FestOrderDetailVO festOrderDetailVO:list) {
 //			
-//			System.out.println(festFestOrderDetailVO.getFestOrId() + " ");
-//			System.out.println(festFestOrderDetailVO.getFestMId() + " ");
-//			System.out.println(festFestOrderDetailVO.getFestOrRate() + " ");
-//			System.out.println(festFestOrderDetailVO.getFestOrQty() + " ");
-//			System.out.println(festFestOrderDetailVO.getFestOrStotal() + " ");
+//			System.out.println(festOrderDetailVO.getFest_or_ID() + " ");
+//			System.out.println(festOrderDetailVO.getFest_m_ID() + " ");
+//			System.out.println(festOrderDetailVO.getFest_or_rate() + " ");
+//			System.out.println(festOrderDetailVO.getFest_or_msg() + " ");
+//			System.out.println(festOrderDetailVO.getFest_or_qty() + " ");
+//			System.out.println(festOrderDetailVO.getFest_or_stotal() + " ");
         
 
-//		}
+		}
 	}
-}
+//}
