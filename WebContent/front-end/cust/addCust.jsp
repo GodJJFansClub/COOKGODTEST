@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.cust.model.*"%>
 
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>·|­û¸ê®Æ·s¼W - addEmp.jsp</title>
+<title>æœƒå“¡è³‡æ–™æ–°å¢ž - addCust.jsp</title>
 
 <style>
 table#table-1 {
@@ -52,11 +52,11 @@ th, td {
 </head>
 <body>
 <body bgcolor='white'>
-	<h3>¸ê®Æ·s¼W:</h3>
+	<h3>è³‡æ–™æ–°å¢ž:</h3>
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -67,80 +67,87 @@ th, td {
 		
 		<table>
 			<tr>
-				<td>·|­û±b¸¹:</td>
+				<td>æœƒå“¡å¸³è™Ÿ:</td>
 				<td><input type="TEXT" name="cust_acc" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "a123" : custVO.getCust_ID()%>" /></td>
 			</tr>
 		
 			<tr>
-				<td>·|­û±K½X:</td>
+				<td>æœƒå“¡å¯†ç¢¼:</td>
 				<td><input type="TEXT" name="cust_pwd" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "Aa123456" : custVO.getCust_pwd()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û©m¦W:</td>
+				<td>æœƒå“¡å§“å:</td>
 				<td><input type="TEXT" name="cust_name" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_name()%>" /></td>
+					value="<%= (custVO==null)? "å³æ°¸å¿—" : custVO.getCust_name()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û¨­¤ÀÃÒ¦r¸¹:</td>
+				<td>æœƒå“¡èº«åˆ†è­‰å­—è™Ÿ:</td>
 				<td><input type="TEXT" name="cust_pid" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_name()%>" /></td>
+					value="<%= (custVO==null)? "a987654321" : custVO.getCust_pid()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û©Ê§O:</td>
-				<td><input type="checkbox" name="cust_sex" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_acc()%>" /></td>
+				<td>æœƒå“¡æ€§åˆ¥:</td>
+				<td><input type="text" name="cust_sex" size="45"
+					value="<%= (custVO==null)? "d" : custVO.getCust_sex()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û¥Í¤é:</td>
+				<td>æœƒå“¡ç”Ÿæ—¥:</td>
 				<td><input type="date" name="cust_brd" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_acc()%>" /></td>
+					/></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û¹q¸Ü:</td>
+				<td>æœƒå“¡é›»è©±:</td>
 				<td><input type="TEXT" name="cust_tel" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "09090909" : custVO.getCust_tel()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û¦a§}:</td>
+				<td>æœƒå“¡åœ°å€:</td>
 				<td><input type="TEXT" name="cust_addr" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "ä¸­å¤®å¤§å­¸" : custVO.getCust_addr()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û«H½c:</td>
+				<td>æœƒå“¡ä¿¡ç®±:</td>
 				<td><input type="TEXT" name="cust_mail" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_acc()%>" /></td>
+					value="<%= (custVO==null)? "gggccc@yahoo" : custVO.getCust_mail()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û¼ÊºÙ:</td>
+				<td>æœƒå“¡æš±ç¨±:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_name()%>" /></td>
+					value="<%= (custVO==null)? "å³å¿—" : custVO.getCust_niname()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>·|­û¤jÀY·Ó:</td>
-				<td><input type="TEXT" name="cust_pic" size="45"
-					value="<%= (custVO==null)? "§d¥Ã§Ó" : custVO.getCust_name()%>" /></td>
+				<td>æœƒå“¡å¤§é ­ç…§:</td>
+				<td><input type="file" name="cust_pic" size="45"
+					 /></td>
 			</tr>
 			
 
 
 		</table>
 		<br> <input type="hidden" name="action" value="insert"> <input
-			type="submit" value="°e¥X·s¼W">
+			type="submit" value="é€å‡ºæ–°å¢ž">
 	
 	</FORM>
 </body>
-
+<% 
+  java.sql.Date cust_brd = null;
+  try {
+	  cust_brd = custVO.getCust_brd();
+   } catch (Exception e) {
+	   cust_brd = new java.sql.Date(System.currentTimeMillis());
+   }
+%>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />

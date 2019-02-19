@@ -26,6 +26,15 @@
     <url-pattern>/food/food.do</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>CustServlet</servlet-name>
+    <servlet-class>com.cust.controller.CustServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustServlet</servlet-name>
+    <url-pattern>/cust/cust.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>MenuOrderServlet</servlet-name>
     <servlet-class>com.menuOrder.controller.MenuOrderServlet</servlet-class>
