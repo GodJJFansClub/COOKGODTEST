@@ -69,7 +69,7 @@ th, td {
 			<tr>
 				<td>會員帳號:</td>
 				<td><input type="TEXT" name="cust_acc" size="45"
-					value="<%= (custVO==null)? "a123" : custVO.getCust_ID()%>" /></td>
+					 /></td>
 			</tr>
 		
 			<tr>

@@ -34,7 +34,7 @@ public class CustServlet extends HttpServlet {
 
 				// 1.姓名
 				String cust_name = req.getParameter("cust_name");
-				String cust_nameReg ="^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String cust_nameReg ="^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (cust_name == null || cust_name.trim().length() == 0) {
 					errorMsgs.add("會員姓名: 請勿空白");
 				}else if (!cust_name.trim().matches(cust_nameReg)) {
@@ -43,7 +43,7 @@ public class CustServlet extends HttpServlet {
 
 				// 2.密碼
 				String cust_pwd = req.getParameter("cust_pwd");
-				String cust_pwdReg ="^[(?=.*\\d)(?=.*[a-zA-Z])]{6,15}$$";
+				String cust_pwdReg ="^(a-zA-Z0-9_){6,15}$";
 				if (cust_name == null || cust_name.trim().length() == 0) {
 					errorMsgs.add("會員密碼: 請勿空白");
 				}else if (!cust_name.trim().matches(cust_pwdReg)) {
@@ -52,7 +52,7 @@ public class CustServlet extends HttpServlet {
 
 				// 3.帳號
 				String cust_acc = req.getParameter("cust_acc");
-				String cust_accReg ="^[a-zA-Z][a-zA-Z0-9_]{4,15}$";
+				String cust_accReg ="^(a-zA-Z0-9_){2,10}$";
 				if (cust_name == null || cust_name.trim().length() == 0) {
 					errorMsgs.add("會員帳號: 請勿空白");
 				}else if (!cust_name.trim().matches(cust_accReg)) {
@@ -107,7 +107,7 @@ public class CustServlet extends HttpServlet {
 				 */
 				String xx = setDateFormat.format(Calendar.getInstance().getTime());
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
-
+				
 				// 11.狀態
 				String cust_status = new String(req.getParameter("cust_status".trim()));
 				if (cust_status == null || cust_status.trim().length() == 0) {
@@ -124,8 +124,7 @@ public class CustServlet extends HttpServlet {
 
 				byte[] cust_pic = null;
 
-				String cust_ID = new String(req.getParameter("cust_ID".trim()));
-
+				
 				CustVO custVO = new CustVO();
 				custVO.setCust_acc(cust_acc);
 				custVO.setCust_name(cust_name);
@@ -144,13 +143,13 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/cust/addCust.jsp");
 
 					failureView.forward(req, res);
 					return;
 				}
 
-//				String cust_acc = ""
+//			
 				CustService custSvc = new CustService();
 			
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
