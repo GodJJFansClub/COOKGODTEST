@@ -22,7 +22,7 @@ public class AdDAO implements AdDAO_interface {
 	}
 	
 	private static final String INSERT_STMT =
-			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ? ,?)";
+			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),4,'0'), ?, ?, ?, ?, ?, ? ,?)";
 	private static final String GET_ALL_STMT = 
 			"SELECT AD_ID,AD_STATUS,to_Char(AD_START,'yyyy-mm-dd hh:mm:ss')AD_START,to_Char(AD_END,'yyyy-mm-dd hh:mm:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD order by AD_ID";
 	private static final String GET_ONE_STMT = 

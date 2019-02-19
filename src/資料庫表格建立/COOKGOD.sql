@@ -148,7 +148,7 @@ CREATE TABLE FOOD_SUP (
 ------------------------------------------------------------------
 --建立表格:廣告--
 CREATE TABLE AD (
- AD_ID                    VARCHAR2(8)      NOT NULL,
+ AD_ID                    VARCHAR2(6)      NOT NULL,
  AD_STATUS                VARCHAR2(2)      NOT NULL,
  AD_START                 TIMESTAMP        NOT NULL,
  AD_END                   TIMESTAMP        NOT NULL,

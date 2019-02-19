@@ -17,7 +17,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 	String passwd = "123456";
 	
 	private static final String INSERT_STMT =
-			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ? ,?)";
+			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),4,'0'), ?, ?, ?, ?, ?, ? ,?)";
 	private static final String GET_ALL_STMT = 
 			"SELECT AD_ID,AD_STATUS,to_Char(AD_START,'yyyy-mm-dd hh:mm:ss')AD_START,to_Char(AD_END,'yyyy-mm-dd hh:mm:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD order by AD_ID";
 	private static final String GET_ONE_STMT = 
@@ -27,7 +27,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 	private static final String UPDATE =
 			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
 
-//	Â²©öª©
+//	Â²ï¿½ï¿½ï¿½ï¿½
 //	private static final String GET_ALL_STMT = 
 //			"SELECT * FROM AD";
 //	private static final String GET_ONE_STMT = 
@@ -292,7 +292,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 
 		AdJDBCDAO dao = new AdJDBCDAO();
 		
-		//·s¼W
+		//ï¿½sï¿½W
 		AdVO adVO1 = new AdVO();
 		adVO1.setAd_status("1");
 		adVO1.setAd_start(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
@@ -303,9 +303,9 @@ public class AdJDBCDAO implements AdDAO_interface {
 		adVO1.setFood_sup_ID("T00003");
 		dao.insert(adVO1);
 		
-		//­×§ï
+		//ï¿½×§ï¿½
 		AdVO adVO2 = new AdVO();
-		adVO2.setAd_ID("AD000004");
+		adVO2.setAd_ID("AD0004");
 		adVO2.setAd_status("2");
 		adVO2.setAd_start(java.sql.Timestamp.valueOf("2018-02-12 21:12:24"));
 		adVO2.setAd_end(java.sql.Timestamp.valueOf("2019-02-12 21:12:24"));
@@ -315,11 +315,11 @@ public class AdJDBCDAO implements AdDAO_interface {
 		adVO2.setFood_sup_ID("T00003");
 		dao.update(adVO2);
 		
-		// §R°£
-		dao.delete("AD000006");
+		// ï¿½Rï¿½ï¿½
+		dao.delete("AD0006");
 		
-		//¬d¸ß
-		AdVO adVO3 = dao.findByPrimaryKey("AD000004");
+		//ï¿½dï¿½ï¿½
+		AdVO adVO3 = dao.findByPrimaryKey("AD0004");
 		System.out.println(adVO3.getAd_status()+",");
 		System.out.println(adVO3.getAd_start()+",");
 		System.out.println(adVO3.getAd_end()+",");
@@ -329,7 +329,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 		System.out.println(adVO3.getFood_sup_ID()+",");
 		System.out.println("-------");
 		
-		//¬d¸ßall
+		//ï¿½dï¿½ï¿½all
 		List<AdVO> list = dao.getAll();
 		for (AdVO aAd: list) {
 			System.out.println(aAd.getAd_ID()+",");

@@ -24,7 +24,8 @@ public class CustServlet extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+			
+			//add new cust
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -51,11 +52,11 @@ public class CustServlet extends HttpServlet {
 
 				// 3.帳號
 				String cust_acc = req.getParameter("cust_acc");
-				String cust_accReg ="[A-Za-z0-9]{6,15}";
+				String cust_accReg ="^[a-zA-Z][a-zA-Z0-9_]{4,15}$";
 				if (cust_name == null || cust_name.trim().length() == 0) {
 					errorMsgs.add("會員帳號: 請勿空白");
 				}else if (!cust_name.trim().matches(cust_accReg)) {
-					errorMsgs.add("會員帳號: 只能是英文字母、數字, 且長度必需在6到15之間");
+					errorMsgs.add("會員帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
 				}
 
 				// 4.姓別
