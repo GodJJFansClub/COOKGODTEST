@@ -126,7 +126,7 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 13.圖片
-
+				File pic = new File(filePath);
 				byte[] cust_pic = null;
 				String saveDirectory = "/images_uploaded";
 				req.setCharacterEncoding("Big5"); // 處理中文檔名
