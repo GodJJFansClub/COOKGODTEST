@@ -68,7 +68,7 @@
 			</tr>
 			<tr>
 				<td>食材種類:</td>
-				<td><input type="TEXT" name="food_type" size="45"	value="${foodVO.food_type}" /></td>
+				<td><input type="TEXT" name="food_type_ID" size="45"	value="${foodVO.food_type_ID}" /></td>
 			</tr>
 		</table>
 		<br>

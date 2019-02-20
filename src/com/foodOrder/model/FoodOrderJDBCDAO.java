@@ -1,4 +1,4 @@
-package com.foodorder.model;
+package com.foodOrder.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

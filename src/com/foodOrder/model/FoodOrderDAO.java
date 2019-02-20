@@ -1,4 +1,4 @@
-package com.foodorder.model;
+package com.foodOrder.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class FoodOrderJNDIDAO implements FoodOrderDAO_interface {
+public class FoodOrderDAO implements FoodOrderDAO_interface {
 	
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;

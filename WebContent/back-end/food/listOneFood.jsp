@@ -57,7 +57,7 @@
 			<%-- 思考一下這裡是左邊還是右邊, 左邊上面的其實是script用 --%>
 			<td>${foodVO.food_ID}</td>
 			<td>${foodVO.food_name}</td>
-			<td>${foodVO.food_type}</td>
+			<td>${food_type[foodVO.food_type_ID]}</td>
 		</tr>
 	</table>
 

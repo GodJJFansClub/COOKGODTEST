@@ -73,7 +73,7 @@
 			<tr>
 				<td>${foodVO.food_ID}</td>
 				<td>${foodVO.food_name}</td>
-				<td>${foodVO.food_type}</td>
+				<td>${food_type[foodVO.food_type_ID]}</td>
 				<td>
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" style="margin-bottom: 0px;">
 						<input type="submit" value="修改">

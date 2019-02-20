@@ -24,15 +24,15 @@ public class FoodDAO implements FoodDAO_interface {
 	}
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), ?, ?)";
+			"INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE FROM FOOD";
+			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD";
 	private static final String GET_ONE_STMT = 
-			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE FROM FOOD WHERE FOOD_ID = ?";
+			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_ID = ?";
 	private static final String DELETE = 
 			"DELETE FROM FOOD WHERE FOOD_ID = ?";
 	private static final String UPDATE = 
-			"UPDATE FOOD SET FOOD_NAME = ?, FOOD_TYPE = ? WHERE FOOD_ID = ?";
+			"UPDATE FOOD SET FOOD_NAME = ?, FOOD_TYPE_ID = ? WHERE FOOD_ID = ?";
 	@Override
 	public void insert(FoodVO foodVO) {
 		Connection con = null;

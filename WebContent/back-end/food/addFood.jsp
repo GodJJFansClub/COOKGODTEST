@@ -48,7 +48,7 @@
 	<table id="table-1">
 		<tr><td>
 			 <h3>食材資料新增 - addfood.jsp</h3></td><td>
-			 <h4><a href="select_page.jsp"><img src="<%=request.getContextPath()%>/images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
+			 <h4><a href="<%=request.getContextPath()%>/back-end/food/select_page.jsp"><img src="<%=request.getContextPath()%>/images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
 		</td></tr>
 	</table>
 
@@ -67,14 +67,21 @@
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" name="form1">
 	<table>
 		<tr>
-			<td>食材名稱:</td>
+				 
+			<td>食材名稱:${foodVO.food_name}</td>
 			<td><input type="TEXT" name="food_name" size="45" 
-				 value="<%= (foodVO==null)? "大白菜" : foodVO.getFood_name()%>" /></td>
+				 <%--value="<%= (foodVO==null)? "大白菜" : foodVO.getFood_name()%>" /></td> --%>
+				 value=${empty foodVO.food_name ? "大白菜":foodVO.food_name} /></td>
 		</tr>
 		<tr>
 			<td>食材種類:</td>
-			<td><input type="TEXT" name="food_type" size="45"
-				 value="<%= (foodVO==null)? "g01" : foodVO.getFood_type()%>" /></td>
+			<td>
+				<select size="1" name="food_type_ID">
+					<c:forEach var="food_type" items="${food_type}">
+						<option value="${food_type.key}">${food_type.value}
+					</c:forEach>
+				</select>
+			</td>
 		</tr>
 	
 	

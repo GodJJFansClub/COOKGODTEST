@@ -1,4 +1,4 @@
-package com.foodmall.model;
+package com.foodMall.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,9 +16,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	private static final String PASSWORD = "123456";
 	private static final String INSERT_STMT = "INSERT INTO FOOD_MALL (FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE FOOD_MALL SET FOOD_M_NAME = ?, FOOD_M_STATUS = ?, FOOD_M_PRICE = ?, FOOD_M_UNIT = ?, FOOD_M_PLACE = ?, FOOD_M_PIC = ?, FOOD_M_RESUME = ?, FOOD_M_RATE = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
-	private static final String DELETE_STMT = "DELETE FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT * FROM FOOD_MALL";
-	private static final String GET_ONE_STMT = "SELECT * FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
+	private static final String GET_ALL_STMT = "SELECT FOOD_SUP_ID , FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL";
+	private static final String GET_ONE_STMT = "SELECT FOOD_SUP_ID , FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	
 	@Override
 	public void insert(FoodMallVO foodMallVO) {
@@ -43,22 +42,24 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("A database error occured. "
+					+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -111,88 +112,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 		}
 	}
 	
-	public void updatePIC(FoodMallVO foodMallVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
+	
 
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			pstmt = con.prepareStatement(UPDATE_STMT);
-
-			pstmt.setBytes(1, foodMallVO.getFood_m_pic());
-			pstmt.setString(2, foodMallVO.getFood_sup_ID());
-			pstmt.setString(3, foodMallVO.getFood_ID());
-
-			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	@Override
-	public void delete(String food_sup_ID, String food_ID) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			con.setAutoCommit(false);
-			
-			pstmt = con.prepareStatement(DELETE_STMT);
-			pstmt.setString(1, food_sup_ID);
-			pstmt.setString(2, food_ID);
-			
-			pstmt.executeUpdate();
-			
-			con.commit();
-			con.setAutoCommit(true);
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			if(con != null) {
-				try {
-					con.rollback();
-				}catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			e.printStackTrace();
-		}finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
 
 	@Override
 	public FoodMallVO findByPrimaryKey(String food_sup_ID, String food_ID) {
@@ -226,31 +147,33 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 					
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(rs != null) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
@@ -260,7 +183,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 
 	@Override
 	public List<FoodMallVO> getAll() {
-		List<FoodMallVO> foodMallVOAL = new ArrayList<FoodMallVO>(); 
+		List<FoodMallVO> list = new ArrayList<FoodMallVO>(); 
 		FoodMallVO foodMallVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -285,38 +208,39 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 					foodMallVO.setFood_m_pic(rs.getBytes(8));
 					foodMallVO.setFood_m_resume(rs.getString(9));
 					foodMallVO.setFood_m_rate(rs.getInt(10));
-					foodMallVOAL.add(foodMallVO);
+					list.add(foodMallVO);
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(rs != null) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
-					se.printStackTrace();
+					se.printStackTrace(System.err);
 				}
 			}
-				
 			if (con != null) {
 				try {
 					con.close();
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(System.err);
 				}
 			}
 		}
-		return foodMallVOAL;
+		return list;
 	}
 	
 	public static void main(String[] args) {
@@ -349,8 +273,6 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 //		foodMallVO.setFood_m_resume("煮起來又香又好吃, 對身體的健康又很有幫助");
 //		foodMallVO.setFood_m_rate(4);
 //		fMDao.update(foodMallVO);
-		// 刪除
-//		fMDao.delete("C00005", "F00001");
 		// 查一筆
 //		FoodMallVO foodMallVO = fMDao.findByPrimaryKey("C00009", "F00009");
 //		System.out.println(foodMallVO.getFood_sup_ID());
@@ -364,22 +286,22 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 //		System.out.println(foodMallVO.getFood_m_resume());
 //		System.out.println(foodMallVO.getFood_m_rate());
 		// 查全部
-//		List<FoodMallVO> foodMallVOs = fMDao.getAll();
-//		int count = 1;
-//		for(FoodMallVO foodMallVO:foodMallVOs) {
-//			System.out.print(foodMallVO.getFood_sup_ID() + " ");
-//			System.out.print(foodMallVO.getFood_ID() + " ");
-//			System.out.print(foodMallVO.getFood_m_name() + " ");
-//			System.out.print(foodMallVO.getFood_m_status() + " ");
-//			System.out.print(foodMallVO.getFood_m_price() + " ");
-//			System.out.print(foodMallVO.getFood_m_unit() + " ");
-//			System.out.print(foodMallVO.getFood_m_place() + " ");
-//			picIOTest.byteArrToFile(foodMallVO.getFood_m_pic(), "P:/pic/"+ count +".png");
-//			System.out.print(foodMallVO.getFood_m_resume() + " ");
-//			System.out.print(foodMallVO.getFood_m_rate() + " ");
-//			System.out.println();
-//			count++;
-//		}
+		List<FoodMallVO> list = fMDao.getAll();
+		int count = 1;
+		for(FoodMallVO foodMallVO:list) {
+			System.out.print(foodMallVO.getFood_sup_ID() + " ");
+			System.out.print(foodMallVO.getFood_ID() + " ");
+			System.out.print(foodMallVO.getFood_m_name() + " ");
+			System.out.print(foodMallVO.getFood_m_status() + " ");
+			System.out.print(foodMallVO.getFood_m_price() + " ");
+			System.out.print(foodMallVO.getFood_m_unit() + " ");
+			System.out.print(foodMallVO.getFood_m_place() + " ");
+			picIOTest.byteArrToFile(foodMallVO.getFood_m_pic(), "P:/pic/"+ count +".png");
+			System.out.print(foodMallVO.getFood_m_resume() + " ");
+			System.out.print(foodMallVO.getFood_m_rate() + " ");
+			System.out.println();
+			count++;
+		}
 		
 		
 		

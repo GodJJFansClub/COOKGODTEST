@@ -1,8 +1,5 @@
 package com.food.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,22 +15,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.food.model.FoodService;
 import com.food.model.FoodVO;
-import com.google.gson.stream.JsonReader;
+
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
 
 public class FoodServlet extends HttpServlet {
 	
+	private static Jedis jedis;
 	@Override
 	public void init() {
-		Map< String, String> food_type_map = new HashMap< String, String>();
+		jedis = new Jedis("localhost", 6379);
+
+		Map< String, String> food_typeMap = new HashMap< String, String>();
 		ServletContext servletContext = getServletContext();
-		try {
-			JsonReader jsonReader = new JsonReader(new FileReader(new File(servletContext.getContextPath() + "/resource")));
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+		jedis.auth("123456");
+		food_typeMap = jedis.hgetAll("FOOD_TYPE");
+		servletContext.setAttribute("food_type", food_typeMap);
 	}
 	
 	@Override
@@ -170,15 +170,15 @@ public class FoodServlet extends HttpServlet {
 				
 				// 這裡為何要trim兩次
 				// 要做判定如果沒有存在這種食材種類, 可能要新增或減少, 其實是可以用map來對
-				String food_type = req.getParameter("food_type").trim();
-				if (food_type == null || food_type.trim().length() == 0) {
+				String food_type_ID = req.getParameter("food_type_ID").trim();
+				if (food_type_ID == null || food_type_ID.trim().length() == 0) {
 					errorMsgs.add("食材種類請勿空白");
 				}
 				
 				FoodVO foodVO = new FoodVO();
 				foodVO.setFood_ID(food_ID);
 				foodVO.setFood_name(food_name);
-				foodVO.setFood_type_ID(food_type);
+				foodVO.setFood_type_ID(food_type_ID);
 				
 				// Send the use back to the form, if there were errors
 				if(!errorMsgs.isEmpty()) {
@@ -192,7 +192,7 @@ public class FoodServlet extends HttpServlet {
 				}
 				/***************************2.開始修改資料*****************************************/
 				FoodService foodSvc = new FoodService();
-				foodVO = foodSvc.updateFood(food_ID, food_name, food_type);
+				foodVO = foodSvc.updateFood(food_ID, food_name, food_type_ID);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("foodVO", foodVO);
@@ -225,14 +225,14 @@ public class FoodServlet extends HttpServlet {
 					errorMsgs.add("食材名稱: 只能是中文且長度必需在1到30之間");
 	            } 
 				
-				String food_type = req.getParameter("food_type").trim();
-				if (food_type == null || food_type.trim().length() == 0) {
+				String food_type_ID = req.getParameter("food_type_ID").trim();
+				if (food_type_ID == null || food_type_ID.trim().length() == 0) {
 					errorMsgs.add("食材種類請勿空白");
 				}
 				
 				FoodVO foodVO = new FoodVO();
 				foodVO.setFood_name(food_name);
-				foodVO.setFood_type_ID(food_type);
+				foodVO.setFood_type_ID(food_type_ID);
 				
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("foodVO", foodVO);
@@ -243,9 +243,9 @@ public class FoodServlet extends HttpServlet {
 				}
 				/***************************2.開始新增資料***************************************/
 				FoodService foodSvc = new FoodService();
-				foodVO = foodSvc.addFood(food_name, food_type);
+				foodVO = foodSvc.addFood(food_name, food_type_ID);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back-end/food/listFood.jsp";
+				String url = "/back-end/food/listAllFood.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
@@ -281,5 +281,11 @@ public class FoodServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+	}
+	
+	@Override
+	public void destroy() {
+		if (jedis != null)
+			jedis.close();
 	}
 }

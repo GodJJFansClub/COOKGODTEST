@@ -1,4 +1,4 @@
-package com.foodsup.model;
+package com.foodSup.model;
 
 public class FoodSupVO {
 	private String food_sup_ID;

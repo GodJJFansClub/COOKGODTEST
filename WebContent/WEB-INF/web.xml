@@ -20,6 +20,7 @@
   <servlet>
     <servlet-name>FoodServlet</servlet-name>
     <servlet-class>com.food.controller.FoodServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodServlet</servlet-name>
