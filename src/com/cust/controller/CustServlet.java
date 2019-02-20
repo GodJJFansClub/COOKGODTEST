@@ -18,18 +18,17 @@ import com.cust.model.*;
 public class CustServlet extends HttpServlet {
 
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse res) 
-		throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
+
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse res)
-		throws ServletException, IOException {
-		
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-			
-			//add new cust
+
+		// add new cust
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -38,31 +37,31 @@ public class CustServlet extends HttpServlet {
 
 				// 1.姓名
 				String cust_name = req.getParameter("cust_name");
-				String cust_nameReg ="^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String cust_nameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (cust_name == null || cust_name.trim().length() == 0) {
 					errorMsgs.add("會員姓名: 請勿空白");
-				}else if (!cust_name.trim().matches(cust_nameReg)) {
+				} else if (!cust_name.trim().matches(cust_nameReg)) {
 					errorMsgs.add(cust_name);
 				}
-				//"會員姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
+				// "會員姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
 
 				// 2.密碼
 				String cust_pwd = req.getParameter("cust_pwd");
-				String cust_pwdReg ="^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
+				String cust_pwdReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
 				if (cust_pwd == null || cust_pwd.trim().length() == 0) {
 					errorMsgs.add("會員密碼: 請勿空白");
-				}else if (!cust_pwd.trim().matches(cust_pwdReg)) {
+				} else if (!cust_pwd.trim().matches(cust_pwdReg)) {
 					errorMsgs.add(cust_pwd);
 				}
-				
-				//"會員密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
+
+				// "會員密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
 
 				// 3.帳號
 				String cust_acc = req.getParameter("cust_acc");
-				String cust_accReg ="^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$$";
+				String cust_accReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$$";
 				if (cust_acc == null || cust_acc.trim().length() == 0) {
 					errorMsgs.add("會員帳號: 請勿空白");
-				}else if (!cust_acc.trim().matches(cust_accReg)) {
+				} else if (!cust_acc.trim().matches(cust_accReg)) {
 					errorMsgs.add("會員帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
 				}
 
@@ -114,10 +113,9 @@ public class CustServlet extends HttpServlet {
 				 */
 				String xx = setDateFormat.format(Calendar.getInstance().getTime());
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
-				
+
 				// 11.狀態
 				String cust_status = "a0";
-				
 
 				// 12.暱稱
 				String cust_niname = new String(req.getParameter("cust_niname".trim()));
@@ -126,57 +124,65 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 13.圖片
-				File pic = new File(filePath);
 				byte[] cust_pic = null;
-				String saveDirectory = "/images_uploaded";
-				req.setCharacterEncoding("Big5"); // 處理中文檔名
-				res.setContentType("text/html; charset=Big5");
-				PrintWriter out = res.getWriter();
-				System.out.println("ContentType="+req.getContentType()); // 測試用
+//				File pic = new File(req.getParameter("cust_pic".trim()));
+//				FileInputStream fis = null;
+//				ByteArrayOutputStream baos = null;
+//
+//				byte[] cust_pic = null;
+//				try {
+//					fis = new FileInputStream(pic);
+//					cust_pic = new byte[fis.available()];
+//				} catch (FileNotFoundException e) {
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				} finally {
+//					if (fis != null) {
+//						try {
+//							fis.close();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//					}
+//				}
 
-				String realPath = getServletContext().getRealPath(saveDirectory);
-				System.out.println("realPath="+realPath); // 測試用
-				File fsaveDirectory = new File(realPath);
-				if (!fsaveDirectory.exists())
-					 fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
+//				String saveDirectory = "/images_uploaded";
+//				req.setCharacterEncoding("Big5"); // 處理中文檔名
+//				res.setContentType("text/html; charset=Big5");
+//				PrintWriter out = res.getWriter();
+//
+//				String realPath = getServletContext().getRealPath(saveDirectory);
+//
+//				File fsaveDirectory = new File(req.getParameter("cust_pic".trim()));
+//				if (!fsaveDirectory.exists())
+//					fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
+//
+//				Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
+//				out.write("<h2> Total parts : " + parts.size() + "</h2>");
+//				
+//				for (Part part : parts) {
+//					if (getFileNameFromPart(part) != null && part.getContentType() != null) {
+//						out.println("<PRE>");
+//						String name = part.getName();
+//						String filename = getFileNameFromPart(part);
+//						String ContentType = part.getContentType();
+//						long size = part.getSize();
+//						File f = new File(fsaveDirectory, filename);
+//
+//						// 利用File物件,寫入目地目錄,上傳成功
+//						part.write(f.toString());
+//
+//						// 額外測試 InputStream 與 byte[] (幫將來model的VO預作準備)
+//						InputStream in = part.getInputStream();
+//						cust_pic = new byte[in.available()];
+//						in.read(cust_pic);
+//						in.close();
+//
+//					}
+//				}
 
-				Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
-				out.write("<h2> Total parts : " + parts.size() + "</h2>");
-
-				for (Part part : parts) {
-					if (getFileNameFromPart(part) != null && part.getContentType()!=null) {
-						out.println("<PRE>");
-						String name = part.getName();
-						String filename = getFileNameFromPart(part);
-						String ContentType = part.getContentType();
-						long size = part.getSize();
-						File f = new File(fsaveDirectory, filename);
-
-						out.println("name: " + name);
-						out.println("filename: " + filename);
-						out.println("ContentType: " + ContentType);
-						out.println("size: " + size);
-						out.println("File: " + f);
-
-						// 利用File物件,寫入目地目錄,上傳成功
-						part.write(f.toString());
-
-						// 額外測試 InputStream 與 byte[] (幫將來model的VO預作準備)
-						InputStream in = part.getInputStream();
-						byte[] buf = new byte[in.available()];
-						in.read(buf);
-						in.close();
-						out.println("buffer length: " + buf.length);
-						
-						// 額外測試秀圖
-						out.println("<br><img src=\""+req.getContextPath()+saveDirectory+"/"+filename+"\">");
-
-						out.println();
-						out.println("</PRE>");
-					}
-				}
-
-				//set
+				// set
 				CustVO custVO = new CustVO();
 				custVO.setCust_acc(cust_acc);
 				custVO.setCust_name(cust_name);
@@ -203,7 +209,7 @@ public class CustServlet extends HttpServlet {
 
 //			
 				CustService custSvc = new CustService();
-			
+
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
 //				custVO = custSvc.addCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
@@ -320,28 +326,28 @@ public class CustServlet extends HttpServlet {
 
 				// 1.姓名
 				String cust_name = req.getParameter("cust_name");
-				String cust_nameReg ="^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String cust_nameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (cust_name == null || cust_name.trim().length() == 0) {
 					errorMsgs.add("會員姓名: 請勿空白");
-				}else if (!cust_name.trim().matches(cust_nameReg)) {
+				} else if (!cust_name.trim().matches(cust_nameReg)) {
 					errorMsgs.add("會員姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 				}
 
 				// 2.密碼
 				String cust_pwd = req.getParameter("cust_pwd");
-				String cust_pwdReg ="^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String cust_pwdReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (cust_pwd == null || cust_pwd.trim().length() == 0) {
 					errorMsgs.add("會員密碼: 請勿空白");
-				}else if (!cust_pwd.trim().matches(cust_pwdReg)) {
+				} else if (!cust_pwd.trim().matches(cust_pwdReg)) {
 					errorMsgs.add("會員密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間");
 				}
 
 				// 3.帳號
 				String cust_acc = req.getParameter("cust_acc");
-				String cust_accReg ="^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String cust_accReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (cust_acc == null || cust_acc.trim().length() == 0) {
 					errorMsgs.add("會員帳號: 請勿空白");
-				}else if (!cust_acc.trim().matches(cust_accReg)) {
+				} else if (!cust_acc.trim().matches(cust_accReg)) {
 					errorMsgs.add("會員帳號: 只能是英文字母、數字, 且長度必需在6到15之間");
 				}
 
@@ -410,8 +416,6 @@ public class CustServlet extends HttpServlet {
 
 				byte[] cust_pic = null;
 
-				
-
 				CustVO custVO = new CustVO();
 				custVO.setCust_acc(cust_acc);
 				custVO.setCust_name(cust_name);
@@ -436,9 +440,8 @@ public class CustServlet extends HttpServlet {
 					return;
 				}
 
-
 				CustService custSvc = new CustService();
-				
+
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
 //				custVO = custSvc.addCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
@@ -460,37 +463,36 @@ public class CustServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-	
+
 			try {
-				/***************************1.接收請求參數***************************************/
+				/*************************** 1.接收請求參數 ***************************************/
 				String cust_ID = new String(req.getParameter("cust_ID"));
-				
-				/***************************2.開始刪除資料***************************************/
+
+				/*************************** 2.開始刪除資料 ***************************************/
 				CustService custSvc = new CustService();
 				custSvc.deleteCust(cust_ID);
-				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-end/cust/listAllCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
-				
-				/***************************其他可能的錯誤處理**********************************/
+
+				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
 				failureView.forward(req, res);
 			}
 		}
-		
+
 	}
-	
-	//取出上傳的檔案名稱 (因為API未提供method,所以必須自行撰寫)by 吳神
+
+	// 取出上傳的檔案名稱 (因為API未提供method,所以必須自行撰寫)by 吳神
 	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-		System.out.println("header=" + header); // 測試用
+
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		System.out.println("filename=" + filename); // 測試用
+
 		if (filename.length() == 0) {
 			return null;
 		}
