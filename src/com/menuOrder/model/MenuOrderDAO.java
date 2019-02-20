@@ -23,7 +23,7 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 	}
 	
 	private static final String Insert_Stmt = 
-			"INSERT INTO MENU_ORDER (MENU_OD_ID,MENU_OD_STATUS,MENU_OD_START,MENU_OD_BOOK,CUST_ID,CHEF_ID,MENU_ID) VALUES ('MU'||TO_CHAR(CURRENT_DATE, 'YYYYMMDD')||'-'||LPAD(TO_CHAR(MENU_OD_ID_SEQ.NEXTVAL), 6, '0'),?,SYSDATE,?,?,?,?)";
+			"INSERT INTO MENU_ORDER (MENU_OD_ID,MENU_OD_STATUS,MENU_OD_START,MENU_OD_BOOK,CUST_ID,CHEF_ID,MENU_ID) VALUES ('MU'||TO_CHAR(CURRENT_DATE, 'YYYYMMDD')||'-'||LPAD(TO_CHAR(MENU_OD_ID_SEQ.NEXTVAL), 6, '0'),'2',SYSDATE,?,?,?,?)";
 	private static final String Update_Stmt = 
 			"UPDATE MENU_ORDER SET MENU_OD_STATUS = ?, MENU_OD_BOOK = ?, MENU_OD_END = ?, MENU_OD_RATE = ?, MENU_OD_MSG = ? ,CHEF_ID = ?, MENU_ID = ? WHERE MENU_OD_ID = ?";
 	private static final String Delete_Stmt = 
@@ -43,11 +43,10 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Insert_Stmt);
 			
-			pstmt.setString(1, menuOrderVO.getMenu_od_status());
-			pstmt.setTimestamp(2, menuOrderVO.getMenu_od_book());
-			pstmt.setString(3, menuOrderVO.getCust_ID());
-			pstmt.setString(4, menuOrderVO.getChef_ID());
-			pstmt.setString(5, menuOrderVO.getMenu_ID());
+			pstmt.setTimestamp(1, menuOrderVO.getMenu_od_book());
+			pstmt.setString(2, menuOrderVO.getCust_ID());
+			pstmt.setString(3, menuOrderVO.getChef_ID());
+			pstmt.setString(4, menuOrderVO.getMenu_ID());
 			
 			pstmt.executeUpdate();
 		

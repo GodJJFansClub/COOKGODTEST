@@ -12,21 +12,20 @@ public class MenuOrderService {
 		dao = new MenuOrderDAO();
 	}
 	
-	public MenuOrderVO addMenuOrder(String menu_od_status,Timestamp menu_od_book, String cust_ID, String chef_ID, String menu_ID) {
+	public MenuOrderVO addMenuOrder(Timestamp menu_od_book, String cust_ID, String chef_ID, String menu_ID) {
 		
 		MenuOrderVO menuOrderVO = new MenuOrderVO();
-		menuOrderVO.setMenu_od_status(menu_od_status);
 		menuOrderVO.setMenu_od_book(menu_od_book);
 		menuOrderVO.setCust_ID(cust_ID);
 		menuOrderVO.setChef_ID(chef_ID);
 		menuOrderVO.setMenu_ID(menu_ID);
+		dao.insert(menuOrderVO);
 				
 		return menuOrderVO;	
 	}
-	public MenuOrderVO updateMenuOrder(String menu_od_ID, String menu_od_status, Timestamp menu_od_book, Date menu_od_end, Integer menu_od_rate, String menu_od_msg, String chef_ID, String menu_ID) {
+	public MenuOrderVO updateMenuOrder(String menu_od_status, Timestamp menu_od_book, Date menu_od_end, Integer menu_od_rate, String menu_od_msg, String chef_ID, String menu_ID) {
 		
-		MenuOrderVO menuOrderVO = new MenuOrderVO();		
-		menuOrderVO.setMenu_od_ID(menu_od_ID);
+		MenuOrderVO menuOrderVO = new MenuOrderVO();	
 		menuOrderVO.setMenu_od_status(menu_od_status);
 		menuOrderVO.setMenu_od_book(menu_od_book);
 		menuOrderVO.setMenu_od_end(menu_od_end);
@@ -44,7 +43,7 @@ public class MenuOrderService {
 	public MenuOrderVO getOneMenuOrder(String menu_od_ID) {
 		return dao.findByPrimaryKey(menu_od_ID);
 	}
-	public List<MenuOrderVO> getall(){
+	public List<MenuOrderVO> getAll(){
 		return dao.getAll();
 	}
 }
