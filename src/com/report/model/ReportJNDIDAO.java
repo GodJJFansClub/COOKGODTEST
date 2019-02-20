@@ -291,4 +291,65 @@ public class ReportJNDIDAO implements Report_Interface {
 			return reportVOs;
 		}
 
+		public static void main(String[] args) {
+			
+			ReportJNDIDAO dao = new ReportJNDIDAO();
+			Calendar currentTime = Calendar.getInstance();
+			java.sql.Timestamp sqlDate = new java.sql.Timestamp(currentTime.getTimeInMillis());
+			// 新增
+			
+			ReportVO reportVO = new ReportVO();
+			reportVO.setReport_title("主廚專區有網友發言不當");
+			reportVO.setReport_sort("檢舉文章");
+			reportVO.setReport_start(sqlDate);
+			reportVO.setReport_status("1");
+			reportVO.setReport_con("文章發言不當");
+			reportVO.setCust_ID("C00001");
+			reportVO.setForum_art_ID("A00001");	
+			dao.insert(reportVO);
+		
+			// 修改
+			
+//			ReportVO reportVO = new ReportVO();
+//			reportVO.setReport_title("主廚專區並無網友發言不當");
+//			reportVO.setReport_sort("檢舉文章");
+//			reportVO.setReport_start(sqlDate);
+//			reportVO.setReport_status("1");
+//			reportVO.setReport_con("文章發言不當，建議刪除");
+//			reportVO.setCust_ID("C00001");
+//			reportVO.setForum_art_ID("A00001");
+//			reportVO.setReport_ID("0");
+//			dao.insert(reportVO);
+
+			//刪除
+//			dao.delete("8");
+			
+			// 查詢
+//	      FestMenuVO festMenuVO=new FestMenuVO();
+//			System.out.println(reportVO.getReport_ID());
+//			System.out.println(reportVO.getReport_title());
+//			System.out.println(reportVO.getReport_sort());
+//			System.out.println(reportVO.getReport_start());
+//			System.out.println(reportVO.getReport_status());
+//			System.out.println(reportVO.getReport_con());
+//			System.out.println(reportVO.getCust_ID());
+//			System.out.println(reportVO.getForum_art_ID());	
+
+			//查詢全部
+			List<ReportVO> list = dao.getAll();
+			
+			for(ReportVO reportVOs :list) {
+				
+				System.out.println(reportVOs.getReport_ID() + " ,");
+				System.out.println(reportVOs.getReport_title() + ",");
+				System.out.println(reportVOs.getReport_sort() + ",");
+				System.out.println(reportVOs.getReport_start() + " ,");
+				System.out.println(reportVOs.getReport_status()+ " ,");
+				System.out.println(reportVOs.getReport_con()+ " ,");
+				System.out.println(reportVOs.getCust_ID()+ " ,");
+				System.out.println(reportVOs.getForum_art_ID()+ " ,");	
+			}
+		}
+		
+		
 }

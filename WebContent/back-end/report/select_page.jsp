@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllEmp.jsp'>List</a> all Emps.  <br><br></li>
+  <li><a href='listAllReport.jsp'>List</a> all Reports.  <br><br></li>
   
   
   <li>
@@ -79,9 +79,9 @@
   <li>
      <FORM METHOD="post" ACTION="report.do" >
        <b>選擇檢舉分類:</b>
-       <select size="1" name="report_sort">
+       <select size="1" name="report_ID">
          <c:forEach var="reportVO" items="${reportSvc.all}" > 
-          <option value="${reportVO.report_sort}">${reportVO.report_sort}
+          <option value="${reportVO.report_ID}">${reportVO.report_sort}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

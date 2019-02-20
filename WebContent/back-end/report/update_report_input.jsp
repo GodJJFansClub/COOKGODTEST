@@ -3,19 +3,13 @@
 <%@ page import="com.report.model.*"%>
 
 <%
-  ReportVO reportVO = (ReportVO) request.getAttribute("reportVO");
+   ReportVO reportVO = (ReportVO) request.getAttribute("reportVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
-<% 
-    java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    String formatDate = df.format(new java.util.Date());
-    out.println(formatDate);
-    
-  %>
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>檢舉文章資料新增 - addReport.jsp</title>
+<title>員工資料修改 - update_report_input.jsp</title>
 
 <style>
   table#table-1 {
@@ -54,12 +48,12 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>檢舉文章資料新增 - addReport.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h3>檢舉資料修改 - update_report_input.jsp</h3>
+		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
-<h3>資料新增:</h3>
+<h3>檢舉資料修改:</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -73,66 +67,57 @@
 
 <FORM METHOD="post" ACTION="report.do" name="form1">
 <table>
-  
 	<tr>
-		<td>檢舉編題:</td>
+		<td>檢舉編號:<font color=red><b>*</b></font></td>
+		<td><%=reportVO.getReport_ID()%></td>
+	</tr>
+	<tr>
+		<td>檢舉標題:</td>
 		<td><input type="TEXT" name="report_title" size="45" 
-			 value="<%= (reportVO==null)? "請輸入檢舉文章標題" :reportVO.getReport_title() %>" /></td>
+		     value="<%=reportVO.getReport_title()%>" /></td>
+	</tr>
+	<tr>
+		<td>檢舉分類</td>
+		<td><input type="TEXT" name="report_sort" size="45"	
+		      value="<%=reportVO.getReport_sort()%>" /></td>
+	</tr>
+	<tr>
+		<td>檢舉時間</td>
+		<td><input name="report_start" id="f_date1" type="text" ></td>
+	</tr>
+	<tr>
+		<td>檢舉狀態</td>
+		<td><input type="TEXT" name="report_status" size="45"
+		      value="<%=reportVO.getReport_status()%>" /></td>
+	</tr>
+	<tr>
+		<td>檢舉內容</td>
+		<td><input type="TEXT" name="report_con" size="45" 
+		      value="<%=reportVO.getReport_con()%>" /></td>
+	</tr>
+	<tr>
+		<td>會員編號</td>
+		<td><input type="TEXT" name="cust_ID" size="45"	
+		      value="<%=reportVO.getCust_ID()%>" /></td>
+	</tr>
+	<tr>
+		<td>文章編號</td>
+		<td><input type="TEXT" name="forum_art_ID" size="45" 
+		      value="<%=reportVO.getForum_art_ID()%>" /></td>
 	</tr>
 
-	<tr>
-		<td>檢舉分類:</td>
-		<td><input type="TEXT" name="report_sort" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章分類" :reportVO.getReport_sort()%>" /></td>
-	</tr>
 	
-	<tr>
-		<td>檢舉時間:</td>
-		<td><input type="TEXT" name="report_start" id="f_date1" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章時間" :reportVO.getReport_start()%>" /></td>
-	</tr>
-	
-	<tr>
-		<td>檢舉狀態:</td>
-		<td><input type="TEXT" name="report_status" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章狀態" : reportVO.getReport_status()%>" /></td>
-	</tr>
-	
-	<tr>
-		<td>檢舉內容:</td>
-		<td><input type="TEXT" name="report_con" size="45" 
-			 value="<%= (reportVO==null)? "請填入檢舉文章內容" : reportVO.getReport_con()%>" /></td>
-	</tr>
-	
-	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="cust_ID" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章會員編號" :reportVO.getCust_ID()%>" /></td>
-	</tr>
-	
-	<tr>
-		<td>文章編號:</td>
-		<td><input type="TEXT" name="forum_art_ID" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章編號" : reportVO.getForum_art_ID()%>" /></td>
-	</tr>
+
 </table>
 <br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="report_ID" value="<%=reportVO.getReport_ID()%>">
+<input type="submit" value="送出修改"></FORM>
 </body>
 
 
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
- <% 
-   java.sql.Timestamp report_start = null;
-   try {
-	    report_start = reportVO.getReport_start();
-    } catch (Exception e) {
-	    report_start = new java.sql.Timestamp(System.currentTimeMillis());
-    }
-  %>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
@@ -150,18 +135,17 @@
 <script>
         $.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
-		   value: '<%=report_start%>', 
-		   // value:   new Date(),
-//           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-             //startDate:	            '2017/07/10',  // 起始日 
-//           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-//           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-          });
-      
+           theme: '',              //theme: 'dark',
+ 	       timepicker:true,       //timepicker:true,
+ 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+ 	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
+ 		   value: '<%=reportVO.getReport_start()%>', // value:   new Date(),
+           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+           //startDate:	            '2017/07/10',  // 起始日
+           //minDate:               '-1970-01-01', // 去除今日(不含)之前
+           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+        });
+        
         
    
         // ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------

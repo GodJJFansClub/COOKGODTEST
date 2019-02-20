@@ -26,15 +26,15 @@ public class ReportService {
 		reportVO.setCust_ID(cust_ID);
 		reportVO.setForum_art_ID(forum_art_ID);
 		dao.insert(reportVO);
-
+        
 		return reportVO;
 	}
 
-	public ReportVO updateReport(String report_ID, String report_title,String report_sort,Timestamp report_start,
+	public ReportVO updateReport(String report_ID,String report_title,String report_sort,Timestamp report_start,
 			String report_status,String report_con,String cust_ID,String forum_art_ID) {
-
+		int i = 0;
 		ReportVO reportVO = new ReportVO();
-
+//		System.out.println("檢查點s" +(i++));
 		reportVO.setReport_ID(report_ID);
 		reportVO.setReport_title(report_title);
 		reportVO.setReport_sort(report_sort);

@@ -26,8 +26,8 @@ public class ReportDAO implements Report_Interface {
 			+ "REPORT_START,REPORT_STATUS,REPORT_CON,CUST_ID,FORUM_ART_ID) VALUES (REPORT_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM REPORT";
 	private static final String GET_ONE_STMT = "SELECT * FROM REPORT WHERE report_ID = ?";
-	private static final String UPDATE = "UPDATE REPORT SET REPORT_TITLE =? REPORT_SORT = ?"
-			+ " REPORT_START = ? REPORT_STATUS = ?, REPORT_CON = ?,CUST_ID = ?,FORUM_ART_ID = ? WHERE report_ID = ?";
+	private static final String UPDATE = "UPDATE REPORT SET REPORT_TITLE =? ,REPORT_SORT = ?,"
+			+ " REPORT_START = ? ,REPORT_STATUS = ?, REPORT_CON = ?,CUST_ID = ?,FORUM_ART_ID = ? WHERE report_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM REPORT WHERE report_ID = ?";
 
 	@Override
@@ -81,21 +81,29 @@ public class ReportDAO implements Report_Interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
+			int i = 0;
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-
+			System.out.println("檢查點a" +(i++));
 			pstmt.setString(1, reportVO.getReport_title());
+			System.out.println("檢查點a" +(i++));
 			pstmt.setString(2, reportVO.getReport_sort());
+			System.out.println("檢查點a" +(i++));
 			pstmt.setTimestamp(3, reportVO.getReport_start());
+			System.out.println("檢查點b" +(i++));
 			pstmt.setString(4, reportVO.getReport_status());
+			System.out.println("檢查點b" +(i++));
 			pstmt.setString(5, reportVO.getReport_con());
+			System.out.println("檢查點b" +(i++));
 			pstmt.setString(6, reportVO.getCust_ID());
-			pstmt.setTimestamp(7, reportVO.getReport_start());
+			System.out.println("檢查點c" +(i++));
+			pstmt.setString(7, reportVO.getForum_art_ID());
+			System.out.println("檢查點c" +(i++));
 			pstmt.setString(8, reportVO.getReport_ID());
+			System.out.println("檢查點c" +(i++));
 
 			pstmt.executeUpdate();
-
+			System.out.println("檢查點c" +(i++));
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());

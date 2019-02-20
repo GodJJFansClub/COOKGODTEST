@@ -294,15 +294,15 @@ public class ReportJDBCDAO implements Report_Interface {
 		java.sql.Timestamp sqlDate = new java.sql.Timestamp(currentTime.getTimeInMillis());
 		// 新增
 		
-//		ReportVO reportVO = new ReportVO();
-//		reportVO.setReport_title("主廚專區有網友發言不當");
-//		reportVO.setReport_sort("檢舉文章");
-//		reportVO.setReport_start(sqlDate);
-//		reportVO.setReport_status("1");
-//		reportVO.setReport_con("文章發言不當");
-//		reportVO.setCust_ID("C00001");
-//		reportVO.setForum_art_ID("A00001");	
-//		dao.insert(reportVO);
+		ReportVO reportVO = new ReportVO();
+		reportVO.setReport_title("主廚專區有網友發言不當");
+		reportVO.setReport_sort("檢舉文章");
+		reportVO.setReport_start(sqlDate);
+		reportVO.setReport_status("1");
+		reportVO.setReport_con("文章發言不當");
+		reportVO.setCust_ID("C00001");
+		reportVO.setForum_art_ID("A00001");	
+		dao.insert(reportVO);
 	
 		// 修改
 		
