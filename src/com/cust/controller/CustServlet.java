@@ -1,15 +1,20 @@
 package com.cust.controller;
 
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 
 import com.cust.model.*;
 
+@WebServlet("/cust.do")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class CustServlet extends HttpServlet {
 
 	@Override
@@ -123,8 +128,55 @@ public class CustServlet extends HttpServlet {
 				// 13.圖片
 
 				byte[] cust_pic = null;
+				String saveDirectory = "/images_uploaded";
+				req.setCharacterEncoding("Big5"); // 處理中文檔名
+				res.setContentType("text/html; charset=Big5");
+				PrintWriter out = res.getWriter();
+				System.out.println("ContentType="+req.getContentType()); // 測試用
 
-				
+				String realPath = getServletContext().getRealPath(saveDirectory);
+				System.out.println("realPath="+realPath); // 測試用
+				File fsaveDirectory = new File(realPath);
+				if (!fsaveDirectory.exists())
+					 fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
+
+				Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
+				out.write("<h2> Total parts : " + parts.size() + "</h2>");
+
+				for (Part part : parts) {
+					if (getFileNameFromPart(part) != null && part.getContentType()!=null) {
+						out.println("<PRE>");
+						String name = part.getName();
+						String filename = getFileNameFromPart(part);
+						String ContentType = part.getContentType();
+						long size = part.getSize();
+						File f = new File(fsaveDirectory, filename);
+
+						out.println("name: " + name);
+						out.println("filename: " + filename);
+						out.println("ContentType: " + ContentType);
+						out.println("size: " + size);
+						out.println("File: " + f);
+
+						// 利用File物件,寫入目地目錄,上傳成功
+						part.write(f.toString());
+
+						// 額外測試 InputStream 與 byte[] (幫將來model的VO預作準備)
+						InputStream in = part.getInputStream();
+						byte[] buf = new byte[in.available()];
+						in.read(buf);
+						in.close();
+						out.println("buffer length: " + buf.length);
+						
+						// 額外測試秀圖
+						out.println("<br><img src=\""+req.getContextPath()+saveDirectory+"/"+filename+"\">");
+
+						out.println();
+						out.println("</PRE>");
+					}
+				}
+
+				//set
 				CustVO custVO = new CustVO();
 				custVO.setCust_acc(cust_acc);
 				custVO.setCust_name(cust_name);
@@ -430,5 +482,18 @@ public class CustServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+	}
+	
+	//取出上傳的檔案名稱 (因為API未提供method,所以必須自行撰寫)by 吳神
+	public String getFileNameFromPart(Part part) {
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename); // 測試用
+		if (filename.length() == 0) {
+			return null;
+		}
+		return filename;
 	}
 }

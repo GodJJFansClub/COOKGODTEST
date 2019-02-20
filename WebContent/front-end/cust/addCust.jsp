@@ -63,7 +63,7 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" name="form1">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" name="form1 enctype="multipart/form-data">
 		
 		<table>
 			<tr>
