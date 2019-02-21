@@ -75,7 +75,7 @@
 		<th>顧客編號</th>
 		<th>顧客帳號</th>
 		<th>顧客密碼</th>
-		<th>顧客性名</th>
+		<th>顧客姓名</th>
 		<th>顧客性別</th>
 		<th>顧客電話</th>
 		<th>顧客地址</th>
@@ -103,7 +103,13 @@
 			<td>${custVO.cust_brd}</td>
 			<td>${custVO.cust_reg}</td>
 			<td><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></td>
-			<td>${custVO.cust_status}</td>
+			
+				<c:if test="${custVO.cust_status.equals('a0')}" var="true" scope="session">
+				<td>未停權</td>
+				</c:if>
+				<c:if test="${custVO.cust_status.equals('a1')}" var="true" scope="session">
+				<td>停權</td>
+				</c:if>
 			<td>${custVO.cust_niname}</td>
 						
 			<td>

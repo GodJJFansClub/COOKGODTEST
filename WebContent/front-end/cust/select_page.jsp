@@ -34,7 +34,7 @@
    <tr><td><h3>IBM Cust: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM Cust: Home</p>
+<p>This is the Home page forCust: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -78,7 +78,7 @@
   
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" >
-       <b>選擇顧客性名:</b>
+       <b>選擇顧客姓名:</b>
        <select size="1" name="cust_ID">
          <c:forEach var="custVO" items="${custSvc.all}" > 
           <option value="${custVO.cust_ID}">${custVO.cust_name}
