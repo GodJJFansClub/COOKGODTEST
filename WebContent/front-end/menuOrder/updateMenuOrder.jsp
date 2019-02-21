@@ -11,16 +11,17 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<title>Hello, Bootstrap!</title>
+<title>updateMenuOrder.jsp</title>
 </head>
 <body>
-	<div class="card"
-		style="width: 32rem; background-color: #D4E6F1; margin: 10px;">
-		<div class="card-body text-center">
-			<h5 class="card-title">編輯套餐訂單_updateMenuOrder.jsp</h5>
-			<a href="index.jsp" class="card-link">回首頁</a>
-		</div>
+	<div class="card text-center" style="background-color: #D4E6F1">	  
+	  <div class="card-body" >
+	    <h5 class="card-title">修改套餐訂單</h5>
+	    <p class="card-text">updateMenuOrder.jsp</p>
+	    <a href="index.jsp" class="btn btn-primary">回首頁</a>
+	  </div>
 	</div>
+	
 	<%--Error Message --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red;font-size:20px;">Error:</font>
@@ -30,85 +31,96 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
-	<form method = "post" action = "menuOrder.do" name = "insertMenuOrderForm">						
-		<table>
-			<jsp:useBean id="menuOrderSvc" scope="page" class="com.menuOrder.model.MenuOrderService" />
-			<tr>
-				<td>訂單編號:<font color=red><b>*</b></font></td>
-				<td><input type="TEXT" readonly name="menu_od_ID" value="${menuOrderVO.menu_od_ID}" /></td>
-			</tr>
-			<tr>
-				<td><font color=red><b>*</b></font>訂單狀態:</td>
-				<%	
-					String status[] = new String [4];
-					status[0]="0";
-					status[1]="1";
-					status[2]="2";
-					status[3]="3";
-					request.setAttribute("mystatus", status);
-				%>
-				<td>
-					<select size="1" name="menu_od_status">
-						<c:forEach var="mydata" items="${mystatus}">
-							<option value="${mydata}" ${(menuOrderVO.menu_od_status==mydata)? 'selected':'' } >${mydata}
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td><font color=red><b>*</b></font>預約日期:</td>
-				<td><input name="menu_od_book" id="book_time" type="text"/></td><td>${errMsgs.menu_od_book}</td>
-			</tr>
-			<jsp:useBean id="chefSvc" scope="page" class="com.chef.model.ChefService" />
-			<tr>
-				<td><font color=red><b>*</b></font>主廚編號:</td>
-				<td><select size="1" name="chef_ID">
-					<c:forEach var="chefVO" items="${chefSvc.all}">
-						<option value="${chefVO.chef_ID}" ${(menuOrderVO.chef_ID==chefVO.chef_ID)? 'selected':'' } >${chefVO.chef_ID}
-					</c:forEach>
-				</select></td>
-			</tr>	
-			<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
-			<tr>
-				<td><font color=red><b>*</b></font>套餐編號:</td>
-				<td><select size="1" name="menu_ID">
-					<c:forEach var="menuVO" items="${menuSvc.all}">
-						<option value="${menuVO.menu_ID}" ${(menuOrderVO.menu_ID==menuVO.menu_ID)? 'selected':'' } >${menuVO.menu_ID}
-					</c:forEach>
-				</select></td>
-			</tr>
-			<tr>
-				<td><font color=red><b>*</b></font>完成日期:</td>
-				<td><input name="menu_od_end" id="end_time" type="text"/></td><td>${errMsgs.menu_od_end}</td>
-			</tr>
-			<tr>
-				<td><font color=red><b>*</b></font>訂單評價:</td>
-				<%	
-					String rate[] = new String [5];
-					rate[0]="1";
-					rate[1]="2";
-					rate[2]="3";
-					rate[3]="4";
-					rate[4]="5";
-					request.setAttribute("myrate", rate);
-				%>
-				<td>
-					<select size="1" name="menu_od_rate">
-						<c:forEach var="mydata" items="${myrate}">
-							<option value="${mydata}" ${(menuOrderVO.menu_od_rate==mydata)? 'selected':'' } >${mydata}
-						</c:forEach>
-					</select>
-				</td>
-			</tr>			
-			<tr>
-				<td><font color=red><b>*</b></font>訂單留言:</td>				
-				<td><textarea rows="3" cols="100" name="menu_od_msg"></textarea></td>
-			</tr>
-		</table>
-		<input type="hidden" name="action" value="update">
-		<input type="submit" value="修改訂單">		
-	</form>
+	<div class="container justify-content-center">
+  		<div class="row">
+  			<div class="col-12">
+				<form method = "post" action = "menuOrder.do" name = "insertMenuOrderForm">						
+					<jsp:useBean id="menuOrderSvc" scope="page" class="com.menuOrder.model.MenuOrderService" />
+						
+						<div class="form-group">
+						    <label>訂單編號</label>
+						    <input type="text" readonly class="form-control" name="menu_od_ID" value="${menuOrderVO.menu_od_ID}" />
+						</div>
+						<%	
+							String status[] = new String [4];
+							status[0]="0";
+							status[1]="1";
+							status[2]="2";
+							status[3]="3";
+							request.setAttribute("mystatus", status);
+						%>			
+						<div class="form-group">			
+					    	<label>訂單狀態</label>
+					    	<select size="1" name="menu_od_status" class="form-control">
+					     		<c:forEach var="mydata" items="${mystatus}">
+									<option value="${mydata}" ${(menuOrderVO.menu_od_status==mydata)? 'selected':'' } >${mydata}
+								</c:forEach>
+					    	</select>
+					  	</div>
+					  	
+						<div class="form-group">
+				    		<label>預約日期</label>
+				    		<input name="menu_od_book" class="form-control" id="book_time" type="text" value="${menuOrderVO.menu_od_book}"/>${errMsgs.menu_od_book}
+					  	</div>
+					  	
+					  	<div class="form-group">
+					  		<jsp:useBean id="custSvc" scope="page" class="com.cust.model.CustService" />
+						    <label>顧客編號</label>
+						    <input type="text" readonly name="cust_ID" class="form-control" value="${menuOrderVO.cust_ID}" />
+						</div>
+						
+						<div class="form-group">
+					 		<jsp:useBean id="chefSvc" scope="page" class="com.chef.model.ChefService" />
+					    	<label>主廚編號</label>
+					    	<select size="1" name="chef_ID" class="form-control">
+					     		<c:forEach var="chefVO" items="${chefSvc.all}">
+									<option value="${chefVO.chef_ID}" ${(menuOrderVO.chef_ID==cheftVO.chef_ID)? 'selected':'' } >${chefVO.chef_ID}
+								</c:forEach>
+					    	</select>
+					  	</div>
+					  	
+						<div class="form-group">
+					 		<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
+					    	<label>套餐編號</label>
+					    	<select size="1" name="menu_ID" class="form-control">
+					     		<c:forEach var="menuVO" items="${menuSvc.all}">
+									<option value="${menuVO.menu_ID}" ${(menuOrderVO.menu_ID==menuVO.menu_ID)? 'selected':'' } >${menuVO.menu_ID}
+								</c:forEach>
+					    	</select>
+					  	</div>
+					  	
+					  	<div class="form-group">
+				    		<label>完成日期</label>
+				    		<input name="menu_od_end" id="end_time" class="form-control" id="book_time" type="text" value="${menuOrderVO.menu_od_end}"/>${errMsgs.menu_od_end}
+					  	</div>
+						<%	
+							String rate[] = new String [5];
+							rate[0]="1";
+							rate[1]="2";
+							rate[2]="3";
+							rate[3]="4";
+							rate[4]="5";
+							request.setAttribute("myrate", rate);
+						%>
+						<div class="form-group">			
+					    	<label>訂單評價</label>
+					    	<select size="1" name="menu_od_rate" class="form-control">
+					     		<c:forEach var="myrate" items="${myrate}">
+									<option value="${myrate}" ${(menuOrderVO.menu_od_rate==myrate)? 'selected':'' } >${myrate}
+								</c:forEach>
+					    	</select>
+					  	</div>
+					  	
+						<div class="form-group">
+						    <label>訂單留言</label>
+						    <textarea rows="3" cols="100" name="menu_od_msg" class="form-control">${menuOrderVO.menu_od_msg}</textarea>
+						</div>							
+					<input type="hidden" name="action" value="update">
+					<input type="submit" class="btn btn-success btn-lg btn-block" value="修改訂單">			
+				</form>
+			</div>
+  		</div>
+  	</div>
 	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

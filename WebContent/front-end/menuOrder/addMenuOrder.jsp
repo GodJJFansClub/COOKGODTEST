@@ -14,13 +14,14 @@
 <title>Hello, Bootstrap!</title>
 </head>
 <body>
-	<div class="card"
-		style="width: 32rem; background-color: #D4E6F1; margin: 10px;">
-		<div class="card-body text-center">
-			<h5 class="card-title">新增套餐訂單_addMenuOrder.jsp</h5>
-			<a href="index.jsp" class="card-link">回首頁</a>
-		</div>
+	<div class="card text-center" style="background-color: #D4E6F1">	  
+	  <div class="card-body" >
+	    <h5 class="card-title">新增套餐訂單</h5>
+	    <p class="card-text">addMenuOrder.jsp</p>
+	    <a href="index.jsp" class="btn btn-primary">回首頁</a>
+	  </div>
 	</div>
+	
 	<%--Error Message --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red;font-size:20px;">Error:</font>
@@ -30,44 +31,50 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
-	<form method = "post" action = "menuOrder.do" name = "insertMenuOrderForm">						
-		<table>
-			<tr>
-				<td>預約日期:</td>
-				<td><input name="menu_od_book" id="book_time" type="text"/></td><td>${errMsgs.menu_od_book}</td>
-			</tr>
-			<jsp:useBean id="custSvc" scope="page" class="com.cust.model.CustService" />
-			<tr>
-				<td>顧客編號:<font color=red><b>*</b></font></td>
-				<td><select size="1" name="cust_ID">
-					<c:forEach var="custVO" items="${custSvc.all}">
-						<option value="${custVO.cust_ID}" ${(menuOrderVO.cust_ID==custVO.cust_ID)? 'selected':'' } >${custVO.cust_ID}
-					</c:forEach>
-				</select></td>
-			</tr>
-			<jsp:useBean id="chefSvc" scope="page" class="com.chef.model.ChefService" />
-			<tr>
-				<td>主廚編號:<font color=red><b>*</b></font></td>
-				<td><select size="1" name="chef_ID">
-					<c:forEach var="chefVO" items="${chefSvc.all}">
-						<option value="${chefVO.chef_ID}" ${(menuOrderVO.chef_ID==chefVO.chef_ID)? 'selected':'' } >${chefVO.chef_ID}
-					</c:forEach>
-				</select></td>
-			</tr>
-			<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
-			<tr>
-				<td>套餐編號:<font color=red><b>*</b></font></td>
-				<td><select size="1" name="menu_ID">
-					<c:forEach var="menuVO" items="${menuSvc.all}">
-						<option value="${menuVO.menu_ID}" ${(menuOrderVO.menu_ID==menuVO.menu_ID)? 'selected':'' } >${menuVO.menu_ID}
-					</c:forEach>
-				</select></td>
-			</tr>
-		</table>
-		<input type="hidden" name="action" value="insert">
-		<input type="submit" value="新增訂單">		
-	</form>
+	<div class="container justify-content-center">
+  		<div class="row">
+  			<div class="col-12">
+				<form method = "post" action = "menuOrder.do" name = "insertMenuOrderForm">	
+					<div class="form-group">
+			    		<label>預約日期</label>
+			    		<input name="menu_od_book" class="form-control" id="book_time" type="text"/>${errMsgs.menu_od_book}
+				  	</div>
+				  	
+				 	<div class="form-group">
+				 		<jsp:useBean id="custSvc" scope="page" class="com.cust.model.CustService" />
+				    	<label>顧客編號</label>
+				    	<select size="1" name="cust_ID" class="form-control">
+				     		<c:forEach var="custVO" items="${custSvc.all}">
+								<option value="${custVO.cust_ID}" ${(menuOrderVO.cust_ID==custVO.cust_ID)? 'selected':'' } >${custVO.cust_ID}
+							</c:forEach>
+				    	</select>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				 		<jsp:useBean id="chefSvc" scope="page" class="com.chef.model.ChefService" />
+				    	<label>主廚編號</label>
+				    	<select size="1" name="chef_ID" class="form-control">
+				     		<c:forEach var="chefVO" items="${chefSvc.all}">
+								<option value="${chefVO.chef_ID}" ${(menuOrderVO.chef_ID==cheftVO.chef_ID)? 'selected':'' } >${chefVO.chef_ID}
+							</c:forEach>
+				    	</select>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				 		<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
+				    	<label>套餐編號</label>
+				    	<select size="1" name="menu_ID" class="form-control">
+				     		<c:forEach var="menuVO" items="${menuSvc.all}">
+								<option value="${menuVO.menu_ID}" ${(menuOrderVO.menu_ID==menuVO.menu_ID)? 'selected':'' } >${menuVO.menu_ID}
+							</c:forEach>
+				    	</select>
+				  	</div>
+					<input type="hidden" name="action" value="insert">
+					<input type="submit" class="btn btn-success btn-lg btn-block" value="新增訂單">		
+				</form>
+			</div>
+  		</div>
+  	</div>
 	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
