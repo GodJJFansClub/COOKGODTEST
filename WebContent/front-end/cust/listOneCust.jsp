@@ -4,11 +4,12 @@
 
 <%
   CustVO custVO = (CustVO) request.getAttribute("custVO"); //SustServlet.java(Concroller), 存入req的custVO物件
+ 
 %>
 
 <html>
 <head>
-<title>會員資料 - listOneCust.jsp</title>
+<title>顧客資料 - listOneCust.jsp</title>
 
 <style>
   table#table-1 {
@@ -45,31 +46,34 @@
 
 </head>
 <body bgcolor='white'>
+ <%if(custVO!=null) {
+ 	
+ %>
 
 <h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料 - ListOneCust.jsp</h3>
+		 <h3>顧客資料 - ListOneCust.jsp</h3>
 		 <h4><a href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>會員編號</th>
-		<th>會員帳號</th>
-		<th>會員密碼</th>
-		<th>會員姓名</th>
-		<th>會員姓別</th>
-		<th>會員電話</th>
-		<th>會員地址</th>
-		<th>會員身份證字號</th>
-		<th>email</th>
-		<th>會員生日</th>
-		<th>會員註冊日</th>
+		<th>顧客編號</th>
+		<th>顧客帳號</th>
+		<th>顧客密碼</th>
+		<th>顧客性名</th>
+		<th>顧客性別</th>
+		<th>顧客電話</th>
+		<th>顧客地址</th>
+		<th>顧客身份證字號</th>
+		<th>E-mail</th>
+		<th>顧客生日</th>
+		<th>顧客註冊日</th>
 		<th>大頭照</th>
-		<th>會員狀態</th>
-		<th>會員暱稱</th>
+		<th>顧客狀態</th>
+		<th>顧客暱稱</th>
 	</tr>
 	<tr>
 		<td><%=custVO.getCust_ID()%></td>
@@ -83,12 +87,12 @@
 		<td><%=custVO.getCust_mail()%></td>
 		<td><%=custVO.getCust_brd()%></td>
 		<td><%=custVO.getCust_reg()%></td>
-		<td><%=custVO.getCust_pic()%></td>
+		<td><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></td>
 		<td><%=custVO.getCust_status()%></td>
 		<td><%=custVO.getCust_niname()%></td>
 		
 	</tr>
 </table>
-
+<%}%>
 </body>
 </html>

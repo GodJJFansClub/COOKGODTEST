@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料修改 - update_cust_input.jsp</title>
+<title>顧客資料修改 - update_cust_input.jsp</title>
 
 <style>
   table#table-1 {
@@ -48,7 +48,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料修改 - update_cust_input.jsp</h3>
+		 <h3>顧客資料修改 - update_cust_input.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -68,73 +68,77 @@
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" name="form1">
 <table>
 	<tr>
-				<td>會員帳號:</td>
+				<td>顧客帳號:</td>
 				<td><input type="TEXT" name="cust_acc" size="45"
-					value="<%=custVO.getCust_ID()%>" /></td>
+					value="<%=custVO.getCust_acc()%>" /></td>
 			</tr>
 		
 			<tr>
-				<td>會員密碼:</td>
+				<td>顧客密碼:</td>
 				<td><input type="TEXT" name="cust_pwd" size="45"
 					value="<%=custVO.getCust_pwd()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員姓名:</td>
+				<td>顧客性名:</td>
 				<td><input type="TEXT" name="cust_name" size="45"
 					value="<%=custVO.getCust_name()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員身分證字號:</td>
+				<td>顧客身分證字號:</td>
 				<td><input type="TEXT" name="cust_pid" size="45"
 					value="<%=custVO.getCust_pid()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員性別:</td>
-				<td><input type="text" name="cust_sex" size="45"
-					value="<%=custVO.getCust_sex()%>" /></td>
+				<td>顧客性別:</td>
+				<td><input type="radio" name="cust_sex" size="45"
+					value="M" />男
+				<input type="radio" name="cust_sex" size="45"
+					value="F" />女</td>
 			</tr>
 			
 			<tr>
-				<td>會員生日:</td>
+				<td>顧客生日:</td>
 				<td><input type="date" name="cust_brd" size="45"
 					/></td>
 			</tr>
 			
 			<tr>
-				<td>會員電話:</td>
+				<td>顧客電話:</td>
 				<td><input type="TEXT" name="cust_tel" size="45"
 					value="<%=custVO.getCust_tel()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員地址:</td>
+				<td>顧客地址:</td>
 				<td><input type="TEXT" name="cust_addr" size="45"
 					value="<%=custVO.getCust_addr()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員信箱:</td>
+				<td>顧客信箱:</td>
 				<td><input type="TEXT" name="cust_mail" size="45"
 					value="<%=custVO.getCust_mail()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員狀態:</td>
-				<td><input type="TEXT" name="cust_status" size="45"
-					value="<%=custVO.getCust_status()%>" /></td>
+				<td>顧客狀態:</td>
+				<td><input type="radio" name="cust_status" size="45"
+					value="a0" />未停權
+				<input type="radio" name="cust_status" size="45"
+					value="a1" />停權</td>
 			</tr>
 			
 			<tr>
-				<td>會員暱稱:</td>
+				<td>顧客暱稱:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
 					value="<%=custVO.getCust_niname()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員大頭照:</td>
+				<td>顧客大頭照:</td>
 				<td><input type="file" name="cust_pic" size="45"
 					 /></td>
 			</tr>

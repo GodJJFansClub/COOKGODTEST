@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>會員資料新增 - addCust.jsp</title>
+<title>顧客資料新增 - addCust.jsp</title>
 
 <style>
 table#table-1 {
@@ -63,71 +63,73 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" name="form1 enctype="multipart/form-data">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" name="form1" enctype="multipart/form-data">
 		
 		<table>
 			<tr>
-				<td>會員帳號:</td>
+				<td>顧客帳號:</td>
 				<td><input type="TEXT" name="cust_acc" size="45"
-					 /></td>
+					value="<%= (custVO==null)? "Aa158556" : custVO.getCust_acc()%>"  /></td>
 			</tr>
 		
 			<tr>
-				<td>會員密碼:</td>
+				<td>顧客密碼:</td>
 				<td><input type="TEXT" name="cust_pwd" size="45"
 					value="<%= (custVO==null)? "Aa123456" : custVO.getCust_pwd()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員姓名:</td>
+				<td>顧客性名:</td>
 				<td><input type="TEXT" name="cust_name" size="45"
-					value="<%= (custVO==null)? "吳永志" : custVO.getCust_name()%>" /></td>
+					value="<%= (custVO==null)? "teddy" : custVO.getCust_name()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員身分證字號:</td>
+				<td>身分證字號:</td>
 				<td><input type="TEXT" name="cust_pid" size="45"
 					value="<%= (custVO==null)? "a987654321" : custVO.getCust_pid()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員性別:</td>
-				<td><input type="text" name="cust_sex" size="45"
-					value="<%= (custVO==null)? "d" : custVO.getCust_sex()%>" /></td>
+				<td >顧客性別:</td>
+				<td><input type="radio" name="cust_sex" size="10"
+					value="M" />男
+					<input type="radio" name="cust_sex" size="10"
+					value="F" />女</td>
 			</tr>
 			
 			<tr>
-				<td>會員生日:</td>
+				<td>顧客生日:</td>
 				<td><input type="date" name="cust_brd" size="45"
 					/></td>
 			</tr>
 			
 			<tr>
-				<td>會員電話:</td>
+				<td>顧客電話:</td>
 				<td><input type="TEXT" name="cust_tel" size="45"
 					value="<%= (custVO==null)? "09090909" : custVO.getCust_tel()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員地址:</td>
+				<td>顧客地址:</td>
 				<td><input type="TEXT" name="cust_addr" size="45"
 					value="<%= (custVO==null)? "中央大學" : custVO.getCust_addr()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員信箱:</td>
+				<td>顧客信箱:</td>
 				<td><input type="TEXT" name="cust_mail" size="45"
 					value="<%= (custVO==null)? "gggccc@yahoo" : custVO.getCust_mail()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員暱稱:</td>
+				<td>顧客暱稱:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%= (custVO==null)? "吳志" : custVO.getCust_niname()%>" /></td>
+					value="<%= (custVO==null)? "555" : custVO.getCust_niname()%>" /></td>
 			</tr>
 			
 			<tr>
-				<td>會員大頭照:</td>
+				<td>顧客大頭照:</td>
 				<td><input type="file" name="cust_pic" size="45"
 					 /></td>
 			</tr>

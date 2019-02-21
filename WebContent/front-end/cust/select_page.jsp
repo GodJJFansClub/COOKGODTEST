@@ -54,7 +54,7 @@
   
   <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" >
-        <b>輸入會員編號:</b>
+        <b>輸入顧客編號:</b>
         <input type="text" name="cust_ID">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
@@ -65,7 +65,7 @@
   
   <li>
    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" >
-       <b>選擇員工編號:</b>
+       <b>選擇顧客編號:</b>
        <select size="1" name="cust_ID">
          <c:forEach var="custVO" items="${custSvc.all}" > 
           <option value="${custVO.cust_ID}">${custVO.cust_ID}
@@ -78,7 +78,7 @@
   
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do" >
-       <b>選擇會員姓名:</b>
+       <b>選擇顧客性名:</b>
        <select size="1" name="cust_ID">
          <c:forEach var="custVO" items="${custSvc.all}" > 
           <option value="${custVO.cust_ID}">${custVO.cust_name}
@@ -91,7 +91,7 @@
 </ul>
 
 
-<h3>會員管理</h3>
+<h3>顧客管理</h3>
 
 <ul>
   <li><a href='addCust.jsp'>Add</a> a new Cust.</li>
