@@ -172,14 +172,19 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 				menuOrderVO.setCust_ID(rs.getString("CUST_ID"));
 				menuOrderVO.setChef_ID(rs.getString("CHEF_ID"));
 				menuOrderVO.setMenu_ID(rs.getString("MENU_ID"));
-			}			
-			return menuOrderVO;
-		
+			}		
 		}catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		}catch(SQLException se){
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if(pstmt!=null) {
 				try {
 					pstmt.close();
@@ -194,7 +199,8 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 					e.printStackTrace();
 				}
 			}
-		}	
+		}
+		return menuOrderVO;	
 	}
 
 	@Override

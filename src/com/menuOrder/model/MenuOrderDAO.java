@@ -31,7 +31,7 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 	private static final String Get_One_Stmt = 
 			"SELECT * FROM MENU_ORDER WHERE MENU_OD_ID = ?";
 	private static final String Get_All_Stmt = 
-			"SELECT * FROM MENU_ORDER";
+			"SELECT * FROM MENU_ORDER ORDER BY MENU_OD_ID";
 	
 
 	@Override
@@ -171,12 +171,17 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 				menuOrderVO.setCust_ID(rs.getString("CUST_ID"));
 				menuOrderVO.setChef_ID(rs.getString("CHEF_ID"));
 				menuOrderVO.setMenu_ID(rs.getString("MENU_ID"));
-			}			
-			return menuOrderVO;
-		
+			}		
 		}catch(SQLException se){
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if(pstmt!=null) {
 				try {
 					pstmt.close();
@@ -191,7 +196,8 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 					e.printStackTrace();
 				}
 			}
-		}	
+		}			
+		return menuOrderVO;
 	}
 
 	@Override

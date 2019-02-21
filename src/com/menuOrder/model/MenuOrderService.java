@@ -23,14 +23,16 @@ public class MenuOrderService {
 				
 		return menuOrderVO;	
 	}
-	public MenuOrderVO updateMenuOrder(String menu_od_status, Timestamp menu_od_book, Date menu_od_end, Integer menu_od_rate, String menu_od_msg, String chef_ID, String menu_ID) {
+	public MenuOrderVO updateMenuOrder(String menu_od_ID,String menu_od_status, Timestamp menu_od_book, Date menu_od_end, Integer menu_od_rate, String menu_od_msg, String cust_ID, String chef_ID, String menu_ID) {
 		
-		MenuOrderVO menuOrderVO = new MenuOrderVO();	
+		MenuOrderVO menuOrderVO = new MenuOrderVO();
+		menuOrderVO.setMenu_od_ID(menu_od_ID);
 		menuOrderVO.setMenu_od_status(menu_od_status);
 		menuOrderVO.setMenu_od_book(menu_od_book);
 		menuOrderVO.setMenu_od_end(menu_od_end);
 		menuOrderVO.setMenu_od_rate(menu_od_rate);
 		menuOrderVO.setMenu_od_msg(menu_od_msg);
+		menuOrderVO.setChef_ID(cust_ID);
 		menuOrderVO.setChef_ID(chef_ID);
 		menuOrderVO.setMenu_ID(menu_ID);	
 		dao.update(menuOrderVO);
