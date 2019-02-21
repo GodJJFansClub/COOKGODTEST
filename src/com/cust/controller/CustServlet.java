@@ -23,11 +23,11 @@ public class CustServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
-		
+
 		String s = req.getParameter("cust_ID");
 		CustService ds = new CustService();
-		CustVO dao = (CustVO)ds.getOneCust(s);
-		byte[] sb =dao.getCust_pic();
+		CustVO dao = (CustVO) ds.getOneCust(s);
+		byte[] sb = dao.getCust_pic();
 		out.write(sb);
 		doPost(req, res);
 	}
@@ -37,11 +37,8 @@ public class CustServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-		
-		
 
-	// 新增
+		// 新增
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -173,11 +170,11 @@ public class CustServlet extends HttpServlet {
 
 				Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
 //				out.write("<h2> Total parts : " + parts.size() + "</h2>");
-				
+
 				for (Part part : parts) {
 					if (getFileNameFromPart(part) != null && part.getContentType() != null) {
 //						out.println("<PRE>");
-						
+
 						// 利用File物件,寫入目地目錄,上傳成功
 //						part.write(f.toString());
 
@@ -233,7 +230,7 @@ public class CustServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-	//查詢-單一
+		// 查詢-單一
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -294,7 +291,7 @@ public class CustServlet extends HttpServlet {
 			}
 		}
 
-	//查詢-全部
+		// 查詢-全部
 		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -324,7 +321,7 @@ public class CustServlet extends HttpServlet {
 			}
 		}
 
-	//修改
+		// 修改
 		if ("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -411,7 +408,7 @@ public class CustServlet extends HttpServlet {
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
 
 				// 11.狀態
-				String cust_status =new String(req.getParameter("cust_status".trim()));
+				String cust_status = new String(req.getParameter("cust_status".trim()));
 				if (cust_status == null || cust_status.trim().length() == 0) {
 					errorMsgs.add("狀態請勿空白");
 				}
@@ -458,11 +455,11 @@ public class CustServlet extends HttpServlet {
 
 				Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
 //				out.write("<h2> Total parts : " + parts.size() + "</h2>");
-				
+
 				for (Part part : parts) {
 					if (getFileNameFromPart(part) != null && part.getContentType() != null) {
 //						out.println("<PRE>");
-						
+
 						// 利用File物件,寫入目地目錄,上傳成功
 //						part.write(f.toString());
 
@@ -495,8 +492,7 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.
-							getRequestDispatcher("/cust/update_cust_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/cust/update_cust_input.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -505,25 +501,24 @@ public class CustServlet extends HttpServlet {
 //				/***************************2.開始修改資料*****************************************/
 				CustService custSvc = new CustService();
 
-				custVO = custSvc.updateCust(cust_ID,cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
-						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
+				custVO = custSvc.updateCust(cust_ID, cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr,
+						cust_pid, cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
 //				custVO = custSvc.updateCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
-				/***************************3.修改完成,準備轉交(Send the Success view)*************/
+				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/front-end/cust/listOneCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				/***************************其他可能的錯誤處理*************************************/
+				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req.
-						getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
+				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
 				failureView.forward(req, res);
-				
+
 			}
 		}
-		
-		//刪除
+
+		// 刪除
 		if ("delete".equals(action)) { // 來自listAllCust.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
