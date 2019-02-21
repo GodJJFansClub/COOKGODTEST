@@ -17,7 +17,7 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 	private static final String INSERT_STMT =
 			"INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD";
+			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD ORDER BY FOOD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_ID = ?";
 	private static final String DELETE = 
@@ -273,13 +273,13 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 		// 新增
 //		FoodVO foodVO1 = new FoodVO();
 //		foodVO1.setFood_name("大白菜");
-//		foodVO1.setFood_type("F01");
+//		foodVO1.setFood_type_ID("F01");
 //		dao.insert(foodVO1);
 		// 修改
 //		FoodVO foodVO1 = new FoodVO();
 //		foodVO1.setFood_ID("F00027");
 //		foodVO1.setFood_name("AAA");
-//		foodVO1.setFood_type("F03");
+//		foodVO1.setFood_type_ID("F03");
 //		dao.update(foodVO1);
 		// 刪除
 //		dao.delete("F00027");
@@ -287,13 +287,13 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 //		FoodVO foodVO1 = dao.findByPrimaryKey("F00021");
 //		System.out.println(foodVO1.getFood_ID());
 //		System.out.println(foodVO1.getFood_name());
-//		System.out.println(foodVO1.getFood_type());
+//		System.out.println(foodVO1.getFood_type_ID());
 		// 查全部
 //		List<FoodVO> foodVOs = dao.getAll();
 //		for(FoodVO foodVO:foodVOs) {
 //			System.out.print(foodVO.getFood_ID());
 //			System.out.print(foodVO.getFood_name());
-//			System.out.print(foodVO.getFood_type());
+//			System.out.print(foodVO.getFood_type_ID());
 //			System.out.println();
 //		}
 		

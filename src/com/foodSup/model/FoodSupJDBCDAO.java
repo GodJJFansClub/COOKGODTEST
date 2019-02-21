@@ -23,11 +23,11 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 	private static final String UPDATE_STMT = 
 			"UPDATE FOOD_SUP SET FOOD_SUP_NAME = ?, FOOD_SUP_TEL = ?, FOOD_SUP_STATUS = ?, FOOD_SUP_RESUME = ? WHERE FOOD_SUP_ID = ?";
 	private static final String GET_ALL_STMT = 
-			"SELECT FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME FROM FOOD_SUP";
+			"SELECT FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME FROM FOOD_SUP ORDER BY FOOD_SUP_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME FROM FOOD_SUP WHERE FOOD_SUP_ID = ?";
 	private static final String GET_FoodMalls_ByFood_sup_ID_STMT = 
-			"SELECT FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL WHERE FOOD_SUP_ID = ?";
+			"SELECT FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL WHERE FOOD_SUP_ID = ? ORDER BY FOOD_SUP_ID";
 	
 	@Override
 	public void insert(FoodSupVO foodSupVO) {
@@ -330,14 +330,14 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 //		System.out.println(foodSupVO.getFood_sup_resume());
 		
 		// 查詢全部
-//		List<FoodSupVO> foodSupVOs = foodSupJDBCDAO.getAll();
-//		for(FoodSupVO foodSupVO:foodSupVOs) {
-//			System.out.print(foodSupVO.getFood_sup_ID() + " ");
-//			System.out.print(foodSupVO.getFood_sup_name() + " ");
-//			System.out.print(foodSupVO.getFood_sup_tel() + " ");
-//			System.out.print(foodSupVO.getFood_sup_status() + " ");
-//			System.out.println(foodSupVO.getFood_sup_resume() + " ");
-//		}
+		List<FoodSupVO> foodSupVOs = foodSupJDBCDAO.getAll();
+		for(FoodSupVO foodSupVO:foodSupVOs) {
+			System.out.print(foodSupVO.getFood_sup_ID() + " ");
+			System.out.print(foodSupVO.getFood_sup_name() + " ");
+			System.out.print(foodSupVO.getFood_sup_tel() + " ");
+			System.out.print(foodSupVO.getFood_sup_status() + " ");
+			System.out.println(foodSupVO.getFood_sup_resume() + " ");
+		}
 		
 		// 查詢某一食材商的全部食材
 //		Set<FoodMallVO> foodMallVOs = foodSupJDBCDAO.getFoodMallsByFood_sup_ID("C00012");

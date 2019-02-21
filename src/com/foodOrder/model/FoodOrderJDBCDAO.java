@@ -20,7 +20,7 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 	private static final String INSERT_STMT = 
 			"INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_SEND, FOOD_OR_RCV, FOOD_OR_END, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID) VALUES ('FO'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.NEXTVAL), 6, '0'), ?, sysdate, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT FOOD_OR_ID, FOOD_OR_STATUS, to_char(FOOD_OR_START,'yyyy-mm-dd') FOOD_OR_START,to_char(FOOD_OR_SEND,'yyyy-mm-dd') FOOD_OR_SEND,to_char( FOOD_OR_RCV,'yyyy-mm-dd') FOOD_OR_RCV, to_char( FOOD_OR_END,'yyyy-mm-dd') FOOD_OR_END, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID FROM FOOD_ORDER";
+			"SELECT FOOD_OR_ID, FOOD_OR_STATUS, to_char(FOOD_OR_START,'yyyy-mm-dd') FOOD_OR_START,to_char(FOOD_OR_SEND,'yyyy-mm-dd') FOOD_OR_SEND,to_char( FOOD_OR_RCV,'yyyy-mm-dd') FOOD_OR_RCV, to_char( FOOD_OR_END,'yyyy-mm-dd') FOOD_OR_END, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID FROM FOOD_ORDER ORDER BY FOOD_OR_ID";
 	private static final String GET_ONE_STMT =
 			"SELECT FOOD_OR_ID, FOOD_OR_STATUS, to_char(FOOD_OR_START,'yyyy-mm-dd') FOOD_OR_START,to_char(FOOD_OR_SEND,'yyyy-mm-dd') FOOD_OR_SEND,to_char( FOOD_OR_RCV,'yyyy-mm-dd') FOOD_OR_RCV, to_char( FOOD_OR_END,'yyyy-mm-dd') FOOD_OR_END, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID FROM FOOD_ORDER WHERE FOOD_OR_ID = ?";
 	private static final String DELETE = 
@@ -323,19 +323,19 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 //		System.out.println(foodOrderVO.getFood_or_tel());
 //		System.out.println(foodOrderVO.getCust_ID());
 		// 查詢全部
-//		List<FoodOrderVO> foodOrderVOs = foodOrderJDBCDAO.getAll();
-//		for(FoodOrderVO foodOrderVO: foodOrderVOs) {		
-//			System.out.print(foodOrderVO.getFood_or_ID() + " ");
-//			System.out.print(foodOrderVO.getFood_or_status() + " ");
-//			System.out.print(foodOrderVO.getFood_or_start() + " ");
-//			System.out.print(foodOrderVO.getFood_or_send() + " ");
-//			System.out.print(foodOrderVO.getFood_or_rcv() + " ");
-//			System.out.print(foodOrderVO.getFood_or_end() + " ");
-//			System.out.print(foodOrderVO.getFood_or_name() + " ");
-//			System.out.print(foodOrderVO.getFood_or_addr() + " ");
-//			System.out.print(foodOrderVO.getFood_or_tel() + " ");
-//			System.out.print(foodOrderVO.getCust_ID() + " ");
-//			System.out.println();
-//		}
+		List<FoodOrderVO> foodOrderVOs = foodOrderJDBCDAO.getAll();
+		for(FoodOrderVO foodOrderVO: foodOrderVOs) {		
+			System.out.print(foodOrderVO.getFood_or_ID() + " ");
+			System.out.print(foodOrderVO.getFood_or_status() + " ");
+			System.out.print(foodOrderVO.getFood_or_start() + " ");
+			System.out.print(foodOrderVO.getFood_or_send() + " ");
+			System.out.print(foodOrderVO.getFood_or_rcv() + " ");
+			System.out.print(foodOrderVO.getFood_or_end() + " ");
+			System.out.print(foodOrderVO.getFood_or_name() + " ");
+			System.out.print(foodOrderVO.getFood_or_addr() + " ");
+			System.out.print(foodOrderVO.getFood_or_tel() + " ");
+			System.out.print(foodOrderVO.getCust_ID() + " ");
+			System.out.println();
+		}
 	}
 }
