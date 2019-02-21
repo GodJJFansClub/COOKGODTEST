@@ -1,6 +1,7 @@
 package com.foodSup.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import javax.sql.DataSource;
 
 import com.foodMall.model.FoodMallVO;
 
-public class FoodSupJNDIDAO implements FoodSupDAO_interface {
+public class FoodSupDAO implements FoodSupDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {
@@ -221,7 +222,7 @@ public class FoodSupJNDIDAO implements FoodSupDAO_interface {
 
 		return foodSupVOs;
 	}
-
+	
 	@Override
 	public Set<FoodMallVO> getFoodMallsByFood_sup_ID(String food_sup_ID) {
 		Set<FoodMallVO> set = new LinkedHashSet<FoodMallVO>();

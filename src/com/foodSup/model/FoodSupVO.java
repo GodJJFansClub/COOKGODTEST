@@ -1,6 +1,10 @@
 package com.foodSup.model;
 
-public class FoodSupVO {
+import java.io.Serializable;
+
+public class FoodSupVO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private String food_sup_ID;
 	private String food_sup_name;
 	private String food_sup_tel;

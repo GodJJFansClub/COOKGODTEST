@@ -54,4 +54,13 @@
 	<servlet-name>ReportServlet</servlet-name>
 	<url-pattern>/back-end/report/report.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FoodMallServlet</servlet-name>
+  	<servlet-class>com.foodMall.controller.FoodMallServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FoodMallServlet</servlet-name>
+  	<url-pattern>/foodSupManaMall/foodSupManaMall.do</url-pattern>
+  </servlet-mapping>
 </web-app>

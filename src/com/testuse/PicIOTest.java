@@ -1,4 +1,4 @@
-package piciotest;
+package com.testuse;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

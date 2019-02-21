@@ -245,7 +245,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	
 	public static void main(String[] args) {
 		FoodMallJDBCDAO fMDao = new FoodMallJDBCDAO();
-		piciotest.PicIOTest picIOTest = new piciotest.PicIOTest();
+		com.testuse.PicIOTest picIOTest = new com.testuse.PicIOTest();
 		
 		// 新增
 //		FoodMallVO foodMallVO = new FoodMallVO();

@@ -68,7 +68,13 @@
 			</tr>
 			<tr>
 				<td>食材種類:</td>
-				<td><input type="TEXT" name="food_type_ID" size="45"	value="${foodVO.food_type_ID}" /></td>
+				<td>
+					<select size="1" name="food_type_ID">
+						<c:forEach var="food_type" items="${food_type}">
+							<option value="${food_type.key}" ${(foodVO.food_type_ID == food_type.key)?'selected':''}>${food_type.value}
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 		</table>
 		<br>

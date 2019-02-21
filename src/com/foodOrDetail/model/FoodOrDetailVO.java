@@ -1,6 +1,9 @@
 package com.foodOrDetail.model;
 
-public class FoodOrDetailVO {
+import java.io.Serializable;
+
+public class FoodOrDetailVO implements Serializable {
+	private static final long serialVersionUID = 4L;
 	private String food_or_ID;
 	private String food_sup_ID;
 	private String food_ID;

@@ -46,7 +46,7 @@
 	</c:if>
 	<%-- 不封死嗎, 這樣forward和include會不會太危險 --%>
 	<ul>
-		<li><a href='listAllFood.jsp'>List</a> all Food. <br><br></li>
+		<li><a href='<%=request.getContextPath()%>/back-end/food/listAllFood.jsp'>List</a> all Food. <br><br></li>
 		<li>
 			<%-- 封死路徑, 強制由專案門口起算, request JSP幫你宣告好的物件 --%>
 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do">
@@ -92,7 +92,7 @@
 	
 	<h3>食材管理</h3>
 	<ul>
-		<li><a href='addFood.jsp'>Add</a>a new Food.</li>
+		<li><a href='<%=request.getContextPath()%>/back-end/food/addFood.jsp'>Add</a>a new Food.</li>
 	</ul>
 </body>
 </html>
