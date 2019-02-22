@@ -44,7 +44,7 @@ public class MenuService {
 		return dao.findByPrimaryKey(menu_ID);
 	}
 
-	public List<MenuVO> gelAllMenu() {
+	public List<MenuVO> getAll() {
 		return dao.getAll();
 	}
 

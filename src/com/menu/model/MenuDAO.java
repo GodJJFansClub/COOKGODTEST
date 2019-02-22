@@ -14,7 +14,7 @@ public class MenuDAO implements MenuDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -217,7 +217,7 @@ public class MenuDAO implements MenuDAO_interface {
 				menuVO.setMenu_ID(rs.getString("MENU_ID"));
 				menuVO.setMenu_name(rs.getString("MENU_NAME"));
 				menuVO.setMenu_resume(rs.getString("MENU_RESUME"));
-				menuVO.setMenu_pic(rs.getBytes("MENU_PIC"));
+//				menuVO.setMenu_pic(rs.getBytes("MENU_PIC"));
 				menuVO.setMenu_status(rs.getString("MENU_STATUS"));
 				menuVO.setMenu_price(rs.getInt("MENU_PRICE"));
 				list.add(menuVO);
