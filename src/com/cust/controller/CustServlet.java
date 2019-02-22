@@ -23,12 +23,20 @@ public class CustServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
+		List<String> errorMsgs = new LinkedList<String>();
 
 		String s = req.getParameter("cust_ID");
-		CustService ds = new CustService();
-		CustVO dao = (CustVO) ds.getOneCust(s);
-		byte[] sb = dao.getCust_pic();
-		out.write(sb);
+		try {
+			CustService ds = new CustService();
+			CustVO dao = (CustVO) ds.getOneCust(s);
+			byte[] sb = dao.getCust_pic();
+			out.write(sb);
+		
+		}catch(NullPointerException e){
+			errorMsgs.add("a");
+			
+		}
+		
 		doPost(req, res);
 	}
 
@@ -76,31 +84,31 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 4.性別
-				String cust_sex = new String(req.getParameter("cust_sex".trim()));
-				if (cust_sex == null || cust_sex.trim().length() == 0) {
+				String cust_sex = req.getParameter("cust_sex");
+				if (cust_sex == null || cust_sex.length() == 0) {
 					errorMsgs.add("性別請勿空白");
 				}
 
 				// 5.電話
-				String cust_tel = new String(req.getParameter("cust_tel".trim()));
+				String cust_tel =req.getParameter("cust_tel").trim();
 				if (cust_tel == null || cust_tel.trim().length() == 0) {
 					errorMsgs.add("電話請勿空白");
 				}
 
 				// 6.地址
-				String cust_addr = new String(req.getParameter("cust_addr".trim()));
+				String cust_addr =req.getParameter("cust_addr").trim();
 				if (cust_addr == null || cust_addr.trim().length() == 0) {
 					errorMsgs.add("地址請勿空白");
 				}
 
 				// 7.身分證字號
-				String cust_pid = new String(req.getParameter("cust_pid".trim()));
+				String cust_pid =req.getParameter("cust_pid").trim();
 				if (cust_pid == null || cust_pid.trim().length() == 0) {
 					errorMsgs.add("身分證字號請勿空白");
 				}
 
 				// 8.e-mail
-				String cust_mail = new String(req.getParameter("cust_mail".trim()));
+				String cust_mail =req.getParameter("cust_mail").trim();
 				if (cust_mail == null || cust_mail.trim().length() == 0) {
 					errorMsgs.add("e-mail請勿空白");
 				}
@@ -117,10 +125,7 @@ public class CustServlet extends HttpServlet {
 				// 10.註冊日
 				// 註冊日期
 				SimpleDateFormat setDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				/*
-				 * 時：分：秒 HH:mm:ss HH : 23小時制 (0-23) kk : 24小時制 (1-24) hh : 12小時制 (1-12) KK :
-				 * 11小時制 (0-11)
-				 */
+				
 				String xx = setDateFormat.format(Calendar.getInstance().getTime());
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
 
@@ -128,65 +133,20 @@ public class CustServlet extends HttpServlet {
 				String cust_status = "a0";
 
 				// 12.暱稱
-				String cust_niname = new String(req.getParameter("cust_niname".trim()));
+				String cust_niname =req.getParameter("cust_niname").trim();
 				if (cust_niname == null || cust_niname.trim().length() == 0) {
 					errorMsgs.add("暱稱請勿空白");
 				}
 
 				// 13.圖片
-				byte[] cust_pic = null;
-//				File pic = new File(req.getParameter("cust_pic".trim()));
-//				FileInputStream fis = null;
-//				ByteArrayOutputStream baos = null;
-//
 //				byte[] cust_pic = null;
-//				try {
-//					fis = new FileInputStream(pic);
-//					cust_pic = new byte[fis.available()];
-//				} catch (FileNotFoundException e) {
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				} finally {
-//					if (fis != null) {
-//						try {
-//							fis.close();
-//						} catch (IOException e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				}
+				Part part= req.getPart("cust_pic");
+				InputStream in = part.getInputStream();
+				byte[] cust_pic = new byte[in.available()];
+				in.read(cust_pic);
+				in.close();
+				
 
-				String saveDirectory = "/images_uploaded";
-				req.setCharacterEncoding("Big5"); // 處理中文檔名
-				res.setContentType("text/html; charset=Big5");
-//				PrintWriter out = res.getWriter();
-
-				String realPath = getServletContext().getRealPath(saveDirectory);
-
-				File fsaveDirectory = new File(realPath);
-				if (!fsaveDirectory.exists())
-					fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
-
-				Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
-//				out.write("<h2> Total parts : " + parts.size() + "</h2>");
-
-				for (Part part : parts) {
-					if (getFileNameFromPart(part) != null && part.getContentType() != null) {
-//						out.println("<PRE>");
-
-						// 利用File物件,寫入目地目錄,上傳成功
-//						part.write(f.toString());
-
-						// 額外測試 InputStream 與 byte[] (幫將來model的VO預作準備)
-						InputStream in = part.getInputStream();
-						byte[] buf = new byte[in.available()];
-						in.read(buf);
-						in.close();
-						cust_pic = buf;
-
-					}
-				}
 
 				// set
 				CustVO custVO = new CustVO();
@@ -207,29 +167,29 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/cust/addCust.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
 
 					failureView.forward(req, res);
 					return;
 				}
 
-//			
+				//將資料加入資料庫
 				CustService custSvc = new CustService();
 
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
-//				custVO = custSvc.addCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
-
 				String url = "/front-end/cust/listAllCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-
+				
+				//除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
 				failureView.forward(req, res);
 			}
 		}
+		
 		// 查詢-單一
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -327,6 +287,8 @@ public class CustServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
+				
+				//0.id
 				String cust_ID = new String(req.getParameter("cust_ID").trim());
 				// 1.姓名
 				String cust_name = req.getParameter("cust_name");
@@ -346,7 +308,8 @@ public class CustServlet extends HttpServlet {
 				} else if (!cust_pwd.trim().matches(cust_pwdReg)) {
 					errorMsgs.add(cust_pwd);
 				}
-
+				
+				
 				// "顧客密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
 
 				// 3.帳號
@@ -359,19 +322,19 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 4.性別
-				String cust_sex = new String(req.getParameter("cust_sex".trim()));
-				if (cust_sex == null || cust_sex.trim().length() == 0) {
+				String cust_sex =req.getParameter("cust_sex");
+				if (cust_sex == null || cust_sex.length() == 0) {
 					errorMsgs.add("性別請勿空白");
 				}
 
 				// 5.電話
-				String cust_tel = new String(req.getParameter("cust_tel".trim()));
+				String cust_tel =req.getParameter("cust_tel").trim();
 				if (cust_tel == null || cust_tel.trim().length() == 0) {
 					errorMsgs.add("電話請勿空白");
 				}
 
 				// 6.地址
-				String cust_addr = new String(req.getParameter("cust_addr".trim()));
+				String cust_addr =req.getParameter("cust_addr").trim();
 				if (cust_addr == null || cust_addr.trim().length() == 0) {
 					errorMsgs.add("地址請勿空白");
 				}

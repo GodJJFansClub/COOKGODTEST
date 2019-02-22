@@ -63,8 +63,7 @@ th, td {
 				<h3>所有顧客資料 - listAllCust.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp"><img
-						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -120,8 +119,8 @@ th, td {
 				<td>${custVO.cust_mail}</td>
 				<td>${custVO.cust_brd}</td>
 				<td>${custVO.cust_reg}</td>
-				<td><img
-					src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></td>
+				<td><c:if test="${not empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></c:if>
+				    <c:if test="${empty custVO.cust_pic}"><img src="images/null2.jpg"></c:if></td>
 
 				<c:if test="${custVO.cust_status.equals('a0')}" var="true"
 					scope="session">

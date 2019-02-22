@@ -5,6 +5,7 @@
 
 <%
 	CustVO custVO = (CustVO) request.getAttribute("custVO");
+	Integer i = (Integer)request.getAttribute("aaa");
 %>
 
 <!DOCTYPE html>
@@ -75,7 +76,7 @@ th, td {
 
 			<tr>
 				<td>顧客密碼:</td>
-				<td><input type="TEXT" name="cust_pwd" size="45"
+				<td><input type="password" name="cust_pwd" size="45"
 					value="<%=(custVO == null) ? "Aa123456" : custVO.getCust_pwd()%>" /></td>
 			</tr>
 
@@ -93,13 +94,16 @@ th, td {
 
 			<tr>
 				<td>顧客性別:</td>
-				<td><input type="radio" name="cust_sex" size="10" value="M" />男
-					<input type="radio" name="cust_sex" size="10" value="F" />女</td>
+				<td> <input type="radio" name="cust_sex" size="10" value="M" 
+				 ${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' } />男 
+					 <input type="radio" name="cust_sex" size="10" value="F"  
+				${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }/>女
+				</td>
 			</tr>
 
 			<tr>
 				<td>顧客生日:</td>
-				<td><input type="date" name="cust_brd" size="45" /></td>
+				<td><input type="TEXT" name="cust_brd" id="f_date1" size="45" /></td>
 			</tr>
 
 			<tr>
@@ -158,6 +162,66 @@ th, td {
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
+<script>
+        $.datetimepicker.setLocale('zh');
+        $('#f_date1').datetimepicker({
+           theme: '',              //theme: 'dark',
+ 	       timepicker:true,       //timepicker:true,
+ 	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
+ 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+ 		   value: '${custVO.cust_brd}', // value:   new Date(),
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+	});
+
+	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
+
+	//      1.以下為某一天之前的日期無法選擇
+	//      var somedate1 = new Date('2017-06-15');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() <  somedate1.getYear() || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
+
+	//      2.以下為某一天之後的日期無法選擇
+	//      var somedate2 = new Date('2017-06-15');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() >  somedate2.getYear() || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
+
+	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
+	//      var somedate1 = new Date('2017-06-15');
+	//      var somedate2 = new Date('2017-06-25');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() <  somedate1.getYear() || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+	//		             ||
+	//		            date.getYear() >  somedate2.getYear() || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
+</script>
 <script>
 	function setImagePreview() {
 		var docObj = document.getElementById("doc");

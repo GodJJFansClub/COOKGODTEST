@@ -56,8 +56,7 @@ th, td {
 				<h3>顧客資料修改 - update_cust_input.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp"><img
-						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -201,8 +200,7 @@ th, td {
  	       timepicker:true,       //timepicker:true,
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=custVO.getCust_brd()%>
-	', // value:   new Date(),
+ 		   value: '<%=custVO.getCust_brd()%>', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
