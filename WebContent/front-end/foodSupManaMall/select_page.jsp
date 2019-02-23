@@ -7,28 +7,12 @@
 <% 	
 	
 	foodSupVO.setFood_sup_ID("C00012");
-	session.setAttribute("foodSupVO", foodSupVO);
-   	Map<String, String> statusMapStr = new HashMap<String, String>();
-   	statusMapStr.put("p0", "審核不通過");
-   	statusMapStr.put("p1", "審核通過");
-   	statusMapStr.put("p2", "未審核");
-   	statusMapStr.put("p3", "下架");
-   	statusMapStr.put("p4", "上架");
-   	
-   	Map<String, String> foodUnitMap = new HashMap<String, String>();
-   	foodUnitMap.put("u0", "公斤");
-   	foodUnitMap.put("u1", "臺斤");
-   	foodUnitMap.put("u2", "克");
-   	foodUnitMap.put("u3", "包");
-   	foodUnitMap.put("u4", "碗");
-   	foodUnitMap.put("u5", "磅");
-   	
-    application.setAttribute("statusMapStr", statusMapStr);
-    application.setAttribute("foodUnitMap", foodUnitMap);
+	
+
 %>
 <html>
 <head>
-<title>食材供應商食材管理頁面</title>
+<title>食材供應商食材商品管理頁面</title>
 <style>
 	table#table-1 {
 		width: 450px;

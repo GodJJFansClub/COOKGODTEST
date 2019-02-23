@@ -64,8 +64,8 @@
 		<tr>
 			<th>食材商編號</th>
 			<th>食材編號</th>
-			<th>食材商品名稱</th>
-			<th>食材商品狀態</th>
+			<th>標題</th>
+			<th>商品狀態</th>
 			<th>價格</th>
 			<th>單位</th>
 			<th>產地</th>
@@ -74,15 +74,15 @@
 			<th>評價</th>
 		</tr>
 		
-		<%@ include file="/page/page1.file" %>
+		<%@ include file="/file/page1.file" %>
 		<c:forEach var="foodMallVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<tr>
 				<td>${foodMallVO.food_sup_ID}</td>
 				<td>${foodMallVO.food_ID}</td>
 				<td>${foodMallVO.food_m_name}</td>
-				<td>${statusMapStr[foodMallVO.food_m_status]}</td>
+				<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
 				<td>${foodMallVO.food_m_price}</td>
-				<td>${foodUnitMap[foodMallVO.food_m_unit]}</td>
+				<td>${foodMallVO.food_m_unit}</td>
 				<td>${foodMallVO.food_m_place}</td>
 				<%--<td><img src="data:image/png;base64,${foodMallVO.food_m_pic}"></td> --%>
 				<td><img src="<%=request.getContextPath()%>/foodSupManaMall/foodSupManaMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"></td>
@@ -99,6 +99,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="/page/page2.file" %>
+	<%@ include file="/file/page2.file" %>
 </body>
 </html>

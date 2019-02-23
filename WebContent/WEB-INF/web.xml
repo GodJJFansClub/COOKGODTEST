@@ -63,4 +63,13 @@
   	<servlet-name>FoodMallServlet</servlet-name>
   	<url-pattern>/foodSupManaMall/foodSupManaMall.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FoodSupServlet</servlet-name>
+  	<servlet-class>com.foodSup.controller.FoodSupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FoodSupServlet</servlet-name>
+  	<url-pattern>/foodSup/foodSup.do</url-pattern>
+  </servlet-mapping>
 </web-app>
