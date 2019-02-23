@@ -8,8 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import piciotest.PicIOTest;
+import com.testuse.PicIOTest;
 
 public class CustJDBCDAO implements CustDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";

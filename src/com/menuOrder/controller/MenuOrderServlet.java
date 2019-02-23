@@ -27,7 +27,7 @@ public class MenuOrderServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		String indexUrl = "/menuOrder/index.jsp";
-		
+		//新增一筆訂單
 		if("insert".equals(action)) {
 			//1.接收參數，處理錯誤
 			List<String> errorMsgs = new LinkedList<String>();
@@ -70,6 +70,7 @@ public class MenuOrderServlet extends HttpServlet {
 				errView.forward(request, response);
 			}
 		}
+		//取出一筆訂單準備修改
 		if("getOneForUpdate".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -93,7 +94,7 @@ public class MenuOrderServlet extends HttpServlet {
 				errView.forward(request, response);
 			}
 		}
-	
+		//修改訂單
 		if("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -102,22 +103,24 @@ public class MenuOrderServlet extends HttpServlet {
 				//1.接收請求參數，並做錯誤判斷
 				String menu_od_ID = request.getParameter("menu_od_ID");
 				String menu_od_status = request.getParameter("menu_od_status");
+				
 				Timestamp menu_od_book = null;	
 				try {
 					menu_od_book = Timestamp.valueOf(request.getParameter("menu_od_book").trim());
 				}catch(Exception e){
 					menu_od_book = null;
-					errorMsgs.add("請輸入正確日期");
+					errorMsgs.add("請輸入正確預約日期");
 				}
 				java.sql.Date menu_od_end = null;
 				try {
 					menu_od_end = java.sql.Date.valueOf(request.getParameter("menu_od_end").trim());
 				}catch(Exception e){
 					menu_od_end = null;
-					errorMsgs.add("請輸入正確日期");
+					errorMsgs.add("請輸入正確完成日期");
 				}
 				Integer menu_od_rate = new Integer(request.getParameter("menu_od_rate"));
 				String menu_od_msg = request.getParameter("menu_od_msg");
+				String cust_ID = request.getParameter("cust_ID");
 				String chef_ID = request.getParameter("chef_ID");
 				String menu_ID = request.getParameter("menu_ID");
 				
@@ -128,6 +131,7 @@ public class MenuOrderServlet extends HttpServlet {
 				menuOrderVO.setMenu_od_end(menu_od_end);
 				menuOrderVO.setMenu_od_rate(menu_od_rate);
 				menuOrderVO.setMenu_od_msg(menu_od_msg);
+				menuOrderVO.setChef_ID(cust_ID);
 				menuOrderVO.setChef_ID(chef_ID);
 				menuOrderVO.setMenu_ID(menu_ID);
 				
@@ -139,8 +143,8 @@ public class MenuOrderServlet extends HttpServlet {
 				}
 				//2.開始修改資料
 				MenuOrderService menuOrderSvc = new MenuOrderService();
-				menuOrderVO = menuOrderSvc.updateMenuOrder(menu_od_status, menu_od_book, menu_od_end, menu_od_rate, menu_od_msg, chef_ID, menu_ID);
-				
+				menuOrderVO = menuOrderSvc.updateMenuOrder(menu_od_ID, menu_od_status, menu_od_book, menu_od_end, menu_od_rate, menu_od_msg, cust_ID, chef_ID, menu_ID);
+				menuOrderVO = menuOrderSvc.getOneMenuOrder(menu_od_ID);
 				//3.修改完成，轉交資料
 				request.setAttribute("menuOrderVO", menuOrderVO);
 				RequestDispatcher sucessView = request.getRequestDispatcher("/menuOrder/listOneMenuOrder.jsp");
@@ -152,15 +156,15 @@ public class MenuOrderServlet extends HttpServlet {
 				errView.forward(request, response);
 			}
 		}
-
+		//取得一筆訂單
 		if("getOneMenuOrder".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			
 			try{
 				//1.接收請求參數，並做錯誤判斷
-				String str = request.getParameter("menu_od_ID");
-				if(str==null||str.trim().length()==0) {
+				String menu_od_ID = request.getParameter("menu_od_ID");
+				if(menu_od_ID==null||menu_od_ID.trim().length()==0) {
 					errorMsgs.add("請輸入訂單編號");
 				}
 				if(!errorMsgs.isEmpty()) {
@@ -168,20 +172,7 @@ public class MenuOrderServlet extends HttpServlet {
 							request.getRequestDispatcher(indexUrl); 
 					errView.forward(request, response);
 					return;				
-				}
-				String menu_od_ID = null;
-				try {
-					menu_od_ID = new String(str);
-				}catch(Exception e) {
-					errorMsgs.add("套餐訂單編號格式不正確");
-				}
-				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher errView = 
-							request.getRequestDispatcher(indexUrl);
-					errView.forward(request, response);
-					return;//程式中斷
-				}
-				
+				}				
 				//2.開始查詢資料
 				MenuOrderService menuOrderSvc = new MenuOrderService();
 				MenuOrderVO menuOrderVO = menuOrderSvc.getOneMenuOrder(menu_od_ID);
@@ -206,6 +197,28 @@ public class MenuOrderServlet extends HttpServlet {
 						request.getRequestDispatcher(indexUrl);
 				errView.forward(request, response);
 			}	
+		}
+		//刪除
+		if("delete".equals(action)) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			request.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				//1.接收參數
+				String menu_od_ID = request.getParameter("menu_od_ID");
+				//2.準備刪除
+				MenuOrderService menuOrderSvc = new MenuOrderService();
+				menuOrderSvc.deleteMenuOrder(menu_od_ID);
+				//3.刪除完成，準備轉交
+				RequestDispatcher sucessView = request.getRequestDispatcher("/menuOrder/listAllMenuOrder.jsp");
+				sucessView.forward(request, response);
+				//其他可能的錯誤處理
+			}catch(Exception e){
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				RequestDispatcher errView = request.getRequestDispatcher("/menuOrder/listAllMenuOrder.jsp");
+				errView.forward(request, response);
+			}
 		}
 	}
 }

@@ -1,6 +1,5 @@
 package com.festMenu.model;
 
-import java.sql.Clob;
 import java.sql.Date;
 
 public class FestMenuVO {

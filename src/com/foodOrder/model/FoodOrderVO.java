@@ -1,8 +1,11 @@
 package com.foodOrder.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class FoodOrderVO {
+public class FoodOrderVO implements Serializable{
+	
+	private static final long serialVersionUID = 3L;
 	private String food_or_ID;
 	private String food_or_status;
 	private Date food_or_start;

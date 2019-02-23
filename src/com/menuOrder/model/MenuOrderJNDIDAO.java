@@ -171,11 +171,16 @@ public class MenuOrderJNDIDAO implements MenuOrderDAO_Interface{
 				menuOrderVO.setChef_ID(rs.getString("CHEF_ID"));
 				menuOrderVO.setMenu_ID(rs.getString("MENU_ID"));
 			}			
-			return menuOrderVO;
-		
 		}catch(SQLException se){
 			throw new RuntimeException("Database Error : " + se.getMessage());
 		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if(pstmt!=null) {
 				try {
 					pstmt.close();
@@ -190,7 +195,8 @@ public class MenuOrderJNDIDAO implements MenuOrderDAO_Interface{
 					e.printStackTrace();
 				}
 			}
-		}	
+		}			
+		return menuOrderVO;
 	}
 
 	@Override

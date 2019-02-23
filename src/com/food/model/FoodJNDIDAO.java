@@ -26,7 +26,7 @@ public class FoodJNDIDAO implements FoodDAO_interface {
 	private static final String INSERT_STMT =
 			"INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD";
+			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD ORDER BY FOOD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_ID = ?";
 	private static final String DELETE = 

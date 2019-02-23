@@ -1,6 +1,10 @@
 package com.foodMall.model;
 
-public class FoodMallVO {
+import java.io.Serializable;
+
+public class FoodMallVO implements Serializable {
+	
+	private static final long serialVersionUID = 2L;
 	private String food_sup_ID;
 	private String food_ID;
 	private String food_m_name;

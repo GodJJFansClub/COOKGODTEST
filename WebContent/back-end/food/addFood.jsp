@@ -78,7 +78,7 @@
 			<td>
 				<select size="1" name="food_type_ID">
 					<c:forEach var="food_type" items="${food_type}">
-						<option value="${food_type.key}">${food_type.value}
+						<option value="${food_type.key}" ${(foodVO.food_type_ID == food_type.key)?'selected':''}>${food_type.value}
 					</c:forEach>
 				</select>
 			</td>

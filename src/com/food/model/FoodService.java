@@ -24,7 +24,7 @@ public class FoodService {
 		foodVO.setFood_ID(food_ID);
 		foodVO.setFood_name(food_name);
 		foodVO.setFood_type_ID(food_type);
-		dao.insert(foodVO);
+		dao.update(foodVO);
 		
 		return foodVO;
 	}
