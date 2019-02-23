@@ -83,7 +83,7 @@
 	<tr>
 		<td>檢舉分類:</td>
 		<td><input type="TEXT" name="report_sort" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章分類" :reportVO.getReport_sort()%>" /></td>
+			 value="<%= (reportVO==null)? "1" :reportVO.getReport_sort()%>" /></td>
 	</tr>
 	
 	<tr>
@@ -95,7 +95,7 @@
 	<tr>
 		<td>檢舉狀態:</td>
 		<td><input type="TEXT" name="report_status" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章狀態" : reportVO.getReport_status()%>" /></td>
+			 value="<%= (reportVO==null)? "1" : reportVO.getReport_status()%>" /></td>
 	</tr>
 	
 	<tr>
@@ -107,13 +107,13 @@
 	<tr>
 		<td>會員編號:</td>
 		<td><input type="TEXT" name="cust_ID" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章會員編號" :reportVO.getCust_ID()%>" /></td>
+			 value="<%= (reportVO==null)? "C00001" :reportVO.getCust_ID()%>" /></td>
 	</tr>
 	
 	<tr>
 		<td>文章編號:</td>
 		<td><input type="TEXT" name="forum_art_ID" size="45" 
-			 value="<%= (reportVO==null)? "請選擇檢舉文章編號" : reportVO.getForum_art_ID()%>" /></td>
+			 value="<%= (reportVO==null)? "A00001" : reportVO.getForum_art_ID()%>" /></td>
 	</tr>
 </table>
 <br>

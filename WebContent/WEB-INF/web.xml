@@ -11,12 +11,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/CookGodDB</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
+  
   <servlet>
     <servlet-name>FoodServlet</servlet-name>
     <servlet-class>com.food.controller.FoodServlet</servlet-class>
@@ -56,8 +58,8 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>FoodMallServlet</servlet-name>
-  	<servlet-class>com.foodMall.controller.FoodMallServlet</servlet-class>
+    <servlet-name>FoodMallServlet</servlet-name>
+    <servlet-class>com.festMall.controller.FoodMallServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>FoodMallServlet</servlet-name>
@@ -72,4 +74,24 @@
   	<servlet-name>FoodSupServlet</servlet-name>
   	<url-pattern>/foodSup/foodSup.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FestOrderServlet</servlet-name>
+  	<servlet-class>com.festOrder.controller.FestOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FestOrderServlet</servlet-name>
+    <url-pattern>/front-end/festOrder/festOrder.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>FestOrderDetailServlet</servlet-name>
+    <servlet-class>com.festOrderDetail.controller.FestOrderDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FestOrderDetailServlet</servlet-name>
+    <url-pattern>/front-end/festOrderDetail/festOrderDetail.do</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

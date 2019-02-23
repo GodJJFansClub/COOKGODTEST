@@ -163,8 +163,8 @@ public class MenuOrderServlet extends HttpServlet {
 			
 			try{
 				//1.接收請求參數，並做錯誤判斷
-				String str = request.getParameter("menu_od_ID");
-				if(str==null||str.trim().length()==0) {
+				String menu_od_ID = request.getParameter("menu_od_ID");
+				if(menu_od_ID==null||menu_od_ID.trim().length()==0) {
 					errorMsgs.add("請輸入訂單編號");
 				}
 				if(!errorMsgs.isEmpty()) {
@@ -172,20 +172,7 @@ public class MenuOrderServlet extends HttpServlet {
 							request.getRequestDispatcher(indexUrl); 
 					errView.forward(request, response);
 					return;				
-				}
-				String menu_od_ID = null;
-				try {
-					menu_od_ID = new String(str);
-				}catch(Exception e) {
-					errorMsgs.add("套餐訂單編號格式不正確");
-				}
-				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher errView = 
-							request.getRequestDispatcher(indexUrl);
-					errView.forward(request, response);
-					return;//程式中斷
-				}
-				
+				}				
 				//2.開始查詢資料
 				MenuOrderService menuOrderSvc = new MenuOrderService();
 				MenuOrderVO menuOrderVO = menuOrderSvc.getOneMenuOrder(menu_od_ID);

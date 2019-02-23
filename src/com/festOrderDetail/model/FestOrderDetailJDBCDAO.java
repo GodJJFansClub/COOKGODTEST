@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.festOrderDetail.model.FestOrderDetailVO;
 
-public class FestOrderDetailJDBCDAO implements FestOrderDetailDAO_interface {
+public class FestOrderDetailJDBCDAO implements FestOrderDetail_Interface {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String USER = "COOKGOD";

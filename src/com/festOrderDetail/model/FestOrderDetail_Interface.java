@@ -2,7 +2,7 @@ package com.festOrderDetail.model;
 
 import java.util.List;
 
-public interface FestOrderDetailDAO_interface {
+public interface FestOrderDetail_Interface {
 	void insert(FestOrderDetailVO festOrderDetailVO);
 	void update(FestOrderDetailVO festOrderDetailVO);
 	void delete(String fest_or_ID);
