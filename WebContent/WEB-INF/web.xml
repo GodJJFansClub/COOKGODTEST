@@ -54,4 +54,24 @@
 	<servlet-name>ReportServlet</servlet-name>
 	<url-pattern>/back-end/report/report.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FestOrderServlet</servlet-name>
+    <servlet-class>com.festOrder.controller.FestOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FestOrderServlet</servlet-name>
+    <url-pattern>/front-end/festOrder/festOrder.do</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>FestOrderDetailServlet</servlet-name>
+    <servlet-class>com.festOrderDetail.controller.FestOrderDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FestOrderDetailServlet</servlet-name>
+    <url-pattern>/front-end/festOrderDetail/festOrderDetail.do</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>
