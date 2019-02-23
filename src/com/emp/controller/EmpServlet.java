@@ -2,7 +2,7 @@ package com.emp.controller;
 
 
 	import java.io.*;
-	import java.text.SimpleDateFormat;
+
 	import java.util.*;
 
 	import javax.servlet.RequestDispatcher;
@@ -58,30 +58,30 @@ package com.emp.controller;
 					String emp_name = req.getParameter("emp_name");
 					String emp_nameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 					if (emp_name == null || emp_name.trim().length() == 0) {
-						errorMsgs.add("顧客姓名: 請勿空白");
+						errorMsgs.add("員工姓名: 請勿空白");
 					} else if (!emp_name.trim().matches(emp_nameReg)) {
 						errorMsgs.add(emp_name);
 					}
-					// "顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
+					// "員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
 
 					// 2.密碼
 					String emp_pwd = req.getParameter("emp_pwd");
 					String emp_pwdReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
 					if (emp_pwd == null || emp_pwd.trim().length() == 0) {
-						errorMsgs.add("顧客密碼: 請勿空白");
+						errorMsgs.add("員工密碼: 請勿空白");
 					} else if (!emp_pwd.trim().matches(emp_pwdReg)) {
 						errorMsgs.add(emp_pwd);
 					}
 
-					// "顧客密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
+					// "員工密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
 
 					// 3.帳號
 					String emp_acc = req.getParameter("emp_acc");
 					String emp_accReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
 					if (emp_acc == null || emp_acc.trim().length() == 0) {
-						errorMsgs.add("顧客帳號: 請勿空白");
+						errorMsgs.add("員工帳號: 請勿空白");
 					} else if (!emp_acc.trim().matches(emp_accReg)) {
-						errorMsgs.add("顧客帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
+						errorMsgs.add("員工帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
 					}
 
 					
@@ -139,7 +139,7 @@ package com.emp.controller;
 					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 					String str = req.getParameter("emp_ID");
 					if (str == null || (str.trim()).length() == 0) {
-						errorMsgs.add("請輸入顧客編號");
+						errorMsgs.add("請輸入員工編號");
 					}
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
@@ -152,7 +152,7 @@ package com.emp.controller;
 					try {
 						emp_ID = new String(str);
 					} catch (Exception e) {
-						errorMsgs.add("顧客編號格式不正確");
+						errorMsgs.add("員工編號格式不正確");
 					}
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
@@ -231,30 +231,30 @@ package com.emp.controller;
 					String emp_name = req.getParameter("emp_name");
 					String emp_nameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 					if (emp_name == null || emp_name.trim().length() == 0) {
-						errorMsgs.add("顧客姓名: 請勿空白");
+						errorMsgs.add("員工姓名: 請勿空白");
 					} else if (!emp_name.trim().matches(emp_nameReg)) {
 						errorMsgs.add(emp_name);
 					}
-					// "顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
+					// "員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
 
 					// 2.密碼
 					String emp_pwd = req.getParameter("emp_pwd");
 					String emp_pwdReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
 					if (emp_pwd == null || emp_pwd.trim().length() == 0) {
-						errorMsgs.add("顧客密碼: 請勿空白");
+						errorMsgs.add("員工密碼: 請勿空白");
 					} else if (!emp_pwd.trim().matches(emp_pwdReg)) {
 						errorMsgs.add(emp_pwd);
 					}
 
-					// "顧客密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
+					// "員工密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
 
 					// 3.帳號
 					String emp_acc = req.getParameter("emp_acc");
 					String emp_accReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
 					if (emp_acc == null || emp_acc.trim().length() == 0) {
-						errorMsgs.add("顧客帳號: 請勿空白");
+						errorMsgs.add("員工帳號: 請勿空白");
 					} else if (!emp_acc.trim().matches(emp_accReg)) {
-						errorMsgs.add("顧客帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
+						errorMsgs.add("員工帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
 					}
 
 					
