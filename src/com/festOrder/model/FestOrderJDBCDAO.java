@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.report.model.ReportJDBCDAO;
-import com.report.model.ReportVO;
-
 public class FestOrderJDBCDAO implements FestOrder_Interface {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";

@@ -9,9 +9,6 @@ import javax.servlet.http.*;
 import com.festOrder.model.FestOrderService;
 import com.festOrder.model.FestOrderVO;
 
-
-
-
 public class FestOrderServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
