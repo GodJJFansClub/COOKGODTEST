@@ -102,4 +102,13 @@
     <url-pattern>/emp/emp.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>FunServlet</servlet-name>
+    <servlet-class>com.fun.controller.FunServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FunServlet</servlet-name>
+    <url-pattern>/fun/fun.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
