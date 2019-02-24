@@ -7,9 +7,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import com.festOrder.model.FestOrderService;
-import com.festOrder.model.FestOrderVO;
 import com.festOrderDetail.model.FestOrderDetailService;
 import com.festOrderDetail.model.FestOrderDetailVO;
+import com.report.model.ReportVO;
 
 public class FestOrderDetailServlet extends HttpServlet {
 
@@ -48,21 +48,6 @@ public class FestOrderDetailServlet extends HttpServlet {
 					return;
 				}
 				
-//				String report_ID= null;
-//				try {
-//					report_ID= str;
-//				} catch (Exception e) {
-//					errorMsgs.add("檢舉編號格式不正確");
-//				}
-				
-				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front-end/festOrder/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-				
 				FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
 				System.out.println("檢查點e" +(i++));
 				FestOrderDetailVO festOrderDetailVO = festOrderDetailSvc.getOneFestOrderDetail(fest_or_ID);
@@ -78,16 +63,10 @@ public class FestOrderDetailServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				System.out.println("檢查點f" +(i++));
 				req.setAttribute("festOrderDetailVO", festOrderDetailVO); //資料庫取出的empVO物件，存入req
 				String url = "/front-end/festOrderDetail/listOneFestOrderDetail.jsp";
-				System.out.println("檢查點g" +(i++));
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
-				System.out.println("檢查點h" +(i++));
 				successView.forward(req, res);
-				System.out.println("檢查點i" +(i++));
-
-
 			} catch (Exception e) {
 				System.out.println("A");
 				errorMsgs.add("無法取得資料:" + e.getMessage());
@@ -107,7 +86,6 @@ public class FestOrderDetailServlet extends HttpServlet {
 			
 			try {
 				int i=1;
-				System.out.println(" "+ "檢查點2");
 				/***************************1.接收請求參數***************************************/
 				String fest_or_ID = req.getParameter("fest_or_ID");
 				
@@ -132,103 +110,88 @@ public class FestOrderDetailServlet extends HttpServlet {
 		}
 		
 		
-//		if ("update".equals(action)) { 
-//			List<String> errorMsgs = new LinkedList<String>();//來自update_emp_input.jsp的請求
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//		
-//			try {
-//				/**********************1.接收請求參數-輸入格式的錯務處理*********************/
-//				String fest_or_ID = req.getParameter("fest_or_ID").trim();
-//				
-//				String fest_m_ID = req.getParameter("fest_m_ID");
-//				
-//				Integer fest_or_rate = null;
-//				try {
-//					fest_or_rate = new Integer(req.getParameter("fest_or_rate").trim());
-//				} catch (NumberFormatException e) {
-//					fest_or_rate = 0;
-//					errorMsgs.add("訂單評價請填數字.");
-//				}
-//
-//				java.sql.Date fest_or_start = null;
-//				 try {
-//					fest_or_start = java.sql.Date.valueOf(req.getParameter("fest_or_start").trim());
-//				} catch (Exception e) {
-//					fest_or_start=new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入訂單成立日期!");
-//				}
-//				
-//				java.sql.Date fest_or_send = null;
-//				try {
-//					fest_or_send = java.sql.Date.valueOf(req.getParameter("fest_or_send").trim());
-//				} catch (IllegalArgumentException e) {
-//					fest_or_send=new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入訂單出貨日期!");
-//				}
-//				
-//				java.sql.Date fest_or_end = null;
-//				try {
-//					fest_or_end = java.sql.Date.valueOf(req.getParameter("fest_or_end").trim());
-//				} catch (IllegalArgumentException e) {
-//					fest_or_end=new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入訂單結束日期!");
-//				}
-//				
-//				System.out.println("  " +"A");
-//				String fest_or_disc = req.getParameter("fest_or_disc").trim();
-//				if (fest_or_disc == null || fest_or_disc.trim().length() == 0) {
-//					errorMsgs.add("折扣");
-//				}
-//				System.out.println("  " +"B");
-//				String cust_ID = req.getParameter("cust_ID").trim();
-//				if (cust_ID == null || cust_ID.trim().length() == 0) {
-//					errorMsgs.add("請輸入會員編號");
-//				}
-//				
-//				System.out.println("  " +"C");
-//				FestOrderVO festOrderVO=new FestOrderVO();
-//				festOrderVO.setFest_or_ID(fest_or_ID);
-//				festOrderVO.setFest_or_status(fest_or_status);
-//				festOrderVO.setFest_or_price(fest_or_price);
-//				festOrderVO.setFest_or_start(fest_or_start);
-//				festOrderVO.setFest_or_send(fest_or_send);
-//				festOrderVO.setFest_or_end(fest_or_end);
-//				festOrderVO.setFest_or_disc(fest_or_disc);
-//				festOrderVO.setCust_ID(cust_ID);
-//				System.out.println("  " +"檢查點13");
-//                //Send the use back to the form,if there were errors
-//                if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("festOrderVO", festOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front-end/festOrder/update_festOrder_input.jsp");
-//					failureView.forward(req, res);
-//					return; //程式中斷
-//				}
-//
-//				/***************************2.開始修改資料*****************************************/
-//                FestOrderService festOrderSvc = new FestOrderService();
-//				festOrderVO = festOrderSvc.updateFestOrder
-//						(fest_or_ID, fest_or_status, fest_or_price, fest_or_start, fest_or_send, 
-//								fest_or_end, fest_or_disc, cust_ID);
-//				System.out.println(festOrderVO);
-//				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-//				req.setAttribute("festOrderVO", festOrderVO); // 資料庫update成功後,正確的的empVO物件,存入req
-//				System.out.println(festOrderVO+"221");
-//				String url = "/front-end/festOrder/listAllFestOrder.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-//				successView.forward(req, res);
-//				System.out.println("  " +"檢查點16");
-//				
-//			} catch (Exception e) {
-//				errorMsgs.add("修改資料失敗:"+e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/front-end/festOrder/update_festOrder_input.jsp");
-//				failureView.forward(req, res);
-//			}
-//			
-//		}
+		if ("update".equals(action)) { 
+		
+			List<String> errorMsgs = new LinkedList<String>();//來自update_emp_input.jsp的請求
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+		
+			try {
+				/**********************1.接收請求參數-輸入格式的錯務處理*********************/
+				String fest_or_ID = req.getParameter("fest_or_ID").trim();
+				
+				String fest_m_ID = req.getParameter("fest_m_ID");
+				
+				Integer fest_or_rate = null;
+				try {
+					fest_or_rate = new Integer(req.getParameter("fest_or_rate").trim());
+				} catch (NumberFormatException e) {
+					fest_or_rate = 0;
+					errorMsgs.add("訂單評價請填數字.");
+				}
+				System.out.println("update"+"133");
+				String fest_or_msg = req.getParameter("fest_or_msg").trim();
+				if (fest_or_msg == null || fest_or_msg.trim().length() == 0) {
+					errorMsgs.add("訂單評價請留言");
+				}
+                
+				Integer fest_or_qty = null;
+				try {
+					fest_or_qty = new Integer(req.getParameter("fest_or_qty").trim());
+				} catch (NumberFormatException e) {
+					fest_or_rate = 0;
+					errorMsgs.add("訂單數量請填數字.");
+				}
+				System.out.println("update"+"146");
+				Integer fest_or_stotal = null;
+				try {
+					fest_or_stotal = new Integer(req.getParameter("fest_or_stotal").trim());
+				} catch (NumberFormatException e) {
+					fest_or_stotal = 0;
+					errorMsgs.add("訂單小計.");
+				}
+				
+				FestOrderDetailVO festOrderDetailVO=new FestOrderDetailVO();
+				festOrderDetailVO.setFest_or_ID(fest_or_ID);
+				festOrderDetailVO.setFest_m_ID(fest_m_ID);
+				festOrderDetailVO.setFest_or_rate(fest_or_rate);
+				festOrderDetailVO.setFest_or_msg(fest_or_msg);
+				festOrderDetailVO.setFest_or_qty(fest_or_qty);
+				festOrderDetailVO.setFest_or_stotal(fest_or_stotal);
+				System.out.println("update"+"162");
+                //Send the use back to the form,if there were errors
+                if (!errorMsgs.isEmpty()) {
+					req.setAttribute("festOrderDetailVO", festOrderDetailVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-end/festOrderDetail/update_festOrderDetail_input.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+
+				/***************************2.開始修改資料*****************************************/
+                FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
+				festOrderDetailVO = festOrderDetailSvc.updateFestOrderDetail
+						(fest_or_ID, fest_m_ID, fest_or_rate, fest_or_msg, fest_or_qty, 
+								fest_or_stotal);
+				System.out.println("update"+"177");
+				System.out.println(festOrderDetailVO);
+				/***************************3.修改完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("festOrderDetailVO", festOrderDetailVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				System.out.println(festOrderDetailVO+"221");
+				String url = "/front-end/festOrderDetail/listAllFestOrderDetail.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				successView.forward(req, res);
+				System.out.println("update"+"185");
+				
+			} catch (Exception e) {
+				errorMsgs.add("修改資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/festOrderDetail/update_festOrderDetail_input.jsp");
+				failureView.forward(req, res);
+			}
+			
+		}
 				
         if ("insert".equals(action)) { //來自addReport.jsp的請求 
 			System.out.println("檢查點256");
@@ -239,7 +202,6 @@ public class FestOrderDetailServlet extends HttpServlet {
 
 			try {
 				int i=1;
-				System.out.println("檢查點"+i++);
 				/***********************1.接收請求參數-輸入格式的錯誤處理*************************/
 				String fest_or_ID=req.getParameter("fest_or_ID").trim();
 				if (fest_or_ID == null || fest_or_ID.trim().length() == 0) {
@@ -249,7 +211,6 @@ public class FestOrderDetailServlet extends HttpServlet {
 				if (fest_m_ID == null || fest_m_ID.trim().length() == 0) {
 					errorMsgs.add("節慶料理編號請勿空白");
 				}
-				
 				Integer fest_or_rate = null;
 				try {
 					fest_or_rate = new Integer(req.getParameter("fest_or_rate").trim());
@@ -257,12 +218,11 @@ public class FestOrderDetailServlet extends HttpServlet {
 					fest_or_rate=0;
 					errorMsgs.add("請輸入訂單評價：");
 				}
-				
 				String fest_or_msg = req.getParameter("fest_or_msg").trim();
 				if (fest_or_msg == null || fest_or_msg.trim().length() == 0) {
 					errorMsgs.add("訂單評價留言請勿空白");
 				}
-				
+
 				Integer fest_or_qty = null;
 				try {
 					fest_or_qty = new Integer(req.getParameter("fest_or_qty").trim());
@@ -270,7 +230,7 @@ public class FestOrderDetailServlet extends HttpServlet {
 					fest_or_qty=0;
 					errorMsgs.add("請輸入訂單數量：");
 				}
-				
+
 				Integer fest_or_stotal = null;
 				try {
 					fest_or_stotal = new Integer(req.getParameter("fest_or_stotal").trim());
@@ -278,7 +238,7 @@ public class FestOrderDetailServlet extends HttpServlet {
 					fest_or_stotal=0;
 					errorMsgs.add("請輸入訂單小計：");
 				}
-			
+
 				FestOrderDetailVO festOrderDetailVO = new FestOrderDetailVO();
 				festOrderDetailVO.setFest_or_ID(fest_or_ID);
 				festOrderDetailVO.setFest_m_ID(fest_m_ID);
@@ -286,7 +246,7 @@ public class FestOrderDetailServlet extends HttpServlet {
 				festOrderDetailVO.setFest_or_msg(fest_or_msg);
 				festOrderDetailVO.setFest_or_qty(fest_or_qty);
 				festOrderDetailVO.setFest_or_stotal(fest_or_stotal);
-				System.out.println("檢查點"+i++);
+
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("festOrderDetailVO", festOrderDetailVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -295,12 +255,13 @@ public class FestOrderDetailServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				
+				System.out.println("檢查點"+"294");
 				/***************************2.開始新增資料**************************************/
 				FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
 				festOrderDetailVO = festOrderDetailSvc.addFestOrderDetail
 				(fest_or_ID,fest_m_ID,fest_or_rate,fest_or_msg,fest_or_qty,fest_or_stotal);
-				System.out.println("檢查點"+i++);
+				System.out.print(festOrderDetailVO);
+				System.out.println("檢查點"+ "299");
 				/***************************3.新增完成，準備提交(Send the Success view**********/
 				String url = "/front-end/festOrderDetail/listAllFestOrderDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); //
@@ -310,11 +271,11 @@ public class FestOrderDetailServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/festOrderDetail/addFestOrderDetail.jsp");
+						.getRequestDispatcher("/front-end/festOrderDetail/addReport.jsp");
 				failureView.forward(req, res);
 			}
-		}
-		
+
+        }
 	
 		if ("delete".equals(action)) { 
 			System.out.println("  " +"檢查點4");
@@ -331,10 +292,8 @@ public class FestOrderDetailServlet extends HttpServlet {
 				festOrderDetailSvc.deleteFestOrderDetail(fest_or_ID);
 											
 				String url = "/front-end/festOrderDetail/listAllFestOrderDetail.jsp";
-		//		System.out.println("  " +"檢查點5");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-		//		System.out.println("  " +"檢查點6");
 				
 			} catch (Exception e) {
 				System.out.println(" "+"檢查點7");
