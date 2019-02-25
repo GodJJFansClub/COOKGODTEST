@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.cust.model.*"%>
+<%@ page import="com.emp.model.*"%>
 
 <%
-	CustVO custVO = (CustVO) request.getAttribute("custVO");
+	EmpVO empVO = (EmpVO) request.getAttribute("empVO");
 	Integer i = (Integer)request.getAttribute("aaa");
 %>
 
@@ -13,7 +13,7 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>顧客資料新增 - addCust.jsp</title>
+<title>員工資料新增 - addEmp.jsp</title>
 
 <style>
 table#table-1 {
@@ -65,78 +65,32 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do"
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do"
 		name="form1" enctype="multipart/form-data">
 
 		<table>
 			<tr>
-				<td>顧客帳號:</td>
-				<td><input type="TEXT" name="cust_acc" size="45"
-					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /></td>
+				<td>員工帳號:</td>
+				<td><input type="TEXT" name="emp_acc" size="45"
+					value="<%=(empVO == null) ? "Aa158556" : empVO.getEmp_acc()%>" /></td>
 			</tr>
 
 			<tr>
-				<td>顧客密碼:</td>
-				<td><input type="password" name="cust_pwd" size="45"
-					value="<%=(custVO == null) ? "Aa123456" : custVO.getCust_pwd()%>" /></td>
+				<td>員工密碼:</td>
+				<td><input type="password" name="emp_pwd" size="45"
+					value="<%=(empVO == null) ? "Aa123456" : empVO.getEmp_pwd()%>" /></td>
 			</tr>
 
 			<tr>
-				<td>顧客姓名:</td>
-				<td><input type="TEXT" name="cust_name" size="45"
-					value="<%=(custVO == null) ? "teddy" : custVO.getCust_name()%>" /></td>
+				<td>員工姓名:</td>
+				<td><input type="TEXT" name="emp_name" size="45"
+					value="<%=(empVO == null) ? "teddy" : empVO.getEmp_name()%>" /></td>
 			</tr>
 
+			
 			<tr>
-				<td>身分證字號:</td>
-				<td><input type="TEXT" name="cust_pid" size="45"
-					value="<%=(custVO == null) ? "a987654321" : custVO.getCust_pid()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>顧客性別:</td>
-				<td> <input type="radio" name="cust_sex" size="10" value="M" 
-				 ${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' } />男 
-					 <input type="radio" name="cust_sex" size="10" value="F"  
-				${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }/>女
-				</td>
-			</tr>
-
-			<tr>
-				<td>顧客生日:</td>
-				<td><input type="TEXT" name="cust_brd" id="f_date1" size="45" /></td>
-			</tr>
-
-			<tr>
-				<td>顧客電話:</td>
-				<td><input type="TEXT" name="cust_tel" size="45"
-					value="<%=(custVO == null) ? "09090909" : custVO.getCust_tel()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>顧客地址:</td>
-				<td><div id="zipcode3">
-					<div class="f3" data-role="county"></div>
-					<div class="f4" data-role="district"></div></div>
-					<input name="Address" type="text" class="f13 address form-control">
-					</td>
-			</tr>
-
-			<tr>
-				<td>顧客信箱:</td>
-				<td><input type="TEXT" name="cust_mail" size="45"
-					value="<%=(custVO == null) ? "gggccc@yahoo" : custVO.getCust_mail()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>顧客暱稱:</td>
-				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%=(custVO == null) ? "555" : custVO.getCust_niname()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>顧客大頭照:</td>
-				<td><input type="file" name="cust_pic" size="45" id="doc"
+				<td>員工大頭照:</td>
+				<td><input type="file" name="emp_pic" size="45" id="doc"
 					onchange="javascript:setImagePreview();" /></td>
 			</tr>
 
@@ -151,14 +105,7 @@ th, td {
 
 	</FORM>
 </body>
-<%
-	java.sql.Date cust_brd = null;
-	try {
-		cust_brd = custVO.getCust_brd();
-	} catch (Exception e) {
-		cust_brd = new java.sql.Date(System.currentTimeMillis());
-	}
-%>
+
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
@@ -174,7 +121,7 @@ th, td {
  	       timepicker:true,       //timepicker:true,
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '${custVO.cust_brd}', // value:   new Date(),
+ 		   value: '${empVO.emp_brd}', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前

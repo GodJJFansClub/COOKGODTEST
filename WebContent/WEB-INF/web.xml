@@ -46,6 +46,22 @@
     <servlet-name>MenuOrderServlet</servlet-name>
     <url-pattern>/menuOrder/menuOrder.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ChefSchServlet</servlet-name>
+    <servlet-class>com.chefSch.controller.ChefSchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChefSchServlet</servlet-name>
+    <url-pattern>/chefSch/chefSch.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ChefDishServlet</servlet-name>
+    <servlet-class>com.chefDish.controller.ChefDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChefDishServlet</servlet-name>
+    <url-pattern>/chefDish/chefDish.do</url-pattern>
+  </servlet-mapping>
   
   
    <servlet>
@@ -93,5 +109,22 @@
     <url-pattern>/front-end/festOrderDetail/festOrderDetail.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>EmpServlet</servlet-name>
+    <servlet-class>com.emp.controller.EmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpServlet</servlet-name>
+    <url-pattern>/emp/emp.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FunServlet</servlet-name>
+    <servlet-class>com.fun.controller.FunServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FunServlet</servlet-name>
+    <url-pattern>/fun/fun.do</url-pattern>
+  </servlet-mapping>
   
 </web-app>

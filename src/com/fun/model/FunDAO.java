@@ -203,7 +203,7 @@ public class FunDAO implements FunDAO_interface {
 				funVO = new FunVO();
 				funVO.setFun_ID(rs.getString("FUN_ID"));
 				funVO.setFun_name(rs.getString("FUN_NAME"));
-								
+				list.add(funVO);				
 			 }
 			}catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
