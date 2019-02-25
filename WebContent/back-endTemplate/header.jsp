@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom CSS -->
+    <link href="<%=request.getContextPath()%>/back-endTemplate/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="<%=request.getContextPath()%>/back-endTemplate/dist/css/style.min.css" rel="stylesheet">
 </head>
 <body>
 	<header class="topbar" data-navbarbg="skin6">
@@ -55,21 +62,15 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
                                 <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 mr-1"></i>
+                                    <i class="font-20 mr-1"></i>
                                     <div class="ml-1 d-none d-sm-block">
-                                        <span>Search</span>
+                                        <span>管理合作廠商</span>
                                     </div>
                                 </div>
                             </a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
                         </li>
                     </ul>
                     <!-- ============================================================== -->
