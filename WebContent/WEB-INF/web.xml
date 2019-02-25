@@ -136,4 +136,13 @@
     <url-pattern>/fun/fun.do</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>AdServlet</servlet-name>
+    <servlet-class>com.ad.controller.AdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdServlet</servlet-name>
+    <url-pattern>/ad/ad.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

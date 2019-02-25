@@ -69,50 +69,24 @@ th, td {
 	<table>
 		<tr>
 			<th>廣告編號</th>
-			<th>廣告帳號</th>
-			<th>廣告密碼</th>
-			<th>廣告姓名</th>
-			<th>廣告性別</th>
-			<th>廣告電話</th>
-			<th>廣告地址</th>
-			<th>廣告身份證字號</th>
-			<th>E-mail</th>
-			<th>廣告生日</th>
-			<th>廣告註冊日</th>
-			<th>大頭照</th>
+			<th>廣告標題</th>
+			<th>廣告內文</th>
+			<th>廣告上架日期</th>
+			<th>廣告下架日期</th>
 			<th>廣告狀態</th>
-			<th>廣告暱稱</th>
+			<th>廣告類別</th>
+			<th>食材供應商</th>
+			
 		</tr>
 		<tr>
 			<td><%=adVO.getAd_ID()%></td>
-			<td><%=adVO.getAd_acc()%></td>
-			<td><%=adVO.getAd_pwd()%></td>
-			<td><%=adVO.getAd_title()%></td>
-			<c:if test="${adVO.ad_sex.equals('M')}" var="true"
-				scope="session">
-				<td>男生</td>
-			</c:if>
-			<c:if test="${adVO.ad_sex.equals('F')}" var="true"
-				scope="session">
-				<td>女生</td>
-			</c:if>
-			<td><%=adVO.getAd_tel()%></td>
-			<td><%=adVO.getAd_addr()%></td>
-			<td><%=adVO.getAd_pid()%></td>
-			<td><%=adVO.getAd_mail()%></td>
+			<td><%=adVO.getAd_con()%></td>
 			<td><%=adVO.getAd_start()%></td>
-			<td><%=adVO.getAd_reg()%></td>
-			<td><img
-				src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></td>
-			<c:if test="${adVO.ad_status.equals('a0')}" var="true"
-				scope="session">
-				<td>未停權</td>
-			</c:if>
-			<c:if test="${adVO.ad_status.equals('a1')}" var="true"
-				scope="session">
-				<td>停權</td>
-			</c:if>
-			<td><%=adVO.getAd_niname()%></td>
+			<td><%=adVO.getAd_end()%></td>
+			<td><%=adVO.getAd_status()%></td>
+			<td><%=adVO.getAd_type()%></td>
+			<td><%=adVO.getFood_sup_ID()%></td>
+		
 
 		</tr>
 	</table>

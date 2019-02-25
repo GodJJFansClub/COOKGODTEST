@@ -82,88 +82,40 @@ th, td {
 				<td><%=adVO.getAd_ID()%></td>
 			</tr>
 			<tr>
-				<td>廣告帳號:</td>
-				<td><input type="TEXT" name="ad_acc" size="45"
-					value="<%=adVO.getAd_acc()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>廣告密碼:</td>
-				<td><input type="TEXT" name="ad_pwd" size="45"
-					value="<%=adVO.getAd_pwd()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>廣告姓名:</td>
+				<td>廣告標題:</td>
 				<td><input type="TEXT" name="ad_title" size="45"
 					value="<%=adVO.getAd_title()%>" /></td>
 			</tr>
 
 			<tr>
-				<td>廣告身分證字號:</td>
-				<td><input type="TEXT" name="ad_pid" size="45"
-					value="<%=adVO.getAd_pid()%>" /></td>
+				<td>廣告內文:</td>
+				<td><input type="TEXT" name="ad_con" size="45"
+					value="<%=adVO.getAd_con()%>" /></td>
 			</tr>
-
+			
 			<tr>
-				<td>廣告性別:</td>
-				<c:if test="${adVO.ad_sex.equals('M')}" var="true"
-					scope="session">
-					<td><input type="radio" name="ad_sex" size="10" value="M"
-						checked />男 <input type="radio" name="ad_sex" size="10"
-						value="F" />女</td>
-				</c:if>
-
-				<c:if test="${adVO.ad_sex.equals('F')}" var="true"
-					scope="session">
-					<td><input type="radio" name="ad_sex" size="10" value="M"
-						checked />男 <input type="radio" name="ad_sex" size="10"
-						value="F" checked />女</td>
-				</c:if>
-
-			</tr>
-
-			<tr>
-				<td>廣告生日:</td>
+				<td>廣告上架日期:</td>
 				<td><input type="text" name="ad_start" id="f_date1" size="45"></td>
 			</tr>
+			
+			<tr>
+				<td>廣告下架日期:</td>
+				<td><input type="text" name="ad_end" id="f_date1" size="45"></td>
+			</tr>
 
 			<tr>
-				<td>廣告電話:</td>
-				<td><input type="TEXT" name="ad_tel" size="45"
-					value="<%=adVO.getAd_tel()%>" /></td>
+				<td>狀態:</td>
+				<td><input type="TEXT" name="ad_status" size="45"
+					value="<%=adVO.getAd_status()%>" /></td>
 			</tr>
 
 			<tr>
 				<td>廣告地址:</td>
-				<td><input type="TEXT" name="ad_addr" size="45"
-					value="<%=adVO.getAd_addr()%>" /></td>
+				<td><input type="TEXT" name="food_sup_ID" size="45"
+					value="<%=adVO.getFood_sup_ID()%>" /></td>
 			</tr>
 
-			<tr>
-				<td>廣告信箱:</td>
-				<td><input type="TEXT" name="ad_mail" size="45"
-					value="<%=adVO.getAd_mail()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>廣告狀態:</td>
-				<td><input type="radio" name="ad_status" size="10" value="a0"
-					checked />未停權 <input type="radio" name="ad_status" size="10"
-					value="a1" />停權</td>
-			</tr>
-
-			<tr>
-				<td>廣告暱稱:</td>
-				<td><input type="TEXT" name="ad_niname" size="45"
-					value="<%=adVO.getAd_niname()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>廣告大頭照:</td>
-				<td><input type="file" name="ad_pic" size="45" id="doc"
-					onchange="javascript:setImagePreview();" /></td>
-			</tr>
+			
 
 
 		</table>
@@ -199,7 +151,7 @@ th, td {
            theme: '',              //theme: 'dark',
  	       timepicker:true,       //timepicker:true,
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+ 	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
  		   value: '<%=adVO.getAd_start()%>', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
