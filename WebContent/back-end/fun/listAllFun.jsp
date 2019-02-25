@@ -82,7 +82,7 @@ th, td {
 	<table>
 		<tr>
 			<th>權限編號</th>
-			<th>權限姓名</th>
+			<th>權限名稱</th>
 			
 			
 			

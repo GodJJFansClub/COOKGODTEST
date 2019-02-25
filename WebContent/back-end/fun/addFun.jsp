@@ -69,15 +69,9 @@ th, td {
 		name="form1" enctype="multipart/form-data">
 
 		<table>
+		
 			<tr>
-				<td>權限帳號:</td>
-				<td><input type="TEXT" name="fun_ID" size="45"
-					value="<%=(funVO == null) ? "Aa158556" : funVO.getFun_ID()%>" /></td>
-			</tr>
-
-			
-			<tr>
-				<td>權限姓名:</td>
+				<td>權限名稱:</td>
 				<td><input type="TEXT" name="fun_name" size="45"
 					value="<%=(funVO == null) ? "teddy" : funVO.getFun_name()%>" /></td>
 			</tr>
