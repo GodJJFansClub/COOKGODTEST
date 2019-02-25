@@ -53,7 +53,7 @@
   
   <li>
     <FORM METHOD="post" ACTION="festDish.do" >
-        <b>請輸入訂單編號 :</b>
+        <b>請輸入菜色編號 :</b>
         <input type="text" name="dish_ID">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
@@ -64,7 +64,7 @@
    
   <li>
      <FORM METHOD="post" ACTION="festDish.do" >
-       <b>選擇訂單編號 ::</b>
+       <b>節慶料理編號 ::</b>
        <select size="1" name="dish_ID">
          <%-- <c:forEach var="reportVO" items="${reportSvc.all}"> --%>
          <c:forEach var="festDishVO" items="${festDishSvc.all}"> 
@@ -77,11 +77,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="festOrder.do" >
+     <FORM METHOD="post" ACTION="festDish.do" >
        <b>請選擇訂單狀態:</b>
-       <select size="1" name="fest_or_ID">
+       <select size="1" name="fest_m_ID">
          <c:forEach var="festOrderVO" items="${festOrderSvc.all}" > 
-          <option value="${festOrderVO.fest_or_ID}">${festOrderVO.fest_or_status}
+          <option value="${festDishVO.dish_ID}">${feshDishVO.fest_m_ID}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

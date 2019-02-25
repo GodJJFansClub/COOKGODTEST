@@ -22,7 +22,7 @@ public class FestDishServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if ("getOne_For_Display".equals(action)) { 
-			System.out.println("檢查點成功");
+			System.out.println("25");
 			int i = 1;
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -31,10 +31,10 @@ public class FestDishServlet extends HttpServlet {
 
 			try {
 				String dish_ID = req.getParameter("dish_ID");
-				System.out.println("檢查點a35" +(i++));
+				System.out.println("檢查點34" +(i++));
 				if (dish_ID == null || (dish_ID.trim()).length() == 0) {
 					errorMsgs.add("請輸入訂單編號");
-					System.out.println("檢查點b" +(i++));
+					System.out.println("37" +(i++));
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -48,28 +48,27 @@ public class FestDishServlet extends HttpServlet {
 
 				
 				FestDishService festDishSvc = new FestDishService();
-				System.out.println("檢查點e" +(i++));
+				System.out.println("檢查點51" +(i++));
 				FestDishVO festDishVO = festDishSvc.getOneFestDish(dish_ID);
 				System.out.println(festDishVO.getDish_ID());
-				System.out.println("檢查點f" +(i++));
+				System.out.println("檢查點54" +(i++));
 				if (dish_ID == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-end/festOrder/select_page.jsp");
+							.getRequestDispatcher("/front-end/festDish/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-				System.out.println("檢查點f" +(i++));
+				
 				req.setAttribute("festDishVO", festDishVO); //資料庫取出的empVO物件，存入req
 				String url = "/front-end/festDish/listOneFestDish.jsp";
-				System.out.println("檢查點g" +(i++));
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
-				System.out.println("檢查點h" +(i++));
 				successView.forward(req, res);
-				System.out.println("檢查點i" +(i++));
+
 
 
 			} catch (Exception e) {
@@ -110,7 +109,7 @@ public class FestDishServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/festDish/listAllFestDish.jsp");
+						.getRequestDispatcher("/festDish/listAllFestDish.jsp");
 				failureView.forward(req, res);
 			}
 		}	
@@ -177,15 +176,16 @@ public class FestDishServlet extends HttpServlet {
 				if (dish_ID == null || dish_ID.trim().length() == 0) {
 					errorMsgs.add("訂單狀態請勿空白");
 				}
-				
+				System.out.println("179");
 				String fest_m_ID = req.getParameter("fest_m_ID").trim();
 				if (fest_m_ID == null || fest_m_ID.trim().length() == 0) {
 					errorMsgs.add("訂單狀態請勿空白");
 				}
-				
+				System.out.println("184");
 				FestDishVO festDishVO = new FestDishVO();
 				festDishVO.setDish_ID(dish_ID);
 				festDishVO.setFest_m_ID(fest_m_ID);
+				System.out.println("188");
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -195,16 +195,16 @@ public class FestDishServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				
+				System.out.println("198");
 				/***************************2.開始新增資料**************************************/
 				FestDishService festDishSvc = new FestDishService();
 				festDishVO = festDishSvc.addFestDish(dish_ID,fest_m_ID);
-				
+				System.out.println("202");
 				/***************************3.新增完成，準備提交(Send the Success view**********/
 				String url = "/front-end/festDish/listAllFestDish.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); //
 				successView.forward(req, res);				
-				
+				System.out.println("207");
 				/***************************其它可能的錯誤處理*********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());

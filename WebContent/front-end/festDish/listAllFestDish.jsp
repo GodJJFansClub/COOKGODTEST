@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>List_All_FestOrder.jsp</title>
+<title>List_All_FestDish.jsp</title>
 
 <style>
   table#table-1 {
@@ -55,7 +55,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>節慶主題料理菜色資料 - listAllFestDish.jsp</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/front-end/festDish/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

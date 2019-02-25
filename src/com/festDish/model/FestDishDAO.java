@@ -165,8 +165,9 @@ public class FestDishDAO implements FestDish_Interface {
 
 			while (rs.next()) {
 	
-				pstmt.setString(1, festDishVO.getDish_ID());
-				pstmt.setString(2, festDishVO.getFest_m_ID());
+				festDishVO = new FestDishVO();
+				festDishVO.setDish_ID(rs.getString(1));
+				festDishVO.setFest_m_ID(rs.getString(2));
 			}
 
 			// Handle any driver errors
@@ -217,8 +218,10 @@ public class FestDishDAO implements FestDish_Interface {
 
 			while (rs.next()) {
 				
-				pstmt.setString(1, festDishVO.getDish_ID());
-				pstmt.setString(2, festDishVO.getFest_m_ID());
+				festDishVO = new FestDishVO();
+				festDishVO.setDish_ID(rs.getString(1));
+				festDishVO.setFest_m_ID(rs.getString(2));
+				festDishVOs.add(festDishVO);
 			}
 
 			// Handle any driver errors

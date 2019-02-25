@@ -54,7 +54,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>節慶主題料理訂單新增 - addFestDish.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/fesselect_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -70,19 +70,19 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="festDish.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festDish/festDish.do" name="form1">
 <table>
   
 	<tr>
 		<td>菜色編號</td>
 		<td><input type="TEXT" name="dish_ID" size="45" 
-			 value="<%= (festDishVO==null)? "3" :festDishVO.getDish_ID() %>" /></td>
+			 value="<%= (festDishVO==null)? "D00003" :festDishVO.getDish_ID() %>" /></td>
 	</tr>
 
 	<tr>
 		<td>節慶料理編號</td>
 		<td><input type="TEXT" name="fest_m_ID" size="45" 
-			 value="<%= (festDishVO==null)? "2000" :festDishVO.getFest_m_ID()%>" /></td>
+			 value="<%= (festDishVO==null)? "FM0003" :festDishVO.getFest_m_ID()%>" /></td>
 	</tr>
 </table>
 <br>

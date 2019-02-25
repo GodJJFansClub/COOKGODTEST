@@ -70,17 +70,17 @@
 
 	<tr>
 		<td>菜色編號:<font color=red><b>*</b></font></td>
-		<td><%=feshDishVO.dish_ID()%></td>
+		<td><%=festDishVO.getDish_ID()%></td>
 	</tr>
 	<tr>
 		<td>節慶料理編號:<font color=red><b>*</b></font></td>
-		<td><%=festDishVO.fest_ID()%></td>
+		<td><%=festDishVO.getFest_m_ID()%></td>
 	</tr>
 	
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="dish_ID" value="<%=festDishVO.getdish_ID()%>">
+<input type="hidden" name="dish_ID" value="<%=festDishVO.getDish_ID()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
