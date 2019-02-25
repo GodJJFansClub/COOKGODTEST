@@ -70,7 +70,7 @@
   </servlet>
   <servlet-mapping>
 	<servlet-name>ReportServlet</servlet-name>
-	<url-pattern>/back-end/report/report.do</url-pattern>
+	<url-pattern>/report/report.do</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -80,6 +80,15 @@
   <servlet-mapping>
   	<servlet-name>FoodMallServlet</servlet-name>
   	<url-pattern>/foodSupManaMall/foodSupManaMall.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FoodOrderController</servlet-name>
+  	<servlet-class>com.foodOrder.controller.FoodOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FoodOrderController</servlet-name>
+  	<url-pattern>/foodOrder/foodOrder.do</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -97,7 +106,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FestOrderServlet</servlet-name>
-    <url-pattern>/front-end/festOrder/festOrder.do</url-pattern>
+    <url-pattern>/festOrder/festOrder.do</url-pattern>
   </servlet-mapping>
   
    <servlet>
@@ -106,7 +115,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FestOrderDetailServlet</servlet-name>
-    <url-pattern>/front-end/festOrderDetail/festOrderDetail.do</url-pattern>
+    <url-pattern>/festOrderDetail/festOrderDetail.do</url-pattern>
   </servlet-mapping>
   
   <servlet>
