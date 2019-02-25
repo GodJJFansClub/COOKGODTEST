@@ -10,6 +10,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>顧客資料新增 - addCust.jsp</title>
@@ -114,8 +115,11 @@ th, td {
 
 			<tr>
 				<td>顧客地址:</td>
-				<td><input type="TEXT" name="cust_addr" size="45"
-					value="<%=(custVO == null) ? "中央大學" : custVO.getCust_addr()%>" /></td>
+				<td><div id="zipcode3">
+					<div class="f3" data-role="county"></div>
+					<div class="f4" data-role="district"></div></div>
+					<input name="Address" type="text" class="f13 address form-control">
+					</td>
 			</tr>
 
 			<tr>
@@ -161,7 +165,8 @@ th, td {
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://github.com/totobe/jQuery/blob/master/jquery.twzipcode.min.js"></script>
 <script>
         $.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({

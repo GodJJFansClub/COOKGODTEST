@@ -69,24 +69,18 @@
 <table>
 
 	<tr>
-		<td>訂單狀態 :</td>
-		<td><input type="TEXT" name="fest_or_status" size="45" 
-		     value="<%=festDishVO.getFest_or_status()%>" /></td>
+		<td>菜色編號:<font color=red><b>*</b></font></td>
+		<td><%=feshDishVO.dish_ID()%></td>
 	</tr>
 	<tr>
-		<td>價格</td>
-		<td><input type="TEXT" name="fest_or_price" size="45"	
-		      value="<%=festDishVO.getFest_or_price()%>" /></td>
+		<td>節慶料理編號:<font color=red><b>*</b></font></td>
+		<td><%=festDishVO.fest_ID()%></td>
 	</tr>
-	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="cust_ID" size="45" 
-		     value="<%=festDishVO.getCust_ID()%>" /></td>
-	</tr>
+	
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="dish_ID" value="<%=festDishVO.getFest_or_ID()%>">
+<input type="hidden" name="dish_ID" value="<%=festDishVO.getdish_ID()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 

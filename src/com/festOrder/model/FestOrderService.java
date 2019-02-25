@@ -7,17 +7,16 @@ public class FestOrderService {
 
 	private FestOrder_Interface dao;
 
-	public  FestOrderService() {
-		
+	public FestOrderService() {
+
 		dao = new FestOrderDAO();
 	}
 
-	public FestOrderVO addFestOrder(String fest_or_status,Integer fest_or_price,Date fest_or_start,
-			Date fest_or_send,Date fest_or_end,String fest_or_disc,String cust_ID)
-	{
+	public FestOrderVO addFestOrder(String fest_or_status, Integer fest_or_price, Date fest_or_start, Date fest_or_send,
+			Date fest_or_end, String fest_or_disc, String cust_ID) {
 
 		FestOrderVO festOrderVO = new FestOrderVO();
-		
+
 		festOrderVO.setFest_or_status(fest_or_status);
 		festOrderVO.setFest_or_price(fest_or_price);
 		festOrderVO.setFest_or_start(fest_or_start);
@@ -26,14 +25,13 @@ public class FestOrderService {
 		festOrderVO.setFest_or_disc(fest_or_disc);
 		festOrderVO.setCust_ID(cust_ID);
 		dao.insert(festOrderVO);
-        
+
 		return festOrderVO;
 	}
 
-	public FestOrderVO updateFestOrder(String fest_or_ID,String fest_or_status,
-			Integer fest_or_price,Date fest_or_start,Date fest_or_send,Date fest_or_end,
-			String fest_or_disc,String cust_ID) {
-		
+	public FestOrderVO updateFestOrder(String fest_or_ID, String fest_or_status, Integer fest_or_price,
+			Date fest_or_start, Date fest_or_send, Date fest_or_end, String fest_or_disc, String cust_ID) {
+
 		FestOrderVO festOrderVO = new FestOrderVO();
 //		System.out.println("檢查點s" +(i++));
 		festOrderVO.setFest_or_ID(fest_or_ID);
@@ -44,11 +42,10 @@ public class FestOrderService {
 		festOrderVO.setFest_or_end(fest_or_end);
 		festOrderVO.setFest_or_disc(fest_or_disc);
 		festOrderVO.setCust_ID(cust_ID);
-	    dao.update(festOrderVO);
-	    
+		dao.update(festOrderVO);
+
 		return festOrderVO;
 
-	
 	}
 
 	public void deleteFestOrder(String fest_or_ID) {

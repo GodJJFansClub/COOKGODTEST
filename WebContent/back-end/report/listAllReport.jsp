@@ -93,13 +93,13 @@
 			<td>${reportVO.cust_ID}</td>
 			<td>${reportVO.forum_art_ID}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/report/report.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/report/report.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="report_ID"  value="${reportVO.report_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/report/report.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/report/report.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="report_ID"  value="${reportVO.report_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>

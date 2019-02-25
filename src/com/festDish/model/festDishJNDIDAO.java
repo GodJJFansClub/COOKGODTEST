@@ -8,9 +8,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.report.model.ReportJDBCDAO;
-import com.report.model.ReportVO;
-
 public class festDishJNDIDAO implements FestDish_Interface {
 
 	private static DataSource ds = null;

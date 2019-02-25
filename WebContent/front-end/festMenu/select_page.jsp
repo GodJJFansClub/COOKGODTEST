@@ -30,10 +30,10 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-   <tr><td><h3>IBM FestOrder: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM FestMenu: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM FestOrder: Home</p>
+<p>This is the Home page for IBM FestMenu: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -48,11 +48,11 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllFestOrder.jsp'>List</a> all Reports.  <br><br></li>
+  <li><a href='listAllFestMenu.jsp'>List</a> all Reports.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="festOrder.do" >
+    <FORM METHOD="post" ACTION="festMenu.do" >
         <b>請輸入訂單編號 :</b>
         <input type="text" name="fest_or_ID">
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -60,15 +60,15 @@
     </FORM>
   </li>
 
-  <jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
+  <jsp:useBean id="festMenuSvc" scope="page" class="com.festMenu.model.FestMenuService" />
    
   <li>
-     <FORM METHOD="post" ACTION="festOrder.do" >
+     <FORM METHOD="post" ACTION="festMenu.do" >
        <b>選擇訂單編號 ::</b>
-       <select size="1" name="fest_or_ID">
+       <select size="1" name="fest_m_ID">
          <%-- <c:forEach var="reportVO" items="${reportSvc.all}"> --%>
-         <c:forEach var="festOrderVO" items="${festOrderSvc.all}"> 
-          <option value="${festOrderVO.fest_or_ID}">${festOrderVO.fest_or_ID}
+         <c:forEach var="festMenuVO" items="${festMenuSvc.all}"> 
+          <option value="${festMenuVO.fest_m_ID}">${festMenuVO.fest_m_ID}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -77,11 +77,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="festOrder.do" >
+     <FORM METHOD="post" ACTION="festMenu.do" >
        <b>請選擇訂單狀態:</b>
-       <select size="1" name="fest_or_ID">
-         <c:forEach var="festOrderVO" items="${festOrderSvc.all}" > 
-          <option value="${festOrderVO.fest_or_ID}">${festOrderVO.fest_or_status}
+       <select size="1" name="fest_m_ID">
+         <c:forEach var="festMenuVO" items="${festMenuSvc.all}" > 
+          <option value="${festMenuVO.fest_m_ID}">${festMenuVO.fest_m_name}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -94,7 +94,7 @@
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='addFestOrder.jsp'>Add</a> a new Report.</li>
+  <li><a href='addFestMenu.jsp'>Add</a> a new Report.</li>
 </ul>
 
 </body>

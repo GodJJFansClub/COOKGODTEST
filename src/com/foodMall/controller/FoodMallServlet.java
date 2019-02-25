@@ -34,7 +34,7 @@ public class FoodMallServlet extends HttpServlet{
 			if(foodMallVO.getFood_m_pic() != null) {
 				out.write(foodMallVO.getFood_m_pic());
 			} else {
-				in = getServletContext().getResourceAsStream("/images/null2.jpg");
+				in = getServletContext().getResourceAsStream("/back-end/food/images/null2.jpg");
 				byte[] buff = new byte[in.available()];
 				in.read(buff);
 				out.write(buff);
@@ -63,7 +63,17 @@ public class FoodMallServlet extends HttpServlet{
 			
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("");
+				String str = req.getParameter("food_ID");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入食材編號");
+				}
+				
+				String food_ID = str;
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end");
+				}
+				
 			}catch(Exception e) {
 				
 			}
@@ -106,10 +116,10 @@ public class FoodMallServlet extends HttpServlet{
 				if(part.getSubmittedFileName().length() != 0 && part.getContentType() != null) {
 					InputStream in = null;
 					try {
-					in = part.getInputStream();
-					food_m_pic = new byte[in.available()];
-				
-					in.read(food_m_pic);
+						in = part.getInputStream();
+						food_m_pic = new byte[in.available()];
+					
+						in.read(food_m_pic);
 					}catch (IOException e) {
 						errorMsgs.add("上傳圖片失敗:" + e.getMessage());
 					}finally {

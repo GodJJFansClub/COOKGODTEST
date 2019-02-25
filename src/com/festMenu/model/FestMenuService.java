@@ -3,7 +3,6 @@ package com.festMenu.model;
 import java.sql.Date;
 import java.util.List;
 
-import com.festOrder.model.FestOrder_Interface;
 
 public class FestMenuService {
 
@@ -21,7 +20,6 @@ public class FestMenuService {
 		FestMenuVO festMenuVO = new FestMenuVO();
 
 		festMenuVO.setFest_m_name(fest_m_name);
-
 		festMenuVO.setFest_m_qty(fest_m_qty);
 		festMenuVO.setFest_m_start(fest_m_start);
 		festMenuVO.setFest_m_end(fest_m_end);
@@ -37,9 +35,9 @@ public class FestMenuService {
 
 	}
 
-	public FestMenuVO updateFestMenu(String fest_m_name, Integer fest_m_qty, Date fest_m_start, Date fest_m_end,
-			byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status, String fest_m_kind,
-			String chef_ID) {
+	public FestMenuVO updateFestMenu(String fest_m_ID,String fest_m_name, Integer fest_m_qty, Date fest_m_start,
+			Date fest_m_end,byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status, 
+			String fest_m_kind,String chef_ID) {
 
 		FestMenuVO festMenuVO = new FestMenuVO();
 
@@ -55,19 +53,19 @@ public class FestMenuService {
 		festMenuVO.setFest_m_kind(fest_m_kind);
 		festMenuVO.setChef_ID(chef_ID);
 		dao.update(festMenuVO);
-		return festOrderVO;
-
+		
+		return festMenuVO;
 	}
 
-	public void deleteFestOrder(String fest_or_ID) {
-		dao.delete(fest_or_ID);
+	public void deleteFestMenu(String fest_m_ID) {
+		dao.delete(fest_m_ID);
 	}
 
-	public FestOrderVO getOneFestOrder(String fest_or_ID) {
-		return dao.findByPrimaryKey(fest_or_ID);
+	public FestMenuVO getOneFestMenu(String fest_m_ID) {
+		return dao.findByPrimaryKey(fest_m_ID);
 	}
 
-	public List<FestOrderVO> getAll() {
+	public List<FestMenuVO> getAll() {
 		return dao.getAll();
 	}
 }

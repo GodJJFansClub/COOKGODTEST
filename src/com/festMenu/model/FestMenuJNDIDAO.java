@@ -98,11 +98,11 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 		    pstmt.setDate(3, festMenuVO.getFest_m_start());
 		    pstmt.setDate(4, festMenuVO.getFest_m_send());
 		    pstmt.setBytes(5, festMenuVO.getFest_m_pic());
-		    pstmt.setClob(6, festMenuVO.getFest_m_resume());
+		    pstmt.setString(6, festMenuVO.getFest_m_resume());
 		    pstmt.setDate(7, festMenuVO.getFest_m_end());
 		    pstmt.setString(8, festMenuVO.getFest_m_status());
 		    pstmt.setString(9,festMenuVO.getFest_m_kind());
-		    pstmt.setString(10, festMenuVO.getChif_ID());
+		    pstmt.setString(10, festMenuVO.getChef_ID());
 		    pstmt.setString(11, festMenuVO.getFest_m_ID());
 
 			pstmt.executeUpdate();
@@ -130,7 +130,6 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 		}
 
 	}
-
 	@Override
 	public void delete(String fest_m_ID) {
 
@@ -196,11 +195,11 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_start(rs.getDate(4));
 				festMenuVO.setFest_m_end(rs.getDate(5));
 				festMenuVO.setFest_m_pic(rs.getBytes(6));
-				festMenuVO.setFest_m_resume(rs.getClob(7));
+				festMenuVO.setFest_m_resume(rs.getString(7));
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));
 				festMenuVO.setFest_m_ID(rs.getString(10));
-				festMenuVO.setChif_ID(rs.getString(11));
+				festMenuVO.setChef_ID(rs.getString(11));
 			}
 
 			// Handle any driver errors
@@ -259,11 +258,11 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_start(rs.getDate(4));
 				festMenuVO.setFest_m_end(rs.getDate(5));
 				festMenuVO.setFest_m_pic(rs.getBytes(6));
-				festMenuVO.setFest_m_resume(rs.getClob(7));
+				festMenuVO.setFest_m_resume(rs.getString(7));
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));
 				festMenuVO.setFest_m_ID(rs.getString(10));
-				festMenuVO.setChif_ID(rs.getString(11));
+				festMenuVO.setChef_ID(rs.getString(11));
 				list.add(festMenuVO); // Store the row in the list
 			}
 

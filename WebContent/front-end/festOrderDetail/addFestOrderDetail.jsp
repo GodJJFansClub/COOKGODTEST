@@ -79,32 +79,32 @@
 			 value="<%= (festOrderDetailVO==null)? "FM20190219-000001" :festOrderDetailVO.getFest_or_ID()%>" /></td>
 	</tr>
 	<tr>
-		<td>節慶主題料理編號:</td>
+		<td>節慶料理編號:</td>
 		<td><input type="TEXT" name="fest_m_ID" size="45" 
-			 value="<%= (festOrderDetailVO==null)? "3" :festOrderDetailVO.getFest_m_ID() %>" /></td>
+			 value="<%= (festOrderDetailVO==null)? "FM0002" :festOrderDetailVO.getFest_m_ID() %>" /></td>
 	</tr>
 
 	<tr>
 		<td>訂單評價:</td>
-		<td><input type="TEXT" name="fest_or_price" size="45" 
-			 value="<%= (festOrderDetailVO==null)? "1" :festOrderDetailVO.getFest_or_rate()%>" /></td>
+		<td><input type="TEXT" name="fest_or_rate" size="45" 
+			 value="<%= (festOrderDetailVO==null)? 1 :festOrderDetailVO.getFest_or_rate()%>" /></td>
 	</tr>
 	
 	<tr>
 		<td>訂單評價留言:</td>
-		<td><input type="TEXT" name="fest_or_start" value="<%= (festOrderDetailVO==null)?
+		<td><input type="TEXT" name="fest_or_msg" value="<%= (festOrderDetailVO==null)?
 				"這筆訂單很不錯喔" :festOrderDetailVO.getFest_or_msg()%>"/></td>
 	</tr>
 	
 	<tr>
 		<td>訂單數量:</td>
-		<td><input type="TEXT" name="fest_or_send" value="<%= (festOrderDetailVO==null)? 
+		<td><input type="TEXT" name="fest_or_qty" value="<%= (festOrderDetailVO==null)? 
 				"45" :festOrderDetailVO.getFest_or_qty()%>"/></td>
 	</tr>
 	
 	<tr>
 		<td>訂單小計:</td>
-		<td><input type="TEXT" name="fest_or_end" value="<%= (festOrderDetailVO==null)? 
+		<td><input type="TEXT" name="fest_or_stotal" value="<%= (festOrderDetailVO==null)? 
 				"50" :festOrderDetailVO.getFest_or_stotal()%>"/></td>
 	</tr>
 </table>

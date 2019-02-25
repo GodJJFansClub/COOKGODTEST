@@ -20,13 +20,12 @@ public class FestOrderDAO implements FestOrder_Interface {
 		}
 	}
 
-	private static final String INSERT_STMT = 
-		"INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES (FEST_ORDER_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES (FEST_ORDER_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER WHERE FEST_OR_ID = ?";
 	private static final String UPDATE = "UPDATE FEST_ORDER SET FEST_OR_STATUS = ?,FEST_OR_PRICE = ?,FEST_OR_START = ?,FEST_OR_SEND = ?,FEST_OR_END = ?,FEST_OR_DISC = ?, CUST_ID = ? WHERE FEST_OR_ID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM FEST_ORDER WHERE FEST_OR_ID = ?";
-	
+
 	@Override
 	public void insert(FestOrderVO festOrderVO) {
 
@@ -37,20 +36,19 @@ public class FestOrderDAO implements FestOrder_Interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			
+
 			pstmt.setString(1, festOrderVO.getFest_or_status());
 			pstmt.setInt(2, festOrderVO.getFest_or_price());
-		    pstmt.setDate(3, festOrderVO.getFest_or_start());
-		    pstmt.setDate(4, festOrderVO.getFest_or_send());
-		    pstmt.setDate(5, festOrderVO.getFest_or_end());
-		    pstmt.setString(6, festOrderVO.getFest_or_disc());
-		    pstmt.setString(7, festOrderVO.getCust_ID());
+			pstmt.setDate(3, festOrderVO.getFest_or_start());
+			pstmt.setDate(4, festOrderVO.getFest_or_send());
+			pstmt.setDate(5, festOrderVO.getFest_or_end());
+			pstmt.setString(6, festOrderVO.getFest_or_disc());
+			pstmt.setString(7, festOrderVO.getCust_ID());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -84,19 +82,18 @@ public class FestOrderDAO implements FestOrder_Interface {
 
 			pstmt.setString(1, festOrderVO.getFest_or_status());
 			pstmt.setInt(2, festOrderVO.getFest_or_price());
-		    pstmt.setDate(3, festOrderVO.getFest_or_start());
-		    pstmt.setDate(4, festOrderVO.getFest_or_send());
-		    pstmt.setDate(5, festOrderVO.getFest_or_end());
-		    pstmt.setString(6, festOrderVO.getFest_or_disc());
-		    pstmt.setString(7, festOrderVO.getCust_ID());
-		    pstmt.setString(8, festOrderVO.getFest_or_ID());
+			pstmt.setDate(3, festOrderVO.getFest_or_start());
+			pstmt.setDate(4, festOrderVO.getFest_or_send());
+			pstmt.setDate(5, festOrderVO.getFest_or_end());
+			pstmt.setString(6, festOrderVO.getFest_or_disc());
+			pstmt.setString(7, festOrderVO.getCust_ID());
+			pstmt.setString(8, festOrderVO.getFest_or_ID());
 
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -134,8 +131,7 @@ public class FestOrderDAO implements FestOrder_Interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -174,7 +170,7 @@ public class FestOrderDAO implements FestOrder_Interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-	            
+
 				festOrderVO = new FestOrderVO();
 				festOrderVO.setFest_or_ID(rs.getString(1));
 				festOrderVO.setFest_or_status(rs.getString(2));
@@ -188,8 +184,7 @@ public class FestOrderDAO implements FestOrder_Interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -221,7 +216,7 @@ public class FestOrderDAO implements FestOrder_Interface {
 	public List<FestOrderVO> getAll() {
 		List<FestOrderVO> festOrderVOs = new ArrayList<FestOrderVO>();
 		FestOrderVO festOrderVO = null;
-       
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -234,8 +229,8 @@ public class FestOrderDAO implements FestOrder_Interface {
 
 			while (rs.next()) {
 //				System.out.println("DAO" + "223");
-				
-				festOrderVO=new FestOrderVO();
+
+				festOrderVO = new FestOrderVO();
 				festOrderVO.setFest_or_ID(rs.getString(1));
 				festOrderVO.setFest_or_status(rs.getString(2));
 				festOrderVO.setFest_or_price(rs.getInt(3));
@@ -245,14 +240,12 @@ public class FestOrderDAO implements FestOrder_Interface {
 				festOrderVO.setFest_or_disc(rs.getString(7));
 				festOrderVO.setCust_ID(rs.getString(8));
 				festOrderVOs.add(festOrderVO);
-	
-//			    System.out.println("DAO" + "224");
+
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {

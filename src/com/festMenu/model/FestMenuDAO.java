@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.report.model.ReportVO;
+
 public class FestMenuDAO implements FestMenu_Interface {
 
 	private static DataSource ds = null;
@@ -20,15 +22,13 @@ public class FestMenuDAO implements FestMenu_Interface {
 		}
 	}
 
-	private static final String INSERT_STMT = 
-			"INSERT INTO FEST_MENU (FEST_M_ID, FEST_M_NAME, FEST_M_QTY, FEST_M_START, FEST_M_END, FEST_M_PIC, FEST_M_RESUME,"
-					+ "FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,CHIF_ID) VALUES (?,?,?,?,? ?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO FEST_MENU (FEST_M_ID, FEST_M_NAME, FEST_M_QTY, FEST_M_START, FEST_M_END, FEST_M_PIC, FEST_M_RESUME,"
+			+ "FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,CHIF_ID) VALUES (FEST_MENU_SEQ.NEXTVAL,?,?,?,? ?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_MENU";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_MENU WHERE FEST_M_ID = ?";
-	private static final String UPDATE = "UPDATE FEST_ORDER_DETAIL SET FEST_M_NAME = ?,FEST_M_QTY = ?,FEST_M_START = ?,FEST_M_END= ?,FEST_M_PIC = ? "
-			+ "FEST_M_RESUME= ?,FEST_M_SEND = ? ,FEST_M_STATUS = ?, FEST_M_KIND = ?,CHIF_ID = ? WHERE FEST_M_ID = ? ";
+	private static final String UPDATE = "UPDATE FEST_MENU SET FEST_M_NAME = ?,FEST_M_QTY = ?,FEST_M_START = ?,FEST_M_END = ?,FEST_M_PIC = ? ,FEST_M_RESUME= ?,  FEST_M_SEND = ?,FEST_M_STATUS = ?, FEST_M_KIND = ?,CHEF_ID = ? WHERE FEST_M_ID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM FEST_MENU WHERE FEST_M_ID = ?";
-	
+
 	@Override
 	public void insert(FestMenuVO festMenuVO) {
 
@@ -40,24 +40,22 @@ public class FestMenuDAO implements FestMenu_Interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, festMenuVO.getFest_m_ID());
-			pstmt.setString(2, festMenuVO.getFest_m_name());
-			pstmt.setInt(3, festMenuVO.getFest_m_qty());
-		    pstmt.setDate(4, festMenuVO.getFest_m_start());
-		    pstmt.setDate(5, festMenuVO.getFest_m_end());
-		    pstmt.setBytes(6, festMenuVO.getFest_m_pic());
-		    pstmt.setString(7, festMenuVO.getFest_m_resume());
-		    pstmt.setDate(8, festMenuVO.getFest_m_send());
-		    pstmt.setString(9, festMenuVO.getFest_m_status());
-		    pstmt.setString(10,festMenuVO.getFest_m_kind());
-		    pstmt.setString(11, festMenuVO.getChif_ID());
+			pstmt.setString(1, festMenuVO.getFest_m_name());
+			pstmt.setInt(2, festMenuVO.getFest_m_qty());
+			pstmt.setDate(3, festMenuVO.getFest_m_start());
+			pstmt.setDate(4, festMenuVO.getFest_m_end());
+			pstmt.setBytes(5, festMenuVO.getFest_m_pic());
+			pstmt.setString(6, festMenuVO.getFest_m_resume());
+			pstmt.setDate(7, festMenuVO.getFest_m_send());
+			pstmt.setString(8, festMenuVO.getFest_m_status());
+			pstmt.setString(9, festMenuVO.getFest_m_kind());
+			pstmt.setString(10, festMenuVO.getChef_ID());
 
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -89,24 +87,23 @@ public class FestMenuDAO implements FestMenu_Interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, festMenuVO.getFest_m_ID());
-			pstmt.setString(2, festMenuVO.getFest_m_name());
-			pstmt.setInt(3, festMenuVO.getFest_m_qty());
-		    pstmt.setDate(4, festMenuVO.getFest_m_start());
-		    pstmt.setDate(5, festMenuVO.getFest_m_end());
-		    pstmt.setBytes(6, festMenuVO.getFest_m_pic());
-		    pstmt.setString(7, festMenuVO.getFest_m_resume());
-		    pstmt.setDate(8, festMenuVO.getFest_m_send());
-		    pstmt.setString(9, festMenuVO.getFest_m_status());
-		    pstmt.setString(10,festMenuVO.getFest_m_kind());
-		    pstmt.setString(11, festMenuVO.getChif_ID());
+			pstmt.setString(1, festMenuVO.getFest_m_name());
+			pstmt.setInt(2, festMenuVO.getFest_m_qty());
+			pstmt.setDate(3, festMenuVO.getFest_m_start());
+			pstmt.setDate(4, festMenuVO.getFest_m_end());
+			pstmt.setBytes(5, festMenuVO.getFest_m_pic());
+			pstmt.setString(6, festMenuVO.getFest_m_resume());
+			pstmt.setDate(7, festMenuVO.getFest_m_send());
+			pstmt.setString(8, festMenuVO.getFest_m_status());
+			pstmt.setString(9, festMenuVO.getFest_m_kind());
+			pstmt.setString(10, festMenuVO.getChef_ID());
+			pstmt.setString(11, festMenuVO.getFest_m_ID());
 
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -128,7 +125,7 @@ public class FestMenuDAO implements FestMenu_Interface {
 	}
 
 	@Override
-	public void delete(String fest_m_Id) {
+	public void delete(String fest_m_ID) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -138,14 +135,13 @@ public class FestMenuDAO implements FestMenu_Interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 
-			pstmt.setString(1, fest_m_Id);
+			pstmt.setString(1, fest_m_ID);
 
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -184,24 +180,23 @@ public class FestMenuDAO implements FestMenu_Interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-	
+
 				pstmt.setString(1, festMenuVO.getFest_m_ID());
 				pstmt.setString(2, festMenuVO.getFest_m_name());
 				pstmt.setInt(3, festMenuVO.getFest_m_qty());
-			    pstmt.setDate(4, festMenuVO.getFest_m_start());
-			    pstmt.setDate(5, festMenuVO.getFest_m_end());
-			    pstmt.setBytes(6, festMenuVO.getFest_m_pic());
-			    pstmt.setString(7, festMenuVO.getFest_m_resume());
-			    pstmt.setDate(8, festMenuVO.getFest_m_send());
-			    pstmt.setString(9, festMenuVO.getFest_m_status());
-			    pstmt.setString(10,festMenuVO.getFest_m_kind());
-			    pstmt.setString(11, festMenuVO.getChif_ID());
+				pstmt.setDate(4, festMenuVO.getFest_m_start());
+				pstmt.setDate(5, festMenuVO.getFest_m_end());
+				pstmt.setBytes(6, festMenuVO.getFest_m_pic());
+				pstmt.setString(7, festMenuVO.getFest_m_resume());
+				pstmt.setDate(8, festMenuVO.getFest_m_send());
+				pstmt.setString(9, festMenuVO.getFest_m_status());
+				pstmt.setString(10, festMenuVO.getFest_m_kind());
+				pstmt.setString(11, festMenuVO.getChef_ID());
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -245,24 +240,25 @@ public class FestMenuDAO implements FestMenu_Interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				
-				pstmt.setString(1, festMenuVO.getFest_m_ID());
-				pstmt.setString(2, festMenuVO.getFest_m_name());
-				pstmt.setInt(3, festMenuVO.getFest_m_qty());
-			    pstmt.setDate(4, festMenuVO.getFest_m_start());
-			    pstmt.setDate(5, festMenuVO.getFest_m_end());
-			    pstmt.setBytes(6, festMenuVO.getFest_m_pic());
-			    pstmt.setString(7, festMenuVO.getFest_m_resume());
-			    pstmt.setDate(8, festMenuVO.getFest_m_send());
-			    pstmt.setString(9, festMenuVO.getFest_m_status());
-			    pstmt.setString(10,festMenuVO.getFest_m_kind());
-			    pstmt.setString(11, festMenuVO.getChif_ID());
+
+				festMenuVO = new FestMenuVO();
+				festMenuVO.setFest_m_ID(rs.getString(1));
+				festMenuVO.setFest_m_name(rs.getString(2));			
+				festMenuVO.setFest_m_qty(rs.getInt(3));
+				festMenuVO.setFest_m_start(rs.getDate(4));
+				festMenuVO.setFest_m_end(rs.getDate(5));
+				festMenuVO.setFest_m_pic(rs.getBytes(6));
+				festMenuVO.setFest_m_resume(rs.getString(7));
+				festMenuVO.setFest_m_send(rs.getDate(8));
+				festMenuVO.setFest_m_status(rs.getString(9));
+				festMenuVO.setFest_m_kind(rs.getString(10));
+				festMenuVO.setChef_ID(rs.getString(11));		
+				festMenuVOs.add(festMenuVO);
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
