@@ -11,12 +11,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/CookGodDB</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
+  
   <servlet>
     <servlet-name>FoodServlet</servlet-name>
     <servlet-class>com.food.controller.FoodServlet</servlet-class>
@@ -44,6 +46,22 @@
     <servlet-name>MenuOrderServlet</servlet-name>
     <url-pattern>/menuOrder/menuOrder.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ChefSchServlet</servlet-name>
+    <servlet-class>com.chefSch.controller.ChefSchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChefSchServlet</servlet-name>
+    <url-pattern>/chefSch/chefSch.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ChefDishServlet</servlet-name>
+    <servlet-class>com.chefDish.controller.ChefDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChefDishServlet</servlet-name>
+    <url-pattern>/chefDish/chefDish.do</url-pattern>
+  </servlet-mapping>
   
   
    <servlet>
@@ -51,18 +69,47 @@
 	<servlet-class>com.report.controller.ReportServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ReportServlet</servlet-name>
-    <url-pattern>/report/report.do</url-pattern>
+	<servlet-name>ReportServlet</servlet-name>
+	<url-pattern>/report/report.do</url-pattern>
   </servlet-mapping>
+  
   <servlet>
-    <servlet-name>FestOrderServlet</servlet-name>
-    <servlet-class>com.festOrder.controller.FestOrderServlet</servlet-class>
+    <servlet-name>FoodMallServlet</servlet-name>
+    <servlet-class>com.festMall.controller.FoodMallServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FoodMallServlet</servlet-name>
+  	<url-pattern>/foodSupManaMall/foodSupManaMall.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FoodOrderController</servlet-name>
+  	<servlet-class>com.foodOrder.controller.FoodOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FoodOrderController</servlet-name>
+  	<url-pattern>/foodOrder/foodOrder.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FoodSupServlet</servlet-name>
+  	<servlet-class>com.foodSup.controller.FoodSupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FoodSupServlet</servlet-name>
+  	<url-pattern>/foodSup/foodSup.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>FestOrderServlet</servlet-name>
+  	<servlet-class>com.festOrder.controller.FestOrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FestOrderServlet</servlet-name>
     <url-pattern>/festOrder/festOrder.do</url-pattern>
   </servlet-mapping>
-  <servlet>
+  
+   <servlet>
     <servlet-name>FestOrderDetailServlet</servlet-name>
     <servlet-class>com.festOrderDetail.controller.FestOrderDetailServlet</servlet-class>
   </servlet>
@@ -70,4 +117,23 @@
     <servlet-name>FestOrderDetailServlet</servlet-name>
     <url-pattern>/festOrderDetail/festOrderDetail.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>EmpServlet</servlet-name>
+    <servlet-class>com.emp.controller.EmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpServlet</servlet-name>
+    <url-pattern>/emp/emp.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FunServlet</servlet-name>
+    <servlet-class>com.fun.controller.FunServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FunServlet</servlet-name>
+    <url-pattern>/fun/fun.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
