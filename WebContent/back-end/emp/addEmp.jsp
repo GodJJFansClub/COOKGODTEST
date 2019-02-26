@@ -76,12 +76,6 @@ th, td {
 			</tr>
 
 			<tr>
-				<td>員工密碼:</td>
-				<td><input type="password" name="emp_pwd" size="45"
-					value="<%=(empVO == null) ? "Aa123456" : empVO.getEmp_pwd()%>" /></td>
-			</tr>
-
-			<tr>
 				<td>員工姓名:</td>
 				<td><input type="TEXT" name="emp_name" size="45"
 					value="<%=(empVO == null) ? "teddy" : empVO.getEmp_name()%>" /></td>
