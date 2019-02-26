@@ -1,19 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.festOrder.model.*"%>
+<%@ page import="com.festMenu.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    FestOrderService festOrderSvc = new FestOrderService();
-    List<FestOrderVO> list = festOrderSvc.getAll();
+    FestMenuService festMenuSvc = new FestMenuService();
+    List<FestMenuVO> list = festMenuSvc.getAll();
     pageContext.setAttribute("list", list);
 %>
 
 
 <html>
 <head>
-<title>List_All_FestOrder.jsp</title>
+<title>List_All_FestMenu.jsp</title>
 
 <style>
   table#table-1 {
@@ -54,8 +54,8 @@
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>節慶主題料理訂單資料 - listAllFestOrder.jsp</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h3>節慶主題料理訂單資料 - listAllFestMenu.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -71,37 +71,41 @@
 
 <table>
 	<tr>
-		<th>訂單編號 </th>
-		<th>訂單狀態</th>
-		<th>價格</th>
-		<th>訂單成立日期 </th>
-		<th>出貨日期        </th>
-		<th>訂單結束日期</th>
-		<th>折扣</th>
-		<th>會員編號</th>
+		<th>節慶料理編號 </th>
+		<th>節慶主題料理名稱</th>
+		<th>數量</th>
+		<th>開始預購日期 </th>
+		<th>結束預購日期        </th>
+		<th>介紹</th>
+		<th>出貨日期</th>
+		<th>節慶主題料理狀態</th>
+		<th>種類</th>
+		<th>主廚編號</th>
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:forEach var="festOrderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="festMenuVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${festOrderVO.fest_or_ID}</td>
-			<td>${festOrderVO.fest_or_status}</td>
-			<td>${festOrderVO.fest_or_price}</td>
-			<td>${festOrderVO.fest_or_start}</td>
-			<td>${festOrderVO.fest_or_send}</td>
-			<td>${festOrderVO.fest_or_end}</td> 
-			<td>${festOrderVO.fest_or_disc}</td>
-			<td>${festOrderVO.cust_ID}</td>
+			<td>${festMenuVO.fest_m_ID}</td>
+			<td>${festMenuVO.fest_m_name}</td>
+			<td>${festMenuVO.fest_m_qty}</td>
+			<td>${festMenuVO.fest_m_start}</td>
+			<td>${festMenuVO.fest_m_end}</td>
+			<td>${festMenuVO.fest_m_resume}</td>
+			<td>${festMenuVO.fest_m_send}</td>
+			<td>${festMenuVO.fest_m_status}</td>
+			<td>${festMenuVO.fest_m_kind}</td>
+			<td>${festMenuVO.chef_ID}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/festOrder/festOrder.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
-			     <input type="hidden" name="fest_or_ID"  value="${festOrderVO.fest_or_ID}">
+			     <input type="hidden" name="fest_m_ID"  value="${festMenuVO.fest_m_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/festOrder/festOrder.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="fest_or_ID"  value="${festOrderVO.fest_or_ID}">
+			     <input type="hidden" name="fest_m_ID"  value="${festMenuVO.fest_m_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

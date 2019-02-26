@@ -343,7 +343,7 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 //    		dao.delete("5");
 //		
 //		// 查詢
-		FestMenuVO festMenuVO=dao.findByPrimaryKey("2");
+		FestMenuVO festMenuVO=dao.findByPrimaryKey("FM0002");
 		System.out.println(festMenuVO.getFest_m_ID() + ",");
 		System.out.println(festMenuVO.getFest_m_name() + ",");
 		System.out.println(festMenuVO.getFest_m_qty() + ",");
