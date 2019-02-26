@@ -5,11 +5,13 @@ import java.sql.Date;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.festMenu.model.FestMenuService;
 import com.festMenu.model.FestMenuVO;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class FestMenuServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
@@ -137,8 +139,7 @@ public class FestMenuServlet extends HttpServlet {
 			}
 		}
 
-
-//		if ("update".equals(action)) { 
+		if ("update".equals(action)) { 
 //			List<String> errorMsgs = new LinkedList<String>();//來自update_emp_input.jsp的請求
 //			// Store this set in the request scope, in case we need to
 //			// send the ErrorPage view.
@@ -147,9 +148,9 @@ public class FestMenuServlet extends HttpServlet {
 //			try {
 //
 //				/**********************1.接收請求參數-輸入格式的錯務處理*********************/
-//				String fest_m_ID = req.getParameter("fest_m_ID").trim();
+//				String fest_m_ID = req.getParameter("fest_m_ID").trim(); //節慶料理編號
 //
-//				String fest_m_name = req.getParameter("fest_m_name");
+//				String fest_m_name = req.getParameter("fest_m_name"); //節慶主題料理編號
 //
 //				Integer fest_m_qty = null;
 //				try {
@@ -174,41 +175,38 @@ public class FestMenuServlet extends HttpServlet {
 //					fest_m_start = new java.sql.Date(System.currentTimeMillis());
 //					errorMsgs.add("請輸入-結束預購日期!");
 //				}
-//				
-//				
-//				
-//				
-//				String report_sort = req.getParameter("report_sort").trim();
-//				if (report_sort == null || report_sort.trim().length() == 0) {
-//					errorMsgs.add("請填入檢舉分類");
+//						
+//         		String fest_m_resume = req.getParameter("fest_m_resume").trim();
+//				if (fest_m_resume == null || fest_m_resume.trim().length() == 0) {
+//					errorMsgs.add("介紹");
 //				}	
-//
-//
-//
-//
-//				String report_status = req.getParameter("report_status").trim();
-//				if (report_sort == null || report_sort.trim().length() == 0) {
-//					errorMsgs.add("請填入檢舉狀態");
-//				}
-//
-//				String report_con = req.getParameter("report_con").trim();
-//				if (report_sort == null || report_sort.trim().length() == 0) {
-//					errorMsgs.add("請填入檢舉內容");
-//				}
-//
-//				String cust_ID= req.getParameter("cust_ID").trim();
-//				if (cust_ID == null || cust_ID.trim().length() == 0) {
-//					errorMsgs.add("請填入會員編號");
-//				}
-//
-//				String forum_art_ID = null;
+//				
+//				java.sql.Date fest_m_send = null;
 //				try {
-//					forum_art_ID = req.getParameter("forum_art_ID").trim();
-//				} catch (NumberFormatException e) {
-//					forum_art_ID = null;
-//					errorMsgs.add("文章編號請填數字.");
+//					fest_m_send = java.sql.Date.valueOf(req.getParameter("fest_m_send").trim());
+//				} catch (Exception e) {
+//					fest_m_start = new java.sql.Date(System.currentTimeMillis());
+//					errorMsgs.add("請輸入-出貨日期!");
 //				}
-////				System.out.println("  " +"檢查點12");
+//				
+//				String fest_m_status = req.getParameter("fest_m_status").trim();
+//				if (fest_m_status == null || fest_m_status.trim().length() == 0) {
+//					errorMsgs.add("請填入節慶主題料理狀態");
+//				}
+//
+//				String fest_m_kind = req.getParameter("fest_m_kind").trim();
+//				if (fest_m_kind == null || fest_m_kind.trim().length() == 0) {
+//					errorMsgs.add("種類");
+//				}
+//				
+//				
+//				String chef_ID = req.getParameter("chef_ID").trim();
+//				if (chef_ID == null || chef_ID.trim().length() == 0) {
+//					errorMsgs.add("請填入主廚編號");
+//				}
+//
+//				
+//				System.out.println("  " +"檢查點12");
 //
 //				ReportVO reportVO=new ReportVO();
 //				reportVO.setReport_ID(report_ID);
@@ -219,7 +217,7 @@ public class FestMenuServlet extends HttpServlet {
 //                reportVO.setReport_con(report_con);
 //                reportVO.setCust_ID(cust_ID);
 //                reportVO.setForum_art_ID(forum_art_ID);
-////                System.out.println("  " +"檢查點13");
+//                System.out.println("  " +"檢查點13");
 //
 //                //Send the use back to the form,if there were errors
 //                if (!errorMsgs.isEmpty()) {
@@ -230,24 +228,24 @@ public class FestMenuServlet extends HttpServlet {
 //					return; //程式中斷
 //				}
 //
-////				java.sql.Date hiredate = null;
-////				try {
-////					hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
-////				} catch (IllegalArgumentException e) {
-////					hiredate=new java.sql.Date(System.currentTimeMillis());
-////					errorMsgs.add("請輸入日期!");
-////				}
+//				java.sql.Date hiredate = null;
+//				try {
+//					hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
+//				} catch (IllegalArgumentException e) {
+//					hiredate=new java.sql.Date(System.currentTimeMillis());
+//					errorMsgs.add("請輸入日期!");
+//				}
 //				/***************************2.開始修改資料*****************************************/
 //				ReportService reportSvc = new ReportService();
 //				reportVO = reportSvc.updateReport(report_ID,report_title, 
 //				report_sort, report_start, report_status, report_con, cust_ID,forum_art_ID);
-////				System.out.println("  " +"檢查點15");
+//				System.out.println("  " +"檢查點15");
 //				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 //				req.setAttribute("reportVO", reportVO); // 資料庫update成功後,正確的的empVO物件,存入req
 //				String url = "/back-end/report/listAllReport.jsp";
 //				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 //				successView.forward(req, res);
-////				System.out.println("  " +"檢查點16");
+//				System.out.println("  " +"檢查點16");
 //
 //			} catch (Exception e) {
 //				errorMsgs.add("修改資料失敗:"+e.getMessage());
@@ -255,143 +253,142 @@ public class FestMenuServlet extends HttpServlet {
 //						.getRequestDispatcher("/back-end/report/update_report_input.jsp");
 //				failureView.forward(req, res);
 //			}
-//
-//		}
 
-//        if ("insert".equals(action)) { //來自addReport.jsp的請求 
-//            int i=1;
-//        	System.out.println("263");
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			System.out.println(i++);
-//
-//			try {
-//				/***********************1.接收請求參數-輸入格式的錯誤處理*************************/
-//				String fest_m_name = req.getParameter("fest_m_name").trim();//2
-//				if (fest_m_name == null || fest_m_name.trim().length() == 0) {
-//					errorMsgs.add("節慶主題料理名稱請勿空白");
-//				}
-//				System.out.println(fest_m_name);
-//				Integer fest_m_qty = null;//3
-//				try{
-//					fest_m_qty = new Integer(req.getParameter("fest_m_qty"));
-//				}catch (NumberFormatException e) {
-//					fest_m_qty = 0;
-//					errorMsgs.add("數量請填數字");
-//				}
-//				System.out.println(fest_m_qty);
-//				
-//				java.sql.Date fest_m_start = null;//4
-//				try {
-//					fest_m_start = java.sql.Date.valueOf(req.getParameter("fest_m_start").trim());
-//				} catch (Exception e) {
-//					fest_m_start = new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入訂單成立日期!");
-//				}
-//				
-//				System.out.println(fest_m_start);
-//				
-//				java.sql.Date fest_m_end = null;//5
-//				try {
-//					fest_m_end = java.sql.Date.valueOf(req.getParameter("fest_m_end").trim());
-//				} catch (Exception e) {
-//					fest_m_end = new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入結束預購日期!");
-//				}
-//				
-//				System.out.println(fest_m_end);
-//				
-////				//圖片
-////				Part part= req.getPart("fest_m_pic");//6
-////				InputStream in = part.getInputStream();
-////				byte[] fest_m_pic = new byte[in.available()];
-////				in.read(fest_m_pic);
-////				in.close();
-//				
-//				//介紹
-//				String fest_m_resume = req.getParameter("fest_m_resume");//7
-//				if (fest_m_resume == null || fest_m_resume.trim().length() == 0) {
-//					errorMsgs.add("介紹請勿空白");
-//				}
-//				
-//				System.out.println(fest_m_resume);
-//				
-//				java.sql.Date fest_m_send = null; //8
-//				try {
-//					fest_m_send = java.sql.Date.valueOf(req.getParameter("fest_m_send").trim());
-//				} catch (Exception e) {
-//					fest_m_send = new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入出貨日期!");
-//				}
-//				
-//				System.out.println(fest_m_send);
-//				
-//				String fest_m_status = req.getParameter("fest_m_status");//9
-//				if (fest_m_status == null || fest_m_status.trim().length() == 0) {
-//					errorMsgs.add("節慶主題料理狀態請勿空白");
-//				}
-//				
-//				System.out.println(fest_m_status);
-//				
-//				String fest_m_kind = req.getParameter("fest_m_kind").trim();//10
-//				if (fest_m_kind == null || fest_m_kind.trim().length() == 0) {
-//					errorMsgs.add("節慶主題料理種類請勿空白");
-//				}
-//				
-//				System.out.println(fest_m_kind);
-//				
-//				String chef_ID = req.getParameter("chef_ID").trim();//11
-//				if (chef_ID == null || chef_ID.trim().length() == 0) {
-//					errorMsgs.add("主廚編號請勿空白");
-//				}
-//							
-//				System.out.println(chef_ID);
-//				
-//				FestMenuVO festMenuVO = new FestMenuVO();
-//				
-//				festMenuVO.setFest_m_name(fest_m_name);
-//				festMenuVO.setFest_m_qty(fest_m_qty);
-//				festMenuVO.setFest_m_start(fest_m_start);
-//				festMenuVO.setFest_m_end(fest_m_end);
-////				festMenuVO.setFest_m_pic(fest_m_pic);
-//				festMenuVO.setFest_m_resume(fest_m_resume);
-//				festMenuVO.setFest_m_send(fest_m_send);
-//				festMenuVO.setFest_m_status(fest_m_status);
-//				festMenuVO.setChef_ID(chef_ID);
-//			
-//				
-//				System.out.println(festMenuVO);
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("festMenuVO", festMenuVO); // 含有輸入格式錯誤的empVO物件,也存入req
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front-end/festMenu/addFestMenu.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-//
-//				/***************************2.開始新增資料**************************************/
-//				FestMenuService festMenuSvc = new FestMenuService();
-//				
-//				festMenuVO = festMenuSvc.addFestMenu(fest_m_name,fest_m_qty, 
-//				fest_m_start, fest_m_end,fest_m_resume,
-//				fest_m_send, fest_m_status, fest_m_kind,chef_ID);
-//
-//				/***************************3.新增完成，準備提交(Send the Success view**********/
-//				String url = "/front-end/festMenu/listAllFestMenu.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // �s�W���\�����listAllEmp.jsp
-//				successView.forward(req, res);				
-//
-//				/***************************其它可能的錯誤處理*********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/front-end/festMenu/addFestMenu.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
+		}
+
+        if ("insert".equals(action)) { //來自addReport.jsp的請求 
+            int i=1;
+        	System.out.println("263");
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println(i++);
+
+			try {
+				/***********************1.接收請求參數-輸入格式的錯誤處理*************************/
+				String fest_m_name = req.getParameter("fest_m_name").trim();//2
+				if (fest_m_name == null || fest_m_name.trim().length() == 0) {
+					errorMsgs.add("節慶主題料理名稱請勿空白");
+				}
+				System.out.println(fest_m_name);
+				Integer fest_m_qty = null;//3
+				try{
+					fest_m_qty = new Integer(req.getParameter("fest_m_qty"));
+				}catch (NumberFormatException e) {
+					fest_m_qty = 0;
+					errorMsgs.add("數量請填數字");
+				}
+				System.out.println(fest_m_qty);
+				
+				java.sql.Date fest_m_start = null;//4
+				try {
+					fest_m_start = java.sql.Date.valueOf(req.getParameter("fest_m_start").trim());
+				} catch (Exception e) {
+					fest_m_start = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請輸入訂單成立日期!");
+				}
+				
+				System.out.println(fest_m_start);
+				
+				java.sql.Date fest_m_end = null;//5
+				try {
+					fest_m_end = java.sql.Date.valueOf(req.getParameter("fest_m_end").trim());
+				} catch (Exception e) {
+					fest_m_end = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請輸入結束預購日期!");
+				}
+				
+				System.out.println(fest_m_end);
+				
+				//圖片
+				Part part= req.getPart("fest_m_pic");//6
+				InputStream in = part.getInputStream();
+				byte[] fest_m_pic = new byte[in.available()];
+				in.read(fest_m_pic);
+				in.close();
+				
+				//介紹
+				String fest_m_resume = req.getParameter("fest_m_resume");//7
+				if (fest_m_resume == null || fest_m_resume.trim().length() == 0) {
+					errorMsgs.add("介紹請勿空白");
+				}
+				
+				System.out.println(fest_m_resume);
+			
+				java.sql.Date fest_m_send = null; //8
+				try {
+					fest_m_send = java.sql.Date.valueOf(req.getParameter("fest_m_send").trim());
+				} catch (Exception e) {
+					fest_m_send = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請輸入出貨日期!");
+				}
+				
+				System.out.println(fest_m_send);
+				
+				String fest_m_status = req.getParameter("fest_m_status");//9
+				if (fest_m_status == null || fest_m_status.trim().length() == 0) {
+					errorMsgs.add("節慶主題料理狀態請勿空白");
+				}
+				
+				System.out.println(fest_m_status);
+				
+				String fest_m_kind = req.getParameter("fest_m_kind").trim();//10
+				if (fest_m_kind == null || fest_m_kind.trim().length() == 0) {
+					errorMsgs.add("節慶主題料理種類請勿空白");
+				}
+				
+				System.out.println(fest_m_kind);
+				
+				String chef_ID = req.getParameter("chef_ID").trim();//11
+				if (chef_ID == null || chef_ID.trim().length() == 0) {
+					errorMsgs.add("主廚編號請勿空白");
+				}
+							
+				System.out.println(chef_ID);
+				
+				FestMenuVO festMenuVO = new FestMenuVO();
+				
+				festMenuVO.setFest_m_name(fest_m_name);
+				festMenuVO.setFest_m_qty(fest_m_qty);
+				festMenuVO.setFest_m_start(fest_m_start);
+				festMenuVO.setFest_m_end(fest_m_end);
+			    festMenuVO.setFest_m_pic(fest_m_pic);
+				festMenuVO.setFest_m_resume(fest_m_resume);
+				festMenuVO.setFest_m_send(fest_m_send);
+				festMenuVO.setFest_m_status(fest_m_status);
+				festMenuVO.setChef_ID(chef_ID);
+							
+				System.out.println(festMenuVO);
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("festMenuVO", festMenuVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-end/festMenu/addFestMenu.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				/***************************2.開始新增資料**************************************/
+				FestMenuService festMenuSvc = new FestMenuService();
+				
+				festMenuVO = festMenuSvc.addFestMenu(fest_m_name,fest_m_qty, 
+				fest_m_start, fest_m_end,fest_m_pic,fest_m_resume,
+				fest_m_send, fest_m_status, fest_m_kind,chef_ID);
+
+				/***************************3.新增完成，準備提交(Send the Success view**********/
+				String url = "/front-end/festMenu/listAllFestMenu.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // �s�W���\�����listAllEmp.jsp
+				successView.forward(req, res);				
+
+				/***************************其它可能的錯誤處理*********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/festMenu/addFestMenu.jsp");
+				failureView.forward(req, res);
+			}
+		}
 
 
 		if ("delete".equals(action)) { 

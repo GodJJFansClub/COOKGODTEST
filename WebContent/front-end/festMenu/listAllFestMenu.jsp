@@ -76,6 +76,7 @@
 		<th>數量</th>
 		<th>開始預購日期 </th>
 		<th>結束預購日期        </th>
+		<th>照片</th>
 		<th>介紹</th>
 		<th>出貨日期</th>
 		<th>節慶主題料理狀態</th>
@@ -91,6 +92,8 @@
 			<td>${festMenuVO.fest_m_qty}</td>
 			<td>${festMenuVO.fest_m_start}</td>
 			<td>${festMenuVO.fest_m_end}</td>
+			<td><c:if test="${not empty festMenuVO.fest_m_pic}"><img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"></c:if>
+				    <c:if test="${empty festMenuVO.fest_m_pic}"><img src="images/null2.jpg"></c:if></td>
 			<td>${festMenuVO.fest_m_resume}</td>
 			<td>${festMenuVO.fest_m_send}</td>
 			<td>${festMenuVO.fest_m_status}</td>

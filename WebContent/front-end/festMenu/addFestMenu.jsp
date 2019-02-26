@@ -86,8 +86,8 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" name="form1"
-	  enctype="multipart/from-data">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" name="form1" 
+	  enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>節慶主題料理名稱:</td>
@@ -112,11 +112,12 @@ th, td {
 				<td><input type="TEXT" name="fest_m_end" id="f_date2"
 					value="<%= (festMenuVO==null)? "請選擇結束預購日期" :festMenuVO.getFest_m_end()%>" /></td>
 			</tr>
-<!-- 			<tr>
-				<td>照片:</td>
+			
+            <tr>
+			    <td>照片:</td>
 				<td><input type="file" name="fest_m_pic" size="20" id="doc"
 					onchange="javascript:setImagePreview();" /></td>
-			    </tr>    -->
+			</tr>   
 
 			<tr>
 				<td>介紹:</td>
@@ -154,6 +155,11 @@ th, td {
 					value="<%=(festMenuVO == null) ? "C00002" : festMenuVO.getChef_ID()%>" /></td>
 			</tr>
 		</table>
+		
+		
+		<div id="localImag">
+			<img id="preview" width=-1 height=-1 style="diplay: none" />
+		</div>
 		<br> <input type="hidden" name="action" value="insert">
 		     <input type="submit" value="送出新增">
 	</FORM>
