@@ -14,9 +14,9 @@ public class FestMenuService {
 	}
 
 	public FestMenuVO addFestMenu(String fest_m_name, Integer fest_m_qty, Date fest_m_start, Date fest_m_end,
-			byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status, String fest_m_kind,
+			byte[] fest_m_pic,String fest_m_resume, Date fest_m_send, String fest_m_status, String fest_m_kind,
 			String chef_ID) {
-
+		//
 		FestMenuVO festMenuVO = new FestMenuVO();
 
 		festMenuVO.setFest_m_name(fest_m_name);
