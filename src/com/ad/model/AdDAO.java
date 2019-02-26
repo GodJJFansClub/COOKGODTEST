@@ -225,6 +225,7 @@ public class AdDAO implements AdDAO_interface {
 				adVO.setAd_title(rs.getString("AD_TITLE"));
 				adVO.setAd_con(rs.getString("AD_CON"));
 				adVO.setFood_sup_ID(rs.getString("FOOD_SUP_ID"));
+				list.add(adVO);
 			 }
 			}catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "

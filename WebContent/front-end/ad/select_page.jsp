@@ -1,10 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.fun.model.*"%>
+<%@ page import="com.ad.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
-<title>IBM Fun: Home</title>
+<title>IBM Ad: Home</title>
 
 <style>
 table#table-1 {
@@ -34,12 +34,12 @@ h4 {
 
 	<table id="table-1">
 		<tr>
-			<td><h3>IBM Fun: Home</h3>
+			<td><h3>IBM Ad: Home</h3>
 				<h4>( MVC )</h4></td>
 		</tr>
 	</table>
 
-	<p>This is the Home page forFun: Home</p>
+	<p>This is the Home page forAd: Home</p>
 
 	<h3>資料查詢:</h3>
 
@@ -55,29 +55,29 @@ h4 {
 
 	<ul>
 		<li><a
-			href='<%=request.getContextPath()%>/back-end/fun/listAllFun.jsp'>List</a>
-			all Fun. <br>
+			href='<%=request.getContextPath()%>/front-end/ad/listAllAd.jsp'>List</a>
+			all Ad. <br>
 		<br></li>
 
 
 		<li>
 			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/fun/fun.do">
-				<b>輸入權限編號:</b> <input type="text" name="fun_ID"> <input
+				ACTION="<%=request.getContextPath()%>/ad/ad.do">
+				<b>輸入廣告編號:</b> <input type="text" name="ad_ID"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
 					type="submit" value="送出">
 			</FORM>
 		</li>
 
-		<jsp:useBean id="funSvc" scope="page"
-			class="com.fun.model.FunService" />
+		<jsp:useBean id="adSvc" scope="page"
+			class="com.ad.model.AdService" />
 
 		<li>
 			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/fun/fun.do">
-				<b>選擇權限編號:</b> <select size="1" name="fun_ID">
-					<c:forEach var="funVO" items="${funSvc.all}">
-						<option value="${funVO.fun_ID}">${funVO.fun_ID}
+				ACTION="<%=request.getContextPath()%>/ad/ad.do">
+				<b>選擇廣告編號:</b> <select size="1" name="ad_ID">
+					<c:forEach var="adVO" items="${adSvc.all}">
+						<option value="${adVO.ad_ID}">${adVO.ad_ID}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
@@ -86,10 +86,10 @@ h4 {
 
 		<li>
 			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/fun/fun.do">
-				<b>選擇權限名稱:</b> <select size="1" name="fun_ID">
-					<c:forEach var="funVO" items="${funSvc.all}">
-						<option value="${funVO.fun_ID}">${funVO.fun_name}
+				ACTION="<%=request.getContextPath()%>/ad/ad.do">
+				<b>選擇廣告姓名:</b> <select size="1" name="ad_ID">
+					<c:forEach var="adVO" items="${adSvc.all}">
+						<option value="${adVO.ad_ID}">${adVO.ad_title}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
@@ -98,10 +98,10 @@ h4 {
 	</ul>
 
 
-	<h3>權限管理</h3>
+	<h3>廣告管理</h3>
 
 	<ul>
-		<li><a href='addFun.jsp'>Add</a> a new Fun.</li>
+		<li><a href='addAd.jsp'>Add</a> a new Ad.</li>
 	</ul>
 
 </body>

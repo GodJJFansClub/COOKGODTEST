@@ -1,14 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.fun.model.*"%>
+<%@ page import="com.ad.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	FunVO funVO = (FunVO) request.getAttribute("funVO"); //SustServlet.java(Concroller), 存入req的funVO物件
+	AdVO adVO = (AdVO) request.getAttribute("adVO"); //SustServlet.java(Concroller), 存入req的adVO物件
 %>
 
 <html>
 <head>
-<title>權限資料 - listOneFun.jsp</title>
+<title>廣告資料 - listOneAd.jsp</title>
 
 <style>
 table#table-1 {
@@ -50,17 +50,17 @@ th, td {
 </head>
 <body bgcolor='white'>
 	<%
-		if (funVO != null) {
+		if (adVO != null) {
 	%>
 
 	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>權限資料 - ListOneFun.jsp</h3>
+				<h3>廣告資料 - ListOneAd.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/back-end/fun/select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -68,16 +68,25 @@ th, td {
 
 	<table>
 		<tr>
-			<th>權限編號</th>
-			
-			<th>權限名稱</th>
-		
+			<th>廣告編號</th>
+			<th>廣告標題</th>
+			<th>廣告內文</th>
+			<th>廣告上架日期</th>
+			<th>廣告下架日期</th>
+			<th>廣告狀態</th>
+			<th>廣告類別</th>
+			<th>食材供應商</th>
 			
 		</tr>
 		<tr>
-			<td><%=funVO.getFun_ID()%></td>
-			<td><%=funVO.getFun_name()%></td>
-					
+			<td><%=adVO.getAd_ID()%></td>
+			<td><%=adVO.getAd_con()%></td>
+			<td><%=adVO.getAd_start()%></td>
+			<td><%=adVO.getAd_end()%></td>
+			<td><%=adVO.getAd_status()%></td>
+			<td><%=adVO.getAd_type()%></td>
+			<td><%=adVO.getFood_sup_ID()%></td>
+		
 
 		</tr>
 	</table>

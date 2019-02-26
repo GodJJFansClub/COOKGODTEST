@@ -1,19 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.emp.model.*"%>
+<%@ page import="com.ad.model.*"%>
 
 <%
-	EmpVO empVO = (EmpVO) request.getAttribute("empVO");
-	Integer i = (Integer)request.getAttribute("aaa");
+	AdVO adVO = (AdVO) request.getAttribute("adVO"); //AdServlet.java (Concroller) 存入req的adVO物件 (包括幫忙取出的adVO, 也包括輸入資料錯誤時的adVO物件)
 %>
 
-<!DOCTYPE html>
 <html>
-
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>員工資料新增 - addEmp.jsp</title>
+<title>廣告資料修改 - update_ad_input.jsp</title>
 
 <style>
 table#table-1 {
@@ -52,9 +48,21 @@ th, td {
 </style>
 
 </head>
-
 <body bgcolor='white'>
-	<h3>資料新增:</h3>
+
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>廣告資料修改 - update_ad_input.jsp</h3>
+				<h4>
+					<a
+						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
+
+	<h3>資料修改:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -65,38 +73,58 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do"
-		name="form1" enctype="multipart/form-data">
 
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do"
+		name="form1" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>員工帳號:</td>
-				<td><input type="TEXT" name="emp_acc" size="45"
-					value="<%=(empVO == null) ? "Aa158556" : empVO.getEmp_acc()%>" /></td>
+				<td>廣告編號:<font color=red><b>*</b></font></td>
+				<td><%=adVO.getAd_ID()%></td>
+			</tr>
+			<tr>
+				<td>廣告標題:</td>
+				<td><input type="TEXT" name="ad_title" size="45"
+					value="<%=adVO.getAd_title()%>" /></td>
 			</tr>
 
 			<tr>
-				<td>員工姓名:</td>
-				<td><input type="TEXT" name="emp_name" size="45"
-					value="<%=(empVO == null) ? "teddy" : empVO.getEmp_name()%>" /></td>
+				<td>廣告內文:</td>
+				<td><input type="TEXT" name="ad_con" size="45"
+					value="<%=adVO.getAd_con()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>廣告上架日期:</td>
+				<td><input type="text" name="ad_start" id="f_date1" size="45"></td>
+			</tr>
+			
+			<tr>
+				<td>廣告下架日期:</td>
+				<td><input type="text" name="ad_end" id="f_date1" size="45"></td>
+			</tr>
+
+			<tr>
+				<td>狀態:</td>
+				<td><input type="TEXT" name="ad_status" size="45"
+					value="<%=adVO.getAd_status()%>" /></td>
+			</tr>
+
+			<tr>
+				<td>廣告地址:</td>
+				<td><input type="TEXT" name="food_sup_ID" size="45"
+					value="<%=adVO.getFood_sup_ID()%>" /></td>
 			</tr>
 
 			
-			<tr>
-				<td>員工大頭照:</td>
-				<td><input type="file" name="emp_pic" size="45" id="doc"
-					onchange="javascript:setImagePreview();" /></td>
-			</tr>
-
 
 
 		</table>
 		<div id="localImag">
 			<img id="preview" width=-1 height=-1 style="diplay: none" />
 		</div>
-		<br> <input type="hidden" name="action" value="insert"> <input
-			type="submit" value="送出新增">
-
+		<br> <input type="hidden" name="action" value="update"> <input
+			type="hidden" name="ad_ID" value="<%=adVO.getAd_ID()%>">
+		<input type="submit" value="送出修改">
 	</FORM>
 </body>
 
@@ -106,16 +134,25 @@ th, td {
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="https://github.com/totobe/jQuery/blob/master/jquery.twzipcode.min.js"></script>
+
+<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+
 <script>
         $.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
            theme: '',              //theme: 'dark',
  	       timepicker:true,       //timepicker:true,
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '${empVO.emp_brd}', // value:   new Date(),
+ 	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
+ 		   value: '<%=adVO.getAd_start()%>', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
@@ -203,9 +240,5 @@ th, td {
 		return true;
 	}
 </script>
-
-
-
-
 
 </html>

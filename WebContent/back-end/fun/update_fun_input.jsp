@@ -83,7 +83,7 @@ th, td {
 			</tr>
 			
 			<tr>
-				<td>權限姓名:</td>
+				<td>權限名稱:</td>
 				<td><input type="TEXT" name="fun_name" size="45"
 					value="<%=funVO.getFun_name()%>" /></td>
 			</tr>
