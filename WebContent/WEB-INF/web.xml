@@ -25,7 +25,7 @@
   </filter>
   <filter-mapping>
     <filter-name>loginFilter</filter-name>
-    <url-pattern>/back-end/*</url-pattern>
+    <url-pattern></url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
@@ -36,7 +36,6 @@
   <servlet>
     <servlet-name>FoodServlet</servlet-name>
     <servlet-class>com.food.controller.FoodServlet</servlet-class>
-    <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>FoodServlet</servlet-name>
@@ -97,11 +96,11 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>FoodOrderController</servlet-name>
-  	<servlet-class>com.foodOrder.controller.FoodOrderController</servlet-class>
+  	<servlet-name>FoodOrderServlet</servlet-name>
+  	<servlet-class>com.foodOrder.controller.FoodOrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>FoodOrderController</servlet-name>
+  	<servlet-name>FoodOrderServlet</servlet-name>
   	<url-pattern>/foodOrder/foodOrder.do</url-pattern>
   </servlet-mapping>
   
