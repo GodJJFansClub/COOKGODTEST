@@ -5,7 +5,6 @@
 
 <%
 	AdVO adVO = (AdVO) request.getAttribute("adVO");
-	
 %>
 
 <!DOCTYPE html>
@@ -69,7 +68,7 @@ th, td {
 		name="form1" enctype="multipart/form-data">
 
 		<table>
-			
+
 			<tr>
 				<td>廣告標題:</td>
 				<td><input type="TEXT" name="ad_title" size="45"
@@ -82,14 +81,14 @@ th, td {
 					value="<%=(adVO == null) ? "a987654321" : adVO.getAd_con()%>" /></td>
 			</tr>
 
-			
+
 
 			<tr>
 				<td>廣告上架日期:</td>
 				<td><input type="TEXT" name="ad_start" id="f_date1" size="45" /></td>
 			</tr>
 
-			
+
 			<tr>
 				<td>廣告下架日期:</td>
 				<td><input type="TEXT" name="ad_end" id="f_date2" size="45" /></td>
@@ -109,15 +108,30 @@ th, td {
 
 			<tr>
 				<td>食材供應商ID:</td>
-				<td><input type="text" name="food_sup_ID" size="45" 
+				<td><input type="text" name="food_sup_ID" size="45"
 					value="<%=(adVO == null) ? "555" : adVO.getFood_sup_ID()%>" /></td>
 			</tr>
+			
+			
+			
 
 
 
 		</table>
+		
+		<script src="ckEditor/ckeditor.js"></script>
+			<form id="form1" runat="server">
+				<div style="margin: 0 auto; width: 700px">
+					<textarea id="editor"></textarea>
+				</div>
+			</form>
+			
+			<script>
+   				 ClassicEditor.create(document.querySelector('#editor')).then(editor => {
+            	console.log(editor);})
+			</script>
 		<div id="localImag">
-			<img id="preview" width=-1 height=-1 style="diplay: none" />
+			<img id="preview" width=200px height=300px style="diplay: on" />
 		</div>
 		<br> <input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
@@ -138,8 +152,10 @@ th, td {
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="https://github.com/totobe/jQuery/blob/master/jquery.twzipcode.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script
+	src="https://github.com/totobe/jQuery/blob/master/jquery.twzipcode.min.js"></script>
 <script>
         $.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
@@ -214,41 +230,7 @@ th, td {
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 
 </script>
-<script>
-	function setImagePreview() {
-		var docObj = document.getElementById("doc");
-		var imgObjPreview = document.getElementById("preview");
-		if (docObj.files && docObj.files[0]) {
-			//火狐下，直接设img属性
-			imgObjPreview.style.display = 'block';
-			imgObjPreview.style.width = '200px';
-			imgObjPreview.style.height = '120px';
-			//imgObjPreview.src = docObj.files[0].getAsDataURL();
-			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
-			imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
-		} else {
-			//IE下，使用滤镜
-			docObj.select();
-			var imgSrc = document.selection.createRange().text;
-			var localImagId = document.getElementById("localImag");
-			//必须设置初始大小
-			localImagId.style.width = "250px";
-			localImagId.style.height = "200px";
-			//图片异常的捕捉，防止用户修改后缀来伪造图片
-			try {
-				localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-				localImagId.filters
-						.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
-			} catch (e) {
-				alert("您上传的图片格式不正确，请重新选择!");
-				return false;
-			}
-			imgObjPreview.style.display = 'none';
-			document.selection.empty();
-		}
-		return true;
-	}
-</script>
+
 
 
 
