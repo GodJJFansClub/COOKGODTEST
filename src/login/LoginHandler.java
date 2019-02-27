@@ -18,11 +18,7 @@ public class LoginHandler extends HttpServlet {
    //【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
    //【實際上應至資料庫搜尋比對】
   protected boolean allowUser(String account, String password) {
-	  CustService custSvc = new CustService();
-		CustVO custVO = custSvc.
-		if (custVO == null) {
-			
-		}
+	 
     if ("tomcat".equals(account) && "tomcat".equals(password))
       return true;
     else
