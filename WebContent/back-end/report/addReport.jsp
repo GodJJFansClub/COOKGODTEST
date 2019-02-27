@@ -55,12 +55,13 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>檢舉文章資料新增 - addReport.jsp</h3></td><td>
+		 
 		 <h4><a href="select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
 <h3>資料新增:</h3>
-
+<p class="mt-3">您可以利用下列表單與我們交流檢舉文章的內容,請留下資料，我們會儘快與您聯絡！</p>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -71,12 +72,12 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="report.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/report/report.do" name="form1">
 <table>
   
 	<tr>
 		<td>檢舉編題:</td>
-		<td><input type="TEXT" name="report_title" size="45" 
+		<td><input type="TEXT" name="report_title" size="45" class="form-control"
 			 value="<%= (reportVO==null)? "請輸入檢舉文章標題" :reportVO.getReport_title() %>" /></td>
 	</tr>
 
@@ -117,8 +118,12 @@
 	</tr>
 </table>
 <br>
+ <div>
 <input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<input type="submit" value="送出新增">
+<button type="reset" class="btn btn-primary float-right send-btn">重設</button>
+ </div>
+</FORM>
 </body>
 
 

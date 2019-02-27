@@ -8,6 +8,11 @@
 
 <html>
 <head>
+<!-- Required meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>員工資料修改 - update_report_input.jsp</title>
 
@@ -44,15 +49,14 @@
 </style>
 
 </head>
-<body bgcolor='white'>
-
-<table id="table-1">
-	<tr><td>
-		 <h3>檢舉資料修改 - update_report_input.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
+<body>
+     <div class="card text-center" style="background-color: #D4E6F1">	  
+	  <div class="card-body" >
+	    <h5 class="card-title">檢舉文章管理</h5>
+	    <p class="card-text">update_report_input.jsp</p>
+	    <a href="index.jsp" class="btn btn-primary">回首頁</a>
+	  </div>
+	</div>
 <h3>檢舉資料修改:</h3>
 
 <%-- 錯誤表列 --%>

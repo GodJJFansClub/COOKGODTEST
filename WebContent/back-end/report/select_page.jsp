@@ -48,11 +48,11 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllReport.jsp'>List</a> all Reports.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/report/listAllReport.jsp'>List</a> all Reports.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="report.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/report/report.do" >
         <b>輸入檢舉編號 :</b>
         <input type="text" name="report_ID">
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -63,7 +63,7 @@
   <jsp:useBean id="reportSvc" scope="page" class="com.report.model.ReportService" />
    
   <li>
-     <FORM METHOD="post" ACTION="report.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/report/report.do" >
        <b>選擇檢舉編號 ::</b>
        <select size="1" name="report_ID">
          <%-- <c:forEach var="reportVO" items="${reportSvc.all}"> --%>
@@ -77,7 +77,7 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="report.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/report/report.do" >
        <b>選擇檢舉分類:</b>
        <select size="1" name="report_ID">
          <c:forEach var="reportVO" items="${reportSvc.all}" > 
