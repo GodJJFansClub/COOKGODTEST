@@ -27,7 +27,7 @@ public class FoodMallService {
 		return foodMallVO;
 	}
 	
-	public FoodMallVO updateFood(String food_sup_ID, String food_ID, String food_m_name, String food_m_status, Integer food_m_price,
+	public FoodMallVO updateFoodMall(String food_sup_ID, String food_ID, String food_m_name, String food_m_status, Integer food_m_price,
 			String food_m_unit, String food_m_place, byte[] food_m_pic, String food_m_resume) {
 		FoodMallVO foodMallVO = new FoodMallVO();
 		

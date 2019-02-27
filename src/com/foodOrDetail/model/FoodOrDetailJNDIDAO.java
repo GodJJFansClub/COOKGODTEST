@@ -24,7 +24,7 @@ public class FoodOrDetailJNDIDAO implements FoodOrDetailDAO_interface {
 		}
 	}
 	private static final String INSERT_STMT = 
-			"INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL) VALUES (?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE FOOD_OR_DETAIL SET FOOD_OD_QTY = ?, FOOD_OD_STOTAL = ?, FOOD_OD_RATE = ?, FOOD_OD_MSG = ? WHERE FOOD_OR_ID = ? AND FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String DELETE_STMT = 
@@ -46,9 +46,7 @@ public class FoodOrDetailJNDIDAO implements FoodOrDetailDAO_interface {
 			pstmt.setString(2, foodOrDetailVO.getFood_sup_ID());
 			pstmt.setString(3, foodOrDetailVO.getFood_ID());
 			pstmt.setInt(4, foodOrDetailVO.getFood_od_qty());
-			pstmt.setInt(5, foodOrDetailVO.getFood_od_stotal());
-			pstmt.setInt(6, foodOrDetailVO.getFood_od_rate());
-			pstmt.setString(7, foodOrDetailVO.getFood_od_msg());			
+			pstmt.setInt(5, foodOrDetailVO.getFood_od_stotal());		
 			
 
 			pstmt.executeUpdate();

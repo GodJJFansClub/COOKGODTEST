@@ -41,17 +41,12 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/food/addFood.jsp" aria-expanded="false">
                                 <i class="mdi mdi-file"></i>
-                                <span class="hide-menu">Blank</span>
+                                <span class="hide-menu">新增食材</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html" aria-expanded="false">
-                                <i class="mdi mdi-alert-outline"></i>
-                                <span class="hide-menu">404</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

@@ -8,4 +8,5 @@ public interface FoodOrDetailDAO_interface {
 	void delete(String food_or_ID, String food_sup_ID, String food_ID);
 	FoodOrDetailVO findByPrimaryKey(String food_or_ID, String food_sup_ID, String food_ID);
 	List<FoodOrDetailVO> getAll();
+	
 }

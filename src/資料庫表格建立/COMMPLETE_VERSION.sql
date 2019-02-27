@@ -551,7 +551,7 @@ CREATE TABLE FOOD_ORDER (
  FOOD_OR_ID                VARCHAR2(17)    NOT NULL,
  FOOD_OR_STATUS            VARCHAR2(2)    NOT NULL, 
  FOOD_OR_START             DATE           NOT NULL,
- FOOD_OR_SEND              DATE           NOT NULL,
+ FOOD_OR_SEND              DATE,
  FOOD_OR_RCV               DATE,
  FOOD_OR_END               DATE,
  FOOD_OR_NAME              VARCHAR2(100)   NOT NULL,
@@ -710,6 +710,7 @@ CREATE TABLE FEST_MENU (
  FEST_M_SEND             DATE                 NOT NULL,
  FEST_M_STATUS           VARCHAR2(2)            NOT NULL,
  FEST_M_KIND             VARCHAR2(30)         NOT NULL,
+ FEST_M_PRICE			 NUMBER(6),
  CHEF_ID                 VARCHAR2(6)          NOT NULL,
  CONSTRAINT FEST_MENU_FK FOREIGN KEY (CHEF_ID) REFERENCES CHEF (CHEF_ID),
  PRIMARY KEY (FEST_M_ID)

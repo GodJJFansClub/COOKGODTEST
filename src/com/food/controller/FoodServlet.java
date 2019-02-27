@@ -21,36 +21,6 @@ import com.food.model.FoodVO;
 
 public class FoodServlet extends HttpServlet {
 	
-	@Override
-	public void init() {
-
-		
-		Map< String, String> foodTypeMap = new HashMap< String, String>();
-		foodTypeMap.put("g0", "肉");
-		foodTypeMap.put("g1", "蔬果");
-		foodTypeMap.put("g2", "海鮮");
-		foodTypeMap.put("g3", "米,麵,粉");
-		foodTypeMap.put("g4", "南北雜貨");
-				
-		Map<String, String> mallStatusMap = new HashMap<String, String>();
-		mallStatusMap.put("p0", "審核不通過");
-		mallStatusMap.put("p1", "審核通過");
-		mallStatusMap.put("p2", "未審核");
-		mallStatusMap.put("p3", "下架");
-		mallStatusMap.put("p4", "上架");
-		
-		Map<String, String> foodSupStatusMap = new HashMap<String, String>();
-		foodSupStatusMap.put("s0", "未審核");
-		foodSupStatusMap.put("s1", "審核通過");
-		foodSupStatusMap.put("s2", "審核不過");
-		foodSupStatusMap.put("s3", "解除合作");
-		
-		
-		ServletContext servletContext = getServletContext();
-		servletContext.setAttribute("foodTypeMap", foodTypeMap);
-		servletContext.setAttribute("mallStatusMap", mallStatusMap);
-		servletContext.setAttribute("foodSupStatusMap", foodSupStatusMap);
-	}
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)

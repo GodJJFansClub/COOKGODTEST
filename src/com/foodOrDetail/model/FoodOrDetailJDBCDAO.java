@@ -14,7 +14,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 	private static final String USER = "COOKGOD";
 	private static final String PASSWORD = "123456";
 	private static final String INSERT_STMT = 
-			"INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL) VALUES (?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE FOOD_OR_DETAIL SET FOOD_OD_QTY = ?, FOOD_OD_STOTAL = ?, FOOD_OD_RATE = ?, FOOD_OD_MSG = ? WHERE FOOD_OR_ID = ? AND FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String DELETE_STMT = 
@@ -23,6 +23,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			"SELECT FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG FROM FOOD_OR_DETAIL ORDER BY FOOD_OR_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? AND FOOD_SUP_ID = ? AND FOOD_ID = ?";
+
 	
 	@Override
 	public void insert(FoodOrDetailVO foodOrDetailVO) {
@@ -38,9 +39,7 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 			pstmt.setString(2, foodOrDetailVO.getFood_sup_ID());
 			pstmt.setString(3, foodOrDetailVO.getFood_ID());
 			pstmt.setInt(4, foodOrDetailVO.getFood_od_qty());
-			pstmt.setInt(5, foodOrDetailVO.getFood_od_stotal());
-			pstmt.setInt(6, foodOrDetailVO.getFood_od_rate());
-			pstmt.setString(7, foodOrDetailVO.getFood_od_msg());			
+			pstmt.setInt(5, foodOrDetailVO.getFood_od_stotal());			
 			
 
 			pstmt.executeUpdate();
@@ -287,15 +286,13 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 		FoodOrDetailJDBCDAO dao = new FoodOrDetailJDBCDAO();
 		
 		// 新增
-//		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
-//		foodOrDetailVO.setFood_or_ID("FO20181121-000001");
-//		foodOrDetailVO.setFood_sup_ID("C00011");
-//		foodOrDetailVO.setFood_ID("F00016");
-//		foodOrDetailVO.setFood_od_qty(4);
-//		foodOrDetailVO.setFood_od_stotal(260);
-//		foodOrDetailVO.setFood_od_rate(5);
-//		foodOrDetailVO.setFood_od_msg("AAAA");
-//		dao.insert(foodOrDetailVO);
+		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
+		foodOrDetailVO.setFood_or_ID("FO20181121-000001");
+		foodOrDetailVO.setFood_sup_ID("C00011");
+		foodOrDetailVO.setFood_ID("F00016");
+		foodOrDetailVO.setFood_od_qty(4);
+		foodOrDetailVO.setFood_od_stotal(260);
+		dao.insert(foodOrDetailVO);
 		
 		// 修改
 //		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
@@ -322,17 +319,17 @@ public class FoodOrDetailJDBCDAO implements FoodOrDetailDAO_interface{
 //		System.out.println(foodOrDetailVO.getFood_od_msg());
 		
 		// 查全部
-		List<FoodOrDetailVO> foodOdDetailVOs = dao.getAll();
-		for(FoodOrDetailVO foodOrDetailVO:foodOdDetailVOs) {
-			System.out.print(foodOrDetailVO.getFood_or_ID() + " ");
-			System.out.print(foodOrDetailVO.getFood_sup_ID() + " ");
-			System.out.print(foodOrDetailVO.getFood_ID() + " ");
-			System.out.print(foodOrDetailVO.getFood_od_qty() + " ");
-			System.out.print(foodOrDetailVO.getFood_od_stotal() + " ");
-			System.out.print(foodOrDetailVO.getFood_od_rate() + " ");
-			System.out.print(foodOrDetailVO.getFood_od_msg() + " ");
-			System.out.println();
-		}
+//		List<FoodOrDetailVO> foodOdDetailVOs = dao.getAll();
+//		for(FoodOrDetailVO foodOrDetailVO:foodOdDetailVOs) {
+//			System.out.print(foodOrDetailVO.getFood_or_ID() + " ");
+//			System.out.print(foodOrDetailVO.getFood_sup_ID() + " ");
+//			System.out.print(foodOrDetailVO.getFood_ID() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_qty() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_stotal() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_rate() + " ");
+//			System.out.print(foodOrDetailVO.getFood_od_msg() + " ");
+//			System.out.println();
+//		}
 		
 	}
 }

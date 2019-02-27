@@ -33,6 +33,10 @@
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
   
+  <listener>
+  	<listener-class>com.cookGodPub.CookGodListener</listener-class>
+  </listener>
+  
   <servlet>
     <servlet-name>FoodServlet</servlet-name>
     <servlet-class>com.food.controller.FoodServlet</servlet-class>
