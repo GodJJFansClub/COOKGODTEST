@@ -192,6 +192,7 @@ public class AuthDAO implements AuthDAO_interface {
 				authVO = new AuthVO();
 				authVO.setEmp_ID(rs.getString("EMP_ID"));
 				authVO.setFun_ID(rs.getString("FUN_ID"));
+				list.add(authVO);
 			}
 		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured."+ se.getMessage());

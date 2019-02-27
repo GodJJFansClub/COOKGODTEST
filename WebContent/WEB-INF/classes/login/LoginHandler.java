@@ -3,26 +3,15 @@ package login;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-
-import com.auth.model.AuthService;
-import com.auth.model.AuthVO;
-import com.cust.model.CustService;
-import com.cust.model.CustVO;
-
 import javax.servlet.annotation.WebServlet;
 
 @WebServlet("/loginhandler")
 public class LoginHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
    //【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
    //【實際上應至資料庫搜尋比對】
   protected boolean allowUser(String account, String password) {
-	  CustService custSvc = new CustService();
-		CustVO custVO = custSvc.
-		if (custVO == null) {
-			
-		}
     if ("tomcat".equals(account) && "tomcat".equals(password))
       return true;
     else
@@ -34,9 +23,7 @@ public class LoginHandler extends HttpServlet {
     req.setCharacterEncoding("Big5");
     res.setContentType("text/html; charset=Big5");
     PrintWriter out = res.getWriter();
-    CustVO custVO = (CustVO) req.getAttribute("custVO");
-    
-    
+
     // 【取得使用者 帳號(account) 密碼(password)】
     String account = req.getParameter("account");
     String password = req.getParameter("password");

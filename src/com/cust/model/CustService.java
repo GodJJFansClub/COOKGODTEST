@@ -72,5 +72,8 @@ public class CustService {
 	public List<CustVO> getAll() {
 		return dao.getAll();
 	}
+	public CustVO compareCust(String cust_acc) {
+		return dao.findByPrimaryKey(cust_acc);
+	}
 
 }
