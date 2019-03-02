@@ -40,8 +40,8 @@ public class EmpService {
 		dao.delete(emp_ID);
 	}
 
-	public EmpVO getOneEmp(String emp_ID) {
-		return dao.findByPrimaryKey(emp_ID);
+	public EmpVO getOneEmp(String emp_acc) {
+		return dao.findByPrimaryKey(emp_acc);
 	}
 
 	public List<EmpVO> getAll() {

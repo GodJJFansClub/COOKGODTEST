@@ -136,9 +136,9 @@ package com.emp.controller;
 
 				try {
 					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-					String str = req.getParameter("emp_ID");
+					String str = req.getParameter("emp_acc");
 					if (str == null || (str.trim()).length() == 0) {
-						errorMsgs.add("請輸入員工編號");
+						errorMsgs.add("請輸入員工帳號");
 					}
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
@@ -147,9 +147,9 @@ package com.emp.controller;
 						return;// 程式中斷
 					}
 
-					String emp_ID = null;
+					String emp_acc = null;
 					try {
-						emp_ID = new String(str);
+						emp_acc = new String(str);
 					} catch (Exception e) {
 						errorMsgs.add("員工編號格式不正確");
 					}
@@ -162,7 +162,7 @@ package com.emp.controller;
 
 					/*************************** 2.開始查詢資料 *****************************************/
 					EmpService empSvc = new EmpService();
-					EmpVO empVO = empSvc.getOneEmp(emp_ID);
+					EmpVO empVO = empSvc.getOneEmp(emp_acc);
 					if (empVO == null) {
 						errorMsgs.add("查無資料");
 					}
@@ -197,11 +197,11 @@ package com.emp.controller;
 
 				try {
 					/*************************** 1.接收請求參數 ****************************************/
-					String emp_ID = new String(req.getParameter("emp_ID"));
+					String emp_acc = new String(req.getParameter("emp_acc"));
 
 					/*************************** 2.開始查詢資料 ****************************************/
 					EmpService empSvc = new EmpService();
-					EmpVO empVO = empSvc.getOneEmp(emp_ID);
+					EmpVO empVO = empSvc.getOneEmp(emp_acc);
 
 					/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 					req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
