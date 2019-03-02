@@ -170,4 +170,12 @@
     <servlet-name>AuthServlet</servlet-name>
     <url-pattern>/auth/auth.do</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>FavFdSupServlet</servlet-name>
+    <servlet-class>com.favFdSup.controller.FavFdSupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FavFdSupServlet</servlet-name>
+    <url-pattern>/favFdSup/favFdSup.do</url-pattern>
+  </servlet-mapping>
 </web-app>

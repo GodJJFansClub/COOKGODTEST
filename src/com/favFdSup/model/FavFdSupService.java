@@ -10,24 +10,21 @@ public class FavFdSupService {
 		dao=new FavFdSupDAO();
 	}
 	
-	public FavFdSupVO addFavFdSup(String chef_ID, String food_sup_ID, String fav_fd_sup_note, Integer fav_fd_sup_num) {
+	public FavFdSupVO addFavFdSup(String chef_ID, String food_sup_ID) {
 		
 		FavFdSupVO favFdSupVO = new FavFdSupVO();
 		favFdSupVO.setChef_ID(chef_ID);
 		favFdSupVO.setFood_sup_ID(food_sup_ID);
-		favFdSupVO.setFav_fd_sup_note(fav_fd_sup_note);
-		favFdSupVO.setFav_fd_sup_num(fav_fd_sup_num);
 		dao.insert(favFdSupVO);
 		
 		return favFdSupVO;
 	}
-	public FavFdSupVO updateFavFdSup(String chef_ID, String food_sup_ID, String fav_fd_sup_note, Integer fav_fd_sup_num) {
+	public FavFdSupVO updateFavFdSup(String chef_ID, String food_sup_ID, String fav_fd_sup_note) {
 		
 		FavFdSupVO favFdSupVO = new FavFdSupVO();
 		favFdSupVO.setChef_ID(chef_ID);
 		favFdSupVO.setFood_sup_ID(food_sup_ID);
 		favFdSupVO.setFav_fd_sup_note(fav_fd_sup_note);
-		favFdSupVO.setFav_fd_sup_num(fav_fd_sup_num);
 		dao.update(favFdSupVO);
 		
 		return favFdSupVO;
@@ -38,6 +35,9 @@ public class FavFdSupService {
 	public FavFdSupVO getOneFavFdSup(String chef_ID, String food_sup_ID) {
 		return dao.findByPrimaryKey(chef_ID, food_sup_ID);
 	}
+	public List<FavFdSupVO> getAllByChefID(String chef_ID){
+		return dao.getAllByChefID(chef_ID);
+	}	
 	public List<FavFdSupVO> getAll(){
 		return dao.getAll();
 	}

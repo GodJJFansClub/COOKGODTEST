@@ -4,7 +4,6 @@ public class FavFdSupVO {
 	private String chef_ID;
 	private String food_sup_ID;
 	private String fav_fd_sup_note;	
-	private Integer fav_fd_sup_num;
 	
 	public String getChef_ID() {
 		return chef_ID;
@@ -23,11 +22,5 @@ public class FavFdSupVO {
 	}
 	public void setFav_fd_sup_note(String fav_fd_sup_note) {
 		this.fav_fd_sup_note = fav_fd_sup_note;
-	}
-	public Integer getFav_fd_sup_num() {
-		return fav_fd_sup_num;
-	}
-	public void setFav_fd_sup_num(Integer fav_fd_sup_num) {
-		this.fav_fd_sup_num = fav_fd_sup_num;
 	}
 }
