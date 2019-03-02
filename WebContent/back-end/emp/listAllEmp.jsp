@@ -54,7 +54,21 @@ th, td {
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+
+
+
 
 	<h4>此頁練習採用 EL 的寫法取值:</h4>
 	<table id="table-1">
@@ -125,6 +139,11 @@ th, td {
 		</c:forEach>
 	</table>
 	<%@ include file="page2.file"%>
-
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

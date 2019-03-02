@@ -48,7 +48,19 @@ th, td {
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+
 
 	<table id="table-1">
 		<tr>
@@ -115,9 +127,9 @@ th, td {
 			type="hidden" name="emp_ID" value="<%=empVO.getEmp_ID()%>">
 		<input type="submit" value="送出修改">
 	</FORM>
-</body>
 
 
+<%--=================================工作區================================================--%>			
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
@@ -171,4 +183,10 @@ th, td {
 	}
 </script>
 
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

@@ -52,8 +52,19 @@ th, td {
 </style>
 
 </head>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 
-<body bgcolor='white'>
 	<h3>資料新增:</h3>
 
 	<%-- 錯誤表列 --%>
@@ -87,7 +98,7 @@ th, td {
 			type="submit" value="送出新增">
 
 	</FORM>
-</body>
+<%--=================================工作區================================================--%>		
 
 
 <link rel="stylesheet" type="text/css"
@@ -102,5 +113,11 @@ th, td {
 
 
 
-
+	
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
