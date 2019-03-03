@@ -8,7 +8,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.*;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 
@@ -51,7 +50,7 @@ public class CustServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 
 				// 1.姓名
 				String cust_name = req.getParameter("cust_name");
@@ -183,11 +182,11 @@ public class CustServlet extends HttpServlet {
 				successView.forward(req, res);
 				
 				//除錯
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		// 查詢-單一

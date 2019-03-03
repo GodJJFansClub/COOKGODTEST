@@ -263,39 +263,39 @@ public class AuthJDBCDAO implements AuthDAO_interface {
 	}
 	
 	
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 
-		AuthJDBCDAO dao = new AuthJDBCDAO();
+//		AuthJDBCDAO dao = new AuthJDBCDAO();
 		
-//		//·s¼W
+//		
 //		AuthVO authVO1 = new AuthVO();
 //		authVO1.setEmp_ID("E00002");
 //		authVO1.setFun_ID("FU0001");
 //		dao.insert(authVO1);
 //		
-//		//­×§ï
+//		
 //		AuthVO authVO2 = new AuthVO();
 //		authVO2.setEmp_ID("E00002");
 //		authVO2.setFun_ID("FU0002");
 //		dao.update(authVO2);
 //		
-//		// §R°£
+//		ï¿½
 //		dao.delete("");
 //		
-//		//¬d¸ß
+//		
 //		AuthVO authVO3 = dao.findByPrimaryKey("E00002");
 //		System.out.println(authVO3.getEmp_ID()+",");
 //		System.out.println(authVO3.getFun_ID()+",");
 //		System.out.println("-------");
 //		
-//		//¬d¸ßall
+//		//ï¿½dï¿½ï¿½all
 //		List<AuthVO> list = dao.getAll();
 //		for (AuthVO aAuth: list) {
 //			System.out.println(aAuth.getEmp_ID()+",");
 //			System.out.println(aAuth.getFun_ID()+",");
 //		}
 //		
-	}
+//	}
 	
 	
 

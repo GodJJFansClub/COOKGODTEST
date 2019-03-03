@@ -67,15 +67,21 @@ th, td {
 		<table>
 		
 			<tr>
-				<td>員工名稱:</td>
-				<td><input type="TEXT" name="emp_ID" size="45"
-					value="<%=(authVO == null) ? "teddy" : authVO.getEmp_ID()%>" /></td>
+				
+				<b>選擇員工編號:</b> <select size="1" name="emp_ID">
+					<c:forEach var="empVO" items="${empSvc.all}">
+						<option value="${empVO.emp_ID}">${empVO.emp_ID}
+					</c:forEach>
+				</select> 
+			
 			</tr>
 			
 			<tr>
-				<td>權限名稱:</td>
-				<td><input type="TEXT" name="fun_ID" size="45"
-					value="<%=(authVO == null) ? "teddy" : authVO.getFun_ID()%>" /></td>
+				<b>選擇權限編號:</b> <select size="1" name="fun_ID">
+					<c:forEach var="funVO" items="${funSvc.all}">
+						<option value="${funVO.fun_ID}">${funVO.fun_ID}
+					</c:forEach>
+					</select> 
 			</tr>
 			
 

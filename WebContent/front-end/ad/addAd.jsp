@@ -127,8 +127,7 @@ th, td {
 			</form>
 			
 			<script>
-   				 ClassicEditor.create(document.querySelector('#editor')).then(editor => {
-            	console.log(editor);})
+   				 ClassicEditor.create(document.querySelector('#editor')).then(editor => {console.log(editor);})
 			</script>
 		<div id="localImag">
 			<img id="preview" width=200px height=300px style="diplay: on" />
