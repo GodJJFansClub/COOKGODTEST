@@ -21,8 +21,8 @@ public class AuthDAO implements AuthDAO_interface {
 	}
 
 	private static final String INSERT_STMT ="INSERT INTO AUTH (EMP_ID, FUN_ID) values(?,?)";
-	private static final String GET_ALL_STMT ="SELECT FUN_ID,EMP_ID FROM AUTH ";
-	private static final String GET_ONE_STMT ="SELECT FUN_ID,EMP_ID FROM AUTH WHERE EMP_ID= ? ";
+	private static final String GET_ALL_STMT ="SELECT * FROM AUTH ";
+	private static final String GET_ONE_STMT ="SELECT * FROM AUTH WHERE EMP_ID= ? ";
 	private static final String DELETE = "DELETE FROM AUTH WHERE EMP_ID = ?";
 	private static final String UPDATE = "UPDATE AUTH SET FUN_ID=? WHERE EMP_ID= ?";
 	@Override

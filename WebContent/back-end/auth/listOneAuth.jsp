@@ -72,7 +72,7 @@ th, td {
 			
 		</tr>
 		<tr>
-			<td><%=authVO.getEmp_ID()%>->${empSvc.getOneEmp(authVO.emp_ID).emp_name}</td>
+			<td><%=authVO.getEmp_ID()%>->${empSvc.getOneEmp(empVO.emp_acc).emp_name}</td>
 			<td><%=authVO.getFun_ID()%>->${funSvc.getOneFun(authVO.fun_ID).fun_name}</td>
 					
 

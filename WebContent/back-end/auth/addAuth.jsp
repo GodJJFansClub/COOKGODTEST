@@ -5,7 +5,7 @@
 
 <%
 	AuthVO authVO = (AuthVO) request.getAttribute("authVO");
-	Integer i = (Integer)request.getAttribute("aaa");
+	
 %>
 
 <!DOCTYPE html>
@@ -67,19 +67,20 @@ th, td {
 		<table>
 		
 			<tr>
-				
+<jsp:useBean id="empSvc" scope="session" class="com.emp.model.EmpService" />
+<jsp:useBean id="funSvc" scope="session" class="com.fun.model.FunService" />
 				<b>選擇員工編號:</b> <select size="1" name="emp_ID">
 					<c:forEach var="empVO" items="${empSvc.all}">
-						<option value="${empVO.emp_ID}">${empVO.emp_ID}
+						<option value="${empVO.emp_ID}">${empVO.emp_name}
 					</c:forEach>
-				</select> 
+</select> 
 			
 			</tr>
 			
 			<tr>
 				<b>選擇權限編號:</b> <select size="1" name="fun_ID">
 					<c:forEach var="funVO" items="${funSvc.all}">
-						<option value="${funVO.fun_ID}">${funVO.fun_ID}
+						<option value="${funVO.fun_ID}">${funVO.fun_name}
 					</c:forEach>
 					</select> 
 			</tr>
@@ -87,9 +88,7 @@ th, td {
 
 
 		</table>
-		<div id="localImag">
-			<img id="preview" width=-1 height=-1 style="diplay: none" />
-		</div>
+		
 		<br> <input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
 
@@ -97,11 +96,7 @@ th, td {
 
 
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="https://github.com/totobe/jQuery/blob/master/jquery.twzipcode.min.js"></script>
 

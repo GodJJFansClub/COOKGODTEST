@@ -275,7 +275,7 @@ package com.emp.controller;
 					// 如果以上格式有錯
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("empVO", empVO);// 以下練習正則(規)表示式(regular-expression)
-						RequestDispatcher failureView = req.getRequestDispatcher("/emp/update_emp_input.jsp");
+						RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/update_emp_input.jsp");
 
 						failureView.forward(req, res);
 						return;

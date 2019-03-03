@@ -279,7 +279,7 @@ public class AuthJDBCDAO implements AuthDAO_interface {
 //		authVO2.setFun_ID("FU0002");
 //		dao.update(authVO2);
 //		
-//		�
+//		
 //		dao.delete("");
 //		
 //		
@@ -288,7 +288,7 @@ public class AuthJDBCDAO implements AuthDAO_interface {
 //		System.out.println(authVO3.getFun_ID()+",");
 //		System.out.println("-------");
 //		
-//		//�d��all
+//		
 //		List<AuthVO> list = dao.getAll();
 //		for (AuthVO aAuth: list) {
 //			System.out.println(aAuth.getEmp_ID()+",");

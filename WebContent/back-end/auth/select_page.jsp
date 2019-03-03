@@ -63,8 +63,8 @@
 		<jsp:useBean id="authSvc" scope="page"
 			class="com.auth.model.AuthService" />
 			
-<jsp:useBean id="empVO" scope="session" class="com.emp.model.EmpVO" />
-<jsp:useBean id="funVO" scope="session" class="com.fun.model.FunVO" />
+<jsp:useBean id="empSvc" scope="session" class="com.emp.model.EmpService" />
+<jsp:useBean id="funSvc" scope="session" class="com.fun.model.FunService" />
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/auth/auth.do">

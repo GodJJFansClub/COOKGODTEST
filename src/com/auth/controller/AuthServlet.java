@@ -35,21 +35,14 @@ public class AuthServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				// 1.編號
 				String emp_ID = req.getParameter("emp_ID");
 				
-				if (emp_ID == null || emp_ID.trim().length() == 0) {
-					errorMsgs.add("權限帳號: 請勿空白");
-				}
+				
 				// 2.名稱
 				String fun_ID = req.getParameter("fun_ID");
-				
-				if (fun_ID == null || fun_ID.trim().length() == 0) {
-					errorMsgs.add("權限姓名: 請勿空白");
-				} 
-				
-				
+			
 
 				// set
 				AuthVO authVO = new AuthVO();
@@ -76,11 +69,11 @@ public class AuthServlet extends HttpServlet {
 				successView.forward(req, res);
 				
 				//除錯
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/auth/addAuth.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/auth/addAuth.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		// 查詢-單一
@@ -91,7 +84,7 @@ public class AuthServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("emp_ID");
 				if (str == null || (str.trim()).length() == 0) {
@@ -137,11 +130,11 @@ public class AuthServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
-			} catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/auth/select_page.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add("無法取得資料:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/auth/select_page.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 
 		// 查詢-全部
@@ -202,7 +195,7 @@ public class AuthServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("authVO", authVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/auth/update_auth_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/auth/update_auth_input.jsp");
 
 					failureView.forward(req, res);
 					return;

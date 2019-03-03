@@ -7,7 +7,7 @@
 <%
 	AuthService authSvc = new AuthService();
 	List<AuthVO> list = authSvc.getAll();
-	;
+	
 	pageContext.setAttribute("list", list);
 %>
 
