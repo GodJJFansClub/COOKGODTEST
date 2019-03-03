@@ -30,7 +30,7 @@ public class CustDAO implements CustDAO_interface {
 	private static final String GET_ALL_STMT = 
 			"SELECT * FROM CUST";
 	private static final String GET_ONE_STMT = 
-			"SELECT * FROM CUST where CUST_ID = ?";
+			"SELECT * FROM CUST where CUST_ACC = ?";
 	private static final String DELETE =
 			"DELETE FROM CUST where CUST_ID=? ";
 	private static final String UPDATE =
@@ -165,7 +165,7 @@ public class CustDAO implements CustDAO_interface {
 	}
 
 	@Override
-	public CustVO findByPrimaryKey(String cust_ID) {
+	public CustVO findByPrimaryKey(String cust_acc) {
 		// TODO Auto-generated method stub
 		CustVO custVO = null;
 		Connection con = null;
@@ -176,7 +176,7 @@ public class CustDAO implements CustDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setString(1, cust_ID);
+			pstmt.setString(1, cust_acc);
 			
 			rs = pstmt.executeQuery();
 			

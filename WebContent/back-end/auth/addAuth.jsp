@@ -15,29 +15,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>權限資料新增 - addAuth.jsp</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
 
 <style>
 table {
 	width: 450px;
-	background-color: white;
+	
 	margin-top: 1px;
 	margin-bottom: 1px;
 }

@@ -137,7 +137,7 @@ th, td {
 						ACTION="<%=request.getContextPath()%>/cust/cust.do"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="修改"> <input type="hidden"
-							name="cust_ID" value="${custVO.cust_ID}"> <input
+							name="cust_acc" value="${custVO.cust_acc}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>

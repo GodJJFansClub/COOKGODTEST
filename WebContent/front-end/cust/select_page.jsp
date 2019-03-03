@@ -63,7 +63,7 @@ h4 {
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/cust/cust.do">
-				<b>輸入顧客編號:</b> <input type="text" name="cust_ID"> <input
+				<b>輸入顧客帳號:</b> <input type="text" name="cust_acc"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
 					type="submit" value="送出">
 			</FORM>
@@ -75,9 +75,9 @@ h4 {
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/cust/cust.do">
-				<b>選擇顧客編號:</b> <select size="1" name="cust_ID">
+				<b>選擇顧客編號:</b> <select size="1" name="cust_acc">
 					<c:forEach var="custVO" items="${custSvc.all}">
-						<option value="${custVO.cust_ID}">${custVO.cust_ID}
+						<option value="${custVO.cust_acc}">${custVO.cust_ID}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
@@ -87,9 +87,9 @@ h4 {
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/cust/cust.do">
-				<b>選擇顧客姓名:</b> <select size="1" name="cust_ID">
+				<b>選擇顧客姓名:</b> <select size="1" name="cust_acc">
 					<c:forEach var="custVO" items="${custSvc.all}">
-						<option value="${custVO.cust_ID}">${custVO.cust_name}
+						<option value="${custVO.cust_acc}">${custVO.cust_name}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">

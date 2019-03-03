@@ -4,10 +4,8 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.auth.model.AuthService;
-import com.auth.model.AuthVO;
-import com.cust.model.CustService;
-import com.cust.model.CustVO;
+import com.emp.model.EmpService;
+import com.emp.model.EmpVO;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -17,12 +15,25 @@ public class LoginHandler extends HttpServlet {
 	
    //【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
    //【實際上應至資料庫搜尋比對】
-  protected boolean allowUser(String account, String password) {
+	
+  protected boolean allowUser(String account, String password,HttpSession session) {
+	  EmpService empSvc = new EmpService();
+//	  try {
+	EmpVO empVO = empSvc.getOneEmp(account);
+	  
 	 
-    if ("tomcat".equals(account) && "tomcat".equals(password))
-      return true;
-    else
+		
+    if ( password.equals(empVO.getEmp_pwd())) {
+    	
+    	session.setAttribute("empVO",empSvc);
+    	return true;
+    }else
       return false;
+//    }catch (NullPointerException nu) {
+//    	System.out.println("查無此帳號");
+//    }
+      
+    
   }
   
   public void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -30,22 +41,24 @@ public class LoginHandler extends HttpServlet {
     req.setCharacterEncoding("Big5");
     res.setContentType("text/html; charset=Big5");
     PrintWriter out = res.getWriter();
-    CustVO custVO = (CustVO) req.getAttribute("custVO");
+    EmpVO empVO = (EmpVO) req.getAttribute("empVO");
     
+ 
     
     // 【取得使用者 帳號(account) 密碼(password)】
     String account = req.getParameter("account");
     String password = req.getParameter("password");
+    HttpSession session = req.getSession();
+    session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
+    session.setAttribute("empVO",empVO);
 
     // 【檢查該帳號 , 密碼是否有效】
-    if (!allowUser(account, password)) {          //【帳號 , 密碼無效時】
+    if (!allowUser(account, password, session)) {          //【帳號 , 密碼無效時】
       out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
       out.println("<BODY>你的帳號 , 密碼無效!<BR>");
       out.println("請按此重新登入 <A HREF="+req.getContextPath()+"/login.html>重新登入</A>");
       out.println("</BODY></HTML>");
     }else {                                       //【帳號 , 密碼有效時, 才做以下工作】
-      HttpSession session = req.getSession();
-      session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
       
        try {                                                        
          String location = (String) session.getAttribute("location");

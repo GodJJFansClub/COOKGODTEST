@@ -6,31 +6,23 @@
 <head>
 <title>IBM Emp: Home</title>
 
-<style>
-table#table-1 {
-	width: 450px;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-	border: 3px ridge Gray;
-	height: 80px;
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+
+
 
 	<table id="table-1">
 		<tr>
@@ -63,7 +55,7 @@ h4 {
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>輸入員工編號:</b> <input type="text" name="emp_ID"> <input
+				<b>輸入員工編號:</b> <input type="text" name="emp_acc"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
 					type="submit" value="送出">
 			</FORM>
@@ -75,9 +67,9 @@ h4 {
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>選擇員工編號:</b> <select size="1" name="emp_ID">
+				<b>選擇員工編號:</b> <select size="1" name="emp_acc">
 					<c:forEach var="empVO" items="${empSvc.all}">
-						<option value="${empVO.emp_ID}">${empVO.emp_ID}
+						<option value="${empVO.emp_acc}">${empVO.emp_ID}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
@@ -87,9 +79,9 @@ h4 {
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>選擇員工姓名:</b> <select size="1" name="emp_ID">
+				<b>選擇員工姓名:</b> <select size="1" name="emp_acc">
 					<c:forEach var="empVO" items="${empSvc.all}">
-						<option value="${empVO.emp_ID}">${empVO.emp_name}
+						<option value="${empVO.emp_acc}">${empVO.emp_name}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
@@ -104,5 +96,11 @@ h4 {
 		<li><a href='addEmp.jsp'>Add</a> a new Emp.</li>
 	</ul>
 
+</body>
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
