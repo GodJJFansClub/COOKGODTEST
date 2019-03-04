@@ -97,7 +97,7 @@ th, td {
 				<td>${empVO.emp_name}</td>
 				
 				<td><c:if test="${not empty empVO.emp_pic}"><img src="<%=request.getContextPath()%>/emp/emp.do?emp_ID=${empVO.emp_ID}"></c:if>
-				    <c:if test="${empty empVO.emp_pic}"><img src="images/null2.jpg"></c:if></td>
+				    <c:if test="${empty empVO.emp_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
 
 
 				<td>

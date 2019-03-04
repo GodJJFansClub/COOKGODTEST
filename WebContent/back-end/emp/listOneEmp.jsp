@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
@@ -77,8 +78,9 @@ th, td {
 			<td><%=empVO.getEmp_acc()%></td>
 			<td><%=empVO.getEmp_pwd()%></td>
 			<td><%=empVO.getEmp_name()%></td>
-			<td><img
-				src="<%=request.getContextPath()%>/emp/emp.do?emp_ID=${empVO.emp_ID}"></td>
+			<td><c:if test="${not empty empVO.emp_pic}"><img src="<%=request.getContextPath()%>/emp/emp.do?emp_ID=${empVO.emp_ID}"></c:if>
+				    <c:if test="${empty empVO.emp_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
+
 			
 
 		</tr>

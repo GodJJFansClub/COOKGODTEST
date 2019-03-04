@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.cust.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
@@ -88,12 +90,10 @@ th, td {
 			<td><%=custVO.getCust_acc()%></td>
 			<td><%=custVO.getCust_pwd()%></td>
 			<td><%=custVO.getCust_name()%></td>
-			<c:if test="${custVO.cust_sex.equals('M')}" var="true"
-				scope="session">
+			<c:if test="${custVO.cust_sex.equals('M')}" var="true" scope="request">
 				<td>男生</td>
 			</c:if>
-			<c:if test="${custVO.cust_sex.equals('F')}" var="true"
-				scope="session">
+			<c:if test="${custVO.cust_sex.equals('F')}" var="true" scope="request">
 				<td>女生</td>
 			</c:if>
 			<td><%=custVO.getCust_tel()%></td>
@@ -102,8 +102,9 @@ th, td {
 			<td><%=custVO.getCust_mail()%></td>
 			<td><%=custVO.getCust_brd()%></td>
 			<td><%=custVO.getCust_reg()%></td>
-			<td><img
-				src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></td>
+			<td><c:if test="${not empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></c:if>
+				    <c:if test="${empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
+
 			<c:if test="${custVO.cust_status.equals('a0')}" var="true"
 				scope="session">
 				<td>未停權</td>

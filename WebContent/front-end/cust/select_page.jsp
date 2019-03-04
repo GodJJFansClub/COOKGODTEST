@@ -69,7 +69,7 @@ h4 {
 			</FORM>
 		</li>
 
-		<jsp:useBean id="custSvc" scope="page"
+		<jsp:useBean id="custSvc" scope="session"
 			class="com.cust.model.CustService" />
 
 		<li>
@@ -87,7 +87,7 @@ h4 {
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/cust/cust.do">
-				<b>選擇顧客姓名:</b> <select size="1" name="cust_name">
+				<b>選擇顧客姓名:</b> <select size="1" name="cust_ID">
 					<c:forEach var="custVO" items="${custSvc.all}">
 						<option value="${custVO.cust_ID}">${custVO.cust_name}
 					</c:forEach>

@@ -381,59 +381,13 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 13.圖片
-				byte[] cust_pic = null;
-//				File pic = new File(req.getParameter("cust_pic".trim()));
-//				FileInputStream fis = null;
-//				ByteArrayOutputStream baos = null;
-//
-//				byte[] cust_pic = null;
-//				try {
-//					fis = new FileInputStream(pic);
-//					cust_pic = new byte[fis.available()];
-//				} catch (FileNotFoundException e) {
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				} finally {
-//					if (fis != null) {
-//						try {
-//							fis.close();
-//						} catch (IOException e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				}
+				Part part= req.getPart("cust_pic");
+				InputStream in = part.getInputStream();
+				byte[] cust_pic = new byte[in.available()];
+				in.read(cust_pic);
+				in.close();
 
-				String saveDirectory = "/images_uploaded";
-				req.setCharacterEncoding("Big5"); // 處理中文檔名
-				res.setContentType("text/html; charset=Big5");
-//				PrintWriter out = res.getWriter();
-
-				String realPath = getServletContext().getRealPath(saveDirectory);
-
-				File fsaveDirectory = new File(realPath);
-				if (!fsaveDirectory.exists())
-					fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
-
-				Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理
-//				out.write("<h2> Total parts : " + parts.size() + "</h2>");
-
-				for (Part part : parts) {
-					if (getFileNameFromPart(part) != null && part.getContentType() != null) {
-//						out.println("<PRE>");
-
-						// 利用File物件,寫入目地目錄,上傳成功
-//						part.write(f.toString());
-
-						// 額外測試 InputStream 與 byte[] (幫將來model的VO預作準備)
-						InputStream in = part.getInputStream();
-						byte[] buf = new byte[in.available()];
-						in.read(buf);
-						in.close();
-						cust_pic = buf;
-
-					}
-				}
+				
 
 				// set
 				CustVO custVO = new CustVO();
@@ -511,15 +465,5 @@ public class CustServlet extends HttpServlet {
 
 	}
 
-	// 取出上傳的檔案名稱 (因為API未提供method,所以必須自行撰寫)by 吳神
-	public String getFileNameFromPart(Part part) {
-		String header = part.getHeader("content-disposition");
 
-		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-
-		if (filename.length() == 0) {
-			return null;
-		}
-		return filename;
-	}
 }
