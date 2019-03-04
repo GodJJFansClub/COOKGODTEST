@@ -74,30 +74,13 @@ th, td {
 
 
 		</table>
-		<div id="localImag">
-			<img id="preview" width=-1 height=-1 style="diplay: none" />
-		</div>
+		
 		<br> <input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
 
 	</FORM>
 <%--=================================工作區================================================--%>		
-
-
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="https://github.com/totobe/jQuery/blob/master/jquery.twzipcode.min.js"></script>
-
-
-
-
-
-	
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+		<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
 			</div>
 		</div>

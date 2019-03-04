@@ -69,10 +69,10 @@ th, td {
 	</c:if>
 
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/auth/auth.do"
-		name="form1" enctype="multipart/form-data">
+		name="form1">
 		<table>
 			<tr>
-				<td>權限編號:<font color=red><b>*</b></font></td>
+				<td>員工:<font color=red><b>*</b></font></td>
 				<td><%=authVO.getEmp_ID()%></td>
 			</tr>
 			
@@ -83,12 +83,8 @@ th, td {
 			</tr>
 
 			
-
-
 		</table>
-		<div id="localImag">
-			<img id="preview" width=-1 height=-1 style="diplay: none" />
-		</div>
+		
 		<br> <input type="hidden" name="action" value="update"> <input
 			type="hidden" name="emp_ID" value="<%=authVO.getEmp_ID()%>">
 		<input type="submit" value="送出修改">

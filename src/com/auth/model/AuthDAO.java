@@ -36,7 +36,7 @@ public class AuthDAO implements AuthDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1, authVO.getEmp_ID());
-			pstmt.setString(2, authVO.getEmp_ID());
+			pstmt.setString(2, authVO.getFun_ID());
 			
 			pstmt.executeUpdate();
 		}catch(SQLException se) {
@@ -68,8 +68,8 @@ public class AuthDAO implements AuthDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, authVO.getEmp_ID());
-			pstmt.setString(2, authVO.getFun_ID());
+			pstmt.setString(1, authVO.getFun_ID());
+			pstmt.setString(2, authVO.getEmp_ID());
 			
 			pstmt.executeUpdate();
 		}catch (SQLException se) {

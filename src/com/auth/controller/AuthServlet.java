@@ -1,6 +1,6 @@
 package com.auth.controller;
 
-import java.io.File;
+
 import java.io.IOException;
 
 import java.util.LinkedList;
@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+
 
 import com.auth.model.*;
 
@@ -139,7 +139,7 @@ public class AuthServlet extends HttpServlet {
 			}
 		}
 
-		// 查詢-全部
+		// 更新個人
 		if ("getOne_For_Update".equals(action)) { // 來自listAllAuth.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -181,16 +181,11 @@ public class AuthServlet extends HttpServlet {
 				// 1.姓名
 				String fun_ID = req.getParameter("fun_ID");
 				
-				if (fun_ID == null || fun_ID.trim().length() == 0) {
-					errorMsgs.add("權限姓名: 請勿空白");
-				} 
-				
-
 				
 
 				// set
 				AuthVO authVO = new AuthVO();
-				authVO.setEmp_ID(emp_ID);
+				
 				authVO.setFun_ID(fun_ID);
 				
 				
@@ -252,16 +247,6 @@ public class AuthServlet extends HttpServlet {
 
 	}
 
-	// 取出上傳的檔案名稱 (因為API未提供method,所以必須自行撰寫)by 吳神
-	public String getFileNameFromPart(Part part) {
-		String header = part.getHeader("content-disposition");
-
-		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-
-		if (filename.length() == 0) {
-			return null;
-		}
-		return filename;
-	}
+	
 
 }

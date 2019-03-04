@@ -60,9 +60,7 @@
 			</FORM>
 		</li>
 
-		<jsp:useBean id="authSvc" scope="page"
-			class="com.auth.model.AuthService" />
-			
+<jsp:useBean id="authSvc" scope="session" class="com.auth.model.AuthService" />
 <jsp:useBean id="empSvc" scope="session" class="com.emp.model.EmpService" />
 <jsp:useBean id="funSvc" scope="session" class="com.fun.model.FunService" />
 		<li>

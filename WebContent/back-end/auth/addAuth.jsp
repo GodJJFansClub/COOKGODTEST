@@ -62,7 +62,7 @@ th, td {
 		</ul>
 	</c:if>
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/auth/auth.do"
-		name="form1" enctype="multipart/form-data">
+		name="form1" >
 
 		<table>
 		
