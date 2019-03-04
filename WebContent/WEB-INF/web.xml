@@ -38,6 +38,11 @@
   	<listener-class>com.cookGodPub.CookGodListener</listener-class>
   </listener>
   
+  <context-param>
+    <param-name>org.apache.tomcat.websocket.textBufferSize</param-name>
+    <param-value>307200</param-value>
+  </context-param>
+  
   <servlet>
     <servlet-name>FoodServlet</servlet-name>
     <servlet-class>com.food.controller.FoodServlet</servlet-class>
