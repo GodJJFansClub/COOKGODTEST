@@ -60,14 +60,14 @@ th, td {
 		</ul>
 	</c:if>
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/fun/fun.do"
-		name="form1" enctype="multipart/form-data">
+		name="form1" >
 
 		<table>
 		
 			<tr>
-				<td>權限名稱:</td>
+				<td>功能名稱:</td>
 				<td><input type="TEXT" name="fun_name" size="45"
-					value="<%=(funVO == null) ? "teddy" : funVO.getFun_name()%>" /></td>
+					value="<%=(funVO == null) ? "請輸入功能名稱" : funVO.getFun_name()%>" /></td>
 			</tr>
 
 			

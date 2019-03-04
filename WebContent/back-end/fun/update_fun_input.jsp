@@ -71,7 +71,7 @@ th, td {
 	</c:if>
 
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/fun/fun.do"
-		name="form1" enctype="multipart/form-data">
+		name="form1">
 		<table>
 			<tr>
 				<td>權限編號:<font color=red><b>*</b></font></td>

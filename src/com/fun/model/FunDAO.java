@@ -26,7 +26,7 @@ public class FunDAO implements FunDAO_interface {
 	private static final String DELETE =
 			"DELETE FROM FUN where FUN_ID=? ";
 	private static final String UPDATE =
-			"UPDATE EMP set FUN_NAME=? WHERE FUN_ID=?";
+			"UPDATE FUN set FUN_NAME=? WHERE FUN_ID=?";
 	
 	
 	@Override

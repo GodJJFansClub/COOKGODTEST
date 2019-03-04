@@ -115,10 +115,8 @@ th, td {
 
 			<tr>
 				<td>顧客地址:</td>
-				<td><div id="zipcode3">
-					<div class="f3" data-role="county"></div>
-					<div class="f4" data-role="district"></div></div>
-					<input name="Address" type="text" class="f13 address form-control">
+				<td><input type="TEXT" name="cust_addr" size="45"
+					value="<%=(custVO == null) ? "09090909" : custVO.getCust_addr()%>" />
 					</td>
 			</tr>
 

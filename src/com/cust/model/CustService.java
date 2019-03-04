@@ -65,8 +65,8 @@ public class CustService {
 		dao.delete(cust_ID);
 	}
 
-	public CustVO getOneCust(String cust_acc) {
-		return dao.findByPrimaryKey(cust_acc);
+	public CustVO getOneCust(String cust_ID) {
+		return dao.findByPrimaryKey(cust_ID);
 	}
 
 	public List<CustVO> getAll() {

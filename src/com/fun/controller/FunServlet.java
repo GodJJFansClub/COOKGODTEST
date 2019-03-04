@@ -36,14 +36,7 @@ public class FunServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				// 1.編號
-				String fun_ID = req.getParameter("fun_ID");
-				String fun_IDReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
-				if (fun_ID == null || fun_ID.trim().length() == 0) {
-					errorMsgs.add("員工帳號: 請勿空白");
-				} else if (!fun_ID.trim().matches(fun_IDReg)) {
-					errorMsgs.add("員工帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
-				}
+								
 				// 2.名稱
 				String fun_name = req.getParameter("fun_name");
 				String fun_nameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -57,7 +50,7 @@ public class FunServlet extends HttpServlet {
 
 				// set
 				FunVO funVO = new FunVO();
-				funVO.setFun_ID(fun_ID);
+				
 				funVO.setFun_name(fun_name);
 				
 				
@@ -74,7 +67,7 @@ public class FunServlet extends HttpServlet {
 				//將資料加入資料庫
 				FunService funSvc = new FunService();
 
-				funVO = funSvc.addFun(fun_ID, fun_name);
+				funVO = funSvc.addFun(fun_name);
 				String url = "/back-end/fun/listAllFun.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -183,7 +176,7 @@ public class FunServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				
 				//0.id
 				String fun_ID = new String(req.getParameter("fun_ID").trim());
@@ -201,7 +194,7 @@ public class FunServlet extends HttpServlet {
 
 				// set
 				FunVO funVO = new FunVO();
-				funVO.setFun_ID(fun_ID);
+				
 				funVO.setFun_name(fun_name);
 				
 				
@@ -224,12 +217,12 @@ public class FunServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
-			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/fun/update_fun_input.jsp");
-				failureView.forward(req, res);
-
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add("修改資料失敗:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/fun/update_fun_input.jsp");
+//				failureView.forward(req, res);
+//
+//			}
 		}
 
 		// 刪除

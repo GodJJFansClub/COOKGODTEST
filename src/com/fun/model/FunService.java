@@ -10,10 +10,9 @@ public class FunService {
 		dao = new FunDAO();
 	}
 
-	public FunVO addFun(String fun_ID,String fun_name) {
+	public FunVO addFun(String fun_name) {
 
 		FunVO funVO = new FunVO();
-		funVO.setFun_ID(fun_ID);
 		funVO.setFun_name(fun_name);
 				
 		dao.insert(funVO);
