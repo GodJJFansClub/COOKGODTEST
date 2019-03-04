@@ -11,7 +11,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.cust.model.*;
+import com.emp.model.EmpService;
+import com.emp.model.EmpVO;
 
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -37,6 +42,7 @@ public class CustServlet extends HttpServlet {
 		}
 		
 		doPost(req, res);
+	
 	}
 
 	@Override
@@ -463,6 +469,35 @@ public class CustServlet extends HttpServlet {
 			}
 		}
 
+		//ajax 驗證帳號
+		String action1 = req.getParameter("action1");
+		String cust_acc = req.getParameter("cust_acc");
+		CustService custSvc = new CustService();
+		CustVO custVO = custSvc.getOneCust(cust_acc);
+		JSONObject obj = new JSONObject();
+		
+			if(custVO.getCust_acc().equals(cust_acc)){
+				try {
+					obj.accumulate("answer", "帳號重複，請重新輸入");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					obj.accumulate("answer", "此帳號可使用");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+		res.setContentType("text/plain");
+		res.setCharacterEncoding("UTF-8");
+		PrintWriter outt = res.getWriter();
+		outt.write(obj.toString());
+		outt.flush();
+		outt.close();
 	}
 
 

@@ -55,7 +55,7 @@
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>輸入員工編號:</b> <input type="text" name="emp_acc"> <input
+				<b>輸入員工編號:</b> <input type="text" name="emp_ID"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
 					type="submit" value="送出">
 			</FORM>
@@ -67,9 +67,9 @@
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>選擇員工編號:</b> <select size="1" name="emp_acc">
+				<b>選擇員工編號:</b> <select size="1" name="emp_ID">
 					<c:forEach var="empVO" items="${empSvc.all}">
-						<option value="${empVO.emp_acc}">${empVO.emp_ID}
+						<option value="${empVO.emp_ID}">${empVO.emp_ID}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
@@ -79,9 +79,9 @@
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>選擇員工姓名:</b> <select size="1" name="emp_acc">
+				<b>選擇員工姓名:</b> <select size="1" name="emp_ID">
 					<c:forEach var="empVO" items="${empSvc.all}">
-						<option value="${empVO.emp_acc}">${empVO.emp_name}
+						<option value="${empVO.emp_ID}">${empVO.emp_name}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">

@@ -71,8 +71,8 @@ th, td {
 		<table>
 			<tr>
 				<td>顧客帳號:</td>
-				<td><input type="TEXT" name="cust_acc" size="45"
-					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /></td>
+				<td><input type="TEXT" id="cust_acc" name="cust_acc" size="45"
+					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /></td><p id="answer">I cannot give you an answer until you ask a question!</p>
 			</tr>
 
 			<tr>
@@ -164,7 +164,7 @@ th, td {
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
@@ -271,7 +271,46 @@ th, td {
 		return true;
 	}
 </script>
-
+<script>
+		var timer;
+		$(function(){
+			$('#cust_acc').on('keyup', function(){
+				$('#answer').text('Waiting for you to stop typing...');
+				var cust_acc = $(this).val();
+				_debounce(function(){ 
+					return getAnswer(cust_acc); 
+				}, 500);
+			});
+		});
+		
+		function getAnswer(cust_acc){
+			
+			$('#answer').text('帳號驗證中');
+			$.ajax({
+ 		//		url: 'https://yesno.wtf/api',
+				url: '<%=request.getContextPath()%>/cust/cust.do',
+				type: "POST",
+				data: { action1: 'ask', cust_acc: $('#cust_acc').val() },
+				dataType: 'json',
+				success: function(res){
+					console.log(res);
+					$('#answer').text(res.answer);
+					
+				},
+				error: function(res){
+					$('#answer').text('Error! Could not reach the API. ');
+				}
+			});
+		}
+		
+		function _debounce(callback, time){
+			if(timer)
+				 clearTimeout(timer);
+			timer = setTimeout(function(){
+				callback();
+			}, time);
+		}
+	</script>
 
 
 
