@@ -1,10 +1,10 @@
-package filters;
+package com.filters;
 
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class LoginFilter implements Filter {
+public class LoginBackEndFilter implements Filter {
 
 	private FilterConfig config;
 
@@ -27,7 +27,7 @@ public class LoginFilter implements Filter {
 		Object account = session.getAttribute("account");
 		if (account == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/login.html");
+			res.sendRedirect(req.getContextPath() + "/loginBackEnd.html");
 			return;
 		} else {
 			chain.doFilter(request, response);
