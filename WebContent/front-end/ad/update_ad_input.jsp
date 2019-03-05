@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>廣告資料修改 - update_ad_input.jsp</title>
-
+<link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -49,6 +49,17 @@ th, td {
 
 </head>
 <body bgcolor='white'>
+		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 
 	<table id="table-1">
 		<tr>
@@ -100,7 +111,7 @@ th, td {
 			
 			<tr>
 				<td>廣告下架日期:</td>
-				<td><input type="text" name="ad_end" id="f_date1" size="45"></td>
+				<td><input type="text" name="ad_end" id="f_date2" size="45"></td>
 			</tr>
 
 			<tr>
@@ -126,24 +137,14 @@ th, td {
 			type="hidden" name="ad_ID" value="<%=adVO.getAd_ID()%>">
 		<input type="submit" value="送出修改">
 	</FORM>
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
-
-
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
 
 <script>
         $.datetimepicker.setLocale('zh');
@@ -152,7 +153,7 @@ th, td {
  	       timepicker:true,       //timepicker:true,
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
- 		   value: '<%=adVO.getAd_start()%>', // value:   new Date(),
+ 		   value: '${adVO.ad_start}', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
@@ -204,6 +205,21 @@ th, td {
 	//              }
 	//              return [true, ""];
 	//      }});
+</script>
+<script>
+        $.datetimepicker.setLocale('zh');
+        $('#f_date2').datetimepicker({
+           theme: '',              //theme: 'dark',
+ 	       timepicker:true,       //timepicker:true,
+ 	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
+ 	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
+ 		   value: '${adVO.ad_end}', });
+ 		   // value:   new Date(),
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+
 </script>
 <script>
 	function setImagePreview() {

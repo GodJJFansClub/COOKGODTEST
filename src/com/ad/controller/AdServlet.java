@@ -334,15 +334,5 @@ public class AdServlet extends HttpServlet {
 
 	}
 
-	// 取出上傳的檔案名稱 (因為API未提供method,所以必須自行撰寫)by 吳神
-	public String getFileNameFromPart(Part part) {
-		String header = part.getHeader("content-disposition");
-
-		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-
-		if (filename.length() == 0) {
-			return null;
-		}
-		return filename;
-	}
+	
 }

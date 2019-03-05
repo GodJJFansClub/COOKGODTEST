@@ -14,7 +14,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>顧客資料新增 - addCust.jsp</title>
-
+<link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -54,6 +54,17 @@ th, td {
 </head>
 
 <body bgcolor='white'>
+		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 	<h3>資料新增:</h3>
 
 	<%-- 錯誤表列 --%>
@@ -148,6 +159,14 @@ th, td {
 		     <input type="submit" value="送出新增">
 
 	</FORM>
+	
+	<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 <%
 	java.sql.Date cust_brd = null;
@@ -159,12 +178,8 @@ th, td {
 %>
 
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
@@ -182,12 +197,13 @@ th, td {
  	       timepicker:true,       //timepicker:true,
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '${custVO.Cust_brd}', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-	//startDate:	            '2017/07/10',  // 起始日
-	//minDate:               '-1970-01-01', // 去除今日(不含)之前
-	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-	});
+ 		   value: '${custVO.cust_brd}', // value:   new Date(),
+			
+			//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+			//startDate:	            '2017/07/10',  // 起始日
+			//minDate:               '-1970-01-01', // 去除今日(不含)之前
+			//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+		});
 
 	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
 
@@ -287,10 +303,10 @@ th, td {
 			
 			$('#answer').text('帳號驗證中');
 			$.ajax({
- 		//		url: 'https://yesno.wtf/api',
+ 		//		url: 'hSttps://yesno.wtf/api',
 				url: '<%=request.getContextPath()%>/cust/cust.do',
 				type: "POST",
-				data: { action1: 'ask', cust_acc: $('#cust_acc').val() },
+				data: { action: 'ask', cust_acc: $('#cust_acc').val() },
 				dataType: 'json',
 				success: function(res){
 					console.log(res);

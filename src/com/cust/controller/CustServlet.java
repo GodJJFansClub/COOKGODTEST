@@ -468,7 +468,8 @@ public class CustServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-
+		
+		
 		//ajax 驗證帳號
 		String action1 = req.getParameter("action1");
 		String cust_acc = req.getParameter("cust_acc");
