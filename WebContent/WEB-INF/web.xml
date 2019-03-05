@@ -20,12 +20,27 @@
   </resource-ref>
   
   <filter>
-    <filter-name>loginFilter</filter-name>
-    <filter-class>com.filters.LoginFilter</filter-class>
+    <filter-name>LoginBackEndFilter</filter-name>
+    <filter-class>com.backEnd.filters.LoginBackEndFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>loginFilter</filter-name>
+    <filter-name>LoginBackEndFilter</filter-name>
     <url-pattern>/back-end/emp/*</url-pattern>
+    
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+  
+  <filter>
+    <filter-name>LoginFrontEndFilter</filter-name>
+    <filter-class>com.frontEnd.filters.LoginFrontEndFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFrontEndFilter</filter-name>
+    <url-pattern>/front-end/cust/*</url-pattern>
     
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
