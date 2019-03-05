@@ -22,6 +22,8 @@ public class CustJDBCDAO implements CustDAO_interface {
 			"SELECT * FROM CUST";
 	private static final String GET_ONE_STMT = 
 			"SELECT * FROM CUST where CUST_ID = ?";
+	private static final String GET_ONE_STMT_CUST_ACC = 
+			"SELECT * FROM CUST where CUST_ACC = ?";
 	private static final String DELETE =
 			"DELETE FROM CUST where CUST_ID=? ";
 	private static final String UPDATE =
@@ -309,6 +311,74 @@ public class CustJDBCDAO implements CustDAO_interface {
 		return list;
 	}
 	
+	@Override
+	public CustVO findByCust_acc(String cust_acc) {
+		// TODO Auto-generated method stub
+				CustVO custVO = null;
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				try {
+					Class.forName(driver);
+					con = DriverManager.getConnection(url, userid, passwd);
+					pstmt = con.prepareStatement(GET_ONE_STMT_CUST_ACC);
+					
+					pstmt.setString(1, cust_acc);
+					
+					rs = pstmt.executeQuery();
+					
+					while (rs.next()) {
+						custVO = new CustVO();
+						custVO.setCust_ID(rs.getString("CUST_ID"));
+						custVO.setCust_acc(rs.getString("CUST_ACC"));
+						custVO.setCust_pwd(rs.getString("CUST_PWD"));
+						custVO.setCust_name(rs.getString("CUST_NAME"));
+						custVO.setCust_sex(rs.getString("CUST_SEX"));
+						custVO.setCust_tel(rs.getString("CUST_TEL"));
+						custVO.setCust_addr(rs.getString("CUST_ADDR"));
+						custVO.setCust_pid(rs.getString("CUST_PID"));
+						custVO.setCust_mail(rs.getString("CUST_MAIL"));
+						custVO.setCust_brd(rs.getDate("CUST_BRD"));
+						custVO.setCust_reg(rs.getDate("CUST_REG"));
+						custVO.setCust_pic(rs.getBytes("CUST_PIC"));
+						custVO.setCust_status(rs.getString("CUST_STATUS"));
+						custVO.setCust_niname(rs.getString("CUST_NINAME"));
+					}
+					
+				}catch (ClassNotFoundException e) {
+					throw new RuntimeException("Couldn't load database driver. "
+							+ e.getMessage());
+					// Handle any SQL errors
+				} catch (SQLException se) {
+					throw new RuntimeException("A database error occured. "
+							+ se.getMessage());
+					// Clean up JDBC resources
+				} finally {
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}return custVO;
+			}
+	
 	public static void main(String[] args) {
 
 		CustJDBCDAO dao = new CustJDBCDAO();
@@ -352,43 +422,44 @@ public class CustJDBCDAO implements CustDAO_interface {
 //		dao.delete("tess");
 //		
 //		//search
-//		CustVO custVO3 = dao.findByPrimaryKey("C00001");
-//		System.out.println(custVO3.getCust_acc()+",");
-//		System.out.println(custVO3.getCust_pwd()+",");
-//		System.out.println(custVO3.getCust_name()+",");
-//		System.out.println(custVO3.getCust_sex()+",");
-//		System.out.println(custVO3.getCust_tel()+",");
-//		System.out.println(custVO3.getCust_addr()+",");
-//		System.out.println(custVO3.getCust_pid()+",");
-//		System.out.println(custVO3.getCust_mail()+",");
-//		System.out.println(custVO3.getCust_brd()+",");
-//		System.out.println(custVO3.getCust_reg()+",");
-//		System.out.println(custVO3.getCust_pic()+",");
-//		System.out.println(custVO3.getCust_status()+",");
-//		System.out.println(custVO3.getCust_niname()+",");
+		CustVO custVO3 = dao.findByPrimaryKey("C00099");
+		System.out.println(custVO3.getCust_acc()+",");
+		System.out.println(custVO3.getCust_pwd()+",");
+		System.out.println(custVO3.getCust_name()+",");
+		System.out.println(custVO3.getCust_sex()+",");
+		System.out.println(custVO3.getCust_tel()+",");
+		System.out.println(custVO3.getCust_addr()+",");
+		System.out.println(custVO3.getCust_pid()+",");
+		System.out.println(custVO3.getCust_mail()+",");
+		System.out.println(custVO3.getCust_brd()+",");
+		System.out.println(custVO3.getCust_reg()+",");
+		System.out.println(custVO3.getCust_pic()+",");
+		System.out.println(custVO3.getCust_status()+",");
+		System.out.println(custVO3.getCust_niname()+",");
 //		
 //		
 //		System.out.println("-------");
 		
 //		// search all
-		List<CustVO> list = dao.getAll();
-		for (CustVO aCust: list) {
-			System.out.println(aCust.getCust_ID()+",");
-			System.out.println(aCust.getCust_acc()+",");
-			System.out.println(aCust.getCust_pwd()+",");
-			System.out.println(aCust.getCust_name()+",");
-			System.out.println(aCust.getCust_sex()+",");
-			System.out.println(aCust.getCust_tel()+",");
-			System.out.println(aCust.getCust_addr()+",");
-			System.out.println(aCust.getCust_pid()+",");
-			System.out.println(aCust.getCust_mail()+",");
-			System.out.println(aCust.getCust_brd()+",");
-			System.out.println(aCust.getCust_reg()+",");
-			System.out.println(aCust.getCust_pic()+",");
-			System.out.println(aCust.getCust_status()+",");
-			System.out.println(aCust.getCust_niname()+",");
-		}
+//		List<CustVO> list = dao.getAll();
+//		for (CustVO aCust: list) {
+//			System.out.println(aCust.getCust_ID()+",");
+//			System.out.println(aCust.getCust_acc()+",");
+//			System.out.println(aCust.getCust_pwd()+",");
+//			System.out.println(aCust.getCust_name()+",");
+//			System.out.println(aCust.getCust_sex()+",");
+//			System.out.println(aCust.getCust_tel()+",");
+//			System.out.println(aCust.getCust_addr()+",");
+//			System.out.println(aCust.getCust_pid()+",");
+//			System.out.println(aCust.getCust_mail()+",");
+//			System.out.println(aCust.getCust_brd()+",");
+//			System.out.println(aCust.getCust_reg()+",");
+//			System.out.println(aCust.getCust_pic()+",");
+//			System.out.println(aCust.getCust_status()+",");
+//			System.out.println(aCust.getCust_niname()+",");
+//		}
 		
 	}
+	
 	
 }

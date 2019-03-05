@@ -287,8 +287,10 @@ th, td {
 		return true;
 	}
 </script>
+
 <script>
 		var timer;
+		
 		$(function(){
 			$('#cust_acc').on('keyup', function(){
 				$('#answer').text('Waiting for you to stop typing...');
@@ -303,17 +305,18 @@ th, td {
 			
 			$('#answer').text('帳號驗證中');
 			$.ajax({
- 		//		url: 'hSttps://yesno.wtf/api',
+ 			
 				url: '<%=request.getContextPath()%>/cust/cust.do',
 				type: "POST",
 				data: { action: 'ask', cust_acc: $('#cust_acc').val() },
-				dataType: 'json',
+				//dataType: 'json',
 				success: function(res){
 					console.log(res);
-					$('#answer').text(res.answer);
+					$('#answer').text(res);
 					
 				},
 				error: function(res){
+					console.log(res);
 					$('#answer').text('Error! Could not reach the API. ');
 				}
 			});

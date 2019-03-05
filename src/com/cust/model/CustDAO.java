@@ -31,6 +31,8 @@ public class CustDAO implements CustDAO_interface {
 			"SELECT * FROM CUST";
 	private static final String GET_ONE_STMT = 
 			"SELECT * FROM CUST where CUST_ID = ?";
+	private static final String GET_ONE_STMT_CUST_ACC = 
+			"SELECT * FROM CUST where CUST_ACC = ?";
 	private static final String DELETE =
 			"DELETE FROM CUST where CUST_ID=? ";
 	private static final String UPDATE =
@@ -291,6 +293,71 @@ public class CustDAO implements CustDAO_interface {
 			}
 		
 		return list;
+	}
+
+	@Override
+	public CustVO findByCust_acc(String cust_acc) {
+		// TODO Auto-generated method stub
+		CustVO custVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT_CUST_ACC);
+			
+			pstmt.setString(1, cust_acc);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				custVO = new CustVO();
+				custVO.setCust_ID(rs.getString("CUST_ID"));
+				custVO.setCust_acc(rs.getString("CUST_ACC"));
+				custVO.setCust_pwd(rs.getString("CUST_PWD"));
+				custVO.setCust_name(rs.getString("CUST_NAME"));
+				custVO.setCust_sex(rs.getString("CUST_SEX"));
+				custVO.setCust_tel(rs.getString("CUST_TEL"));
+				custVO.setCust_addr(rs.getString("CUST_ADDR"));
+				custVO.setCust_pid(rs.getString("CUST_PID"));
+				custVO.setCust_mail(rs.getString("CUST_MAIL"));
+				custVO.setCust_brd(rs.getDate("CUST_BRD"));
+				custVO.setCust_reg(rs.getDate("CUST_REG"));
+				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
+				custVO.setCust_status(rs.getString("CUST_STATUS"));
+				custVO.setCust_niname(rs.getString("CUST_NINAME"));
+				
+				
+			}
+			
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return custVO;
 	}
 
 }

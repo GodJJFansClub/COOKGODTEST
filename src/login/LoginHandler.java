@@ -19,13 +19,11 @@ public class LoginHandler extends HttpServlet {
   protected boolean allowUser(String account, String password,HttpSession session) {
 	  EmpService empSvc = new EmpService();
 //	  try {
-	EmpVO empVO = empSvc.getOneEmp(account);
-	  
-	 
+	EmpVO empVO = empSvc.getOneEmp_acc(account);	 
 		
     if ( password.equals(empVO.getEmp_pwd())) {
     	
-    	session.setAttribute("empVO",empSvc);
+    	session.setAttribute("empVO",empVO);
     	return true;
     }else
       return false;

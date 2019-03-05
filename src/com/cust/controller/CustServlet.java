@@ -41,9 +41,10 @@ public class CustServlet extends HttpServlet {
 			
 		}
 		
-		doPost(req, res);
-	
+		
+		
 	}
+	
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -470,36 +471,48 @@ public class CustServlet extends HttpServlet {
 		}
 		
 		
-		//ajax 驗證帳號
-		String action1 = req.getParameter("action1");
-		String cust_acc = req.getParameter("cust_acc");
-		CustService custSvc = new CustService();
-		CustVO custVO = custSvc.getOneCust(cust_acc);
-		JSONObject obj = new JSONObject();
+		// ajax 驗證帳號
 		
-			if(custVO.getCust_acc().equals(cust_acc)){
-				try {
-					obj.accumulate("answer", "帳號重複，請重新輸入");
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				try {
-					obj.accumulate("answer", "此帳號可使用");
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		
+		
+		if ("ask".equals(action)) {
+			
+			res.setContentType("text/plain; charset=UTF-8");
+			String cust_acc = req.getParameter("cust_acc");
+			CustService custSvc = new CustService();
+
+			JSONObject obj=new JSONObject();
+
+//			if (custVO.getCust_acc().equals(cust_acc)) {
+//				try {
+//					obj.accumulate("answer", "帳號重複，請重新輸入");
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			} else {
+//				try {
+//					obj.accumulate("answer", "此帳號可使用");
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+			
+			PrintWriter out = res.getWriter();
+			
+			
+			
+			if(custSvc.getOneCust_acc(cust_acc) == null) {
+				out.write("空的");
+			}else {
+				out.write("此帳號已有重複");
 			}
+			out.flush();
+			out.close();
+			
+			
+		}
 		
-		res.setContentType("text/plain");
-		res.setCharacterEncoding("UTF-8");
-		PrintWriter outt = res.getWriter();
-		outt.write(obj.toString());
-		outt.flush();
-		outt.close();
 	}
-
-
 }
