@@ -57,7 +57,7 @@
 						<%@ include file="/file/page1.file"%>
 						<c:forEach var="foodOrderVO" items="${list}"  begin="<%=pageIndex%>"
 						end="<%=pageIndex+rowsPerPage-1%>">
-							<tr>
+							<tr class="foodOrder">
 								<td scope="col">${foodOrderVO.food_or_ID}</td>
 								<td scope="col">${custSvc.getOneCust(foodOrderVO.cust_ID).cust_name}</td>
 								<td scope="col">${foodOrderVO.food_or_name}</td>
@@ -76,18 +76,48 @@
 									${total}
 								</td>
 								<td>
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/foodOrder/foodOrder.do" >
-										<input type="submit" value="修改">
-										<input type="hidden" name="food_or_ID" value="${foodOrderVO.food_or_ID}">
-										<input type="hidden" name="action" value="getOne_For_Udate">
+									<FORM METHOD="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
+										<button id="update" type="button">修改</button>
+										<input type="hidden" id="food_or_ID" name="food_or_ID" value="${foodOrderVO.food_or_ID}">
+										<input type="hidden" id="action" name="action">
 									</FORM>
 								</td>
 							</tr>
+							
 						</c:forEach>
 					</table>
 					<%@ include file="/file/page2.file"%>
 				</div>
+				<c:if test="${openModal!=null}">
 
+					<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+									
+								<div class="modal-header">
+					                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					                <h3 class="modal-title" id="myModalLabel">The Bootstrap modal-header</h3>
+					            </div>
+								
+								<div class="modal-body">
+					<!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
+					               <jsp:include page="/back-end/foodOrder/listOneFoodOrder.jsp" />
+					<!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
+								</div>
+								
+								<div class="modal-footer">
+					                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					                <button type="button" class="btn btn-primary">Save changes</button>
+					            </div>
+							
+							</div>
+						</div>
+					</div>
+					
+					        <script>
+					    		
+					        </script>
+					 </c:if>
 
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
@@ -95,5 +125,22 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$(".foodOrder").click(function(evt){
+				let foodOrForm = $(this).find("form");
+				if(evt.target.id != "update") { 
+					foodOrForm.children("#action").val("getOne_For_Display");
+				}else{
+					foodOrForm.children("#action").val("getOne_For_Udate");	
+				}
+				foodOrForm.submit();
+			});
+			<c:if test="${openModal!=null}">
+				$("#basicModal").modal({show: true});
+			</c:if>
+		});
+		 
+	</script>
 </body>
 </html>

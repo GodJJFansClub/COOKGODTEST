@@ -113,13 +113,13 @@
   
   <servlet>
     <servlet-name>FoodMallServlet</servlet-name>
-    <servlet-class>com.festMall.controller.FoodMallServlet</servlet-class>
+    <servlet-class>com.foodMall.controller.FoodMallServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>FoodMallServlet</servlet-name>
-  	<url-pattern>/foodSupManaMall/foodSupManaMall.do</url-pattern>
+  	<url-pattern>/foodMall/foodMall.do</url-pattern>
   </servlet-mapping>
-  
+ 
   <servlet>
   	<servlet-name>FoodOrderServlet</servlet-name>
   	<servlet-class>com.foodOrder.controller.FoodOrderServlet</servlet-class>

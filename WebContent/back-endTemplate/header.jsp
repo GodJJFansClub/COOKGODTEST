@@ -8,38 +8,13 @@
     <link href="<%=request.getContextPath()%>/back-endTemplate/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<%=request.getContextPath()%>/back-endTemplate/dist/css/style.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
 </head>
 <body>
 	<header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header" data-logobg="skin5">
-                    <!-- This is for the sidebar toggle which is visible on mobile only -->
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
-                        <i class="ti-menu ti-close"></i>
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <div class="navbar-brand">
-                        <a href="index.html" class="logo">
-                            <!-- Logo icon -->
-                            <b class="logo-icon">
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
-                                <img src="" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo icon -->
-                                <img src="" alt="homepage" class="light-logo" />
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
-                            <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img src="" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo text -->
-                                <img src="" class="light-logo" alt="homepage" />
-                            </span>
-                        </a>
-                    </div>
+                    
                     <!-- ============================================================== -->
                     <!-- End Logo -->
                     <!-- ============================================================== -->
@@ -67,31 +42,104 @@
                                 <div class="d-flex align-items-center">
                                     <i class="font-20 mr-1"></i>
                                     <div class="ml-1 d-none d-sm-block">
-                                        <span>管理合作廠商</span>
+                                        <span>食材管理</span>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>訂單管理</span>
+                                    </div>
+                                </div>
+                            </a>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>顧客資料管理</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>合作夥伴</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>員工管理</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>廣告管理</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>菜色管理</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>審核檢舉文章</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>在線客服平台</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>登入/登出</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        
                     </ul>
+                    
                 </div>
             </nav>
         </header>

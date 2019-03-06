@@ -26,6 +26,10 @@ public class FoodMallServlet extends HttpServlet{
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
 		InputStream in = null;
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
 		try {
 			String food_ID = req.getParameter("food_ID");
 			String food_sup_ID = req.getParameter("food_sup_ID");
@@ -34,13 +38,14 @@ public class FoodMallServlet extends HttpServlet{
 			if(foodMallVO.getFood_m_pic() != null) {
 				out.write(foodMallVO.getFood_m_pic());
 			} else {
-				in = getServletContext().getResourceAsStream("/back-end/food/images/null2.jpg");
+				in = getServletContext().getResourceAsStream("/images/null2.jpg");
 				byte[] buff = new byte[in.available()];
 				in.read(buff);
 				out.write(buff);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		} finally {
 			if(in != null) {
 				in.close();

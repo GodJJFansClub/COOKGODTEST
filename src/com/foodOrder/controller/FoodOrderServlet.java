@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.foodOrDetail.model.FoodOrDetailVO;
 import com.foodOrder.model.FoodOrderService;
 import com.foodOrder.model.FoodOrderVO;
 
@@ -93,7 +95,7 @@ public class FoodOrderServlet extends HttpServlet {
 		// 利用action參數來決定要做哪個區塊的事
 		String action = req.getParameter("action");
 
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -103,18 +105,15 @@ public class FoodOrderServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("food_or_ID");
-				String food_or_IDReg = "^[F]\\d{5}$";
 
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入食材編號");
-				} else if (!str.trim().matches(food_or_IDReg)) {
-					errorMsgs.add("食材名稱: 只能是F開頭外加5個數字");
-				}
-				// Send the use back to the form, if there were errors
+				} 
+				
 
 				if (!errorMsgs.isEmpty()) {
 
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/food/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/listAllFoodOrder.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -123,35 +122,43 @@ public class FoodOrderServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/food/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/listAllFoodOrder.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				/*************************** 2.開始查詢資料 *****************************************/
-				FoodOrderService foodOrderService = new FoodOrderService();
-				FoodOrderVO FoodOrderVO = foodOrderService.getOneFoodOrder(food_or_ID);
-				if (FoodOrderVO == null) {
+				FoodOrderService foodOrderSvc = new FoodOrderService();
+				
+				FoodOrderVO foodOrderVO = foodOrderSvc.getOneFoodOrder(food_or_ID);
+				if (foodOrderVO == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/food/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/listAllFoodOrder.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
+				Set<FoodOrDetailVO> set = foodOrderSvc.getFoodOrDetailsByFood_or_ID(food_or_ID);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-
-				req.setAttribute("FoodOrderVO", FoodOrderVO); // 資料庫取出的FoodOrderVO物件,存入req
-				String url = "/back-end/food/listOneFood.jsp";
+				
+				req.setAttribute("foodOrderVO", foodOrderVO); // 資料庫取出的FoodOrderVO物件,存入req
+				/*********************/
+				boolean openModal=true;
+				req.setAttribute("openModal",openModal );	      
+				req.setAttribute("listFoodOrDetails_ByFood_or_ID", set);
+				/*********************/
+				String url = "/back-end/foodOrder/listAllFoodOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
+
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/food/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/listAllFoodOrder.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -167,8 +174,8 @@ public class FoodOrderServlet extends HttpServlet {
 				/*************************** 1.接收請求參數 ****************************************/
 				String food_or_ID = req.getParameter("food_or_ID");
 				/*************************** 2.開始查詢資料 ****************************************/
-				FoodOrderService foodOrderService = new FoodOrderService();
-				FoodOrderVO foodOrderVO = foodOrderService.getOneFoodOrder(food_or_ID);
+				FoodOrderService foodOrderSvc = new FoodOrderService();
+				FoodOrderVO foodOrderVO = foodOrderSvc.getOneFoodOrder(food_or_ID);
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("foodOrderVO", foodOrderVO); // 資料庫取出的FoodOrderVO物件,存入req
 				String url = "/back-end/foodOrder/update_foodOrder_input.jsp";
@@ -207,24 +214,24 @@ public class FoodOrderServlet extends HttpServlet {
 					errorMsgs.add("食材種類請勿空白");
 				}
 
-				FoodOrderVO FoodOrderVO = new FoodOrderVO();
-				FoodOrderVO.setFood_or_ID(food_or_ID);
-				FoodOrderVO.setFood_or_name(food_or_name);
+				FoodOrderVO foodOrderVO = new FoodOrderVO();
+				foodOrderVO.setFood_or_ID(food_or_ID);
+				foodOrderVO.setFood_or_name(food_or_name);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 
-					req.setAttribute("FoodOrderVO", FoodOrderVO);
+					req.setAttribute("foodOrderVO", foodOrderVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/update_food_input.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				/*************************** 2.開始修改資料 *****************************************/
-				FoodOrderService foodOrderService = new FoodOrderService();
-//				FoodOrderVO = foodOrderService.updateFood(food_or_ID, food_or_name, food_or_addr);
+				FoodOrderService foodOrderSvc = new FoodOrderService();
+//				FoodOrderVO = foodOrderSvc.updateFood(food_or_ID, food_or_name, food_or_addr);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("FoodOrderVO", FoodOrderVO);
+				req.setAttribute("FoodOrderVO", foodOrderVO);
 				String url = "/back-end/foodOrder/listOneFoodOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -285,7 +292,7 @@ public class FoodOrderServlet extends HttpServlet {
 				
 				String food_or_addr = null;
 				try {
-					food_or_addr = zipcode + getPreAddr(cityIn, areaIn, roadIn) + food_or_addrAfter;
+					food_or_addr = zipcode + "-" + getPreAddr(cityIn, areaIn, roadIn) + food_or_addrAfter;
 				} catch(JSONException e) {
 					errorMsgs.add(e.getMessage());
 				}
@@ -311,8 +318,8 @@ public class FoodOrderServlet extends HttpServlet {
 				}
 				/*************************** 2.開始新增資料 ***************************************/
 				
-				FoodOrderService foodOrderService = new FoodOrderService();
-				foodOrderVO = foodOrderService.addFoodOrder("o0", food_or_name, food_or_addr, food_or_tel, cust_ID);
+				FoodOrderService foodOrderSvc = new FoodOrderService();
+				foodOrderVO = foodOrderSvc.addFoodOrder("o0", food_or_name, food_or_addr, food_or_tel, cust_ID);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back-end/foodOrder/listAllFoodOrder.jsp";
 
@@ -324,6 +331,33 @@ public class FoodOrderServlet extends HttpServlet {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/addFoodOrder.jsp");
 				failureView.forward(req, res);
+			}
+		}
+		
+		if("listFoodOrDetails_ByFood_or_ID".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String food_or_ID = req.getParameter("food_or_ID");
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				FoodOrderService foodOrderSvc = new FoodOrderService();
+				Set<FoodOrDetailVO> set = foodOrderSvc.getFoodOrDetailsByFood_or_ID(food_or_ID);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("listFoodOrDetailsByFood_or_ID", set);    
+
+				String url = "/back-end/foodOrder/listOneFoodOrder.jsp";
+				             
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 ***********************************/
+			} catch (Exception e) {
+				throw new ServletException(e);
 			}
 		}
 

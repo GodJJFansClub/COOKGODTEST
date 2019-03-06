@@ -392,11 +392,11 @@ CREATE TABLE FOOD_SUP (
 
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID,FOOD_SUP_NAME,FOOD_SUP_TEL,FOOD_SUP_STATUS,FOOD_SUP_RESUME)
-VALUES('C00005','Candyshop','02-2345678','s1','新富市場，又稱東三水街市場，是一座位在臺北市的傳統市場。');
+VALUES('C00005','Candyshop','022345678','s1','新富市場，又稱東三水街市場，是一座位在臺北市的傳統市場。');
 
 --(REMOVE FOOD_SUP_LICENSE NOT NULL)--
 INSERT INTO FOOD_SUP (FOOD_SUP_ID,FOOD_SUP_NAME,FOOD_SUP_TEL,FOOD_SUP_STATUS,FOOD_SUP_RESUME) 
-VALUES ('C00001','DAVID_SEAFOOD','02-4587541','s1','新北市汐止區發財路88號');
+VALUES ('C00001','DAVID_SEAFOOD','024587541','s1','新北市汐止區發財路88號');
 ------------------------------------------------------------------
 --建立表格:廣告--
 CREATE TABLE AD (
@@ -453,7 +453,7 @@ CREATE TABLE FOOD_MALL (
 );
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID,FOOD_ID,FOOD_M_NAME,FOOD_M_STATUS,FOOD_M_PRICE,FOOD_M_UNIT,FOOD_M_PLACE,FOOD_M_PIC,FOOD_M_RESUME,FOOD_M_RATE)
-VALUES('C00005','F00001','營養滿點的五穀米','p1',800,'1斤','台灣',null,'本產品為真空包裝，保存期限六個月，若尚未開封請置於陰涼處保存，並請勿碰撞及種壓以免失去真空狀態',1);
+VALUES('C00005','F00001','營養滿點的五穀米','p1',800,'kan','台灣',null,'本產品為真空包裝，保存期限六個月，若尚未開封請置於陰涼處保存，並請勿碰撞及種壓以免失去真空狀態',1);
 -----------------------食材供應商1資料----------------------------------
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
@@ -461,11 +461,11 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'ABC', '123', '周子怡'
 to_date('1988/11/21', 'YYYY/MM/DD'), to_date('2018/02/06', 'YYYY/MM/DD'), 'c0', '怡姐');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '宏昇畜牧場', '03-1234567', 's1',
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '宏昇畜牧場', '031234567', 's1',
 '宏昇畜牧場建立於民國六十五年以養白蛋雞為主。三十幾年養雞技術和一流的好口碑傳聞於北中南部地區。民國九十三宏昇轉型機能安全健康的生鮮雞蛋！主要生產德國羅曼褐色雞生褐蛋和烏骨雞生青蛋。因近幾年台灣的食安風暴凸顯食品安全重要性。');
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00009', '洗選蛋', 'p3', 65, '10顆入', '臺灣', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00009', '洗選蛋', 'p3', 65, 'kan', '臺灣', 
 '洗選分級，個個精挑，粒粒細選');
 
 
@@ -476,7 +476,7 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'fg1', '123', '蘇鵬', '
 to_date('1980/05/21', 'YYYY/MM/DD'), to_date('2018/02/07', 'YYYY/MM/DD'), 'c0', 'Lion');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '中央畜產有限公司', '08-7217729', 's0',
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '中央畜產有限公司', '087217729', 's0',
 '中央畜產牧場創立於民國六十八年，由蘇氏兄弟共同規劃經營，座落於美麗的田野間，屏東縣麟洛鄉新田村，位於南二高南下 404KL 大武山下，牧場面積約8公頃。');
 
 -----------------------食材供應商3資料----------------------------------
@@ -486,17 +486,17 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'ccc', '123', '張靖男'
 to_date('1977/06/01', 'YYYY/MM/DD'), to_date('2018/02/08', 'YYYY/MM/DD'), 'c0', '阿男');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '翠軒', '04-6817729', 's1',
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '翠軒', '046817729', 's1',
 '台糖公司畜殖事業部所生產之豬肉肉品，由於絕無藥物殘留，也絕不使用瘦肉精，而且衛生美味，早
 已有口皆碑。但因隸屬公營企業，較不擅於行銷，故有許多消費者屢屢抱怨：「明知台糖肉品好，卻
 不知何處買得到？」。');
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00016', '五花肉', 'p4', 369, '1kg', '臺灣', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00016', '五花肉', 'p4', 369, 'kg', '臺灣', 
 '因為肥瘦層層相間，故又稱為「三層肉」；也因為油脂與瘦肉層疊分佈，具有多汁性、肉質較軟嫩的特性，口感甘甜、非常鮮嫩美味，很棒！');
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00015', '黃金松阪豬肉', 'p4', 350, '300g', '臺灣', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00015', '黃金松阪豬肉', 'p4', 350, 'kan', '臺灣', 
 '豬頸肉，位於豬的頸部兩側，是最珍稀的豬肉部位，在台灣有人吃了之後發現，它的口感與日本的松阪牛肉很像，因此又稱它為松阪豬肉。一隻豬只有左右兩片，因為數量少，因此價位比較高');
 -----------------------食材供應商4資料----------------------------------
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
@@ -505,25 +505,25 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'RT5G', '658W', '駒場�
 to_date('1980/06/01', 'YYYY/MM/DD'), to_date('2018/05/08', 'YYYY/MM/DD'), 'c0', '一郎');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '蝦夷農產', '05-1509436', 's1', '專門從日本進口高級食材');
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '蝦夷農產', '051509436', 's1', '專門從日本進口高級食材');
 
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00026', '翼板牛排', 'p4', 320, '150g', '日本', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00026', '翼板牛排', 'p4', 320, 'g', '日本', 
 '去除肩峰部分,頸側,肉不厚的部分後整形，全體有均一的(脂肪)紋路肉質');
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00024', '牛頸肉', 'p4', 349, '100g', '日本', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00024', '牛頸肉', 'p4', 349, 'g', '日本', 
 'A5冷藏和牛/頂級松阪牛因為經常活動，脂肪較少，屬於較硬的瘦肉，適合用來燉煮湯品。');
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00023', '牛舌', 'p0', 300, '250g', '日本', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00023', '牛舌', 'p0', 300, 'g', '日本', 
 '獨家純手工精修牛舌片
 適合炙烤的黃金比例厚度
 豐富油脂入口即化更勝草飼牛');
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00022', '牛頰', 'p2', 600, '1kg', '日本', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00022', '牛頰', 'p2', 600, 'kg', '日本', 
 '不管是要做紅酒燉牛頰還是蔬菜比較多的蔬菜燉牛頰都很適合!');
 
 -----------------------食材供應商5資料----------------------------------
@@ -534,13 +534,13 @@ to_date('1971/08/11', 'YYYY/MM/DD'), to_date('2018/06/18', 'YYYY/MM/DD'), 'c0', 
 
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '台南農產', '06-4555436','s1', '台灣出產');
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '台南農產', '064555436','s1', '台灣出產');
 
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00016', '五花肉', 'p4', 520, '1kg', '臺灣', 
 '油脂與瘦肉層疊分佈，具有多汁性、肉質較軟嫩的特性，口感甘甜、非常鮮嫩美味，很棒！');
 INSERT INTO FOOD_MALL(FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_RESUME)
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00024', '牛頸肉', 'p4', 310, '100g', '臺灣', 
+VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00024', '牛頸肉', 'p4', 310, 'g', '臺灣', 
 '因為經常活動，脂肪較少，屬於較硬的瘦肉，適合用來燉煮湯品。');
 
 commit;
@@ -628,16 +628,16 @@ VALUES ('FO'||'20190208'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.CURRVAL), 6, '0'), 'C
 INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL)
 VALUES ('FO'||'20190208'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.CURRVAL), 6, '0'), 'C00012', 'F00024', 2, 349);
 
-INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_SEND, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID)
-VALUES ('FO'||'20190211'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.NEXTVAL), 6, '0'), 'o1', TO_DATE('2019/02/11', 'YYYY/MM/DD'), TO_DATE('2019/02/16' , 'YYYY/MM/DD'), '李舜生', '桃園市復興區澤仁里中山路8號', '0958021852', 'C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'));
+INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID)
+VALUES ('FO'||'20190211'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.NEXTVAL), 6, '0'), 'o1', TO_DATE('2019/02/11', 'YYYY/MM/DD'), '李舜生', '桃園市復興區澤仁里中山路8號', '0958021852', 'C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'));
 INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL)
 VALUES ('FO'||'20190211'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.CURRVAL), 6, '0'), 'C00013', 'F00016', 2, 1040);
 INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL)
 VALUES ('FO'||'20190211'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.CURRVAL), 6, '0'), 'C00009', 'F00009', 1, 65);
 
 
-INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_SEND, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID)
-VALUES ('FO'||'20190215'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.NEXTVAL), 6, '0'), 'o0', TO_DATE('2019/02/15', 'YYYY/MM/DD'), TO_DATE('2019/02/20' , 'YYYY/MM/DD'), '李舜生', '桃園市復興區澤仁里中山路8號', '0958021852', 'C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'));
+INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID)
+VALUES ('FO'||'20190215'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.NEXTVAL), 6, '0'), 'o0', TO_DATE('2019/02/15', 'YYYY/MM/DD'), '李舜生', '桃園市復興區澤仁里中山路8號', '0958021852', 'C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'));
 INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL)
 VALUES ('FO'||'20190215'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.CURRVAL), 6, '0'), 'C00012', 'F00026', 2, 640);
 INSERT INTO FOOD_OR_DETAIL (FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL)

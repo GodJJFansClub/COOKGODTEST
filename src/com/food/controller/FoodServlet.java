@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.food.model.FoodService;
 import com.food.model.FoodVO;
+import com.foodMall.model.FoodMallVO;
 
 
 
@@ -267,6 +269,36 @@ public class FoodServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+ 		
+ 		if("listFoodMalls_ByFood_ID".equals(action)) {
+ 			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String food_ID = req.getParameter("food_ID");
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				FoodService foodSvc = new FoodService();
+				Set<FoodMallVO> set = foodSvc.getFoodMallsByFood_ID(food_ID);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("listFoodMalls_ByFood_ID", set);    // 資料庫取出的set物件,存入request
+
+
+//				if ("listEmps_ByDeptno_A".equals(action))
+//					url = "/dept/listEmps_ByDeptno.jsp";        // 成功轉交 dept/listEmps_ByDeptno.jsp
+//				else if ("listEmps_ByDeptno_B".equals(action))
+//					url = "/dept/listAllDept.jsp";              // 成功轉交 dept/listAllDept.jsp
+
+				RequestDispatcher successView = req.getRequestDispatcher(requestURL);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 ***********************************/
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+ 		}
 	}
 	
 	

@@ -1,6 +1,9 @@
 package com.food.model;
 
 import java.util.List;
+import java.util.Set;
+
+import com.foodMall.model.FoodMallVO;
 
 public class FoodService {
 	private FoodDAO_interface dao;
@@ -39,5 +42,9 @@ public class FoodService {
 	
 	public List<FoodVO> getAll(){
 		return dao.getAll();
+	}
+	
+	public Set<FoodMallVO> getFoodMallsByFood_ID(String food_ID){
+		return dao.getFoodMallsByFood_ID(food_ID);
 	}
 }

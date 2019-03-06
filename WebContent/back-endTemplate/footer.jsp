@@ -27,5 +27,6 @@
     <script src="<%=request.getContextPath()%>/back-endTemplate/assets/libs/chartist/dist/chartist.min.js"></script>
     <script src="<%=request.getContextPath()%>/back-endTemplate/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="<%=request.getContextPath()%>/back-endTemplate/dist/js/pages/dashboards/dashboard1.js"></script>
+    <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 </html>
