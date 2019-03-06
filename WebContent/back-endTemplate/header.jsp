@@ -127,8 +127,19 @@
                                 </div>
                             </a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+                            <a class="nav-link waves-effect waves-dark">
+                                <div class="d-flex align-items-center">
+                                    <i class="font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>歡迎:<font color=red> ${account} </font>您好</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark" action="<%=request.getContextPath()%>/emp/emp.do"  method="post" >
                                 <div class="d-flex align-items-center">
                                     <i class="font-20 mr-1"></i>
                                     <div class="ml-1 d-none d-sm-block">
@@ -137,7 +148,6 @@
                                 </div>
                             </a>
                         </li>
-                        
                     </ul>
                     
                 </div>
