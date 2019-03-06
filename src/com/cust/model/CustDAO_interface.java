@@ -9,5 +9,5 @@ public interface CustDAO_interface {
 	public CustVO findByPrimaryKey(String cust_ID);
 	public CustVO findByCust_acc(String cust_acc);
 	public List<CustVO> getAll();
-
+	public void insertWithFoodSup(CustVO custVO , List<FoodSupVO> list);
 }
