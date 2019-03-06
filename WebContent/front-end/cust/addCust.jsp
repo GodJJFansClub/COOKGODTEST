@@ -83,7 +83,7 @@ th, td {
 			<tr>
 				<td>顧客帳號:</td>
 				<td><input type="TEXT" id="cust_acc" name="cust_acc" size="45"
-					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /></td><p id="answer">I cannot give you an answer until you ask a question!</p>
+					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /><p id="answer"></p></td>
 			</tr>
 
 			<tr>
@@ -293,7 +293,7 @@ th, td {
 		
 		$(function(){
 			$('#cust_acc').on('keyup', function(){
-				$('#answer').text('Waiting for you to stop typing...');
+				$('#answer').text('輸入中');
 				var cust_acc = $(this).val();
 				_debounce(function(){ 
 					return getAnswer(cust_acc); 

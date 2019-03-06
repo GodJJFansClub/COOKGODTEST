@@ -504,7 +504,7 @@ public class CustServlet extends HttpServlet {
 			
 			
 			if(custSvc.getOneCust_acc(cust_acc) == null) {
-				out.write("空的");
+				out.write("此帳號可以使用");
 			}else {
 				out.write("此帳號已有重複");
 			}

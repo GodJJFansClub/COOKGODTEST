@@ -186,25 +186,24 @@ CREATE TABLE CUST (
 );
 
 Insert into CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME) 
-values ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'acust','234561','David','1','0910889862','桃園市中壢區中大路300號','H123456789','david123@yahoo.com',to_date('2019-02-01','YYYY-MM-DD'),to_date('2019-02-01','YYYY-MM-DD'),'0','seafood');
+values ('C00001','acust','234561','David','M','0910889862','桃園市中壢區中大路300號','H123456789','david123@yahoo.com',to_date('2019-02-01','YYYY-MM-DD'),to_date('2019-02-01','YYYY-MM-DD'),'a0','seafood');
 Insert into CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME)
-values ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'custa2','123456','Peter','1','0910889866','桃園市中壢區中大路301號','A123557799','peter123@yahoo.com',to_date('2000-01-01','YYYY-MM-DD'),to_date('2019-02-06','YYYY-MM-DD'),'0','Peterseafood');
+values ('C00002','custa2','123456','Peter','M','0910889866','桃園市中壢區中大路301號','A123557799','peter123@yahoo.com',to_date('2000-01-01','YYYY-MM-DD'),to_date('2019-02-06','YYYY-MM-DD'),'a0','Peterseafood');
 Insert into CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME)
-values ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'custa3','123456','Amy','0','0910889867','桃園市中壢區中大路302號','A223456789','amy123@yahoo.com',to_date('1989-01-01','YYYY-MM-DD'),to_date('2019-02-01','YYYY-MM-DD'),'0','Amy');
+values ('C00003','custa3','123456','Amy','M','0910889867','桃園市中壢區中大路302號','A223456789','amy123@yahoo.com',to_date('1989-01-01','YYYY-MM-DD'),to_date('2019-02-01','YYYY-MM-DD'),'a0','Amy');
 Insert into CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME) 
-values ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'cookb1','123456','Tom','1','0910889869','桃園市中壢區中大路305號','B124456789','tom123@yahoo.com',to_date('1990-01-01','YYYY-MM-DD'),to_date('2019-02-01','YYYY-MM-DD'),'0','Tomcat');
+values ('C00004','cookb1','123456','Tom','M','0910889869','桃園市中壢區中大路305號','B124456789','tom123@yahoo.com',to_date('1990-01-01','YYYY-MM-DD'),to_date('2019-02-01','YYYY-MM-DD'),'a0','Tomcat');
 Insert into CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME) 
-values ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'foodsupc2','123456','Candy','0','0910889864','桃園市中壢區中大路306號','C223456788','candy123@yahoo.com',to_date('1980-02-01'),to_date('2019-02-08'),'0','Candyshop');
+values ('C00005','foodsupc2','123456','Candy','F','0910889864','桃園市中壢區中大路306號','C223456788','candy123@yahoo.com',to_date('1980-02-01'),to_date('2019-02-08'),'a0','Candyshop');
 
 INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME) 
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'CUST','123456','AAA','1','0987654321','桃園市中壢區1號','A123456789','TEST_01@GMAIL.COM',TO_DATE('2000-01-01','YYYY-MM-DD'),TO_DATE('2019-02-11','YYYY-MM-DD'),'0','DAVID_01');
+VALUES ('T00001','CUST','123456','AAA','M','0987654321','桃園市中壢區1號','A123456789','TEST_01@GMAIL.COM',TO_DATE('2000-01-01','YYYY-MM-DD'),TO_DATE('2019-02-11','YYYY-MM-DD'),'a0','DAVID_01');
 
 INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME) 
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'CHEF','123456','BBB','1','0987654322','桃園市中壢區2號','B223456789','TEST_02@GMAIL.COM',TO_DATE('2000-02-02','YYYY-MM-DD'),TO_DATE('2019-02-11','YYYY-MM-DD'),'0','DAVID_02');
+VALUES ('T00002','CHEF','123456','BBB','M','0987654322','桃園市中壢區2號','B223456789','TEST_02@GMAIL.COM',TO_DATE('2000-02-02','YYYY-MM-DD'),TO_DATE('2019-02-11','YYYY-MM-DD'),'a0','DAVID_02');
 
 INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_STATUS,CUST_NINAME) 
-VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'),'FOOD_SUP','123456','CCC','1','0987654323','桃園市中壢區3號','C323456789','TEST_03@GMAIL.COM',TO_DATE('2000-03-03','YYYY-MM-DD'),TO_DATE('2019-02-11','YYYY-MM-DD'),'0','DAVID_03');
-
+VALUES ('T00003','FOOD_SUP','123456','CCC','M','0987654323','桃園市中壢區3號','C323456789','TEST_03@GMAIL.COM',TO_DATE('2000-03-03','YYYY-MM-DD'),TO_DATE('2019-02-11','YYYY-MM-DD'),'a0','DAVID_03');
 
 
 ------------------------------------------------------------------
@@ -414,11 +413,11 @@ CREATE TABLE AD (
 REM INSERTING into AD
 SET DEFINE OFF;
 Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID) 
-values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'1',to_timestamp('2019-02-13 04.35.21'),to_timestamp('2019-04-18 12.32.29'),'1','阿基師春節限定','阿基師特選寶島復古料理四天王，「滑溜溜佛跳牆」「五花大綁肉」「溫煮牛肉湯」「功夫老雞煲」 讓你吃得巧，吃到飽～',null);
+values ('AD0001','d0',to_timestamp('2019-02-13 04.35.21'),to_timestamp('2019-04-18 12.32.29'),'e0','阿基師春節限定','阿基師特選寶島復古料理四天王，「滑溜溜佛跳牆」「五花大綁肉」「溫煮牛肉湯」「功夫老雞煲」 讓你吃得巧，吃到飽～',null);
 Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)
-values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'1',to_timestamp('2019-02-28 04.42.39'),to_timestamp('2019-04-14 04.42.44'),'2','帝王感蟹季','在遙遠南極的海下，科學家曾發現超過100萬只巨型帝王蟹。它們是石蟹科的甲殼類，不是真正的螃蟹。這種生物主要分布在寒冷的海域， 素有蟹中之王的美譽，聽了是不是都流口水了?',null);
+values ('AD0002','d1',to_timestamp('2019-02-28 04.42.39'),to_timestamp('2019-04-14 04.42.44'),'e1','帝王感蟹季','在遙遠南極的海下，科學家曾發現超過100萬只巨型帝王蟹。它們是石蟹科的甲殼類，不是真正的螃蟹。這種生物主要分布在寒冷的海域， 素有蟹中之王的美譽，聽了是不是都流口水了?',null);
 Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)
-values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'1',to_timestamp('2019-02-27 08.57.09'),to_timestamp('2019-04-24 08.57.15'),'0','人氣日本和牛','找日本人問何謂人氣「和牛」，可能沒幾個日本人能回答你的問題。這篇要告訴你何謂人氣和牛，又，哪裡可以吃到這些知名和牛呢？',null);
+values ('AD0003','d2',to_timestamp('2019-02-27 08.57.09'),to_timestamp('2019-04-24 08.57.15'),'e2','人氣日本和牛','找日本人問何謂人氣「和牛」，可能沒幾個日本人能回答你的問題。這篇要告訴你何謂人氣和牛，又，哪裡可以吃到這些知名和牛呢？',null);
 ------------------------------------------------------------------
 --建立表格:喜愛食材供應商--
 CREATE TABLE FAV_FD_SUP (
@@ -458,7 +457,7 @@ VALUES('C00005','F00001','營養滿點的五穀米','p1',800,'kan','台灣',null
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'ABC', '123', '周子怡', 'f', '0958111222' , '桃園市大園區橫峰里中山南路二段246號', 'B224448640', '123@gmail.com', 
-to_date('1988/11/21', 'YYYY/MM/DD'), to_date('2018/02/06', 'YYYY/MM/DD'), 'c0', '怡姐');
+to_date('1988/11/21', 'YYYY/MM/DD'), to_date('2018/02/06', 'YYYY/MM/DD'), 'a0', '怡姐');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '宏昇畜牧場', '031234567', 's1',
@@ -473,7 +472,7 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00009', '洗選蛋', 'p
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'fg1', '123', '蘇鵬', 'm', '0958111222', '屏東市中華路166號1樓', 'T150500669', '456@gmail.com', 
-to_date('1980/05/21', 'YYYY/MM/DD'), to_date('2018/02/07', 'YYYY/MM/DD'), 'c0', 'Lion');
+to_date('1980/05/21', 'YYYY/MM/DD'), to_date('2018/02/07', 'YYYY/MM/DD'), 'a0', 'Lion');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '中央畜產有限公司', '087217729', 's0',
@@ -483,7 +482,7 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '中央畜產有限公司
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'ccc', '123', '張靖男', 'm', '0958111222', '台中市北屯區松竹路二段258號', 'L103239021', 'nnn@gmail.com', 
-to_date('1977/06/01', 'YYYY/MM/DD'), to_date('2018/02/08', 'YYYY/MM/DD'), 'c0', '阿男');
+to_date('1977/06/01', 'YYYY/MM/DD'), to_date('2018/02/08', 'YYYY/MM/DD'), 'a0', '阿男');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '翠軒', '046817729', 's1',
@@ -502,7 +501,7 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00015', '黃金松阪�
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'RT5G', '658W', '駒場一郎', 'm', '0952115123', '嘉義市西區北港路310號', 'A140818041', 'dd7@gmail.com', 
-to_date('1980/06/01', 'YYYY/MM/DD'), to_date('2018/05/08', 'YYYY/MM/DD'), 'c0', '一郎');
+to_date('1980/06/01', 'YYYY/MM/DD'), to_date('2018/05/08', 'YYYY/MM/DD'), 'a0', '一郎');
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), '蝦夷農產', '051509436', 's1', '專門從日本進口高級食材');
@@ -530,7 +529,7 @@ VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.CURRVAL), 5, '0'), 'F00022', '牛頰', 'p2',
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'FERw3', 'tgr55', '稻田多摩子', 'f', '0952115123', '嘉義市西區北港路310號', 'A140818041', 'dd7@gmail.com', 
-to_date('1971/08/11', 'YYYY/MM/DD'), to_date('2018/06/18', 'YYYY/MM/DD'), 'c0', '蛋姐');
+to_date('1971/08/11', 'YYYY/MM/DD'), to_date('2018/06/18', 'YYYY/MM/DD'), 'a0', '蛋姐');
 
 
 INSERT INTO FOOD_SUP(FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME)
@@ -583,7 +582,7 @@ CREATE TABLE FOOD_OR_DETAIL (
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'N573JHTY', 'AA123DD', '桑野信介', 'm', '0958111222', '台中市龍井區新興路17巷3號', 'L176024587', 'xu5ktleo@gmail.com', 
-to_date('1966/07/04', 'YYYY/MM/DD'), to_date('2018/10/10', 'YYYY/MM/DD'), 'c0', '信介');
+to_date('1966/07/04', 'YYYY/MM/DD'), to_date('2018/10/10', 'YYYY/MM/DD'), 'a0', '信介');
 --------------------------食神嚴選食材訂單資料---------------------
 INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_SEND, FOOD_OR_RCV, FOOD_OR_END, FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID)
 VALUES ('FO'||'20181121'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.NEXTVAL), 6, '0'), 'o4', TO_DATE('2018/11/21', 'YYYY/MM/DD'), TO_DATE('2018/11/23' , 'YYYY/MM/DD'),
@@ -611,7 +610,7 @@ VALUES ('FO'||'20181124'||'-'||LPAD(TO_CHAR(FOOD_ORDER_SEQ.CURRVAL), 6, '0'), 'C
 INSERT INTO CUST (CUST_ID, CUST_ACC, CUST_PWD, CUST_NAME, CUST_SEX, CUST_TEL, 
 CUST_ADDR, CUST_PID, CUST_MAIL, CUST_BRD, CUST_REG, CUST_STATUS, CUST_NINAME)
 VALUES ('C'||LPAD(TO_CHAR (CUST_SEQ.NEXTVAL), 5, '0'), 'Dw4hg1', '1qaz2wsx', '李舜生', 'm', '0958021852', '桃園市復興區澤仁里中山路8號', 'H151941450', '555@gmail.com', 
-to_date('1986/07/04', 'YYYY/MM/DD'), to_date('2018/11/01', 'YYYY/MM/DD'), 'c0', '黑');
+to_date('1986/07/04', 'YYYY/MM/DD'), to_date('2018/11/01', 'YYYY/MM/DD'), 'a0', '黑');
 --------------------------食神嚴選食材訂單資料---------------------
 
 INSERT INTO FOOD_ORDER (FOOD_OR_ID, FOOD_OR_STATUS, FOOD_OR_START, FOOD_OR_SEND, FOOD_OR_RCV ,FOOD_OR_NAME, FOOD_OR_ADDR, FOOD_OR_TEL, CUST_ID)
