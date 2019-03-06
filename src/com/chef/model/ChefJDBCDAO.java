@@ -5,6 +5,8 @@ import java.util.*;
 import javax.naming.*;
 import javax.sql.*;
 
+import com.cust.model.CustVO;
+
 
 public class ChefJDBCDAO implements ChefDAO_Interface{
 	
@@ -14,7 +16,9 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 	String passwd = "123456";
 	
 	private static final String Insert_Stmt = 
-			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, '2', 'NoChannel', ?)";
+			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, '0', 'NoChannel', ?)";
+	private static final String Insert_Stmt_With_Cust = 
+			"INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) VALUES ('C'||LPAD((CUST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String Updata_Stmt_From_Emp = 
 			"UPDATE CHEF SET CHEF_STATUS= ?, CHEF_CHANNEL=? WHERE CHEF_ID= ?";
 	private static final String Updata_Stmt_From_Chef = 
@@ -27,20 +31,59 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID";
 	
 	@Override
-	public void insert(ChefVO chefVO) {
+	public void insert(CustVO custVO, ChefVO chefVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
+con.setAutoCommit(false);
+			
+    		// 先新增顧客
+			String cols[] = {"CUST_ID"};
+			pstmt = con.prepareStatement(Insert_Stmt_With_Cust , cols);			
+			pstmt.setString(1, custVO.getCust_acc());
+			pstmt.setString(2, custVO.getCust_pwd());
+			pstmt.setString(3, custVO.getCust_name());
+			pstmt.setString(4, custVO.getCust_sex());
+			pstmt.setString(5, custVO.getCust_tel());
+			pstmt.setString(6, custVO.getCust_addr());
+			pstmt.setString(7, custVO.getCust_pid());
+			pstmt.setString(8, custVO.getCust_mail());
+			pstmt.setDate(9, custVO.getCust_brd());
+			pstmt.setDate(10, custVO.getCust_reg());
+			pstmt.setBytes(11, custVO.getCust_pic());
+			pstmt.setString(12, custVO.getCust_status());
+			pstmt.setString(13, custVO.getCust_niname());
+			
+			pstmt.executeUpdate();
+			
+			//掘取對應的自增主鍵值
+			
+			String next_cust_ID = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_cust_ID = rs.getString("CUST_ID");
+				System.out.println("自增主鍵值= " + next_cust_ID +"(剛新增成功的顧客編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+			// 再同時新增廚師
+			
 			pstmt = con.prepareStatement(Insert_Stmt);
 			
-			pstmt.setString(1, chefVO.getChef_ID());
+			pstmt.setString(1, next_cust_ID);
 			pstmt.setString(2, chefVO.getChef_area());
 			pstmt.setString(3, chefVO.getChef_resume());
 			
 			pstmt.executeUpdate();
+
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
 			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
@@ -250,7 +293,7 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 //		ChefVO chef01 = new ChefVO();
 //		chef01.setChef_ID("C00003");
 //		chef01.setChef_area("3");
-//		chef01.setChef_resume("這邊應該要輸入CLOB");
+//		chef01.setChef_resume("CLOB");
 //		dao.insert(chef01);
 //		
 //		//Update
