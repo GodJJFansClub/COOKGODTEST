@@ -340,14 +340,14 @@ public class CustServlet extends HttpServlet {
 				custVO.setCust_niname(cust_niname);
 
 				List<FoodSupVO> testList = new ArrayList<FoodSupVO>();
-				FoodSupVO foodSupXX = new FoodSupVO();
+				FoodSupVO foodSupVO = new FoodSupVO();
 				
-				foodSupXX.setFood_sup_name(food_sup_name);
-				foodSupXX.setFood_sup_tel(food_sup_tel);
-				foodSupXX.setFood_sup_status(food_sup_status);
-				foodSupXX.setFood_sup_resume(food_sup_resume);
+				foodSupVO.setFood_sup_name(food_sup_name);
+				foodSupVO.setFood_sup_tel(food_sup_tel);
+				foodSupVO.setFood_sup_status(food_sup_status);
+				foodSupVO.setFood_sup_resume(food_sup_resume);
 				
-				testList.add(foodSupXX);
+				testList.add(foodSupVO);
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)

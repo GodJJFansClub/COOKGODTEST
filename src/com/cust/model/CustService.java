@@ -84,33 +84,33 @@ public class CustService {
 			String cust_addr, String cust_pid, String cust_mail, Date cust_brd, Date cust_reg, byte[] cust_pic,
 			String cust_status, String cust_niname, String food_sup_name, String food_sup_tel, String food_sup_status,
 			String food_sup_resume) {
-		CustVO custVO1 = new CustVO();
-		custVO1.setCust_acc(cust_acc);
-		custVO1.setCust_pwd(cust_pwd);
-		custVO1.setCust_name(cust_name);
-		custVO1.setCust_sex(cust_sex);
-		custVO1.setCust_tel(cust_tel);
-		custVO1.setCust_addr(cust_addr);
-		custVO1.setCust_pid(cust_pid);
-		custVO1.setCust_mail(cust_mail);
-		custVO1.setCust_brd(cust_brd);
-		custVO1.setCust_reg(cust_reg);
-		custVO1.setCust_pic(cust_pic);
-		custVO1.setCust_status(cust_status);
-		custVO1.setCust_niname(cust_niname);
+		CustVO custVO = new CustVO();
+		custVO.setCust_acc(cust_acc);
+		custVO.setCust_pwd(cust_pwd);
+		custVO.setCust_name(cust_name);
+		custVO.setCust_sex(cust_sex);
+		custVO.setCust_tel(cust_tel);
+		custVO.setCust_addr(cust_addr);
+		custVO.setCust_pid(cust_pid);
+		custVO.setCust_mail(cust_mail);
+		custVO.setCust_brd(cust_brd);
+		custVO.setCust_reg(cust_reg);
+		custVO.setCust_pic(cust_pic);
+		custVO.setCust_status(cust_status);
+		custVO.setCust_niname(cust_niname);
 		
 		
 		List<FoodSupVO> testList = new ArrayList<FoodSupVO>();
-		FoodSupVO foodSupXX = new FoodSupVO();
+		FoodSupVO foodSupVO = new FoodSupVO();
 		
-		foodSupXX.setFood_sup_name(food_sup_name);
-		foodSupXX.setFood_sup_tel(food_sup_tel);
-		foodSupXX.setFood_sup_status(food_sup_status);
-		foodSupXX.setFood_sup_resume(food_sup_resume);
+		foodSupVO.setFood_sup_name(food_sup_name);
+		foodSupVO.setFood_sup_tel(food_sup_tel);
+		foodSupVO.setFood_sup_status(food_sup_status);
+		foodSupVO.setFood_sup_resume(food_sup_resume);
 		
-		testList.add(foodSupXX);
-		dao.insertWithFoodSup(custVO1, testList);
-		return custVO1;	
+		testList.add(foodSupVO);
+		dao.insertWithFoodSup(custVO, testList);
+		return custVO;	
 		//回傳有點小問題?
 		
 	}
