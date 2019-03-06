@@ -40,12 +40,17 @@ public class CookGodListener implements ServletContextListener{
 		mallOrStatusMap.put("o3", "送達");
 		mallOrStatusMap.put("o4", "訂單完成");
 		
+		Map<String, String> dishStatusMap = new HashMap<String, String>();
+		dishStatusMap.put("D0", "下架");
+		dishStatusMap.put("D1", "上架");
+		
 		
 		ServletContext servletContext = event.getServletContext();
 		servletContext.setAttribute("foodTypeMap", foodTypeMap);
 		servletContext.setAttribute("mallStatusMap", mallStatusMap);
 		servletContext.setAttribute("mallOrStatusMap", mallOrStatusMap);
 		servletContext.setAttribute("foodSupStatusMap", foodSupStatusMap);
+		servletContext.setAttribute("dishStatusMap", dishStatusMap);
 
 	}
 
