@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import com.cust.model.*;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
+import com.foodSup.model.FoodSupVO;
 
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -52,12 +53,12 @@ public class CustServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-		// 新增
+		// 新增顧客
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 
 				// 1.姓名
 				String cust_name = req.getParameter("cust_name");
@@ -189,11 +190,188 @@ public class CustServlet extends HttpServlet {
 				successView.forward(req, res);
 				
 				//除錯
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		//新增食材供應商
+		if ("insert2".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+
+				// 1.姓名
+				String cust_name = req.getParameter("cust_name");
+				String cust_nameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				if (cust_name == null || cust_name.trim().length() == 0) {
+					errorMsgs.add("顧客姓名: 請勿空白");
+				} else if (!cust_name.trim().matches(cust_nameReg)) {
+					errorMsgs.add(cust_name);
+				}
+				// "顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
+
+				// 2.密碼
+				String cust_pwd = req.getParameter("cust_pwd");
+				String cust_pwdReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
+				if (cust_pwd == null || cust_pwd.trim().length() == 0) {
+					errorMsgs.add("顧客密碼: 請勿空白");
+				} else if (!cust_pwd.trim().matches(cust_pwdReg)) {
+					errorMsgs.add(cust_pwd);
+				}
+
+				// "顧客密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
+
+				// 3.帳號
+				String cust_acc = req.getParameter("cust_acc");
+				String cust_accReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
+				if (cust_acc == null || cust_acc.trim().length() == 0) {
+					errorMsgs.add("顧客帳號: 請勿空白");
+				} else if (!cust_acc.trim().matches(cust_accReg)) {
+					errorMsgs.add("顧客帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
+				}
+
+				// 4.性別
+				String cust_sex = req.getParameter("cust_sex");
+				if (cust_sex == null || cust_sex.length() == 0) {
+					errorMsgs.add("性別請勿空白");
+				}
+
+				// 5.電話
+				String cust_tel =req.getParameter("cust_tel").trim();
+				String cust_telReg = "^[(0-9)]{10,11}$";
+				if (cust_tel == null || cust_tel.trim().length() == 0) {
+					errorMsgs.add("電話號碼請勿空白");
+				} else if(!cust_tel.trim().matches(cust_telReg)) {
+					errorMsgs.add("電話號碼: 只能是數字");
+	            }	
+
+				// 6.地址
+				String cust_addr =req.getParameter("cust_addr").trim();
+				if (cust_addr == null || cust_addr.trim().length() == 0) {
+					errorMsgs.add("地址請勿空白");
+				}
+
+				// 7.身分證字號
+				String cust_pid =req.getParameter("cust_pid").trim();
+				if (cust_pid == null || cust_pid.trim().length() == 0) {
+					errorMsgs.add("身分證字號請勿空白");
+				}
+
+				// 8.e-mail
+				String cust_mail =req.getParameter("cust_mail").trim();
+				if (cust_mail == null || cust_mail.trim().length() == 0) {
+					errorMsgs.add("e-mail請勿空白");
+				}
+
+				// 9.生日
+				java.sql.Date cust_brd = null;
+				try {
+					cust_brd = java.sql.Date.valueOf(req.getParameter("cust_brd").trim());
+				} catch (IllegalArgumentException e) {
+					cust_brd = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請輸入日期!");
+				}
+
+				// 10.註冊日
+				// 註冊日期
+				SimpleDateFormat setDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				
+				String xx = setDateFormat.format(Calendar.getInstance().getTime());
+				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
+
+				// 11.狀態
+				String cust_status = "a0";
+
+				// 12.暱稱
+				String cust_niname =req.getParameter("cust_niname").trim();
+				if (cust_niname == null || cust_niname.trim().length() == 0) {
+					errorMsgs.add("暱稱請勿空白");
+				}
+
+				// 13.圖片
+//				byte[] cust_pic = null;
+				Part part= req.getPart("cust_pic");
+				InputStream in = part.getInputStream();
+				byte[] cust_pic = new byte[in.available()];
+				in.read(cust_pic);
+				in.close();
+				
+				//14.食材供應商名稱
+				String food_sup_name = req.getParameter("cust_niname");
+				String food_sup_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,30}$";
+				if (food_sup_name == null || food_sup_name.trim().length() == 0) {
+					errorMsgs.add("食材供應商名稱: 請勿空白");
+				} else if(!food_sup_name.trim().matches(food_sup_nameReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("食材供應商名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到30之間");
+	            }
+				
+				//15.食材供應商電話
+				String food_sup_tel = req.getParameter("cust_tel").trim();
+				String food_sup_telReg = "^[(0-9)]{10,11}$";
+				if (food_sup_tel == null || food_sup_tel.trim().length() == 0) {
+					errorMsgs.add("電話號碼請勿空白");
+				} else if(!food_sup_tel.trim().matches(food_sup_telReg)) {
+					errorMsgs.add("電話號碼: 只能是數字");
+	            }	
+				
+				//16.食材供應商狀態
+				String food_sup_status ="s0";
+				
+				//17.食材供應商簡歷
+				String food_sup_resume = req.getParameter("food_sup_resume");
+
+				// set
+				CustVO custVO = new CustVO();
+				custVO.setCust_acc(cust_acc);
+				custVO.setCust_name(cust_name);
+				custVO.setCust_pwd(cust_pwd);
+				custVO.setCust_sex(cust_sex);
+				custVO.setCust_tel(cust_tel);
+				custVO.setCust_addr(cust_addr);
+				custVO.setCust_pid(cust_pid);
+				custVO.setCust_mail(cust_mail);
+				custVO.setCust_brd(cust_brd);
+				custVO.setCust_reg(cust_reg);
+				custVO.setCust_pic(cust_pic);
+				custVO.setCust_status(cust_status);
+				custVO.setCust_niname(cust_niname);
+
+				List<FoodSupVO> testList = new ArrayList<FoodSupVO>();
+				FoodSupVO foodSupXX = new FoodSupVO();
+				
+				foodSupXX.setFood_sup_name(food_sup_name);
+				foodSupXX.setFood_sup_tel(food_sup_tel);
+				foodSupXX.setFood_sup_status(food_sup_status);
+				foodSupXX.setFood_sup_resume(food_sup_resume);
+				
+				testList.add(foodSupXX);
+				// 如果以上格式有錯
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+
+					failureView.forward(req, res);
+					return;
+				}
+
+				//將資料加入資料庫
+				CustService custSvc = new CustService();
+				
+				custVO = custSvc.addFoodSup(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
+						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname,food_sup_name,food_sup_tel,food_sup_status,food_sup_resume);
+				String url = "/front-end/cust/listAllCust.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				//除錯
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 		// 查詢-單一
