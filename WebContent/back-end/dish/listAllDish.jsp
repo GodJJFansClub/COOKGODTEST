@@ -82,7 +82,7 @@
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
-	<%@ include file="/back-end/page/page1.file" %> 
+	<%@ include file="page1.file" %> 
 	<c:forEach var="dishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr ${(dishVO.dish_ID==param.dish_ID) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
 		<tr>
@@ -108,7 +108,7 @@
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="/back-end/page/page2.file" %>
+<%@ include file="page2.file" %>
 
 </body>
 </html>

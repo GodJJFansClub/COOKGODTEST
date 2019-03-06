@@ -68,10 +68,10 @@
 			<li style="color:red">${message}</li>
 		
 		</c:forEach>
-			<ul>
+			
   <li><a href='addMenuDish.jsp'>Add</a> a new Dish.</li>
 </ul>
-	</ul>
+	
 </c:if>
 			
 <table>
@@ -81,7 +81,7 @@
 		<th>菜色編號</th>
 		<th>刪除</th>
 	</tr>
-	<%@ include file="/back-end/page/page1.file" %> 
+	<%@ include file="page1.file" %> 
 	<c:forEach var="menuDishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
@@ -98,9 +98,9 @@
 			</td>
 		</tr>
 	</c:forEach>
-	<h3><a href='addMenuDish.jsp'>新增</a> 套餐菜色</h3>
+	
 </table>
-<%@ include file="/back-end/page/page2.file" %>
+<%@ include file="page2.file" %>
 
 </body>
 </html>
