@@ -29,7 +29,7 @@ public class LoginBackEndFilter implements Filter {
 		EmpVO empVO = (EmpVO) session.getAttribute("empVO");
 		if (empVO == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "back-end/loginBackEnd.html");
+			res.sendRedirect(req.getContextPath() + "/back-end/loginBackEnd.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

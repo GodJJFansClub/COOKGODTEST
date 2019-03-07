@@ -1,4 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cust.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=Big5">
@@ -6,15 +9,15 @@
 </head>
 <body>
 <center>
-	<form action="LoginBackEnd" method="post">
+	<form action="<%=request.getContextPath()%>/front-end/login.do" method="post">
 		
 			<table border=1>
 				<tr>
 					<td colspan=2>
 						<p align=center>
-							¿é¤J<b>(´ú¸Õµn¤J)</b>:<br> 
-							±b¸¹:<b>tomcat</b><br>
-							±K½X:<b>tomcat</b><br>
+							è¼¸å…¥<b>(æ¸¬è©¦ç™»å…¥)</b>:<br> 
+							å¸³è™Ÿ:<b>tomcat</b><br>
+							å¯†ç¢¼:<b>tomcat</b><br>
 					</td>
 				</tr>
 

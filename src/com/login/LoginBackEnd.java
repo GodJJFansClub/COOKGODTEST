@@ -9,7 +9,7 @@ import com.emp.model.EmpVO;
 
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/LoginBackEnd")
+
 public class LoginBackEnd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -50,7 +50,7 @@ public class LoginBackEnd extends HttpServlet {
 		if (!allowUser(account, password, session)) { // 【帳號 , 密碼無效時】
 			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
 			out.println("<BODY>你的帳號 , 密碼無效!<BR>");
-			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/loginBackEnd.html>重新登入</A>");
+			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/back-end/loginBackEnd.jsp>重新登入</A>");
 			out.println("</BODY></HTML>");
 		} else { // 【帳號 , 密碼有效時, 才做以下工作】
 
@@ -64,7 +64,7 @@ public class LoginBackEnd extends HttpServlet {
 			} catch (Exception ignored) {
 			}
 
-			res.sendRedirect(req.getContextPath() + "/login_success.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
+			res.sendRedirect(req.getContextPath() + "/back-end/login_success.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
 		}
 	}
 }
