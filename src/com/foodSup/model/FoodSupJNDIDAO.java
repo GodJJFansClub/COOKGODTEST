@@ -96,7 +96,7 @@ public class FoodSupJNDIDAO implements FoodSupDAO_interface {
 				try {
 					// 3●設定於當有exception發生時之catch區塊內
 					System.err.print("Transaction is being ");
-					System.err.println("rolled back-由-emp");
+					System.err.println("rolled back-由-FoodSup");
 					con.rollback();
 				} catch (SQLException excep) {
 					throw new RuntimeException("rollback error occured. "

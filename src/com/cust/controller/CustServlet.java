@@ -351,7 +351,7 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/FoodSup.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -369,7 +369,7 @@ public class CustServlet extends HttpServlet {
 				//除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addFoodSup.jsp");
 				failureView.forward(req, res);
 			}
 		}
