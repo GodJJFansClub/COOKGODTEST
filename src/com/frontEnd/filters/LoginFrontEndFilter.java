@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cust.model.CustVO;
+
 public class LoginFrontEndFilter implements Filter {
 
 	private FilterConfig config;
@@ -32,8 +34,10 @@ public class LoginFrontEndFilter implements Filter {
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("account");
-		if (account == null) {
+		
+		CustVO custVO = (CustVO) session.getAttribute("custVO");
+		System.out.println(custVO);
+		if (custVO == null) {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/loginFrontEnd.html");
 			return;

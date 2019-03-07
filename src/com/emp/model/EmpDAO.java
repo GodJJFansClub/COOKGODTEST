@@ -25,7 +25,7 @@ public class EmpDAO implements EmpDAO_interface {
 		}
 	}
 	private static final String INSERT_STMT = "Insert into EMP (EMP_ID,EMP_ACC,EMP_PWD,EMP_NAME,EMP_PIC) VALUES ('E'||LPAD((EMP_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT * FROM EMP";
+	private static final String GET_ALL_STMT = "SELECT * FROM EMP order by EMP_ID";
 	private static final String GET_ONE_STMT = "SELECT * FROM EMP where EMP_ID = ?";
 	private static final String GET_ONE_STMT_EMP_ACC = "SELECT * FROM EMP where EMP_ACC = ?";
 	private static final String DELETE = "DELETE FROM EMP where EMP_ID=? ";

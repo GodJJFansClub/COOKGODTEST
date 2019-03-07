@@ -4,6 +4,8 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.emp.model.EmpVO;
+
 public class LoginBackEndFilter implements Filter {
 
 	private FilterConfig config;
@@ -24,8 +26,8 @@ public class LoginBackEndFilter implements Filter {
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("account");
-		if (account == null) {
+		EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+		if (empVO == null) {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/loginBackEnd.html");
 			return;

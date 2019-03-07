@@ -133,7 +133,7 @@
                                 <div class="d-flex align-items-center">
                                     <i class="font-20 mr-1"></i>
                                     <div class="ml-1 d-none d-sm-block">
-                                        <span>歡迎:<font color=red> ${account} </font>您好</span>
+                                        <span>歡迎:<font color=red> ${empVO.emp_name} </font>您好</span>
                                     </div>
                                 </div>
                             </a>

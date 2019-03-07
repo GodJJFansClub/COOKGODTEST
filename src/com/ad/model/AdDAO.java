@@ -24,7 +24,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String INSERT_STMT =
 			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),4,'0'), ?, ?, ?, ?, ?, ? ,?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT * FROM AD ORDER BY AD_ID";
+			"SELECT * FROM AD ORDER BY AD_ID order by AD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT * FROM AD where AD_ID = ?";
 	private static final String DELETE =

@@ -45,7 +45,7 @@ public class LoginFrontEnd extends HttpServlet {
 		String account = req.getParameter("account");
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession();
-		session.setAttribute("account", account); // *工作1: 才在session內做已經登入過的標識
+		
 		session.setAttribute("custVO", custVO);
 
 		// 【檢查該帳號 , 密碼是否有效】
