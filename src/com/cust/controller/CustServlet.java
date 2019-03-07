@@ -11,12 +11,10 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.cust.model.*;
-import com.emp.model.EmpService;
-import com.emp.model.EmpVO;
+
 import com.foodSup.model.FoodSupVO;
 
 
@@ -351,7 +349,7 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/FoodSup.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addFoodSup.jsp");
 
 					failureView.forward(req, res);
 					return;
