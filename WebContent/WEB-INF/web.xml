@@ -60,6 +60,15 @@
     <url-pattern>/back-end/login.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.login.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/back-endTemplate/logout.do</url-pattern>
+  </servlet-mapping>
+  
   <listener>
     <listener-class>com.cookGodPub.CookGodListener</listener-class>
   </listener>

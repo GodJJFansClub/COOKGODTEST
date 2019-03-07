@@ -9,20 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/Logout")
 public class Logout extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+		HttpSession session = req.getSession(false);
 
-        HttpSession session = request.getSession(false);
+		if (session != null) {
 
-        if(session!=null){
+			session.invalidate();
+			session = null;
+		}
+		try {
+			String location = (String) session.getAttribute("location");
+			if (location != null) {
+				session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
+				res.sendRedirect(location);
+				return;
+			}
+		} catch (Exception ignored) {
+		}
 
-            session.invalidate();
-            session=null;
-        }
-        request.getRequestDispatcher("LoginBackEnd.jsp").forward(request,response);
-    }
+		res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3:
+																					// (-->如無來源網頁:則重導至login_success.jsp)
+	}
+
 }

@@ -36,7 +36,7 @@ public class LoginFrontEndFilter implements Filter {
 		// 【從 session 判斷此user是否登入過】
 		
 		CustVO custVO = (CustVO) session.getAttribute("custVO");
-		System.out.println(custVO);
+	
 		if (custVO == null) {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/front-end/loginFrontEnd.jsp");
