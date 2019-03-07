@@ -1,6 +1,9 @@
 package com.chefOrder.model;
 
 import java.util.*;
+
+import com.chefOdDetail.model.ChefOdDetailVO;
+
 import java.sql.*;
 
 public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
@@ -333,4 +336,17 @@ public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 //		}
 
 	}
+
+	@Override
+	public void insertChefOrderDetail(ChefOrderVO chefOrderVO, List<ChefOdDetailVO> list) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ChefOrderVO>  findByCuefID(String chef_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

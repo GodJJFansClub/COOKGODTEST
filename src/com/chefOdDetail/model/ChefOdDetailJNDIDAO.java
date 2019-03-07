@@ -8,7 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
+public class ChefOdDetailJNDIDAO implements ChefOdDetailDAO_interface {
 
 	private static DataSource ds = null;
 	static {
@@ -247,99 +247,14 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 	@Override
 	public void inser2(ChefOdDetailVO chefOdDetailVO, Connection con) {
-
-		PreparedStatement pstmt = null;
-
-		try {
-
-
-			pstmt = con.prepareStatement(INSERT_STMT);
-
-			pstmt.setString(1, chefOdDetailVO.getChef_or_ID());
-			pstmt.setString(2, chefOdDetailVO.getFood_sup_ID());
-			pstmt.setString(3, chefOdDetailVO.getFood_ID());
-			pstmt.setInt(4, chefOdDetailVO.getChef_od_qty());
-			pstmt.setInt(5, chefOdDetailVO.getChef_od_stotal());
-
-			pstmt.executeUpdate();
-
-		} catch (SQLException se) {
-			if (con != null) {
-				try {
-					System.err.print("Transaction is being ");
-					System.err.println("rolled back-由-ChefOdDetail");
-					con.rollback();
-				} catch (SQLException excep) {
-					throw new RuntimeException("rollback error occured. " + excep.getMessage());
-				}
-			}
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-
-		}
-
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public List<ChefOdDetailVO> getAllChefOrID(String chef_or_ID) {
-		List<ChefOdDetailVO> list = new ArrayList<ChefOdDetailVO>();
-		ChefOdDetailVO chefOdDetailVO = null;
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-
-		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-			pstmt.setString(1, chef_or_ID);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				chefOdDetailVO = new ChefOdDetailVO();
-				chefOdDetailVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
-				chefOdDetailVO.setFood_sup_ID(rs.getString("FOOD_SUP_ID"));
-				chefOdDetailVO.setFood_ID(rs.getString("FOOD_ID"));
-				chefOdDetailVO.setChef_od_qty(rs.getInt("CHEF_OD_QTY"));
-				chefOdDetailVO.setChef_od_stotal(rs.getInt("CHEF_OD_STOTAL"));
-				list.add(chefOdDetailVO);
-			}
-
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
