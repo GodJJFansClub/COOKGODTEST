@@ -64,9 +64,10 @@
 		<th>照片 </th>
 		<th>介紹</th>
 		<th>出貨日期</th>
-		<th>節慶主題料理狀態</th>
+		<th>訂購數量</th>
+<!--  		<th>節慶主題料理狀態</th>
 		<th>種類</th>
-		<th>主廚編號</th>
+		<th>主廚編號</th>  -->
 		
 	</tr>
 	<tr>
@@ -78,11 +79,21 @@
 		<td><%=festMenuVO.getFest_m_pic()%></td>
 		<td><%=festMenuVO.getFest_m_resume()%></td>
 		<td><%=festMenuVO.getFest_m_send()%></td>
-		<td><%=festMenuVO.getFest_m_kind()%></td>
+		<td><%=festMenuVO.getFest_m_price() %>
+<!-- 	<td><%=festMenuVO.getFest_m_kind()%></td>
 		<td><%=festMenuVO.getFest_m_resume()%></td>
-		<td><%=festMenuVO.getFest_m_send()%></td>
+		<td><%=festMenuVO.getFest_m_send()%></td>    -->
+		<td>
+		   <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/festMenu/festMenu.do" style="margin-bottom:0px;">
+			   <input type="text" name="Fest_m_qty" size="3" value="1"><br>
+			   <input type="hidden" name="action" value="ADD">
+			   <input type="hidden" name="fest_m_ID" value="{festMenuVO.fest_m_ID}">
+			   <input type="submit" name="submit" value="放入購物車"></td>
+		   
+		   </FORM>
+		</td>	
 	</tr>
 </table>
-
+     <p>
 </body>
 </html>

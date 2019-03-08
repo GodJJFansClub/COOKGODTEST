@@ -70,7 +70,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="festOrderDetail.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do" name="form1">
 <table>
   
     <tr>

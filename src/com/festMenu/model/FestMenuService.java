@@ -3,7 +3,6 @@ package com.festMenu.model;
 import java.sql.Date;
 import java.util.List;
 
-
 public class FestMenuService {
 
 	private FestMenu_Interface dao;
@@ -14,7 +13,7 @@ public class FestMenuService {
 	}
 
 	public FestMenuVO addFestMenu(String fest_m_name, Integer fest_m_qty, Date fest_m_start, Date fest_m_end,
-			byte[] fest_m_pic,String fest_m_resume, Date fest_m_send, String fest_m_status, String fest_m_kind,
+			byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status, String fest_m_kind,
 			String chef_ID) {
 		//
 		FestMenuVO festMenuVO = new FestMenuVO();
@@ -35,14 +34,14 @@ public class FestMenuService {
 
 	}
 
-	public FestMenuVO updateFestMenu(String fest_m_ID,String fest_m_name, Integer fest_m_qty, Date fest_m_start,
-			Date fest_m_end,byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status, 
-			String fest_m_kind,String chef_ID) {
+	public FestMenuVO updateFestMenu(String fest_m_ID, String fest_m_name, Integer fest_m_qty, Date fest_m_start,
+			Date fest_m_end, byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status,
+			String fest_m_kind, String chef_ID) {
 
 		FestMenuVO festMenuVO = new FestMenuVO();
 
+		festMenuVO.setFest_m_ID(fest_m_ID);
 		festMenuVO.setFest_m_name(fest_m_name);
-
 		festMenuVO.setFest_m_qty(fest_m_qty);
 		festMenuVO.setFest_m_start(fest_m_start);
 		festMenuVO.setFest_m_end(fest_m_end);
@@ -53,7 +52,7 @@ public class FestMenuService {
 		festMenuVO.setFest_m_kind(fest_m_kind);
 		festMenuVO.setChef_ID(chef_ID);
 		dao.update(festMenuVO);
-		
+
 		return festMenuVO;
 	}
 
@@ -67,5 +66,18 @@ public class FestMenuService {
 
 	public List<FestMenuVO> getAll() {
 		return dao.getAll();
+	}
+
+	public FestMenuVO update2_FestMenu(String fest_m_ID,Integer final_qty) {
+
+		FestMenuVO festMenuVO = new FestMenuVO();
+
+		festMenuVO.setFest_m_ID(fest_m_ID);
+		festMenuVO.setFest_m_qty(final_qty);
+
+		dao.update(festMenuVO);
+
+		return festMenuVO;
+
 	}
 }

@@ -20,18 +20,13 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 		}
 	}
 
-	private static final String INSERT_STMT = 
-			"INSERT INTO FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_PIC,FEST_M_RESUME,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,CHEF_ID) VALUES " 
-	        + "(FEST_MENU_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
-	private static final String GET_ALL_STMT = 
-			"SELECT * FROM FEST_MENU";
-	private static final String GET_ONE_STMT = 
-			"SELECT * FROM FEST_MENU WHERE FEST_M_ID = ?";
-	private static final String DELETE = 
-			"DELETE FROM FEST_MENU WHERE FEST_M_ID = ?";
-	private static final String UPDATE = 
-			"UPDATE FEST_MENU SET FEST_M_NAME = ?,FEST_M_QTY = ?,FEST_M_START = ?,FEST_M_END = ?,FEST_M_PIC = ? ,FEST_M_RESUME= ?,"
-					+ " FEST_M_SEND = ?,FEST_M_STATUS = ?, FEST_M_KIND = ?,CHEF_ID = ? WHERE FEST_M_ID = ? ";
+	private static final String INSERT_STMT = "INSERT INTO FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_PIC,FEST_M_RESUME,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,CHEF_ID) VALUES "
+			+ "(FEST_MENU_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+	private static final String GET_ALL_STMT = "SELECT * FROM FEST_MENU";
+	private static final String GET_ONE_STMT = "SELECT * FROM FEST_MENU WHERE FEST_M_ID = ?";
+	private static final String DELETE = "DELETE FROM FEST_MENU WHERE FEST_M_ID = ?";
+	private static final String UPDATE = "UPDATE FEST_MENU SET FEST_M_NAME = ?,FEST_M_QTY = ?,FEST_M_START = ?,FEST_M_END = ?,FEST_M_PIC = ? ,FEST_M_RESUME= ?,"
+			+ " FEST_M_SEND = ?,FEST_M_STATUS = ?, FEST_M_KIND = ?,CHEF_ID = ? WHERE FEST_M_ID = ? ";
 
 	@Override
 	public void insert(FestMenuVO festMenuVO) {
@@ -46,21 +41,20 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 
 			pstmt.setString(1, festMenuVO.getFest_m_name());
 			pstmt.setInt(2, festMenuVO.getFest_m_qty());
-		    pstmt.setDate(3, festMenuVO.getFest_m_start());
-		    pstmt.setDate(4, festMenuVO.getFest_m_send());
-		    pstmt.setBytes(5, festMenuVO.getFest_m_pic());
-		    pstmt.setString(6, festMenuVO.getFest_m_resume());
-		    pstmt.setDate(7, festMenuVO.getFest_m_end());
-		    pstmt.setString(8, festMenuVO.getFest_m_status());
-		    pstmt.setString(9,festMenuVO.getFest_m_kind());
-		    pstmt.setString(10, festMenuVO.getChef_ID());
+			pstmt.setDate(3, festMenuVO.getFest_m_start());
+			pstmt.setDate(4, festMenuVO.getFest_m_send());
+			pstmt.setBytes(5, festMenuVO.getFest_m_pic());
+			pstmt.setString(6, festMenuVO.getFest_m_resume());
+			pstmt.setDate(7, festMenuVO.getFest_m_end());
+			pstmt.setString(8, festMenuVO.getFest_m_status());
+			pstmt.setString(9, festMenuVO.getFest_m_kind());
+			pstmt.setString(10, festMenuVO.getChef_ID());
 
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -92,25 +86,23 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			
 			pstmt.setString(1, festMenuVO.getFest_m_name());
 			pstmt.setInt(2, festMenuVO.getFest_m_qty());
-		    pstmt.setDate(3, festMenuVO.getFest_m_start());
-		    pstmt.setDate(4, festMenuVO.getFest_m_send());
-		    pstmt.setBytes(5, festMenuVO.getFest_m_pic());
-		    pstmt.setString(6, festMenuVO.getFest_m_resume());
-		    pstmt.setDate(7, festMenuVO.getFest_m_end());
-		    pstmt.setString(8, festMenuVO.getFest_m_status());
-		    pstmt.setString(9,festMenuVO.getFest_m_kind());
-		    pstmt.setString(10, festMenuVO.getChef_ID());
-		    pstmt.setString(11, festMenuVO.getFest_m_ID());
+			pstmt.setDate(3, festMenuVO.getFest_m_start());
+			pstmt.setDate(4, festMenuVO.getFest_m_send());
+			pstmt.setBytes(5, festMenuVO.getFest_m_pic());
+			pstmt.setString(6, festMenuVO.getFest_m_resume());
+			pstmt.setDate(7, festMenuVO.getFest_m_end());
+			pstmt.setString(8, festMenuVO.getFest_m_status());
+			pstmt.setString(9, festMenuVO.getFest_m_kind());
+			pstmt.setString(10, festMenuVO.getChef_ID());
+			pstmt.setString(11, festMenuVO.getFest_m_ID());
 
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -130,6 +122,7 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 		}
 
 	}
+
 	@Override
 	public void delete(String fest_m_ID) {
 
@@ -147,8 +140,7 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -187,7 +179,7 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-			
+
 				festMenuVO = new FestMenuVO();
 				festMenuVO.setFest_m_ID(rs.getString(1));
 				festMenuVO.setFest_m_name(rs.getString(2));
@@ -204,8 +196,7 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -251,7 +242,7 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 			while (rs.next()) {
 
 				festMenuVO = new FestMenuVO();
-				
+
 				festMenuVO.setFest_m_ID(rs.getString(1));
 				festMenuVO.setFest_m_name(rs.getString(2));
 				festMenuVO.setFest_m_qty(rs.getInt(3));
@@ -268,8 +259,7 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -296,4 +286,11 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 		}
 		return list;
 	}
+
+	@Override
+	public void update2_FestMenu(String fest_m_ID, Integer final_qty) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
