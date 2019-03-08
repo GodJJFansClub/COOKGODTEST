@@ -1,21 +1,21 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.menu.model.*" %>
 
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <title>Mode II ½d¨Òµ{¦¡ - Checkout.jsp</title>
+ <title>Mode II ç¯„ä¾‹ç¨‹å¼ - Checkout.jsp</title>
 </head>
 <body bgcolor="#FFFFFF">
-<img src="images/tomcat.gif"> <font size="+3">ºô¸ô®Ñ©± - µ²±b </font>
+<img src="images/tomcat.gif"> <font size="+3">ç¶²è·¯æ›¸åº— - çµå¸³ </font>
 <hr><p>
 
 <table border="1">
 	<tr bgcolor="#999999">
-		<th width="200">¦W</th>
-		<th width="100">»ù®æ</th>
-		<th width="100">¼Æ¶q</th>
+		<th width="200">å</th>
+		<th width="100">åƒ¹æ ¼</th>
+		<th width="100">æ•¸é‡</th>
 	</tr>
 	
 	<%
@@ -38,12 +38,12 @@
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><div align="center"><font color="red"><b>Á`ª÷ÃB¡G</b></font></div></td>
+		<td><div align="center"><font color="red"><b>ç¸½é‡‘é¡ï¼š</b></font></div></td>
 		<td></td>
 		<td> <font color="red"><b>$<%=amount%></b></font> </td>
 		<td></td>
 	</tr>
 </table>
-<p><a href="EShop.jsp">¬O§_Ä~ÄòÁÊª«</a>
+<p><a href="EShop.jsp">æ˜¯å¦ç¹¼çºŒè³¼ç‰©</a>
 </body>
 </html>
