@@ -213,4 +213,14 @@
   	<servlet-name>MallServlet</servlet-name>
   	<url-pattern>/mall/mall.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>BroadcastServlet</servlet-name>
+  	<servlet-class>com.broadcast.controller.BroadcastServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>BroadcastServlet</servlet-name>
+  	<url-pattern>/broadcast/broadcast.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
