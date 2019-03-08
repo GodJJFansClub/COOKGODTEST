@@ -204,4 +204,13 @@
     <servlet-name>FavFdSupServlet</servlet-name>
     <url-pattern>/favFdSup/favFdSup.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>MallServlet</servlet-name>
+  	<servlet-class>com.mall.controller.MallServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MallServlet</servlet-name>
+  	<url-pattern>/mall/mall.do</url-pattern>
+  </servlet-mapping>
 </web-app>
