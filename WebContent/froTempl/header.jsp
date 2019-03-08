@@ -3,10 +3,24 @@
 <jsp:useBean id="custVO" scope="session" class="com.cust.model.CustVO"/>
 <html>
 <head>
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/froTempl/templ/style.css">
+	<!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+
 </head>
-<body>
+<body onload="connect();" onunload="disconnect();">
+	<!-- jQuery-2.2.4 js -->
+    <script src="<%=request.getContextPath()%>/froTempl/templ/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="<%=request.getContextPath()%>/froTempl/templ/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="<%=request.getContextPath()%>/froTempl/templ/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="<%=request.getContextPath()%>/froTempl/templ/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="<%=request.getContextPath()%>/froTempl/templ/js/active.js"></script>
 	<!-- ##### Header Area Start ##### -->
 	<header class="header-area">
 	    <!-- Navbar Area -->
@@ -17,7 +31,7 @@
 	                <nav class="classy-navbar justify-content-between" id="pixelNav">
 	
 	                    <!-- Nav brand -->
-	                    <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+	                    <a href="index.html" class="nav-brand">
 	
 	                    <!-- Navbar Toggler -->
 	                    <div class="classy-navbar-toggler">
@@ -111,13 +125,17 @@
 	        </div>
 	    </div>
 	</header>
-	<div class="toast" role="alert" aria-live="assertive"
-		aria-atomic="true">
-		<div  id ="broadcastRcver" class="toast-header">
-			
-			
-		</div>
-		<div class="toast-body"></div>
+	<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+	  <div class="toast-header">
+	    <img src="..." class="rounded mr-2" alt="...">
+	    <strong class="mr-auto">Bootstrap</strong>
+	    <small>11 mins ago</small>
+	    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+	  </div>
+	  <div id="broadcastRcver" class="toast-body">
+	  </div>
 	</div>
 
 	<div id="statusOutput"></div>
@@ -143,6 +161,7 @@
 	
 			webSocket.onopen = function(event) {
 				updateStatus("WebSocket 成功連線");
+				
 			};
 	
 			//	隨然我是在連線建立好時傳送訊息(ServerWebSocket), 依舊會觸發這個onmessage
@@ -150,7 +169,7 @@
 			webSocket.onmessage = function(event) {
 				var broadcastRcver = document.getElementById("broadcastRcver");
 				broadcastRcver.innerText = broadcastRcver.innerText + event.data;
-				
+				$('#element').toast('show');
 			};
 	
 			webSocket.onclose = function(event) {

@@ -12,12 +12,27 @@
     <!-- Custom CSS -->
     <link href="<%=request.getContextPath()%>/back-endTemplate/dist/css/style.min.css" rel="stylesheet">
 </head>
-<body onload="connect();" onunload="disconnect();">
+<body >
+	
+	
+	<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <img src="..." class="rounded mr-2" alt="...">
+    <strong class="mr-auto" id="broadcastRcver">Bootstrap</strong>
+    <small>11 mins ago</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Hello, world! This is a toast message.
+  </div>
+</div>
+	
 	<div id="statusOutput">
 		
 	</div>
-	<div id="broadcastRcver">
-	</div>
+	
 	
 </body>
 	<script>
@@ -40,9 +55,11 @@
 			};
 			
 			//	隨然我是在連線建立好時傳送訊息(ServerWebSocket), 依舊會觸發這個onmessage
+			
 			webSocket.onmessage = function(event) {
 				var broadcastRcver = document.getElementById("broadcastRcver");
 				broadcastRcver.innerText = broadcastRcver.innerText + event.data;
+				$('#element').toast('show');
 			};
 
 			webSocket.onclose = function(event) {

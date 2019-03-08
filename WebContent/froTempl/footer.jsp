@@ -80,18 +80,6 @@
             </div>
         </div>
     </footer>
-    <!-- ##### Footer Area Start ##### -->
-
-    <!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="<%=request.getContextPath()%>/froTempl/templ/js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="<%=request.getContextPath()%>/froTempl/templ/js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="<%=request.getContextPath()%>/froTempl/templ/js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="<%=request.getContextPath()%>/froTempl/templ/js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="<%=request.getContextPath()%>/froTempl/templ/js/active.js"></script>
+    
 </body>
 </html>

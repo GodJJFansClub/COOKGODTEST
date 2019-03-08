@@ -148,29 +148,6 @@
 								</div>
 							</div>
 
-							<li class="nav-item"><a
-								class="nav-link waves-effect waves-dark">
-									<div class="d-flex align-items-center">
-										<i class="font-20 mr-1"></i>
-										<div class="ml-1 d-none d-sm-block">
-											<button type="button" class="btn btn-light">
-												Notifications <span class="badge badge-warning">4</span>
-											</button>
-										</div>
-									</div>
-							</a></li>
-							<div class="dropdown">
-								<a class="btn btn-secondary dropdown-toggle" href="#"
-									role="button" id="dropdownMenuLink" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> Dropdown link </a>
-
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<a class="dropdown-item" href="#">Action</a> <a
-										class="dropdown-item" href="#">Another action</a> <a
-										class="dropdown-item" href="#">Something else here</a>
-								</div>
-							</div>
-					</a></li>
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark">
 							<div class="d-flex align-items-center">
