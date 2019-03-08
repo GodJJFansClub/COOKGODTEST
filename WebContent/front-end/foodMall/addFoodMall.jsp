@@ -42,12 +42,6 @@
 	</style>
 </head>
 <body>
-	<table id="table-1">
-		<tr><td>
-			 <h3>新增商品 - addFoodMall.jsp</h3></td><td>
-			 <h4><a href="<%=request.getContextPath()%>/front-end/foodSupManaMall/select_page.jsp">回首頁</a></h4>
-		</td></tr>
-	</table>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red">請修正以下錯誤:</font>
 		<ul>
@@ -56,7 +50,7 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	<form method="post" action="<%=request.getContextPath()%>/foodSupManaMall/foodSupManaMall.do" name="form1" enctype="multipart/form-data">
+	<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do" name="form1" enctype="multipart/form-data">
 		<table>
 		<tr>
 			<td>標題:</td>

@@ -63,7 +63,8 @@
 							<td>
 								<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
 									<input type="submit" value="修改">
-									<input type="hidden" value="food_ID" value="${foodMallVO.food_ID}">
+									<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
+									<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 									<input type="hidden" name="action" value="getOne_For_Update">
 								</form>
 							</td>
