@@ -39,9 +39,6 @@ public class CustServlet extends HttpServlet {
 			errorMsgs.add("a");
 			
 		}
-		
-		
-		
 	}
 	
 
