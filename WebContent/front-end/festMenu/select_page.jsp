@@ -48,13 +48,13 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllFestMenu.jsp'>List</a> all Reports.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/front-end/festMenu/listAllFestMenu.jsp'>List</a> all Reports.  <br><br></li>
   
   
   <li>
     <FORM METHOD="post" ACTION="festMenu.do" >
         <b>請輸入訂單編號 :</b>
-        <input type="text" name="fest_or_ID">
+        <input type="text" name="fest_m_ID">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
@@ -63,7 +63,7 @@
   <jsp:useBean id="festMenuSvc" scope="page" class="com.festMenu.model.FestMenuService" />
    
   <li>
-     <FORM METHOD="post" ACTION="festMenu.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" >
        <b>選擇訂單編號 ::</b>
        <select size="1" name="fest_m_ID">
          <%-- <c:forEach var="reportVO" items="${reportSvc.all}"> --%>
@@ -77,7 +77,7 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="festMenu.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" >
        <b>請選擇訂單狀態:</b>
        <select size="1" name="fest_m_ID">
          <c:forEach var="festMenuVO" items="${festMenuSvc.all}" > 

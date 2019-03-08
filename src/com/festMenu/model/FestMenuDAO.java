@@ -189,7 +189,7 @@ public class FestMenuDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_qty(rs.getInt(3));
 				festMenuVO.setFest_m_start(rs.getDate(4));
 				festMenuVO.setFest_m_end(rs.getDate(5));
-//				festMenuVO.setFest_m_pic(rs.getBytes(6));
+				festMenuVO.setFest_m_pic(rs.getBytes(6));
 				festMenuVO.setFest_m_resume(rs.getString(7));
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));

@@ -3,7 +3,7 @@
 <%@ page import="com.festMenu.model.*"%>
 
 <%
-	FestMenuVO festMenuVO = (FestMenuVO) request.getAttribute("festMneuVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+	FestMenuVO festMenuVO = (FestMenuVO) request.getAttribute("festMenuVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 <html>
@@ -55,7 +55,7 @@ th, td {
 			<td>
 				<h3>節慶主題料理訂單修改 - update_festOrder_input.jsp</h3>
 				<h4>
-					<a href="select_page.jsp"><img src="images/back1.gif"
+					<a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp"><img src="images/back1.gif"
 						width="100" height="32" border="0">回首頁</a>
 				</h4>
 			</td>
@@ -74,12 +74,13 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="festMenu.do" name="form1">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" name="form1" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>節慶料理編號:<font color=red><b>*</b></font></td>
-				<td><%=festMenuVO.getFest_m_ID()%></td>
+				<td>節慶主題料理編號:<font color=red><b>*</b></font></td>
+		        <td><%=festMenuVO.getFest_m_ID()%></td>
 			</tr>
+			
 			<tr>
 				<td>節慶主題料理名稱 :</td>
 				<td><input type="TEXT" name="fest_m_name" size="45"
@@ -92,7 +93,7 @@ th, td {
 			</tr>
 			<tr>
 				<td>開始預購日期</td>
-				<td><input type="Date" name="fest_or_start" class="f_date1"
+				<td><input type="Date" name="fest_m_start" class="f_date1"
 					size="30" value="<%=festMenuVO.getFest_m_start()%>" /></td>
 			</tr>
 
@@ -102,8 +103,12 @@ th, td {
 					size="30" value="<%=festMenuVO.getFest_m_end()%>" /></td>
 			</tr>
 			<tr>
+				<td>照片:</td>
+				<td><input type="file" name="fest_m_pic" /></td>
+			</tr>
+			<tr>
 				<td>介紹:</td>
-				<td><input type="TEXT" name="fest_or_resume" size="45"
+				<td><input type="TEXT" name=fest_m_resume size="45"
 					value="<%=festMenuVO.getFest_m_resume()%>" /></td>
 			</tr>
 			<tr>
@@ -127,7 +132,7 @@ th, td {
 			</tr>
 		</table>
 		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="fest_or_ID"
+			type="hidden" name="fest_m_ID"
 			value="<%=festMenuVO.getFest_m_ID()%>"> <input type="submit"
 			value="送出修改">
 	</FORM>

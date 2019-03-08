@@ -24,20 +24,17 @@ public class FestMenuServlet extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 		List<String> errorMsgs = new LinkedList<String>();
 
-//		Part part = req.getPart("fest_m_pic");// 6
-//		InputStream in = part.getInputStream();
-//		byte[] fest_m_pic = new byte[in.available()];
-//		in.read(fest_m_pic);
-//		in.close();
-		
 		String s = req.getParameter("fest_m_ID");
-//		try {
+		try {
 			FestMenuService ds = new FestMenuService();
 			FestMenuVO dao = (FestMenuVO) ds.getOneFestMenu(s);
 			byte[] sb = dao.getFest_m_pic();
 			out.write(sb);
-	
-		doPost(req, res);
+		
+		}catch(NullPointerException e){
+			errorMsgs.add("a");
+			
+		}
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
