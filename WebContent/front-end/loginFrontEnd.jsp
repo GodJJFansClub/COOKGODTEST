@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=Big5">
-<title>login</title>
+<title>前台login</title>
 </head>
 <body>
 <center>
@@ -15,9 +15,9 @@
 				<tr>
 					<td colspan=2>
 						<p align=center>
-							輸入<b>(測試登入)</b>:<br> 
-							帳號:<b>tomcat</b><br>
-							密碼:<b>tomcat</b><br>
+							輸入<b>前台(測試登入)</b>:<br> 
+							帳號:<b>ccc</b><br>
+							密碼:<b>123</b><br>
 					</td>
 				</tr>
 

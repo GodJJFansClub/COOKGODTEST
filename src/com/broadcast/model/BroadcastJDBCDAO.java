@@ -13,7 +13,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO BROADCAST(BROADCAST_ID,BROADCAST_START,BROADCAST_CON,BROADCAST_STATUS,CUST_ID)  VALUES ('B'||LPAD((BROADCAST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM BROADCAST";
 	private static final String GET_ONE_STMT = "SELECT * FROM BROADCAST WHERE BROADCAST_ID = ?";
-	private static final String GET_ONE_STMT_CUST_ID = "SELECT * FROM BROADCAST WHERE CUST_ID = ?";
+	private static final String GET_ONE_STMT_CUST_ID = "SELECT * FROM BROADCAST WHERE CUST_ID = ? ORDER BY  MAX(BROADCAST_START)  DESC";
 	private static final String DELETE = "DELETE FROM BROADCAST WHERE BROADCAST_ID = ?";
 	private static final String UPDATE = "UPDATE BROADCAST SET BROADCAST_STATUS= ? WHERE BROADCAST_ID = ?";
 	
