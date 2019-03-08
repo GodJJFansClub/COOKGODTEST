@@ -16,8 +16,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 	private static final String PASSWORD = "123456";
 	private static final String INSERT_STMT = 
 			"INSERT INTO FOOD_MALL (FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = 
-			"UPDATE FOOD_MALL SET FOOD_M_NAME = ?, FOOD_M_STATUS = ?, FOOD_M_PRICE = ?, FOOD_M_UNIT = ?, FOOD_M_PLACE = ?, FOOD_M_PIC = ?, FOOD_M_RESUME = ?, FOOD_M_RATE = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
+	private static final String UPDATE_NO_RATE = 
+			"UPDATE FOOD_MALL SET FOOD_M_NAME = ?, FOOD_M_STATUS = ?, FOOD_M_PRICE = ?, FOOD_M_UNIT = ?, FOOD_M_PLACE = ?, FOOD_M_PIC = ?, FOOD_M_RESUME = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String GET_ALL_STMT = 
 			"SELECT FOOD_SUP_ID , FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL ORDER BY FOOD_ID";
 	private static final String GET_ONE_STMT = 
@@ -78,7 +78,7 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			pstmt = con.prepareStatement(UPDATE_STMT);
+			pstmt = con.prepareStatement(UPDATE_NO_RATE);
 
 			pstmt.setString(1, foodMallVO.getFood_m_name());
 			pstmt.setString(2, foodMallVO.getFood_m_status());
@@ -87,9 +87,8 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 			pstmt.setString(5, foodMallVO.getFood_m_place());
 			pstmt.setBytes(6, foodMallVO.getFood_m_pic());
 			pstmt.setString(7, foodMallVO.getFood_m_resume());
-			pstmt.setInt(8, foodMallVO.getFood_m_rate());
-			pstmt.setString(9, foodMallVO.getFood_sup_ID());
-			pstmt.setString(10, foodMallVO.getFood_ID());
+			pstmt.setString(8, foodMallVO.getFood_sup_ID());
+			pstmt.setString(9, foodMallVO.getFood_ID());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -265,18 +264,18 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 //		foodMallVO.setFood_m_rate(5);
 //		fMDao.insert(foodMallVO);
 		// 更新
-//		FoodMallVO foodMallVO = new FoodMallVO();
-//		foodMallVO.setFood_sup_ID("C00005");
-//		foodMallVO.setFood_ID("F00001");
-//		foodMallVO.setFood_m_name("馬玉山五穀米");
-//		foodMallVO.setFood_m_status("p4");
-//		foodMallVO.setFood_m_price(250);
-//		foodMallVO.setFood_m_unit("0.6kg");
-//		foodMallVO.setFood_m_place("馬玉山");
-//		foodMallVO.setFood_m_pic(picIOTest.getPictureByteArray("P:/pic/2.jpg"));
-//		foodMallVO.setFood_m_resume("煮起來又香又好吃, 對身體的健康又很有幫助");
-//		foodMallVO.setFood_m_rate(4);
-//		fMDao.update(foodMallVO);
+		FoodMallVO foodMallVO = new FoodMallVO();
+		foodMallVO.setFood_sup_ID("C00005");
+		foodMallVO.setFood_ID("F00001");
+		foodMallVO.setFood_m_name("馬玉山五穀米");
+		foodMallVO.setFood_m_status("p4");
+		foodMallVO.setFood_m_price(250);
+		foodMallVO.setFood_m_unit("0.6kg");
+		foodMallVO.setFood_m_place("馬玉山");
+		foodMallVO.setFood_m_pic(picIOTest.getPictureByteArray("P:/pic/2.jpg"));
+		foodMallVO.setFood_m_resume("煮起來又香又好吃, 對身體的健康又很有幫助");
+		foodMallVO.setFood_m_rate(4);
+		fMDao.update(foodMallVO);
 		// 查一筆
 //		FoodMallVO foodMallVO = fMDao.findByPrimaryKey("C00009", "F00009");
 //		System.out.println(foodMallVO.getFood_sup_ID());
@@ -290,22 +289,22 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 //		System.out.println(foodMallVO.getFood_m_resume());
 //		System.out.println(foodMallVO.getFood_m_rate());
 		// 查全部
-		List<FoodMallVO> list = fMDao.getAll();
-		int count = 1;
-		for(FoodMallVO foodMallVO:list) {
-			System.out.print(foodMallVO.getFood_sup_ID() + " ");
-			System.out.print(foodMallVO.getFood_ID() + " ");
-			System.out.print(foodMallVO.getFood_m_name() + " ");
-			System.out.print(foodMallVO.getFood_m_status() + " ");
-			System.out.print(foodMallVO.getFood_m_price() + " ");
-			System.out.print(foodMallVO.getFood_m_unit() + " ");
-			System.out.print(foodMallVO.getFood_m_place() + " ");
-			picIOTest.byteArrToFile(foodMallVO.getFood_m_pic(), "P:/pic/"+ count +".png");
-			System.out.print(foodMallVO.getFood_m_resume() + " ");
-			System.out.print(foodMallVO.getFood_m_rate() + " ");
-			System.out.println();
-			count++;
-		}
+//		List<FoodMallVO> list = fMDao.getAll();
+//		int count = 1;
+//		for(FoodMallVO foodMallVO:list) {
+//			System.out.print(foodMallVO.getFood_sup_ID() + " ");
+//			System.out.print(foodMallVO.getFood_ID() + " ");
+//			System.out.print(foodMallVO.getFood_m_name() + " ");
+//			System.out.print(foodMallVO.getFood_m_status() + " ");
+//			System.out.print(foodMallVO.getFood_m_price() + " ");
+//			System.out.print(foodMallVO.getFood_m_unit() + " ");
+//			System.out.print(foodMallVO.getFood_m_place() + " ");
+//			picIOTest.byteArrToFile(foodMallVO.getFood_m_pic(), "P:/pic/"+ count +".png");
+//			System.out.print(foodMallVO.getFood_m_resume() + " ");
+//			System.out.print(foodMallVO.getFood_m_rate() + " ");
+//			System.out.println();
+//			count++;
+//		}
 		
 		
 		

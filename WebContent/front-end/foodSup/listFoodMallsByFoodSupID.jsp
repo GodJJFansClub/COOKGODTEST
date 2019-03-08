@@ -1,73 +1,107 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.foodSup.model.*"%>
-<%@page import="com.foodMall.model.*"%>
-<%@page import="java.util.Set" %>
-<%@page import="java.util.LinkedHashSet" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.foodMall.model.FoodMallService"%>
+<%@ page import="com.foodMall.model.FoodMallVO"%>
 
+<%@ page import="java.util.List"%>
+<jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
 <jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService"/>
+<jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
 
 <%
-	String food_sup_ID = ((FoodSupVO) session.getAttribute("foodSupVO")).getFood_sup_ID();
-	Set<FoodMallVO> list = foodSupSvc.getFoodMallsByFood_sup_ID(food_sup_ID);
+	List<FoodMallVO> list = foodMallSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
 
 <html>
 <head>
-	<title>供應商顯示所有食材商品 listAllFoodMall.jsp</title>
+<title>供應商顯示所有食材商品 listAllFoodMall.jsp</title>
 
 </head>
 <body>
-	
-	<%-- 錯誤列表 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color:red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color:red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-	<table>
-		<tr>
-			<th>食材商編號</th>
-			<th>食材編號</th>
-			<th>標題</th>
-			<th>商品狀態</th>
-			<th>價格</th>
-			<th>單位</th>
-			<th>產地</th>
-			<th>圖片</th>
-			<th>介紹</th>
-			<th>評價</th>
-		</tr>
-		
-		<%@ include file="/file/page1.file" %>
-		<c:forEach var="foodMallVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			<tr>
-				<td>${foodMallVO.food_sup_ID}</td>
-				<td>${foodMallVO.food_ID}</td>
-				<td>${foodMallVO.food_m_name}</td>
-				<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
-				<td>${foodMallVO.food_m_price}</td>
-				<td>${foodMallVO.food_m_unit}</td>
-				<td>${foodMallVO.food_m_place}</td>
-				<%--<td><img src="data:image/png;base64,${foodMallVO.food_m_pic}"></td> --%>
-				<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"></td>
-				<td>${foodMallVO.food_m_resume}</td>
-				<td>${foodMallVO.food_m_rate}</td>
-			
-				<td>
-					<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
-						<input type="submit" value="修改">
-						<input type="hidden" value="food_ID" value="${foodMallVO.food_ID}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-					</form>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<%@ include file="/file/page2.file" %>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+			<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+
+				<%-- 錯誤列表 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				<table>
+					<tr>
+						<th>食材商編號</th>
+						<th>食材編號</th>
+						<th>標題</th>
+						<th>商品狀態</th>
+						<th>價格</th>
+						<th>單位</th>
+						<th>產地</th>
+						<th>圖片</th>
+						<th>介紹</th>
+						<th>評價</th>
+					</tr>
+
+					<%@ include file="/file/page1.file"%>
+					<c:forEach var="foodMallVO" items="${list}" begin="<%=pageIndex%>"
+						end="<%=pageIndex+rowsPerPage-1%>">
+						<tr class="foodMallEntiy">
+							<td>${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</td>
+							<td>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</td>
+							<td>${foodMallVO.food_m_name}</td>
+							<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
+							<td>${foodMallVO.food_m_price}</td>
+							<td>${foodMallVO.food_m_unit}</td>
+							<td>${foodMallVO.food_m_place}</td>
+							<%--<td><img src="data:image/png;base64,${foodMallVO.food_m_pic}"></td> --%>
+							<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"></td>
+							<td>${foodMallVO.food_m_resume}</td>
+							<td>${foodMallVO.food_m_rate}</td>
+
+							<td>
+								<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
+									<button id="update">修改</button>
+									<input type="hidden" value="food_ID" value="${foodMallVO.food_ID}">
+									<input type="hidden" value="food_sup_ID" value="${foodMallVO.food_sup_ID}">
+									<input type="hidden" id="action" name="action">
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<%@ include file="/file/page2.file"%>
+<%--=================================工作區================================================--%>
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+			$(".foodMallEntiy").click(function(evt){
+				let foodForm = $(this).find("form");
+				if(evt.target.id != "update") { 
+					foodForm.children("#requestURL").val('<%=request.getServletPath()%>');
+					foodForm.children("#action").val("getOne_For_Display");
+				}else{
+					foodForm.children("#action").val("getOne_For_Udate");	
+				}
+				foodForm.submit();
+			});
+		}); 
+	</script>
 </body>
 </html>
