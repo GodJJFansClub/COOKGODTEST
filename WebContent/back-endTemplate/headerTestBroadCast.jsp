@@ -33,6 +33,10 @@
 		
 	</div>
 	
+	<div id="broadcastRcver">
+		
+	</div>
+	
 	
 </body>
 	<script>
@@ -59,7 +63,7 @@
 			webSocket.onmessage = function(event) {
 				var broadcastRcver = document.getElementById("broadcastRcver");
 				broadcastRcver.innerText = broadcastRcver.innerText + event.data;
-				$('#element').toast('show');
+				window.alert("broadcastRcver");
 			};
 
 			webSocket.onclose = function(event) {
