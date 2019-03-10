@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
@@ -19,7 +21,7 @@ import com.broadcast.model.BroadcastVO;
 
 
 @ServerEndpoint(
-		value="/notifications", //not sure
+		value="/notifications/", //not sure
 		encoders = {BroadcastEncoder.class},
 		decoders = {BroadcastDecoder.class}
 		)
@@ -27,7 +29,7 @@ import com.broadcast.model.BroadcastVO;
 public class BroadcastWebSocket {
 	
 	private static final List<BroadcastVO> broadcastVO = Collections.synchronizedList(new LinkedList<BroadcastVO>());
-	private static final Set<Session>sessions = Collections.synchronizedSet(new HashSet<Session>());
+	private static final Map<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 	
 	@OnMessage
 	public void onMessage(Session session, BroadcastVO broadcast) {
@@ -44,7 +46,7 @@ public class BroadcastWebSocket {
 	
 	@OnOpen
 	public void onOpen(Session session)throws IOException, EncodeException{
-		sessions.add(session);
+		sessions.put(String cust_Id, session);
 		for(BroadcastVO broadcast : broadcastVO) {
 			session.getBasicRemote().sendObject(broadcast);
 			
