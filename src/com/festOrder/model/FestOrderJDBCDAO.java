@@ -435,11 +435,11 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 		festOrderVO.setFest_or_send(java.sql.Date.valueOf("2018-02-14"));
 		festOrderVO.setFest_or_end(java.sql.Date.valueOf("2018-02-05"));
 		festOrderVO.setFest_or_disc("0.8");
-		festOrderVO.setCust_ID("C00010");
+		festOrderVO.setCust_ID("C00002");
 		
 		List<FestOrderDetailVO> testList = new ArrayList<FestOrderDetailVO>(); //準備置入節慶主題料理訂單明細FestOrderDetail
 		FestOrderDetailVO festOrderDetailXX = new FestOrderDetailVO(); //節慶主題料理訂單明細FestOrderDetail
-		festOrderDetailXX.setFest_or_ID("FM20190219-000003");
+//		festOrderDetailXX.setFest_or_ID("FM20190219-000003");
 		festOrderDetailXX.setFest_m_ID("FM0005");
 		festOrderDetailXX.setFest_or_rate(6);
 		festOrderDetailXX.setFest_or_msg("下次仍會訂購此項產品");
@@ -448,7 +448,7 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 		
 		
 		FestOrderDetailVO festOrderDetailYY = new FestOrderDetailVO();
-		festOrderDetailYY.setFest_or_ID("FM20190220-00004");
+//		festOrderDetailYY.setFest_or_ID("FM20190220-00004");
 		festOrderDetailYY.setFest_m_ID("FM0003");
 		festOrderDetailYY.setFest_or_rate(5);
 		festOrderDetailYY.setFest_or_msg("我覺得下次仍會繼績消費，甜點非常好吃");

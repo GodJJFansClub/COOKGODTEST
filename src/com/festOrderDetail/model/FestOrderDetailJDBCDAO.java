@@ -366,9 +366,4 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetail_Interface {
 		}
 	}
 
-	@Override
-	public void update2_FestMenu(String fest_m_ID, Integer final_qty) {
-		// TODO Auto-generated method stub
-		
-	}
 }
