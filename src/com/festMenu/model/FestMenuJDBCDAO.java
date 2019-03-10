@@ -312,8 +312,11 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 			pstmt = con.prepareStatement(UPDATE_QTY);
 			
 			FestMenuVO festMenuVO = new FestMenuVO();
-			pstmt.setString(1, festMenuVO.getFest_m_ID());
-			pstmt.setInt(2, festMenuVO.getFest_m_qty());
+			festMenuVO.setFest_m_ID(fest_m_ID);
+			festMenuVO.setFest_m_qty(final_qty);
+			pstmt.setInt(1, festMenuVO.getFest_m_qty());
+			pstmt.setString(2, festMenuVO.getFest_m_ID());
+			
 			
 			pstmt.executeUpdate();
 			

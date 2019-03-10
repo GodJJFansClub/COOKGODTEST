@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.festMenu.model.FestMenuJDBCDAO;
+import com.festMenu.model.FestMenuService;
 import com.festOrderDetail.model.FestOrderDetailJDBCDAO;
 import com.festOrderDetail.model.FestOrderDetailVO;
 
@@ -20,7 +22,8 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String USER = "COOKGOD";
 	private static final String PASSWORD = "123456";
-	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES (FEST_ORDER_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
+//	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES (FEST_ORDER_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES ('FM'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE FEST_ORDER SET FEST_OR_STATUS = ?,FEST_OR_PRICE = ?,FEST_OR_START = ?,FEST_OR_SEND = ?,FEST_OR_END = ?,FEST_OR_DISC = ?, CUST_ID = ? WHERE FEST_OR_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM FEST_ORDER WHERE FEST_OR_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER";
@@ -376,9 +379,16 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 			//再同時新增節慶主題料理訂單明細 Fest_Order_Detail
 			FestOrderDetailJDBCDAO dao = new FestOrderDetailJDBCDAO();
 			System.out.println("list.size()-A=" + list.size());
+			FestMenuJDBCDAO festMenuDAO = new FestMenuJDBCDAO();
+			Integer final_qty = 0;
+			String fest_m_ID = null;
 			for(FestOrderDetailVO aFestOrderDetail:list) {
 				aFestOrderDetail.setFest_or_ID(next_fest_or_ID);
+				final_qty = aFestOrderDetail.getFest_or_qty();
+				fest_m_ID = aFestOrderDetail.getFest_m_ID();
 				dao.insert2(aFestOrderDetail, con);
+				festMenuDAO.update2_FestMenu(fest_m_ID, final_qty);
+				
 			}
 			//2.設定於pstm.executeUpdate()之後
 			con.commit();
