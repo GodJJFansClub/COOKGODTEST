@@ -291,6 +291,7 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetail_Interface {
 
 			pstmt.executeQuery();
 		} catch (SQLException se) {
+			se.printStackTrace();
 			if (con != null) {
 				try {
 					// 3：設定於當有exception發生時之catch區塊內

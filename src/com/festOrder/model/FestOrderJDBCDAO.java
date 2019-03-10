@@ -387,7 +387,7 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 				final_qty = aFestOrderDetail.getFest_or_qty();
 				fest_m_ID = aFestOrderDetail.getFest_m_ID();
 				dao.insert2(aFestOrderDetail, con);
-				festMenuDAO.update2_FestMenu(fest_m_ID, final_qty);
+				//festMenuDAO.update2_FestMenu(fest_m_ID, final_qty);
 				
 			}
 			//2.設定於pstm.executeUpdate()之後
@@ -450,7 +450,7 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 		List<FestOrderDetailVO> testList = new ArrayList<FestOrderDetailVO>(); //準備置入節慶主題料理訂單明細FestOrderDetail
 		FestOrderDetailVO festOrderDetailXX = new FestOrderDetailVO(); //節慶主題料理訂單明細FestOrderDetail
 //		festOrderDetailXX.setFest_or_ID("FM20190219-000003");
-		festOrderDetailXX.setFest_m_ID("FM0005");
+		festOrderDetailXX.setFest_m_ID("FM0001");
 		festOrderDetailXX.setFest_or_rate(6);
 		festOrderDetailXX.setFest_or_msg("下次仍會訂購此項產品");
 		festOrderDetailXX.setFest_or_qty(2);
