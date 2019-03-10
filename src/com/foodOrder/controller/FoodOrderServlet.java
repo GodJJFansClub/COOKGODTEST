@@ -7,12 +7,14 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -358,6 +360,65 @@ public class FoodOrderServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 ***********************************/
 			} catch (Exception e) {
 				throw new ServletException(e);
+			}
+		}
+		
+		if ("insertOrODs".equals(action)) { // 來自前端的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				String food_or_name = req.getParameter("food_or_name");
+				String food_or_nameReg = "^[(\u4e00-\u9fa5)]{1,30}$";
+				if (food_or_name == null || food_or_name.trim().length() == 0) {
+					errorMsgs.add("收件人 : 起勿空白");
+				} else if (!food_or_name.trim().matches(food_or_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("收件人 : 只能是中文且長度必需在1到30之間");
+				}
+
+				String food_or_addr = req.getParameter("food_or_addr");
+				if (food_or_addr == null || food_or_addr.trim().length() == 0) {
+					errorMsgs.add("郵遞區號請勿空白");
+				}
+				
+				
+				String food_or_tel = req.getParameter("food_or_tel");
+				String food_or_telReg = "^[\\d]{10}$";
+				if (food_or_tel == null || food_or_tel.trim().length() == 0) {
+					errorMsgs.add("收件人電話 : 起勿空白");
+				} else if (!food_or_tel.trim().matches(food_or_telReg)) { // 以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("收件人電話 : 09XXXXXXXX");
+				}
+				
+				String cust_ID = req.getParameter("cust_ID");
+				FoodOrderVO foodOrderVO = new FoodOrderVO();
+				foodOrderVO.setFood_or_name(food_or_name);
+				foodOrderVO.setFood_or_tel(food_or_tel);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("foodOrderVO", foodOrderVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/addFoodOrder.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/*************************** 2.開始新增資料 ***************************************/
+				HttpSession session = req.getSession();
+				@SuppressWarnings("unchecked")
+				List<FoodOrDetailVO> foodBuyList = (Vector<FoodOrDetailVO>) session.getAttribute("shoppingCart");
+				FoodOrderService foodOrderSvc = new FoodOrderService();
+				foodOrderVO = foodOrderSvc.addFoodOrder("o0", food_or_name, food_or_addr, food_or_tel, cust_ID, foodBuyList);
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/back-end/foodOrder/listAllFoodOrder.jsp";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/addFoodOrder.jsp");
+				failureView.forward(req, res);
 			}
 		}
 

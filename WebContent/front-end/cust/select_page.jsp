@@ -6,42 +6,12 @@
 <head>
 <title>IBM Cust: Home</title>
 
-<style>
-table#table-1 {
-	width: 450px;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-	border: 3px ridge Gray;
-	height: 80px;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
-	<table id="table-1">
-		<tr>
-			<td><h3>IBM Cust: Home</h3>
-				<h4>( MVC )</h4></td>
-		</tr>
-	</table>
-
-	<p>This is the Home page forCust: Home</p>
-
-	<h3>資料查詢:</h3>
+	
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -103,6 +73,11 @@ h4 {
 	<ul>
 		<li><a href='addCust.jsp'>Add</a> a new Cust.</li>
 	</ul>
+
+	
+	
+	
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 
 </body>
 </html>

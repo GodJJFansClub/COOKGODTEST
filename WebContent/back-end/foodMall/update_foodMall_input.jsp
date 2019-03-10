@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.foodOrder.model.*" %>
-<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
+<%@ page import="com.foodMall.model.*" %>
+<jsp:useBean id="foodMallVO" scope="request" type="com.foodMall.model.FoodMallVO"/>
+<jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService" />
 <html>
 <head>
-<title>修改食材商城訂單</title>
-<link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+<title>修改食材商城</title>
+
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -21,7 +22,7 @@
 <%--=================================工作區================================================--%>
 				<div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">修改食材商城訂單</h4>
+                        <h4 class="page-title">修改商品</h4>
                     </div>
                 </div>
             </div>
@@ -34,128 +35,90 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- Row -->
-                <div class="row">
-                	<!-- Column -->
-                    <div class="col-lg-8 col-xlg-9 col-md-7">
-                        <div class="card">
-                            <div class="card-body">
-                                <form class="form-horizontal form-material">
-                                    <div class="form-group">
-                                        <label class="col-md-12">訂單編號</label>
-                                        <div class="col-md-12">
-                                            <h4>${foodOrderVO.food_or_ID}</h4>
-                                        </div>
-                                    </div>      
-                                    <div class="form-group">
-                                        <label class="col-md-12">顧客姓名</label>
-                                        <div class="col-md-12">
-                                            <h4>${custSvc.getOneCust(foodOrderVO.cust_ID).cust_name}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">收件人姓名</label>
-                                        <div class="col-md-12">
-                                            <h4>${foodOrderVO.food_or_name}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">收件地址</label>
-                                        <div class="col-md-12">
-                                            <h4>${foodOrderVO.food_or_addr}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">收件人電話</label>
-                                        <div class="col-md-12">
-                                            <h4>${foodOrderVO.food_or_tel}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">下訂日期</label>
-                                        <div class="col-md-12">
-                                            <h4>${foodOrderVO.food_or_start}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">出貨日期</label>
-                                        <div class="col-md-12">
-                                            <input name="food_or_send" id="f_date1" type="text" value="${foodOrderVO.food_or_send}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">到貨日期</label>
-                                        <div class="col-md-12">
-                                            <input name="food_or_rcv" id="f_date1" type="text" value="${foodOrderVO.food_or_rcv}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">完成日期</label>
-                                        <div class="col-md-12">
-                                            <input name="food_or_end" id="f_date1" type="text" value="${foodOrderVO.food_or_end}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">訂單狀態</label>                                       
-                                        <div class="col-sm-12">
-                                        	<select name="food_or_status" class="form-control form-control-line">
-                                        	<c:forEach var="mallOrStatus" items="${mallOrStatusMap}">                
-                                            	<option value="${mallOrStatus.key}"
-                                            	 ${(foodOrder.food_or_status == mallOrStatus.key)? 'selected':''}>${mallOrStatus.value}</option>
-                                            </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <input type="submit" value="送出" class="btn btn-success">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3 col-md-5">
-                        <div class="card">
-                            <div class="card-body">
-                              
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                </div>
+				<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do" name="form1" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td>標題:</td>
+						<td><input type="TEXT" name="food_m_name" size="45" 
+							 value="<%= (foodMallVO==null)? "蔬果" : foodMallVO.getFood_m_name()%>" /></td>
+					</tr>
+					<tr>
+						<td>商品狀態:</td>
+						<td>
+						<select size="1" name="food_m_status">
+							<c:forEach var="mallStatus" items="${mallStatusMap}">
+								<option value="${mallStatus.key}" ${(foodMallVO.food_m_status == mallStatus.key)?'selected':''} >${mallStatus.value}
+							</c:forEach>
+						</select>
+			
+					</tr>
+					<tr>
+						<td>商品價格:</td>
+						<td><input type="TEXT" name="food_m_price" size="45"
+							 value="<%= (foodMallVO==null)? "10000" : foodMallVO.getFood_m_price()%>" /></td>
+					</tr>
+					<tr>
+						<td>單位:</td>
+						<td>
+							<input type="text" name="food_m_unit" value="<%= (foodMallVO==null)? "公斤" : foodMallVO.getFood_m_unit()%>">
+						</td>
+					</tr>
+					<tr>
+						<td>產地:</td>
+						<td><input type="TEXT" name="food_m_place" size="45"
+							 value="<%= (foodMallVO==null)? "台灣" : foodMallVO.getFood_m_place()%>" /></td>
+					</tr>
+			
+				
+				<tr>
+					<td>食材名稱:</td>
+					<td>
+						<h3>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</h3>
+					</td>
+				</tr>
+				<tr>
+					<td>商品照片:</td>
+					<td><input type="file" name="food_m_pic" 
+						 value="C:/XXX/XXX" /></td>
+				</tr>
+				<tr>
+					<td>介紹:</td>
+					<td>
+						<textarea name="food_m_resume">${empty foodMallVO.food_m_resume ? "請介紹" : foodMallVO.food_m_resume}</textarea>
+					</td>
+				</tr>
+				</table>
+				<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
+				<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
+				<input type="hidden" name="action" value="update">
+				<input type="submit" value="送出">
+			</form>
+			<img id="preView">
+	
+           
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
-				<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-				<script>
-			        $.datetimepicker.setLocale('zh');
-			        $('#f_date1').datetimepicker({
-			           theme: '',              //theme: 'dark',
-			  	       timepicker:false,       //timepicker:true,
-			  	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-			  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-			  		   value: '<%=((FoodOrderVO) request.getAttribute("foodOrderVO"))%>', // value:   new Date(),
-			           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-			           //startDate:	            '2017/07/10',  // 起始日
-			           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-			           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-			        });
-			       </script>
-			</div>
+
+			
 		</div>
 	</div>
+	<script>
+		$(document).ready(
+			function(){
+				$(":file").change(
+					function(){
+						if(this.files && this.files[0]){
+							let reader = new FileReader();
+							reader.onload = function(e){
+								$('#preView').attr('src', e.target.result);
+							}
+							reader.readAsDataURL(this.files[0]);
+						}
+					}
+				);
+			}
+		);
+	</script>
 </body>
 </html>

@@ -53,6 +53,35 @@ public class FoodOrDetailVO implements Serializable {
 	public void setFood_od_msg(String food_od_msg) {
 		this.food_od_msg = food_od_msg;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((food_ID == null) ? 0 : food_ID.hashCode());
+		result = prime * result + ((food_sup_ID == null) ? 0 : food_sup_ID.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FoodOrDetailVO other = (FoodOrDetailVO) obj;
+		if (food_ID == null) {
+			if (other.food_ID != null)
+				return false;
+		} else if (!food_ID.equals(other.food_ID))
+			return false;
+		if (food_sup_ID == null) {
+			if (other.food_sup_ID != null)
+				return false;
+		} else if (!food_sup_ID.equals(other.food_sup_ID))
+			return false;
+		return true;
+	}
 	
 	
 }

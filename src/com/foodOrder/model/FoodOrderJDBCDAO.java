@@ -7,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import com.foodOrDetail.model.FoodOrDetailDAO;
+import com.foodOrDetail.model.FoodOrDetailJDBCDAO;
 import com.foodOrDetail.model.FoodOrDetailVO;
 
 
@@ -79,6 +82,94 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 		}
 		
 	}
+	
+	
+	@Override
+	public void insertWithFoodDetails(FoodOrderVO foodOrderVO, List<FoodOrDetailVO> foodODlist) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			
+			// 1●設定於 pstm.executeUpdate()之前
+    		con.setAutoCommit(false);
+			
+    		// 先新增部門
+			String cols[] = {"FOOD_OR_ID"};
+			pstmt = con.prepareStatement(INSERT_STMT , cols);			
+			pstmt.setString(1, foodOrderVO.getFood_or_status());		
+			pstmt.setString(2, foodOrderVO.getFood_or_name());
+			pstmt.setString(3, foodOrderVO.getFood_or_addr());
+			pstmt.setString(4, foodOrderVO.getFood_or_tel());
+			pstmt.setString(5, foodOrderVO.getCust_ID());
+			pstmt.executeUpdate();
+			//掘取對應的自增主鍵值
+			String next_foodOrID = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_foodOrID = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_foodOrID +"(剛新增成功的部門編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			// 再同時新增員工
+			FoodOrDetailJDBCDAO dao = new FoodOrDetailJDBCDAO();
+			System.out.println("list.size()-A="+foodODlist.size());
+			for (FoodOrDetailVO foodOrDetailVO : foodODlist) {
+				foodOrDetailVO.setFood_or_ID(next_foodOrID);
+				dao.insertODs(foodOrDetailVO, con);
+			}
+
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("list.size()-B="+foodODlist.size());
+			System.out.println("新增部門編號" + next_foodOrID + "時,共有員工" + foodODlist.size()
+					+ "人同時被新增");
+			
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-dept");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+
+
 	@Override
 	public void update(FoodOrderVO foodOrderVO) {
 		Connection con = null;
@@ -354,13 +445,13 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 	public static void main(String[] args) {
 		FoodOrderJDBCDAO foodOrderJDBCDAO = new FoodOrderJDBCDAO();
 		// 新增
-		FoodOrderVO foodOrderVO = new FoodOrderVO();
-		foodOrderVO.setFood_or_status("o0");
-		foodOrderVO.setFood_or_name("李舜生");
-		foodOrderVO.setFood_or_addr("中央大學");
-		foodOrderVO.setFood_or_tel("0958111222");
-		foodOrderVO.setCust_ID("C00013");
-		foodOrderJDBCDAO.insert(foodOrderVO);
+//		FoodOrderVO foodOrderVO = new FoodOrderVO();
+//		foodOrderVO.setFood_or_status("o0");
+//		foodOrderVO.setFood_or_name("李舜生");
+//		foodOrderVO.setFood_or_addr("中央大學");
+//		foodOrderVO.setFood_or_tel("0958111222");
+//		foodOrderVO.setCust_ID("C00013");
+//		foodOrderJDBCDAO.insert(foodOrderVO);
 		// 修改
 //		FoodOrderVO foodOrderVO = new FoodOrderVO();
 //		foodOrderVO.setFood_or_ID("FO20190215-000006");
@@ -403,16 +494,38 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 //			System.out.println();
 //		}
 		
-		Set<FoodOrDetailVO> foodOrDetailVOs = foodOrderJDBCDAO.getFoodOrDetailsByFood_or_ID("FO20181124-000002");
-		for(FoodOrDetailVO foodOrDetailVO: foodOrDetailVOs) {
-			System.out.print(foodOrDetailVO.getFood_or_ID());
-			System.out.print(foodOrDetailVO.getFood_sup_ID());
-			System.out.print(foodOrDetailVO.getFood_ID());
-			System.out.print(foodOrDetailVO.getFood_od_qty());
-			System.out.print(foodOrDetailVO.getFood_od_stotal());
-			System.out.print(foodOrDetailVO.getFood_od_rate());
-			System.out.print(foodOrDetailVO.getFood_od_msg());
-			System.out.println();
-		}
+//		Set<FoodOrDetailVO> foodOrDetailVOs = foodOrderJDBCDAO.getFoodOrDetailsByFood_or_ID("FO20181124-000002");
+//		for(FoodOrDetailVO foodOrDetailVO: foodOrDetailVOs) {
+//			System.out.print(foodOrDetailVO.getFood_or_ID());
+//			System.out.print(foodOrDetailVO.getFood_sup_ID());
+//			System.out.print(foodOrDetailVO.getFood_ID());
+//			System.out.print(foodOrDetailVO.getFood_od_qty());
+//			System.out.print(foodOrDetailVO.getFood_od_stotal());
+//			System.out.print(foodOrDetailVO.getFood_od_rate());
+//			System.out.print(foodOrDetailVO.getFood_od_msg());
+//			System.out.println();
+//		}
+		
+		FoodOrderVO foodOrderVO = new FoodOrderVO();
+		foodOrderVO.setFood_or_status("o0");
+		foodOrderVO.setFood_or_name("李舜生");
+		foodOrderVO.setFood_or_addr("中央大學");
+		foodOrderVO.setFood_or_tel("0958111222");
+		foodOrderVO.setCust_ID("C00013");
+		List<FoodOrDetailVO> list = new LinkedList<>();
+		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
+		foodOrDetailVO.setFood_sup_ID("C00005");
+		foodOrDetailVO.setFood_ID("F00001");
+		foodOrDetailVO.setFood_od_qty(3);
+		foodOrDetailVO.setFood_od_stotal(700);
+		list.add(foodOrDetailVO);
+		FoodOrDetailVO foodOrDetailVO1 = new FoodOrDetailVO();
+		foodOrDetailVO1.setFood_sup_ID("C00012");
+		foodOrDetailVO1.setFood_ID("F00024");
+		foodOrDetailVO1.setFood_od_qty(3);
+		foodOrDetailVO1.setFood_od_stotal(700);
+		list.add(foodOrDetailVO1);
+		
+		foodOrderJDBCDAO.insertWithFoodDetails(foodOrderVO, list);
 	}
 }

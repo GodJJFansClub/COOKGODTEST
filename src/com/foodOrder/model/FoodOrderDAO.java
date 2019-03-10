@@ -1,7 +1,6 @@
 package com.foodOrder.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +14,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.foodOrDetail.model.FoodOrDetailDAO;
+import com.foodOrDetail.model.FoodOrDetailDAO_interface;
 import com.foodOrDetail.model.FoodOrDetailVO;
 
 public class FoodOrderDAO implements FoodOrderDAO_interface {
@@ -78,6 +79,82 @@ public class FoodOrderDAO implements FoodOrderDAO_interface {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void insertWithFoodDetails(FoodOrderVO foodOrderVO, List<FoodOrDetailVO> foodODList) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			con = ds.getConnection();
+			
+			// 1●設定於 pstm.executeUpdate()之前
+    		con.setAutoCommit(false);
+			
+    		// 先新增部門
+			String cols[] = {"FOOD_OR_ID"};
+			pstmt = con.prepareStatement(INSERT_STMT , cols);			
+			pstmt.setString(1, foodOrderVO.getFood_or_status());		
+			pstmt.setString(2, foodOrderVO.getFood_or_name());
+			pstmt.setString(3, foodOrderVO.getFood_or_addr());
+			pstmt.setString(4, foodOrderVO.getFood_or_tel());
+			pstmt.setString(5, foodOrderVO.getCust_ID());
+			pstmt.executeUpdate();
+			//掘取對應的自增主鍵值
+			String next_foodOrID = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_foodOrID = rs.getString(1);
+			} else {
+				System.out.println("未取得FoodOrder自增主鍵值");
+			}
+			rs.close();
+			// 再同時新增員工
+			FoodOrDetailDAO_interface dao = new FoodOrDetailDAO();
+			System.out.println("list.size()-A="+foodODList.size());
+			for (FoodOrDetailVO foodOrDetailVO : foodODList) {
+				foodOrDetailVO.setFood_or_ID(next_foodOrID);
+				dao.insertODs(foodOrDetailVO, con);
+			}
+
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-FoodOrder");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 
 	@Override
