@@ -10,6 +10,7 @@ public class DishService {
 		dao = new DishDAO();		
 	}
 	
+	
 	public DishVO addDish( String dish_name,String dish_status,
 							byte[] dish_pic,String dish_resume,Integer dish_price) {
 		
@@ -33,11 +34,13 @@ public class DishService {
 		DishVO dishVO = new DishVO();
 			
 		dishVO.setDish_ID(dish_ID);
+		
 		dishVO.setDish_name(dish_name);
 		dishVO.setDish_status(dish_status);
 		dishVO.setDish_pic(dish_pic);
 		dishVO.setDish_resume(dish_resume);
 		dishVO.setDish_price(dish_price);
+		
 		dao.update(dishVO);
 		
 		return dishVO;
@@ -56,6 +59,7 @@ public class DishService {
 		public List<DishVO> getAll(){
 			return dao.getAll();
 		}
+		
 		
 		
 	}

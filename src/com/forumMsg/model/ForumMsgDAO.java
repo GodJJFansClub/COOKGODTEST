@@ -31,7 +31,7 @@ public class ForumMsgDAO implements ForumMsgDAO_interface{
 	private static final String DELETE =
 			"DELETE FROM FORUM_MSG where FORUM_MSG_ID = ?";
 	private static final String UPDATE = 
-			"UPDATE FORUM_MSG set FORUM_MSG_CON=?,FORUM_MSG_STATUS = ?,FORUM_ART_ID = ?,CUST_ID= ? where FORUM_MSG_ID = ?";
+			"UPDATE FORUM_MSG set FORUM_ART_ID = ?,FORUM_MSG_CON=?,FORUM_MSG_START=?,FORUM_MSG_STATUS = ?,CUST_ID= ? where FORUM_MSG_ID = ?";
 	
 	@Override
 	public void insert(ForumMsgVO forumMsgVO) {
@@ -83,11 +83,12 @@ public class ForumMsgDAO implements ForumMsgDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1,forumMsgVO.getForum_msg_con());
-			pstmt.setString(2, forumMsgVO.getForum_msg_status());
-			pstmt.setString(3, forumMsgVO.getForum_art_ID());
-			pstmt.setString(4, forumMsgVO.getCust_ID());
-			pstmt.setString(5, forumMsgVO.getForum_msg_ID());
+			pstmt.setString(1, forumMsgVO.getForum_art_ID());
+			pstmt.setString(2,forumMsgVO.getForum_msg_con());
+			pstmt.setTimestamp(3, forumMsgVO.getForum_msg_start());
+			pstmt.setString(4, forumMsgVO.getForum_msg_status());
+			pstmt.setString(5, forumMsgVO.getCust_ID());
+			pstmt.setString(6, forumMsgVO.getForum_msg_ID());
 		
 			pstmt.executeUpdate();
 			

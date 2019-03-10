@@ -39,7 +39,7 @@ public class ForumMsgServlet extends HttpServlet {
 				errorMsgs.add("請輸入留言編號");
 			}
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/forumMsg/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumMsg/select_page.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -52,7 +52,7 @@ public class ForumMsgServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/forumMsg/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumMsg/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -65,14 +65,14 @@ public class ForumMsgServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/forumMsg/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumMsg/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("forumMsgVO", forumMsgVO); // 資料庫取出的empVO物件,存入req
-			String url = "/forumMsg/listOneForumMsg.jsp";
+			String url = "/back-end/forumMsg/listOneForumMsg.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 
@@ -92,6 +92,8 @@ public class ForumMsgServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+			String requestURL = req.getParameter("requestURL");
 
 			// try {
 			/*************************** 1.接收請求參數 ****************************************/
@@ -103,7 +105,7 @@ public class ForumMsgServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("forumMsgVO", forumMsgVO); // 資料庫取出的empVO物件,存入req
-			String url = "/forumMsg/update_forumMsg_input.jsp";
+			String url = "/back-end/forumMsg/update_forumMsg_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 
@@ -137,17 +139,11 @@ public class ForumMsgServlet extends HttpServlet {
 				errorMsgs.add("留言內容請勿空白");
 			}	
 			//留言時間
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String forum_msg_startString = req.getParameter("forum_msg_start");
-			System.out.println(forum_msg_startString);
-			java.sql.Timestamp forum_msg_start = null;
-			try {
-				forum_msg_start = new java.sql.Timestamp(df.parse(forum_msg_startString).getTime());
-				System.out.println(forum_msg_start);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Timestamp forum_msg_start= new Timestamp(System.currentTimeMillis());
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			String timeStr = df.format(forum_msg_start); 
+			forum_msg_start = Timestamp.valueOf(timeStr); 
 			
 			//留言狀態
 			String forum_msg_status = req.getParameter("forum_msg_status").trim();
@@ -175,18 +171,18 @@ public class ForumMsgServlet extends HttpServlet {
 
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("forumMsgVO", forumMsgVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/forumMsg/update_forumMsg_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumMsg/update_forumMsg_input.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
 
 			/*************************** 2.開始修改資料 *****************************************/
 			ForumMsgService forumMsgSvc = new ForumMsgService();
-			forumMsgVO = forumMsgSvc.updateForumMsg(forum_art_ID,forum_msg_ID,forum_msg_con,forum_msg_status,cust_ID);
+			forumMsgVO = forumMsgSvc.updateForumMsg(forum_msg_ID,forum_msg_con,forum_msg_start,forum_msg_status,cust_ID,forum_art_ID);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("forumMsgVO", forumMsgVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/forumMsg/listOneForumMsg.jsp";
+			String url = "/back-end/forumMsg/listOneForumMsg.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 
@@ -251,7 +247,7 @@ public class ForumMsgServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("forumMsgVO", forumMsgVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/forumMsg/addForumMsg.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumMsg/addForumMsg.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -263,7 +259,7 @@ public class ForumMsgServlet extends HttpServlet {
 				forumMsgVO = forumMsgSvc.addForumMsg(forum_art_ID,forum_msg_con,forum_msg_status,cust_ID);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/forumMsg/listAllForumMsg.jsp";
+				String url = "/back-end/forumMsg/listAllForumMsg.jsp";
 				System.out.println("AAA");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
@@ -271,7 +267,7 @@ public class ForumMsgServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 				} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/forumMsg/addForumMsg.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumMsg/addForumMsg.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -292,14 +288,14 @@ public class ForumMsgServlet extends HttpServlet {
 				forumMsgSvc.deleteForumMsg(forum_msg_ID);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/forumMsg/listAllForumMsg.jsp";
+				String url = "/back-end/forumMsg/listAllForumMsg.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/forumMsg/listAllForumMsg.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumMsg/listAllForumMsg.jsp");
 				failureView.forward(req, res);
 			}
 		}

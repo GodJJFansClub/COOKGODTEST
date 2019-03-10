@@ -1,7 +1,9 @@
 package com.forumArt.model;
 
+import java.util.Set;
 import java.util.List;
 import java.sql.Timestamp;
+import com.forumMsg.model.ForumMsgVO;
 
 
 public class ForumArtService {
@@ -20,7 +22,6 @@ public class ForumArtService {
 		forumArtVO.setForum_art_name(forum_art_name);
 		forumArtVO.setForum_art_pic(forum_art_pic);
 		forumArtVO.setForum_art_con(forum_art_con);;
-		//forumArtVO.setForum_art_start(forum_art_start);
 		forumArtVO.setForum_art_status(forum_art_status);
 		forumArtVO.setChef_ID(chef_ID);
 		
@@ -62,4 +63,7 @@ public class ForumArtService {
 	public List<ForumArtVO> getAll(){
 		return dao.getAll();
 	}
+	public Set<ForumMsgVO> getForumMsgsByForumArt(String forum_art_ID){
+		return dao.getForumMsgsByForumArt(forum_art_ID);
+	} 
 }

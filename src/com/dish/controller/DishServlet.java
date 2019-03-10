@@ -7,8 +7,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import com.dish.model.*;
 
-
-
 import com.broadcast.model.BroadcastService;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -71,6 +69,7 @@ public class DishServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		
 		String action = req.getParameter("action");
 
 		// 單一查詢
@@ -118,7 +117,7 @@ public class DishServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/dish/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dish/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -257,9 +256,9 @@ public class DishServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			
-			req.setAttribute("listAllDish", dishSvc.getOneDish(dish_ID)); // 資料庫update成功後,正確的的empVO物件,存入req
+			req.setAttribute("AllDish", dishSvc.getOneDish(dish_ID)); // 資料庫update成功後,正確的的empVO物件,存入req
 			System.out.println(requestURL);
-			String url = "/back-end/dish/listAllDish.jsp";
+			String url = "/back-end/dish/AllDish.jsp";
 			
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
@@ -379,7 +378,7 @@ public class DishServlet extends HttpServlet {
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 				
-				String url = "/back-end/dish/listAllDish.jsp";
+				String url = "/back-end/dish/AllDish.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				return;
@@ -387,7 +386,7 @@ public class DishServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dish/listAllDish.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dish/AllDish.jsp");
 				failureView.forward(req, res);
 				return;
 			}

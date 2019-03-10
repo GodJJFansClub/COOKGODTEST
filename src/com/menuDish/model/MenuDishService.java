@@ -23,14 +23,14 @@ public class MenuDishService {
 		
 	}
 	
-	public MenuDishVO updateMenuDish(String menu_ID_new,String menu_ID,String dish_ID) {
+	public MenuDishVO updateMenuDish(String menu_ID,String dish_ID) {
 		
 		MenuDishVO menuDishVO = new MenuDishVO();
 		
 		menuDishVO.setMenu_ID(menu_ID);
 		menuDishVO.setDish_ID(dish_ID);
 		
-		dao.update(menu_ID_new,menuDishVO);
+		dao.update(menuDishVO);
 		
 		return menuDishVO;
 	}
@@ -45,6 +45,9 @@ public class MenuDishService {
 	}
 	public List <MenuDishVO> getAll() {
 		return dao.getAll();
+	}
+	public List <MenuDishVO> getAllByMenu_ID(String menu_ID) {
+		return dao.getAllBy_Menu(menu_ID);
 	}
 
 }

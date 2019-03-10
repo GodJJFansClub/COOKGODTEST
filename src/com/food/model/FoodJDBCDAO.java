@@ -22,8 +22,6 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			"INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), ?, ?)";
 	private static final String GET_ALL_STMT = 
 			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD ORDER BY FOOD_ID";
-	private static final String GET_BY_FOOD_TYPE =
-			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_TYPE_ID = ? ORDER BY FOOD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_ID = ?";
 	private static final String DELETE = 
@@ -277,65 +275,6 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 	}
 	
 	@Override
-	public List<FoodVO> getByFood_type_ID(String food_type_ID) {
-		List<FoodVO> list = new ArrayList<FoodVO>();
-		FoodVO foodVO = null;
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			pstmt = con.prepareStatement(GET_BY_FOOD_TYPE);
-			pstmt.setString(1, food_type_ID);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				foodVO = new FoodVO();
-				foodVO.setFood_ID(rs.getString(1));
-				foodVO.setFood_name(rs.getString(2));
-				foodVO.setFood_type_ID(rs.getString(3));
-				list.add(foodVO);
-			}
-			// Handle any driver errors
-		}catch(ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		}catch(SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		}finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		
-		return list;
-	}
-	
-	@Override
 	public Set<FoodMallVO> getFoodMallsByFood_ID(String food_ID) {
 		Set<FoodMallVO> set = new LinkedHashSet<FoodMallVO>();
 		FoodMallVO foodMallVO = null;
@@ -431,25 +370,17 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 //			System.out.println();
 //		}
 		
-//		Set<FoodMallVO> foodMallVOs = dao.getFoodMallsByFood_ID("F00009");
-//		for(FoodMallVO foodMallVO:foodMallVOs) {
-//			System.out.print(foodMallVO.getFood_sup_ID());
-//			System.out.print(foodMallVO.getFood_ID());
-//			System.out.print(foodMallVO.getFood_m_name());
-//			System.out.print(foodMallVO.getFood_m_status());
-//			System.out.print(foodMallVO.getFood_m_price());
-//			System.out.print(foodMallVO.getFood_m_unit());
-//			System.out.print(foodMallVO.getFood_m_place());
-//			System.out.print(foodMallVO.getFood_m_resume());
-//			System.out.println(foodMallVO.getFood_m_rate());
-//		}
-		
-		List<FoodVO> foodVOList = dao.getByFood_type_ID("g0");
-		for(FoodVO foodVO:foodVOList) {
-			System.out.print(foodVO.getFood_ID());
-			System.out.print(foodVO.getFood_name());
-			System.out.print(foodVO.getFood_type_ID());
-			System.out.println();
+		Set<FoodMallVO> foodMallVOs = dao.getFoodMallsByFood_ID("F00009");
+		for(FoodMallVO foodMallVO:foodMallVOs) {
+			System.out.print(foodMallVO.getFood_sup_ID());
+			System.out.print(foodMallVO.getFood_ID());
+			System.out.print(foodMallVO.getFood_m_name());
+			System.out.print(foodMallVO.getFood_m_status());
+			System.out.print(foodMallVO.getFood_m_price());
+			System.out.print(foodMallVO.getFood_m_unit());
+			System.out.print(foodMallVO.getFood_m_place());
+			System.out.print(foodMallVO.getFood_m_resume());
+			System.out.println(foodMallVO.getFood_m_rate());
 		}
 	}
 }
