@@ -24,8 +24,8 @@ public class FoodMallDAO implements FoodMallDAO_interface {
 	}
 	private static final String INSERT_STMT = 
 			"INSERT INTO FOOD_MALL (FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_NO_RATE = 
-			"UPDATE FOOD_MALL SET FOOD_M_NAME = ?, FOOD_M_STATUS = ?, FOOD_M_PRICE = ?, FOOD_M_UNIT = ?, FOOD_M_PLACE = ?, FOOD_M_PIC = ?, FOOD_M_RESUME = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
+	private static final String UPDATE_STMT = 
+			"UPDATE FOOD_MALL SET FOOD_M_NAME = ?, FOOD_M_STATUS = ?, FOOD_M_PRICE = ?, FOOD_M_UNIT = ?, FOOD_M_PLACE = ?, FOOD_M_PIC = ?, FOOD_M_RESUME = ?, FOOD_M_RATE = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String GET_ALL_STMT = 
 			"SELECT FOOD_SUP_ID , FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL ORDER BY FOOD_ID";
 	private static final String GET_ONE_STMT =
@@ -80,7 +80,7 @@ public class FoodMallDAO implements FoodMallDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_NO_RATE);
+			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			pstmt.setString(1, foodMallVO.getFood_m_name());
 			pstmt.setString(2, foodMallVO.getFood_m_status());
@@ -89,8 +89,9 @@ public class FoodMallDAO implements FoodMallDAO_interface {
 			pstmt.setString(5, foodMallVO.getFood_m_place());
 			pstmt.setBytes(6, foodMallVO.getFood_m_pic());
 			pstmt.setString(7, foodMallVO.getFood_m_resume());
-			pstmt.setString(8, foodMallVO.getFood_sup_ID());
-			pstmt.setString(9, foodMallVO.getFood_ID());
+			pstmt.setInt(8, foodMallVO.getFood_m_rate());
+			pstmt.setString(9, foodMallVO.getFood_sup_ID());
+			pstmt.setString(10, foodMallVO.getFood_ID());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

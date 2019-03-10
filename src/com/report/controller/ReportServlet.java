@@ -5,17 +5,20 @@ import java.sql.Timestamp;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.report.model.ReportService;
 import com.report.model.ReportVO;
 
+@MultipartConfig
 public class ReportServlet extends HttpServlet {
-
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
@@ -24,6 +27,7 @@ public class ReportServlet extends HttpServlet {
 
 
 		if ("getOne_For_Display".equals(action)) { 
+			System.out.println("30");
 			int i = 1;
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -41,7 +45,7 @@ public class ReportServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					System.out.println("檢查點c" +(i++));
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/report/select_page.jsp");
+							.getRequestDispatcher("/back-end/report/select_page.jsp");
 					failureView.forward(req, res);
 					System.out.println("檢查點d" +(i++));
 					return;
@@ -50,7 +54,7 @@ public class ReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/report/select_page.jsp");
+							.getRequestDispatcher("/back-end/report/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -66,13 +70,13 @@ public class ReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/report/select_page.jsp");
+							.getRequestDispatcher("/back-end/report/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
 				req.setAttribute("reportVO", reportVO); //資料庫取出的empVO物件，存入req
-				String url = "/report/listOneReport.jsp";
+				String url = "/back-end/report/listOneReport.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
@@ -82,7 +86,7 @@ public class ReportServlet extends HttpServlet {
 				System.out.println("A");
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/report/select_page.jsp");
+						.getRequestDispatcher("/back-end/report/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -107,7 +111,7 @@ public class ReportServlet extends HttpServlet {
 
 				/***************************3.查詢完成，準備轉交(Send the Success view)********/
 				req.setAttribute("reportVO", reportVO);   //資料庫取得的reportVO物件，存入req      
-				String url = "/report/update_report_input.jsp";
+				String url = "/back-end/report/update_report_input.jsp";
 				System.out.println("  " +"檢查點4");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -117,7 +121,7 @@ public class ReportServlet extends HttpServlet {
 				System.out.println("  " +"檢查點6");
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/report/listAllReport.jsp");
+						.getRequestDispatcher("/back-end/report/listAllReport.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -197,7 +201,7 @@ public class ReportServlet extends HttpServlet {
                 if (!errorMsgs.isEmpty()) {
 					req.setAttribute("reportVO", reportVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/report/update_report_input.jsp");
+							.getRequestDispatcher("/back-end/report/update_report_input.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -216,7 +220,7 @@ public class ReportServlet extends HttpServlet {
 //				System.out.println("  " +"檢查點15");
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("reportVO", reportVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/report/listAllReport.jsp";
+				String url = "/back-end/report/listAllReport.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 //				System.out.println("  " +"檢查點16");
@@ -224,14 +228,14 @@ public class ReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/report/update_report_input.jsp");
+						.getRequestDispatcher("/back-end/report/update_report_input.jsp");
 				failureView.forward(req, res);
 			}
 
 		}
 
         if ("insert".equals(action)) { //來自addReport.jsp的請求 
-
+            System.out.println("237");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -293,7 +297,7 @@ public class ReportServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("reportVO", reportVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/report/addReport.jsp");
+							.getRequestDispatcher("/back-end/report/addReport.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -305,7 +309,7 @@ public class ReportServlet extends HttpServlet {
 //						report_status,report_con,cust_ID,forum_art_ID);
 
 				/***************************3.新增完成，準備提交(Send the Success view**********/
-				String url = "/report/listAllReport.jsp";
+				String url = "/back-end/report/listAllReport.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // �s�W���\�����listAllEmp.jsp
 				successView.forward(req, res);				
 
@@ -313,7 +317,7 @@ public class ReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/report/addReport.jsp");
+						.getRequestDispatcher("/back-end/report/addReport.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -333,7 +337,7 @@ public class ReportServlet extends HttpServlet {
 				ReportService reportSvc = new ReportService();
 				reportSvc.deleteReport(report_ID);
 
-				String url = "/report/listAllReport.jsp";
+				String url = "/back-end/report/listAllReport.jsp";
 		//		System.out.println("  " +"檢查點5");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -343,7 +347,7 @@ public class ReportServlet extends HttpServlet {
 				System.out.println(" "+"檢查點7");
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/report/listAllReport.jsp");
+						.getRequestDispatcher("/back-end/report/listAllReport.jsp");
 				failureView.forward(req, res);
 			}
 		}

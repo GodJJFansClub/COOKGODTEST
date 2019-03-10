@@ -100,6 +100,14 @@ th, td {
 				<td><input type="TEXT" name="fest_m_qty" size="20"
 					value="<%= (festMenuVO==null)? "3" :festMenuVO.getFest_m_qty() %>" /></td>
 			</tr>
+			
+			<tr>
+				<td>價格:</td>
+				<td><input type="TEXT" name="fest_m_qty" size="20"
+					value="<%= (festMenuVO==null)? "3" :festMenuVO.getFest_m_qty() %>" /></td>
+			</tr>
+			
+			
 
 			<tr>
 				<td>開始預購日期:</td>
@@ -147,12 +155,6 @@ th, td {
 				<td><input type="TEXT" name="fest_m_kind" size="20" 
 			        value="<%= (festMenuVO==null)? "3" :festMenuVO.getFest_m_kind() %>" />
 			    </td>
-			</tr>
-			
-			<tr>
-				<td>價格:</td>
-				<td><input type="TEXT" name="fest_m_price" size="20"
-					value="<%= (festMenuVO==null)? "3" :festMenuVO.getFest_m_price() %>" /></td>
 			</tr>
 
 			<tr>

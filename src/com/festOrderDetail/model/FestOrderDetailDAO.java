@@ -8,7 +8,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.festOrder.model.FestOrderVO;
 
 public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 
@@ -266,5 +265,50 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 		return festOrderDetailVOs;
 	}
 
+	@Override
+	public void insert2(FestOrderDetailVO festOrderDetailVO, Connection con) {
+		PreparedStatement pstmt = null;
+
+
+		try {
+
+			pstmt = con.prepareStatement(INSERT_STMT);
+
+			pstmt.setString(1, festOrderDetailVO.getFest_or_ID());
+			pstmt.setString(2, festOrderDetailVO.getFest_m_ID());
+			pstmt.setInt(3, festOrderDetailVO.getFest_or_rate());
+			pstmt.setString(4, festOrderDetailVO.getFest_or_msg());
+			pstmt.setInt(5, festOrderDetailVO.getFest_or_qty());
+			pstmt.setInt(6, festOrderDetailVO.getFest_or_stotal());
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-emp");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 }
 

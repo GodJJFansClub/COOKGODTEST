@@ -17,6 +17,7 @@ public class FestMenuDAO implements FestMenu_Interface {
 		try {
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
+			
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -29,6 +30,7 @@ public class FestMenuDAO implements FestMenu_Interface {
 	private static final String UPDATE = "UPDATE FEST_MENU SET FEST_M_NAME = ?,FEST_M_QTY = ?,FEST_M_START = ?,FEST_M_END = ?,FEST_M_PIC = ?,FEST_M_RESUME= ?,FEST_M_SEND = ?,FEST_M_STATUS = ?, FEST_M_KIND = ?,CHEF_ID = ? WHERE FEST_M_ID = ? ";
 	private static final String UPDATE_QTY = "UPDATE FEST_MENU SET FEST_M_QTY = ? WHERE FEST_M_ID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM FEST_MENU WHERE FEST_M_ID = ?";
+	private static final String Select_Menu_qty = "SELECT FEST_M_QTY FROM FEST_MENU WHERE = ?";
 
 	@Override
 	public void insert(FestMenuVO festMenuVO) {
@@ -189,12 +191,13 @@ public class FestMenuDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_qty(rs.getInt(3));
 				festMenuVO.setFest_m_start(rs.getDate(4));
 				festMenuVO.setFest_m_end(rs.getDate(5));
-//				festMenuVO.setFest_m_pic(rs.getBytes(6));
+				festMenuVO.setFest_m_pic(rs.getBytes(6));
 				festMenuVO.setFest_m_resume(rs.getString(7));
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));
 				festMenuVO.setFest_m_kind(rs.getString(10));
-				festMenuVO.setChef_ID(rs.getString(11));
+				festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString("CHEF_ID"));
 			}
 
 			// Handle any driver errors
@@ -255,7 +258,8 @@ public class FestMenuDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));
 				festMenuVO.setFest_m_kind(rs.getString(10));
-				festMenuVO.setChef_ID(rs.getString(11));		
+				festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString(12));		
 				festMenuVOs.add(festMenuVO);
 			}
 
@@ -293,15 +297,23 @@ public class FestMenuDAO implements FestMenu_Interface {
 	public void update2_FestMenu(String fest_m_ID, Integer final_qty) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_QTY);
+			
+			pstmt = con.prepareStatement(Select_Menu_qty);
+			rs =  pstmt.executeQuery();
+			int menu_qty = rs.getInt("FEST_M_QTY");			
+			
+	//		pstmt = con.prepareStatement(UPDATE_QTY);
 
 			FestMenuVO festMenuVO = new FestMenuVO();
 			pstmt.setString(1, festMenuVO.getFest_m_ID());
-			pstmt.setInt(2, festMenuVO.getFest_m_qty());
+			
+			menu_qty = menu_qty-festMenuVO.getFest_m_qty();
+			pstmt.setInt(2, menu_qty);
 			
 			pstmt.executeUpdate();
 

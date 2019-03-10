@@ -263,14 +263,14 @@ public class DishJDBCDAO implements DishDAO_interface {
 		// 新增
 		PicIOTest picIOTest = new PicIOTest();
 		
-		DishVO DishVO1 = new DishVO();
-		
-		DishVO1.setDish_name("臘味櫻花蝦米糕");
-		DishVO1.setDish_status("D1");
-		DishVO1.setDish_pic(picIOTest.getPictureByteArray("C:/T3/年菜套餐/臘味櫻花蝦米糕.jpeg"));
-		DishVO1.setDish_resume("鮮美透亮的櫻花蝦，配上香氣四溢的肝臘腸，與口感十足糯米糕結合，加以紅蔥頭油點綴，香氣直撲而來，口感軟而不爛！嚴選台灣在地食材與天然配料，這款家家戶戶年節必備之大菜，絕對讓您吃得安心！");
-		DishVO1.setDish_price(588);
-		dish.insert(DishVO1);
+//		DishVO DishVO1 = new DishVO();
+//		
+//		DishVO1.setDish_name("臘味櫻花蝦米糕");
+//		DishVO1.setDish_status("D1");
+//		DishVO1.setDish_pic(picIOTest.getPictureByteArray("C:/T3/年菜套餐/臘味櫻花蝦米糕.jpeg"));
+//		DishVO1.setDish_resume("鮮美透亮的櫻花蝦，配上香氣四溢的肝臘腸，與口感十足糯米糕結合，加以紅蔥頭油點綴，香氣直撲而來，口感軟而不爛！嚴選台灣在地食材與天然配料，這款家家戶戶年節必備之大菜，絕對讓您吃得安心！");
+//		DishVO1.setDish_price(588);
+//		dish.insert(DishVO1);
 
 //		// 修改
 //		DishVO dishVO2 = new DishVO();
@@ -296,15 +296,15 @@ public class DishJDBCDAO implements DishDAO_interface {
 //		System.out.println("---------------------");
 
 		//查詢
-//		List<DishVO> list = dish.getAll();
-//		for (DishVO adish : list) {
-//			System.out.print(adish.getDish_ID() + ",");
-//			System.out.print(adish.getDish_name() + ",");
-//			System.out.print(adish.getDish_status() + ",");
-//			System.out.print(adish.getDish_pic() + ",");
-//			System.out.print(adish.getDish_resume() + ",");
-//			System.out.print(adish.getDish_price() + ",");
-//			System.out.println();
-//		}
+		List<DishVO> list = dish.getAll();
+		for (DishVO adish : list) {
+			System.out.print(adish.getDish_ID() + ",");
+			System.out.print(adish.getDish_name() + ",");
+			System.out.print(adish.getDish_status() + ",");
+			System.out.print(adish.getDish_pic() + ",");
+			System.out.print(adish.getDish_resume() + ",");
+			System.out.print(adish.getDish_price() + ",");
+			System.out.println();
+		}
 	}
 }

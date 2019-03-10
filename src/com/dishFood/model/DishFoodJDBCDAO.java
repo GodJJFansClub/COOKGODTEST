@@ -207,15 +207,16 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 			Class.forName(driver);
+			
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-
+				
 				DishFoodVO = new DishFoodVO();
 				DishFoodVO.setDish_ID(rs.getString("dish_ID"));
 				DishFoodVO.setFood_ID(rs.getString("food_ID"));
@@ -281,15 +282,15 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 //		DishFood.delete("D00007","F00005");
 //		
 ////		//查詢
-//		DishFoodVO DishFoodVO3 =DishFood.findByPrimaryKey("D00003","F00005");
+//		DishFoodVO DishFoodVO3 =DishFood.findByPrimaryKey("D00003","F00022");
 //		System.out.print(DishFoodVO3.getDish_ID() + ",");
 //		System.out.print(DishFoodVO3.getFood_ID() + ",");
 //		System.out.print(DishFoodVO3.getDish_f_qty() + ",");
 //	    System.out.print(DishFoodVO3.getDish_f_unit() + ",");
-////		
+//		
 //		System.out.println("---------------------");
 ////
-//		//查詢
+		//查詢
 		List<DishFoodVO> list = DishFood.getAll();
 		for (DishFoodVO adish : list) {
 			System.out.print(adish.getDish_ID() + ",");
@@ -297,6 +298,6 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 			System.out.print(adish.getDish_f_qty() + ",");
 			System.out.print(adish.getDish_f_unit() + ",");
 			System.out.println();
-		}
+			}
 	}
 }

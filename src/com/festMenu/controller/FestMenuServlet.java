@@ -24,20 +24,17 @@ public class FestMenuServlet extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 		List<String> errorMsgs = new LinkedList<String>();
 
-//		Part part = req.getPart("fest_m_pic");// 6
-//		InputStream in = part.getInputStream();
-//		byte[] fest_m_pic = new byte[in.available()];
-//		in.read(fest_m_pic);
-//		in.close();
-		
 		String s = req.getParameter("fest_m_ID");
-//		try {
+		try {
 			FestMenuService ds = new FestMenuService();
 			FestMenuVO dao = (FestMenuVO) ds.getOneFestMenu(s);
 			byte[] sb = dao.getFest_m_pic();
 			out.write(sb);
-	
-		doPost(req, res);
+		
+		}catch(NullPointerException e){
+			errorMsgs.add("a");
+			
+		}
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -58,6 +55,7 @@ public class FestMenuServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String fest_m_ID = req.getParameter("fest_m_ID");
 				System.out.println("檢查點a35" + (i++));
 				if (fest_m_ID == null || (fest_m_ID.trim()).length() == 0) {
@@ -211,6 +209,14 @@ public class FestMenuServlet extends HttpServlet {
 			if (fest_m_kind == null || fest_m_kind.trim().length() == 0) {
 				errorMsgs.add("種類");
 			}
+			
+			Integer fest_m_price = null;
+			try {
+				fest_m_price = new Integer(req.getParameter("fest_m_price").trim());
+			} catch (NumberFormatException e) {
+				fest_m_price = 0;
+				errorMsgs.add("價格請填數字.");
+			}
 
 			String chef_ID = req.getParameter("chef_ID").trim();
 			if (chef_ID == null || chef_ID.trim().length() == 0) {
@@ -230,6 +236,7 @@ public class FestMenuServlet extends HttpServlet {
 			festMenuVO.setFest_m_send(fest_m_send);
 			festMenuVO.setFest_m_status(fest_m_status);
 			festMenuVO.setFest_m_kind(fest_m_kind);
+			festMenuVO.setFest_m_price(fest_m_price);
 			festMenuVO.setChef_ID(chef_ID);
 			System.out.println("  " + "檢查點13");
 			System.out.println(festMenuVO);
@@ -246,7 +253,7 @@ public class FestMenuServlet extends HttpServlet {
 			/*************************** 2.開始修改資料 *****************************************/
 			FestMenuService festMenuSvc = new FestMenuService();
 			festMenuVO = festMenuSvc.updateFestMenu(fest_m_ID, fest_m_name, fest_m_qty, fest_m_start, fest_m_end,
-					fest_m_pic, fest_m_resume, fest_m_send, fest_m_status, fest_m_kind, chef_ID);
+					fest_m_pic, fest_m_resume, fest_m_send, fest_m_status, fest_m_kind, fest_m_price,chef_ID);
 			System.out.println(festMenuVO);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
@@ -274,6 +281,7 @@ public class FestMenuServlet extends HttpServlet {
 					errorMsgs.add("節慶主題料理名稱請勿空白");
 				}
 				System.out.println(fest_m_name);
+				
 				Integer fest_m_qty = null;// 3
 				try {
 					fest_m_qty = new Integer(req.getParameter("fest_m_qty"));
@@ -339,6 +347,14 @@ public class FestMenuServlet extends HttpServlet {
 				if (fest_m_kind == null || fest_m_kind.trim().length() == 0) {
 					errorMsgs.add("節慶主題料理種類請勿空白");
 				}
+				
+				Integer fest_m_price = null;// 3
+				try {
+					fest_m_price = new Integer(req.getParameter("fest_m_price"));
+				} catch (NumberFormatException e) {
+					fest_m_price = 0;
+					errorMsgs.add("價格請填數字");
+				}
 
 				System.out.println(fest_m_kind);
 
@@ -359,6 +375,8 @@ public class FestMenuServlet extends HttpServlet {
 				festMenuVO.setFest_m_resume(fest_m_resume);
 				festMenuVO.setFest_m_send(fest_m_send);
 				festMenuVO.setFest_m_status(fest_m_status);
+				festMenuVO.setFest_m_kind(fest_m_kind);
+				festMenuVO.setFest_m_price(fest_m_price);
 				festMenuVO.setChef_ID(chef_ID);
 
 				System.out.println(festMenuVO);
@@ -374,7 +392,7 @@ public class FestMenuServlet extends HttpServlet {
 				FestMenuService festMenuSvc = new FestMenuService();
 
 				festMenuVO = festMenuSvc.addFestMenu(fest_m_name, fest_m_qty, fest_m_start, fest_m_end, fest_m_pic,
-						fest_m_resume, fest_m_send, fest_m_status, fest_m_kind, chef_ID);
+						fest_m_resume, fest_m_send, fest_m_status, fest_m_kind,fest_m_price,chef_ID);
 
 				/*************************** 3.新增完成，準備提交(Send the Success view **********/
 				String url = "/front-end/festMenu/listAllFestMenu.jsp";
@@ -399,10 +417,11 @@ public class FestMenuServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String fest_m_ID = req.getParameter("fest_m_ID");
-				System.out.println(fest_m_ID);
+				System.out.println(399);
 				FestMenuService festMenuSvc = new FestMenuService();
 				festMenuSvc.deleteFestMenu(fest_m_ID);
-
+                System.out.print(402);
+				
 				String url = "/front-end/festMenu/listAllFestMenu.jsp";
 				System.out.println("  " + "檢查點5");
 				RequestDispatcher successView = req.getRequestDispatcher(url);

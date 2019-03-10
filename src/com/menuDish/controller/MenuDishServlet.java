@@ -37,7 +37,7 @@ public class MenuDishServlet extends HttpServlet {
 				errorMsgs.add("請輸入菜色編號");
 			}
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/menuDish/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/select_page.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -50,7 +50,7 @@ public class MenuDishServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/menuDish/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -63,14 +63,14 @@ public class MenuDishServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/menuDish/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("menuDishVO", menuDishVO); // 資料庫取出的empVO物件,存入req
-			String url = "/menuDish/listOneMenuDish.jsp";
+			String url = "/back-end/menuDish/listOneMenuDish.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 
@@ -100,7 +100,7 @@ public class MenuDishServlet extends HttpServlet {
 			MenuDishVO menuDishVO = menuDishSvc.getOneMenuDish(menu_ID);
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("menuDishVO", menuDishVO); // 資料庫取出的empVO物件,存入req
-			String url = "/menuDish/update_menuDish_input.jsp";
+			String url = "/back-end/menuDish/update_menuDish_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 
@@ -137,7 +137,7 @@ public class MenuDishServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("menuDishVO", menuDishVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/menuDish/update_menuDish_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/update_menuDish_input.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -148,7 +148,7 @@ public class MenuDishServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("menuDishVO", menuDishVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/menuDish/listOneMenuDish.jsp";
+			String url = "/back-end/menuDish/listOneMenuDish.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 
@@ -183,7 +183,7 @@ public class MenuDishServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("menuDishVO", menuDishVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/menuDish/addMenuDish.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/addMenuDish.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -192,14 +192,14 @@ public class MenuDishServlet extends HttpServlet {
 				MenuDishService menuDishSvc = new MenuDishService();
 				menuDishVO = menuDishSvc.addMenuDish(menu_ID,dish_ID);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/menuDish/listAllMenuDish.jsp";
+				String url = "/back-end/menuDish/listAllMenuDish.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/menuDish/addMenuDish.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/addMenuDish.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -221,14 +221,14 @@ public class MenuDishServlet extends HttpServlet {
 				menuDishSvc.deleteMenuDish(menu_ID,dish_ID);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/menuDish/listAllMenuDish.jsp";
+				String url = "/back-end/menuDish/listAllMenuDish.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/menuDish/listAllMenuDish.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/listAllMenuDish.jsp");
 				failureView.forward(req, res);
 			}
 		}

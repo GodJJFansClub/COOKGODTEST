@@ -125,6 +125,7 @@ public class DishFoodDAO implements DishFoodDAO_interface{
 			pstmt.setString(2, food_ID);
 			
 			pstmt.executeUpdate();
+			
 		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+se.getMessage());

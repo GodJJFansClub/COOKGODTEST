@@ -25,7 +25,7 @@ public class DishDAO implements DishDAO_interface{
 	private static final String GET_ALL_STMT = 
 			"SELECT DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE FROM DISH order by DISH_ID";
 	private static final String GET_ONE_STMT = 
-			"SELECT DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE FROM DISH where DISH_ID=?";
+			"SELECT *FROM DISH where DISH_ID=?";
 	private static final String DELETE = 
 			"DELETE FROM DISH where DISH_ID=?";
 	private static final String UPDATE = 

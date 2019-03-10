@@ -10,7 +10,6 @@ package com.dishFood.model;
 		public DishFoodVO findByPrimaryKey(String dish_ID,String food_ID);
 		public List<DishFoodVO> getAll();
 		
-
 	}
 
 
