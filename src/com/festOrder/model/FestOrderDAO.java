@@ -8,6 +8,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.festOrderDetail.model.FestOrderDetailDAO;
+import com.festOrderDetail.model.FestOrderDetailVO;
+
 public class FestOrderDAO implements FestOrder_Interface {
 
 	private static DataSource ds = null;
@@ -23,6 +26,7 @@ public class FestOrderDAO implements FestOrder_Interface {
 	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES (FEST_ORDER_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER WHERE FEST_OR_ID = ?";
+//	private static final String GET_PrimaryKey = "SELECT FEST_OR_ID FROM FEST_ORDER ";
 	private static final String UPDATE = "UPDATE FEST_ORDER SET FEST_OR_STATUS = ?,FEST_OR_PRICE = ?,FEST_OR_START = ?,FEST_OR_SEND = ?,FEST_OR_END = ?,FEST_OR_DISC = ?, CUST_ID = ? WHERE FEST_OR_ID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM FEST_ORDER WHERE FEST_OR_ID = ?";
 
@@ -271,5 +275,159 @@ public class FestOrderDAO implements FestOrder_Interface {
 			}
 		}
 		return festOrderVOs;
+	}
+
+
+
+	@Override
+	public void insertWithFestOrderDetails(FestOrderVO festOrderVO, List<FestOrderDetailVO> list) {
+
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+
+			
+			// 1●設定於 pstm.executeUpdate()之前
+    		con.setAutoCommit(false);
+			
+    		// 先新增部門
+			String cols[] = {"FEST_OR_ID"};
+			pstmt = con.prepareStatement(INSERT_STMT , cols);			
+			pstmt.setString(1, festOrderVO.getFest_or_status());
+			pstmt.setInt(2, festOrderVO.getFest_or_price());
+			pstmt.setDate(3, festOrderVO.getFest_or_start());
+			pstmt.setDate(4, festOrderVO.getFest_or_send());
+			pstmt.setDate(5, festOrderVO.getFest_or_end());
+			pstmt.setString(6, festOrderVO.getFest_or_disc());
+			pstmt.setString(7, festOrderVO.getCust_ID());
+			pstmt.executeUpdate();
+			//掘取對應的自增主鍵值
+			String next_fest_or_ID = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_fest_or_ID = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_fest_or_ID +"(剛新增成功的部門編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			// 再同時新增員工
+			FestOrderDetailDAO dao = new FestOrderDetailDAO();
+			System.out.println("list.size()-A="+list.size());
+			for (FestOrderDetailVO aFest : list) {
+				aFest.setFest_or_ID(new String(next_fest_or_ID)) ;
+				dao.insert2(aFest,con);
+			}
+
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("list.size()-B="+list.size());
+			System.out.println("新增部門編號" + next_fest_or_ID + "時,共有員工" + list.size()
+					+ "人同時被新增");
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-dept");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public Set<FestOrderDetailVO> getFestOrderDetailByFest_or_ID(String fest_or_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FestOrderVO getByPrimaryKey(String fest_or_ID) {
+
+		FestOrderVO festOrderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_PrimaryKey);
+
+			pstmt.setString(1, fest_or_ID);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				festOrderVO = new FestOrderVO();
+				festOrderVO.setFest_or_ID(rs.getString(1));
+				festOrderVO.setFest_or_status(rs.getString(2));
+				festOrderVO.setFest_or_price(rs.getInt(3));
+				festOrderVO.setFest_or_start(rs.getDate(4));
+				festOrderVO.setFest_or_send(rs.getDate(5));
+				festOrderVO.setFest_or_end(rs.getDate(6));
+				festOrderVO.setFest_or_disc(rs.getString(7));
+				festOrderVO.setCust_ID(rs.getString(8));
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return festOrderVO;
 	}
 }

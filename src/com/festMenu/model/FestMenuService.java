@@ -14,7 +14,7 @@ public class FestMenuService {
 
 	public FestMenuVO addFestMenu(String fest_m_name, Integer fest_m_qty, Date fest_m_start, Date fest_m_end,
 			byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status, String fest_m_kind,
-			String chef_ID) {
+			Integer fest_m_price,String chef_ID) {
 		//
 		FestMenuVO festMenuVO = new FestMenuVO();
 
@@ -27,6 +27,7 @@ public class FestMenuService {
 		festMenuVO.setFest_m_send(fest_m_send);
 		festMenuVO.setFest_m_status(fest_m_status);
 		festMenuVO.setFest_m_kind(fest_m_kind);
+		festMenuVO.setFest_m_price(fest_m_price);
 		festMenuVO.setChef_ID(chef_ID);
 		dao.insert(festMenuVO);
 
@@ -36,7 +37,7 @@ public class FestMenuService {
 
 	public FestMenuVO updateFestMenu(String fest_m_ID, String fest_m_name, Integer fest_m_qty, Date fest_m_start,
 			Date fest_m_end, byte[] fest_m_pic, String fest_m_resume, Date fest_m_send, String fest_m_status,
-			String fest_m_kind, String chef_ID) {
+			String fest_m_kind,Integer fest_m_price, String chef_ID) {
 
 		FestMenuVO festMenuVO = new FestMenuVO();
 
@@ -50,6 +51,7 @@ public class FestMenuService {
 		festMenuVO.setFest_m_send(fest_m_send);
 		festMenuVO.setFest_m_status(fest_m_status);
 		festMenuVO.setFest_m_kind(fest_m_kind);
+		festMenuVO.setFest_m_price(fest_m_price);
 		festMenuVO.setChef_ID(chef_ID);
 		dao.update(festMenuVO);
 

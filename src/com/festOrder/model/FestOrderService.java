@@ -58,5 +58,6 @@ public class FestOrderService {
 
 	public List<FestOrderVO> getAll() {
 		return dao.getAll();
+		
 	}
 }

@@ -50,6 +50,11 @@ th, td {
 	padding: 5px;
 	text-align: center;
 }
+
+img{
+	width:200px;
+	height:auto;
+}
 </style>
 
 </head>
@@ -86,11 +91,11 @@ th, td {
 			<th>開始預購日期</th>
 			<th>結束預購日期</th>
 			<th>照片</th>
-			<th>價格</th>
 			<th>介紹</th>
 			<th>出貨日期</th>
 			<th>節慶主題料理狀態</th>
 			<th>種類</th>
+			<th>價格</th>
 			<th>主廚編號</th>
 		</tr>
 		<%@ include file="page1.file"%>
@@ -104,11 +109,11 @@ th, td {
 				<td>${festMenuVO.fest_m_end}</td>
 				<td><c:if test="${not empty festMenuVO.fest_m_pic}"><img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"></c:if>
 				    <c:if test="${empty festMenuVO.fest_m_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
-				<td>${festMenuVO.fest_m_price}</td>
 				<td>${festMenuVO.fest_m_resume}</td>
 				<td>${festMenuVO.fest_m_send}</td>
 				<td>${festMenuVO.fest_m_status}</td>
 				<td>${festMenuVO.fest_m_kind}</td>
+				<td>${festMenuVO.fest_m_price}</td>
 				<td>${festMenuVO.chef_ID}</td>
 				<td>
 					<FORM METHOD="post"
@@ -123,9 +128,9 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do"
 						style="margin-bottom: 0px;">
-						<input type="hidden" name="fest_m_ID"
-							value="${festMenuVO.fest_m_ID}"> <input type="hidden"
-							name="action" value="ADD">
+						<input type="submit" value="刪除"> <input type="hidden"
+							name="fest_m_ID" value="${festMenuVO.fest_m_ID}"> <input
+							type="hidden" name="action" value="delete">
 					</FORM>
 				</td>
 			</tr>

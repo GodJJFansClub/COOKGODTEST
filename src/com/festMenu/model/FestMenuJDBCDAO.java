@@ -260,8 +260,9 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_resume(rs.getString(7));
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));
-				festMenuVO.setFest_m_ID(rs.getString(10));
-				festMenuVO.setChef_ID(rs.getString(11));
+			    festMenuVO.setFest_m_kind(rs.getString(10));
+			    festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString(12));
 				
 				list.add(festMenuVO);
 			}

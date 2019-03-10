@@ -295,7 +295,7 @@ public class ReportJDBCDAO implements Report_Interface {
 		// 新增
 		
 		ReportVO reportVO = new ReportVO();
-		reportVO.setReport_title("主廚專區有網友發言不當");
+		reportVO.setReport_title("網友發言不當");
 		reportVO.setReport_sort("檢舉文章");
 		reportVO.setReport_start(sqlDate);
 		reportVO.setReport_status("1");
@@ -332,19 +332,19 @@ public class ReportJDBCDAO implements Report_Interface {
 //		System.out.println(reportVO.getForum_art_ID());	
 
 		//查詢全部
-		List<ReportVO> list = dao.getAll();
-		
-		for(ReportVO reportVOs :list) {
-			
-			System.out.println(reportVOs.getReport_ID() + " ,");
-			System.out.println(reportVOs.getReport_title() + ",");
-			System.out.println(reportVOs.getReport_sort() + ",");
-			System.out.println(reportVOs.getReport_start() + " ,");
-			System.out.println(reportVOs.getReport_status()+ " ,");
-			System.out.println(reportVOs.getReport_con()+ " ,");
-			System.out.println(reportVOs.getCust_ID()+ " ,");
-			System.out.println(reportVOs.getForum_art_ID()+ " ,");	
-		}
+//		List<ReportVO> list = dao.getAll();
+//		
+//		for(ReportVO reportVOs :list) {
+//			
+//			System.out.println(reportVOs.getReport_ID() + " ,");
+//			System.out.println(reportVOs.getReport_title() + ",");
+//			System.out.println(reportVOs.getReport_sort() + ",");
+//			System.out.println(reportVOs.getReport_start() + " ,");
+//			System.out.println(reportVOs.getReport_status()+ " ,");
+//			System.out.println(reportVOs.getReport_con()+ " ,");
+//			System.out.println(reportVOs.getCust_ID()+ " ,");
+//			System.out.println(reportVOs.getForum_art_ID()+ " ,");	
+//		}
 	}
 
 }

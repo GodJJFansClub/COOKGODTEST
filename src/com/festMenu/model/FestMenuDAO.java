@@ -17,6 +17,7 @@ public class FestMenuDAO implements FestMenu_Interface {
 		try {
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
+			
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -194,7 +195,8 @@ public class FestMenuDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));
 				festMenuVO.setFest_m_kind(rs.getString(10));
-				festMenuVO.setChef_ID(rs.getString(11));
+				festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString("CHEF_ID"));
 			}
 
 			// Handle any driver errors
@@ -255,7 +257,8 @@ public class FestMenuDAO implements FestMenu_Interface {
 				festMenuVO.setFest_m_send(rs.getDate(8));
 				festMenuVO.setFest_m_status(rs.getString(9));
 				festMenuVO.setFest_m_kind(rs.getString(10));
-				festMenuVO.setChef_ID(rs.getString(11));		
+				festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString(12));		
 				festMenuVOs.add(festMenuVO);
 			}
 

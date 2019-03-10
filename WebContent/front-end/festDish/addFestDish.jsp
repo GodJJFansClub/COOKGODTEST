@@ -54,7 +54,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>節慶主題料理訂單新增 - addFestDish.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/fesselect_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/festDish/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

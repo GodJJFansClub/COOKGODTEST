@@ -7,7 +7,6 @@ public class FestMenuVO {
 	private String fest_m_ID;
 	private String fest_m_name;
 	private Integer fest_m_qty;
-	private Integer fest_m_price;
 	private Date fest_m_start;
 	private Date fest_m_end;
 	private byte[] fest_m_pic;
@@ -15,6 +14,7 @@ public class FestMenuVO {
 	private Date fest_m_send;
 	private String fest_m_status;
 	private String fest_m_kind;
+	private Integer fest_m_price;
 	private String chef_ID;
 
 	public String getFest_m_ID() {
@@ -97,6 +97,14 @@ public class FestMenuVO {
 		this.fest_m_kind = fest_m_kind;
 	}
 
+	public Integer getFest_m_price() {
+		return fest_m_price;
+	}
+
+	public void setFest_m_price(Integer fest_m_price) {
+		this.fest_m_price = fest_m_price;
+	}
+
 	public String getChef_ID() {
 		return chef_ID;
 	}
@@ -105,12 +113,4 @@ public class FestMenuVO {
 		this.chef_ID = chef_ID;
 	}
 
-	public Integer getFest_m_price() {
-		return fest_m_price;
-	}
-
-	public void setFest_m_price(Integer fest_m_price) {
-		this.fest_m_price = fest_m_price;
-	}
-	
 }

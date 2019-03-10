@@ -3,9 +3,10 @@
 --------------------------------------------------------
 REM INSERTING into FEST_MENU
 SET DEFINE OFF;
-Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,CHEF_ID) values ('FM0002','節慶主題料理名稱一',50,to_date('01-JAN-19','DD-MON-RR'),to_date('01-FEB-19','DD-MON-RR'),to_date('14-FEB-19','DD-MON-RR'),'1','1','C00002');
-Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,CHEF_ID) values ('FM0003','節慶主題料理名稱二',20,to_date('18-FEB-19','DD-MON-RR'),to_date('01-FEB-19','DD-MON-RR'),to_date('14-FEB-19','DD-MON-RR'),'1','1','C00008');
-Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,CHEF_ID) values ('FM0004','節慶主題料理名稱三',50,to_date('05-FEB-19','DD-MON-RR'),to_date('01-FEB-19','DD-MON-RR'),to_date('14-FEB-19','DD-MON-RR'),'1','1','C00008');
+
+Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,FEST_M_PRICE,CHEF_ID) values ('FM0002','節慶主題料理名稱一',50,to_date('01-JAN-19','DD-MON-RR'),to_date('01-FEB-19','DD-MON-RR'),to_date('14-FEB-19','DD-MON-RR'),'1','1',1888,'C00002');
+Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,FEST_M_PRICE,CHEF_ID) values ('FM0003','節慶主題料理名稱二',20,to_date('18-FEB-19','DD-MON-RR'),to_date('01-FEB-19','DD-MON-RR'),to_date('14-FEB-19','DD-MON-RR'),'1','1',2888,'C00008');
+Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,FEST_M_PRICE,CHEF_ID) values ('FM0004','節慶主題料理名稱三',50,to_date('05-FEB-19','DD-MON-RR'),to_date('01-FEB-19','DD-MON-RR'),to_date('14-FEB-19','DD-MON-RR'),'1','1',3888,'C00008');
 
 --------------------------------------------------------
 --  File created - Tuesday-February-19-2019   

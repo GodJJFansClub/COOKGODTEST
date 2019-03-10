@@ -44,21 +44,6 @@ public class FestOrderServlet extends HttpServlet {
 					return;
 				}
 
-//				String report_ID= null;
-//				try {
-//					report_ID= str;
-//				} catch (Exception e) {
-//					errorMsgs.add("檢舉編號格式不正確");
-//				}
-
-				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front-end/festOrder/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-
 				FestOrderService festOrderSvc = new FestOrderService();
 				System.out.println("檢查點e" + (i++));
 				FestOrderVO festOrderVO = festOrderSvc.getOneFestOrder(fest_or_ID);

@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllFestOrder.jsp'>List</a> all Reports.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/front-end/festOrder/listAllFestOrder.jsp'>List</a> all Reports.  <br><br></li>
   
   
   <li>
@@ -77,7 +77,7 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="festOrder.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do" >
        <b>請選擇訂單狀態:</b>
        <select size="1" name="fest_or_ID">
          <c:forEach var="festOrderVO" items="${festOrderSvc.all}" > 
@@ -94,7 +94,7 @@
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='addFestOrder.jsp'>Add</a> a new Report.</li>
+  <li><a href='addFestOrder.jsp'>Add</a> a new festOrder.</li>
 </ul>
 
 </body>
