@@ -57,7 +57,7 @@
 	
 </body>
 	<script>
-		var MyPoint = "/BroadCastServer";
+		var MyPoint = "/notifications";
 		var host = window.location.host;
 		var webCtx = '<%=request.getContextPath()%>';
 		var userID = '<%=custVO.getCust_ID()%>';

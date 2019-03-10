@@ -41,7 +41,8 @@ public class CustDAO implements CustDAO_interface {
 			"DELETE FROM CUST where CUST_ID=? ";
 	private static final String UPDATE =
 			"UPDATE CUST set CUST_ACC=?, CUST_PWD=?, CUST_NAME=?, CUST_SEX=?, CUST_TEL=?, CUST_ADDR=?, CUST_PID=?, CUST_MAIL=?, CUST_BRD=?, CUST_REG=?, CUST_PIC=?, CUST_STATUS=?, CUST_NINAME=? WHERE CUST_ID=?";
-	
+	private static final String UPDATE_CUST_STATUS =
+			"UPDATE CUST set CUST_STATUS=?,WHERE CUST_ID=?";
 	@Override
 	public void insert(CustVO custVO) {
 		// TODO Auto-generated method stub
@@ -455,5 +456,6 @@ public class CustDAO implements CustDAO_interface {
 				}
 
 			}
-
+	
+	
 }
