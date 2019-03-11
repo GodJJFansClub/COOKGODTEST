@@ -25,8 +25,10 @@ public class ChefJDBCDAO implements ChefDAO_Interface{
 			"UPDATE CHEF SET CHEF_AREA= ?, CHEF_RESUME=? WHERE CHEF_ID= ?";
 	private static final String Delete_Stmt = 
 			"DELETE FROM CHEF WHERE CHEF_ID= ?";
-	private static final String Get_One_Chef_From_Emp = 
+	private static final String Get_One_Chef_By_Chef_ID = 
 			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID WHERE CHEF_ID = ?";
+	private static final String Get_All_Chef_By_Chef_Area = 
+			"SELECT * FROM CHEF WHERE CHEF_AREA = ?";
 	private static final String Get_All_Chef_From_Emp = 
 			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID";
 	
@@ -191,7 +193,7 @@ con.setAutoCommit(false);
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);			
-			pstmt = con.prepareStatement(Get_One_Chef_From_Emp);
+			pstmt = con.prepareStatement(Get_One_Chef_By_Chef_ID);
 			
 			pstmt.setString(1, chefId);			
 			rs = pstmt.executeQuery();	
@@ -199,9 +201,9 @@ con.setAutoCommit(false);
 			while (rs.next()) {				
 				chefVO = new ChefVO();				
 				chefVO.setChef_ID(rs.getString("CHEF_ID"));
-				chefVO.setChef_name(rs.getString("CUST_NAME"));
-				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
-				chefVO.setChef_tel(rs.getString("CUST_TEL"));
+				chefVO.setChef_area(rs.getString("CHEF_AREA"));
+				chefVO.setChef_channel(rs.getString("CHEF_CHANNEL"));
+				chefVO.setChef_resume(rs.getString("CHEF_RESUME"));
 			}			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
@@ -232,6 +234,60 @@ con.setAutoCommit(false);
 		}
 		return chefVO;
 	}
+	
+	@Override
+	public List<ChefVO> getAllByChefArea(String chef_area) {
+		List<ChefVO> listAllChef = new ArrayList<ChefVO>();
+		ChefVO chefVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);				
+			pstmt = con.prepareStatement(Get_All_Chef_By_Chef_Area);
+			
+			pstmt.setString(1, chef_area);			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {				
+				chefVO = new ChefVO();				
+				chefVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefVO.setChef_area(rs.getString("CHEF_AREA"));
+				chefVO.setChef_channel(rs.getString("CHEF_CHANNEL"));
+				chefVO.setChef_resume(rs.getString("CHEF_RESUME"));
+				listAllChef.add(chefVO);
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());			
+		} catch (SQLException se) {
+			throw new RuntimeException("Database Error : "+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return listAllChef;
+	}
 
 	@Override
 	public List<ChefVO> getAll() {
@@ -251,9 +307,9 @@ con.setAutoCommit(false);
 			while (rs.next()) {
 				chefVO = new ChefVO();				
 				chefVO.setChef_ID(rs.getString("CHEF_ID"));
-				chefVO.setChef_name(rs.getString("CUST_NAME"));
-				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
-				chefVO.setChef_tel(rs.getString("CUST_TEL"));
+				chefVO.setChef_area(rs.getString("CHEF_AREA"));
+				chefVO.setChef_channel(rs.getString("CHEF_CHANNEL"));
+				chefVO.setChef_resume(rs.getString("CHEF_RESUME"));
 				listAllChef.add(chefVO);
 			}
 		} catch (ClassNotFoundException e) {

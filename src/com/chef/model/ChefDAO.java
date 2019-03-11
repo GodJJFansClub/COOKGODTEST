@@ -23,7 +23,7 @@ public class ChefDAO implements ChefDAO_Interface{
 	}
 	
 	private static final String Insert_Stmt = 
-			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, '2', 'NoChannel', ?)";
+			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, '0', 'NoChannel', ?)";
 	private static final String Insert_Stmt_With_Cust = 
 			"INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) VALUES ('C'||LPAD((CUST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String Updata_Stmt_From_Emp = 
@@ -32,10 +32,12 @@ public class ChefDAO implements ChefDAO_Interface{
 			"UPDATE CHEF SET CHEF_AREA=?, CHEF_RESUME=? WHERE CHEF_ID= ?";
 	private static final String Delete_Stmt = 
 			"DELETE FROM CHEF WHERE CHEF_ID= ?";
-	private static final String Get_One_Chef_From_Emp = 
-			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID WHERE CHEF_ID = ?";
+	private static final String Get_One_Chef_By_Chef_ID = 
+			"SELECT * FROM CHEF WHERE CHEF_ID = ?";
+	private static final String Get_All_Chef_By_Chef_Area = 
+			"SELECT * FROM CHEF WHERE CHEF_AREA = ?";
 	private static final String Get_All_Chef_From_Emp = 
-			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID";
+			"SELECT * FROM CHEF";
 	
 	@Override
 	public void insert(CustVO custVO, ChefVO chefVO) {
@@ -63,15 +65,12 @@ public class ChefDAO implements ChefDAO_Interface{
 			pstmt.setBytes(11, custVO.getCust_pic());
 			pstmt.setString(12, custVO.getCust_status());
 			pstmt.setString(13, custVO.getCust_niname());
-			
 			pstmt.executeUpdate();
-			
-			//掘取對應的自增主鍵值
-			
+			//掘取對應的自增主鍵值			
 			String next_cust_ID = null;
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
-				next_cust_ID = rs.getString("CUST_ID");
+				next_cust_ID = rs.getString(1);
 				System.out.println("自增主鍵值= " + next_cust_ID +"(剛新增成功的顧客編號)");
 			} else {
 				System.out.println("未取得自增主鍵值");
@@ -181,7 +180,7 @@ public class ChefDAO implements ChefDAO_Interface{
 	}
 
 	@Override
-	public ChefVO findByPrimaryKey(String chefId) {		
+	public ChefVO findByPrimaryKey(String chef_ID) {		
 		ChefVO chefVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -189,17 +188,17 @@ public class ChefDAO implements ChefDAO_Interface{
 		try {
 
 			con = ds.getConnection();			
-			pstmt = con.prepareStatement(Get_One_Chef_From_Emp);
+			pstmt = con.prepareStatement(Get_One_Chef_By_Chef_ID);
 			
-			pstmt.setString(1, chefId);			
+			pstmt.setString(1, chef_ID);			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {				
 				chefVO = new ChefVO();				
 				chefVO.setChef_ID(rs.getString("CHEF_ID"));
-				chefVO.setChef_name(rs.getString("CUST_NAME"));
-				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
-				chefVO.setChef_tel(rs.getString("CUST_TEL"));
+				chefVO.setChef_area(rs.getString("CHEF_AREA"));
+				chefVO.setChef_channel(rs.getString("CHEF_CHANNEL"));
+				chefVO.setChef_resume(rs.getString("CHEF_RESUME"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("Database Error : "+ se.getMessage());
@@ -228,6 +227,57 @@ public class ChefDAO implements ChefDAO_Interface{
 		}
 		return chefVO;
 	}
+	
+	@Override
+	public List<ChefVO> getAllByChefArea(String chef_area) {
+		List<ChefVO> listAllByChefArea = new ArrayList<ChefVO>();
+		ChefVO chefVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			con = ds.getConnection();			
+			pstmt = con.prepareStatement(Get_All_Chef_By_Chef_Area);
+			
+			pstmt.setString(1, chef_area);			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {				
+				chefVO = new ChefVO();				
+				chefVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefVO.setChef_area(rs.getString("CHEF_AREA"));
+				chefVO.setChef_channel(rs.getString("CHEF_CHANNEL"));
+				chefVO.setChef_resume(rs.getString("CHEF_RESUME"));
+				listAllByChefArea.add(chefVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("Database Error : "+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return listAllByChefArea;
+	}
 
 	@Override
 	public List<ChefVO> getAll() {
@@ -245,9 +295,9 @@ public class ChefDAO implements ChefDAO_Interface{
 			while (rs.next()) {
 				chefVO = new ChefVO();				
 				chefVO.setChef_ID(rs.getString("CHEF_ID"));
-				chefVO.setChef_name(rs.getString("CUST_NAME"));
-				chefVO.setChef_addr(rs.getString("CUST_ADDR"));
-				chefVO.setChef_tel(rs.getString("CUST_TEL"));
+				chefVO.setChef_area(rs.getString("CHEF_AREA"));
+				chefVO.setChef_channel(rs.getString("CHEF_CHANNEL"));
+				chefVO.setChef_resume(rs.getString("CHEF_RESUME"));
 				listAllChef.add(chefVO); // Store the row in the list
 			}
 		} catch (SQLException se) {

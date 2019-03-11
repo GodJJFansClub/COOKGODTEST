@@ -8,10 +8,6 @@ public class MenuVO implements java.io.Serializable {
 	private byte[] menu_pic;
 	private String menu_status;
 	private Integer menu_price;
-
-	public MenuVO() {
-
-	}
 	
 	public String getMenu_ID() {
 		return menu_ID;
@@ -60,5 +56,4 @@ public class MenuVO implements java.io.Serializable {
 	public void setMenu_price(Integer menu_price) {
 		this.menu_price = menu_price;
 	}
-
 }

@@ -3,9 +3,6 @@ package com.chef.model;
 public class ChefVO {
 	
 	private String chef_ID;
-	private String chef_name;
-	private String chef_tel;
-	private String chef_addr;
 	private String chef_area;
 	private String chef_status;
 	private String chef_channel;
@@ -16,24 +13,6 @@ public class ChefVO {
 	}
 	public void setChef_ID(String chef_ID) {
 		this.chef_ID = chef_ID;
-	}
-	public String getChef_name() {
-		return chef_name;
-	}
-	public void setChef_name(String chef_name) {
-		this.chef_name = chef_name;
-	}
-	public String getChef_tel() {
-		return chef_tel;
-	}
-	public void setChef_tel(String chef_tel) {
-		this.chef_tel = chef_tel;
-	}
-	public String getChef_addr() {
-		return chef_addr;
-	}
-	public void setChef_addr(String chef_addr) {
-		this.chef_addr = chef_addr;
 	}
 	public String getChef_area() {
 		return chef_area;

@@ -13,9 +13,9 @@ public class ChefService {
 		dao = new ChefDAO();
 	}
 	
-	public ChefVO addChef(String cust_acc, String cust_pwd, String cust_name, String cust_sex, String cust_tel,
+	public ChefVO insertChef(String cust_acc, String cust_pwd, String cust_name, String cust_sex, String cust_tel,
 			String cust_addr, String cust_pid, String cust_mail, Date cust_brd, Date cust_reg, byte[] cust_pic,
-			String cust_status, String cust_niname,String chef_ID,String chef_area,String chef_resume) {
+			String cust_status, String cust_niname,String chef_area,String chef_resume) {
 		
 		CustVO custVO = new CustVO();
 		custVO.setCust_acc(cust_acc);
@@ -31,12 +31,9 @@ public class ChefService {
 		custVO.setCust_pic(cust_pic);
 		custVO.setCust_status(cust_status);
 		custVO.setCust_niname(cust_niname);
-		
 		ChefVO chefVO = new ChefVO();
-		chefVO.setChef_ID(chef_ID);
 		chefVO.setChef_area(chef_area);
 		chefVO.setChef_resume(chef_resume);
-		
 		dao.insert(custVO, chefVO);
 		
 		return chefVO;
@@ -56,8 +53,11 @@ public class ChefService {
 	public void deleteChef(String chef_ID) {
 		dao.delete(chef_ID);
 	}
-	public ChefVO getOneChef(String chef_ID) {
+	public ChefVO getOneByChefID(String chef_ID) {
 		return dao.findByPrimaryKey(chef_ID);
+	}
+	public List<ChefVO> getAllByChefArea(String chef_area) {
+		return dao.getAllByChefArea(chef_area);
 	}
 	public List<ChefVO> getAll(){
 		return dao.getAll();

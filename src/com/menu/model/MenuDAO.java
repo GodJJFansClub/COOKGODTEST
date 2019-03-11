@@ -20,7 +20,7 @@ public class MenuDAO implements MenuDAO_interface {
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT INTO MENU (MENU_ID,MENU_NAME,MENU_RESUME,MENU_PIC,MENU_STATUS,MENU_PRICE) VALUES ('M'||LPAD((MENU_SEQ.NEXTVAL),5,'0'),?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO MENU (MENU_ID,MENU_NAME,MENU_RESUME,MENU_PIC,MENU_STATUS,MENU_PRICE) VALUES ('M'||LPAD((MENU_SEQ.NEXTVAL),5,'0'),?, ?, ?,'0', ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM MENU";
 	private static final String GET_ONE_STMT = "SELECT * FROM MENU WHERE MENU_ID = ?";
 	private static final String DELETE = "DELETE FROM MENU WHERE MENU_ID = ?";
@@ -39,8 +39,7 @@ public class MenuDAO implements MenuDAO_interface {
 			pstmt.setString(1, menuVO.getMenu_name());
 			pstmt.setString(2, menuVO.getMenu_resume());
 			pstmt.setBytes(3, menuVO.getMenu_pic());
-			pstmt.setString(4, menuVO.getMenu_status());
-			pstmt.setInt(5, menuVO.getMenu_price());
+			pstmt.setInt(4, menuVO.getMenu_price());
 
 			pstmt.executeUpdate();
 
@@ -150,9 +149,7 @@ public class MenuDAO implements MenuDAO_interface {
 		ResultSet rs = null;
 
 		try {
-
 			con = ds.getConnection();
-
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, menu_ID);
@@ -166,9 +163,8 @@ public class MenuDAO implements MenuDAO_interface {
 				menuVO.setMenu_resume(rs.getString("MENU_RESUME"));
 				menuVO.setMenu_pic(rs.getBytes("MENU_PIC"));
 				menuVO.setMenu_status(rs.getString("MENU_STATUS"));
-				menuVO.setMenu_price(rs.getInt("MENU_PRICE"));
+				menuVO.setMenu_price(rs.getInt("MENU_PRICE"));				
 			}
-
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -217,7 +213,7 @@ public class MenuDAO implements MenuDAO_interface {
 				menuVO.setMenu_ID(rs.getString("MENU_ID"));
 				menuVO.setMenu_name(rs.getString("MENU_NAME"));
 				menuVO.setMenu_resume(rs.getString("MENU_RESUME"));
-//				menuVO.setMenu_pic(rs.getBytes("MENU_PIC"));
+				menuVO.setMenu_pic(rs.getBytes("MENU_PIC"));
 				menuVO.setMenu_status(rs.getString("MENU_STATUS"));
 				menuVO.setMenu_price(rs.getInt("MENU_PRICE"));
 				list.add(menuVO);
