@@ -436,8 +436,5 @@ public class FestMenuServlet extends HttpServlet {
 			}
 		}
 	}
-	private FestMenuVO getFestMenuVO(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
