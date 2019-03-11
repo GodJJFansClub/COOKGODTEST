@@ -17,18 +17,18 @@ import javax.websocket.server.ServerEndpoint;
 import com.broadcast.model.BroadcastService;
 import com.broadcast.model.BroadcastVO;
 
-@ServerEndpoint("/BroadCastServer/{cust_IDOremp_ID}")
+@ServerEndpoint("/BroadCastServer/{cust_ID}")
 public class BroadCastServer {
 	private static final Set<Session> allSessions = Collections.synchronizedSet(new HashSet<Session>());
 	
 	@OnOpen
-	public void onOpen(@PathParam("cust_IDOremp_ID") String cust_IDOremp_ID, Session userSession) throws IOException {
+	public void onOpen(@PathParam("cust_ID") String cust_IDOremp_ID, Session userSession) throws IOException {
 		// 這時候應該就建立好連線了
 		allSessions.add(userSession);
 //		System.out.println(userSession.getId() + ": 已連線");
-//		System.out.println(cust_IDOremp_ID + ": 已連線");
+//		System.out.println(cust_ID+ ": 已連線");
 		BroadcastService broadcastSvc = new BroadcastService();
-		List<BroadcastVO> broadcastVOs = broadcastSvc.getOneBroadcastByCustID(cust_IDOremp_ID);
+		List<BroadcastVO> broadcastVOs = broadcastSvc.getOneBroadcastByCustID(cust_ID);
 		//	要用哪個再研究, async or basic, 串接字串
 		StringBuilder sb = new StringBuilder();
 		for(BroadcastVO broadcastVO: broadcastVOs) {

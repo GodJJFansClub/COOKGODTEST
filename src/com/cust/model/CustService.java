@@ -114,5 +114,16 @@ public class CustService {
 		//回傳有點小問題?
 		
 	}
+	public CustVO updateCust_status(String cust_ID,  String cust_status) {
+		CustVO custVO = new CustVO();
+		custVO.setCust_ID(cust_ID);
+		
+		custVO.setCust_status(cust_status);
+		
+		
+		dao.update(custVO);
+
+		return custVO;
+	}
 
 }

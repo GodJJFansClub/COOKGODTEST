@@ -20,7 +20,6 @@ import com.cust.model.*;
 
 import com.foodSup.model.FoodSupVO;
 
-
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class CustServlet extends HttpServlet {
 
@@ -37,13 +36,12 @@ public class CustServlet extends HttpServlet {
 			CustVO dao = (CustVO) ds.getOneCust(s);
 			byte[] sb = dao.getCust_pic();
 			out.write(sb);
-		
-		}catch(NullPointerException e){
+
+		} catch (NullPointerException e) {
 			errorMsgs.add("a");
-			
+
 		}
 	}
-	
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -95,25 +93,25 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 5.電話
-				String cust_tel =req.getParameter("cust_tel").trim();
+				String cust_tel = req.getParameter("cust_tel").trim();
 				if (cust_tel == null || cust_tel.trim().length() == 0) {
 					errorMsgs.add("電話請勿空白");
 				}
 
 				// 6.地址
-				String cust_addr =req.getParameter("cust_addr").trim();
+				String cust_addr = req.getParameter("cust_addr").trim();
 				if (cust_addr == null || cust_addr.trim().length() == 0) {
 					errorMsgs.add("地址請勿空白");
 				}
 
 				// 7.身分證字號
-				String cust_pid =req.getParameter("cust_pid").trim();
+				String cust_pid = req.getParameter("cust_pid").trim();
 				if (cust_pid == null || cust_pid.trim().length() == 0) {
 					errorMsgs.add("身分證字號請勿空白");
 				}
 
 				// 8.e-mail
-				String cust_mail =req.getParameter("cust_mail").trim();
+				String cust_mail = req.getParameter("cust_mail").trim();
 				if (cust_mail == null || cust_mail.trim().length() == 0) {
 					errorMsgs.add("e-mail請勿空白");
 				}
@@ -130,7 +128,7 @@ public class CustServlet extends HttpServlet {
 				// 10.註冊日
 				// 註冊日期
 				SimpleDateFormat setDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				
+
 				String xx = setDateFormat.format(Calendar.getInstance().getTime());
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
 
@@ -138,32 +136,30 @@ public class CustServlet extends HttpServlet {
 				String cust_status = "a0";
 
 				// 12.暱稱
-				String cust_niname =req.getParameter("cust_niname").trim();
+				String cust_niname = req.getParameter("cust_niname").trim();
 				if (cust_niname == null || cust_niname.trim().length() == 0) {
 					errorMsgs.add("暱稱請勿空白");
 				}
 
 				// 13.圖片
 //				byte[] cust_pic = null;
-				Part part= req.getPart("cust_pic");
+				Part part = req.getPart("cust_pic");
 				InputStream in = part.getInputStream();
 				byte[] cust_pic = new byte[in.available()];
 				in.read(cust_pic);
 				in.close();
-				
-				
-				//寄Email
-				String to = cust_mail;
-			      
-			      String subject = "會員驗證";
-			      
-			      String ch_name = "peter1";
-			      String passRandom = "111";
-			      String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" +" (已經啟用)"; 
-			       
-			      CustServlet mailService = new CustServlet();
-			      mailService.sendMail(to, subject, messageText);
 
+				// 寄Email
+				String to = cust_mail;
+
+				String subject = "會員驗證";
+
+				String ch_name = "peter1";
+				String passRandom = "111";
+				String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+
+				CustServlet mailService = new CustServlet();
+				mailService.sendMail(to, subject, messageText);
 
 				// set
 				CustVO custVO = new CustVO();
@@ -190,7 +186,7 @@ public class CustServlet extends HttpServlet {
 					return;
 				}
 
-				//將資料加入資料庫
+				// 將資料加入資料庫
 				CustService custSvc = new CustService();
 
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
@@ -198,20 +194,16 @@ public class CustServlet extends HttpServlet {
 				String url = "/front-end/cust/listAllCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				
-				
-				
-				//除錯
+
+				// 除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
 				failureView.forward(req, res);
 			}
-			
-			
-			
+
 		}
-		//新增食材供應商
+		// 新增食材供應商
 		if ("insert2".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -255,28 +247,28 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 5.電話
-				String cust_tel =req.getParameter("cust_tel").trim();
+				String cust_tel = req.getParameter("cust_tel").trim();
 				String cust_telReg = "^[(0-9)]{10,11}$";
 				if (cust_tel == null || cust_tel.trim().length() == 0) {
 					errorMsgs.add("電話號碼請勿空白");
-				} else if(!cust_tel.trim().matches(cust_telReg)) {
+				} else if (!cust_tel.trim().matches(cust_telReg)) {
 					errorMsgs.add("電話號碼: 只能是數字");
-	            }	
+				}
 
 				// 6.地址
-				String cust_addr =req.getParameter("cust_addr").trim();
+				String cust_addr = req.getParameter("cust_addr").trim();
 				if (cust_addr == null || cust_addr.trim().length() == 0) {
 					errorMsgs.add("地址請勿空白");
 				}
 
 				// 7.身分證字號
-				String cust_pid =req.getParameter("cust_pid").trim();
+				String cust_pid = req.getParameter("cust_pid").trim();
 				if (cust_pid == null || cust_pid.trim().length() == 0) {
 					errorMsgs.add("身分證字號請勿空白");
 				}
 
 				// 8.e-mail
-				String cust_mail =req.getParameter("cust_mail").trim();
+				String cust_mail = req.getParameter("cust_mail").trim();
 				if (cust_mail == null || cust_mail.trim().length() == 0) {
 					errorMsgs.add("e-mail請勿空白");
 				}
@@ -293,7 +285,7 @@ public class CustServlet extends HttpServlet {
 				// 10.註冊日
 				// 註冊日期
 				SimpleDateFormat setDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				
+
 				String xx = setDateFormat.format(Calendar.getInstance().getTime());
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
 
@@ -301,41 +293,41 @@ public class CustServlet extends HttpServlet {
 				String cust_status = "a0";
 
 				// 12.暱稱
-				String cust_niname =req.getParameter("cust_niname").trim();
+				String cust_niname = req.getParameter("cust_niname").trim();
 				if (cust_niname == null || cust_niname.trim().length() == 0) {
 					errorMsgs.add("暱稱請勿空白");
 				}
 
 				// 13.圖片
 //				byte[] cust_pic = null;
-				Part part= req.getPart("cust_pic");
+				Part part = req.getPart("cust_pic");
 				InputStream in = part.getInputStream();
 				byte[] cust_pic = new byte[in.available()];
 				in.read(cust_pic);
 				in.close();
-				
-				//14.食材供應商名稱
+
+				// 14.食材供應商名稱
 				String food_sup_name = req.getParameter("cust_niname");
 				String food_sup_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,30}$";
 				if (food_sup_name == null || food_sup_name.trim().length() == 0) {
 					errorMsgs.add("食材供應商名稱: 請勿空白");
-				} else if(!food_sup_name.trim().matches(food_sup_nameReg)) { //以下練習正則(規)表示式(regular-expression)
+				} else if (!food_sup_name.trim().matches(food_sup_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
 					errorMsgs.add("食材供應商名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到30之間");
-	            }
-				
-				//15.食材供應商電話
+				}
+
+				// 15.食材供應商電話
 				String food_sup_tel = req.getParameter("cust_tel").trim();
 				String food_sup_telReg = "^[(0-9)]{10,11}$";
 				if (food_sup_tel == null || food_sup_tel.trim().length() == 0) {
 					errorMsgs.add("電話號碼請勿空白");
-				} else if(!food_sup_tel.trim().matches(food_sup_telReg)) {
+				} else if (!food_sup_tel.trim().matches(food_sup_telReg)) {
 					errorMsgs.add("電話號碼: 只能是數字");
-	            }	
-				
-				//16.食材供應商狀態
-				String food_sup_status ="s0";
-				
-				//17.食材供應商簡歷
+				}
+
+				// 16.食材供應商狀態
+				String food_sup_status = "s0";
+
+				// 17.食材供應商簡歷
 				String food_sup_resume = req.getParameter("food_sup_resume");
 
 				// set
@@ -356,12 +348,12 @@ public class CustServlet extends HttpServlet {
 
 				List<FoodSupVO> testList = new ArrayList<FoodSupVO>();
 				FoodSupVO foodSupVO = new FoodSupVO();
-				
+
 				foodSupVO.setFood_sup_name(food_sup_name);
 				foodSupVO.setFood_sup_tel(food_sup_tel);
 				foodSupVO.setFood_sup_status(food_sup_status);
 				foodSupVO.setFood_sup_resume(food_sup_resume);
-				
+
 				testList.add(foodSupVO);
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
@@ -372,23 +364,24 @@ public class CustServlet extends HttpServlet {
 					return;
 				}
 
-				//將資料加入資料庫
+				// 將資料加入資料庫
 				CustService custSvc = new CustService();
-				
+
 				custVO = custSvc.addFoodSup(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
-						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname,food_sup_name,food_sup_tel,food_sup_status,food_sup_resume);
+						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname, food_sup_name, food_sup_tel,
+						food_sup_status, food_sup_resume);
 				String url = "/front-end/cust/listAllCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				
-				//除錯
+
+				// 除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addFoodSup.jsp");
 				failureView.forward(req, res);
 			}
 		}
-		
+
 		// 查詢-單一
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -486,8 +479,8 @@ public class CustServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				
-				//0.id
+
+				// 0.id
 				String cust_ID = new String(req.getParameter("cust_ID").trim());
 				// 1.姓名
 				String cust_name = req.getParameter("cust_name");
@@ -507,8 +500,7 @@ public class CustServlet extends HttpServlet {
 				} else if (!cust_pwd.trim().matches(cust_pwdReg)) {
 					errorMsgs.add(cust_pwd);
 				}
-				
-				
+
 				// "顧客密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
 
 				// 3.帳號
@@ -521,19 +513,19 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 4.性別
-				String cust_sex =req.getParameter("cust_sex");
+				String cust_sex = req.getParameter("cust_sex");
 				if (cust_sex == null || cust_sex.length() == 0) {
 					errorMsgs.add("性別請勿空白");
 				}
 
 				// 5.電話
-				String cust_tel =req.getParameter("cust_tel").trim();
+				String cust_tel = req.getParameter("cust_tel").trim();
 				if (cust_tel == null || cust_tel.trim().length() == 0) {
 					errorMsgs.add("電話請勿空白");
 				}
 
 				// 6.地址
-				String cust_addr =req.getParameter("cust_addr").trim();
+				String cust_addr = req.getParameter("cust_addr").trim();
 				if (cust_addr == null || cust_addr.trim().length() == 0) {
 					errorMsgs.add("地址請勿空白");
 				}
@@ -581,13 +573,11 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 13.圖片
-				Part part= req.getPart("cust_pic");
+				Part part = req.getPart("cust_pic");
 				InputStream in = part.getInputStream();
 				byte[] cust_pic = new byte[in.available()];
 				in.read(cust_pic);
 				in.close();
-
-				
 
 				// set
 				CustVO custVO = new CustVO();
@@ -662,19 +652,63 @@ public class CustServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+
+		if("updateCust_status".equals(action))
+
+		{
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+
+				// 0.id
+				String cust_ID = new String(req.getParameter("cust_ID").trim());
+				
+				// 11.狀態
+				String cust_status ="a0";
+
+				// set
+				CustVO custVO = new CustVO();
+				
+				custVO.setCust_status(cust_status);
+				
+
+				// 如果以上格式有錯
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
+					RequestDispatcher failureView = req.getRequestDispatcher("/cust/update_cust_input.jsp");
+
+					failureView.forward(req, res);
+					return;
+				}
+
+//				/***************************2.開始修改資料*****************************************/
+				CustService custSvc = new CustService();
+				custVO = custSvc.updateCust_status(cust_ID,cust_status);
+//				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				String url = "/front-end/cust/listOneCust.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
+				failureView.forward(req, res);
+
+			}
+		}
 		
-		
+
 		// ajax 驗證帳號
-		
-		
-		
+
 		if ("ask".equals(action)) {
-			
+
 			res.setContentType("text/plain; charset=UTF-8");
 			String cust_acc = req.getParameter("cust_acc");
 			CustService custSvc = new CustService();
 
-			JSONObject obj=new JSONObject();
+			JSONObject obj = new JSONObject();
 
 //			if (custVO.getCust_acc().equals(cust_acc)) {
 //				try {
@@ -691,215 +725,57 @@ public class CustServlet extends HttpServlet {
 //					e.printStackTrace();
 //				}
 //			}
-			
+
 			PrintWriter out = res.getWriter();
-			
-			
-			
-			if(custSvc.getOneCust_acc(cust_acc) == null) {
+
+			if (custSvc.getOneCust_acc(cust_acc) == null) {
 				out.write("此帳號可以使用");
-			}else {
+			} else {
 				out.write("此帳號已有重複");
 			}
 			out.flush();
 			out.close();
-			
-			
 		}
-		
+
 	}
-	
-	if ("update".equals(action)) {
-		List<String> errorMsgs = new LinkedList<String>();
-		req.setAttribute("errorMsgs", errorMsgs);
+
+	// 設定傳送郵件:至收信人的Email信箱,Email主旨,Email內容
+	public void sendMail(String to, String subject, String messageText) {
 
 		try {
-			
-			//0.id
-			String cust_ID = new String(req.getParameter("cust_ID").trim());
-			// 1.姓名
-			String cust_name = req.getParameter("cust_name");
-			String cust_nameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-			if (cust_name == null || cust_name.trim().length() == 0) {
-				errorMsgs.add("顧客姓名: 請勿空白");
-			} else if (!cust_name.trim().matches(cust_nameReg)) {
-				errorMsgs.add(cust_name);
-			}
-			// "顧客姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間"
+			// 設定使用SSL連線至 Gmail smtp Server
+			Properties props = new Properties();
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.socketFactory.port", "465");
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.port", "465");
 
-			// 2.密碼
-			String cust_pwd = req.getParameter("cust_pwd");
-			String cust_pwdReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
-			if (cust_pwd == null || cust_pwd.trim().length() == 0) {
-				errorMsgs.add("顧客密碼: 請勿空白");
-			} else if (!cust_pwd.trim().matches(cust_pwdReg)) {
-				errorMsgs.add(cust_pwd);
-			}
-			
-			
-			// "顧客密碼: 至少有一個數字, 至少有一個大寫或小寫英文字母 , 且長度必需在6到15之間"
+			// ●設定 gmail 的帳號 & 密碼 (將藉由你的Gmail來傳送Email)
+			// ●須將myGmail的【安全性較低的應用程式存取權】打開
+			final String myGmail = "ixlogic.wu@gmail.com";
+			final String myGmail_password = "BBB45678";
+			Session session = Session.getInstance(props, new Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(myGmail, myGmail_password);
+				}
+			});
 
-			// 3.帳號
-			String cust_acc = req.getParameter("cust_acc");
-			String cust_accReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,15}$";
-			if (cust_acc == null || cust_acc.trim().length() == 0) {
-				errorMsgs.add("顧客帳號: 請勿空白");
-			} else if (!cust_acc.trim().matches(cust_accReg)) {
-				errorMsgs.add("顧客帳號: 只能是英文字母開頭, 且長度必需在5到15之間");
-			}
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(myGmail));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
-			// 4.性別
-			String cust_sex =req.getParameter("cust_sex");
-			if (cust_sex == null || cust_sex.length() == 0) {
-				errorMsgs.add("性別請勿空白");
-			}
+			// 設定信中的主旨
+			message.setSubject(subject);
+			// 設定信中的內容
+			message.setText(messageText);
 
-			// 5.電話
-			String cust_tel =req.getParameter("cust_tel").trim();
-			if (cust_tel == null || cust_tel.trim().length() == 0) {
-				errorMsgs.add("電話請勿空白");
-			}
-
-			// 6.地址
-			String cust_addr =req.getParameter("cust_addr").trim();
-			if (cust_addr == null || cust_addr.trim().length() == 0) {
-				errorMsgs.add("地址請勿空白");
-			}
-
-			// 7.身分證字號
-			String cust_pid = new String(req.getParameter("cust_pid".trim()));
-			if (cust_pid == null || cust_pid.trim().length() == 0) {
-				errorMsgs.add("身分證字號請勿空白");
-			}
-
-			// 8.e-mail
-			String cust_mail = new String(req.getParameter("cust_mail".trim()));
-			if (cust_mail == null || cust_mail.trim().length() == 0) {
-				errorMsgs.add("e-mail請勿空白");
-			}
-
-			// 9.生日
-			java.sql.Date cust_brd = null;
-			try {
-				cust_brd = java.sql.Date.valueOf(req.getParameter("cust_brd").trim());
-			} catch (IllegalArgumentException e) {
-				cust_brd = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入日期!");
-			}
-
-			// 10.註冊日
-			// 註冊日期
-			SimpleDateFormat setDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			/*
-			 * 時：分：秒 HH:mm:ss HH : 23小時制 (0-23) kk : 24小時制 (1-24) hh : 12小時制 (1-12) KK :
-			 * 11小時制 (0-11)
-			 */
-			String xx = setDateFormat.format(Calendar.getInstance().getTime());
-			java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
-
-			// 11.狀態
-			String cust_status = new String(req.getParameter("cust_status".trim()));
-			if (cust_status == null || cust_status.trim().length() == 0) {
-				errorMsgs.add("狀態請勿空白");
-			}
-			// 12.暱稱
-			String cust_niname = new String(req.getParameter("cust_niname".trim()));
-			if (cust_niname == null || cust_niname.trim().length() == 0) {
-				errorMsgs.add("暱稱請勿空白");
-			}
-
-			// 13.圖片
-			Part part= req.getPart("cust_pic");
-			InputStream in = part.getInputStream();
-			byte[] cust_pic = new byte[in.available()];
-			in.read(cust_pic);
-			in.close();
-
-			
-
-			// set
-			CustVO custVO = new CustVO();
-			custVO.setCust_acc(cust_acc);
-			custVO.setCust_name(cust_name);
-			custVO.setCust_pwd(cust_pwd);
-			custVO.setCust_sex(cust_sex);
-			custVO.setCust_tel(cust_tel);
-			custVO.setCust_addr(cust_addr);
-			custVO.setCust_pid(cust_pid);
-			custVO.setCust_mail(cust_mail);
-			custVO.setCust_brd(cust_brd);
-			custVO.setCust_reg(cust_reg);
-			custVO.setCust_pic(cust_pic);
-			custVO.setCust_status(cust_status);
-			custVO.setCust_niname(cust_niname);
-
-			// 如果以上格式有錯
-			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-				RequestDispatcher failureView = req.getRequestDispatcher("/cust/update_cust_input.jsp");
-
-				failureView.forward(req, res);
-				return;
-			}
-
-//			/***************************2.開始修改資料*****************************************/
-			CustService custSvc = new CustService();
-
-			custVO = custSvc.updateCust(cust_ID, cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr,
-					cust_pid, cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
-//			custVO = custSvc.updateCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
-			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/front-end/cust/listOneCust.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
-			/*************************** 其他可能的錯誤處理 *************************************/
-		} catch (Exception e) {
-			errorMsgs.add("修改資料失敗:" + e.getMessage());
-			RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
-			failureView.forward(req, res);
-
+			Transport.send(message);
+			System.out.println("傳送成功!");
+		} catch (MessagingException e) {
+			System.out.println("傳送失敗!");
+			e.printStackTrace();
 		}
 	}
 
-		
-		// 設定傳送郵件:至收信人的Email信箱,Email主旨,Email內容
-		public void sendMail(String to, String subject, String messageText) {
-				
-		   try {
-			   // 設定使用SSL連線至 Gmail smtp Server
-			   Properties props = new Properties();
-			   props.put("mail.smtp.host", "smtp.gmail.com");
-			   props.put("mail.smtp.socketFactory.port", "465");
-			   props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-			   props.put("mail.smtp.auth", "true");
-			   props.put("mail.smtp.port", "465");
-
-	       // ●設定 gmail 的帳號 & 密碼 (將藉由你的Gmail來傳送Email)
-	       // ●須將myGmail的【安全性較低的應用程式存取權】打開
-		     final String myGmail = "ixlogic.wu@gmail.com";
-		     final String myGmail_password = "BBB45678";
-			   Session session = Session.getInstance(props, new Authenticator() {
-				   protected PasswordAuthentication getPasswordAuthentication() {
-					   return new PasswordAuthentication(myGmail, myGmail_password);
-				   }
-			   });
-
-			   Message message = new MimeMessage(session);
-			   message.setFrom(new InternetAddress(myGmail));
-			   message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
-			  
-			   //設定信中的主旨  
-			   message.setSubject(subject);
-			   //設定信中的內容 
-			   message.setText(messageText);
-
-			   Transport.send(message);
-			   System.out.println("傳送成功!");
-	     }catch (MessagingException e){
-		     System.out.println("傳送失敗!");
-		     e.printStackTrace();
-	     }
-	   }
-	
 }

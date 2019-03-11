@@ -42,9 +42,10 @@ public class BroadcastSocket {
 		State stateMessage = new State("open", userName, userNames);
 		String stateMessageJson = gson.toJson(stateMessage);
 		Collection<Session> sessions = sessionsMap.values();
-		for (Session session : sessions) {
-			session.getAsyncRemote().sendText(stateMessageJson);
-		}
+		//session登入登出的顯示訊息
+//		for (Session session : sessions) {
+//			session.getAsyncRemote().sendText(stateMessageJson);
+//		}
 
 		String text = String.format(
 				"Session ID = %s, connected; userName = %s%nusers: %s%nmaxTextMessageBufferSize = %s",
@@ -58,6 +59,8 @@ public class BroadcastSocket {
 //		System.out.println("message received: " + message);
 		MenuOrderVO menuOrderVO = gson.fromJson(message, MenuOrderVO.class);
 		
+		List<String>
+	
 		MenuOrderService menuOrderService = new MenuOrderService();
 		BroadcastService broadcastService = new BroadcastService();
 		StringBuilder broadcast_con_sb = new StringBuilder();
