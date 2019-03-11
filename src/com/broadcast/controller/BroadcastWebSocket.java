@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.servlet.http.HttpSession;
+
 import javax.websocket.EncodeException;
-import javax.websocket.EndpointConfig;
+
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -22,7 +22,6 @@ import com.cust.model.CustVO;
 @ServerEndpoint(
 		
 		value="/notifications/{cust_ID}", //not sure
-		configurator=GetHttpSessionConfigurator.class,
 		encoders = {BroadcastEncoder.class},
 		decoders = {BroadcastDecoder.class}
 		)

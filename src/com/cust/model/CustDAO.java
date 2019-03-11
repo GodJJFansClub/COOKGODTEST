@@ -457,5 +457,41 @@ public class CustDAO implements CustDAO_interface {
 
 			}
 	
+	public void updateCust_ID(CustVO custVO) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_CUST_STATUS);
+			
+			
+			pstmt.setString(1, custVO.getCust_status());
+			
+			pstmt.setString(2, custVO.getCust_ID());
+			
+			
+			pstmt.executeUpdate();		
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
 	
 }

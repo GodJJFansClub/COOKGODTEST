@@ -574,6 +574,11 @@ public class CustJDBCDAO implements CustDAO_interface {
 //		}
 		
 	}
+	@Override
+	public void updateCust_ID(CustVO custVO) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
