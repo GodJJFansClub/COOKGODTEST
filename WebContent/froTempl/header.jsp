@@ -31,7 +31,7 @@
 	                <nav class="classy-navbar justify-content-between" id="pixelNav">
 	
 	                    <!-- Nav brand -->
-	                    <a href="index.html" class="nav-brand">
+	                    <a href="index.html" class="nav-brand"></a>
 	
 	                    <!-- Navbar Toggler -->
 	                    <div class="classy-navbar-toggler">
