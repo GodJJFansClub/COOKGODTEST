@@ -17,6 +17,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import com.broadcast.model.BroadcastService;
+import com.broadcast.model.BroadcastVO;
 import com.google.gson.Gson;
 import com.menuOrder.model.MenuOrderService;
 import com.menuOrder.model.MenuOrderVO;
@@ -71,13 +72,14 @@ public class BroadcastSocket {
 			broadcast_con_sb.append("未通過審核");
 		}
 
-		broadcastService.addBroadcast(broadcast_con_sb.toString(),menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getCust_ID());
+		BroadcastVO broadcastVO=broadcastService.addBroadcast(broadcast_con_sb.toString(),menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getCust_ID());
 		
 		
 		String receiver = menuOrderVO.getCust_ID();
+		String sentMessage=gson.toJson(broadcastVO);
 		Session receiverSession = sessionsMap.get(receiver);
 		if (receiverSession != null && receiverSession.isOpen()) {
-			receiverSession.getAsyncRemote().sendText(message);
+			receiverSession.getAsyncRemote().sendText(sentMessage);
 		}
 	}
 
