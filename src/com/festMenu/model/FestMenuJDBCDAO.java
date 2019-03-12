@@ -22,6 +22,9 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 	private static final String DELETE = "DELETE FROM FEST_MENU WHERE FEST_M_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_MENU";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_MENU WHERE FEST_M_ID = ?";
+	private static final String GET_BETWEENDATA =
+			"SELECT * FROM FEST_MENU WHERE FEST_M_START < SYSDATE AND FEST_M_END > SYSDATE ORDER BY FEST_M_ID";
+	
 	@Override
 	public void insert(FestMenuVO festMenuVO) {
 		Connection con = null;
@@ -345,6 +348,74 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 		}
 	}
 	
+	@Override
+	public List<FestMenuVO> getAllIndate() {
+		List<FestMenuVO> list = new ArrayList<FestMenuVO>();
+		FestMenuVO festMenuVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_BETWEENDATA);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				festMenuVO = new FestMenuVO();
+				
+				festMenuVO.setFest_m_ID(rs.getString(1));
+				festMenuVO.setFest_m_name(rs.getString(2));
+				festMenuVO.setFest_m_qty(rs.getInt(3));
+				festMenuVO.setFest_m_start(rs.getDate(4));
+				festMenuVO.setFest_m_end(rs.getDate(5));
+				festMenuVO.setFest_m_pic(rs.getBytes(6));
+				festMenuVO.setFest_m_resume(rs.getString(7));
+				festMenuVO.setFest_m_send(rs.getDate(8));
+				festMenuVO.setFest_m_status(rs.getString(9));
+			    festMenuVO.setFest_m_kind(rs.getString(10));
+			    festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString(12));
+				
+				list.add(festMenuVO);
+			}
+		}catch (ClassNotFoundException e) {
+		 throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		FestMenuJDBCDAO dao = new FestMenuJDBCDAO();
@@ -389,18 +460,18 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 //    		dao.delete("5");
 //		
 //		// 查詢
-		FestMenuVO festMenuVO=dao.findByPrimaryKey("FM0002");
-		System.out.println(festMenuVO.getFest_m_ID() + ",");
-		System.out.println(festMenuVO.getFest_m_name() + ",");
-		System.out.println(festMenuVO.getFest_m_qty() + ",");
-		System.out.println(festMenuVO.getFest_m_start() + ",");
-		System.out.println(festMenuVO.getFest_m_end() + ",");
-		System.out.println(festMenuVO.getFest_m_pic() + ",");
-		System.out.println(festMenuVO.getFest_m_resume() + ",");
-		System.out.println(festMenuVO.getFest_m_send() + ",");
-		System.out.println(festMenuVO.getFest_m_status() + ",");
-		System.out.println(festMenuVO.getFest_m_kind() + ",");
-		System.out.println(festMenuVO.getChef_ID() + ",");
+//		FestMenuVO festMenuVO=dao.findByPrimaryKey("FM0002");
+//		System.out.println(festMenuVO.getFest_m_ID() + ",");
+//		System.out.println(festMenuVO.getFest_m_name() + ",");
+//		System.out.println(festMenuVO.getFest_m_qty() + ",");
+//		System.out.println(festMenuVO.getFest_m_start() + ",");
+//		System.out.println(festMenuVO.getFest_m_end() + ",");
+//		System.out.println(festMenuVO.getFest_m_pic() + ",");
+//		System.out.println(festMenuVO.getFest_m_resume() + ",");
+//		System.out.println(festMenuVO.getFest_m_send() + ",");
+//		System.out.println(festMenuVO.getFest_m_status() + ",");
+//		System.out.println(festMenuVO.getFest_m_kind() + ",");
+//		System.out.println(festMenuVO.getChef_ID() + ",");
 		
 
 //		List<FestMenuVO> list = dao.getAll();
@@ -419,5 +490,22 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 //			System.out.println(aReport.getChef_ID() + ",");
 	
 //		}
+		
+		List<FestMenuVO> list = dao.getAllIndate();
+		for(FestMenuVO aReport:list) {
+			
+			System.out.println(aReport.getFest_m_ID() + ",");
+			System.out.println(aReport.getFest_m_name() + ",");
+			System.out.println(aReport.getFest_m_qty() + ",");
+			System.out.println(aReport.getFest_m_start() + ",");
+			System.out.println(aReport.getFest_m_end() + ",");
+			System.out.println(aReport.getFest_m_pic() + ",");
+			System.out.println(aReport.getFest_m_resume() + ",");
+			System.out.println(aReport.getFest_m_send() + ",");
+			System.out.println(aReport.getFest_m_status() + ",");
+			System.out.println(aReport.getFest_m_kind() + ",");
+			System.out.println(aReport.getChef_ID() + ",");
+	
+		}
 	}
 }

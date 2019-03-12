@@ -73,7 +73,7 @@
 	</servlet-mapping>
 
 	<listener>
-		<listener-class>com.cookGodPub.CookGodListener</listener-class>
+		<listener-class>com.broadcast.controller.BroadcastWebSocket</listener-class>
 	</listener>
 	<context-param>
 		<param-name>org.apache.tomcat.websocket.textBufferSize</param-name>

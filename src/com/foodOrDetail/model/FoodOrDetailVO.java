@@ -11,6 +11,14 @@ public class FoodOrDetailVO implements Serializable {
 	private Integer food_od_stotal;
 	private Integer food_od_rate;
 	private String food_od_msg;
+	private String food_od_status;
+	
+	public String getFood_od_status() {
+		return food_od_status;
+	}
+	public void setFood_od_status(String food_od_status) {
+		this.food_od_status = food_od_status;
+	}
 	public String getFood_or_ID() {
 		return food_or_ID;
 	}

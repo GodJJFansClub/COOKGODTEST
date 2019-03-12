@@ -69,7 +69,7 @@
 								<td scope="col">${foodOrderVO.food_or_addr}</td>
 								<td scope="col">${foodOrderVO.food_or_tel}</td>
 								<td scope="col">
-									<c:set var="total" value="${0}"/>
+									<c:set var="total" value="0"/>
 										<c:forEach var="foodOrDetailVO" items="${foodOrderSvc.getFoodOrDetailsByFood_or_ID(foodOrderVO.food_or_ID)}">
 											<c:set var="total" value="${total+foodOrDetailVO.food_od_stotal}"/>
 										</c:forEach>

@@ -3,9 +3,11 @@ package com.foodSup.controller;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -166,6 +168,8 @@ public class FoodSupServlet extends HttpServlet{
 				foodSupVO = foodSupSvc.updateFoodSup(food_sup_ID, food_sup_name, food_sup_tel, food_sup_status, food_sup_resume);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
+				
+				
 				req.setAttribute("foodSupVO", foodSupVO); // 資料庫update成功後,正確的的FoodSupVO物件,存入req
 				String url = "/back-end/foodSup/listOneFoodSup.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp

@@ -21,7 +21,6 @@ public class FoodOrDetailServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-		
+	
 	}
 }

@@ -27,7 +27,8 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 	private static final String DELETE = "DELETE FROM FEST_MENU WHERE FEST_M_ID = ?";
 	private static final String UPDATE = "UPDATE FEST_MENU SET FEST_M_NAME = ?,FEST_M_QTY = ?,FEST_M_START = ?,FEST_M_END = ?,FEST_M_PIC = ? ,FEST_M_RESUME= ?,"
 			+ " FEST_M_SEND = ?,FEST_M_STATUS = ?, FEST_M_KIND = ?,CHEF_ID = ? WHERE FEST_M_ID = ? ";
-
+	private static final String GET_BETWEENDATA =
+			"SELECT * FROM FEST_MENU WHERE FEST_M_START < SYSDATE AND FEST_M_END > SYSDATE ORDER BY FEST_M_ID";
 	@Override
 	public void insert(FestMenuVO festMenuVO) {
 
@@ -285,6 +286,71 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public List<FestMenuVO> getAllIndate() {
+		List<FestMenuVO> list = new ArrayList<FestMenuVO>();
+		FestMenuVO festMenuVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BETWEENDATA);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				festMenuVO = new FestMenuVO();
+				
+				festMenuVO.setFest_m_ID(rs.getString(1));
+				festMenuVO.setFest_m_name(rs.getString(2));
+				festMenuVO.setFest_m_qty(rs.getInt(3));
+				festMenuVO.setFest_m_start(rs.getDate(4));
+				festMenuVO.setFest_m_end(rs.getDate(5));
+				festMenuVO.setFest_m_pic(rs.getBytes(6));
+				festMenuVO.setFest_m_resume(rs.getString(7));
+				festMenuVO.setFest_m_send(rs.getDate(8));
+				festMenuVO.setFest_m_status(rs.getString(9));
+			    festMenuVO.setFest_m_kind(rs.getString(10));
+			    festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString(12));
+				
+				list.add(festMenuVO);
+			}
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+		
 	}
 
 	@Override

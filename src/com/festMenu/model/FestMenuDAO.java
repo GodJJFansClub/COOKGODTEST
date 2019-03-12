@@ -31,6 +31,8 @@ public class FestMenuDAO implements FestMenu_Interface {
 	private static final String UPDATE_QTY = "UPDATE FEST_MENU SET FEST_M_QTY = ? WHERE FEST_M_ID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM FEST_MENU WHERE FEST_M_ID = ?";
 	private static final String Select_Menu_qty = "SELECT FEST_M_QTY FROM FEST_MENU WHERE = ?";
+	private static final String GET_BETWEENDATA =
+			"SELECT * FROM FEST_MENU WHERE FEST_M_START < SYSDATE AND FEST_M_END > SYSDATE ORDER BY FEST_M_ID";
 
 	@Override
 	public void insert(FestMenuVO festMenuVO) {
@@ -294,6 +296,61 @@ public class FestMenuDAO implements FestMenu_Interface {
 	}
 
 	@Override
+	public List<FestMenuVO> getAllIndate() {
+		List<FestMenuVO> list = new ArrayList<FestMenuVO>();
+		FestMenuVO festMenuVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BETWEENDATA);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				festMenuVO = new FestMenuVO();
+				
+				festMenuVO.setFest_m_ID(rs.getString(1));
+				festMenuVO.setFest_m_name(rs.getString(2));
+				festMenuVO.setFest_m_qty(rs.getInt(3));
+				festMenuVO.setFest_m_start(rs.getDate(4));
+				festMenuVO.setFest_m_end(rs.getDate(5));
+				festMenuVO.setFest_m_pic(rs.getBytes(6));
+				festMenuVO.setFest_m_resume(rs.getString(7));
+				festMenuVO.setFest_m_send(rs.getDate(8));
+				festMenuVO.setFest_m_status(rs.getString(9));
+			    festMenuVO.setFest_m_kind(rs.getString(10));
+			    festMenuVO.setFest_m_price(rs.getInt(11));
+				festMenuVO.setChef_ID(rs.getString(12));
+				
+				list.add(festMenuVO);
+			}
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
+	}
+	@Override
 	public void update2_FestMenu(String fest_m_ID, Integer final_qty) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -337,5 +394,5 @@ public class FestMenuDAO implements FestMenu_Interface {
 				}
 			}
 		}
-}
+	}
 }

@@ -54,10 +54,6 @@
 						<td>介紹:</td>
 						<td><textarea name="food_sup_resume">${foodSupVO.food_sup_resume}</textarea></td>
 					</tr>
-					
-				
-					
-				
 				</table>
 				<br>
 				<input type="hidden" name="action" value="update">

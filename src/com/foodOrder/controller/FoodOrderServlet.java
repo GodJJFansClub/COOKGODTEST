@@ -6,10 +6,12 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -379,7 +381,7 @@ public class FoodOrderServlet extends HttpServlet {
 
 				String food_or_addr = req.getParameter("food_or_addr");
 				if (food_or_addr == null || food_or_addr.trim().length() == 0) {
-					errorMsgs.add("郵遞區號請勿空白");
+					errorMsgs.add("收件地址請勿空白");
 				}
 				
 				
@@ -394,11 +396,12 @@ public class FoodOrderServlet extends HttpServlet {
 				String cust_ID = req.getParameter("cust_ID");
 				FoodOrderVO foodOrderVO = new FoodOrderVO();
 				foodOrderVO.setFood_or_name(food_or_name);
+				foodOrderVO.setFood_or_addr(food_or_addr);
 				foodOrderVO.setFood_or_tel(food_or_tel);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("foodOrderVO", foodOrderVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/addFoodOrder.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher(req.getParameter("requestURL"));
 					failureView.forward(req, res);
 					return;
 				}
@@ -409,15 +412,18 @@ public class FoodOrderServlet extends HttpServlet {
 				FoodOrderService foodOrderSvc = new FoodOrderService();
 				foodOrderVO = foodOrderSvc.addFoodOrder("o0", food_or_name, food_or_addr, food_or_tel, cust_ID, foodBuyList);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/foodOrder/listAllFoodOrder.jsp";
-
+				String url = "/front-end/foodOrder/listOneFoodOrder.jsp";
+				session.removeAttribute("shoppingCart");
+				
+				
+				
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/foodOrder/addFoodOrder.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher(req.getParameter("requestURL"));
 				failureView.forward(req, res);
 			}
 		}
@@ -465,4 +471,5 @@ public class FoodOrderServlet extends HttpServlet {
 		}
 		return addrJson;
 	}
+	
 }
