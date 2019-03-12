@@ -411,7 +411,7 @@ img {
 
 /* :: 4.0 Header Area CSS */
 .header-area {
-  /*position: absolute;*/
+  position: absolute;
   z-index: 1000;
   width: 100%;
   top: 0;

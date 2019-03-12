@@ -42,7 +42,7 @@
                     <nav class="classy-navbar justify-content-between" id="pixelNav">
 
                         <!-- Nav brand -->
-                        <a href="index.html" class="nav-brand"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
+                        <a href="headertest.jsp" class="nav-brand"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -60,7 +60,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="headertest.jsp">Home</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="services.html">Services</a></li>
                                     <li><a href="portfolio.html">Pages</a>

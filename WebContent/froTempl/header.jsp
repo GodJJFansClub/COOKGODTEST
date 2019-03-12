@@ -1,32 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cust.model.CustVO" %>
 <jsp:useBean id="custVO" scope="session" class="com.cust.model.CustVO"/>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<link rel="stylesheet"
+    <!-- Title -->
+    <title>Pixel - Digital Agency HTML Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="<%=request.getContextPath()%>/froTempl/temp/img/core-img/favicon.ico">
+	
+    <!-- Stylesheet -->
+    <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/froTempl/temp/style.css">
-	<link rel="icon" href="<%=request.getContextPath()%>/froTempl/temp/img/core-img/favicon.ico">
-	<!-- ##### Footer Area Start ##### -->
-
-    <!-- ##### All Javascript Script ##### -->
-
 </head>
-<body onload="connect();" onunload="disconnect();">
-	<!-- jQuery-2.2.4 js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
+
+<body>
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="lds-ellipsis">
@@ -47,7 +42,7 @@
                     <nav class="classy-navbar justify-content-between" id="pixelNav">
 
                         <!-- Nav brand -->
-                        <a href="index.html" class="nav-brand"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
+                        <a href="headertest.jsp" class="nav-brand"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -65,7 +60,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="headertest.jsp">Home</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="services.html">Services</a></li>
                                     <li><a href="portfolio.html">Pages</a>
@@ -154,8 +149,10 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
+  
+    <!-- ##### Contact Area End #####-->
 
-    <!-- ##### Footer Area Start ##### -->
+
 
  
 	<!-- Modal -->
@@ -178,7 +175,17 @@
 	    </div>
 	  </div>
 	</div>
-
+ <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="<%=request.getContextPath()%>/froTempl/temp/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
 </body>
 <script>
 

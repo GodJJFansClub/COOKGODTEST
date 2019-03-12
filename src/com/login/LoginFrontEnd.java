@@ -7,10 +7,6 @@ import javax.servlet.http.*;
 import com.cust.model.CustService;
 import com.cust.model.CustVO;
 
-
-import javax.servlet.annotation.WebServlet;
-
-
 public class LoginFrontEnd extends HttpServlet {
 	private static final long serialVersionUID = 2L;
 
@@ -18,6 +14,7 @@ public class LoginFrontEnd extends HttpServlet {
 	// 【實際上應至資料庫搜尋比對】
 
 	protected boolean allowUser(String account, String password, HttpSession session) {
+
 		CustService custSvc = new CustService();
 //	  try {
 		CustVO custVO = custSvc.getOneCust_acc(account);
@@ -40,33 +37,96 @@ public class LoginFrontEnd extends HttpServlet {
 		res.setContentType("text/html; charset=Big5");
 		PrintWriter out = res.getWriter();
 //		CustVO custVO = (CustVO) req.getAttribute("custVO");
-
-		// 【取得使用者 帳號(account) 密碼(password)】
-		String account = req.getParameter("account");
-		String password = req.getParameter("password");
-		HttpSession session = req.getSession();
 		
+		//get action
+		String action = req.getParameter("action");
 		
+		//cust
+		if ("cust".equals(action)) {
+			// 【取得使用者 帳號(account) 密碼(password)】
+			String account = req.getParameter("account");
+			String password = req.getParameter("password");
+			HttpSession session = req.getSession();
 
-		// 【檢查該帳號 , 密碼是否有效】
-		if (!allowUser(account, password, session)) { // 【帳號 , 密碼無效時】
-			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
-			out.println("<BODY>你的帳號 , 密碼無效!<BR>");
-			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/front-end/loginFrontEnd.jsp>重新登入</A>");
-			out.println("</BODY></HTML>");
-		} else { // 【帳號 , 密碼有效時, 才做以下工作】
+			// 【檢查該帳號 , 密碼是否有效】
+			if (!allowUser(account, password, session)) { // 【帳號 , 密碼無效時】
+				out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
+				out.println("<BODY>你的帳號 , 密碼無效!<BR>");
+				out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/front-end/loginFrontEnd.jsp>重新登入</A>");
+				out.println("</BODY></HTML>");
+			} else { // 【帳號 , 密碼有效時, 才做以下工作】
 
-			try {
-				String location = (String) session.getAttribute("location");
-				if (location != null) {
-					session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
-					res.sendRedirect(location);
-					return;
+				try {
+					String location = (String) session.getAttribute("location");
+					if (location != null) {
+						session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
+						res.sendRedirect(location);
+						return;
+					}
+				} catch (Exception ignored) {
 				}
-			} catch (Exception ignored) {
-			}
 
-			res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
+				res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3:
+																							// (-->如無來源網頁:則重導至login_success.jsp)
+			}
+		}
+		
+		if ("foodSup".equals(action)) {
+			// 【取得使用者 帳號(account) 密碼(password)】
+			String account = req.getParameter("account");
+			String password = req.getParameter("password");
+			HttpSession session = req.getSession();
+
+			// 【檢查該帳號 , 密碼是否有效】
+			if (!allowUser(account, password, session)) { // 【帳號 , 密碼無效時】
+				out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
+				out.println("<BODY>你的帳號 , 密碼無效!<BR>");
+				out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/front-end/loginFrontFoodSup.jsp>重新登入</A>");
+				out.println("</BODY></HTML>");
+			} else { // 【帳號 , 密碼有效時, 才做以下工作】
+
+				try {
+					String location = (String) session.getAttribute("location");
+					if (location != null) {
+						session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
+						res.sendRedirect(location);
+						return;
+					}
+				} catch (Exception ignored) {
+				}
+
+				res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3:
+																							// (-->如無來源網頁:則重導至login_success.jsp)
+			}
+		}
+		
+		if ("chef".equals(action)) {
+			// 【取得使用者 帳號(account) 密碼(password)】
+			String account = req.getParameter("account");
+			String password = req.getParameter("password");
+			HttpSession session = req.getSession();
+
+			// 【檢查該帳號 , 密碼是否有效】
+			if (!allowUser(account, password, session)) { // 【帳號 , 密碼無效時】
+				out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
+				out.println("<BODY>你的帳號 , 密碼無效!<BR>");
+				out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/front-end/loginFrontChef.jsp>重新登入</A>");
+				out.println("</BODY></HTML>");
+			} else { // 【帳號 , 密碼有效時, 才做以下工作】
+
+				try {
+					String location = (String) session.getAttribute("location");
+					if (location != null) {
+						session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
+						res.sendRedirect(location);
+						return;
+					}
+				} catch (Exception ignored) {
+				}
+
+				res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3:
+																							// (-->如無來源網頁:則重導至login_success.jsp)
+			}
 		}
 	}
 }
