@@ -26,12 +26,10 @@
 			MenuVO order = buylist.get(i);
 			String menu_name = order.getMenu_ID();
 			int menu_price = order.getMenu_price();
-			int menu_qty = order.getMenu_qty();
 	%>
 	<tr>
 		<td width="200"><div align="center"><b><%=menu_name%></b></div></td>
 		<td width="100"><div align="center"><b><%=menu_price%></b></div></td>
-		<td width="100"><div align="center"><b><%=menu_qty%></b></div></td>
 	</tr>
 	<%}%>
 	<tr>

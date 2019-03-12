@@ -106,10 +106,10 @@
 							<div class="col-4">
 								<form method="post" action="<%=request.getContextPath()%>/menu/menu.do">
 									<c:if test="${not empty menuVO.menu_pic}">
-										<img class="card-img-top" src="<%=request.getContextPath()%>/menu/menu.do?menu_ID=${menuVO.menu_ID}" style="width: 100%; height: 250px;">
+										<img class="card-img-top" name = "showMenuPic" src="<%=request.getContextPath()%>/menu/menu.do?showMenuPic=showMenuPic&menu_ID=${menuVO.menu_ID}" style="width: 100%; height: 250px;">
 									</c:if>
 									<c:if test="${empty menuVO.menu_pic}">
-										<img class="card-img-top" src="<%=request.getContextPath()%>/images/noimage.jpg" style="width: 100%; height: 250px;">
+										<img class="card-img-top" name = "showMenuPic" src="<%=request.getContextPath()%>/images/noimage.jpg" style="width: 100%; height: 250px;">
 									</c:if>
 									<div class="card-body">
 										<h5 class="card-title">${menuVO.menu_name}</h5>
