@@ -417,9 +417,5 @@ public class FestOrderJNDIDAO implements FestOrder_Interface {
 		    }
 }
 
-	@Override
-	public FestOrderVO getByPrimaryKey(String fest_or_ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

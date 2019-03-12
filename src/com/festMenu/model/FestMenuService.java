@@ -69,6 +69,10 @@ public class FestMenuService {
 	public List<FestMenuVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<FestMenuVO> getAllIndate(){
+		return dao.getAllIndate();
+	}
 
 	public FestMenuVO update2_FestMenu(String fest_m_ID,Integer final_qty) {
 

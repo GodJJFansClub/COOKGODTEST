@@ -4,12 +4,12 @@
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
 /* :: 2.0 Import All CSS */
-@import url(/CA106G3/front-end/templ/css/bootstrap.min.css);
-@import url(/CA106G3/front-end/templ/css/classy-nav.css);
-@import url(/CA106G3/front-end/templ/css/owl.carousel.min.css);
-@import url(/CA106G3/front-end/templ/css/animate.css);
-@import url(/CA106G3/front-end/templ/css/magnific-popup.css);
-@import url(/CA106G3/front-end/templ/css/font-awesome.min.css);
+@import url(/CA106G3/froTempl/templ/css/bootstrap.min.css);
+@import url(/CA106G3/froTempl/templ/css/classy-nav.css);
+@import url(/CA106G3/froTempl/templ/css/owl.carousel.min.css);
+@import url(/CA106G3/froTempl/templ/css/animate.css);
+@import url(/CA106G3/froTempl/templ/css/magnific-popup.css);
+@import url(/CA106G3/froTempl/templ/css/font-awesome.min.css);
 /* :: 3.0 Base CSS */
 * {
   margin: 0;

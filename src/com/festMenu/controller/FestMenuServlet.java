@@ -9,31 +9,44 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
-import com.cust.model.CustService;
-import com.cust.model.CustVO;
 import com.festMenu.model.FestMenuService;
 import com.festMenu.model.FestMenuVO;
+
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class FestMenuServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
+		InputStream in = null;
 		List<String> errorMsgs = new LinkedList<String>();
-
-		String s = req.getParameter("fest_m_ID");
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
 		try {
+			String s = req.getParameter("fest_m_ID");
 			FestMenuService ds = new FestMenuService();
-			FestMenuVO dao = (FestMenuVO) ds.getOneFestMenu(s);
-			byte[] sb = dao.getFest_m_pic();
-			out.write(sb);
-		
-		}catch(NullPointerException e){
-			errorMsgs.add("a");
+			FestMenuVO dao = ds.getOneFestMenu(s);
+
+			if(dao.getFest_m_pic() != null) {
+				out.write(dao.getFest_m_pic());
+			} else {
+				in = getServletContext().getResourceAsStream("/images/null2.jpg");
+				byte[] buff = new byte[in.available()];
+				in.read(buff);
+				out.write(buff);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			
+		} finally {
+			if(in != null) {
+				in.close();
+			}
+			out.close();
 		}
 	}
 

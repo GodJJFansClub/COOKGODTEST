@@ -33,7 +33,8 @@
     </div>
 
     <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
+    <%--<header class="header-area"> --%>
+    <header >
         <!-- Navbar Area -->
         <div class="pixel-main-menu" id="sticker">
             <div class="classy-nav-container breakpoint-off">
