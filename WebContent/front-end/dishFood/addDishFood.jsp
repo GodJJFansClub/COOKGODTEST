@@ -1,11 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.dishFood.model.*,com.food.model.*"%>
-
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Set" %>
 
 <jsp:useBean id="dishFoodSvc" scope="page" class="com.dishFood.model.DishFoodService" />
 <jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService" />
 <jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService" />
+<jsp:useBean id="gson" class="com.google.gson.Gson"/>
 
 
 <html>
@@ -57,56 +62,34 @@
 				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do">
 					<table>
 						<tr>
-							<b>選擇菜色:</td>
+							<td>選擇菜色:</td>
 							
-							<tr>
+							<td>
 								<select size="1" name="dish_ID">
 									<c:forEach var="dishFoodVO" items="${dishSvc.all}" >
 										<option value="${dishFoodVO.dish_ID}">${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}
 									</c:forEach>
 								</select>
-							</tr>
+							</td>
 						</tr>
+					</table>
 						
-						
-								
-						</tr>
-						
-						<h3>選擇食材:</h3>	
+					<h3>選擇食材:</h3>	
 						<div class="container">
 							<div class="row">
-								<div class="col-sm">肉:</div>
-								<div class="col-sm">蔬果:</div>
-								<div class="col-sm">海鮮:</div>
-								<div class="col-sm">米,麵,粉:</div>
-								<div class="col-sm">南北雜貨:</div>
+							<c:forEach var="food_type" items="${foodTypeMap}">
+								<div class="col-sm ${food_type.key}">${food_type.value}</div>
+							</c:forEach>
 							</div>
 						</div>
 							
-							<div class="container">
-							<div class="row">
-								<div class="col-sm">
-								<c:forEach var="dishFoodVO" items="${foodSvc.all}" >
-										
-										
-										<input type="checkbox" name="food_ID" value="${dishFoodVO.food_ID}">${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}
-										
-					
-									</c:forEach>
-									</div>
-								<div class="col-sm">蔬果:</div>
-								<div class="col-sm">海鮮:</div>
-								<div class="col-sm">米,麵,粉:</div>
-								<div class="col-sm">南北雜貨:</div>
-							</div>
-							</div>
+						<div id="foodList" class="container">
 							
-						
-						
-					</table>
+						</div>
 					<input type="hidden" name="action" value="AllFood">
 					<input type="submit" value="送出"><br>
 				</FORM>
+				
 			</div>
 			<div class="col-6" style="backgoung-color:gray;">Right</div>
 		</div>
@@ -125,6 +108,54 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 		crossorigin="anonymous"></script>
+	<script>
+		
+		<%	
+			Map<String, String> foodTypeMap = (Map<String, String>)application.getAttribute("foodTypeMap");
+			Set<String> food_type_IDs = foodTypeMap.keySet();
+			List<Set<FoodVO>> foodCatogry = new ArrayList<>();
+			
+			
+			for(String foodKey:food_type_IDs){
+				foodCatogry.add(foodSvc.getFoodsByFood_type_ID(foodKey));
+			}
+			
+		%>
+		let foodJsonObj = <%=gson.toJson(foodCatogry)%>;
+		let maxLength = 0;
+		jQuery.each(foodJsonObj,function(foodProper){
+			if(foodJsonObj[foodProper].length > maxLength){
+				maxLength = foodJsonObj[foodProper].length;
+			}
+		});
+		console.log(foodJsonObj);
+		for(let i = 0; i < maxLength; i++){
+			let divE = document.createElement('div');
+			divE.setAttribute("class", "row");
+			
+			jQuery.each(foodJsonObj,function(foodProper){
+				let divCE = document.createElement('div');
+				divCE.setAttribute("class", "col");
+				
+				if(i < foodJsonObj[foodProper].length){
+					let chE = document.createElement('input');
+					chE.setAttribute("value", foodJsonObj[foodProper][i].food_ID);
+					chE.setAttribute("type", "checkbox");
+					chE.setAttribute("name", "food_ID");
+					
+					divCE.appendChild(chE);
+					divCE.appendChild(document.createTextNode(foodJsonObj[foodProper][i].food_name));
+				}
+				
+				divE.appendChild(divCE);
+			});
+			$("#foodList").append(divE);
+		}
+		
+		
+		
+	</script>
+	
 
 </body>
 </html>
