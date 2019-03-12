@@ -114,14 +114,13 @@ public class CustService {
 		//回傳有點小問題?
 		
 	}
-	public CustVO updateCust_status(String cust_ID,  String cust_status) {
+	public CustVO updateCust_status(String cust_ID) {
 		CustVO custVO = new CustVO();
 		custVO.setCust_ID(cust_ID);
 		
-		custVO.setCust_status(cust_status);
 		
 		
-		dao.update(custVO);
+		dao.updateCust_ID(custVO);
 
 		return custVO;
 	}

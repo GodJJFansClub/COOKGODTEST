@@ -39,14 +39,14 @@ public class LoginFrontEnd extends HttpServlet {
 		req.setCharacterEncoding("Big5");
 		res.setContentType("text/html; charset=Big5");
 		PrintWriter out = res.getWriter();
-		CustVO custVO = (CustVO) req.getAttribute("custVO");
+//		CustVO custVO = (CustVO) req.getAttribute("custVO");
 
 		// 【取得使用者 帳號(account) 密碼(password)】
 		String account = req.getParameter("account");
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession();
 		
-		session.setAttribute("custVO", custVO);
+		
 
 		// 【檢查該帳號 , 密碼是否有效】
 		if (!allowUser(account, password, session)) { // 【帳號 , 密碼無效時】
