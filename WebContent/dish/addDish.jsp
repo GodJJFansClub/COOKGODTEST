@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料新增 - addEmp.jsp</title>
+
  
  <script 
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -53,8 +53,9 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>菜色資料新增 - addDish.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
+	<br>
+		 <h3>新增菜色</h3></td><td>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -76,7 +77,7 @@
 	<tr>
 		<td>菜色名稱:</td>
 		<td><input type="TEXT" name="dish_name" size="42"
-			 value="<%= (dishVO==null)? "MANAGER" : dishVO.getDish_name()%>" /><br></td>
+			 value="<%= (dishVO==null)? "請輸入菜色名稱" : dishVO.getDish_name()%>" /><br></td>
 	</tr>
 	
 
@@ -86,7 +87,7 @@
 		<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"/>
 		<br>
 		<input type="file" name="dish_pic" size="43" id="progressbarTWInput" 
-			 	value="<%= (dishVO==null)? "10000" : dishVO.getDish_pic()%>" />
+			 	value="<%= (dishVO==null)? "請輸入照片" : dishVO.getDish_pic()%>" />
 		<br>
 		</td>	 
 	</tr>
@@ -99,7 +100,7 @@
 	<tr>
 		<td>菜色價格:</td>
 		<td><input type="TEXT" name="dish_price" size="43"
-			 value="<%= (dishVO==null)? "100" : dishVO.getDish_price()%>" /></td>
+			 value="<%= (dishVO==null)? "請輸入菜色價格" : dishVO.getDish_price()%>" /></td>
 	</tr>
 
 

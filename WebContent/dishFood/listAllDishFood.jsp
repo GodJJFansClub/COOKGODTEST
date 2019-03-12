@@ -15,7 +15,7 @@
 
 <html>
 <head>
-<title>所有食材資料 - listAllDishFood.jsp</title>
+<title>所有食材資料</title>
 
 <style>
   table#table-1 {
@@ -53,11 +53,10 @@
 </head>
 <body bgcolor='white'>
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有菜色食材 - listAllDishFood.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>所有菜色食材</h3>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 

@@ -59,36 +59,18 @@
 </c:if>
 
 <ul>
-  <li><a href='AllDish.jsp'>菜色</a><br><br></li>
-  <li><a href='listAllDish_ByMenu.jsp'>套餐菜色</a><br><br></li>
-   <li><a href='listAllDish_ByFood.jsp'>菜色食材</a> </li>
-
-  <jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService" />
-   
-  <li>
-     <FORM METHOD="post" ACTION="dish.do" >
-       <b>選擇菜色:</b>
-       <select size="1" name="dish_ID">
-         <c:forEach var="dishVO" items="${dishSvc.all}" > 
-          <option value="${dishVO.dish_ID}">${dishVO.dish_name}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="送出">
-    </FORM>
-  </li>
+  <li><a href='listAllForumArt.jsp'>所有文章</a><br><br></li>
+  <li><a href='listAllForumArt_ByForumMsg.jsp'>所有留言</a><br><br></li>
 </ul>
 <h6 >新增</h6>
 
 <ul>
-<li><a href='addDish.jsp'>新增菜色</a> </li>
+<li><a href='addForumArt.jsp'>新增文章</a> </li>
 </ul>
 <ul>
-<li><a href="<%=request.getContextPath() %>/back-end/dishFood/addDishFood.jsp">新增菜色食材</a> </li>
+<li><a href="<%=request.getContextPath() %>/back-end/forumMsg/addForumMsg.jsp">新增文章留言</a> </li>
 </ul>
-<ul>
-<li><a href="<%=request.getContextPath() %>/back-end/menuDish/addMenuDish.jsp">新增套餐菜色</a> </li>
-</ul>
+
 
 
 

@@ -1,20 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.dish.model.*"%>
+<%@ page import="com.dishFood.model.*"%>
+<jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService"/>
 <jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService"/>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-
-    List<DishVO> list = dishSvc.getAll();
+    DishFoodService dishFoodSvc = new DishFoodService();
+    List<DishFoodVO> list = dishFoodSvc.getAll();
     pageContext.setAttribute("list",list);
 %>
 
 
 <html>
 <head>
-<title>所有菜色資料 - listAllDish.jsp</title>
+<title>所有食材資料 - listAllDishFood.jsp</title>
 
 <style>
   table#table-1 {
@@ -55,8 +56,8 @@
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有菜色資料 - listAllDish.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dishselect_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>所有菜色食材 - listAllDishFood.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -70,39 +71,37 @@
 	</ul>
 </c:if>
 
-
 <table>
 	<tr>
 		<th>菜色編號:</th>
-		<th>菜色名稱:</th>
-		<th>菜色照片:</th>
-		<th>菜色介紹:</th>
-		<th>菜色狀態</th>
-		<th>菜色價格</th>
+		<th>食材名稱:</th>
+		<th>食材數量:</th>
+		<th>數量單位:</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:forEach var="dishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr ${(dishVO.dish_ID==param.dish_ID) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
+	<c:forEach var="dishFoodVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		
 		<tr>
-			<td>${dishVO.dish_ID}</td>
-			<td>${dishVO.dish_name}</td>
-			<td><img src ="<%=request.getContextPath()%>/back-end/dish/dish.do?dish_ID=${dishVO.dish_ID}"  width="300" height="200"></td>
-			<td >${dishVO.dish_resume}</td>
-			<td>${dishVO.dish_status}</td> 
-			<td>${dishVO.dish_price}</td>
+			<td>${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</td>
+			<td>${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</td>
+			<td>${dishFoodVO.dish_f_qty}</td>
+			<td>${dishFoodVO.dish_f_unit}</td>
+			
 			
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="審核">
-			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}"> 
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="dish_ID"  value="${dishFoodVO.dish_ID}">
+			     <input type="hidden" name="food_ID"  value="${dishFoodVO.food_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
+			     <input type="hidden" name="dish_ID"  value="${dishFoodVO.dish_ID}">
+			     <input type="hidden" name="food_ID"  value="${dishFoodVO.food_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

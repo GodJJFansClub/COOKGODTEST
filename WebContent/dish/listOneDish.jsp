@@ -9,7 +9,8 @@
 
 <html>
 <head>
-<title>員工資料 - listOneDish.jsp</title>
+
+<title>單一菜色查詢</title>
 
 <style>
   table#table-1 {
@@ -47,10 +48,9 @@
 </head>
 <body bgcolor='white'>
 
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料 - ListOneDish.jsp</h3>
+		 <h3>菜色瀏覽</h3>
 		 
 	</td></tr>
 </table>
@@ -63,7 +63,7 @@
 		<th>菜色介紹</th>
 		<th>菜色價格</th>
 		<th>菜色狀態</th>
-		<th>修改</th>
+		<th>審核</th>
 		<th>刪除</th>
 	</tr>
 	<tr>
@@ -77,7 +77,7 @@
 		
 		<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
+			     <input type="submit" value="審核">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>

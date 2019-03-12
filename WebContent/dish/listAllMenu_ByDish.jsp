@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.menuDish.model.*"%>
+<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService"/>
+<jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService"/>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
@@ -85,8 +87,8 @@
 	<c:forEach var="menuDishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${menuDishVO.menu_ID}</td>
-			<td>${menuDishVO.dish_ID}</td>
+			<td>${menuSvc.getOneMenu(menuDishVO.menu_ID).menu_name}</td>
+			<td>${dishSvc.getOneDish(menuDishVO.dish_ID).dish_name}</td>
 			
 			
 			<td>
