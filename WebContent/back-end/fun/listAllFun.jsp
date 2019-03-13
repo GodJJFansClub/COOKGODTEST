@@ -82,7 +82,7 @@ th, td {
 			
 			
 		</tr>
-		<%@ include file="page1.file"%>
+		<%@ include file="/file/page1.file"%>
 		<c:forEach var="funVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
 
@@ -112,7 +112,7 @@ th, td {
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="page2.file"%>
+	<%@ include file="/file/page2.file"%>
 
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />

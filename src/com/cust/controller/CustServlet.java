@@ -180,7 +180,7 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/login/addCust.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -191,14 +191,14 @@ public class CustServlet extends HttpServlet {
 
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
-				String url = "/front-end/cust/listAllCust.jsp";
+				String url = "/front-end/froTempl/headertest.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				// 除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addCust.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/login/addCust.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -358,7 +358,7 @@ public class CustServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addFoodSup.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/login/addFoodSup.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -370,14 +370,14 @@ public class CustServlet extends HttpServlet {
 				custVO = custSvc.addFoodSup(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname, food_sup_name, food_sup_tel,
 						food_sup_status, food_sup_resume);
-				String url = "/front-end/cust/listAllCust.jsp";
+				String url = "/front-end/froTempl/headertest.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				// 除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/addFoodSup.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/login/addFoodSup.jsp");
 				failureView.forward(req, res);
 			}
 		}
