@@ -133,7 +133,7 @@ public class CustServlet extends HttpServlet {
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
 
 				// 11.狀態
-				String cust_status = "a0";
+				String cust_status = "a1";
 
 				// 12.暱稱
 				String cust_niname = req.getParameter("cust_niname").trim();
@@ -154,8 +154,8 @@ public class CustServlet extends HttpServlet {
 
 				String subject = "會員驗證";
 
-				String ch_name = "peter1";
-				String passRandom = "111";
+				String ch_name = cust_name;
+				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
 				String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
 
 				CustServlet mailService = new CustServlet();
