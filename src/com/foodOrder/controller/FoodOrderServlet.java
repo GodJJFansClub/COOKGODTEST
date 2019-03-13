@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -21,6 +23,10 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.cust.model.CustVO;
+import com.festOrder.model.FestOrderService;
+import com.festOrder.model.FestOrderVO;
+import com.festOrderDetail.model.FestOrderDetailVO;
 import com.foodOrDetail.model.FoodOrDetailVO;
 import com.foodOrder.model.FoodOrderService;
 import com.foodOrder.model.FoodOrderVO;
@@ -393,11 +399,24 @@ public class FoodOrderServlet extends HttpServlet {
 					errorMsgs.add("收件人電話 : 09XXXXXXXX");
 				}
 				
-				String cust_ID = req.getParameter("cust_ID");
+				HttpSession session = req.getSession();
+				@SuppressWarnings("unchecked")
+				List<Object> shoppingCart = (Vector<Object>) session.getAttribute("shoppingCart");
+				List<FoodOrDetailVO> foodCart = shoppingCart.stream()
+						.filter(item -> item instanceof FoodOrDetailVO)
+						.map(item -> {return (FoodOrDetailVO) item;})
+						.collect(Collectors.toList());
+				List<FestOrderDetailVO> festCart = shoppingCart.stream()
+						.filter(item -> item instanceof FestOrderDetailVO)
+						.map(item -> {return (FestOrderDetailVO) item;})
+						.collect(Collectors.toList());
+				
+				String cust_ID =((CustVO) session.getAttribute("custVO")).getCust_ID();
 				FoodOrderVO foodOrderVO = new FoodOrderVO();
 				foodOrderVO.setFood_or_name(food_or_name);
 				foodOrderVO.setFood_or_addr(food_or_addr);
 				foodOrderVO.setFood_or_tel(food_or_tel);
+				
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("foodOrderVO", foodOrderVO);
@@ -406,11 +425,15 @@ public class FoodOrderServlet extends HttpServlet {
 					return;
 				}
 				/*************************** 2.開始新增資料 ***************************************/
-				HttpSession session = req.getSession();
-				@SuppressWarnings("unchecked")
-				List<FoodOrDetailVO> foodBuyList = (Vector<FoodOrDetailVO>) session.getAttribute("shoppingCart");
-				FoodOrderService foodOrderSvc = new FoodOrderService();
-				foodOrderVO = foodOrderSvc.addFoodOrder("o0", food_or_name, food_or_addr, food_or_tel, cust_ID, foodBuyList);
+				if(foodCart.size() > 0) {
+					FoodOrderService foodOrderSvc = new FoodOrderService();
+					foodOrderVO = foodOrderSvc.addFoodOrder("o0", food_or_name, food_or_addr, food_or_tel, cust_ID, foodCart);
+				}
+				FestOrderVO festOrderVO = new FestOrderVO();
+				if(festCart.size() > 0) {
+					FestOrderService festOrderSvc = new FestOrderService();
+					
+				}
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-end/foodOrder/listOneFoodOrder.jsp";
 				session.removeAttribute("shoppingCart");

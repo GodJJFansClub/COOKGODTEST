@@ -114,5 +114,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
+    
 </body>
 </html>

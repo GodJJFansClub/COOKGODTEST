@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.cust.model.CustVO" %>
+<%@ page import="com.foodOrDetail.model.FoodOrDetailVO" %>
 <jsp:useBean id="festMenuSvc" class="com.festMenu.model.FestMenuService"/>
-
+<jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
+<jsp:useBean id="checkType" class="com.mall.controller.CheckType"/>
 
 <html>
 <head>
 </head>
 <body>
-	<div>
-		<jsp:include page="/froTempl/header.jsp" flush="true" />
-	</div>
+	
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<section class="contact-area section-padding-100">
 		<div class="container">
-			<a href='<%=request.getContextPath()%>/front-end/listFestMall.jsp'>節慶主題料理</a>
+			<a href='<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp'>食材商城</a>
 			<p>
 			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 				購物車
@@ -37,20 +39,33 @@
 				   <tbody id="shopCartList">
 				   <c:forEach var="shopItem" items="${shoppingCart}">
 				      <tr class="shopItemT">
-					  <td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
-					  <td>${shopItem.food_od_qty}</td>
-					  <td>${shopItem.food_od_stotal}</td>
-					  <td>
-					  	<form>
-						  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
-						    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
-						    <input type="hidden" name="action" value="delCartItem">
-						  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
-					  	</form>
-					  </td>
-					    
+				      <c:if test="${checkType.getIsFOD(shopItem)}">
+						  <td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
+						  <td>${shopItem.food_od_qty}</td>
+						  <td>${shopItem.food_od_stotal}</td>
+						  <td>
+						  	<form>
+							  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
+							    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
+							    <input type="hidden" name="action" value="delCartItem">
+							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
+						  	</form>
+						  </td>
+					  </c:if>
+					  <c:if test="${!checkType.getIsFOD(shopItem)}">
+						  <td>${festMenuSvc.getOneFestMenu(shopItem.fest_m_ID).fest_m_name}</td>
+						  <td>${shopItem.fest_or_qty}</td>
+						  <td>${shopItem.fest_or_stotal}</td>
+						  <td>
+						  	<form>
+							    <input type="hidden" name="fest_m_ID" value="${shopItem.fest_m_ID}">
+							    <input type="hidden" name="action" value="delCartItem">
+							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
+						  	</form>
+						  </td>
+					  </c:if>
 					  </tr>
-						</c:forEach>
+					</c:forEach>
 						  <tr id="copyShopIF" style="display:none">
 						  <td></td>
 						  <td></td>
@@ -58,7 +73,6 @@
 						  <td>
 						  	<form>
 							  	<input type="hidden">
-							    <input type="hidden">
 							    <input type="hidden" name="action" value="delCartItem">
 							  	<button type="button" class="btn btn-dark">刪除</button>
 						  	</form>
@@ -69,28 +83,25 @@
 				</div>
 			</div>
 			<div class="row">
-				<c:forEach var="festMenuVO" items="${festMenuSvc.all}" varStatus="s">
+				<c:forEach var="festMenuVO" items="${festMenuSvc.allIndate}" varStatus="s">
 					<div class="col-3">
 						<div id="foodMCard${s.index}" class="card foodMCard">
-				  			<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" class="card-img-top">
+				  			<img src="<%=request.getContextPath()%>/festmenu/festmenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" class="card-img-top">
 				  			<div class="card-body">
-				    			<p class="card-text shopUse food_m_name">
+				    			<p class="card-text shopUse fest_m_name">
 				    				${festMenuVO.fest_m_name}
 				    			</p>
-				    			<p class="card-text shopUse food_name">
-				    				${festMenuVO.fest_m_oty}
-				    			</p>
-				    			<p class="card-text shopUse food_sup_name">
-				    				開始預購日期 : ${festMenuVO.fest_m_start}
+				    			<p class="card-text shopUse fest_m_qty">
+				    				${festMenuVO.fest_m_qty}
 				    			</p>
 				    			<p class="card-text">
-				    				預購結束日期 : ${foodMallVO.fest_m_end}
+				    				預購結束日期 : ${festMenuVO.fest_m_end}
 				    			</p>
 				    			<form>
 				    				<button type="button" name="foodMBtn" class="btn btn-primary">加入購物車</button>
 				    				<input type="hidden" name="fest_m_ID" value="${festMenuVO.fest_m_ID}">
 		
-				    				<input type="number"   name="food_od_qty" min="1" max="20" size="3" value="1">
+				    				<input type="number"   name="fest_or_qty" min="1" max="20" size="3" value="1">
 				    			</form>
 				    			<p class="card-text errorMsgs"></p>
 				  			</div>
@@ -99,23 +110,7 @@
 				</c:forEach>
 	         </div>
 	    </div>
-	    <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                       <a class="page-link" href="#" aria-label="Next">
-                           <span aria-hidden="true">&raquo;</span>
-                       </a>
-                </li>
-             </ul>
-        </nav>
+	    </section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
 		
@@ -128,10 +123,10 @@
 					$.ajax({
 						 type:"POST",
 						 url: "<%=request.getContextPath()%>/mall/mall.do",
-						 data: crtQryStrFoodM( $(this).attr("id") , "addFoodMShoppingCart", $(this).find("form").serializeArray()),
+						 data: crtQryStrFoodM( $(this).attr("id") , "addFestMenu", $(this).find("form").serializeArray()),
 						 dataType: "json",
 						 success: function (data){
-							 
+							 console.log(foodMNames);
 							 if(data["foodMCardID"]){
 								 $("#"+data["foodMCardID"]).find(".errorMsgs").text(data["efood_od_qty"]);	 
 							 }else{
@@ -187,10 +182,9 @@
 			
 			jQuery.each( shopCartTrs, function(i, val){
 				let inputArr = $(this).find("form").serializeArray();
-				if(food_sup_ID === inputArr[0].value 
-						&& inputArr[1].value === data.food_ID){
-					$(this).children("td:eq(1)").text(data.food_od_qty);
-					$(this).children("td:eq(2)").text(data.food_od_stotal);
+				if(inputArr[0].value === data.fest_m_ID){
+					$(this).children("td:eq(1)").text(data.fest_or_qty);
+					$(this).children("td:eq(2)").text(data.fest_or_stotal);
 					isNewCartItem = false;
 					return;
 				}
@@ -198,13 +192,11 @@
 			
 			if(isNewCartItem){
 				let shopCartItem = $("#copyShopIF").clone();
-				shopCartItem.children("td:eq(0)").text(foodMNames.food_m_name);
-				shopCartItem.children("td:eq(1)").text(data.food_od_qty);
-				shopCartItem.children("td:eq(2)").text(data.food_od_stotal);
-				shopCartItem.find(":input:eq(0)").attr('name', "food_sup_ID");
-				shopCartItem.find(":input:eq(0)").attr('value', data.food_sup_ID);
-				shopCartItem.find(":input:eq(1)").attr('name', "food_ID");
-				shopCartItem.find(":input:eq(1)").attr('value', data.food_ID);
+				shopCartItem.children("td:eq(0)").text(foodMNames.fest_m_name);
+				shopCartItem.children("td:eq(1)").text(data.fest_or_qty);
+				shopCartItem.children("td:eq(2)").text(data.fest_or_stotal);
+				shopCartItem.find(":input:eq(0)").attr('name', "fest_m_ID");
+				shopCartItem.find(":input:eq(0)").attr('value', data.fest_m_ID);
 				shopCartItem.removeAttr('style');
 				shopCartItem.removeAttr('id');
 				$("#shopCartList").append(shopCartItem);

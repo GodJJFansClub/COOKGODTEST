@@ -345,6 +345,48 @@ public class FoodSupJDBCDAO implements FoodSupDAO_interface {
 		return set;
 	}
 	
+	
+	
+	@Override
+	public void updateStatus(FoodSupVO foodSupVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+
+			pstmt.setString(1, foodSupVO.getFood_sup_status());			
+			pstmt.setString(2, foodSupVO.getFood_sup_ID());
+			
+
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+
 	public static void main(String[] args) {
 		FoodSupJDBCDAO foodSupJDBCDAO = new FoodSupJDBCDAO();
 		

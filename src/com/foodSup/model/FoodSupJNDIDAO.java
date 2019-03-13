@@ -30,6 +30,8 @@ public class FoodSupJNDIDAO implements FoodSupDAO_interface {
 			"INSERT INTO FOOD_SUP (FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME) VALUES (?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE FOOD_SUP SET FOOD_SUP_NAME = ?, FOOD_SUP_TEL = ?, FOOD_SUP_STATUS = ?, FOOD_SUP_RESUME = ? WHERE FOOD_SUP_ID = ?";
+	private static final String UPDATE_STATUS = 
+			"UPDATE FOOD_SUP SET FOOD_SUP_STATUS = ? WHERE FOOD_SUP_ID = ?";
 	private static final String GET_ALL_STMT = 
 			"SELECT FOOD_SUP_ID, FOOD_SUP_NAME, FOOD_SUP_TEL, FOOD_SUP_STATUS, FOOD_SUP_RESUME FROM FOOD_SUP ORDER BY FOOD_SUP_ID";
 	private static final String GET_ONE_STMT = 
@@ -157,6 +159,42 @@ public class FoodSupJNDIDAO implements FoodSupDAO_interface {
 	}
 
 
+	@Override
+	public void updateStatus(FoodSupVO foodSupVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			con =ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+
+			pstmt.setString(1, foodSupVO.getFood_sup_status());			
+			pstmt.setString(2, foodSupVO.getFood_sup_ID());
+			
+
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
 	@Override
 	public FoodSupVO findByPrimaryKey(String food_sup_ID) {
 		FoodSupVO foodSupVO = null;

@@ -1,6 +1,10 @@
 package com.festOrderDetail.model;
 
-public class FestOrderDetailVO {
+import java.io.Serializable;
+
+public class FestOrderDetailVO implements Serializable {
+
+	private static final long serialVersionUID = 10L;
 	private String fest_or_ID;
 	private String fest_m_ID;
 	private Integer fest_or_rate;
@@ -45,6 +49,28 @@ public class FestOrderDetailVO {
 		this.fest_or_stotal = fest_or_stotal;
 	}
 
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fest_m_ID == null) ? 0 : fest_m_ID.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FestOrderDetailVO other = (FestOrderDetailVO) obj;
+		if (fest_m_ID == null) {
+			if (other.fest_m_ID != null)
+				return false;
+		} else if (!fest_m_ID.equals(other.fest_m_ID))
+			return false;
+		return true;
+	}
 
 }

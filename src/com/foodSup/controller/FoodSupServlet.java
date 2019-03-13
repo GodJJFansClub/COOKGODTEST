@@ -110,7 +110,7 @@ public class FoodSupServlet extends HttpServlet{
 			}
 		}
 		
-		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
+		if ("update".equals(action)) { // 來自前端食材供應商請求更改
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -214,6 +214,60 @@ public class FoodSupServlet extends HttpServlet{
 			
 		}
 		
+		if("updateBack".equals(action)){
+			updateBack(req, res);
+		}
+	}
+	
+	private void updateBack(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String food_sup_ID = req.getParameter("food_sup_ID").trim();
+			
+			
+			String food_sup_status = req.getParameter("food_sup_status").trim();
+			if (food_sup_status == null || food_sup_status.trim().length() == 0) {
+				errorMsgs.add("狀態請勿空白");
+			}
+
+			FoodSupVO foodSupVO = new FoodSupVO();
+			foodSupVO.setFood_sup_ID(food_sup_ID);
+			foodSupVO.setFood_sup_status(food_sup_status);
+
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("foodSupVO", foodSupVO); // 含有輸入格式錯誤的FoodSupVO物件,也存入req
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back-end/foodSup/update_foodSup_input.jsp");
+				failureView.forward(req, res);
+				return; //程式中斷
+			}
+			
+			/***************************2.開始修改資料*****************************************/
+			FoodSupService foodSupSvc = new FoodSupService();
+			foodSupVO = foodSupSvc.updateStatus(food_sup_ID, food_sup_status);
+			
+			/***************************3.修改完成,準備轉交(Send the Success view)*************/
+			
+			
+			req.setAttribute("foodSupVO", foodSupVO); // 資料庫update成功後,正確的的FoodSupVO物件,存入req
+			String url = "/back-end/foodSup/listOneFoodSup.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+
+			/***************************其他可能的錯誤處理*************************************/
+		} catch (Exception e) {
+			errorMsgs.add("修改資料失敗:"+e.getMessage());
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/back-end/foodSup/update_foodSup_input.jsp");
+			failureView.forward(req, res);
+		}
 	}
 
 }

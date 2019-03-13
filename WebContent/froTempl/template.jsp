@@ -4,8 +4,13 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	
-	
+
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
+    
+    </section>
+    <!-- ##### Contact Area End #####-->
+
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

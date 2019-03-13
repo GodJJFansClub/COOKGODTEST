@@ -32,12 +32,12 @@
 						<td>${foodSupVO.food_sup_ID}</td>
 					</tr>
 					<tr>
-						<td><font color=red><b>*</b></font>食材供應商名稱:</td>
-						<td><input type="TEXT" name="food_sup_name" size="45" value="${foodSupVO.food_sup_name}" /></td>
+						<td>食材供應商名稱:</td>
+						<td>${foodSupVO.food_sup_name}</td>
 					</tr>
 					<tr>
 						<td>食材供應商電話:</td>
-						<td><input type="TEXT" name="food_sup_tel" size="45"	value="${foodSupVO.food_sup_tel}" /></td>
+						<td>${foodSupVO.food_sup_tel}</td>
 					</tr>
 					<tr>
 						<td>狀態:</td>
@@ -52,11 +52,11 @@
 					</tr>
 					<tr>
 						<td>介紹:</td>
-						<td><textarea name="food_sup_resume">${foodSupVO.food_sup_resume}</textarea></td>
+						<td>${foodSupVO.food_sup_resume}</td>
 					</tr>
 				</table>
 				<br>
-				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="action" value="updateBack">
 				<input type="hidden" name="food_sup_ID" value="${foodSupVO.food_sup_ID}">
 				<input type="submit" value="送出修改">
 			</FORM>

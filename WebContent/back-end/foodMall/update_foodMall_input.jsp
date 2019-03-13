@@ -39,8 +39,7 @@
 				<table>
 					<tr>
 						<td>標題:</td>
-						<td><input type="TEXT" name="food_m_name" size="45" 
-							 value="<%= (foodMallVO==null)? "蔬果" : foodMallVO.getFood_m_name()%>" /></td>
+						<td>${foodMallVO.food_m_name}</td>
 					</tr>
 					<tr>
 						<td>商品狀態:</td>
@@ -54,19 +53,15 @@
 					</tr>
 					<tr>
 						<td>商品價格:</td>
-						<td><input type="TEXT" name="food_m_price" size="45"
-							 value="<%= (foodMallVO==null)? "10000" : foodMallVO.getFood_m_price()%>" /></td>
+						<td>${foodMallVO.food_m_price}</td>
 					</tr>
 					<tr>
 						<td>單位:</td>
-						<td>
-							<input type="text" name="food_m_unit" value="<%= (foodMallVO==null)? "公斤" : foodMallVO.getFood_m_unit()%>">
-						</td>
+						<td>${foodMallVO.food_m_unit}</td>
 					</tr>
 					<tr>
 						<td>產地:</td>
-						<td><input type="TEXT" name="food_m_place" size="45"
-							 value="<%= (foodMallVO==null)? "台灣" : foodMallVO.getFood_m_place()%>" /></td>
+						<td>${foodMallVO.food_m_place}</td>
 					</tr>
 			
 				
@@ -78,13 +73,12 @@
 				</tr>
 				<tr>
 					<td>商品照片:</td>
-					<td><input type="file" name="food_m_pic" 
-						 value="C:/XXX/XXX" /></td>
+					<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"></td>
 				</tr>
 				<tr>
 					<td>介紹:</td>
 					<td>
-						<textarea name="food_m_resume">${empty foodMallVO.food_m_resume ? "請介紹" : foodMallVO.food_m_resume}</textarea>
+						${empty foodMallVO.food_m_resume ? "請介紹" : foodMallVO.food_m_resume}
 					</td>
 				</tr>
 				</table>

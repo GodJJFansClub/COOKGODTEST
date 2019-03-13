@@ -7,6 +7,7 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<section class="contact-area section-padding-100">
 	<%-- 錯誤列表 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -19,7 +20,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card card-body">
-						<h4 class="card-title">新增食材商城訂單</h4>
+					<h4 class="card-title">結帳</h4>
 					<form class="form-horizontal m-t-30" method="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
 						<div class="form-group">
 						<label>收件人姓名</label>
@@ -44,7 +45,7 @@
 				</div>
 			</div>
 		</div>
-	
+	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

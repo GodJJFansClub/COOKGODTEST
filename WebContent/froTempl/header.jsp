@@ -23,6 +23,7 @@
 </head>
 
 <body>
+	<script src="<%=request.getContextPath()%>/ckeditor4/ckeditor.js"></script>
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="lds-ellipsis">
@@ -66,10 +67,18 @@
                                     <li><a href="services.html">食神來了</a></li>
                                     <li><a href="portfolio.html">食神配送</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">節慶主題</a></li>
-                                            <li><a href="about.html">嚴選食材</a></li>
+                                            <li><a href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
+                                            <li><a href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp">嚴選食材</a></li>
                                         </ul>
                                     </li>
+                                    <c:if test="${not empty foodSupVO}">
+	                                    <li><a href="">食材供應商專區</a>
+	                                    	<ul class="dropdown">
+	                                    		<li><a href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
+	                                    		<li><a href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
+	                                    	</ul>
+	                                    </li>
+                                    </c:if>
                                     <li><a href="contact.html">主廚論壇</a></li>
                                   	 	<c:if test="${not empty custVO}">
                                     		<li><a href="contact.html">Hello:<font color=red> ${custVO.cust_name} </font>您好</a></li>

@@ -2,6 +2,8 @@ package com.foodMall.model;
 
 import java.util.List;
 
+import com.foodOrDetail.model.FoodOrDetailVO;
+
 public class FoodMallService {
 	private FoodMallDAO_interface dao;
 	public FoodMallService() {
@@ -48,6 +50,14 @@ public class FoodMallService {
 	
 	public List<FoodMallVO> getAll(){
 		return dao.getAll();
+	}
+	
+	public List<FoodMallVO> getAllStatus(String food_m_status){
+		return dao.getAllStatus(food_m_status);
+	}
+	
+	public List<FoodOrDetailVO> getFoodMallODs(String food_sup_ID , String food_ID){
+		return dao.getFoodOrDetailsByF_IDAFS_ID(food_sup_ID, food_ID);
 	}
 	
 	public FoodMallVO getOneFoodMall(String food_sup_ID, String food_ID) {

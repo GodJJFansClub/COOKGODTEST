@@ -15,15 +15,15 @@
 <body>
 	
 		<jsp:include page="/froTempl/header.jsp" flush="true" />
-	
+		<section class="contact-area section-padding-100">
 		<div class="container">
 			<a href='<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp'>節慶主題料理</a>
 			<p>
-			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseShoppingCart" aria-expanded="false" aria-controls="collapseShoppingCart">
 				購物車
 			</button>
 			</p>
-			<div class="collapse" id="collapseExample">
+			<div class="collapse" id="collapseShoppingCart">
 				<div class="card card-body">
 				<table class="table">
 				   <thead class="thead-dark">
@@ -51,7 +51,7 @@
 							  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
 							    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
 							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
+							  	<button id="btnDel" type="button" class="btn btn-dark shoppingCartItemDel">刪除</button>
 						  	</form>
 						  </td>
 					  </c:if>
@@ -63,7 +63,7 @@
 						  	<form>
 							    <input type="hidden" name="fest_m_ID" value="${shopItem.fest_m_ID}">
 							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
+							  	<button id="btnDel" type="button" class="btn btn-dark shoppingCartItemDel">刪除</button>
 						  	</form>
 						  </td>
 					  </c:if>
@@ -78,7 +78,7 @@
 							  	<input type="hidden">
 							    <input type="hidden">
 							    <input type="hidden" name="action" value="delCartItem">
-							  	<button type="button" class="btn btn-dark">刪除</button>
+							  	<button type="button" class="btn btn-dark shoppingCartItemDel">刪除</button>
 						  	</form>
 						  </td>	
 						  </tr>
@@ -87,9 +87,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<c:forEach var="foodMallVO" items="${foodMallSvc.all}" varStatus="s">
+				<c:forEach var="foodMallVO" items='${foodMallSvc.getAllStatus("p4")}' varStatus="s">
 					<div class="col-3">
-						<div id="foodMCard${s.index}" class="card foodMCard">
+						<div id="foodMCard${s.index}" class="card foodMCard listOneMall">
 				  			<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" class="card-img-top">
 				  			<div class="card-body">
 				    			<p class="card-text shopUse food_m_name">
@@ -104,11 +104,10 @@
 				    			<p class="card-text">
 				    				${foodMallVO.food_m_price}
 				    			</p>
-				    			<form>
+				    			<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
 				    				<button type="button" name="foodMBtn" class="btn btn-primary">加入購物車</button>
 				    				<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
-				    				<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
-		
+				    				<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">	
 				    				<input type="number"   name="food_od_qty" min="1" max="20" size="3" value="1">
 				    			</form>
 				    			<p class="card-text errorMsgs"></p>
@@ -118,23 +117,7 @@
 				</c:forEach>
 	         </div>
 	    </div>
-	    <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                       <a class="page-link" href="#" aria-label="Next">
-                           <span aria-hidden="true">&raquo;</span>
-                       </a>
-                </li>
-             </ul>
-        </nav>
+	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
 		
@@ -164,6 +147,18 @@
 			            	console.log(errdata);
 			             }
 			         });
+				}
+			});
+			// 顯示商品詳情
+			$(".listOneMall").click(function(evt){
+				let mallForm = $(this).find("form");
+				if(evt.target.name !== "foodMBtn"){
+					let action = document.createElement("input");
+					action.setAttribute("type","hidden");
+					action.setAttribute("name","action");
+					action.setAttribute("value","getOneDisplayFoodMall");
+					mallForm.append(action);
+					mallForm.submit();
 				}
 			});
 			
@@ -232,8 +227,32 @@
 			
 			
 		}
-		
-		
+		// 發送刪除訊息
+		function sendDelMsg(){
+			$.ajax({
+				 type:"POST",
+				 url: "<%=request.getContextPath()%>/mall/mall.do",
+				 data: crtQryStrFoodM( $(this).attr("id") , "addFoodMShoppingCart", $(this).find("form").serializeArray()),
+				 dataType: "json",
+				 success: function (data){
+					 
+					 if(data["foodMCardID"]){
+						 ;	 
+					 }else{
+						delShoppingCartItem();
+					 }
+					 
+			     },
+	             error: function(errdata){
+	            	alert("ajax 錯誤");
+	            	console.log(errdata);
+	             }
+	         });
+		}
+		// 刪除購物車商品
+		function delShoppingCartItem(){
+			
+		}
 	</script>
 </body>
 </html>

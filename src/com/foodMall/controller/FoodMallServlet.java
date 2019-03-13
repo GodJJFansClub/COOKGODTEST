@@ -133,7 +133,6 @@ public class FoodMallServlet extends HttpServlet{
 					errorMsgs.put("em_name","食材商品名稱:只能是中文, 且長度必需在1~30之間");
 				}
 				
-				String food_m_status = req.getParameter("food_m_status");
 				Integer food_m_price = null;
 				try{
 					food_m_price = new Integer(req.getParameter("food_m_price"));
@@ -174,7 +173,6 @@ public class FoodMallServlet extends HttpServlet{
 				
 				FoodMallVO foodMallVO = new FoodMallVO();
 				foodMallVO.setFood_m_name(food_m_name);
-				foodMallVO.setFood_m_status(food_m_status);
 				foodMallVO.setFood_m_price(food_m_price);
 				foodMallVO.setFood_m_unit(food_m_unit);
 				foodMallVO.setFood_m_place(food_m_place);
@@ -187,13 +185,13 @@ public class FoodMallServlet extends HttpServlet{
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("foodMallVO", foodMallVO);
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-end/foodMall/addFoodMall.jsp");
+							.getRequestDispatcher("/front-end/foodSup/addFoodMall.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				/***************************2.開始新增資料***************************************/
 				FoodMallService foodMallService = new FoodMallService();
-				foodMallVO = foodMallService.addFoodMall(food_sup_ID, food_ID, food_m_name, food_m_status,
+				foodMallVO = foodMallService.addFoodMall(food_sup_ID, food_ID, food_m_name, "p2",
 						food_m_price, food_m_unit, food_m_place, food_m_pic, food_m_resume, 0);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = 
@@ -205,12 +203,12 @@ public class FoodMallServlet extends HttpServlet{
 			}catch(Exception e) {
 				errorMsgs.put("Exception",e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/foodMall/addFoodMall.jsp");
+						.getRequestDispatcher("/front-end/foodSup/addFoodMall.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
-		if ("getOne_For_Update".equals(action)) { // 這個前後都可能進
+		if ("getOne_For_Update".equals(action)) { // 這個後進
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -337,6 +335,40 @@ public class FoodMallServlet extends HttpServlet{
 			}
 		}
 		
+		if("foodSupGetUpdate".equals(action)) {
+			foodSupGetUpdate(req,res);
+		}
+		
+	}
+	
+	private void foodSupGetUpdate(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+		
+		try {
+			/***************************1.接收請求參數****************************************/
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String food_ID = req.getParameter("food_ID");
+			
+			/***************************2.開始查詢資料****************************************/
+			FoodMallService foodMallSvc = new FoodMallService();
+			FoodMallVO foodMallVO = foodMallSvc.getOneFoodMall(food_sup_ID, food_ID);
+			
+			/***************************3.查詢完成,準備轉交(Send the Success view)************/
+			req.setAttribute("foodMallVO", foodMallVO);         // 資料庫取出的foodMallVO物件,存入req
+			String url = "/front-end/foodMall/update_foodMall_input.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+
+			/***************************其他可能的錯誤處理**********************************/
+		} catch (Exception e) {
+			errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/front-end/foodSup/listFoodMallsByFoodSupID.jsp");
+			failureView.forward(req, res);
+		}
 	}
 	
 }
