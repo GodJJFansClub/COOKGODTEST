@@ -12,5 +12,6 @@ public interface FoodDAO_interface {
 	FoodVO findByPrimaryKey(String food_ID);
 	List<FoodVO> getAll();
 	Set<FoodMallVO> getFoodMallsByFood_ID(String food_ID);
+	public Set<FoodVO> getFoodsByFood_type_ID(String food_type_ID);
 
 }

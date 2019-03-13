@@ -1,6 +1,7 @@
 package com.food.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,6 +40,9 @@ public class FoodDAO implements FoodDAO_interface {
 			"UPDATE FOOD SET FOOD_NAME = ?, FOOD_TYPE_ID = ? WHERE FOOD_ID = ?";
 	private static final String GET_FoodMalls_ByFood_ID_STMT = 
 			"SELECT FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL WHERE FOOD_ID = ? ORDER BY FOOD_SUP_ID";
+	private static final String GET_FoodByFood_type_ID = 
+			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_TYPE_ID = ? ORDER BY FOOD_ID";
+	
 	@Override
 	public void insert(FoodVO foodVO) {
 		Connection con = null;
@@ -295,6 +299,60 @@ public class FoodDAO implements FoodDAO_interface {
 				foodMallVO.setFood_m_rate(rs.getInt(10));
 				set.add(foodMallVO);
 				// Store the row in the vector
+			}
+	
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+	
+	@Override
+	public Set<FoodVO> getFoodsByFood_type_ID(String food_type_ID) {
+		Set<FoodVO> set = new LinkedHashSet<FoodVO>();
+		FoodVO foodVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_FoodByFood_type_ID);
+			pstmt.setString(1, food_type_ID);
+			rs = pstmt.executeQuery();
+	
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				foodVO = new FoodVO();
+				foodVO.setFood_ID(rs.getString(1));
+				foodVO.setFood_name(rs.getString(2));
+				foodVO.setFood_type_ID(rs.getString(3));
+				set.add(foodVO);
 			}
 	
 			// Handle any driver errors

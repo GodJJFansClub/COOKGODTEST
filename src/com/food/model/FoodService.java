@@ -47,4 +47,8 @@ public class FoodService {
 	public Set<FoodMallVO> getFoodMallsByFood_ID(String food_ID){
 		return dao.getFoodMallsByFood_ID(food_ID);
 	}
+	
+	public Set<FoodVO> getFoodsByFood_type_ID( String food_type_ID){
+		return dao.getFoodsByFood_type_ID(food_type_ID);
+	}
 }
