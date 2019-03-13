@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cust.model.CustVO;
 import com.foodSup.model.FoodSupVO;
-
-
 
 public class LoginFrontFoodSupFilter implements Filter {
 
@@ -28,21 +27,30 @@ public class LoginFrontFoodSupFilter implements Filter {
 		config = null;
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws ServletException, IOException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws ServletException, IOException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		
+
 		FoodSupVO foodSupVO = (FoodSupVO) session.getAttribute("foodSupVO");
-	
+		CustVO custVO = (CustVO) session.getAttribute("custVO");
+
+		// 如果沒有登入過
 		if (foodSupVO == null) {
-			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/front-end/loginFrontEnd.jsp");
-			return;
+			if (custVO != null) {
+				// 如果有登入帳號但不是食材供應商，將轉到到其他頁面
+				session.setAttribute("location", req.getRequestURI());
+				res.sendRedirect(req.getContextPath() + "/froTempl/headertest.jsp");
+				return;
+			} else {
+				session.setAttribute("location", req.getRequestURI());
+				res.sendRedirect(req.getContextPath() + "/front-end/loginFrontEnd.jsp");
+				return;
+			}
 		} else {
 			chain.doFilter(request, response);
 		}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.cust.model.CustVO" %>
-<jsp:useBean id="custVO" scope="session" class="com.cust.model.CustVO"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,76 +61,25 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="headertest.jsp">Home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="portfolio.html">Pages</a>
+                                    <li><a href="headertest.jsp">首頁</a></li>
+                                    <li><a href="about.html">關於食神</a></li>
+                                    <li><a href="services.html">食神來了</a></li>
+                                    <li><a href="portfolio.html">食神配送</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="services.html">Services</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="index.html">Home</a></li>
-                                                    <li><a href="about.html">About Us</a></li>
-                                                    <li><a href="services.html">Services</a></li>
-                                                    <li><a href="portfolio.html">Portfolio</a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="index.html">Home</a></li>
-                                                            <li><a href="about.html">About Us</a></li>
-                                                            <li><a href="services.html">Services</a></li>
-                                                            <li><a href="portfolio.html">Portfolio</a></li>
-                                                            <li><a href="contact.html">Contact</a></li>
-                                                            <li><a href="elements.html">Elements</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="contact.html">Contact</a></li>
-                                                    <li><a href="elements.html">Elements</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="portfolio.html">Portfolio</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="elements.html">Elements</a></li>
+                                            <li><a href="index.html">節慶主題</a></li>
+                                            <li><a href="about.html">嚴選食材</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Mega</a>
-                                        <div class="megamenu">
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="services.html">Services</a></li>
-                                                <li><a href="portfolio.html">Portfolio</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="services.html">Services</a></li>
-                                                <li><a href="portfolio.html">Portfolio</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="services.html">Services</a></li>
-                                                <li><a href="portfolio.html">Portfolio</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="services.html">Services</a></li>
-                                                <li><a href="portfolio.html">Portfolio</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="contact.html">主廚論壇</a></li>
+                                  	 	<c:if test="${not empty custVO}">
+                                    		<li><a href="contact.html">Hello:<font color=red> ${custVO.cust_name} </font>您好</a></li>
+										</c:if>
+										<c:if test="${empty custVO}">
+                                    		<li><a href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp">請登入</a></li>
+										</c:if>
                                 </ul>
-
+									
+								
                                 <!-- Top Social Info -->
                                 <div class="top-social-info ml-5">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -193,7 +143,7 @@
 		var MyPoint = "/BroadcastWebSocket";
 		var host = window.location.host;
 		var webCtx = '<%=request.getContextPath()%>';
-		var userID = '<%=custVO.getCust_ID()%>';
+		<%--var userID = '<%=custVO.getCust_ID()%>';--%>
 		var endPointURL = "ws://" + host + webCtx + "/" + MyPoint + "/" + userID;
 	
 		var statusOutput = document.getElementById("statusOutput");

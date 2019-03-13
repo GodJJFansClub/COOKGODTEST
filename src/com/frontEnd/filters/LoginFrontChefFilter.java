@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.chef.model.ChefVO;
+import com.cust.model.CustVO;
 
 
 public class LoginFrontChefFilter implements Filter {
@@ -37,11 +38,18 @@ public class LoginFrontChefFilter implements Filter {
 		// 【從 session 判斷此user是否登入過】
 		
 		ChefVO chefVO = (ChefVO) session.getAttribute("chefVO");
-	
+		CustVO custVO = (CustVO) session.getAttribute("custVO");
 		if (chefVO == null) {
+			if (custVO != null) {
+				// 如果有登入帳號但不是食材供應商，將轉到到其他頁面
+				session.setAttribute("location", req.getRequestURI());
+				res.sendRedirect(req.getContextPath() + "/froTempl/headertest.jsp");
+				return;
+			} else {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/front-end/loginFrontChef.jsp");
+			res.sendRedirect(req.getContextPath() + "/front-end/loginFrontEnd.jsp");
 			return;
+			}
 		} else {
 			chain.doFilter(request, response);
 		}

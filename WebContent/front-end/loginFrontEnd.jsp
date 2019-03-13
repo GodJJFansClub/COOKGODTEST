@@ -16,8 +16,8 @@
 					<td colspan=2>
 						<p align=center>
 							輸入<b>前台(測試登入)</b>:<br> 
-							帳號:<b>ccc</b><br>
-							密碼:<b>123</b><br>
+							帳號cust:<b>ccc</b>foodSup:<b>foodsupc2</b>chef:<b>custa2</b><br>
+							密碼cust:<b>123</b>foodSup:<b>123456</b>chef:<b>123456</b><br>
 					</td>
 				</tr>
 
