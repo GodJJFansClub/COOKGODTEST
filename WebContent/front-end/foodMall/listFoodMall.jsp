@@ -4,6 +4,8 @@
 <jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
 <jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
 <jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService" />
+<jsp:useBean id="festMenuSvc" class="com.festMenu.model.FestMenuService"/>
+<jsp:useBean id="checkType" class="com.mall.controller.CheckType"/>
 <% 	CustVO custVO = new CustVO();
 	custVO.setCust_ID("C00001");
 	session.setAttribute("custVO", custVO); %>
@@ -15,7 +17,7 @@
 		<jsp:include page="/froTempl/header.jsp" flush="true" />
 	</div>
 		<div class="container">
-			<a href='<%=request.getContextPath()%>/front-end/listFestMall.jsp'>節慶主題料理</a>
+			<a href='<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp'>節慶主題料理</a>
 			<p>
 			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 				購物車
@@ -40,20 +42,33 @@
 				   <tbody id="shopCartList">
 				   <c:forEach var="shopItem" items="${shoppingCart}">
 				      <tr class="shopItemT">
-					  <td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
-					  <td>${shopItem.food_od_qty}</td>
-					  <td>${shopItem.food_od_stotal}</td>
-					  <td>
-					  	<form>
-						  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
-						    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
-						    <input type="hidden" name="action" value="delCartItem">
-						  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
-					  	</form>
-					  </td>
-					    
+				      <c:if test="${checkType.getIsFOD(shopItem)}">
+						  <td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
+						  <td>${shopItem.food_od_qty}</td>
+						  <td>${shopItem.food_od_stotal}</td>
+						  <td>
+						  	<form>
+							  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
+							    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
+							    <input type="hidden" name="action" value="delCartItem">
+							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
+						  	</form>
+						  </td>
+					  </c:if>
+					  <c:if test="${!checkType.getIsFOD(shopItem)}">
+						  <td>${festMenuSvc.getOneFestMenu(shopItem.fest_m_ID).fest_m_name}</td>
+						  <td>${shopItem.fest_or_qty}</td>
+						  <td>${shopItem.fest_or_stotal}</td>
+						  <td>
+						  	<form>
+							    <input type="hidden" name="fest_m_ID" value="${shopItem.fest_m_ID}">
+							    <input type="hidden" name="action" value="delCartItem">
+							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
+						  	</form>
+						  </td>
+					  </c:if>
 					  </tr>
-						</c:forEach>
+					</c:forEach>
 						  <tr id="copyShopIF" style="display:none">
 						  <td></td>
 						  <td></td>
@@ -137,7 +152,7 @@
 						 success: function (data){
 							 
 							 if(data["foodMCardID"]){
-								 $("#"+data["foodMCardID"]).find(".errorMsgs").text(data["efood_od_qty"]);	 
+								 $("#"+data["foodMCardID"]).find(".errorMsgs").text(data["cartErrorMsgs"]);	 
 							 }else{
 								 
 								 cartItem(foodMNames, data);
