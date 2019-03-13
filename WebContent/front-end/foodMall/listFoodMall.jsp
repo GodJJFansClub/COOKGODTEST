@@ -13,9 +13,9 @@
 <head>
 </head>
 <body>
-	<div>
+	
 		<jsp:include page="/froTempl/header.jsp" flush="true" />
-	</div>
+	
 		<div class="container">
 			<a href='<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp'>節慶主題料理</a>
 			<p>

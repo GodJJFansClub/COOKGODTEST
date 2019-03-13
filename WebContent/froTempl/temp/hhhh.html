@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.cust.model.CustVO" %>
-<jsp:useBean id="custVO" scope="session" class="com.cust.model.CustVO"/>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -14,11 +12,11 @@
     <title>Pixel - Digital Agency HTML Template</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="<%=request.getContextPath()%>/froTempl/temp/img/core-img/favicon.ico">
-	
+    <link rel="icon" href="img/core-img/favicon.ico">
+
     <!-- Stylesheet -->
-    <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/froTempl/temp/style.css">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -42,7 +40,7 @@
                     <nav class="classy-navbar justify-content-between" id="pixelNav">
 
                         <!-- Nav brand -->
-                        <a href="headertest.jsp" class="nav-brand"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
+                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -60,7 +58,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="headertest.jsp">Home</a></li>
+                                    <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="services.html">Services</a></li>
                                     <li><a href="portfolio.html">Pages</a>
@@ -149,86 +147,20 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-  
-    <!-- ##### Contact Area End #####-->
 
+    <!-- ##### Footer Area Start ##### -->
 
-
- 
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        	收到通知訊息
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
- <!-- ##### All Javascript Script ##### -->
+    <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
+    <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
+    <script src="js/active.js"></script>
 </body>
-<script>
 
-	
-		var MyPoint = "/BroadcastWebSocket";
-		var host = window.location.host;
-		var webCtx = '<%=request.getContextPath()%>';
-		var userID = '<%=custVO.getCust_ID()%>';
-		var endPointURL = "ws://" + host + webCtx + "/" + MyPoint + "/" + userID;
-	
-		var statusOutput = document.getElementById("statusOutput");
-		var webSocket;
-
-		// 觸發connect()時註冊方法, 並建立WebSocket物件
-		function connect() {
-			//	建立 websocket 物件
-			webSocket = new WebSocket(endPointURL);
-	
-			webSocket.onopen = function(event) {
-				
-				
-			};
-	
-			//	隨然我是在連線建立好時傳送訊息(ServerWebSocket), 依舊會觸發這個onmessage
-	
-			webSocket.onmessage = function(event) {
-				$('#myModal').modal('show');
-				updateStatus("收到新的訊息");
-			};
-	
-			webSocket.onclose = function(event) {
-	
-			};
-		}
-	
-		function sendMessage() {
-	
-		}
-	
-		function disconnect() {
-			webSocket.close();
-		}
-	
-		
-</script>
 </html>

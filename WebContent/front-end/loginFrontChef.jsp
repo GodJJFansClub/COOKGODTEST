@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=Big5">
-<title>前台login</title>
+<title>前台Cheflogin</title>
 </head>
 <body>
 <center>
@@ -15,7 +15,7 @@
 				<tr>
 					<td colspan=2>
 						<p align=center>
-							輸入<b>前台(測試登入)</b>:<br> 
+							輸入<b>前台廚師(測試登入)</b>:<br> 
 							帳號:<b>ccc</b><br>
 							密碼:<b>123</b><br>
 					</td>
@@ -46,8 +46,7 @@
 
 				<tr>
 					<td colspan=2 align=center>
-					
-							<input type="hidden" name="action" value="cust"> 
+							<input type="hidden" name="action" value="chef"> 
 							<input type=submit value="  ok   ">
 						
 					</td>

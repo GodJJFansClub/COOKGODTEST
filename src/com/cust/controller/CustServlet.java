@@ -659,20 +659,15 @@ public class CustServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 
 				// 0.id
 				String cust_ID = new String(req.getParameter("cust_ID").trim());
 				
-				// 11.狀態
-				String cust_status ="a0";
-
 				// set
 				CustVO custVO = new CustVO();
+						
 				
-				custVO.setCust_status(cust_status);
-				
-
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
@@ -684,19 +679,19 @@ public class CustServlet extends HttpServlet {
 
 //				/***************************2.開始修改資料*****************************************/
 				CustService custSvc = new CustService();
-				custVO = custSvc.updateCust_status(cust_ID,cust_status);
+				custVO = custSvc.updateCust_status(cust_ID);
 //				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
+//				req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/front-end/cust/listOneCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
-			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
-				failureView.forward(req, res);
-
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add("修改資料失敗:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
+//				failureView.forward(req, res);
+//
+//			}
 		}
 		
 

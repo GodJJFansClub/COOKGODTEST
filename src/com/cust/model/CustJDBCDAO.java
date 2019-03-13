@@ -31,7 +31,8 @@ public class CustJDBCDAO implements CustDAO_interface {
 			"DELETE FROM CUST where CUST_ID=? ";
 	private static final String UPDATE =
 			"UPDATE CUST set CUST_ACC=?, CUST_PWD=?, CUST_NAME=?, CUST_SEX=?, CUST_TEL=?, CUST_ADDR=?, CUST_PID=?, CUST_MAIL=?, CUST_BRD=?, CUST_REG=?, CUST_PIC=?, CUST_STATUS=?, CUST_NINAME=? WHERE CUST_ID=?";
-	
+	private static final String UPDATE_CUST_STATUS =
+			"UPDATE CUST set CUST_STATUS='a0' WHERE CUST_ID=?";
 	@Override
 	public void insert(CustVO custVO) {
 		// TODO Auto-generated method stub
@@ -479,6 +480,49 @@ public class CustJDBCDAO implements CustDAO_interface {
 		}
 
 	}
+	@Override
+	public void updateCust_ID(CustVO custVO) {
+		
+			// TODO Auto-generated method stub
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(UPDATE_CUST_STATUS);
+				
+				pstmt.setString(1, custVO.getCust_ID());
+				
+				pstmt.executeUpdate();		
+			}catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. "
+						+ e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+		
+		
+	}
+	
 	
 	
 	public static void main(String[] args) {
@@ -486,33 +530,33 @@ public class CustJDBCDAO implements CustDAO_interface {
 		CustJDBCDAO dao = new CustJDBCDAO();
 		com.testuse.PicIOTest pic = new com.testuse.PicIOTest();
 		
-		//new
-		CustVO custVO1 = new CustVO();
-		custVO1.setCust_acc("tes88dt");
-		custVO1.setCust_pwd("123");
-		custVO1.setCust_name("testt");
-		custVO1.setCust_sex("F");
-		custVO1.setCust_tel("0955888555");
-		custVO1.setCust_addr("57848748");
-		custVO1.setCust_pid("H123456789");
-		custVO1.setCust_mail("email");
-		custVO1.setCust_brd(java.sql.Date.valueOf("2000-02-05"));
-		custVO1.setCust_reg(java.sql.Date.valueOf("2019-02-15"));
-		custVO1.setCust_pic(pic.getPictureByteArray("C://Pictures/go.jpg"));
-		custVO1.setCust_status("a1");
-		custVO1.setCust_niname("ccc");
-		
-		
-		List<FoodSupVO> testList = new ArrayList<FoodSupVO>();
-		FoodSupVO foodSupXX = new FoodSupVO();
-		
-		foodSupXX.setFood_sup_name("DDD");
-		foodSupXX.setFood_sup_tel("03-6555555");
-		foodSupXX.setFood_sup_status("s0");
-		foodSupXX.setFood_sup_resume("dddddddd");
-		
-		testList.add(foodSupXX);
-		dao.insertWithFoodSup(custVO1, testList);
+//		//new
+//		CustVO custVO1 = new CustVO();
+//		custVO1.setCust_acc("tes88dt");
+//		custVO1.setCust_pwd("123");
+//		custVO1.setCust_name("testt");
+//		custVO1.setCust_sex("F");
+//		custVO1.setCust_tel("0955888555");
+//		custVO1.setCust_addr("57848748");
+//		custVO1.setCust_pid("H123456789");
+//		custVO1.setCust_mail("email");
+//		custVO1.setCust_brd(java.sql.Date.valueOf("2000-02-05"));
+//		custVO1.setCust_reg(java.sql.Date.valueOf("2019-02-15"));
+//		custVO1.setCust_pic(pic.getPictureByteArray("C://Pictures/go.jpg"));
+//		custVO1.setCust_status("a1");
+//		custVO1.setCust_niname("ccc");
+//		
+//		
+//		List<FoodSupVO> testList = new ArrayList<FoodSupVO>();
+//		FoodSupVO foodSupXX = new FoodSupVO();
+//		
+//		foodSupXX.setFood_sup_name("DDD");
+//		foodSupXX.setFood_sup_tel("03-6555555");
+//		foodSupXX.setFood_sup_status("s0");
+//		foodSupXX.setFood_sup_resume("dddddddd");
+//		
+//		testList.add(foodSupXX);
+//		dao.insertWithFoodSup(custVO1, testList);
 		
 		//update
 //		CustVO custVO2 = new CustVO();
@@ -573,10 +617,11 @@ public class CustJDBCDAO implements CustDAO_interface {
 //			System.out.println(aCust.getCust_niname()+",");
 //		}
 		
-	}
-	@Override
-	public void updateCust_ID(CustVO custVO) {
-		// TODO Auto-generated method stub
+		CustVO custVO2 = new CustVO();
+
+		custVO2.setCust_ID("C00002");
+		
+		dao.updateCust_ID(custVO2);
 		
 	}
 	

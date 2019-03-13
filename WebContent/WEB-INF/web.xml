@@ -44,6 +44,35 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>LoginFrontFoodSupFilter</filter-name>
+		<filter-class>com.frontEnd.filters.LoginFrontFoodSupFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFrontFoodSupFilter</filter-name>
+		<url-pattern>/front-end/ad/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>LoginFrontChefFilter</filter-name>
+		<filter-class>com.frontEnd.filters.LoginFrontChefFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFrontChefFilter</filter-name>
+		<url-pattern>/front-end/cust/template</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
 
 	<servlet>
 		<servlet-name>LoginFrontEnd</servlet-name>
