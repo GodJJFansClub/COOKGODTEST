@@ -31,7 +31,7 @@ public class Logout extends HttpServlet {
 		} catch (Exception ignored) {
 		}
 
-		res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3:
+		res.sendRedirect(req.getContextPath() + "/froTempl/headertest.jsp"); // *工作3:
 																					// (-->如無來源網頁:則重導至login_success.jsp)
 	}
 

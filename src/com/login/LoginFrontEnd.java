@@ -100,7 +100,7 @@ public class LoginFrontEnd extends HttpServlet {
 				} catch (Exception ignored) {
 				}
 
-				res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3:
+				res.sendRedirect(req.getContextPath() + "/froTempl/headertest.jsp"); // *工作3:
 																							// (-->如無來源網頁:則重導至login_success.jsp)
 			} else {
 				// 3.判斷為顧客帳號
@@ -114,7 +114,7 @@ public class LoginFrontEnd extends HttpServlet {
 				} catch (Exception ignored) {
 				}
 
-				res.sendRedirect(req.getContextPath() + "/front-end/login_success.jsp"); // *工作3:
+				res.sendRedirect(req.getContextPath() + "/froTempl/headertest.jsp"); // *工作3:
 																							// (-->如無來源網頁:則重導至login_success.jsp)
 			}
 
