@@ -5,7 +5,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	CustVO custVO = (CustVO) request.getAttribute("custVO"); //SustServlet.java(Concroller), 存入req的custVO物件
+	CustVO custVO = (CustVO) session.getAttribute("custVO"); //SustServlet.java(Concroller), 存入req的custVO物件
 %>
 
 <html>

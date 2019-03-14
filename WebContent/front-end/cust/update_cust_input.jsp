@@ -3,7 +3,7 @@
 <%@ page import="com.cust.model.*"%>
 
 <%
-	CustVO custVO = (CustVO) request.getAttribute("custVO"); //CustServlet.java (Concroller) 存入req的custVO物件 (包括幫忙取出的custVO, 也包括輸入資料錯誤時的custVO物件)
+	CustVO custVO = (CustVO)session.getAttribute("custVO"); //CustServlet.java (Concroller) 存入req的custVO物件 (包括幫忙取出的custVO, 也包括輸入資料錯誤時的custVO物件)
 %>
 
 <html>
