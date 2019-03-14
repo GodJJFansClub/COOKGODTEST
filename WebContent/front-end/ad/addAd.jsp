@@ -52,19 +52,11 @@ th, td {
 
 </head>
 
-<body bgcolor='white'>
-		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
-		</aside>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
-	<h3>資料新增:</h3>
+<body>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">	<h3>資料新增:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -122,7 +114,14 @@ th, td {
 				<td><input type="text" name="food_sup_ID" size="45"
 					value="<%=(adVO == null) ? "555" : adVO.getFood_sup_ID()%>" /></td>
 			</tr>
-			
+		
+			<tr>
+				<td>廣告內文:</td>
+				<td>
+					<textarea name="ad_con"></textarea>
+					<script>CKEDITOR.replace('ad_con');</script>
+				</td>
+			</tr>
 			
 			
 
@@ -130,26 +129,17 @@ th, td {
 
 		</table>
 		
-		<script src="ckEditor/ckeditor.js"></script>
-			<form id="form1" runat="server">
-				<div style="margin: 0 auto; width: 700px">
-					<textarea id="editor"></textarea>
-				</div>
-			</form>
-			
-			<script>
-   				 ClassicEditor.create(document.querySelector('#editor')).then(editor => {console.log(editor);})
-			</script>
-		<div id="localImag">
-			<img id="preview" width=200px height=300px style="diplay: on" />
-		</div>
+		
+		
 		<br> <input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
 
 	</FORM>
 	
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+</section>
+    <!-- ##### Contact Area End #####-->
+
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
 			</div>
 		</div>
