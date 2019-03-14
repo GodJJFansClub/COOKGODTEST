@@ -4,9 +4,6 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -19,6 +16,7 @@ import org.json.JSONObject;
 import com.cust.model.*;
 
 import com.foodSup.model.FoodSupVO;
+import com.testuse.SendEmail;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class CustServlet extends HttpServlet {
@@ -156,9 +154,9 @@ public class CustServlet extends HttpServlet {
 
 				String ch_name = cust_name;
 				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
-				String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+				String messageText = "Hello! " + ch_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
 
-				CustServlet mailService = new CustServlet();
+				SendEmail mailService = new SendEmail();
 				mailService.sendMail(to, subject, messageText);
 
 				// set
@@ -290,7 +288,7 @@ public class CustServlet extends HttpServlet {
 				java.sql.Date cust_reg = java.sql.Date.valueOf(xx);
 
 				// 11.狀態
-				String cust_status = "a0";
+				String cust_status = "a1";
 
 				// 12.暱稱
 				String cust_niname = req.getParameter("cust_niname").trim();
@@ -329,6 +327,19 @@ public class CustServlet extends HttpServlet {
 
 				// 17.食材供應商簡歷
 				String food_sup_resume = req.getParameter("food_sup_resume");
+				
+				
+				// 寄Email
+				String to = cust_mail;
+
+				String subject = "會員驗證";
+
+				String ch_name = cust_name;
+				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
+				String messageText = "Hello! " + ch_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
+
+				SendEmail mailService = new SendEmail();
+				mailService.sendMail(to, subject, messageText);
 
 				// set
 				CustVO custVO = new CustVO();
@@ -659,7 +670,7 @@ public class CustServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 
 				// 0.id
 				String cust_ID = new String(req.getParameter("cust_ID").trim());
@@ -677,21 +688,20 @@ public class CustServlet extends HttpServlet {
 					return;
 				}
 
-//				/***************************2.開始修改資料*****************************************/
+				/***************************2.開始修改資料*****************************************/
 				CustService custSvc = new CustService();
 				custVO = custSvc.updateCust_status(cust_ID);
-//				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 //				req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/front-end/cust/listOneCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("修改資料失敗:" + e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
-//				failureView.forward(req, res);
-//
-//			}
+			} catch (Exception e) {
+				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/update_cust_input.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 
@@ -734,43 +744,5 @@ public class CustServlet extends HttpServlet {
 
 	}
 
-	// 設定傳送郵件:至收信人的Email信箱,Email主旨,Email內容
-	public void sendMail(String to, String subject, String messageText) {
-
-		try {
-			// 設定使用SSL連線至 Gmail smtp Server
-			Properties props = new Properties();
-			props.put("mail.smtp.host", "smtp.gmail.com");
-			props.put("mail.smtp.socketFactory.port", "465");
-			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.port", "465");
-
-			// ●設定 gmail 的帳號 & 密碼 (將藉由你的Gmail來傳送Email)
-			// ●須將myGmail的【安全性較低的應用程式存取權】打開
-			final String myGmail = "ixlogic.wu@gmail.com";
-			final String myGmail_password = "BBB45678";
-			Session session = Session.getInstance(props, new Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(myGmail, myGmail_password);
-				}
-			});
-
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(myGmail));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-
-			// 設定信中的主旨
-			message.setSubject(subject);
-			// 設定信中的內容
-			message.setText(messageText);
-
-			Transport.send(message);
-			System.out.println("傳送成功!");
-		} catch (MessagingException e) {
-			System.out.println("傳送失敗!");
-			e.printStackTrace();
-		}
-	}
-
+	
 }
