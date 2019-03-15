@@ -62,10 +62,10 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="headertest.jsp">首頁</a></li>
-                                    <li><a href="about.html">關於食神</a></li>
-                                    <li><a href="services.html">食神來了</a></li>
-                                    <li><a href="portfolio.html">食神配送</a>
+                                    <li><a href="<%=request.getContextPath()%>/froTempl/headertest.jsp">首頁</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/froTemplabout.html">關於食神</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/froTemplservices.html">食神來了</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/froTemplportfolio.html">食神配送</a>
                                         <ul class="dropdown">
                                             <li><a href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
                                             <li><a href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp">嚴選食材</a></li>
@@ -88,6 +88,13 @@
 									</FORM>
 										</c:if>
 										<c:if test="${empty custVO}">
+                                    		 <li><a href="<%=request.getContextPath()%>/froTemplportfolio.html">加入我們</a>
+                                        <ul class="dropdown">
+                                            <li><a href="<%=request.getContextPath()%>/front-end/login/addCust.jsp">成為顧客</a></li>
+                                            <li><a href="<%=request.getContextPath()%>/front-end/login/addChef.jsp">成為主廚</a></li>
+                                            <li><a href="<%=request.getContextPath()%>/front-end/login/addFoodSup.jsp">成為食材供應商</a></li>
+                                        </ul>
+                                    </li>
                                     		<li><a href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp">請登入</a></li>
 										</c:if>
                                 </ul>

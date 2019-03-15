@@ -52,6 +52,9 @@ public class AdService {
 	public AdVO getOneAd(String ad_ID) {
 		return dao.findByPrimaryKey(ad_ID);
 	}
+	public AdVO getOneFoodSup_ID(String foodSup_ID) {
+		return dao.findByFoodSup_ID(foodSup_ID);
+	}
 
 	public List<AdVO> getAll() {
 		return dao.getAll();

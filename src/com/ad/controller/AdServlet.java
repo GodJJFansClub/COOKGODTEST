@@ -12,13 +12,12 @@ import javax.servlet.http.Part;
 
 import com.ad.model.*;
 
-
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class AdServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+
 		doPost(req, res);
 	}
 
@@ -43,12 +42,9 @@ public class AdServlet extends HttpServlet {
 				} else if (!ad_title.trim().matches(ad_titleReg)) {
 					errorMsgs.add(ad_title);
 				}
-				 
 
 				// 2.廣告內文
 				String ad_con = req.getParameter("ad_con");
-				
-				
 
 				// 3.廣告上架日期
 				java.sql.Timestamp ad_start = null;
@@ -58,7 +54,7 @@ public class AdServlet extends HttpServlet {
 					ad_start = new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-				
+
 				// 4.廣告下架日期
 				java.sql.Timestamp ad_end = null;
 				try {
@@ -68,18 +64,16 @@ public class AdServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 
-				
 				// 5.狀態
 				String ad_status = "d2";
 
 				// 6.廣告類別
-				String ad_type =req.getParameter("ad_type").trim();
+				String ad_type = req.getParameter("ad_type").trim();
 				if (ad_type == null || ad_type.trim().length() == 0) {
 					errorMsgs.add("暱稱請勿空白");
 				}
-				//7.
-				String food_sup_ID =req.getParameter("food_sup_ID").trim();
-				
+				// 7.
+				String food_sup_ID = req.getParameter("food_sup_ID").trim();
 
 				// set
 				AdVO adVO = new AdVO();
@@ -90,9 +84,6 @@ public class AdServlet extends HttpServlet {
 				adVO.setAd_status(ad_status);
 				adVO.setAd_type(ad_type);
 				adVO.setFood_sup_ID(food_sup_ID);
-				
-				
-				
 
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
@@ -103,22 +94,22 @@ public class AdServlet extends HttpServlet {
 					return;
 				}
 
-				//將資料加入資料庫
+				// 將資料加入資料庫
 				AdService adSvc = new AdService();
 
-				adVO = adSvc.addAd(ad_status, ad_start,ad_end,ad_type,ad_title,ad_con ,food_sup_ID);
+				adVO = adSvc.addAd(ad_status, ad_start, ad_end, ad_type, ad_title, ad_con, food_sup_ID);
 				String url = "/front-end/ad/listAllAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				
-				//除錯
+
+				// 除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/addAd.jsp");
 				failureView.forward(req, res);
 			}
 		}
-		
+
 		// 查詢-單一
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -216,7 +207,7 @@ public class AdServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				
+
 				// 1.廣告標題
 				String ad_title = req.getParameter("ad_title");
 				String ad_titleReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -225,12 +216,9 @@ public class AdServlet extends HttpServlet {
 				} else if (!ad_title.trim().matches(ad_titleReg)) {
 					errorMsgs.add(ad_title);
 				}
-				 
 
 				// 2.廣告內文
 				String ad_con = req.getParameter("ad_con");
-				
-				
 
 				// 3.廣告上架日期
 				java.sql.Timestamp ad_start = null;
@@ -240,7 +228,7 @@ public class AdServlet extends HttpServlet {
 					ad_start = new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-				
+
 				// 4.廣告下架日期
 				java.sql.Timestamp ad_end = null;
 				try {
@@ -250,18 +238,16 @@ public class AdServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 
-				
 				// 5.狀態
 				String ad_status = "d2";
 
 				// 6.廣告類別
-				String ad_type =req.getParameter("ad_type").trim();
+				String ad_type = req.getParameter("ad_type").trim();
 				if (ad_type == null || ad_type.trim().length() == 0) {
 					errorMsgs.add("暱稱請勿空白");
 				}
-				//7.
-				String food_sup_ID =req.getParameter("food_sup_ID").trim();
-				
+				// 7.
+				String food_sup_ID = req.getParameter("food_sup_ID").trim();
 
 				// set
 				AdVO adVO = new AdVO();
@@ -272,9 +258,7 @@ public class AdServlet extends HttpServlet {
 				adVO.setAd_status(ad_status);
 				adVO.setAd_type(ad_type);
 				adVO.setFood_sup_ID(food_sup_ID);
-				
 
-				
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("adVO", adVO);// 以下練習正則(規)表示式(regular-expression)
@@ -287,7 +271,7 @@ public class AdServlet extends HttpServlet {
 //				/***************************2.開始修改資料*****************************************/
 				AdService adSvc = new AdService();
 
-				adVO = adSvc.updateAd(ad_status, ad_start,ad_end,ad_type,ad_title,ad_con ,food_sup_ID);
+				adVO = adSvc.updateAd(ad_status, ad_start, ad_end, ad_type, ad_title, ad_con, food_sup_ID);
 //				adVO = adSvc.updateAd("C0055", "dddd", ad_title, "f", "050505", "8888", "H123456789", "@54564", ad_start, ad_reg,by , "c","ff" );
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("adVO", adVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -332,7 +316,64 @@ public class AdServlet extends HttpServlet {
 			}
 		}
 
-	}
+		if ("getFoodSup_ID_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
-	
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("foodSup_ID");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入廣告編號");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				String foodSup_ID = null;
+				try {
+					foodSup_ID = new String(str);
+				} catch (Exception e) {
+					errorMsgs.add("廣告編號格式不正確");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				/*************************** 2.開始查詢資料 *****************************************/
+				AdService adSvc = new AdService();
+				AdVO adVO = adSvc.getOneFoodSup_ID(foodSup_ID);
+				if (adVO == null) {
+					errorMsgs.add("目前尚無廣告資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("adVO", adVO); // 資料庫取出的adVO物件,存入req
+				String url = "/front-end/ad/listOneAd.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAd.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+	}
 }

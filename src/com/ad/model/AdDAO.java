@@ -27,6 +27,8 @@ public class AdDAO implements AdDAO_interface {
 			"SELECT * FROM AD ORDER BY AD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT * FROM AD where AD_ID = ?";
+	private static final String GET_ONE_FOODSUP_ID_STMT = 
+			"SELECT * FROM AD where FOODSUP_ID = ?";
 	private static final String DELETE =
 			"DELETE FROM AD where AD_ID=? ";
 	private static final String UPDATE =
@@ -256,6 +258,61 @@ public class AdDAO implements AdDAO_interface {
 		
 		return list;
 				
+	}
+	public AdVO findByFoodSup_ID(String foodSup_ID) {
+		// TODO Auto-generated method stub
+		AdVO adVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_FOODSUP_ID_STMT);
+			
+			pstmt.setString(1, foodSup_ID);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				adVO = new AdVO();
+				adVO.setAd_ID(rs.getString("AD_ID"));
+				adVO.setAd_status(rs.getString("AD_STATUS"));
+				adVO.setAd_start(rs.getTimestamp("AD_START"));
+				adVO.setAd_end(rs.getTimestamp("AD_END"));
+				adVO.setAd_type(rs.getString("AD_TYPE"));
+				adVO.setAd_title(rs.getString("AD_TITLE"));
+				adVO.setAd_con(rs.getString("AD_CON"));
+				adVO.setFood_sup_ID(rs.getString("FOOD_SUP_ID"));
+			}
+			
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return adVO;
 	}
 		
 }

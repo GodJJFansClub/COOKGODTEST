@@ -78,14 +78,7 @@ th, td {
 					value="<%=(adVO == null) ? "teddy" : adVO.getAd_title()%>" /></td>
 			</tr>
 
-			<tr>
-				<td>廣告:</td>
-				<td><input type="TEXT" name="ad_con" size="45"
-					value="<%=(adVO == null) ? "a987654321" : adVO.getAd_con()%>" /></td>
-			</tr>
-
-
-
+			
 			<tr>
 				<td>廣告上架日期:</td>
 				<td><input type="TEXT" name="ad_start" id="f_date1" size="45" /></td>

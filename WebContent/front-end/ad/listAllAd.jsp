@@ -7,8 +7,8 @@
 <%
 	AdService adSvc = new AdService();
 	List<AdVO> list = adSvc.getAll();
-	;
-	pageContext.setAttribute("list", list);
+	;pageContext.setAttribute("list", list);
+	
 %>
 
 
@@ -93,7 +93,7 @@ th, td {
 		<%@ include file="/file/page1.file"%>
 		<c:forEach var="adVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
-
+			<c:if test="adVO.food_sup_ID = session.request.">>
 			<tr>
 				<td>${adVO.ad_ID}</td>
 				<td>${adVO.ad_title}</td>
@@ -103,7 +103,7 @@ th, td {
 				<td>${adVO.ad_status}</td>
 				<td>${adVO.ad_type}</td>
 				<td>${adVO.food_sup_ID}</td>
-				
+			</c:if>
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/ad/ad.do"

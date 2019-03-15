@@ -22,6 +22,8 @@ public class AdJDBCDAO implements AdDAO_interface {
 			"SELECT AD_ID,AD_STATUS,to_Char(AD_START,'yyyy-mm-dd hh:mm:ss')AD_START,to_Char(AD_END,'yyyy-mm-dd hh:mm:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD order by AD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT AD_ID,AD_STATUS,to_Char(AD_START,'yyyy-mm-dd hh:mm:ss')AD_START,to_Char(AD_END,'yyyy-mm-dd hh:mm:ss')AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID FROM AD where AD_ID = ?";
+	private static final String GET_ONE_FOODSUP_ID_STMT = 
+			"SELECT * FROM AD where FOODSUP_ID = ?";
 	private static final String DELETE =
 			"DELETE FROM AD where AD_ID=? ";
 	private static final String UPDATE =
@@ -287,6 +289,68 @@ public class AdJDBCDAO implements AdDAO_interface {
 		}
 		return list;
 	}
+	@Override
+	public AdVO findByFoodSup_ID(String foodSup_ID) {
+		// TODO Auto-generated method stub
+		AdVO adVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			
+			pstmt.setString(1, foodSup_ID);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				adVO = new AdVO();
+				adVO.setAd_ID(rs.getString("AD_ID"));
+				adVO.setAd_status(rs.getString("AD_STATUS"));
+				adVO.setAd_start(rs.getTimestamp("AD_START"));
+				adVO.setAd_end(rs.getTimestamp("AD_END"));
+				adVO.setAd_type(rs.getString("AD_TYPE"));
+				adVO.setAd_title(rs.getString("AD_TITLE"));
+				adVO.setAd_con(rs.getString("AD_CON"));
+				adVO.setFood_sup_ID(rs.getString("FOOD_SUP_ID"));
+			}
+			
+		}catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}return adVO;
+	}
+	
 	
 	public static void main(String[] args) {
 
