@@ -29,6 +29,8 @@ public class FoodMallJNDIDAO implements FoodMallDAO_interface {
 			"INSERT INTO FOOD_MALL (FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE FOOD_MALL SET FOOD_M_NAME = ?, FOOD_M_STATUS = ?, FOOD_M_PRICE = ?, FOOD_M_UNIT = ?, FOOD_M_PLACE = ?, FOOD_M_PIC = ?, FOOD_M_RESUME = ?, FOOD_M_RATE = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
+	private static final String UPDATE_STATUS = 
+			"UPDATE FOOD_MALL SET FOOD_M_STATUS = ? WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String GET_ALL_STMT = 
 			"SELECT FOOD_SUP_ID , FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL ORDER BY FOOD_ID";
 	private static final String GET_ONE_STMT = 
@@ -121,6 +123,43 @@ public class FoodMallJNDIDAO implements FoodMallDAO_interface {
 			}
 		}
 	}
+	
+	@Override
+	public void updateStatus(FoodMallVO foodMallVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+
+			
+			pstmt.setString(1, foodMallVO.getFood_m_status());
+			pstmt.setString(2, foodMallVO.getFood_sup_ID());
+			pstmt.setString(3, foodMallVO.getFood_ID());
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. "
+					+ e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
 	@Override
 	public FoodMallVO findByPrimaryKey(String food_sup_ID, String food_ID) {
 		FoodMallVO foodMallVO = null;

@@ -26,9 +26,9 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES ('FM'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE FEST_ORDER SET FEST_OR_STATUS = ?,FEST_OR_PRICE = ?,FEST_OR_START = ?,FEST_OR_SEND = ?,FEST_OR_END = ?,FEST_OR_DISC = ?, CUST_ID = ? WHERE FEST_OR_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM FEST_ORDER WHERE FEST_OR_ID = ?";
-	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER";
+	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER ORDER BY FEST_OR_ID";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER WHERE FEST_OR_ID = ?";
-	private static final String GET_DETAILS_BY_FEST_OR_ID = "SELECT * FROM FEST_OR_DETAIL WHERE FEST_OR_ID = ?";
+	private static final String GET_DETAILS_BY_FEST_OR_ID = "SELECT * FROM FEST_OR_DETAIL WHERE FEST_OR_ID = ? ORDER BY FEST_OR_ID";
 
 	@Override
 	public void insert(FestOrderVO festOrderVO) {
@@ -390,7 +390,7 @@ public class FestOrderJDBCDAO implements FestOrder_Interface {
 				
 				dao.insert2(aFestOrderDetail, con);
 				
-				festMenuDAO.update2_FestMenu(fest_m_ID, final_qty);
+				festMenuDAO.update2_FestMenu(fest_m_ID, final_qty, con);
 				
 			}
 			//2.設定於pstm.executeUpdate()之後

@@ -21,7 +21,7 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_RATE,FEST_OR_MSG,FEST_OR_QTY,FEST_OR_STOTAL) VALUES (?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_QTY,FEST_OR_STOTAL) VALUES (?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER_DETAIL";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER_DETAIL WHERE FEST_OR_ID = ?";
 	private static final String UPDATE = "UPDATE FEST_ORDER_DETAIL SET FEST_OR_RATE = ?,FEST_OR_MSG = ?,FEST_OR_QTY = ?,FEST_OR_STOTAL = ? WHERE FEST_OR_ID = ? AND FEST_M_ID = ?";
@@ -268,37 +268,28 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 	@Override
 	public void insert2(FestOrderDetailVO festOrderDetailVO, Connection con) {
 		PreparedStatement pstmt = null;
-
-
 		try {
-
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, festOrderDetailVO.getFest_or_ID());
 			pstmt.setString(2, festOrderDetailVO.getFest_m_ID());
-			pstmt.setInt(3, festOrderDetailVO.getFest_or_rate());
-			pstmt.setString(4, festOrderDetailVO.getFest_or_msg());
-			pstmt.setInt(5, festOrderDetailVO.getFest_or_qty());
-			pstmt.setInt(6, festOrderDetailVO.getFest_or_stotal());
+			pstmt.setInt(3, festOrderDetailVO.getFest_or_qty());
+			pstmt.setInt(4, festOrderDetailVO.getFest_or_stotal());
 
-			pstmt.executeUpdate();
-
-			// Handle any SQL errors
+			pstmt.executeQuery();
 		} catch (SQLException se) {
+			se.printStackTrace();
 			if (con != null) {
 				try {
-					// 3●設定於當有exception發生時之catch區塊內
-					System.err.print("Transaction is being ");
-					System.err.println("rolled back-由-emp");
+					// 3：設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being");
+					System.err.println("rolled back-由--festOrderDetail");
 					con.rollback();
-				} catch (SQLException excep) {
-					throw new RuntimeException("rollback error occured. "
-							+ excep.getMessage());
+
+				} catch (Exception excep) {
+					throw new RuntimeException("rollback error occured." + excep.getMessage());
 				}
 			}
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {

@@ -7,19 +7,10 @@
 <title>單一食材商城訂單</title>
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
-		<div class="">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
-				<div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title">單一食材商城訂單</h4>
-                    </div>
-                </div>
-            </div>
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
 			<%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color:red">請修正以下錯誤:</font>
@@ -115,12 +106,12 @@
                     </div>
                     <!-- Column -->
                 </div>
+             </div>
+             
 
-<%--=================================工作區================================================--%>			
-				
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
+	</section>
+    <!-- ##### Contact Area End #####-->
+
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

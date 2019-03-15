@@ -225,8 +225,10 @@ public class FoodMallServlet extends HttpServlet{
 				FoodMallVO foodMallVO = foodMallSvc.getOneFoodMall(food_sup_ID, food_ID);
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				boolean openModal=true;
+				req.setAttribute("openModal",openModal );
 				req.setAttribute("foodMallVO", foodMallVO);         // 資料庫取出的foodMallVO物件,存入req
-				String url = "/back-end/foodMall/update_foodMall_input.jsp";
+				String url = "/back-end/foodMall/listAllFoodMall.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -239,7 +241,7 @@ public class FoodMallServlet extends HttpServlet{
 			}
 		}
 		
-		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
+		if ("update".equals(action)) { // 來自前端的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -339,6 +341,11 @@ public class FoodMallServlet extends HttpServlet{
 			foodSupGetUpdate(req,res);
 		}
 		
+		if("backUpStatus".equals(action)) {
+			backUpStatus(req,res);
+		}
+		
+		
 	}
 	
 	private void foodSupGetUpdate(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -367,6 +374,56 @@ public class FoodMallServlet extends HttpServlet{
 			errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 			RequestDispatcher failureView = req
 					.getRequestDispatcher("/front-end/foodSup/listFoodMallsByFoodSupID.jsp");
+			failureView.forward(req, res);
+		}
+	}
+	
+	private void backUpStatus(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+	
+		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			
+			String food_m_status = req.getParameter("food_m_status");
+			
+			
+			
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String food_ID = req.getParameter("food_ID");
+			
+			FoodMallVO foodMallVO = new FoodMallVO();
+			foodMallVO.setFood_m_status(food_m_status);
+			foodMallVO.setFood_ID(food_ID);
+			foodMallVO.setFood_sup_ID(food_sup_ID);
+
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("foodMallVO", foodMallVO); // 含有輸入格式錯誤的foodMallVO物件,也存入req
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back-end/foodMall/update_foodMall_input.jsp");
+				failureView.forward(req, res);
+				return; //程式中斷
+			}
+			
+			/***************************2.開始修改資料*****************************************/
+			FoodMallService foodMallSvc = new FoodMallService();
+			foodMallVO = foodMallSvc.updateStatus(food_sup_ID, food_ID, food_m_status);
+			
+			/***************************3.修改完成,準備轉交(Send the Success view)*************/
+			req.setAttribute("foodMallVO", foodMallVO); // 資料庫update成功後,正確的的foodMallVO物件,存入req
+			String url = "/back-end/foodMall/listOneFoodMall.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+
+			/***************************其他可能的錯誤處理*************************************/
+		} catch (Exception e) {
+			errorMsgs.add("修改資料失敗:"+e.getMessage());
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/back-end/foodMall/update_foodMall_input.jsp");
 			failureView.forward(req, res);
 		}
 	}

@@ -3,7 +3,9 @@ package com.foodSup.model;
 import java.util.List;
 import java.util.Set;
 
+import com.chefOdDetail.model.ChefOdDetailVO;
 import com.foodMall.model.FoodMallVO;
+import com.foodOrDetail.model.FoodOrDetailVO;
 
 public interface FoodSupDAO_interface {
 	void insert(FoodSupVO foodSupVO);
@@ -13,4 +15,6 @@ public interface FoodSupDAO_interface {
 	FoodSupVO findByPrimaryKey(String food_sup_ID);
 	List<FoodSupVO> getAll();
 	Set<FoodMallVO> getFoodMallsByFood_sup_ID(String food_sup_ID);
+	List<FoodOrDetailVO> getFoodODByFood_sup_ID(String food_sup_ID);
+	List<ChefOdDetailVO> getCODByFood_sup_ID(String food_sup_ID);
 }

@@ -34,6 +34,9 @@
     	<div>
     		評價 : ${foodMallVO.food_m_rate}
     	</div>
+    	<div>
+    		介紹 : ${foodMallVO.food_m_resume}
+    	</div>
     </section>
     <!-- ##### Contact Area End #####-->
 

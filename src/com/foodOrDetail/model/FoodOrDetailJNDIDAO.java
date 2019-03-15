@@ -157,7 +157,8 @@ public class FoodOrDetailJNDIDAO implements FoodOrDetailDAO_interface {
 			}
 		}
 	}
-
+	
+	
 	@Override
 	public void delete(String food_or_ID, String food_sup_ID, String food_ID) {
 		Connection con = null;

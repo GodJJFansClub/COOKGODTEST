@@ -11,8 +11,8 @@ public class ChefOrderService {
 		dao = new ChefOrderDAO();
 	}
 
-	public ChefOrderVO addChefOrder(String chef_or_status, Timestamp chef_or_start, Timestamp chef_or_send, Timestamp chef_or_rcv,
-			Timestamp chef_or_end, String chef_or_name, String chef_or_addr, String chef_or_tel, String chef_ID) {
+	public ChefOrderVO addChefOrder(String chef_or_status, Date chef_or_start, Date chef_or_send, Date chef_or_rcv,
+			Date chef_or_end, String chef_or_name, String chef_or_addr, String chef_or_tel, String chef_ID) {
 
 		ChefOrderVO chefOrderVO = new ChefOrderVO();
 		chefOrderVO.setChef_or_status(chef_or_status);
@@ -29,8 +29,8 @@ public class ChefOrderService {
 		return chefOrderVO;
 	}
 
-	public ChefOrderVO updateChefOrder(String chef_or_ID, String chef_or_status, Timestamp chef_or_start, Timestamp chef_or_send,
-			Timestamp chef_or_rcv, Timestamp chef_or_end, String chef_or_name, String chef_or_addr, String chef_or_tel,
+	public ChefOrderVO updateChefOrder(String chef_or_ID, String chef_or_status, Date chef_or_start, Date chef_or_send,
+			Date chef_or_rcv, Date chef_or_end, String chef_or_name, String chef_or_addr, String chef_or_tel,
 			String chef_ID) {
 		ChefOrderVO chefOrderVO = new ChefOrderVO();
 		chefOrderVO.setChef_or_ID(chef_or_ID);

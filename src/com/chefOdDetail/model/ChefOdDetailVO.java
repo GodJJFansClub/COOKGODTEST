@@ -4,6 +4,11 @@ public class ChefOdDetailVO {
 
 	private String chef_or_ID;
 	private String food_sup_ID;
+	private String food_ID;
+	private Integer chef_od_qty;
+	private Integer chef_od_stotal;
+	private String chef_od_status;
+
 	public ChefOdDetailVO(String food_sup_ID, String food_ID, Integer chef_od_qty, Integer chef_od_stotal) {
 		super();
 		this.food_sup_ID = food_sup_ID;
@@ -11,11 +16,6 @@ public class ChefOdDetailVO {
 		this.chef_od_qty = chef_od_qty;
 		this.chef_od_stotal = chef_od_stotal;
 	}
-
-	private String food_ID;
-	private Integer chef_od_qty;
-	private Integer chef_od_stotal;
-
 	public ChefOdDetailVO() {
 
 	}
@@ -59,7 +59,13 @@ public class ChefOdDetailVO {
 	public void setChef_od_stotal(Integer chef_od_stotal) {
 		this.chef_od_stotal = chef_od_stotal;
 	}
+	public String getChef_od_status() {
+		return chef_od_status;
+	}
+	public void setChef_od_status(String chef_od_status) {
+		this.chef_od_status = chef_od_status;
+	}
+	
 
-
-
+	
 }

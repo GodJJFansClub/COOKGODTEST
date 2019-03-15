@@ -37,6 +37,7 @@ public class FoodOrDetailService {
 		return foodOrDetailVO;
 	}
 	
+	
 	public FoodOrDetailVO getOneFoodOrDetail(String food_or_ID, String food_sup_ID, String food_ID) {
 		return dao.findByPrimaryKey(food_or_ID, food_sup_ID, food_ID);
 	}

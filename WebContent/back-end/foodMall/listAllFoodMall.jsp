@@ -3,6 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.foodMall.model.*" %>
 <jsp:useBean id="foodMallSvc" scope="page" class="com.foodMall.model.FoodMallService"/>
+<jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService"/>
+<jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService"/>
+
 <%
 	List<FoodMallVO> list = foodMallSvc.getAll();
 	pageContext.setAttribute("list", list);
@@ -34,30 +37,29 @@
 				</c:if>
 				<table>
 					<tr>
-						<th>食材商編號</th>
-						<th>食材編號</th>
+						<th>食材供應商名稱</th>
+						<th>食材名稱</th>
 						<th>標題</th>
 						<th>商品狀態</th>
 						<th>價格</th>
 						<th>單位</th>
 						<th>產地</th>
 						<th>圖片</th>
-						<th>介紹</th>
 						<th>評價</th>
 					</tr>
 					<%@ include file="/file/page1.file" %>
 					<c:forEach var="foodMallVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 						<tr>
-							<td>${foodMallVO.food_sup_ID}</td>
-							<td>${foodMallVO.food_ID}</td>
+							<td>${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</td>
+							<td>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</td>
 							<td>${foodMallVO.food_m_name}</td>
 							<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
 							<td>${foodMallVO.food_m_price}</td>
 							<td>${foodMallVO.food_m_unit}</td>
 							<td>${foodMallVO.food_m_place}</td>
 							<%--<td><img src="data:image/png;base64,${foodMallVO.food_m_pic}"></td> --%>
-							<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"></td>
-							<td>${foodMallVO.food_m_resume}</td>
+							<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"
+								height = "400" width="300"></td>
 							<td>${foodMallVO.food_m_rate}</td>
 						
 							<td>
@@ -72,6 +74,36 @@
 					</c:forEach>
 				</table>
 				<%@ include file="/file/page2.file" %>
+				<c:if test="${openModal!=null}">
+
+				<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+								
+							<div class="modal-header">
+				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				                <h3 class="modal-title" id="myModalLabel">The Bootstrap modal-header</h3>
+				            </div>
+							
+							<div class="modal-body">
+				<!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
+				               <jsp:include page="/back-end/foodMall/update_foodMall_input.jsp" />
+				<!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
+							</div>
+							
+							<div class="modal-footer">
+				                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				                <button type="button" class="btn btn-primary">Save changes</button>
+				            </div>
+						
+						</div>
+					</div>
+				</div>
+
+		        <script>
+		    		 $("#basicModal").modal({show: true});
+		        </script>
+ 				</c:if>
 
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />

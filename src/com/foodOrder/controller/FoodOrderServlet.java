@@ -4,11 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -24,6 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.cust.model.CustVO;
+import com.festMenu.model.FestMenuService;
+import com.festMenu.model.FestMenuVO;
 import com.festOrder.model.FestOrderService;
 import com.festOrder.model.FestOrderVO;
 import com.festOrderDetail.model.FestOrderDetailVO;
@@ -372,85 +377,100 @@ public class FoodOrderServlet extends HttpServlet {
 		}
 		
 		if ("insertOrODs".equals(action)) { // 來自前端的請求
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			try {
-				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-				String food_or_name = req.getParameter("food_or_name");
-				String food_or_nameReg = "^[(\u4e00-\u9fa5)]{1,30}$";
-				if (food_or_name == null || food_or_name.trim().length() == 0) {
-					errorMsgs.add("收件人 : 起勿空白");
-				} else if (!food_or_name.trim().matches(food_or_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("收件人 : 只能是中文且長度必需在1到30之間");
-				}
-
-				String food_or_addr = req.getParameter("food_or_addr");
-				if (food_or_addr == null || food_or_addr.trim().length() == 0) {
-					errorMsgs.add("收件地址請勿空白");
-				}
-				
-				
-				String food_or_tel = req.getParameter("food_or_tel");
-				String food_or_telReg = "^[\\d]{10}$";
-				if (food_or_tel == null || food_or_tel.trim().length() == 0) {
-					errorMsgs.add("收件人電話 : 起勿空白");
-				} else if (!food_or_tel.trim().matches(food_or_telReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("收件人電話 : 09XXXXXXXX");
-				}
-				
-				HttpSession session = req.getSession();
-				@SuppressWarnings("unchecked")
-				List<Object> shoppingCart = (Vector<Object>) session.getAttribute("shoppingCart");
-				List<FoodOrDetailVO> foodCart = shoppingCart.stream()
-						.filter(item -> item instanceof FoodOrDetailVO)
-						.map(item -> {return (FoodOrDetailVO) item;})
-						.collect(Collectors.toList());
-				List<FestOrderDetailVO> festCart = shoppingCart.stream()
-						.filter(item -> item instanceof FestOrderDetailVO)
-						.map(item -> {return (FestOrderDetailVO) item;})
-						.collect(Collectors.toList());
-				
-				String cust_ID =((CustVO) session.getAttribute("custVO")).getCust_ID();
-				FoodOrderVO foodOrderVO = new FoodOrderVO();
-				foodOrderVO.setFood_or_name(food_or_name);
-				foodOrderVO.setFood_or_addr(food_or_addr);
-				foodOrderVO.setFood_or_tel(food_or_tel);
-				
-
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("foodOrderVO", foodOrderVO);
-					RequestDispatcher failureView = req.getRequestDispatcher(req.getParameter("requestURL"));
-					failureView.forward(req, res);
-					return;
-				}
-				/*************************** 2.開始新增資料 ***************************************/
-				if(foodCart.size() > 0) {
-					FoodOrderService foodOrderSvc = new FoodOrderService();
-					foodOrderVO = foodOrderSvc.addFoodOrder("o0", food_or_name, food_or_addr, food_or_tel, cust_ID, foodCart);
-				}
-				FestOrderVO festOrderVO = new FestOrderVO();
-				if(festCart.size() > 0) {
-					FestOrderService festOrderSvc = new FestOrderService();
-					
-				}
-				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-end/foodOrder/listOneFoodOrder.jsp";
-				session.removeAttribute("shoppingCart");
-				
-				
-				
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-
-				/*************************** 其他可能的錯誤處理 **********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(req.getParameter("requestURL"));
-				failureView.forward(req, res);
-			}
+			insertOrODs(req, res);
 		}
 
+	}
+	
+	private void insertOrODs (HttpServletRequest req , HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		req.setAttribute("errorMsgs", errorMsgs);
+
+		try {
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+			String food_or_name = req.getParameter("food_or_name");
+			String food_or_nameReg = "^[(\u4e00-\u9fa5)]{1,30}$";
+			if (food_or_name == null || food_or_name.trim().length() == 0) {
+				errorMsgs.add("收件人 : 起勿空白");
+			} else if (!food_or_name.trim().matches(food_or_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.add("收件人 : 只能是中文且長度必需在1到30之間");
+			}
+
+			String food_or_addr = req.getParameter("food_or_addr");
+			if (food_or_addr == null || food_or_addr.trim().length() == 0) {
+				errorMsgs.add("收件地址請勿空白");
+			}
+			
+			
+			String food_or_tel = req.getParameter("food_or_tel");
+			String food_or_telReg = "^[\\d]{10}$";
+			if (food_or_tel == null || food_or_tel.trim().length() == 0) {
+				errorMsgs.add("收件人電話 : 起勿空白");
+			} else if (!food_or_tel.trim().matches(food_or_telReg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.add("收件人電話 : 09XXXXXXXX");
+			}
+			
+			HttpSession session = req.getSession();
+			@SuppressWarnings("unchecked")
+			List<Object> shoppingCart = (Vector<Object>) session.getAttribute("shoppingCart");
+			List<FoodOrDetailVO> foodCart = shoppingCart.stream()
+					.filter(item -> item instanceof FoodOrDetailVO)
+					.map(item -> {return (FoodOrDetailVO) item;})
+					.collect(Collectors.toList());
+			List<FestOrderDetailVO> festCart = shoppingCart.stream()
+					.filter(item -> item instanceof FestOrderDetailVO)
+					.map(item -> {return (FestOrderDetailVO) item;})
+					.collect(Collectors.toList());
+			
+			String cust_ID =((CustVO) session.getAttribute("custVO")).getCust_ID();
+			FoodOrderVO foodOrderVO = new FoodOrderVO();
+			foodOrderVO.setFood_or_name(food_or_name);
+			foodOrderVO.setFood_or_addr(food_or_addr);
+			foodOrderVO.setFood_or_tel(food_or_tel);
+			
+
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("foodOrderVO", foodOrderVO);
+				RequestDispatcher failureView = req.getRequestDispatcher(req.getParameter("requestURL"));
+				failureView.forward(req, res);
+				return;
+			}
+			/*************************** 2.開始新增資料 ***************************************/
+			if(foodCart.size() > 0) {
+				FoodOrderService foodOrderSvc = new FoodOrderService();
+				foodOrderVO = foodOrderSvc.addFoodOrder("o1", food_or_name, food_or_addr, food_or_tel, cust_ID, foodCart);
+				req.setAttribute("foodOrderVO", foodOrderVO);
+			}
+			List<FestOrderVO> festOrderVOs = new ArrayList<FestOrderVO>();
+			if(festCart.size() > 0) {
+				FestOrderService festOrderSvc = new FestOrderService();
+				FestMenuService fesMenuSvc = new FestMenuService();
+				Map<java.sql.Date, List<FestOrderDetailVO>> festOrders = new LinkedHashMap<>();
+				festOrders = festCart.stream()
+						.collect(Collectors.groupingBy(
+							festODVO -> fesMenuSvc.getOneFestMenu(festODVO.getFest_m_ID()).getFest_m_send()
+						));
+				
+				festOrders.forEach((dateKey, festODVOs)->{
+					FestOrderVO festOrderVO =
+					festOrderSvc.insertFestOrder("o1", festODVOs.stream().mapToInt(
+							FestOrderDetailVO::getFest_or_stotal).sum(), dateKey, cust_ID, festODVOs);
+					festOrderVOs.add(festOrderVO);
+				});
+				req.setAttribute("festOrderMap", festOrders);
+			}
+			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			String url = "/front-end/foodMall/comorder.jsp";
+			session.removeAttribute("shoppingCart");
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+
+			/*************************** 其他可能的錯誤處理 **********************************/
+		} catch (Exception e) {
+			errorMsgs.add(e.getMessage());
+			RequestDispatcher failureView = req.getRequestDispatcher(req.getParameter("requestURL"));
+			failureView.forward(req, res);
+		}
 	}
 	
 	private String getPreAddr(int cityIn, int areaIn, int roadIn) throws JSONException {

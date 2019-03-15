@@ -52,7 +52,7 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="festOrder.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do" >
         <b>請輸入訂單編號 :</b>
         <input type="text" name="fest_or_ID">
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -63,7 +63,7 @@
   <jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
    
   <li>
-     <FORM METHOD="post" ACTION="festOrder.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do" >
        <b>選擇訂單編號 ::</b>
        <select size="1" name="fest_or_ID">
          <%-- <c:forEach var="reportVO" items="${reportSvc.all}"> --%>

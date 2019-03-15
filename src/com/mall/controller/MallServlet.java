@@ -91,7 +91,6 @@ public class MallServlet extends HttpServlet{
 					
 				}
 			} else if("getOneDisplayFoodMall".equals(action)) {
-				
 				getOneForDisplay(req,res);
 			}
 		} else if("CHECKOUTFOODMALL".equals(action)) {

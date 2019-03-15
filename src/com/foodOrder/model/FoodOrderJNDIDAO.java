@@ -45,7 +45,7 @@ public class FoodOrderJNDIDAO implements FoodOrderDAO_interface {
 	private static final String UPDATE = 
 			"UPDATE FOOD_ORDER SET FOOD_OR_STATUS = ?, FOOD_OR_SEND = ?, FOOD_OR_RCV = ?, FOOD_OR_END = ?, FOOD_OR_NAME = ?, FOOD_OR_ADDR = ?, FOOD_OR_TEL = ? WHERE FOOD_OR_ID = ?";
 	private static final String GET_FoodODs_ByFood_or_ID_STMT =
-			"SELECT FOOD_OR_ID, FOOD_SUP_ID, FOOD_ID, FOOD_OD_QTY, FOOD_OD_STOTAL, FOOD_OD_RATE, FOOD_OD_MSG FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? ORDER BY FOOD_ID";
+			"SELECT * FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? ORDER BY FOOD_ID";
 	
 	@Override
 	public void insert(FoodOrderVO foodOrderVO) {

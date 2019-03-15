@@ -305,13 +305,12 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 	}
 	
 	@Override
-	public void update2_FestMenu(String fest_m_ID, Integer final_qty) {
-		Connection con = null;
+	public void update2_FestMenu(String fest_m_ID, Integer final_qty, java.sql.Connection con) {
+		
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			
 			pstmt = con.prepareStatement(UPDATE_QTY);
 			
 			pstmt.setString(1, fest_m_ID);
@@ -322,11 +321,15 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 			System.out.println("update2_FestMenu = "+pstmt.executeUpdate());
 			
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					con.rollback();
+				} catch (SQLException e) {
+					throw new RuntimeException("A database error occured. "
+							+ e.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
@@ -336,13 +339,6 @@ public class FestMenuJDBCDAO implements FestMenu_Interface {
 					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
 				}
 			}
 		}

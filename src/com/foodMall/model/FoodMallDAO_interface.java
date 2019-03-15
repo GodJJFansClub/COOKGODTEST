@@ -9,6 +9,7 @@ import com.foodOrDetail.model.FoodOrDetailVO;
 public interface FoodMallDAO_interface {
 	void insert(FoodMallVO foodMallVO);
 	void update(FoodMallVO foodMallVO);
+	void updateStatus(FoodMallVO foodMallVO);
 	FoodMallVO findByPrimaryKey(String food_sup_ID, String food_ID);
 	List<FoodMallVO> getAll();
 	List<FoodMallVO> getAllStatus(String food_m_status);

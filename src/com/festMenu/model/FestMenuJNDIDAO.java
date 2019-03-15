@@ -354,9 +354,11 @@ public class FestMenuJNDIDAO implements FestMenu_Interface {
 	}
 
 	@Override
-	public void update2_FestMenu(String fest_m_ID, Integer final_qty) {
+	public void update2_FestMenu(String fest_m_ID, Integer final_qty, Connection con) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

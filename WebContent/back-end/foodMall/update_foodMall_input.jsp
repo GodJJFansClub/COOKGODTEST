@@ -9,23 +9,6 @@
 
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-			<jsp:include page="/back-end/foodOrder/sidebar.jsp" flush="true"/>
-		</aside>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
-				<div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title">修改商品</h4>
-                    </div>
-                </div>
-            </div>
             <%-- 錯誤列表 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color: red">請修正以下錯誤:</font>
@@ -42,61 +25,53 @@
 						<td>${foodMallVO.food_m_name}</td>
 					</tr>
 					<tr>
-						<td>商品狀態:</td>
-						<td>
-						<select size="1" name="food_m_status">
-							<c:forEach var="mallStatus" items="${mallStatusMap}">
-								<option value="${mallStatus.key}" ${(foodMallVO.food_m_status == mallStatus.key)?'selected':''} >${mallStatus.value}
-							</c:forEach>
-						</select>
+				<td>商品狀態:</td>
+				<td>
+				<select size="1" name="food_m_status">
+					<c:forEach var="mallStatus" items="${mallStatusMap}">
+						<option value="${mallStatus.key}" ${(foodMallVO.food_m_status == mallStatus.key)?'selected':''} >${mallStatus.value}
+					</c:forEach>
+				</select>
+				</td>
 			
-					</tr>
-					<tr>
-						<td>商品價格:</td>
-						<td>${foodMallVO.food_m_price}</td>
-					</tr>
-					<tr>
-						<td>單位:</td>
-						<td>${foodMallVO.food_m_unit}</td>
-					</tr>
-					<tr>
-						<td>產地:</td>
-						<td>${foodMallVO.food_m_place}</td>
-					</tr>
+			</tr>
+			<tr>
+				<td>商品價格:</td>
+				<td>${foodMallVO.food_m_price}</td>
+			</tr>
+			<tr>
+				<td>單位:</td>
+				<td>${foodMallVO.food_m_unit}</td>
+			</tr>
+			<tr>
+				<td>產地:</td>
+				<td>${foodMallVO.food_m_place}</td>
+			</tr>
 			
 				
-				<tr>
-					<td>食材名稱:</td>
-					<td>
-						<h3>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</h3>
-					</td>
-				</tr>
-				<tr>
-					<td>商品照片:</td>
-					<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"></td>
-				</tr>
-				<tr>
-					<td>介紹:</td>
-					<td>
-						${empty foodMallVO.food_m_resume ? "請介紹" : foodMallVO.food_m_resume}
-					</td>
-				</tr>
-				</table>
-				<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
-				<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
-				<input type="hidden" name="action" value="update">
-				<input type="submit" value="送出">
-			</form>
-			<img id="preView">
-	
-           
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-
-			
-		</div>
-	</div>
+			<tr>
+				<td>食材名稱:</td>
+				<td>
+					<h3>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</h3>
+				</td>
+			</tr>
+			<tr>
+				<td>商品照片:</td>
+				<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"></td>
+			</tr>
+			<tr>
+				<td>介紹:</td>
+				<td>
+					${empty foodMallVO.food_m_resume ? "請介紹" : foodMallVO.food_m_resume}
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
+		<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
+		<input type="hidden" name="action" value="backUpStatus">
+		<input type="submit" value="送出">
+	</form>
+	<img id="preView">
 	<script>
 		$(document).ready(
 			function(){
