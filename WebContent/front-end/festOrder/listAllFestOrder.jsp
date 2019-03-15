@@ -1,11 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<!--<%@ page import="com.festOrder.model.*"%>  -->
 <%@ page import="com.festOrder.model.*"%>
+<%@ page import="com.festOrderDetail.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
+<jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
 
 <%
-    FestOrderService festOrderSvc = new FestOrderService();
+    festOrderSvc = new FestOrderService();
     List<FestOrderVO> list = festOrderSvc.getAll();
     pageContext.setAttribute("list", list);
 %>
@@ -93,21 +96,30 @@
 			<td>${festOrderVO.fest_or_disc}</td>
 			<td>${festOrderVO.cust_ID}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/festOrder/festOrder.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="fest_or_ID"  value="${festOrderVO.fest_or_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/festOrder/festOrder.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="fest_or_ID"  value="${festOrderVO.fest_or_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
+			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do" style="margin-bottom: 0px;">
+			    <input type="submit" value="送出查詢"> 
+			    <input type="hidden" name="fest_or_ID" value="${festOrderVO.fest_or_ID}">
+			    <input type="hidden" name="action" value="listFestOrderDetail_ByFest_or_ID"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
 
+<%if (request.getAttribute("listFestOrderDetail_ByFest_or_ID")!=null){%>
+       <jsp:include page="/front-end/festOrder/listFestOrderDetail_ByFest_or_ID.jsp" />
+<%} %>
 </body>
 </html>

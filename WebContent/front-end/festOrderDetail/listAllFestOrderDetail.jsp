@@ -6,11 +6,11 @@
 
 <%
     FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
-    List<FestOrderDetailVO> listAll = festOrderDetailSvc.getAll();
-    pageContext.setAttribute("listAll", listAll);
+    List<FestOrderDetailVO> list = festOrderDetailSvc.getAll();
+    pageContext.setAttribute("list", list);
 %>
 
-
+<jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
 <html>
 <head>
 <title>List_All_FestOrderDetail.jsp</title>
@@ -90,13 +90,13 @@
 			<td>${festOrderDetailVO.fest_or_qty}</td>
 			<td>${festOrderDetailVO.fest_or_stotal}</td> 
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/festOrderDetail/festOrderDetail.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="fest_or_ID"  value="${festOrderDetailVO.fest_or_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/festOrderDetail/festOrderDetail.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="fest_or_ID"  value="${festOrderDetailVO.fest_or_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>

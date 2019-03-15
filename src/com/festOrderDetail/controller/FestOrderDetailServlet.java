@@ -11,7 +11,6 @@ import com.festMenu.model.FestMenuVO;
 import com.festOrder.model.FestOrderService;
 import com.festOrderDetail.model.FestOrderDetailService;
 import com.festOrderDetail.model.FestOrderDetailVO;
-import com.report.model.ReportVO;
 
 public class FestOrderDetailServlet extends HttpServlet {
 
@@ -80,7 +79,7 @@ public class FestOrderDetailServlet extends HttpServlet {
 		
 		
 		if ("getOne_For_Update".equals(action)) { //來自listAllReport.jsp的請求
-            
+            System.out.println("84行");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -263,17 +262,11 @@ public class FestOrderDetailServlet extends HttpServlet {
 				festOrderDetailVO = festOrderDetailSvc.addFestOrderDetail
 				(fest_or_ID,fest_m_ID,fest_or_rate,fest_or_msg,fest_or_qty,fest_or_stotal);
 				
-				
-				
 				FestMenuService festMenuSvc = new FestMenuService();
 				FestMenuVO festMenuVO = festMenuSvc.getOneFestMenu(fest_m_ID);
 				int	festMenu_qty = festMenuVO.getFest_m_qty();
 				int final_qty= festMenu_qty-fest_or_qty;   //fest_or_qty是指訂購數量、festMneu_qty：資料庫的數量、final_qty：最後的數量
 				festMenuSvc.update2_FestMenu(fest_m_ID, final_qty);
-				
-				
-				
-				
 				
 				System.out.print(festOrderDetailVO);
 				System.out.println("檢查點"+ "299");
@@ -298,14 +291,32 @@ public class FestOrderDetailServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-	
+	        
+			String requestURL = req.getParameter("requestURL");
 			try {
 				/***************************1.接收請求參數***************************************/
 				String fest_or_ID = req.getParameter("fest_or_ID");
+				System.out.println("接收請求參數"+ fest_or_ID);
+//				/***************************2.開始刪除資料***************************************/
+//				EmpService empSvc = new EmpService();  //老師的
+//				EmpVO empVO = empSvc.getOneEmp(empno);
+//				empSvc.deleteEmp(empno);
 				
+				/***************************2.開始刪除資料***************************************/
 				FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
+				FestOrderDetailVO festOrderDetailVO = festOrderDetailSvc.getOneFestOrderDetail(fest_or_ID);
 				festOrderDetailSvc.deleteFestOrderDetail(fest_or_ID);
-											
+					
+//				/***************************3.刪除完成,準備轉交(Send the Success view)***********/  老師的
+//				DeptService deptSvc = new DeptService();
+//				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
+//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // 資料庫取出的list物件,存入request
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
+				FestOrderService festOrderSvc = new FestOrderService();
+				if(requestURL.equals("/front-end/festOrder/listFestOrderDetail_ByFest_or_ID.jsp") || requestURL.equals("/front-end/festOrder/listAllFestOrder.jsp"))
+					req.setAttribute("listFestOrderDetail_ByFest_or_ID",festOrderSvc.getFestOrderDetailByFest_or_ID(festOrderDetailVO.getFest_or_ID())); // 資料庫取出的list物件,存入request
+				
 				String url = "/front-end/festOrderDetail/listAllFestOrderDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
