@@ -23,7 +23,7 @@
 </head>
 
 <body>
-	<script src="<%=request.getContextPath()%>/ckeditor4/ckeditor.js"></script>
+	<script src="<%=request.getContextPath()%>/publibrary/ckeditor4/ckeditor.js"></script>
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="lds-ellipsis">
