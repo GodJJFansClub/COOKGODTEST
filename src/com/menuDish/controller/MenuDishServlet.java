@@ -5,6 +5,8 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
+
+
 import com.menuDish.model.*;
 
 public class MenuDishServlet extends HttpServlet {
@@ -12,6 +14,7 @@ public class MenuDishServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 	
 		doPost(req, res);
+		
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) 
@@ -20,41 +23,21 @@ public class MenuDishServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
+		
+		
 		// 單一查詢
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			// try {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			// 菜色編號判斷
-			String MID = req.getParameter("menu_ID");
 			
-			if (MID == null || (MID.trim()).length() == 0) {
-				errorMsgs.add("請輸入菜色編號");
-			}
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/select_page.jsp");
-				failureView.forward(req, res);
-				return;
-			}
-
-			String menu_ID = null;
-			try {
-				menu_ID = new String(MID);
-			} catch (Exception e) {
-				errorMsgs.add("菜色編號格式不正確");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/select_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
+			String menu_ID = req.getParameter("menu_ID");
+			
 			/*************************** 2.開始查詢資料 *****************************************/
 			MenuDishService menuDishSvc = new MenuDishService();
 			MenuDishVO menuDishVO = menuDishSvc.getOneMenuDish(menu_ID);
@@ -172,17 +155,25 @@ public class MenuDishServlet extends HttpServlet {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 
 				String menu_ID = req.getParameter("menu_ID");
-				String dish_ID = req.getParameter("dish_ID");
+				
+				String[] dish_IDArr = req.getParameterValues("dish_ID");
+				if (dish_IDArr == null ) {
+					errorMsgs.add("請選擇菜色編號");
+				}
 				
 				MenuDishVO menuDishVO = new MenuDishVO();
-
-				menuDishVO.setMenu_ID(menu_ID);
-				menuDishVO.setDish_ID(dish_ID);
+				List<MenuDishVO> menuDishList = new ArrayList<>();
 				
+				for(int i = 0; i<dish_IDArr.length; i++) {
+				
+					menuDishVO.setMenu_ID(menu_ID);
+					menuDishVO.setDish_ID(dish_IDArr[i]);
+					menuDishList.add(menuDishVO);
+				}
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("menuDishVO", menuDishVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("menuDishList", menuDishList); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/addMenuDish.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
@@ -190,7 +181,65 @@ public class MenuDishServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				MenuDishService menuDishSvc = new MenuDishService();
-				menuDishVO = menuDishSvc.addMenuDish(menu_ID,dish_ID);
+				
+				for(String dish_ID:dish_IDArr) {
+					menuDishVO = menuDishSvc.addMenuDish(menu_ID,dish_ID);
+				}
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/back-end/menuDish/listAllMenuDish.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/addMenuDish.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+
+		if ("insert2".equals(action)) { // 來自addEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("AAA");
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+
+				String menu_ID = req.getParameter("menu_ID");
+				
+				String[] dish_IDArr = req.getParameterValues("dish_ID");
+				if (dish_IDArr == null ) {
+					errorMsgs.add("請選擇菜色編號");
+				}
+				
+				MenuDishVO menuDishVO = new MenuDishVO();
+				List<MenuDishVO> menuDishList = new ArrayList<>();
+				
+				for(int i = 0; i<dish_IDArr.length; i++) {
+				
+					menuDishVO.setMenu_ID(menu_ID);
+					menuDishVO.setDish_ID(dish_IDArr[i]);
+					menuDishList.add(menuDishVO);
+				}
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("menuDishList", menuDishList); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/menuDish/addMenuDish.jsp");
+					failureView.forward(req, res);
+					return; // 程式中斷
+				}
+
+				/*************************** 2.開始新增資料 ***************************************/
+				MenuDishService menuDishSvc = new MenuDishService();
+				
+				for(String dish_ID:dish_IDArr) {
+					menuDishVO = menuDishSvc.addMenuDish(menu_ID,dish_ID);
+				}
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back-end/menuDish/listAllMenuDish.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp

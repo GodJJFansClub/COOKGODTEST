@@ -46,8 +46,6 @@ public class MenuDishService {
 	public List <MenuDishVO> getAll() {
 		return dao.getAll();
 	}
-	public List <MenuDishVO> getAllByMenu_ID(String menu_ID) {
-		return dao.getAllBy_Menu(menu_ID);
-	}
+	
 
 }

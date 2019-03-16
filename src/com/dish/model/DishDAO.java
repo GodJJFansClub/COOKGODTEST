@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.food.model.FoodVO;
+
 public class DishDAO implements DishDAO_interface{
 
 	private static DataSource ds = null;
@@ -23,9 +25,11 @@ public class DishDAO implements DishDAO_interface{
 	private static final String INSERT_STMT =
 			"INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),?,?,?,?,?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE FROM DISH order by DISH_ID";
+			"SELECT* FROM DISH order by DISH_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT *FROM DISH where DISH_ID=?";
+	private static final String GETFOODS =
+			"SELECT *FROM DISH_FOOD where DISH_ID=?";
 	private static final String DELETE = 
 			"DELETE FROM DISH where DISH_ID=?";
 	private static final String UPDATE = 
@@ -36,11 +40,12 @@ public class DishDAO implements DishDAO_interface{
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs =null;
 		
 		try {
 			
 			con =ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt = con.prepareStatement(INSERT_STMT, new String[] {"DISH_ID"});
 			
 			pstmt.setString(1, dishVO.getDish_name());
 			pstmt.setString(2, dishVO.getDish_status());
@@ -50,10 +55,23 @@ public class DishDAO implements DishDAO_interface{
 			
 			pstmt.executeUpdate();
 			
+			rs = pstmt.getGeneratedKeys();
+			
+			rs.next();
+			
+			dishVO.setDish_ID(rs.getString(1));
+			
 		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+ se.getMessage());
 		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				}catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -264,4 +282,5 @@ public class DishDAO implements DishDAO_interface{
 		return list;
 	}
 
+	
 }
