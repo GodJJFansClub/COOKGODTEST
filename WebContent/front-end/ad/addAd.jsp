@@ -2,9 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.ad.model.*"%>
-
+<%@ page import="com.foodSup.model.*"%>
+<%@ page import="java.util.*"%>
 <%
+	FoodSupVO foodSupVO = (FoodSupVO) session.getAttribute("foodSupVO");	
 	AdVO adVO = (AdVO) request.getAttribute("adVO");
+	
 %>
 
 <!DOCTYPE html>
@@ -90,23 +93,13 @@ th, td {
 				<td><input type="TEXT" name="ad_end" id="f_date2" size="45" /></td>
 			</tr>
 
-			<tr>
-				<td>廣告狀態:</td>
-				<td><input type="TEXT" name="ad_status" size="45"
-					value="<%=(adVO == null) ? "gggccc@yahoo" : adVO.getAd_status()%>" /></td>
-			</tr>
-
+			
 			<tr>
 				<td>廣告類別:</td>
 				<td><input type="TEXT" name="ad_type" size="45"
 					value="<%=(adVO == null) ? "555" : adVO.getAd_type()%>" /></td>
 			</tr>
 
-			<tr>
-				<td>食材供應商ID:</td>
-				<td><input type="text" name="food_sup_ID" size="45"
-					value="<%=(adVO == null) ? "555" : adVO.getFood_sup_ID()%>" /></td>
-			</tr>
 		
 			<tr>
 				<td>廣告內文:</td>
@@ -124,8 +117,11 @@ th, td {
 		
 		
 		
-		<br> <input type="hidden" name="action" value="insert"> <input
+		<br> <input type="hidden" name="action" value="insert"> 
+			<input type="hidden" name="food_sup_ID" size="45"
+					value="<%=foodSupVO.getFood_sup_ID()%>" /></td>	<input
 			type="submit" value="送出新增">
+			
 
 	</FORM>
 	

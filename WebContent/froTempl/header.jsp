@@ -81,7 +81,7 @@
                                     </c:if>
                                     <li><a href="contact.html">主廚論壇</a></li>
                                   	 	<c:if test="${not empty custVO}">
-                                    		<li><a href="contact.html">Hello:<font color=red> ${custVO.cust_name} </font>您好</a></li>
+                                    		<li><a >Hello:<font color=#ea7500> ${custVO.cust_name} </font>您好</a></li>
 											<FORM METHOD="get"
 										action="<%=request.getContextPath()%>/back-endTemplate/logout.do">
 										<input type="submit" value="登出">

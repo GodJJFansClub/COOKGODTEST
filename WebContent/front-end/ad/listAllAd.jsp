@@ -2,12 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.ad.model.*"%>
+<%@ page import="com.foodSup.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+	FoodSupVO foodSupVO = (FoodSupVO) session.getAttribute("foodSupVO");
 	AdService adSvc = new AdService();
 	List<AdVO> list = adSvc.getAll();
 	;pageContext.setAttribute("list", list);
+	
 	
 %>
 
@@ -83,21 +86,20 @@ th, td {
 		<tr>
 			<th>廣告編號</th>
 			<th>廣告標題</th>
-			<th>廣告內文</th>
+			
 			<th>廣告上架日期</th>
 			<th>廣告下架日期</th>
 			<th>廣告狀態</th>
 			<th>廣告類別</th>
 			<th>食材供應商</th>
 		</tr>
-		<%@ include file="/file/page1.file"%>
-		<c:forEach var="adVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-			<c:if test="adVO.food_sup_ID = session.request.">>
+		
+		<c:forEach var="adVO" items="${list}" >
+			<c:if test="${adVO.food_sup_ID == foodSupVO.getFood_sup_ID()}">
 			<tr>
 				<td>${adVO.ad_ID}</td>
 				<td>${adVO.ad_title}</td>
-				<td>${adVO.ad_con}</td>
+				
 				<td>${adVO.ad_start}</td>
 				<td>${adVO.ad_end}</td>
 				<td>${adVO.ad_status}</td>
@@ -113,19 +115,11 @@ th, td {
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/ad/ad.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="刪除"> <input type="hidden"
-							name="ad_ID" value="${adVO.ad_ID}"> <input
-							type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
+				
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="/file/page2.file"%>
+	
 
 </body>
 </html>

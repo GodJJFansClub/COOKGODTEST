@@ -68,10 +68,8 @@ public class AdServlet extends HttpServlet {
 				String ad_status = "d2";
 
 				// 6.廣告類別
-				String ad_type = req.getParameter("ad_type").trim();
-				if (ad_type == null || ad_type.trim().length() == 0) {
-					errorMsgs.add("暱稱請勿空白");
-				}
+				String ad_type = "e0";
+				
 				// 7.
 				String food_sup_ID = req.getParameter("food_sup_ID").trim();
 
