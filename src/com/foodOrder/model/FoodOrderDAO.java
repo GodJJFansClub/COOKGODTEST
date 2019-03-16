@@ -117,7 +117,7 @@ public class FoodOrderDAO implements FoodOrderDAO_interface {
 				foodOrDetailVO.setFood_or_ID(next_foodOrID);
 				dao.insertODs(foodOrDetailVO, con);
 			}
-
+			foodOrderVO.setFood_or_ID(next_foodOrID);
 			// 2●設定於 pstm.executeUpdate()之後
 			con.commit();
 			con.setAutoCommit(true);

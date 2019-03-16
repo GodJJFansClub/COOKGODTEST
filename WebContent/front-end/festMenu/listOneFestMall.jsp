@@ -1,65 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService"/>
-<jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="chefSvc" class="com.chef.model.ChefService"/>
 <html>
 <head>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	
+
 	 <!-- ##### Contact Area Start #####-->
     <section class="contact-area section-padding-100">
     <jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
-    	<div id="mallItem" class="container foodMCard">
+    <c:if test="${not empty errorMsgs}">
+		<font style="color:red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color:red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+		<div id="mallItem" class="container foodMCard">
 	    	<div class="col">
-	    		食材供應商 : ${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}
+	    		節慶料理編號 : ${festMenuVO.fest_m_ID}
 	    	</div>
-	    	<div class="col" id="foodMName">
-	    		標題 : ${foodMallVO.food_m_name}
-	    	</div>
-	    	<div class="col">
-	    		食材名 : ${foodSvc.getOneFood(foodMallVO.food_sup_ID).food_name}
-	    	</div>
-	    	<div class="col">
-	    		價格 : ${foodMallVO.food_m_price}
-	    	</div>
-	    	<div class="col">
-	    		單位 : ${foodMallVO.food_m_unit}
-	    	</div>
-	    	<div class="col">
-	    		產地 : ${foodMallVO.food_m_place}
+	    	<div class="col" id="festMName">
+	    		節慶主題料理名稱 : ${festMenuVO.fest_m_name}
 	    	</div>
 	    	<div class="col">
-	    		<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"
+	    		數量 : ${festMenuVO.fest_m_qty}
+	    	</div>
+	    	<div class="col">
+	    		開始預購日期 : ${festMenuVO.fest_m_start}
+	    	</div>
+	    	<div class="col">
+	    		結束預購日期 : ${festMenuVO.fest_m_end}
+	    	</div>
+	    	<div class="col">
+	    		結束預購日期 : ${festMenuVO.fest_m_send}
+	    	</div>
+	    	<div class="col">
+	    		<img src="<%=request.getContextPath()%>/festmenu/festmenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"
 	    			height = "400" width="300">
 	    	</div>
 	    	<div class="col">
-	    		評價 : ${foodMallVO.food_m_rate}
+	    		種類 : ${festMenuVO.fest_m_kind}
 	    	</div>
 	    	<div class="col">
-	    		介紹 : ${foodMallVO.food_m_resume}
+	    		價格 : ${festMenuVO.fest_m_price}
+	    	</div>
+	    	<div class="col">
+	    		介紹 : ${festMenuVO.fest_m_resume}
 	    	</div>
 	    	<form class="foodMCard" action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
 				<button type="button" id="addShoppingcart" name="foodMBtn" class="btn btn-primary">加入購物車</button>
-				<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
-				<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">	
-				<input type="number" name="food_od_qty" min="1" max="20" size="3" value="1">
+				<input type="hidden" name="fest_m_ID" value="${festMenuVO.fest_m_ID}">	
+				<input type="number" name="fest_or_qty" min="1" max="20" size="3" value="1">
 			</form>
 			<p class="card-text errorMsgs"></p>
 		</div>
     </section>
     <!-- ##### Contact Area End #####-->
+
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
-		
 		$(document).ready(function(){
 			$("#addShoppingcart").click(function(){
-				let foodMName = $("#foodMName").text();
+				let foodMName = $("#festMName").text();
 				foodMName = foodMName.substring(foodMName.indexOf(':')+2);
 				console.log(foodMName);
 				$.ajax({
 					 type:"POST",
 					 url: "<%=request.getContextPath()%>/mall/mall.do",
-					 data: crtQryStrFoodM( $(this).attr("id") , "addFoodMShoppingCart", $(this).parent("form").serializeArray()),
+					 data: crtQryStrFoodM( $(this).attr("id") , "addFestMenu", $(this).parent("form").serializeArray()),
 					 dataType: "json",
 					 success: function (data){
 						 
@@ -77,7 +88,6 @@
 		             }
 		         });
 			});
-
 		});
 		// 產生查詢字串
 		function crtQryStrFoodM( foodMCardID , action, foodMArr){
@@ -93,7 +103,7 @@
 		// 懶得在伺服器再查詢, 所以透過此方法再加入購物商時取得對應的食材名, 標題名, 供應商名
 		// 並暫存到記憶體中, 等伺服器回應時就可以一起加入到購物車
 		// 新增或更改已在購物車的商品
-		function cartItem(foodMName, data){
+		function cartItem(foodMNames, data){
 			
 			let shopCartTrs = $("#shopCartList>tr");
 			let shopCartLen = shopCartTrs.length;
@@ -103,25 +113,22 @@
 			
 			jQuery.each( shopCartTrs, function(i, val){
 				let inputArr = $(this).find("form").serializeArray();
-				if(food_sup_ID === inputArr[0].value 
-						&& inputArr[1].value === data.food_ID){
-					$(this).children("td:eq(1)").text(data.food_od_qty);
-					$(this).children("td:eq(2)").text(data.food_od_stotal);
+				if(inputArr[0].value === data.fest_m_ID){
+					$(this).children("td:eq(1)").text(data.fest_or_qty);
+					$(this).children("td:eq(2)").text(data.fest_or_stotal);
 					isNewCartItem = false;
 					return;
 				}
 			});
 			
 			if(isNewCartItem){
-				let shopCartItem = $("#copyShopIF").clone();
-				shopCartItem.children("td:eq(0)").text(foodMName);
-				shopCartItem.children("td:eq(1)").text(data.food_od_qty);
-				shopCartItem.children("td:eq(2)").text(data.food_od_stotal);
+				let shopCartItem = $("#copyShopFest").clone();
+				shopCartItem.children("td:eq(0)").text(foodMNames.fest_m_name);
+				shopCartItem.children("td:eq(1)").text(data.fest_or_qty);
+				shopCartItem.children("td:eq(2)").text(data.fest_or_stotal);
 				shopCartItem.find("button").click(delShoppingCartItem);
-				shopCartItem.find(":input:eq(0)").attr('name', "food_sup_ID");
-				shopCartItem.find(":input:eq(0)").attr('value', data.food_sup_ID);
-				shopCartItem.find(":input:eq(1)").attr('name', "food_ID");
-				shopCartItem.find(":input:eq(1)").attr('value', data.food_ID);
+				shopCartItem.find(":input:eq(0)").attr('name', "fest_m_ID");
+				shopCartItem.find(":input:eq(0)").attr('value', data.fest_m_ID);
 				shopCartItem.removeAttr('style');
 				shopCartItem.removeAttr('id');
 				$("#shopCartList").append(shopCartItem);
@@ -130,6 +137,5 @@
 	
 		}
 	</script>
-	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

@@ -13,75 +13,18 @@
 	
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 	<section class="contact-area section-padding-100">
+	<c:if test="${not empty errorMsgs}">
+		<font style="color:red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color:red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+	<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
 		<div class="container">
 			<a href='<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp'>食材商城</a>
-			<p>
-			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-				購物車
-			</button>
-			</p>
-			<div class="collapse" id="collapseExample">
-				<div class="card card-body">
-				<table class="table">
-				   <thead class="thead-dark">
-					 <tr>
-					    <th scope="col">標題</th>
-					    <th scope="col">數量</th>
-					    <th scope="col">小計</th>
-					    <th scope="col">
-					    	<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
-					    		<input type="hidden" name="action" value="CHECKOUTFOODMALL">
-					    		<input type="submit" value="結帳" class="btn btn-dark">
-					    	</form>
-					    </th>
-					  </tr>
-				   </thead>
-				   <tbody id="shopCartList">
-				   <c:forEach var="shopItem" items="${shoppingCart}">
-				      <tr class="shopItemT">
-				      <c:if test="${checkType.getIsFOD(shopItem)}">
-						  <td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
-						  <td>${shopItem.food_od_qty}</td>
-						  <td>${shopItem.food_od_stotal}</td>
-						  <td>
-						  	<form>
-							  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
-							    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
-						  	</form>
-						  </td>
-					  </c:if>
-					  <c:if test="${!checkType.getIsFOD(shopItem)}">
-						  <td>${festMenuSvc.getOneFestMenu(shopItem.fest_m_ID).fest_m_name}</td>
-						  <td>${shopItem.fest_or_qty}</td>
-						  <td>${shopItem.fest_or_stotal}</td>
-						  <td>
-						  	<form>
-							    <input type="hidden" name="fest_m_ID" value="${shopItem.fest_m_ID}">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
-						  	</form>
-						  </td>
-					  </c:if>
-					  </tr>
-					</c:forEach>
-						  <tr id="copyShopIF" style="display:none">
-						  <td></td>
-						  <td></td>
-						  <td></td>
-						  <td>
-						  	<form>
-							  	<input type="hidden">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button type="button" class="btn btn-dark">刪除</button>
-						  	</form>
-						  </td>	
-						  </tr>
-					</tbody>
-				</table>
-				</div>
-			</div>
+			
 			<div class="row">
 				<c:forEach var="festMenuVO" items="${festMenuSvc.allIndate}" varStatus="s">
 					<div class="col-3">
@@ -97,10 +40,9 @@
 				    			<p class="card-text">
 				    				預購結束日期 : ${festMenuVO.fest_m_end}
 				    			</p>
-				    			<form>
+				    			<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
 				    				<button type="button" name="foodMBtn" class="btn btn-primary">加入購物車</button>
 				    				<input type="hidden" name="fest_m_ID" value="${festMenuVO.fest_m_ID}">
-		
 				    				<input type="number"   name="fest_or_qty" min="1" max="20" size="3" value="1">
 				    			</form>
 				    			<p class="card-text errorMsgs"></p>
@@ -126,9 +68,9 @@
 						 data: crtQryStrFoodM( $(this).attr("id") , "addFestMenu", $(this).find("form").serializeArray()),
 						 dataType: "json",
 						 success: function (data){
-							 console.log(foodMNames);
+							 console.log(data["foodMCardID"])
 							 if(data["foodMCardID"]){
-								 $("#"+data["foodMCardID"]).find(".errorMsgs").text(data["efood_od_qty"]);	 
+								 $("#"+data["foodMCardID"]).find(".errorMsgs").text(data["cartErrorMsgs"]);	 
 							 }else{
 								 
 								 cartItem(foodMNames, data);
@@ -139,13 +81,21 @@
 			            	alert("ajax 錯誤");
 			            	console.log(errdata);
 			             }
-			         });
+			         });	
+				} else if(eventData.target.name === "food_od_qty"){
+					
+				} else {
+					let dpFestForm = $(this).find("form");
+					let action = document.createElement("input");
+					action.setAttribute("type","hidden");
+					action.setAttribute("name","action");
+					action.setAttribute("value","getOneDisplayFestMall");
+					dpFestForm.append(action);
+					dpFestForm.submit();
 				}
 			});
 			
-			$(".delFromCart").click(function(eventData){
-				console.log($(this).parent());
-			});
+			
 		});
 		// 產生查詢字串
 		function crtQryStrFoodM( foodMCardID , action, foodMArr){
@@ -176,8 +126,6 @@
 			
 			let shopCartTrs = $("#shopCartList>tr");
 			let shopCartLen = shopCartTrs.length;
-			let food_sup_ID = data.food_sup_ID;
-			let food_ID = data.food_ID;
 			let isNewCartItem = true;
 			
 			jQuery.each( shopCartTrs, function(i, val){
@@ -191,10 +139,11 @@
 			});
 			
 			if(isNewCartItem){
-				let shopCartItem = $("#copyShopIF").clone();
+				let shopCartItem = $("#copyShopFest").clone();
 				shopCartItem.children("td:eq(0)").text(foodMNames.fest_m_name);
 				shopCartItem.children("td:eq(1)").text(data.fest_or_qty);
 				shopCartItem.children("td:eq(2)").text(data.fest_or_stotal);
+				shopCartItem.find("button").click(delShoppingCartItem);
 				shopCartItem.find(":input:eq(0)").attr('name', "fest_m_ID");
 				shopCartItem.find(":input:eq(0)").attr('value', data.fest_m_ID);
 				shopCartItem.removeAttr('style');
@@ -202,10 +151,8 @@
 				$("#shopCartList").append(shopCartItem);
 				
 			}
-			
-			
+	
 		}
-		
 		
 	</script>
 </body>

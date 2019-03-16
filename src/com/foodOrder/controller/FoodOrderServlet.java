@@ -441,11 +441,13 @@ public class FoodOrderServlet extends HttpServlet {
 				foodOrderVO = foodOrderSvc.addFoodOrder("o1", food_or_name, food_or_addr, food_or_tel, cust_ID, foodCart);
 				req.setAttribute("foodOrderVO", foodOrderVO);
 			}
-			List<FestOrderVO> festOrderVOs = new ArrayList<FestOrderVO>();
+			
 			if(festCart.size() > 0) {
+				List<FestOrderVO> festOrderVOs = new ArrayList<FestOrderVO>();
 				FestOrderService festOrderSvc = new FestOrderService();
 				FestMenuService fesMenuSvc = new FestMenuService();
 				Map<java.sql.Date, List<FestOrderDetailVO>> festOrders = new LinkedHashMap<>();
+				
 				festOrders = festCart.stream()
 						.collect(Collectors.groupingBy(
 							festODVO -> fesMenuSvc.getOneFestMenu(festODVO.getFest_m_ID()).getFest_m_send()
@@ -457,7 +459,7 @@ public class FoodOrderServlet extends HttpServlet {
 							FestOrderDetailVO::getFest_or_stotal).sum(), dateKey, cust_ID, festODVOs);
 					festOrderVOs.add(festOrderVO);
 				});
-				req.setAttribute("festOrderMap", festOrders);
+				req.setAttribute("festOrderList", festOrderVOs);
 			}
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/front-end/foodMall/comorder.jsp";

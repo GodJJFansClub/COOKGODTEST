@@ -42,9 +42,14 @@ public class MallServlet extends HttpServlet{
 				JsonObject errors = new JsonObject();
 				try {
 					/*************************** 1.接收請求參數 ****************************************/
+					
 					FoodOrDetailVO foodOrDetailVO = getFOD(req, res, errors);
+					if(foodOrDetailVO == null) {
+						return;
+					}
 					/*************************** 3.加入購物車 ****************************************/
 					if (buyList == null) {
+						
 						buyList = new Vector<Object>();
 						buyList.add(foodOrDetailVO);
 						writeCartItem(res, foodOrDetailVO);
@@ -70,8 +75,12 @@ public class MallServlet extends HttpServlet{
 				try {
 					/*************************** 1.接收請求參數 ****************************************/
 					FestOrderDetailVO festODVO = getFestOD(req, res, errors);
+					if(festODVO == null) {
+						return;
+					}
 					/*************************** 3.加入購物車 ****************************************/
 					if (buyList == null) {
+						
 						buyList = new Vector<Object>();
 						buyList.add(festODVO);
 						writeCartItem(res, festODVO);
@@ -88,10 +97,17 @@ public class MallServlet extends HttpServlet{
 					}
 					session.setAttribute("shoppingCart", buyList);
 				} catch(Exception e) {
-					
+					errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
+					writeJson(res, errors);
 				}
 			} else if("getOneDisplayFoodMall".equals(action)) {
 				getOneForDisplay(req,res);
+			} else if("toCheckOutOR".equals(action)) {
+				toCheckOutOR(req,res);
+			} else if("delShoppingCartItem".equals(action)) {
+				delShoppingCartItem(req,res,buyList);
+			} else if("getOneDisplayFestMall".equals(action)) {
+				getOneDisplayFestMall(req,res);
 			}
 		} else if("CHECKOUTFOODMALL".equals(action)) {
 			Integer total = 0;
@@ -134,6 +150,7 @@ public class MallServlet extends HttpServlet{
 	private FoodOrDetailVO getFOD(HttpServletRequest req, HttpServletResponse res,JsonObject errors) throws IOException , SQLException{
 		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
 		String food_ID = req.getParameter("food_ID");
+		System.out.println(food_ID);
 		if(food_ID == null) {
 			errors.addProperty("cartErrorMsgs", "請輸入食材編號");
 			errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
@@ -235,13 +252,13 @@ public class MallServlet extends HttpServlet{
 			}
 			String food_ID = str;
 			String strsID = req.getParameter("food_sup_ID");
-			if (str == null || (str.trim()).length() == 0) {
+			if (strsID == null || (strsID.trim()).length() == 0) {
 				errorMsgs.add("請輸入食材供應商編號");
 			}
 			String food_sup_ID = strsID;
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/foodMall/listAllFoodMall.jsp");
+						.getRequestDispatcher("/front-end/foodMall/listFoodMall.jsp");
 				failureView.forward(req, res);
 				return;//程式中斷
 			}
@@ -275,4 +292,115 @@ public class MallServlet extends HttpServlet{
 		}
 	}
 	
+	private void getOneDisplayFestMall(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+		
+		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String strsID = req.getParameter("fest_m_ID");
+			if (strsID == null || (strsID.trim()).length() == 0) {
+				errorMsgs.add("請輸入食材供應商編號");
+			}
+			String fest_m_ID = strsID;
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/festMenu/listFestMall.jsp");
+				failureView.forward(req, res);
+				return;//程式中斷
+			}
+			/***************************2.開始查詢資料*****************************************/
+			FestMenuService festMenuSvc = new FestMenuService();
+			FestMenuVO festMenuVO = festMenuSvc.getOneFestMenu(fest_m_ID);
+			if (festMenuVO == null) {
+				errorMsgs.add("查無資料");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/festMenu/listFestMall.jsp");
+				failureView.forward(req, res);
+				return;//程式中斷
+			}
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			req.setAttribute("festMenuVO", festMenuVO); // 資料庫取出的foodMallVO物件,存入req
+			String url = "/front-end/festMenu/listOneFestMall.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			successView.forward(req, res);
+
+			/***************************其他可能的錯誤處理*************************************/
+			
+			
+		}catch(Exception e) {
+			errorMsgs.add("無法取得資料:" + e.getMessage());
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/front-end/festMenu/listFestMall.jsp");
+			failureView.forward(req, res);
+		}
+	}
+	
+	private void toCheckOutOR(HttpServletRequest req , HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+		
+		try {
+			List<Object> buyList = ((List<Object>) req.getSession().getAttribute("shoppingCart"));
+			if( buyList == null || buyList.size() <= 0) {
+				errorMsgs.add("請購物後才能結帳");
+				String url = req.getParameter("requestURL");
+				RequestDispatcher failureView = req.getRequestDispatcher(url);
+				failureView.forward(req, res);
+				return;
+			}
+			RequestDispatcher successView = req.getRequestDispatcher("/front-end/foodOrder/addFoodOrder.jsp");
+			successView.forward(req, res);
+		}catch(Exception e) {
+			errorMsgs.add("發生錯誤:" + e.getMessage());
+			String url = req.getParameter("requestURL");
+			RequestDispatcher failureView = req.getRequestDispatcher(url);
+			failureView.forward(req, res);
+		}
+	}
+	
+	private void delShoppingCartItem(HttpServletRequest req, HttpServletResponse res, List<Object> buyList) throws IOException {
+		JsonObject errors = new JsonObject();
+		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String food_ID = req.getParameter("food_ID");
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String fest_m_ID = req.getParameter("fest_m_ID");
+			
+			if(food_ID != null && food_sup_ID != null) {
+				FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
+				foodOrDetailVO.setFood_ID(food_ID);
+				foodOrDetailVO.setFood_sup_ID(food_sup_ID);
+				
+				if (buyList.contains(foodOrDetailVO)) {
+					FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
+					buyList.remove(innerFoodODVO);
+					writeCartItem(res, innerFoodODVO);
+				}
+			}
+			
+			if(fest_m_ID != null) {
+				System.out.println(fest_m_ID);
+				FestOrderDetailVO festOrderDetailVO = new FestOrderDetailVO();
+				festOrderDetailVO.setFest_m_ID(fest_m_ID);
+				if (buyList.contains(festOrderDetailVO)) {
+					FestOrderDetailVO innerFestODVO = (FestOrderDetailVO)buyList.get(buyList.indexOf(festOrderDetailVO));
+					buyList.remove(innerFestODVO);
+					writeCartItem(res, innerFestODVO);
+				}
+			}
+
+		}catch(Exception e) {
+			errors.addProperty("cartErrorMsgs", "請輸入食材編號");
+			errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
+			writeJson(res, errors);
+		}
+	}
 }

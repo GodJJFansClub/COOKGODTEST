@@ -6,90 +6,30 @@
 <jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService" />
 <jsp:useBean id="festMenuSvc" class="com.festMenu.model.FestMenuService"/>
 <jsp:useBean id="checkType" class="com.mall.controller.CheckType"/>
-<% 	CustVO custVO = new CustVO();
-	custVO.setCust_ID("C00001");
-	session.setAttribute("custVO", custVO); %>
+
 <html>
 <head>
 </head>
 <body>
-	
+
 		<jsp:include page="/froTempl/header.jsp" flush="true" />
 		<section class="contact-area section-padding-100">
+		<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color:red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color:red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 		<div class="container">
 			<a href='<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp'>節慶主題料理</a>
-			<p>
-			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseShoppingCart" aria-expanded="false" aria-controls="collapseShoppingCart">
-				購物車
-			</button>
-			</p>
-			<div class="collapse" id="collapseShoppingCart">
-				<div class="card card-body">
-				<table class="table">
-				   <thead class="thead-dark">
-					 <tr>
-					    <th scope="col">標題</th>
-					    <th scope="col">數量</th>
-					    <th scope="col">小計</th>
-					    <th scope="col">
-					    	<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
-					    		<input type="hidden" name="action" value="CHECKOUTFOODMALL">
-					    		<input type="submit" value="結帳" class="btn btn-dark">
-					    	</form>
-					    </th>
-					  </tr>
-				   </thead>
-				   <tbody id="shopCartList">
-				   <c:forEach var="shopItem" items="${shoppingCart}">
-				      <tr class="shopItemT">
-				      <c:if test="${checkType.getIsFOD(shopItem)}">
-						  <td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
-						  <td>${shopItem.food_od_qty}</td>
-						  <td>${shopItem.food_od_stotal}</td>
-						  <td>
-						  	<form>
-							  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
-							    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark shoppingCartItemDel">刪除</button>
-						  	</form>
-						  </td>
-					  </c:if>
-					  <c:if test="${!checkType.getIsFOD(shopItem)}">
-						  <td>${festMenuSvc.getOneFestMenu(shopItem.fest_m_ID).fest_m_name}</td>
-						  <td>${shopItem.fest_or_qty}</td>
-						  <td>${shopItem.fest_or_stotal}</td>
-						  <td>
-						  	<form>
-							    <input type="hidden" name="fest_m_ID" value="${shopItem.fest_m_ID}">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark shoppingCartItemDel">刪除</button>
-						  	</form>
-						  </td>
-					  </c:if>
-					  </tr>
-					</c:forEach>
-						  <tr id="copyShopIF" style="display:none">
-						  <td></td>
-						  <td></td>
-						  <td></td>
-						  <td>
-						  	<form>
-							  	<input type="hidden">
-							    <input type="hidden">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button type="button" class="btn btn-dark shoppingCartItemDel">刪除</button>
-						  	</form>
-						  </td>	
-						  </tr>
-					</tbody>
-				</table>
-				</div>
-			</div>
+			
 			<div class="row">
 				<c:forEach var="foodMallVO" items='${foodMallSvc.getAllStatus("p4")}' varStatus="s">
 					<div class="col-3">
-						<div id="foodMCard${s.index}" class="card foodMCard listOneMall">
+						<div id="foodMCard${s.index}" class="card foodMCard">
 				  			<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" class="card-img-top">
 				  			<div class="card-body">
 				    			<p class="card-text shopUse food_m_name">
@@ -147,24 +87,21 @@
 			            	console.log(errdata);
 			             }
 			         });
+				} else if(eventData.target.name === "food_od_qty") {
+					
+				} else{
+					let mallForm = $(this).find("form");
+					if(eventData.target.name !== "foodMBtn"){
+						let action = document.createElement("input");
+						action.setAttribute("type","hidden");
+						action.setAttribute("name","action");
+						action.setAttribute("value","getOneDisplayFoodMall");
+						mallForm.append(action);
+						mallForm.submit();
+					}
 				}
 			});
-			// 顯示商品詳情
-			$(".listOneMall").click(function(evt){
-				let mallForm = $(this).find("form");
-				if(evt.target.name !== "foodMBtn"){
-					let action = document.createElement("input");
-					action.setAttribute("type","hidden");
-					action.setAttribute("name","action");
-					action.setAttribute("value","getOneDisplayFoodMall");
-					mallForm.append(action);
-					mallForm.submit();
-				}
-			});
-			
-			$(".delFromCart").click(function(eventData){
-				console.log($(this).parent());
-			});
+
 		});
 		// 產生查詢字串
 		function crtQryStrFoodM( foodMCardID , action, foodMArr){
@@ -215,6 +152,7 @@
 				shopCartItem.children("td:eq(0)").text(foodMNames.food_m_name);
 				shopCartItem.children("td:eq(1)").text(data.food_od_qty);
 				shopCartItem.children("td:eq(2)").text(data.food_od_stotal);
+				shopCartItem.find("button").click(delShoppingCartItem);
 				shopCartItem.find(":input:eq(0)").attr('name', "food_sup_ID");
 				shopCartItem.find(":input:eq(0)").attr('value', data.food_sup_ID);
 				shopCartItem.find(":input:eq(1)").attr('name', "food_ID");
@@ -224,34 +162,7 @@
 				$("#shopCartList").append(shopCartItem);
 				
 			}
-			
-			
-		}
-		// 發送刪除訊息
-		function sendDelMsg(){
-			$.ajax({
-				 type:"POST",
-				 url: "<%=request.getContextPath()%>/mall/mall.do",
-				 data: crtQryStrFoodM( $(this).attr("id") , "addFoodMShoppingCart", $(this).find("form").serializeArray()),
-				 dataType: "json",
-				 success: function (data){
-					 
-					 if(data["foodMCardID"]){
-						 ;	 
-					 }else{
-						delShoppingCartItem();
-					 }
-					 
-			     },
-	             error: function(errdata){
-	            	alert("ajax 錯誤");
-	            	console.log(errdata);
-	             }
-	         });
-		}
-		// 刪除購物車商品
-		function delShoppingCartItem(){
-			
+	
 		}
 	</script>
 </body>

@@ -315,7 +315,6 @@ public class FestOrderDAO implements FestOrder_Interface {
 			
 			//再同時新增節慶主題料理訂單明細 Fest_Order_Detail
 			FestOrderDetail_Interface dao = new FestOrderDetailDAO();
-			System.out.println("list.size()-A=" + list.size());
 			FestMenu_Interface festMenuDAO = new FestMenuDAO();
 			Integer final_qty = 0;
 			String fest_m_ID = null;
@@ -331,6 +330,7 @@ public class FestOrderDAO implements FestOrder_Interface {
 				
 			}
 			//2.設定於pstm.executeUpdate()之後
+			festOrderVO.setFest_or_ID(next_fest_or_ID);
 			con.commit();
 			con.setAutoCommit(true);
 			System.out.println("list.size()-B=" + list.size());

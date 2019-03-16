@@ -31,6 +31,18 @@ public class FestOrderService {
 
 		return festOrderVO;
 	}
+	
+	public FestOrderVO insertFestOrder(String fest_or_status, Integer fest_or_price, Date fest_or_send, String cust_ID, List<FestOrderDetailVO> festOrderDetailVOs) {
+		FestOrderVO festOrderVO = new FestOrderVO();
+
+		festOrderVO.setFest_or_status(fest_or_status);
+		festOrderVO.setFest_or_price(fest_or_price);
+		festOrderVO.setFest_or_send(fest_or_send);
+		festOrderVO.setCust_ID(cust_ID);
+		dao.insertWithFestOrderDetails(festOrderVO, festOrderDetailVOs);
+
+		return festOrderVO;
+	}
 
 	public FestOrderVO updateFestOrder(String fest_or_ID, String fest_or_status, Integer fest_or_price,
 			Date fest_or_start, Date fest_or_send, Date fest_or_end, String fest_or_disc, String cust_ID) {
