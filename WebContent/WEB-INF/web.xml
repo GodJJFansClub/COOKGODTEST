@@ -38,6 +38,7 @@
 	<filter-mapping>
 		<filter-name>LoginFrontEndFilter</filter-name>
 		<url-pattern>/front-end/cust/*</url-pattern>
+		<url-pattern>/front-end/foodOrder/addFoodOrder.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

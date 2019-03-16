@@ -157,13 +157,14 @@
     <!-- Active js -->
     <script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
 </body>
-<script>
 
-	
+<c:if test="${not empty custVO}">
+<jsp:useBean id="custVO" scope="session" type="com.cust.model.CustVO"/>
+<script>
 		var MyPoint = "/BroadcastWebSocket";
 		var host = window.location.host;
 		var webCtx = '<%=request.getContextPath()%>';
-		<%--var userID = '<%=custVO.getCust_ID()%>';--%>
+		var userID = '<%=custVO.getCust_ID()%>'
 		var endPointURL = "ws://" + host + webCtx + "/" + MyPoint + "/" + userID;
 	
 		var statusOutput = document.getElementById("statusOutput");
@@ -197,8 +198,8 @@
 	
 		function disconnect() {
 			webSocket.close();
-		}
-	
-		
+		}	
 </script>
+</c:if>
+
 </html>
