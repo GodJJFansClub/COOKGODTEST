@@ -7,8 +7,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
 import com.dish.model.DishVO;
+import com.food.model.FoodVO;
 
 public class DishFoodDAO implements DishFoodDAO_interface{
 
@@ -24,6 +24,7 @@ public class DishFoodDAO implements DishFoodDAO_interface{
 	
 	private static final String INSERT_STMT = "INSERT INTO DISH_FOOD (DISH_ID,FOOD_ID,DISH_F_QTY,DISH_F_UNIT) VALUES (?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM DISH_FOOD ";
+	private static final String GET_Foods_ByDish_ID_STMT = "SELECT * FROM DISH_FOOD where DISH_ID=?";
 	private static final String GET_ONE_STMT = "SELECT * FROM DISH_FOOD where  DISH_ID = ? AND FOOD_ID = ?";
 	private static final String DELETE = "DELETE FROM DISH_FOOD where DISH_ID = ? AND FOOD_ID = ?";
 	private static final String UPDATE = "UPDATE DISH_FOOD set DISH_F_QTY=?,DISH_F_UNIT=? where DISH_ID=? and FOOD_ID=?";
@@ -262,6 +263,60 @@ public class DishFoodDAO implements DishFoodDAO_interface{
 		return list;
 	}
 
-}
+	
+	@Override
+	public Set<DishFoodVO> getFoodsByDish(String dish_ID) {
+		
+		Set<DishFoodVO> set = new LinkedHashSet<DishFoodVO>();
+		DishFoodVO dishFoodVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_Foods_ByDish_ID_STMT);
+			pstmt.setString(1, dish_ID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dishFoodVO = new DishFoodVO();
+				dishFoodVO.setDish_ID(rs.getString(1));
+				dishFoodVO.setFood_ID(rs.getString(2));
+				dishFoodVO.setDish_f_qty(rs.getInt(3));
+				dishFoodVO.setDish_f_unit(rs.getString(4));
+				set.add(dishFoodVO);
+				}
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return set;
+		}
+	}
 
 

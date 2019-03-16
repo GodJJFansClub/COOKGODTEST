@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import com.food.model.*;
 import com.dishFood.model.*;
 
 public class DishFoodServlet extends HttpServlet {
@@ -18,6 +19,29 @@ public class DishFoodServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
+		if("listFoods_ByDish".equals(action)) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs",errorMsgs);
+			
+			try {
+				String dish_ID = new String(req.getParameter("dish_ID"));
+				
+				DishFoodService dishFoodSvc = new DishFoodService();
+				Set<DishFoodVO> set = dishFoodSvc.getFoodsByDish(dish_ID);
+				
+				req.setAttribute("listFoods_ByDish",set);
+				
+				String url = "/back-end/dish/listFoods_ByDish.jsp";
+				
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+		
 
 		// 單一查詢
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
@@ -30,41 +54,10 @@ public class DishFoodServlet extends HttpServlet {
 			// try {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			// 菜色編號判斷
-			String DID = req.getParameter("Dish_ID");
+			String dish_ID = req.getParameter("dish_ID");
 			
-			if (DID == null || (DID.trim()).length() == 0) {
-				errorMsgs.add("請輸入菜色編號");
-			}
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/select_page.jsp");
-				failureView.forward(req, res);
-				return;
-			}
+			String food_ID = req.getParameter("food_ID");
 			
-			String FID = req.getParameter("Food_ID");
-			
-			if (FID == null || (FID.trim()).length() == 0) {
-				errorMsgs.add("請輸入食材編號");
-			}
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/select_page.jsp");
-				failureView.forward(req, res);
-				return;
-			}
-
-			String dish_ID = null;
-			try {
-				dish_ID = new String(DID);
-			} catch (Exception e) {
-				errorMsgs.add("菜色編號格式不正確");
-			}
-			
-			String food_ID = null;
-			try {
-				food_ID = new String(FID);
-			} catch (Exception e) {
-				errorMsgs.add("菜色編號格式不正確");
-			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/select_page.jsp");
@@ -156,7 +149,7 @@ public class DishFoodServlet extends HttpServlet {
 			}
 			// 菜色單位
 			String dish_f_unit = req.getParameter("dish_f_unit");
-			String dish_f_unitReg = "^[(\u4e00-\u9fa5)]{1,3}$";
+			String dish_f_unitReg = "^[A-Za-z]{1,3}$";
 			if (dish_f_unit == null || dish_f_unit.trim().length() == 0) {
 				errorMsgs.add("食材單位: 請勿空白");
 			} else if (!dish_f_unit.trim().matches(dish_f_unitReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -201,9 +194,8 @@ public class DishFoodServlet extends HttpServlet {
 		}
 		
 		if ("AllFood".equals(action)) { // 來自select_page.jsp的請求
+			
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			// try {
@@ -212,6 +204,7 @@ public class DishFoodServlet extends HttpServlet {
 			String dish_ID = req.getParameter("dish_ID");
 			
 			String[] food_IDArr= req.getParameterValues("food_ID");
+			
 			
 			DishFoodVO dishFoodVO = null;
 			List<DishFoodVO> dishFoodList = new ArrayList<>();
@@ -222,18 +215,13 @@ public class DishFoodServlet extends HttpServlet {
 				dishFoodVO.setFood_ID(food_IDArr[i]);
 				dishFoodList.add(dishFoodVO);
 			}
+			req.setAttribute("dishFoodList", dishFoodList); 
 			
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/select_page.jsp");
-				failureView.forward(req, res);
-				return;// 程式中斷
-			}
-
-			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("dishFoodList", dishFoodList); // 資料庫取出的empVO物件,存入req
-			String url = "/back-end/dishFood/addDishFood2.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			String url = null;
+			if("AllFood".equals(action));
+			 url ="/back-end/dishFood/addDishFood.jsp";
+					 
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
 
 			/*************************** 其他可能的錯誤處理 *************************************/
@@ -260,6 +248,7 @@ public class DishFoodServlet extends HttpServlet {
 				String dish_ID = req.getParameter("dish_ID");
 				String[] food_IDArr = req.getParameterValues("food_ID");
 				System.out.println("food_IDArr="+food_IDArr.length);
+				System.out.println(dish_ID);
 //				//菜色重量
 				Integer dish_f_qty = null;
 				try {
@@ -275,7 +264,7 @@ public class DishFoodServlet extends HttpServlet {
 				if (dish_f_unit == null || dish_f_unit.trim().length() == 0) {
 					errorMsgs.add("食材單位: 請勿空白");
 				} else if (!dish_f_unit.trim().matches(dish_f_unitReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("食材命名: 只能是中字 , 且長度必需在1到3之間");
+					errorMsgs.add("菜色單位:只能輸入英文");
 				}
 
 				DishFoodVO dishFoodVO = new DishFoodVO();
@@ -291,8 +280,8 @@ public class DishFoodServlet extends HttpServlet {
 				}
 
 				// Send the use back to the form, if there were errors
+				req.setAttribute("listFoods_ByDish", dishFoodList); // 含有輸入格式錯誤的empVO物件,也存入req
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("dishFoodList", dishFoodList); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/addDishFood.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
@@ -304,7 +293,7 @@ public class DishFoodServlet extends HttpServlet {
 					dishFoodVO = dishFoodSvc.addDishFood(dish_ID, food_ID, dish_f_qty, dish_f_unit);
 				}
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/dishFood/listAllDishFood.jsp";
+				String url = "/back-end/dish/listFoods_ByDish.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 

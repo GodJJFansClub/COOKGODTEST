@@ -1,6 +1,9 @@
 package com.dishFood.model;
 
 import java .util.List;
+import java.util.Set;
+
+import com.food.model.FoodVO;
 
 public class DishFoodService {
 	
@@ -44,6 +47,10 @@ public class DishFoodService {
 	
 	public DishFoodVO getOneDishFood(String dish_ID,String food_ID) {
 		return dao.findByPrimaryKey(dish_ID, food_ID);
+	}
+	
+	public Set<DishFoodVO> getFoodsByDish(String dish_ID){
+		return dao.getFoodsByDish(dish_ID);
 	}
 
 	public List<DishFoodVO> getAll(){

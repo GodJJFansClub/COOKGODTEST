@@ -1,9 +1,10 @@
 package com.dish.model;
 
 import java.util.*;
-
+import com.dish.model.*;
+import com.food.model.*;
+import com.menuDish.model.MenuDishVO;
 import com.testuse.PicIOTest;
-
 import java.sql.*;
 
 public class DishJDBCDAO implements DishDAO_interface {
@@ -13,7 +14,7 @@ public class DishJDBCDAO implements DishDAO_interface {
 	String userid = "COOKGOD";
 	String passwd = "123456";
 
-	private static final String INSERT_STMT = "INSERT INTO DISH (DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NETTVAL),5,'0'),?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO DISH (DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM DISH order by DISH_ID";
 	private static final String GET_ONE_STMT = "SELECT * FROM DISH where DISH_ID = ? ";
 	private static final String DELETE = "DELETE FROM DISH where DISH_ID=?";
@@ -257,21 +258,115 @@ public class DishJDBCDAO implements DishDAO_interface {
 		return list;
 	}
 
+
+	@Override
+	public void insertWithFoods(DishVO dishVO, List<FoodVO> list) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userid,passwd);
+			
+			con.setAutoCommit(false);
+			
+			String cols[] = {"DISH_ID"};
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
+			pstmt.setString(1, dishVO.getDish_name());
+			pstmt.setString(2, dishVO.getDish_status());
+			pstmt.setBytes( 3, dishVO.getDish_pic());
+			pstmt.setString(4, dishVO.getDish_resume());
+			pstmt.setInt(   5, dishVO.getDish_price());
+			
+			pstmt.executeUpdate();
+			
+			String next_Dish_ID = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				next_Dish_ID = rs.getString(1);
+				System.out.println("自增主鍵值="+next_Dish_ID+"(剛新增成功的菜色編號)");
+			}else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+		
+			FoodJDBCDAO dao = new FoodJDBCDAO();
+			System.out.println("list.size()-A="+list.size());
+			for (FoodVO aFood : list) {
+				
+				aFood.setFood_ID(new String(next_Dish_ID));
+				dao.insert2(aFood, con);
+				}
+			
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("新增菜色編號"+next_Dish_ID+"時,共有菜色"+list.size()+"項同時被新增");
+			}catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver."+e.getMessage());
+			}catch (SQLException se) {
+				if (con != null) {
+					try {
+						System.err.print("Transaction is being");
+						System.err.println("rolled back-由-Menu");
+						con.rollback();
+					}catch (SQLException excep) {
+						throw new RuntimeException("rollback error occured."+excep.getMessage());
+					}
+				}
+				se.printStackTrace();
+				throw new RuntimeException("A database error occured."+se.getMessage());
+			}finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					}catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					}catch (Exception e) {
+						e.printStackTrace(System.err);
+						}
+					}
+				}
+		}
 	public static void main(String[] args) {
 
-		DishJDBCDAO dish = new DishJDBCDAO();
+		DishJDBCDAO dao = new DishJDBCDAO();
 		// 新增
-		PicIOTest picIOTest = new PicIOTest();
+		com.testuse.PicIOTest pic = new com.testuse.PicIOTest();
 		
-//		DishVO DishVO1 = new DishVO();
-//		
-//		DishVO1.setDish_name("臘味櫻花蝦米糕");
-//		DishVO1.setDish_status("D1");
-//		DishVO1.setDish_pic(picIOTest.getPictureByteArray("C:/T3/年菜套餐/臘味櫻花蝦米糕.jpeg"));
-//		DishVO1.setDish_resume("鮮美透亮的櫻花蝦，配上香氣四溢的肝臘腸，與口感十足糯米糕結合，加以紅蔥頭油點綴，香氣直撲而來，口感軟而不爛！嚴選台灣在地食材與天然配料，這款家家戶戶年節必備之大菜，絕對讓您吃得安心！");
-//		DishVO1.setDish_price(588);
-//		dish.insert(DishVO1);
+		DishVO dishVO = new DishVO();
+		
+		dishVO.setDish_name("臘味櫻花蝦米糕");
+		dishVO.setDish_status("D1");
+		dishVO.setDish_pic(pic.getPictureByteArray("C:/T3/年菜套餐/黑蒜剝皮辣椒雞湯.jpeg"));
+		dishVO.setDish_resume("鮮美透亮的櫻花蝦，配上香氣四溢的肝臘腸，與口感十足糯米糕結合，加以紅蔥頭油點綴，香氣直撲而來，口感軟而不爛！嚴選台灣在地食材與天然配料，這款家家戶戶年節必備之大菜，絕對讓您吃得安心！");
+		dishVO.setDish_price(588);
+		
+		/*private String dish_ID;
+	private String dish_name;
+	private String dish_status;
+	private byte[] dish_pic;
+	private String dish_resume;
+	private Integer dish_price;*/
+		
+		List<FoodVO> testList = new ArrayList<FoodVO>();
+		FoodVO foodVO = new FoodVO();
 
+		foodVO.setFood_ID("F00019");
+		foodVO.setFood_name("小白菜");
+		foodVO.setFood_type_ID("f0");
+		
+		
+		testList.add(foodVO);
+		
+		dao.insertWithFoods(dishVO, testList);
+		
 //		// 修改
 //		DishVO dishVO2 = new DishVO();
 //
@@ -296,7 +391,7 @@ public class DishJDBCDAO implements DishDAO_interface {
 //		System.out.println("---------------------");
 
 		//查詢
-		List<DishVO> list = dish.getAll();
+		List<DishVO> list = dao.getAll();
 		for (DishVO adish : list) {
 			System.out.print(adish.getDish_ID() + ",");
 			System.out.print(adish.getDish_name() + ",");

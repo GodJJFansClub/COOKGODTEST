@@ -9,7 +9,5 @@ public interface MenuDishDAO_interface {
 	public void delete (String menu_ID, String dish_ID);
 	public MenuDishVO findyByPrimaryKeys(String menu_ID);
 	public List<MenuDishVO> getAll();
-	
-	public List<MenuDishVO> getAllBy_Menu(String meun_ID);
 
 }

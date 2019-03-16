@@ -13,7 +13,7 @@ public class MenuDishJDBCDAO implements MenuDishDAO_interface {
 	String userid = "COOKGOD";
 	String passwd = "123456";
 	
-	private static final String INSERT_STMT ="INSERT INTO MENUDISH(MENU_ID,DISH_ID)VALUES(?.?)";
+	private static final String INSERT_STMT ="INSERT INTO MENU_DISH (MENU_ID,DISH_ID) VALUES (?,?)";
 	private static final String GET_ALL_STMT ="SELECT * FROM MENU_DISH order by MENU_ID";
 	private static final String GET_ONE_STMT ="SELECT * FROM MENU_DISH where MENU_ID = ? AND DISH_ID = ? ";
 	private static final String DELETE ="DELETE FROM MENU_DISH where MENU_ID=? AND DISH_ID=?";
@@ -218,7 +218,47 @@ public class MenuDishJDBCDAO implements MenuDishDAO_interface {
 		return list;
 	}
 }
-	
+//	@Override
+//	public void insert2(MenuDishVO menuDishVO, Connection con) {
+//		
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			
+//			pstmt = con.prepareStatement(INSERT_STMT);
+//			
+//			pstmt.setString(1, menuDishVO.getMenu_ID());
+//			pstmt.setString(2, menuDishVO.getDish_ID());
+//			
+//			pstmt.executeUpdate();
+//		
+//		} catch (SQLException se) {
+//			if (con != null) {
+//				try {
+//					
+//					System.err.print("Transaction is being ");
+//					System.err.println("rolled back-��-emp");
+//					con.rollback();
+//				} catch (SQLException excep) {
+//					throw new RuntimeException("rollback error occured. "
+//							+ excep.getMessage());
+//				}
+//			}
+//			throw new RuntimeException("A database error occured. "
+//					+ se.getMessage());
+//			// Clean up JDBC resources
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//	}
+//}
+//	
 	
 
 	

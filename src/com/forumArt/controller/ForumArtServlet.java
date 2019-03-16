@@ -10,6 +10,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
+import com.dish.model.DishService;
+import com.dish.model.DishVO;
 import com.forumArt.model.*;
 import com.forumMsg.model.*;
 
@@ -190,11 +192,14 @@ public class ForumArtServlet extends HttpServlet {
 				errorMsgs.add("文章標題: 只能是中字 , 且長度必需在2到10之間");
 			}
 			
+			
 			//文章照片
 			byte[] forum_art_pic = null;
 			Part part = req.getPart("forum_art_pic");
-			if (part == null) {
-				errorMsgs.add("請上傳照片");
+			if (part.getSize() == 0) {
+				ForumArtService forumArtSvc = new ForumArtService();
+				ForumArtVO forumArtVO = forumArtSvc.getOneForumArt(forum_art_ID);
+				forum_art_pic = forumArtVO.getForum_art_pic();
 			} else {
 				long size = part.getSize();
 				System.out.println(size);
@@ -345,7 +350,7 @@ public class ForumArtServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("forumArtVO", forumArtVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/forumArt/addForumArt.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/forumArt/addForumArt.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -357,7 +362,7 @@ public class ForumArtServlet extends HttpServlet {
 				forumArtVO = forumArtSvc.addForumArt(forum_art_name,forum_art_pic,forum_art_con,forum_art_status,chef_ID);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/forumArt/listAllForumArt.jsp";
+				String url = "/back-end/forumArt/listAllForumArt.jsp";
 				System.out.println("AAA");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
