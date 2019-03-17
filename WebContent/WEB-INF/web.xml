@@ -105,6 +105,9 @@
 	<listener>
 		<listener-class>com.broadcast.controller.BroadcastWebSocket</listener-class>
 	</listener>
+	<listener>
+		<listener-class>com.broadcast.controller.WebSocketForServlet</listener-class>
+	</listener>
 	<context-param>
 		<param-name>org.apache.tomcat.websocket.textBufferSize</param-name>
 		<param-value>307200</param-value>
@@ -278,7 +281,7 @@
 	
 	    <servlet>
 		    <servlet-name>ScheduleServlet</servlet-name>
-		    <servlet-class>ScheduleServlet</servlet-class>
+		    <servlet-class>com.testuse.ScheduleServlet</servlet-class>
 		    <load-on-startup>10</load-on-startup>
 	  </servlet>
 	  <servlet-mapping>
