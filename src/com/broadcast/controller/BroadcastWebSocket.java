@@ -59,6 +59,11 @@ public class BroadcastWebSocket implements ServletContextListener{
 		mallOrStatusMap.put("o3", "送達");
 		mallOrStatusMap.put("o4", "訂單完成");
 		
+		Map<String, String> foodODStatusMap = new HashMap<String, String>();
+		foodODStatusMap.put("d0", "未出貨");
+		foodODStatusMap.put("d1", "已出貨");
+		foodODStatusMap.put("d2", "確認到貨");
+		
 		Map<String, String> dishStatusMap = new HashMap<String, String>();
 		dishStatusMap.put("D0", "下架");
 		dishStatusMap.put("D1", "上架");
@@ -67,6 +72,7 @@ public class BroadcastWebSocket implements ServletContextListener{
 		servletContext.setAttribute("mallStatusMap", mallStatusMap);
 		servletContext.setAttribute("mallOrStatusMap", mallOrStatusMap);
 		servletContext.setAttribute("foodSupStatusMap", foodSupStatusMap);
+		servletContext.setAttribute("foodODStatusMap", foodODStatusMap);
 		servletContext.setAttribute("dishStatusMap", dishStatusMap);
 		servletContext.setAttribute("bcSessionMap", bcSessionMap);
 	}
@@ -76,7 +82,7 @@ public class BroadcastWebSocket implements ServletContextListener{
 	public void onOpen(@PathParam("cust_ID") String cust_ID,Session usersession)throws IOException, EncodeException{
 		
 		bcSessionMap.put(cust_ID, usersession);
-		
+		System.out.println("使用者" + cust_ID + "已連線");
 		
 	}
 	 // 有訊息從客戶端傳送過來，儲存到列表中，然後通知所有的客戶端
@@ -102,6 +108,21 @@ public class BroadcastWebSocket implements ServletContextListener{
 
 		
 	}
+
+
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		ServletContext servletContext = sce.getServletContext();
+		servletContext.removeAttribute("foodTypeMap");
+		servletContext.removeAttribute("mallStatusMap");
+		servletContext.removeAttribute("mallOrStatusMap");
+		servletContext.removeAttribute("foodSupStatusMap");
+		servletContext.removeAttribute("foodODStatusMap");
+		servletContext.removeAttribute("dishStatusMap");
+		servletContext.removeAttribute("bcSessionMap");
+		ServletContextListener.super.contextDestroyed(sce);
+	}
+	
 	
 	
 }

@@ -18,7 +18,7 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-				<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do" name="form1" enctype="multipart/form-data">
+				<form id="upStatusForm" method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do" name="form1">
 				<table>
 					<tr>
 						<td>標題:</td>
@@ -27,11 +27,9 @@
 					<tr>
 				<td>商品狀態:</td>
 				<td>
-				<select size="1" name="food_m_status">
 					<c:forEach var="mallStatus" items="${mallStatusMap}">
-						<option value="${mallStatus.key}" ${(foodMallVO.food_m_status == mallStatus.key)?'selected':''} >${mallStatus.value}
+						<input name="food_m_status" type="radio" value="${mallStatus.key}" ${(foodMallVO.food_m_status == mallStatus.key)?'checked':''} >${mallStatus.value}
 					</c:forEach>
-				</select>
 				</td>
 			
 			</tr>
@@ -66,28 +64,10 @@
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" name="pre_status" value="${foodMallVO.food_m_status}">
 		<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 		<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 		<input type="hidden" name="action" value="backUpStatus">
-		<input type="submit" value="送出">
 	</form>
-	<img id="preView">
-	<script>
-		$(document).ready(
-			function(){
-				$(":file").change(
-					function(){
-						if(this.files && this.files[0]){
-							let reader = new FileReader();
-							reader.onload = function(e){
-								$('#preView').attr('src', e.target.result);
-							}
-							reader.readAsDataURL(this.files[0]);
-						}
-					}
-				);
-			}
-		);
-	</script>
 </body>
 </html>

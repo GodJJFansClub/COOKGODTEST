@@ -173,6 +173,16 @@
 		<servlet-name>FoodOrderServlet</servlet-name>
 		<url-pattern>/foodOrder/foodOrder.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FoodOrDetail</servlet-name>
+		<servlet-class>com.foodOrDetail.controller.FoodOrDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FoodOrDetail</servlet-name>
+		<url-pattern>/foodOrDetail/foodOrDetail.do</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>FoodSupServlet</servlet-name>
 		<servlet-class>com.foodSup.controller.FoodSupServlet</servlet-class>
@@ -181,6 +191,7 @@
 		<servlet-name>FoodSupServlet</servlet-name>
 		<url-pattern>/foodSup/foodSup.do</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>FestOrderServlet</servlet-name>
 		<servlet-class>com.festOrder.controller.FestOrderServlet</servlet-class>

@@ -18,8 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.websocket.Session;
 
+import com.broadcast.model.BroadcastService;
 import com.foodMall.model.FoodMallService;
 import com.foodMall.model.FoodMallVO;
+
+import sun.misc.FpUtils;
 
 @MultipartConfig(fileSizeThreshold = 1024*1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class FoodMallServlet extends HttpServlet{
@@ -388,9 +391,6 @@ public class FoodMallServlet extends HttpServlet{
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			
 			String food_m_status = req.getParameter("food_m_status");
-			
-			
-			
 			String food_sup_ID = req.getParameter("food_sup_ID");
 			String food_ID = req.getParameter("food_ID");
 			
@@ -404,7 +404,7 @@ public class FoodMallServlet extends HttpServlet{
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("foodMallVO", foodMallVO); // 含有輸入格式錯誤的foodMallVO物件,也存入req
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/foodMall/update_foodMall_input.jsp");
+						.getRequestDispatcher("/back-end/foodMall/listAllFoodMall.jsp");
 				failureView.forward(req, res);
 				return; //程式中斷
 			}
@@ -412,10 +412,24 @@ public class FoodMallServlet extends HttpServlet{
 			/***************************2.開始修改資料*****************************************/
 			FoodMallService foodMallSvc = new FoodMallService();
 			foodMallVO = foodMallSvc.updateStatus(food_sup_ID, food_ID, food_m_status);
+			foodMallVO = foodMallSvc.getOneFoodMall(food_sup_ID, food_ID);
+			/***************************審核通過 發送通知***************************/
+			if("p1".equals(food_m_status) && !("p1".equals(req.getAttribute("pre_status")))) {
+				ServletContext servletContext = getServletContext();
+				Map<String, javax.websocket.Session> bcSessionMap = (Map<String, javax.websocket.Session>)servletContext.getAttribute("bcSessionMap");
+				BroadcastService broSvc = new BroadcastService();
+				String broMsgs = "您的" + foodMallVO.getFood_m_name() + "已通過審核";
+				broSvc.addBroadcast(broMsgs, foodMallVO.getFood_sup_ID());
+				javax.websocket.Session broSession = bcSessionMap.get(foodMallVO.getFood_sup_ID());
+				if(broSession != null) {
+					broSession.getAsyncRemote().sendText(broMsgs);
+				}
+				
+			}
 			
 			/***************************3.修改完成,準備轉交(Send the Success view)*************/
 			req.setAttribute("foodMallVO", foodMallVO); // 資料庫update成功後,正確的的foodMallVO物件,存入req
-			String url = "/back-end/foodMall/listOneFoodMall.jsp";
+			String url = "/back-end/foodMall/listAllFoodMall.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 
@@ -423,7 +437,7 @@ public class FoodMallServlet extends HttpServlet{
 		} catch (Exception e) {
 			errorMsgs.add("修改資料失敗:"+e.getMessage());
 			RequestDispatcher failureView = req
-					.getRequestDispatcher("/back-end/foodMall/update_foodMall_input.jsp");
+					.getRequestDispatcher("/back-end/foodMall/listAllFoodMall.jsp");
 			failureView.forward(req, res);
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.foodMall.model.FoodMallVO;
+import com.foodOrDetail.model.FoodOrDetailVO;
 
 public class FoodSupService {
 	private FoodSupDAO_interface dao;
@@ -54,5 +55,9 @@ public class FoodSupService {
 	
 	public Set<FoodMallVO> getFoodMallsByFood_sup_ID(String food_sup_ID){
 		return dao.getFoodMallsByFood_sup_ID(food_sup_ID);
+	}
+	
+	public List<FoodOrDetailVO> getFoodODByFood_sup_ID(String food_sup_ID){
+		return dao.getFoodODByFood_sup_ID(food_sup_ID);
 	}
 }

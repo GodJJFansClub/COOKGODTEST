@@ -103,12 +103,10 @@
 		// 懶得在伺服器再查詢, 所以透過此方法再加入購物商時取得對應的食材名, 標題名, 供應商名
 		// 並暫存到記憶體中, 等伺服器回應時就可以一起加入到購物車
 		// 新增或更改已在購物車的商品
-		function cartItem(foodMNames, data){
+		function cartItem(foodMName, data){
 			
 			let shopCartTrs = $("#shopCartList>tr");
 			let shopCartLen = shopCartTrs.length;
-			let food_sup_ID = data.food_sup_ID;
-			let food_ID = data.food_ID;
 			let isNewCartItem = true;
 			
 			jQuery.each( shopCartTrs, function(i, val){
@@ -123,7 +121,7 @@
 			
 			if(isNewCartItem){
 				let shopCartItem = $("#copyShopFest").clone();
-				shopCartItem.children("td:eq(0)").text(foodMNames.fest_m_name);
+				shopCartItem.children("td:eq(0)").text(foodMName);
 				shopCartItem.children("td:eq(1)").text(data.fest_or_qty);
 				shopCartItem.children("td:eq(2)").text(data.fest_or_stotal);
 				shopCartItem.find("button").click(delShoppingCartItem);

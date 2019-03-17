@@ -76,6 +76,7 @@
 	                                    	<ul class="dropdown">
 	                                    		<li><a href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
 	                                    		<li><a href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
+	                                    		<li><a href="<%=request.getContextPath()%>/front-end/foodSup/MFSupOD.jsp">訂單管理</a></li>
 	                                    	</ul>
 	                                    </li>
                                     </c:if>
@@ -131,16 +132,12 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
 	      </div>
-	      <div class="modal-body">
-	        	收到通知訊息
+	      <div id="newBroMessage" class="modal-body">
+	        	
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
 	      </div>
 	    </div>
 	  </div>
@@ -159,47 +156,49 @@
 </body>
 
 <c:if test="${not empty custVO}">
-<jsp:useBean id="custVO" scope="session" type="com.cust.model.CustVO"/>
-<script>
-		var MyPoint = "/BroadcastWebSocket";
-		var host = window.location.host;
-		var webCtx = '<%=request.getContextPath()%>';
-		var userID = '<%=custVO.getCust_ID()%>'
-		var endPointURL = "ws://" + host + webCtx + "/" + MyPoint + "/" + userID;
-	
-		var statusOutput = document.getElementById("statusOutput");
-		var webSocket;
-
-		// 觸發connect()時註冊方法, 並建立WebSocket物件
-		function connect() {
-			//	建立 websocket 物件
-			webSocket = new WebSocket(endPointURL);
-	
-			webSocket.onopen = function(event) {
-				
-				
-			};
-	
-			//	隨然我是在連線建立好時傳送訊息(ServerWebSocket), 依舊會觸發這個onmessage
-	
-			webSocket.onmessage = function(event) {
-				$('#myModal').modal('show');
-				updateStatus("收到新的訊息");
-			};
-	
-			webSocket.onclose = function(event) {
-	
-			};
-		}
-	
-		function sendMessage() {
-	
-		}
-	
-		function disconnect() {
-			webSocket.close();
-		}	
-</script>
+	<jsp:useBean id="custVO" scope="session" type="com.cust.model.CustVO"/>
+	<script>
+			var MyPoint = "/BroadcastWebSocket";
+			var host = window.location.host;
+			var webCtx = '<%=request.getContextPath()%>';
+			var userID = '<%=custVO.getCust_ID()%>'
+			var endPointURL = "ws://" + host + webCtx + "/" + MyPoint + "/" + userID;
+		
+			var statusOutput = document.getElementById("statusOutput");
+			var webSocket;
+			$(document).ready(function(){
+				connect();
+			});
+			// 觸發connect()時註冊方法, 並建立WebSocket物件
+			
+			function connect() {
+					//	建立 websocket 物件
+				webSocket = new WebSocket(endPointURL);
+			
+				webSocket.onopen = function(event) {
+					
+						
+				};
+			
+				//	隨然我是在連線建立好時傳送訊息(ServerWebSocket), 依舊會觸發這個onmessage
+			
+				webSocket.onmessage = function(event) {
+					$("#newBroMessage").text(event.data);
+					let newMsgModal = $('#myModal').modal('show');
+				};
+			
+				webSocket.onclose = function(event) {
+			
+				};
+			}
+			function sendMessage() {
+		
+			}
+		
+			function disconnect() {
+				webSocket.close();
+			}	
+	</script>
 </c:if>
 
 </html>
