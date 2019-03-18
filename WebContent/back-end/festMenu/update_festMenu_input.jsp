@@ -55,7 +55,7 @@ th, td {
 			<td>
 				<h3>節慶主題料理訂單修改 - update_festOrder_input.jsp</h3>
 				<h4>
-					<a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp"><img src="images/back1.gif"
+					<a href="<%=request.getContextPath()%>/bank-end/festMenu/select_page.jsp"><img src="images/back1.gif"
 						width="100" height="32" border="0">回首頁</a>
 				</h4>
 			</td>
@@ -124,6 +124,11 @@ th, td {
 				<td>種類 :</td>
 				<td><input type="TEXT" name="fest_m_kind" size="45"
 					value="<%=festMenuVO.getFest_m_kind()%>" /></td>
+			</tr>
+			<tr>
+				<td>價格 :</td>
+				<td><input type="TEXT" name="fest_m_price" size="45"
+					value="<%=festMenuVO.getFest_m_price()%>" /></td>
 			</tr>
 			<tr>
 				<td>主廚編號 :</td>

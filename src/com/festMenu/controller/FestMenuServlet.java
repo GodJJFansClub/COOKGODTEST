@@ -57,7 +57,6 @@ public class FestMenuServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		FestMenuService phs = new FestMenuService();
-		Vector<FestMenuVO> buylist = (Vector<FestMenuVO>) session.getAttribute("shoppingcart");
 
 		if ("getOne_For_Display".equals(action)) {
 			System.out.println("檢查點48");
@@ -115,10 +114,73 @@ public class FestMenuServlet extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println("A");
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festMenu/select_page.jsp");
+//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festMenu/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("<%=request.getContextPath()%>/festMenu/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("getOne_For_Display_Back".equals(action)) {
+			System.out.println("檢查點48");
+			int i = 1;
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String fest_m_ID = req.getParameter("fest_m_ID");
+				System.out.println("檢查點a35" + (i++));
+				if (fest_m_ID == null || (fest_m_ID.trim()).length() == 0) {
+					errorMsgs.add("請輸入檢舉編號");
+					System.out.println("檢查點b" + (i++));
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					System.out.println("檢查點c" + (i++));
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festMenu/select_page.jsp");
+					failureView.forward(req, res);
+					System.out.println("檢查點d" + (i++));
+					return;
+				}
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festMenu/select_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				FestMenuService festMenuSvc = new FestMenuService();
+				System.out.println("檢查點e" + (i++));
+				FestMenuVO festMenuVO = festMenuSvc.getOneFestMenu(fest_m_ID);
+				System.out.println(festMenuVO.getFest_m_ID());
+//				System.out.println("檢查點f" +(i++));
+				if (fest_m_ID == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festMenu/select_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				req.setAttribute("festMenuVO", festMenuVO); // 資料庫取出的empVO物件，存入req
+				String url = "/back-end/festMenu/listOneFestMenu.jsp";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				return;
+			} catch (Exception e) {
+				System.out.println("A");
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festMenu/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 
 		if ("getOne_For_Update".equals(action)) { // 來自listAllReport.jsp的請求
 			System.out.println(" " + "檢查點2");
@@ -223,7 +285,7 @@ public class FestMenuServlet extends HttpServlet {
 				errorMsgs.add("種類");
 			}
 			
-			Integer fest_m_price = null;
+			Integer fest_m_price =new Integer(req.getParameter("fest_m_price"));
 			try {
 				fest_m_price = new Integer(req.getParameter("fest_m_price").trim());
 			} catch (NumberFormatException e) {

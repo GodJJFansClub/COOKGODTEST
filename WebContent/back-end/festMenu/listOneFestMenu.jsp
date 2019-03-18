@@ -51,8 +51,8 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>節慶主題料理訂單資料 - ListOneFestMenu.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">
-		 <img src="<%=request.getContextPath()%>/front-end/festMenu/images/back1.gif" width="100" height="32" border="0">回首頁</a>
+		 <h4><a href="<%=request.getContextPath()%>/bank-end/festMenu/select_page.jsp">
+		 <img src="<%=request.getContextPath()%>/bank-end/festMenu/images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		 
 		 </h4>
 	</td></tr>

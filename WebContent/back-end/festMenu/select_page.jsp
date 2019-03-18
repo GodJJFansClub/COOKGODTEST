@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>FestOrder Home</title>
+<title>FestMenu Home</title>
 
 <style>
   table#table-1 {
@@ -48,14 +48,14 @@
 </c:if>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/front-end/festMenu/listAllFestMenu.jsp'>List</a> all Reports.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/festMenu/listAllFestMenu.jsp'>List</a> all Reports.  <br><br></li>
   
   
   <li>
     <FORM METHOD="post" ACTION="festMenu.do" >
         <b>請輸入訂單編號 :</b>
         <input type="text" name="fest_m_ID">
-        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="hidden" name="action" value="getOne_For_Display_Back">
         <input type="submit" value="送出">
     </FORM>
   </li>
@@ -71,7 +71,7 @@
           <option value="${festMenuVO.fest_m_ID}">${festMenuVO.fest_m_ID}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="getOne_For_Display_Back">
        <input type="submit" value="送出">
     </FORM>
   </li>
@@ -84,7 +84,7 @@
           <option value="${festMenuVO.fest_m_ID}">${festMenuVO.fest_m_name}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="getOne_For_Display_Back">
        <input type="submit" value="送出">
      </FORM>
   </li>

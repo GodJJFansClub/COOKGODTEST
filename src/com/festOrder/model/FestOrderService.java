@@ -1,6 +1,7 @@
 package com.festOrder.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,14 +33,30 @@ public class FestOrderService {
 		return festOrderVO;
 	}
 	
-	public FestOrderVO insertFestOrder(String fest_or_status, Integer fest_or_price, Date fest_or_send, String cust_ID, List<FestOrderDetailVO> festOrderDetailVOs) {
+	public FestOrderVO insertFestOrder(String fest_or_status, Integer fest_or_price, Date fest_or_start, Date fest_or_send,Date fest_or_end,String fest_or_disc, String cust_ID,String fest_m_ID,
+			Integer fest_or_qty) {
 		FestOrderVO festOrderVO = new FestOrderVO();
 
 		festOrderVO.setFest_or_status(fest_or_status);
 		festOrderVO.setFest_or_price(fest_or_price);
-		festOrderVO.setFest_or_send(fest_or_send);
+		festOrderVO.setFest_or_start(fest_or_start);
+        festOrderVO.setFest_or_send(fest_or_send);
+		festOrderVO.setFest_or_end(fest_or_end);
+		festOrderVO.setFest_or_disc(fest_or_disc);
 		festOrderVO.setCust_ID(cust_ID);
-		dao.insertWithFestOrderDetails(festOrderVO, festOrderDetailVOs);
+		
+		
+		List<FestOrderDetailVO> testList = new ArrayList<FestOrderDetailVO>();
+		FestOrderDetailVO festOrderDetailVOs = new FestOrderDetailVO();
+
+
+		festOrderDetailVOs.setFest_m_ID(fest_m_ID);
+	
+		festOrderDetailVOs.setFest_or_qty(fest_or_qty);
+	
+		
+		testList.add(festOrderDetailVOs);
+		dao.insertWithFestOrderDetails(festOrderVO, testList);;
 
 		return festOrderVO;
 	}

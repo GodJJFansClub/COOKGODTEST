@@ -21,7 +21,7 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_QTY,FEST_OR_STOTAL) VALUES (?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_QTY) VALUES (?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER_DETAIL";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER_DETAIL WHERE FEST_OR_ID = ?";
 	private static final String UPDATE = "UPDATE FEST_ORDER_DETAIL SET FEST_OR_RATE = ?,FEST_OR_MSG = ?,FEST_OR_QTY = ?,FEST_OR_STOTAL = ? WHERE FEST_OR_ID = ? AND FEST_M_ID = ?";
@@ -274,7 +274,7 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 			pstmt.setString(1, festOrderDetailVO.getFest_or_ID());
 			pstmt.setString(2, festOrderDetailVO.getFest_m_ID());
 			pstmt.setInt(3, festOrderDetailVO.getFest_or_qty());
-			pstmt.setInt(4, festOrderDetailVO.getFest_or_stotal());
+
 
 			pstmt.executeQuery();
 		} catch (SQLException se) {

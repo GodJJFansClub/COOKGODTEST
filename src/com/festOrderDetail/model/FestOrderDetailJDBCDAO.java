@@ -284,10 +284,9 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetail_Interface {
 
 			pstmt.setString(1, festOrderDetailVO.getFest_or_ID());
 			pstmt.setString(2, festOrderDetailVO.getFest_m_ID());
-			pstmt.setInt(3, festOrderDetailVO.getFest_or_rate());
-			pstmt.setString(4, festOrderDetailVO.getFest_or_msg());
-			pstmt.setInt(5, festOrderDetailVO.getFest_or_qty());
-			pstmt.setInt(6, festOrderDetailVO.getFest_or_stotal());
+			
+			pstmt.setInt(3, festOrderDetailVO.getFest_or_qty());
+		
 
 			pstmt.executeQuery();
 		} catch (SQLException se) {

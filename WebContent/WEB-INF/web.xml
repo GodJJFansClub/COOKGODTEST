@@ -276,7 +276,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FestMenuServlet</servlet-name>
-		<url-pattern>/festmenu/festmenu.do</url-pattern>
+		<url-pattern>/festMenu/festMenu.do</url-pattern>
 	</servlet-mapping>
 	
 	    <servlet>
