@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.report.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
@@ -50,7 +52,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>新增檢舉文章資料 - ListOneReport.jsp</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/report/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

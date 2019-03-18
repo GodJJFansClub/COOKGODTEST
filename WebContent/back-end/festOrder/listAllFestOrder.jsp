@@ -3,7 +3,6 @@
 <%@ page import="java.util.*"%>
 <!--<%@ page import="com.festOrder.model.*"%>  -->
 <%@ page import="com.festOrder.model.*"%>
-<%@ page import="com.festOrderDetail.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 <jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
 
@@ -58,7 +57,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>節慶主題料理訂單資料 - listAllFestOrder.jsp</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/festOrder/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

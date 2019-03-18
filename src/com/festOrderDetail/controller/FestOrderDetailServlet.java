@@ -262,7 +262,6 @@ System.out.println("檢查點10");
 					failureView.forward(req, res);
 					return;
 				}
-				System.out.println("檢查點"+"294");
 				/***************************2.開始新增資料**************************************/
 				FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
 				festOrderDetailVO = festOrderDetailSvc.addFestOrderDetail
@@ -275,7 +274,6 @@ System.out.println("檢查點10");
 				festMenuSvc.update2_FestMenu(fest_m_ID, final_qty);
 				
 				System.out.print(festOrderDetailVO);
-				System.out.println("檢查點"+ "299");
 				/***************************3.新增完成，準備提交(Send the Success view**********/
 				String url = "/front-end/festOrderDetail/listOneFestOrderDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); //

@@ -87,7 +87,6 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 			pstmt.setInt(5, festOrderDetailVO.getFest_or_stotal());
 			pstmt.setString(6, festOrderDetailVO.getFest_or_ID());
 			pstmt.setString(7, festOrderDetailVO.getFest_m_ID());
-            System.out.println("FestOrderDao.89");
 
             System.out.println("pstmt.executeUpdate() = "+pstmt.executeUpdate());
 

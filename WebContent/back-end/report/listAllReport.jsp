@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.report.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
     ReportService reportSvc = new ReportService();
@@ -54,8 +53,8 @@
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有檢舉文章資料 - listAllEmp.jsp</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h3>所有檢舉文章資料 - listAllReport.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/report/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

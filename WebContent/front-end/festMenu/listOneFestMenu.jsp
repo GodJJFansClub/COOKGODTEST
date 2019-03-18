@@ -45,7 +45,19 @@
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+  <jsp:include page="/froTempl/header.jsp" flush="true" />
+   <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
+    <jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
+    <c:if test="${not empty errorMsgs}">
+		<font style="color:red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color:red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
 <h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
@@ -90,6 +102,9 @@
 				<td>${festMenuVO.chef_ID}</td>   
 
 	</tr>
+	
+	  </section>
+	  <jsp:include page="/froTempl/footer.jsp" flush="true" />
 </table>
 
 </body>
