@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>FestOrder Home</title>
+<title>Report Home</title>
 
 <style>
   table#table-1 {
@@ -30,27 +30,19 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-   <tr><td><h3>IBM FestMenu: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM Emp: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM FestMenu: Home</p>
+<p>This is the Home page for IBM Emp: Home</p>
 
 <h3>資料查詢:</h3>
-	
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-	    <c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+
+
 
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='addFestMenu.jsp'>Add</a> a new Report.</li>
+  <li><a href='addReport.jsp'>Add</a> a new Report.</li>
 </ul>
 
 </body>
