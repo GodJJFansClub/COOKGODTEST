@@ -1,9 +1,8 @@
 package com.dish.model;
 
 import java.util.*;
-import com.dish.model.*;
-import com.food.model.*;
-import com.menuDish.model.MenuDishVO;
+import com.dishFood.model.DishFoodJDBCDAO;
+import com.dishFood.model.DishFoodVO;
 import com.testuse.PicIOTest;
 import java.sql.*;
 
@@ -17,7 +16,11 @@ public class DishJDBCDAO implements DishDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO DISH (DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM DISH order by DISH_ID";
 	private static final String GET_ONE_STMT = "SELECT * FROM DISH where DISH_ID = ? ";
-	private static final String DELETE = "DELETE FROM DISH where DISH_ID=?";
+	private static final String GET_Foods_ByDishID_STMT = "SELECT * FROM DISH_FOOD where DISH_ID=?";
+	
+	private static final String DELETE_FOODs ="DELETE FROM DISH_FOOD where DISH_ID=?";
+	private static final String DELETE_DISH ="DELETE FROM DISH where DISH_ID=?";
+	
 	private static final String UPDATE = "UPDATE DISH set DISH_NAME=?,DISH_STATUS=?,DISH_PIC=?,DISH_RESUME=?,DISH_PRICE=? where DISH_ID=?";
 
 	@Override
@@ -107,6 +110,8 @@ public class DishJDBCDAO implements DishDAO_interface {
 	@Override
 	public void delete(String dish_ID) {
 
+		int updateCount_FOODs = 0;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -114,16 +119,39 @@ public class DishJDBCDAO implements DishDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE);
 
+			con.setAutoCommit(false);
+
+			pstmt = con.prepareStatement(DELETE_FOODs);
 			pstmt.setString(1, dish_ID);
-
+			updateCount_FOODs = pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(DELETE_DISH);
+			pstmt.setString(1, dish_ID);
 			pstmt.executeUpdate();
 
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("刪除菜色編號" + dish_ID + "時,共有食材" + updateCount_FOODs
+					+ "個同時被刪除");
+			
+			
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Could't load database driver." + e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured." + se.getMessage());
+			if (con != null) {
+				try {
+					
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -141,11 +169,11 @@ public class DishJDBCDAO implements DishDAO_interface {
 			}
 		}
 	}
-
+	
 	@Override
-	public DishVO findByPrimaryKey(String dishid) {
-
-		DishVO DishVO = null;
+	public DishVO findByPrimaryKey(String dish_ID) {
+		
+		DishVO dishVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -155,26 +183,31 @@ public class DishJDBCDAO implements DishDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-			pstmt.setString(1, dishid);
+
+			pstmt.setString(1, dish_ID);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
-				DishVO = new DishVO();
-				DishVO.setDish_ID(rs.getString("dish_ID"));
-				DishVO.setDish_name(rs.getString("dish_name"));
-				DishVO.setDish_status(rs.getString("dish_status"));
-				DishVO.setDish_pic(rs.getBytes("dish_pic"));
-				DishVO.setDish_resume(rs.getString("dish_resume"));
-				DishVO.setDish_price(rs.getInt("dish_price"));
+				// deptVO 也稱為 Domain objects
+				dishVO = new DishVO();
+				dishVO.setDish_ID(rs.getString("dish_ID"));
+				dishVO.setDish_name(rs.getString("dish_name"));
+				dishVO.setDish_pic(rs.getBytes("dish_pic"));
+				dishVO.setDish_resume(rs.getString("dish_resume"));
+				dishVO.setDish_status(rs.getString("dish_status"));
+				dishVO.setDish_price(rs.getInt("dish_price"));
 			}
 
+			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
-
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured." + se.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -198,10 +231,10 @@ public class DishJDBCDAO implements DishDAO_interface {
 				}
 			}
 		}
-
-		return DishVO;
+		return dishVO;
 	}
 
+	
 	@Override
 	public List<DishVO> getAll() {
 		List<DishVO> list = new ArrayList<DishVO>();
@@ -260,7 +293,7 @@ public class DishJDBCDAO implements DishDAO_interface {
 
 
 	@Override
-	public void insertWithFoods(DishVO dishVO, List<FoodVO> list) {
+	public void  insertWithFoods(DishVO dishVO, List<DishFoodVO> list) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -292,12 +325,12 @@ public class DishJDBCDAO implements DishDAO_interface {
 			}
 			rs.close();
 		
-			FoodJDBCDAO dao = new FoodJDBCDAO();
+			DishFoodJDBCDAO dao = new DishFoodJDBCDAO();
 			System.out.println("list.size()-A="+list.size());
-			for (FoodVO aFood : list) {
+			for (DishFoodVO aDishFood : list) {
 				
-				aFood.setFood_ID(new String(next_Dish_ID));
-				dao.insert2(aFood, con);
+				aDishFood.setDish_ID(new String(next_Dish_ID));
+				dao.insert2(aDishFood, con);
 				}
 			
 			con.commit();
@@ -309,7 +342,7 @@ public class DishJDBCDAO implements DishDAO_interface {
 				if (con != null) {
 					try {
 						System.err.print("Transaction is being");
-						System.err.println("rolled back-由-Menu");
+						System.err.println("rolled back-由-Dish");
 						con.rollback();
 					}catch (SQLException excep) {
 						throw new RuntimeException("rollback error occured."+excep.getMessage());
@@ -330,10 +363,71 @@ public class DishJDBCDAO implements DishDAO_interface {
 						con.close();
 					}catch (Exception e) {
 						e.printStackTrace(System.err);
-						}
-					}
 				}
+			}
 		}
+	}
+	
+	@Override
+	public Set<DishFoodVO> getFoodsByDishID(String dish_ID) {
+
+		Set<DishFoodVO> set = new HashSet<DishFoodVO>();
+		DishFoodVO dishFoodVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_Foods_ByDishID_STMT);
+			pstmt.setString(1, dish_ID);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				dishFoodVO = new DishFoodVO();
+				dishFoodVO.setDish_ID(rs.getString("dish_ID"));
+				dishFoodVO.setFood_ID(rs.getString("food_ID"));
+				dishFoodVO.setDish_f_qty(rs.getInt("dish_f_qty"));
+				dishFoodVO.setDish_f_unit(rs.getString("dish_f_unit"));
+
+				set.add(dishFoodVO); // Store the row in the vector
+			}
+
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+	
 	public static void main(String[] args) {
 
 		DishJDBCDAO dao = new DishJDBCDAO();
@@ -348,27 +442,33 @@ public class DishJDBCDAO implements DishDAO_interface {
 		dishVO.setDish_resume("鮮美透亮的櫻花蝦，配上香氣四溢的肝臘腸，與口感十足糯米糕結合，加以紅蔥頭油點綴，香氣直撲而來，口感軟而不爛！嚴選台灣在地食材與天然配料，這款家家戶戶年節必備之大菜，絕對讓您吃得安心！");
 		dishVO.setDish_price(588);
 		
-		/*private String dish_ID;
-	private String dish_name;
-	private String dish_status;
-	private byte[] dish_pic;
-	private String dish_resume;
-	private Integer dish_price;*/
 		
-		List<FoodVO> testList = new ArrayList<FoodVO>();
-		FoodVO foodVO = new FoodVO();
+		List<DishFoodVO> testList = new ArrayList<DishFoodVO>();
+		
+		DishFoodVO dishFood1 = new DishFoodVO();
+		
+		dishFood1.setDish_ID("D00002");
+		dishFood1.setFood_ID("F00003");
+		dishFood1.setDish_f_qty(10);
+		dishFood1.setDish_f_unit("KG");
 
-		foodVO.setFood_ID("F00019");
-		foodVO.setFood_name("小白菜");
-		foodVO.setFood_type_ID("f0");
+		DishFoodVO dishFood2  = new DishFoodVO();
+		
+		dishFood2.setDish_ID("D00002");
+		dishFood2.setFood_ID("F00004");
+		dishFood2.setDish_f_qty(10);
+		dishFood2.setDish_f_unit("KG");
+
 		
 		
-		testList.add(foodVO);
+		
+		testList.add(dishFood1);
+		testList.add(dishFood2);
 		
 		dao.insertWithFoods(dishVO, testList);
 		
 //		// 修改
-//		DishVO dishVO2 = new DishVO();
+//		 dishVO2 = new DishVO();
 //
 //		dishVO2.setDish_ID("D00008");
 //		dishVO2.setDish_name("黑蒜剝皮辣椒雞湯");
@@ -379,7 +479,7 @@ public class DishJDBCDAO implements DishDAO_interface {
 //		dish.update(dishVO2);
 //		
 //		//刪除
-//		dish.delete("D00009");
+//		dao.delete("D00002");
 //		//查詢
 //		DishVO DishVO3 = dish.findByPrimaryKey("D00007");
 //		System.out.print(DishVO3.getDish_ID() + ",");
@@ -391,15 +491,16 @@ public class DishJDBCDAO implements DishDAO_interface {
 //		System.out.println("---------------------");
 
 		//查詢
-		List<DishVO> list = dao.getAll();
-		for (DishVO adish : list) {
-			System.out.print(adish.getDish_ID() + ",");
-			System.out.print(adish.getDish_name() + ",");
-			System.out.print(adish.getDish_status() + ",");
-			System.out.print(adish.getDish_pic() + ",");
-			System.out.print(adish.getDish_resume() + ",");
-			System.out.print(adish.getDish_price() + ",");
-			System.out.println();
-		}
+//		List<DishVO> list = dao.getAll();
+//		for (DishVO adish : list) {
+//			System.out.print(adish.getDish_ID() + ",");
+//			System.out.print(adish.getDish_name() + ",");
+//			System.out.print(adish.getDish_status() + ",");
+//			System.out.print(adish.getDish_pic() + ",");
+//			System.out.print(adish.getDish_resume() + ",");
+//			System.out.print(adish.getDish_price() + ",");
+//			System.out.println();
+	 }
 	}
-}
+
+	

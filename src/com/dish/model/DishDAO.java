@@ -8,7 +8,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.food.model.FoodVO;
+import com.dishFood.model.DishFoodJDBCDAO;
+import com.dishFood.model.DishFoodVO;
+
 
 public class DishDAO implements DishDAO_interface{
 
@@ -28,7 +30,7 @@ public class DishDAO implements DishDAO_interface{
 			"SELECT* FROM DISH order by DISH_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT *FROM DISH where DISH_ID=?";
-	private static final String GETFOODS =
+	private static final String GET_Foods_ByDishID_STMT =
 			"SELECT *FROM DISH_FOOD where DISH_ID=?";
 	private static final String DELETE = 
 			"DELETE FROM DISH where DISH_ID=?";
@@ -282,5 +284,137 @@ public class DishDAO implements DishDAO_interface{
 		return list;
 	}
 
+	@Override
+	public Set<DishFoodVO> getFoodsByDishID(String dish_ID) {
+		
+		Set<DishFoodVO> set = new LinkedHashSet<DishFoodVO>();
+		DishFoodVO dishFoodVO = null;
 	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_Foods_ByDishID_STMT);
+			pstmt.setString(1, dish_ID);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				dishFoodVO = new DishFoodVO();
+				dishFoodVO.setDish_ID(rs.getString("dish_ID"));
+				dishFoodVO.setFood_ID(rs.getString("food_ID"));
+				dishFoodVO.setDish_f_qty(rs.getInt("dish_f_qty"));
+				dishFoodVO.setDish_f_unit(rs.getString("dish_f_unit"));
+				
+				set.add(dishFoodVO); // Store the row in the vector
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+
+	@Override
+	public void insertWithFoods(DishVO dishVO, List<DishFoodVO> list) {
+		
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			
+			con.setAutoCommit(false);
+			
+			String cols[] = {"DISH_ID"};
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
+			pstmt.setString(1, dishVO.getDish_name());
+			pstmt.setString(2, dishVO.getDish_status());
+			pstmt.setBytes( 3, dishVO.getDish_pic());
+			pstmt.setString(4, dishVO.getDish_resume());
+			pstmt.setInt(   5, dishVO.getDish_price());
+			
+			pstmt.executeUpdate();
+			
+			String next_Dish_ID = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				next_Dish_ID = rs.getString(1);
+				System.out.println("自增主鍵值="+next_Dish_ID+"(剛新增成功的菜色編號)");
+			}else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+		
+			DishFoodJDBCDAO dao = new DishFoodJDBCDAO();
+			System.out.println("list.size()-A="+list.size());
+			for (DishFoodVO aDishFood : list) {
+				
+				aDishFood.setDish_ID(new String(next_Dish_ID));
+				dao.insert2(aDishFood, con);
+				}
+			
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("新增菜色編號"+next_Dish_ID+"時,共有菜色"+list.size()+"項同時被新增");
+			
+			}catch (SQLException se) {
+				if (con != null) {
+					try {
+						System.err.print("Transaction is being");
+						System.err.println("rolled back-由-Dish");
+						con.rollback();
+					}catch (SQLException excep) {
+						throw new RuntimeException("rollback error occured."+excep.getMessage());
+					}
+				}
+				se.printStackTrace();
+				throw new RuntimeException("A database error occured."+se.getMessage());
+			}finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					}catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					}catch (Exception e) {
+						e.printStackTrace(System.err);
+				}
+			}
+		}
+	}		
 }
+
+		

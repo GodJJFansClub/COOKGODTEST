@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import com.food.model.*;
 import com.dishFood.model.*;
+import com.dish.model.*;
 
 public class DishFoodServlet extends HttpServlet {
 
@@ -20,29 +21,6 @@ public class DishFoodServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if("listFoods_ByDish".equals(action)) {
-			
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs",errorMsgs);
-			
-			try {
-				String dish_ID = new String(req.getParameter("dish_ID"));
-				
-				DishFoodService dishFoodSvc = new DishFoodService();
-				Set<DishFoodVO> set = dishFoodSvc.getFoodsByDish(dish_ID);
-				
-				req.setAttribute("listFoods_ByDish",set);
-				
-				String url = "/back-end/dish/listFoods_ByDish.jsp";
-				
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-			} catch (Exception e) {
-				throw new ServletException(e);
-			}
-		}
-		
-
 		// 單一查詢
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -217,9 +195,7 @@ public class DishFoodServlet extends HttpServlet {
 			}
 			req.setAttribute("dishFoodList", dishFoodList); 
 			
-			String url = null;
-			if("AllFood".equals(action));
-			 url ="/back-end/dishFood/addDishFood.jsp";
+			String url ="/back-end/dishFood/addDishFood.jsp";
 					 
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
@@ -237,8 +213,6 @@ public class DishFoodServlet extends HttpServlet {
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -249,39 +223,49 @@ public class DishFoodServlet extends HttpServlet {
 				String[] food_IDArr = req.getParameterValues("food_ID");
 				System.out.println("food_IDArr="+food_IDArr.length);
 				System.out.println(dish_ID);
-//				//菜色重量
-				Integer dish_f_qty = null;
+				//菜色重量
+				String[] dish_f_qty_str = req.getParameterValues("dish_f_qty");
+				Integer[] dish_f_qty = new Integer[dish_f_qty_str.length];
 				try {
-					dish_f_qty = new Integer(req.getParameter("dish_f_qty").trim());
+					
+					for(int i = 0; i < dish_f_qty_str.length; i++) {
+						
+					dish_f_qty[i] = new Integer(dish_f_qty_str[i]);
+					
+					}
 				} catch (NumberFormatException e) {
-					dish_f_qty = 0;
 					errorMsgs.add("請輸入食材數量.");
 				}
 				
 				// 菜色單位
-				String dish_f_unit = req.getParameter("dish_f_unit");
+				String[] dish_f_unit = req.getParameterValues("dish_f_unit");
 				String dish_f_unitReg = "^[A-Za-z]{1,3}$";
-				if (dish_f_unit == null || dish_f_unit.trim().length() == 0) {
+				
+				if (dish_f_unit == null || dish_f_unit.length != dish_f_qty_str.length) {
 					errorMsgs.add("食材單位: 請勿空白");
-				} else if (!dish_f_unit.trim().matches(dish_f_unitReg)) { // 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("菜色單位:只能輸入英文");
+				}
+				
+				for(int i = 0;i < dish_f_unit.length; i++) {
+					if (!dish_f_unit[i].trim().matches(dish_f_unitReg)) { 
+						errorMsgs.add("菜色單位:只能輸入英文");
+					}
 				}
 
-				DishFoodVO dishFoodVO = new DishFoodVO();
 				List<DishFoodVO> dishFoodList = new ArrayList<>();
 				
 				for(int i = 0; i < food_IDArr.length; i++){
 					System.out.println(food_IDArr[i]);
+					DishFoodVO dishFoodVO = new DishFoodVO();
 					dishFoodVO.setDish_ID(dish_ID);
 					dishFoodVO.setFood_ID(food_IDArr[i]);
-					dishFoodVO.setDish_f_qty(dish_f_qty);
-					dishFoodVO.setDish_f_unit(dish_f_unit);
+					dishFoodVO.setDish_f_qty(dish_f_qty[i]);
+					dishFoodVO.setDish_f_unit(dish_f_unit[i]);
 					dishFoodList.add(dishFoodVO);
 				}
 
-				// Send the use back to the form, if there were errors
-				req.setAttribute("listFoods_ByDish", dishFoodList); // 含有輸入格式錯誤的empVO物件,也存入req
+				req.setAttribute("listFoods_ByDish", dishFoodList); 
 				if (!errorMsgs.isEmpty()) {
+					System.out.println("errorMsgs.size() = "+errorMsgs.size());
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/addDishFood.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
@@ -289,11 +273,11 @@ public class DishFoodServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				DishFoodService dishFoodSvc = new DishFoodService();
-				for(String food_ID:food_IDArr) {
-					dishFoodVO = dishFoodSvc.addDishFood(dish_ID, food_ID, dish_f_qty, dish_f_unit);
+				for(DishFoodVO dishFoodVO : dishFoodList) {
+					dishFoodSvc.addDishFood(dishFoodVO.getDish_ID(), dishFoodVO.getFood_ID(), dishFoodVO.getDish_f_qty(), dishFoodVO.getDish_f_unit());
 				}
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/dish/listFoods_ByDish.jsp";
+				String url = "/back-end/dish/listOneDishFood.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 

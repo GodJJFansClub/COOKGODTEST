@@ -49,9 +49,6 @@ public class DishFoodService {
 		return dao.findByPrimaryKey(dish_ID, food_ID);
 	}
 	
-	public Set<DishFoodVO> getFoodsByDish(String dish_ID){
-		return dao.getFoodsByDish(dish_ID);
-	}
 
 	public List<DishFoodVO> getAll(){
 		return dao.getAll();

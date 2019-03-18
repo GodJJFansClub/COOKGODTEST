@@ -7,8 +7,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import com.dish.model.DishVO;
-import com.food.model.FoodVO;
+
 
 public class DishFoodDAO implements DishFoodDAO_interface{
 
@@ -263,60 +262,53 @@ public class DishFoodDAO implements DishFoodDAO_interface{
 		return list;
 	}
 
-	
+
+
+
 	@Override
-	public Set<DishFoodVO> getFoodsByDish(String dish_ID) {
+	public void insert2(DishFoodVO dishFoodVO, Connection con) {
 		
-		Set<DishFoodVO> set = new LinkedHashSet<DishFoodVO>();
-		DishFoodVO dishFoodVO = null;
-		
-		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
+
 		try {
+
+     		pstmt = con.prepareStatement(INSERT_STMT);
+
+			pstmt.setString(1, dishFoodVO.getDish_ID());
+			pstmt.setString(2, dishFoodVO.getFood_ID());
+			pstmt.setInt(3, dishFoodVO.getDish_f_qty());
+			pstmt.setString(4, dishFoodVO.getDish_f_unit());
 			
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_Foods_ByDish_ID_STMT);
-			pstmt.setString(1, dish_ID);
-			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				dishFoodVO = new DishFoodVO();
-				dishFoodVO.setDish_ID(rs.getString(1));
-				dishFoodVO.setFood_ID(rs.getString(2));
-				dishFoodVO.setDish_f_qty(rs.getInt(3));
-				dishFoodVO.setDish_f_unit(rs.getString(4));
-				set.add(dishFoodVO);
-				}
-			} catch (SQLException se) {
-				throw new RuntimeException("A database error occured. "
-						+ se.getMessage());
-			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3���]�w���exception�o�ͮɤ�catch�϶���
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-��-emp");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
 				}
 			}
-			return set;
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 		}
 	}
 
+}
 

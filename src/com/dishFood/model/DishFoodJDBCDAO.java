@@ -57,8 +57,6 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 	}
 }
 
-	
-
 	@Override
 	public void update(DishFoodVO DishFoodVO) {
 		Connection con = null;
@@ -252,8 +250,54 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 				}
 			}
 		}
-		return list;
+		return list;	
 	}
+	
+	@Override
+	public void insert2(DishFoodVO dishFoodVO, Connection con) {
+		
+		PreparedStatement pstmt = null;
+
+		try {
+
+     		pstmt = con.prepareStatement(INSERT_STMT);
+
+			pstmt.setString(1, dishFoodVO.getDish_ID());
+			pstmt.setString(2, dishFoodVO.getFood_ID());
+			pstmt.setInt(3, dishFoodVO.getDish_f_qty());
+			pstmt.setString(4, dishFoodVO.getDish_f_unit());
+			
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-DishFood");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}	
+	}
+	
+	
 	public static void main(String[] args) {
 
 		DishFoodJDBCDAO DishFood = new DishFoodJDBCDAO();
@@ -298,66 +342,9 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 			System.out.print(adish.getDish_f_qty() + ",");
 			System.out.print(adish.getDish_f_unit() + ",");
 			System.out.println();
-			}
-	}
-
-
-
-	@Override
-	public List<DishFoodVO> getDishFood(String dish_ID) {
-		List<DishFoodVO> list = new ArrayList<DishFoodVO>();
-		DishFoodVO dishFoodVO = null;
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			Class.forName(driver);
-			
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_FOOD);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				
-				dishFoodVO = new DishFoodVO();
-				dishFoodVO.setDish_ID(rs.getString("dish_ID"));
-				
-				dishFoodVO.setFood_ID(rs.getString("food_ID"));
-				dishFoodVO.setDish_f_qty(rs.getInt("dish_f_qty"));
-				dishFoodVO.setDish_f_unit(rs.getString("dish_f_unit"));
-				
-				list.add(dishFoodVO);
-			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
-		} catch (SQLException se) {
-			throw new RuntimeException("A database eeror occured." + se.getMessage());
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
 		}
-		return list;
 	}
-	
 }
+
+	
+		

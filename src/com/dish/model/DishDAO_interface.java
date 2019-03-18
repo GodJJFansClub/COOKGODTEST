@@ -1,8 +1,6 @@
 package com.dish.model;
-
 import java.util.*;
-import com.food.model.*;
-
+import com.dishFood.model.*;
 
 public interface DishDAO_interface {
 
@@ -12,6 +10,8 @@ public interface DishDAO_interface {
 	public DishVO findByPrimaryKey (String dish_ID);
 	public List<DishVO> getAll();
 	
-	//public void insertWithFoods(DishVO dishVO , List<FoodVO> list);
+	public Set<DishFoodVO> getFoodsByDishID(String dish_ID);
+	
+	public void insertWithFoods(DishVO dishVO ,List<DishFoodVO> list);
 
 }
