@@ -50,7 +50,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>節慶主題料理訂單資料 - ListOneFestOrderDetail.jsp</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/festOrderDetail/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

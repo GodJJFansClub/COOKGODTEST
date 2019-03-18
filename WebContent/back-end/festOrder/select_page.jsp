@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/bank-end/festOrder/listAllFestOrder.jsp'>List</a> all Reports.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/festOrder/listAllFestOrder.jsp'>List</a> all Reports.  <br><br></li>
   
   
   <li>

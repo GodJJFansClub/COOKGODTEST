@@ -130,7 +130,8 @@ public class FestOrderServlet extends HttpServlet {
 //				System.out.println(" "+ i++);				
 				/*********** 3.查詢完成，準備轉交(Send the Success view) ********/
 				req.setAttribute("festOrderVO", festOrderVO); // 資料庫取得的reportVO物件，存入req
-				String url = "/front-end/festOrder/update_festOrder_input.jsp";
+		//		String url = "/front-end/festOrder/update_festOrder_input.jsp";
+				String url = "/back-end/festOrder/update_festOrder_input.jsp";
 				System.out.println(" " + i++);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -212,8 +213,10 @@ public class FestOrderServlet extends HttpServlet {
 				// Send the use back to the form,if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("festOrderVO", festOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/front-end/festOrder/update_festOrder_input.jsp");
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-end/festOrder/update_festOrder_input.jsp");
+							.getRequestDispatcher("/back-end/festOrder/update_festOrder_input.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -226,7 +229,8 @@ public class FestOrderServlet extends HttpServlet {
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("festOrderVO", festOrderVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				System.out.println(festOrderVO + "221");
-				String url = "/front-end/festOrder/listAllFestOrder.jsp";
+//				String url = "/front-end/festOrder/listAllFestOrder.jsp";
+				String url = "/back-end/festOrder/listAllFestOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 				System.out.println("  " + "檢查點16");
