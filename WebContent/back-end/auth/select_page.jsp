@@ -92,7 +92,7 @@
 	<h3>權限管理</h3>
 
 	<ul>
-		<li><a href='addAuth.jsp'>Add</a> a new Auth.</li>
+		<li><a href='<%=request.getContextPath()%>/back-end/auth/addAuth.jsp'>Add</a> a new Auth.</li>
 	</ul>
 
 <%--=================================工作區================================================--%>			
