@@ -37,10 +37,10 @@
 
 <h3>資料查詢:</h3>
 	
-<h3>員工管理</h3>
+<h3>節慶主題料理訂單明細 (FestOrderDetail)</h3>
 
 <ul>
-  <li><a href='addFestOrderDetail.jsp'>Add</a> a new Report.</li>
+  <li><a href='addFestOrderDetail.jsp'>Add</a> a new FestOrderDetail.</li>
 </ul>
 
 </body>

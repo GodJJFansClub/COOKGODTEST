@@ -28,7 +28,7 @@
                 <div class="col-12 col-lg-8">
                     <!-- Contact Form -->
                     <div class="contact-form-area text-center">
-                        <form action="#" method="post">
+                        <form action="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do" method="post">
                            <c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
 		<ul>
@@ -38,14 +38,14 @@
 		</ul>
 	</c:if>
 <ul>
-  <li><a href='<%=request.getContextPath()%>/back-end/festOrderDetail/listAllFestOrderDetail.jsp'>List</a> all FestOrder.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/festOrderDetail/listAllFestOrderDetail.jsp'>List</a> all FestOrderDetail.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="festOrderDetail.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do" >
         <b>節慶主題料理訂單編號 :</b>
         <input type="text" name="fest_or_ID">
-        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="hidden" name="action" value="getOne_For_Display_Back">
         <input type="submit" value="送出">
     </FORM>
   </li>
@@ -61,7 +61,7 @@
           <option value="${festOrderDetailVO.fest_or_ID}">${festOrderDetailVO.fest_or_ID}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="getOne_For_Display_Back">
        <input type="submit" value="送出">
     </FORM>
   </li>
@@ -74,7 +74,7 @@
           <option value="${festOrderDetailVO.fest_or_ID}">${festOrderDetailVO.fest_m_ID}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="getOne_For_Display_Back">
        <input type="submit" value="送出">
      </FORM>
   </li>

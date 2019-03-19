@@ -25,7 +25,7 @@ public class FestOrderDetailServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if ("getOne_For_Display".equals(action)) { 
-			System.out.println("檢查點成功");
+//			System.out.println("檢查點成功");
 			int i = 1;
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -34,35 +34,83 @@ public class FestOrderDetailServlet extends HttpServlet {
 
 			try {
 				String fest_or_ID = req.getParameter("fest_or_ID");
-				System.out.println("檢查點a35" +(i++));
+//				System.out.println("檢查點a35" +(i++));
 				if (fest_or_ID == null || (fest_or_ID.trim()).length() == 0) {
 					errorMsgs.add("節慶主題料理訂單編號");
-					System.out.println("檢查點b" +(i++));
+//					System.out.println("檢查點b" +(i++));
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					System.out.println("檢查點c" +(i++));
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front-end/festOrderDetail/select_page.jsp");
+//					System.out.println("檢查點c" +(i++));
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/festOrderDetail/select_page.jsp");
+							.getRequestDispatcher("/front-end/festOrderDetail/select_page.jsp");
 					failureView.forward(req, res);
-					System.out.println("檢查點d" +(i++));
+//					System.out.println("檢查點d" +(i++));
 					return;
 				}
 				
 				FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
-				System.out.println("檢查點e" +(i++));
+//				System.out.println("檢查點e" +(i++));
 				FestOrderDetailVO festOrderDetailVO = festOrderDetailSvc.getOneFestOrderDetail(fest_or_ID);
 				System.out.println(festOrderDetailVO.getFest_or_ID());
-				System.out.println("檢查點f" +(i++));
+//				System.out.println("檢查點f" +(i++));
 				if (fest_or_ID == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front-end/festOrderDetail/select_page.jsp");
+					if (!errorMsgs.isEmpty()) {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/front-end/festOrderDetail/select_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				req.setAttribute("festOrderDetailVO", festOrderDetailVO); //資料庫取出的empVO物件，存入req
+				String url = "/front-end/festOrderDetail/listOneFestOrderDetail.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
+				successView.forward(req, res);
+			} catch (Exception e) {
+				System.out.println("A");
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("<%=request.getContextPath()%>/festOrderDetail/select_page.jsp");
+				
+				failureView.forward(req, res);
+			}
+		}
+		if ("getOne_For_Display_Back".equals(action)) { 
+			System.out.println("getOne_For_Display_Back檢查點成功");
+			int i = 1;
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String fest_or_ID = req.getParameter("fest_or_ID");
+				System.out.println("getOne_For_Display_Back90");
+				if (fest_or_ID == null || (fest_or_ID.trim()).length() == 0) {
+					errorMsgs.add("節慶主題料理訂單編號");
+					System.out.println("getOne_For_Display_Back93");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					System.out.println("getOne_For_Display_Back97");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/festOrderDetail/select_page.jsp");
+					failureView.forward(req, res);
+					System.out.println("getOne_For_Display_Back101");
+					return;
+				}
+				
+				FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
+				System.out.println("getOne_For_Display_Back106");
+				FestOrderDetailVO festOrderDetailVO = festOrderDetailSvc.getOneFestOrderDetail(fest_or_ID);
+				System.out.println(festOrderDetailVO.getFest_or_ID());
+				System.out.println("getOne_For_Display_Back109");
+				if (fest_or_ID == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
 						RequestDispatcher failureView = req
 								.getRequestDispatcher("/back-end/festOrderDetail/select_page.jsp");
@@ -71,7 +119,7 @@ public class FestOrderDetailServlet extends HttpServlet {
 				}
 				req.setAttribute("festOrderDetailVO", festOrderDetailVO); //資料庫取出的empVO物件，存入req
 				String url = "/back-end/festOrderDetail/listOneFestOrderDetail.jsp";
-//				String url = "/front-end/festOrderDetail/listOneFestOrderDetail.jsp";
+				System.out.println("getOne_For_Display_Back122");
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -102,7 +150,6 @@ public class FestOrderDetailServlet extends HttpServlet {
 				/***********3.查詢完成，準備轉交(Send the Success view)********/
 				req.setAttribute("festOrderDetailVO", festOrderDetailVO);   //資料庫取得的reportVO物件，存入req  
 				String url = "/back-end/festOrderDetail/update_festOrderDetail_input.jsp";		
-//				String url = "/front-end/festOrderDetail/update_festOrderDetail_input.jsp";
 	
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

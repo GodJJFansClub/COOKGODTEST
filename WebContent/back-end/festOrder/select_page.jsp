@@ -55,7 +55,7 @@
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do" >
         <b>請輸入訂單編號 :</b>
         <input type="text" name="fest_or_ID">
-        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="hidden" name="action" value="getOne_For_Display_Back">
         <input type="submit" value="送出">
     </FORM>
   </li>
@@ -71,7 +71,7 @@
           <option value="${festOrderVO.fest_or_ID}">${festOrderVO.fest_or_ID}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="getOne_For_Display_Back">
        <input type="submit" value="送出">
     </FORM>
   </li>
@@ -84,7 +84,7 @@
           <option value="${festOrderVO.fest_or_ID}">${festOrderVO.fest_or_status}
          </c:forEach>   
        </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
+       <input type="hidden" name="action" value="getOne_For_Display_Back">
        <input type="submit" value="送出">
      </FORM>
   </li>
