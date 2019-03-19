@@ -10,6 +10,7 @@
     pageContext.setAttribute("list", list);
 %>
 
+
 <jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
 <html>
 <head>
@@ -55,7 +56,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>節慶主題料理訂單資料 - listAllFestOrderDetail.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/front-end/festOrder/select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/festOrderDetail/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

@@ -54,7 +54,7 @@
 	  <div class="card-body" >
 	    <h5 class="card-title">檢舉文章管理</h5>
 	    <p class="card-text">update_report_input.jsp</p>
-	    <a href="index.jsp" class="btn btn-primary">回首頁</a>
+	    <a href="<%=request.getContextPath()%>/back-end/report/select_page.jsp" class="btn btn-primary">回首頁</a>
 	  </div>
 	</div>
 <h3>檢舉資料修改:</h3>
@@ -69,7 +69,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="report.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/report/report.do" name="form1">
 <table>
 	<tr>
 		<td>檢舉編號:<font color=red><b>*</b></font></td>

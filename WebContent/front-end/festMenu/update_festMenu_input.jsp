@@ -126,6 +126,11 @@ th, td {
 					value="<%=festMenuVO.getFest_m_kind()%>" /></td>
 			</tr>
 			<tr>
+				<td>價格 :</td>
+				<td><input type="TEXT" name="fest_m_price" size="45"
+					value="<%=festMenuVO.getFest_m_price()%>" /></td>
+			</tr>
+			<tr>
 				<td>主廚編號 :</td>
 				<td><input type="TEXT" name="chef_ID" size="45"
 					value="<%=festMenuVO.getChef_ID()%>" /></td>

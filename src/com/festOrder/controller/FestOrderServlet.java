@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 import com.festOrder.model.FestOrderService;
 import com.festOrder.model.FestOrderVO;
 import com.festOrderDetail.model.FestOrderDetailVO;
+import com.foodSup.model.FoodSupVO;
 
 public class FestOrderServlet extends HttpServlet {
 
@@ -129,7 +130,8 @@ public class FestOrderServlet extends HttpServlet {
 //				System.out.println(" "+ i++);				
 				/*********** 3.查詢完成，準備轉交(Send the Success view) ********/
 				req.setAttribute("festOrderVO", festOrderVO); // 資料庫取得的reportVO物件，存入req
-				String url = "/front-end/festOrder/update_festOrder_input.jsp";
+		//		String url = "/front-end/festOrder/update_festOrder_input.jsp";
+				String url = "/back-end/festOrder/update_festOrder_input.jsp";
 				System.out.println(" " + i++);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -211,8 +213,10 @@ public class FestOrderServlet extends HttpServlet {
 				// Send the use back to the form,if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("festOrderVO", festOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/front-end/festOrder/update_festOrder_input.jsp");
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-end/festOrder/update_festOrder_input.jsp");
+							.getRequestDispatcher("/back-end/festOrder/update_festOrder_input.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -225,7 +229,8 @@ public class FestOrderServlet extends HttpServlet {
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("festOrderVO", festOrderVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				System.out.println(festOrderVO + "221");
-				String url = "/front-end/festOrder/listAllFestOrder.jsp";
+//				String url = "/front-end/festOrder/listAllFestOrder.jsp";
+				String url = "/back-end/festOrder/listAllFestOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 				System.out.println("  " + "檢查點16");
@@ -246,7 +251,7 @@ public class FestOrderServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				int i = 1;
 //				System.out.println("檢查點"+i++);
 				/*********************** 1.接收請求參數-輸入格式的錯誤處理 *************************/
@@ -293,6 +298,23 @@ public class FestOrderServlet extends HttpServlet {
 				if (cust_ID == null || cust_ID.trim().length() == 0) {
 					errorMsgs.add("請輸入會員編號");
 				}
+				
+				/***********************1.接收請求參數-輸入格式的錯誤處理*************************/
+			
+				String fest_m_ID = req.getParameter("fest_m_ID").trim();
+				if (fest_m_ID == null || fest_m_ID.trim().length() == 0) {
+					errorMsgs.add("節慶料理編號請勿空白");
+				}
+				
+				Integer fest_or_qty = null;
+				try {
+					fest_or_qty = new Integer(req.getParameter("fest_or_qty").trim());
+				}catch(NumberFormatException e) {
+					fest_or_qty=0;
+					errorMsgs.add("請輸入訂單數量：");
+				}
+
+				
 
 				FestOrderVO festOrderVO = new FestOrderVO();
 				festOrderVO.setFest_or_status(fest_or_status);
@@ -303,6 +325,18 @@ public class FestOrderServlet extends HttpServlet {
 				festOrderVO.setFest_or_disc(fest_or_disc);
 				festOrderVO.setCust_ID(cust_ID);
 
+				
+				List<FestOrderDetailVO> testList = new ArrayList<FestOrderDetailVO>();
+				FestOrderDetailVO festOrderDetailVOs = new FestOrderDetailVO();
+
+
+				festOrderDetailVOs.setFest_m_ID(fest_m_ID);
+			
+				
+				festOrderDetailVOs.setFest_or_qty(fest_or_qty);
+				
+				
+				testList.add(festOrderDetailVOs);
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("festOrderVO", festOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -313,20 +347,18 @@ public class FestOrderServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 **************************************/
 				FestOrderService festOrderSvc = new FestOrderService();
-				festOrderVO = festOrderSvc.addFestOrder(fest_or_status, fest_or_price, fest_or_start, fest_or_send,
-						fest_or_end, fest_or_disc, cust_ID);
-
+				festOrderVO = festOrderSvc.insertFestOrder(fest_or_status, fest_or_price, fest_or_start, fest_or_send, fest_or_end, fest_or_disc, cust_ID, fest_m_ID, fest_or_qty);
 				/*************************** 3.新增完成，準備提交(Send the Success view **********/
-				String url = "/front-end/festOrder/listAllFestOrder.jsp";
+				String url = "/back-end/festOrder/listAllFestOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); //
 				successView.forward(req, res);
 
 				/*************************** 其它可能的錯誤處理 *********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/addFestOrder.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/addFestOrder.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 
 		if ("delete".equals(action)) {

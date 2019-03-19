@@ -30,8 +30,7 @@ public class FestOrderDAO implements FestOrder_Interface {
 
 //	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES (FEST_ORDER_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
 //	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES ('FM'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";
-	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,CUST_ID) VALUES ('FM'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.NEXTVAL),6,'0'),?,?,SYSDATE,?,?)";
-	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER ORDER BY FEST_OR_ID";
+	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER (FEST_OR_ID, FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) VALUES ('FM'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER ORDER BY FEST_OR_ID";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER WHERE FEST_OR_ID = ?";
 //	private static final String GET_PrimaryKey = "SELECT FEST_OR_ID FROM FEST_ORDER ";
 	private static final String UPDATE = "UPDATE FEST_ORDER SET FEST_OR_STATUS = ?,FEST_OR_PRICE = ?,FEST_OR_START = ?,FEST_OR_SEND = ?,FEST_OR_END = ?,FEST_OR_DISC = ?, CUST_ID = ? WHERE FEST_OR_ID = ? ";
@@ -299,8 +298,11 @@ public class FestOrderDAO implements FestOrder_Interface {
 			pstmt = con.prepareStatement(INSERT_STMT, cols);
 			pstmt.setString(1,festOrderVO.getFest_or_status());
 			pstmt.setInt(2,festOrderVO.getFest_or_price());
-			pstmt.setDate(3, festOrderVO.getFest_or_send());
-			pstmt.setString(4, festOrderVO.getCust_ID());
+			pstmt.setDate(3, festOrderVO.getFest_or_start());
+			pstmt.setDate(4, festOrderVO.getFest_or_send());
+			pstmt.setDate(5, festOrderVO.getFest_or_end());
+			pstmt.setString(6, festOrderVO.getFest_or_disc());
+			pstmt.setString(7, festOrderVO.getCust_ID());
 			pstmt.executeUpdate();
 			//掘取對應的自增主鍵值
 			String next_fest_or_ID=null;
@@ -314,8 +316,9 @@ public class FestOrderDAO implements FestOrder_Interface {
 			rs.close();
 			
 			//再同時新增節慶主題料理訂單明細 Fest_Order_Detail
-			FestOrderDetail_Interface dao = new FestOrderDetailDAO();
-			FestMenu_Interface festMenuDAO = new FestMenuDAO();
+			FestOrderDetailJDBCDAO dao = new FestOrderDetailJDBCDAO();
+			System.out.println("list.size()-A=" + list.size());
+			FestMenuJDBCDAO festMenuDAO = new FestMenuJDBCDAO();
 			Integer final_qty = 0;
 			String fest_m_ID = null;
 			

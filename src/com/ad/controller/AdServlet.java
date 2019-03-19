@@ -124,7 +124,7 @@ public class AdServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -137,7 +137,7 @@ public class AdServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -150,7 +150,7 @@ public class AdServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -164,7 +164,7 @@ public class AdServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -187,14 +187,14 @@ public class AdServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("adVO", adVO); // 資料庫取出的adVO物件,存入req
-				String url = "/front-end/ad/update_ad_input.jsp";
+				String url = "/back-end/ad/update_ad_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_ad_input.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/listAllAd.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/listAllAd.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -273,13 +273,13 @@ public class AdServlet extends HttpServlet {
 //				adVO = adSvc.updateAd("C0055", "dddd", ad_title, "f", "050505", "8888", "H123456789", "@54564", ad_start, ad_reg,by , "c","ff" );
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("adVO", adVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/front-end/ad/listOneAd.jsp";
+				String url = "/back-end/ad/listOneAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/update_ad_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
 				failureView.forward(req, res);
 
 			}
@@ -309,7 +309,7 @@ public class AdServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/listAllAd.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/listAllAd.jsp");
 				failureView.forward(req, res);
 			}
 		}

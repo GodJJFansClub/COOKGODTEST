@@ -58,10 +58,16 @@ public class ScheduleServlet extends HttpServlet{
             	
             	int count = 0;
             	for(AdVO adVO: adVOs) {
-            		Json.createObjectBuilder().add("adWall" + count++, adVO.getAd_con());
+            		jsonObject = Json.createObjectBuilder().add("adWall" + count++, adVO.getAd_con()).build();
             	}
-            	webSessions.forEach(webSession->webSession.getAsyncRemote().sendText(adCon.toString()
-            			));
+            	String adCon = jsonObject.toString();
+            	webSessions.stream().filter(webSession -> webSession.isOpen()).forEach(webSession->{
+					try {
+						webSession.getBasicRemote().sendText(adCon);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
             
             
             }

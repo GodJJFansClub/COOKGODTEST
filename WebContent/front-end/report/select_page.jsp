@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.report.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -42,7 +43,7 @@
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='addReport.jsp'>Add</a> a new Report.</li>
+  <li><a href='<%=request.getContextPath()%>/front-end/report/addReport.jsp'>Add</a> a new Report.</li>
 </ul>
 
 </body>

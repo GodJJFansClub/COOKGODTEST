@@ -1,9 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.festOrder.model.*"%>
+<%@ page import="com.festOrderDetail.model.*"%>
 
 <%
     FestOrderVO festOrderVO = (FestOrderVO) request.getAttribute("festOrderVO");
+%>
+
+<%
+    FestOrderDetailVO festOrderDetailVO = (FestOrderDetailVO) request.getAttribute("festOrderDetailVO");
 %>
 <% /*
     java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -115,6 +120,26 @@
 			 value="<%= (festOrderVO==null)? "C00001" : festOrderVO.getCust_ID()%>" /></td>
 	</tr>
 </table>
+
+<table>
+
+	<tr>
+		<td>節慶料理編號:</td>
+		<td><input type="TEXT" name="fest_m_ID" size="45" 
+			 value="<%= (festOrderDetailVO==null)? "FM0002" :festOrderDetailVO.getFest_m_ID() %>" /></td>
+	</tr>
+
+
+	<tr>
+		<td>訂單數量:</td>
+		<td><input type="TEXT" name="fest_or_qty" value="<%= (festOrderDetailVO==null)? 
+				"45" :festOrderDetailVO.getFest_or_qty()%>"/></td>
+	</tr>
+	
+	
+</table>
+<br>
+
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>

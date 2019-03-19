@@ -11,17 +11,16 @@ public class FestOrderDetailService {
 
 	private FestOrderDetail_Interface dao;
 
-	public  FestOrderDetailService() {
-		
+	public FestOrderDetailService() {
+
 		dao = new FestOrderDetailDAO();
 	}
 
-	public FestOrderDetailVO addFestOrderDetail(String fest_or_ID,String fest_m_ID,Integer fest_or_rate,
-			String fest_or_msg,Integer fest_or_qty,Integer fest_or_stotal)
-	{
+	public FestOrderDetailVO addFestOrderDetail(String fest_or_ID, String fest_m_ID, Integer fest_or_rate,
+			String fest_or_msg, Integer fest_or_qty, Integer fest_or_stotal) {
 
 		FestOrderDetailVO festOrderDetailVO = new FestOrderDetailVO();
-		
+
 		festOrderDetailVO.setFest_or_ID(fest_or_ID);
 		festOrderDetailVO.setFest_m_ID(fest_m_ID);
 		festOrderDetailVO.setFest_or_rate(fest_or_rate);
@@ -29,17 +28,16 @@ public class FestOrderDetailService {
 		festOrderDetailVO.setFest_or_qty(fest_or_qty);
 		festOrderDetailVO.setFest_or_stotal(fest_or_stotal);
 		dao.insert(festOrderDetailVO);
-		
+
 		return festOrderDetailVO;
-		        
-		
+
 	}
 
-	public FestOrderDetailVO updateFestOrderDetail(String fest_or_ID,String fest_m_ID,
-			Integer fest_or_rate,String fest_or_msg,Integer fest_or_qty,Integer fest_or_stotal) {
-		
+	public FestOrderDetailVO updateFestOrderDetail(String fest_or_ID, String fest_m_ID, Integer fest_or_rate,
+			String fest_or_msg, Integer fest_or_qty, Integer fest_or_stotal) {
+
 		FestOrderDetailVO festOrderDetailVO = new FestOrderDetailVO();
-		
+
 		festOrderDetailVO.setFest_or_ID(fest_or_ID);
 		festOrderDetailVO.setFest_m_ID(fest_m_ID);
 		festOrderDetailVO.setFest_or_rate(fest_or_rate);
@@ -47,11 +45,10 @@ public class FestOrderDetailService {
 		festOrderDetailVO.setFest_or_qty(fest_or_qty);
 		festOrderDetailVO.setFest_or_stotal(fest_or_stotal);
 
-	    dao.update(festOrderDetailVO);
-	    
+		dao.update(festOrderDetailVO);
+
 		return festOrderDetailVO;
 
-	
 	}
 
 	public void deleteFestOrderDetail(String fest_or_ID) {
@@ -62,11 +59,11 @@ public class FestOrderDetailService {
 		return dao.findByPrimaryKey(fest_or_ID);
 	}
 
-    public void insertWithFestOrderDetails(FestOrderVO festOrderVO, List<FestOrderDetailVO> list) {
-    	List<FestOrderDetailVO> list_1 = new ArrayList<FestOrderDetailVO>();
-    	FestOrderVO FestOrderVO = null;
-    	
-    	festOrderVO = new FestOrderVO();
+	public void insertWithFestOrderDetails(FestOrderVO festOrderVO, List<FestOrderDetailVO> list) {
+		List<FestOrderDetailVO> list_1 = new ArrayList<FestOrderDetailVO>();
+		FestOrderVO FestOrderVO = null;
+
+		festOrderVO = new FestOrderVO();
 
 //    	festOrderVO.setFest_or_ID("fest_or_ID");
 //    	festOrderVO.setFest_or_status("fest_or_status");
@@ -86,11 +83,11 @@ public class FestOrderDetailService {
 //		festMenuVO.setFest_m_ID(rs.getString(10));
 //		festMenuVO.setChef_ID(rs.getString(11));
 //		list.add(festMenuVO);
-    	
-    	
-    }
-    public List<FestOrderDetailVO> getAll(){
+
+	}
+
+	public List<FestOrderDetailVO> getAll() {
 		return dao.getAll();
 	}
-    
+
 }

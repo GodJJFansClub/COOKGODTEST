@@ -104,23 +104,10 @@
 													${custVO.cust_name} </font>您好
 										</a></li>
 										
-										<div class="dropdown">
-											<button class="btn btn-secondary dropdown-toggle"
-												type="button" id="dropdownMenuButton" data-toggle="dropdown"
-												aria-haspopup="true" aria-expanded="false">
-												通知<span class="badge badge-light">4${custVO.cust_ID}</span></button>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton">
-												<c:forEach var="broadcastVO" items="${broadcastSvc.all}">
-													<c:if test="${broadcastVO.cust_ID == custVO.cust_ID}">
-													<button type="submit" name="reaAction" class="dropdown-item" value=""><a>${broadcastVO.broadcast_ID}</a></button>
-													</c:if>
-												</c:forEach>
-											</div>
-										</div>
 										
 										
-										<li><a><i class="fa fa-dribbble"></i></a>
+										
+										<li><a><i class="fa fa-dribbble"></i><span class="badge badge-light">4${custVO.cust_ID}</span></a>
 											<ul class="dropdown">
 												<c:forEach var="broadcastVO" items="${broadcastSvc.all}">
 												<c:if test="${broadcastVO.cust_ID == custVO.cust_ID}">

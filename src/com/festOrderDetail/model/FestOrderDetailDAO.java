@@ -21,10 +21,10 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_QTY,FEST_OR_STOTAL) VALUES (?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_RATE,FEST_OR_MSG,FEST_OR_QTY,FEST_OR_STOTAL) VALUES (?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM FEST_ORDER_DETAIL";
 	private static final String GET_ONE_STMT = "SELECT * FROM FEST_ORDER_DETAIL WHERE FEST_OR_ID = ?";
-	private static final String UPDATE = "UPDATE FEST_ORDER_DETAIL SET FEST_OR_RATE = ?,FEST_OR_MSG = ?,FEST_OR_QTY = ?,FEST_OR_STOTAL = ? WHERE FEST_OR_ID = ? AND FEST_M_ID = ?";
+	private static final String UPDATE_STMT = "UPDATE FEST_ORDER_DETAIL SET FEST_M_ID = ?,FEST_OR_RATE = ?,FEST_OR_MSG = ?,FEST_OR_QTY = ?,FEST_OR_STOTAL = ? WHERE FEST_OR_ID = ? AND FEST_M_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM FEST_ORDER_DETAIL WHERE FEST_OR_ID = ?";
 
 	@Override
@@ -78,7 +78,7 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
+			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			pstmt.setString(1, festOrderDetailVO.getFest_m_ID());
 			pstmt.setInt(2, festOrderDetailVO.getFest_or_rate());
@@ -86,11 +86,13 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 			pstmt.setInt(4, festOrderDetailVO.getFest_or_qty());
 			pstmt.setInt(5, festOrderDetailVO.getFest_or_stotal());
 			pstmt.setString(6, festOrderDetailVO.getFest_or_ID());
+			pstmt.setString(7, festOrderDetailVO.getFest_m_ID());
 
-			pstmt.executeUpdate();
+            System.out.println("pstmt.executeUpdate() = "+pstmt.executeUpdate());
 
 			// Handle any driver errors
 		} catch (SQLException se) {
+			se.printStackTrace();
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -221,7 +223,7 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("DAO" + "223");
+
 
 				festOrderDetailVO = new FestOrderDetailVO();
 				festOrderDetailVO.setFest_or_ID(rs.getString(1));
@@ -232,7 +234,7 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 				festOrderDetailVO.setFest_or_stotal(rs.getInt(6));
 				festOrderDetailVOs.add(festOrderDetailVO);
 
-				System.out.println("DAO" + "224");
+//				System.out.println("DAO" + "224");
 			}
 
 			// Handle any driver errors
@@ -274,7 +276,7 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 			pstmt.setString(1, festOrderDetailVO.getFest_or_ID());
 			pstmt.setString(2, festOrderDetailVO.getFest_m_ID());
 			pstmt.setInt(3, festOrderDetailVO.getFest_or_qty());
-			pstmt.setInt(4, festOrderDetailVO.getFest_or_stotal());
+
 
 			pstmt.executeQuery();
 		} catch (SQLException se) {
