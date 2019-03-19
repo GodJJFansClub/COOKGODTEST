@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.festMenu.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
 	FestMenuService festMenuSvc = new FestMenuService();
@@ -51,16 +50,43 @@ th, td {
 	text-align: center;
 }
 
-img{
-	width:200px;
-	height:auto;
-}
+
 </style>
 
 </head>
+<jsp:include page="/froTempl/header.jsp" flush="true" />
+<!-- ##### Contact Area Start #####-->
+<section class="contact-area section-padding-100">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<!-- Section Heading -->
+				<div class="section-heading text-center wow fadeInUp"
+					data-wow-delay="100ms">
+					<h2>Get In Touch</h2>
+					<img src="img/core-img/x.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-8">
+				<!-- Contact Form -->
+				<div class="contact-form-area text-center">
+					<form
+						action="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do"
+						method="post">
+						<c:if test="${not empty errorMsgs}">
+							<font style="color: red">請修正以下錯誤:</font>
+							<ul>
+								<c:forEach var="message" items="${errorMsgs}">
+									<li style="color: red">${message}</li>
+								</c:forEach>
+							</ul>
+						</c:if>
+		
 <body bgcolor='white'>
 
-	<h4>此頁練習採用 EL 的寫法取值:</h4>
+
 	<table id="table-1">
 		<tr>
 			<td>
@@ -107,8 +133,12 @@ img{
 				<td>${festMenuVO.fest_m_qty}</td>
 				<td>${festMenuVO.fest_m_start}</td>
 				<td>${festMenuVO.fest_m_end}</td>
-				<td><c:if test="${not empty festMenuVO.fest_m_pic}"><img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"></c:if>
-				    <c:if test="${empty festMenuVO.fest_m_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
+				<td><c:if test="${not empty festMenuVO.fest_m_pic}">
+						<img
+							src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}">
+					</c:if> <c:if test="${empty festMenuVO.fest_m_pic}">
+						<img src="<%=request.getContextPath()%>/images/null2.jpg">
+					</c:if></td>
 				<td>${festMenuVO.fest_m_resume}</td>
 				<td>${festMenuVO.fest_m_send}</td>
 				<td>${festMenuVO.fest_m_status}</td>
@@ -137,5 +167,7 @@ img{
 		</c:forEach>
 	</table>
 	<%@ include file="page2.file"%>
+	</section>
+<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>
