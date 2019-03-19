@@ -5,7 +5,7 @@ import java.util.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.Part;
@@ -17,8 +17,22 @@ public class AdServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("image/gif");
+		ServletOutputStream out = res.getOutputStream();
+		List<String> errorMsgs = new LinkedList<String>();
 
-		doPost(req, res);
+		String s = req.getParameter("ad_ID");
+		try {
+			AdService ds = new AdService();
+			AdVO dao = (AdVO) ds.getOneAd(s);
+			byte[] sb = dao.getAd_pic();
+			out.write(sb);
+
+		} catch (NullPointerException e) {
+			errorMsgs.add("a");
+
+		}
 	}
 
 	@Override
