@@ -405,8 +405,9 @@ CREATE TABLE AD (
  AD_START                 TIMESTAMP        NOT NULL,
  AD_END                   TIMESTAMP        NOT NULL,
  AD_TYPE                  VARCHAR2(2)      NOT NULL,
- AD_TITLE                 VARCHAR2(100)     NOT NULL,
- AD_CON                   CLOB             NOT NULL,
+ AD_TITLE                 VARCHAR2(300)    NOT NULL,
+ AD_PIC					  BLOB,
+ AD_CON                   VARCHAR2(300)    NOT NULL,
  FOOD_SUP_ID              VARCHAR2(6),
  CONSTRAINT AD_FK FOREIGN KEY (FOOD_SUP_ID) REFERENCES FOOD_SUP (FOOD_SUP_ID),
  PRIMARY KEY (AD_ID) 
@@ -414,11 +415,11 @@ CREATE TABLE AD (
 REM INSERTING into AD
 SET DEFINE OFF;
 Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID) 
-values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'d0',to_timestamp('2019-02-13 04.35.21'),to_timestamp('2019-04-18 12.32.29'),'e0','阿基師春節限定','阿基師特選寶島復古料理四天王，「滑溜溜佛跳牆」「五花大綁肉」「溫煮牛肉湯」「功夫老雞煲」 讓你吃得巧，吃到飽～',null);
+values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'d0',to_timestamp('2019-02-13 04.35.21'),to_timestamp('2019-04-18 12.32.29'),'e0','阿基師春節限定','阿基師特選寶島復古料理四天王，「滑溜溜佛跳牆」「五花大綁肉」「溫煮牛肉湯」「功夫老雞煲」 讓你吃得巧，吃到飽～','C00001');
 Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)
-values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'d1',to_timestamp('2019-02-28 04.42.39'),to_timestamp('2019-04-14 04.42.44'),'e1','帝王感蟹季','在遙遠南極的海下，科學家曾發現超過100萬只巨型帝王蟹。它們是石蟹科的甲殼類，不是真正的螃蟹。這種生物主要分布在寒冷的海域， 素有蟹中之王的美譽，聽了是不是都流口水了?',null);
+values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'d1',to_timestamp('2019-02-28 04.42.39'),to_timestamp('2019-04-14 04.42.44'),'e1','帝王感蟹季','在遙遠南極的海下，科學家曾發現超過100萬只巨型帝王蟹。它們是石蟹科的甲殼類，不是真正的螃蟹。這種生物主要分布在寒冷的海域， 素有蟹中之王的美譽，聽了是不是都流口水了?','C00001');
 Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)
-values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'d2',to_timestamp('2019-02-27 08.57.09'),to_timestamp('2019-04-24 08.57.15'),'e2','人氣日本和牛','找日本人問何謂人氣「和牛」，可能沒幾個日本人能回答你的問題。這篇要告訴你何謂人氣和牛，又，哪裡可以吃到這些知名和牛呢？',null);
+values ('AD'||LPAD(TO_CHAR (AD_SEQ.NEXTVAL), 6, '0'),'d2',to_timestamp('2019-02-27 08.57.09'),to_timestamp('2019-04-24 08.57.15'),'e2','人氣日本和牛','找日本人問何謂人氣「和牛」，可能沒幾個日本人能回答你的問題。這篇要告訴你何謂人氣和牛，又，哪裡可以吃到這些知名和牛呢？','C00001');
 ------------------------------------------------------------------
 --建立表格:喜愛食材供應商--
 CREATE TABLE FAV_FD_SUP (

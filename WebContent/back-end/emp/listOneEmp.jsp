@@ -4,7 +4,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //SustServlet.java(Concroller), 存入req的empVO物件
+	EmpVO empVO = (EmpVO) session.getAttribute("empVO"); //SustServlet.java(Concroller), 存入req的empVO物件
 %>
 
 <html>
@@ -33,19 +33,6 @@ th, td {
 
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
-		</aside>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
-
-
 
 	<%
 		if (empVO != null) {
@@ -88,9 +75,7 @@ th, td {
 	<%
 		}
 	%>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
+
 			</div>
 		</div>
 	</div>

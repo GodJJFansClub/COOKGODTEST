@@ -42,8 +42,14 @@ public class AdServlet extends HttpServlet {
 				} else if (!ad_title.trim().matches(ad_titleReg)) {
 					errorMsgs.add(ad_title);
 				}
-
-				// 2.廣告內文
+				//2.1廣告圖片
+				Part part = req.getPart("ad_pic");
+				InputStream in = part.getInputStream();
+				byte[] ad_pic = new byte[in.available()];
+				in.read(ad_pic);
+				in.close();
+				
+				// 2.2廣告內文
 				String ad_con = req.getParameter("ad_con");
 
 				// 3.廣告上架日期
@@ -76,6 +82,7 @@ public class AdServlet extends HttpServlet {
 				// set
 				AdVO adVO = new AdVO();
 				adVO.setAd_title(ad_title);
+				adVO.setAd_pic(ad_pic);
 				adVO.setAd_con(ad_con);
 				adVO.setAd_start(ad_start);
 				adVO.setAd_end(ad_end);
@@ -95,7 +102,7 @@ public class AdServlet extends HttpServlet {
 				// 將資料加入資料庫
 				AdService adSvc = new AdService();
 
-				adVO = adSvc.addAd(ad_status, ad_start, ad_end, ad_type, ad_title, ad_con, food_sup_ID);
+				adVO = adSvc.addAd(ad_status, ad_start, ad_end, ad_type, ad_title,ad_pic, ad_con, food_sup_ID);
 				String url = "/front-end/ad/listAllAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -215,7 +222,14 @@ public class AdServlet extends HttpServlet {
 					errorMsgs.add(ad_title);
 				}
 
-				// 2.廣告內文
+				//2.1廣告圖片
+				Part part = req.getPart("ad_pic");
+				InputStream in = part.getInputStream();
+				byte[] ad_pic = new byte[in.available()];
+				in.read(ad_pic);
+				in.close();
+				
+				// 2.2廣告內文
 				String ad_con = req.getParameter("ad_con");
 
 				// 3.廣告上架日期
@@ -250,6 +264,7 @@ public class AdServlet extends HttpServlet {
 				// set
 				AdVO adVO = new AdVO();
 				adVO.setAd_title(ad_title);
+				adVO.setAd_pic(ad_pic);
 				adVO.setAd_con(ad_con);
 				adVO.setAd_start(ad_start);
 				adVO.setAd_end(ad_end);
@@ -269,7 +284,7 @@ public class AdServlet extends HttpServlet {
 //				/***************************2.開始修改資料*****************************************/
 				AdService adSvc = new AdService();
 
-				adVO = adSvc.updateAd(ad_status, ad_start, ad_end, ad_type, ad_title, ad_con, food_sup_ID);
+				adVO = adSvc.updateAd(ad_status, ad_start, ad_end, ad_type, ad_title,ad_pic, ad_con, food_sup_ID);
 //				adVO = adSvc.updateAd("C0055", "dddd", ad_title, "f", "050505", "8888", "H123456789", "@54564", ad_start, ad_reg,by , "c","ff" );
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("adVO", adVO); // 資料庫update成功後,正確的的empVO物件,存入req
