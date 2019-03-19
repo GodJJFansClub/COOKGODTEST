@@ -29,40 +29,69 @@
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
 
-	<!-- ##### Hero Area Start ##### -->
-	<section class="hero-area">
-		<div id="adWallBro" class="carousel slide" data-ride="carousel">
-		  <ol id="adWallOl" class="carousel-indicators">
-		    <li data-target="#adWallBro" data-slide-to="0" class="active"></li>
-		    <li data-target="#adWallBro" data-slide-to="1"></li>
-		  </ol>
-		  <div id="adWallDivs" class="carousel-inner">
-		    <div class="carousel-item active">
-		      <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/1.jpg" class="d-block w-100" height=300 alt="">
-		    </div>
-		    <div class="carousel-item">
-		      <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/2.jpg" class="d-block w-100" height=300 alt="">
-		    </div>
-		  </div>
-		  <a class="carousel-control-prev" href="#adWallBro" role="button" data-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="sr-only">Previous</span>
-		  </a>
-		  <a class="carousel-control-next" href="#adWallBro" role="button" data-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="sr-only">Next</span>
-		  </a>
-		</div>
-	</section>
-	<div id="hiddenClone" style="display:none">
-		<li id="cloneADLi" data-target="#adWallBro" data-slide-to=""></li>
-		<div id="cloneADDiv" class="carousel-item">
-			  <img src="" class="d-block w-100" height=300 alt="">
-		</div>
-	</div>
-	
-	<div id="convertHtml" style="display: none"></div>
-	<!-- ##### Hero Area End ##### -->
+<!-- ##### Hero Area Start ##### -->
+    <section class="hero-area">
+        <div class="hero-slideshow owl-carousel">
+
+            
+             <!-- Single Slide-->
+             <div class="single-slide">
+                <!-- Background Image-->
+                <div class="slide-bg-img bg-img" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/1.jpg);"></div>
+                <!-- Welcome Text -->
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 col-lg-9">
+                            <div class="welcome-text">
+                                <h2 data-animation="fadeInUp" data-delay="300ms"><span>Digital Agency</span><br>of the year 2019</h2>
+                                <h4 data-animation="fadeInUp" data-delay="500ms">Visual Identity by John Doe Client: <span>Lorem ipsum</span></h4>
+                                <a href="#" class="btn pixel-btn mt-50" data-animation="fadeInUp" data-delay="700ms">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Single Slide 廣告1-->
+            <div class="single-slide">
+                <!-- Background Image-->
+                <div class="slide-bg-img bg-img" style="background-image: url(<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID});"></div>
+                <!-- Welcome Text -->
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 col-lg-9">
+                            <div class="welcome-text">
+                                <h2 data-animation="fadeInUp" data-delay="300ms"><span>Digital Agency</span><br>of the year 2019</h2>
+                                <h4 data-animation="fadeInUp" data-delay="500ms">Visual Identity by John Doe Client: <span></span></h4>
+                                <a href="#" class="btn pixel-btn mt-50" data-animation="fadeInUp" data-delay="700ms">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Slide 廣告2-->
+            <div class="single-slide">
+                <!-- Background Image-->
+                <div class="slide-bg-img bg-img" style="background-image: url(<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID});"></div>
+                <!-- Welcome Text -->
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 col-lg-9">
+                            <div class="welcome-text">
+                                <h2 data-animation="fadeInUp" data-delay="300ms"><span>Creative Agency</span><br>of the year 2019</h2>
+                                <h4 data-animation="fadeInUp" data-delay="500ms">Visual Identity by John Doe Client: <span>${adVO.ad_con}</span></h4>
+                                <a href="#" class="btn pixel-btn mt-50" data-animation="fadeInUp" data-delay="700ms">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
 	    var MyPoint = "/WebSocketForServlet";

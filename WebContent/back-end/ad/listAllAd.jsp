@@ -60,6 +60,7 @@
 			<th>廣告編號</th>
 			<th>廣告標題</th>
 			<th>廣告內文</th>
+			<th>廣告內文</th>
 			<th>廣告上架日期</th>
 			<th>廣告下架日期</th>
 			<th>廣告狀態</th>
@@ -73,6 +74,8 @@
 			<tr>
 				<td>${adVO.ad_ID}</td>
 				<td>${adVO.ad_title}</td>
+				<td><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></c:if>
+				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
 				<td>${adVO.ad_con}</td>
 				<td>${adVO.ad_start}</td>
 				<td>${adVO.ad_end}</td>
