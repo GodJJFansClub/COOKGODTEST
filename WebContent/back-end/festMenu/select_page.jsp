@@ -29,18 +29,42 @@ h4 {
 </style>
 
 </head>
+<jsp:include page="/froTempl/header.jsp" flush="true" />
+<!-- ##### Contact Area Start #####-->
+<section class="contact-area section-padding-100">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<!-- Section Heading -->
+				<div class="section-heading text-center wow fadeInUp"
+					data-wow-delay="100ms">
+					<h2>Get In Touch</h2>
+					<img src="img/core-img/x.png" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-8">
+				<!-- Contact Form -->
+				<div class="contact-form-area text-center">
+					<form
+						action="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do"
+						method="post">
+						<c:if test="${not empty errorMsgs}">
+							<font style="color: red">請修正以下錯誤:</font>
+							<ul>
+								<c:forEach var="message" items="${errorMsgs}">
+									<li style="color: red">${message}</li>
+								</c:forEach>
+							</ul>
+						</c:if>
 <body bgcolor='white'>
 
-	<table id="table-1">
-		<tr>
-			<td><h3>IBM FestMenu: Home</h3>
-				<h4>( MVC )</h4></td>
-		</tr>
-	</table>
 
-	<p>This is the Home page for IBM FestMenu: Home</p>
 
-	<h3>資料查詢:</h3>
+	<p>This is the Home page for Gook GOD FestMenu: Home</p>
+
+	<h3>資料查詢Search:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -55,7 +79,7 @@ h4 {
 	<ul>
 		<li><a
 			href='<%=request.getContextPath()%>/back-end/festMenu/listAllFestMenu.jsp'>List</a>
-			all Reports. <br>
+			all FestMenu. <br>
 		<br></li>
 
 

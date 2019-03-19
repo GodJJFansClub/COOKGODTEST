@@ -123,6 +123,8 @@ th, td {
 			<th>種類</th>
 			<th>價格</th>
 			<th>主廚編號</th>
+			<th>修改</th>
+			<th>刪除</th>
 		</tr>
 		<%@ include file="page1.file"%>
 		<c:forEach var="festMenuVO" items="${list}" begin="<%=pageIndex%>"

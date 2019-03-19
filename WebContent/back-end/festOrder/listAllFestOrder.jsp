@@ -117,8 +117,11 @@ th, td {
 			<th>訂單成立日期</th>
 			<th>出貨日期</th>
 			<th>訂單結束日期</th>
-			<th>折扣</th>
+<!-- 			<th>折扣</th> -->
 			<th>會員編號</th>
+			<th>修改</th>
+			<th>刪除</th>
+			<th>送出查詢</th>
 		</tr>
 		<%@ include file="page1.file"%>
 		<c:forEach var="festOrderVO" items="${list}" begin="<%=pageIndex%>"
@@ -131,7 +134,7 @@ th, td {
 				<td>${festOrderVO.fest_or_start}</td>
 				<td>${festOrderVO.fest_or_send}</td>
 				<td>${festOrderVO.fest_or_end}</td>
-				<td>${festOrderVO.fest_or_disc}</td>
+<%-- 				<td>${festOrderVO.fest_or_disc}</td> --%>
 				<td>${festOrderVO.cust_ID}</td>
 				<td>
 					<FORM METHOD="post"
