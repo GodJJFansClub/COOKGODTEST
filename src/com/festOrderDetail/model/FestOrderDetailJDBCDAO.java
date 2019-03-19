@@ -288,7 +288,7 @@ public class FestOrderDetailJDBCDAO implements FestOrderDetail_Interface {
 			pstmt.setInt(3, festOrderDetailVO.getFest_or_qty());
 		
 
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			se.printStackTrace();
 			if (con != null) {
