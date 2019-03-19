@@ -75,7 +75,6 @@
 		<th>訂單評價留言</th>
 		<th>訂單數量</th>
 		<th>訂單小計</th>
-<!--	<th>部門</th>    -->	
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
@@ -88,8 +87,6 @@
 			<td>${festOrderDetailVO.fest_or_msg}</td>
 			<td>${festOrderDetailVO.fest_or_qty}</td>
 			<td>${festOrderDetailVO.fest_or_stotal}</td>			
-			<td>
-			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="修改"> 
