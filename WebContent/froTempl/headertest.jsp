@@ -63,7 +63,7 @@
                         <div class="col-12 col-lg-9">
                             <div class="welcome-text">
                                 <h2 data-animation="fadeInUp" data-delay="300ms"><span>Digital Agency</span><br>of the year 2019</h2>
-                                <h4 data-animation="fadeInUp" data-delay="500ms">Visual Identity by John Doe Client: <span>${adVO.ad_con}</span></h4>
+                                <h4 data-animation="fadeInUp" data-delay="500ms">Visual Identity by John Doe Client: <span></span></h4>
                                 <a href="#" class="btn pixel-btn mt-50" data-animation="fadeInUp" data-delay="700ms">View Project</a>
                             </div>
                         </div>
