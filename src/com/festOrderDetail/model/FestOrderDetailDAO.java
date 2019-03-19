@@ -277,7 +277,6 @@ public class FestOrderDetailDAO implements FestOrderDetail_Interface {
 			pstmt.setString(2, festOrderDetailVO.getFest_m_ID());
 			pstmt.setInt(3, festOrderDetailVO.getFest_or_qty());
 
-
 			pstmt.executeQuery();
 		} catch (SQLException se) {
 			se.printStackTrace();
