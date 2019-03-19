@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,13 +10,13 @@
 	<table border='1' cellpadding='5' cellspacing='0' width='400'>
 		<tr bgcolor='orange' align='center' valign='middle' height='20'>
 			 <td>   
-			       <h3> µn¤J¦¨¥\ªº­¶­± - login_success.jsp           </h3> 
-				     <h3> Åwªï:<font color=red> ${account} </font>±z¦n</h3>
+			       <h3> ç™»å…¥æˆåŠŸçš„é é¢ - login_success.jsp           </h3> 
+				     <h3> æ­¡è¿:<font color=red> ${account} </font>æ‚¨å¥½</h3>
 			 </td>
 		</tr>
 	</table>
 	<b> <br>
-	<br>                ¥H¤U¯dªÅ....
+	<br>                ä»¥ä¸‹ç•™ç©º....
 	</b>
 	
 </body>

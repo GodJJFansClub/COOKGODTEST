@@ -53,6 +53,7 @@
 	<filter-mapping>
 		<filter-name>LoginFrontFoodSupFilter</filter-name>
 		<url-pattern>/front-end/ad/*</url-pattern>
+		<url-pattern>/front-end/FoodSup/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

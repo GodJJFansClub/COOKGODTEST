@@ -3,11 +3,13 @@ package com.testuse;
 import java.io.*;
 
 import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import javax.sql.*;
+
 
 import com.ad.model.AdService;
 import com.ad.model.AdVO;
@@ -53,21 +55,17 @@ public class ScheduleServlet extends HttpServlet{
             	//方法二
             	AdService adSvc =new AdService();
             	List<AdVO> adVOs = adSvc.getAllNowAd();
-            	
-            	JsonObject jsonObject =null;
+            
+            	JsonObjectBuilder jsObjBuilder = Json.createObjectBuilder();
+            	JsonArrayBuilder jsArrBuilder = Json.createArrayBuilder();
             	
             	int count = 0;
             	for(AdVO adVO: adVOs) {
-            		jsonObject = Json.createObjectBuilder().add("adWall" + count++, adVO.getAd_con()).build();
+            		JsonObject jsonObject = jsObjBuilder.add("adWall", adVO.getAd_con()).build();
+            		jsArrBuilder.add(jsonObject);
             	}
-            	String adCon = jsonObject.toString();
-            	webSessions.stream().filter(webSession -> webSession.isOpen()).forEach(webSession->{
-					try {
-						webSession.getBasicRemote().sendText(adCon);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				});
+            	JsonArray jsArr = jsArrBuilder.build();
+            	webSessions.forEach(webSession->webSession.getAsyncRemote().sendText(jsArr.toString()));
             
             
             }
