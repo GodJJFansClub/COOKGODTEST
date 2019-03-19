@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>檢舉文章資料新增 - addFestMenu.jsp</title>
+<title>節慶主題料理新增 - addFestMenu.jsp</title>
 
 <style>
 table#table-1 {
@@ -63,7 +63,7 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>節慶主題料理訂單新增 - addFestMenu.jsp</h3>
+				<h3>節慶主題料理新增 - addFestMenu.jsp</h3>
 			</td>
 			<td>
 				<h4>

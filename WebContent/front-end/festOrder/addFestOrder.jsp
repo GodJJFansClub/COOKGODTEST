@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>檢舉文章資料新增 - addFestOrder.jsp</title>
+<title>節慶主題料理訂單新增 - addFestOrder.jsp</title>
 
 <style>
 table#table-1 {

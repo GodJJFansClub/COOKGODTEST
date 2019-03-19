@@ -54,11 +54,10 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h4>此頁練習採用 EL 的寫法取值:</h4>
+<!-- 	<h4>此頁練習採用 EL 的寫法取值:</h4> -->
 	<table id="table-2">
 		<tr>
 			<td>
-				<!--	  <h3>部門員工 - listEmps_ByDeptno.jsp</h3>    -->
 				<h3>節慶主題料理訂單明細 - listFestOrderDetail_ByFest_or_ID.jsp</h3>
 				<h4>
 					<a

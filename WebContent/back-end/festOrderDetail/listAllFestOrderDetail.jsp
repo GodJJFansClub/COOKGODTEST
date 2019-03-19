@@ -120,6 +120,8 @@ th, td {
 									<th>訂單評價留言</th>
 									<th>訂單數量</th>
 									<th>訂單小計</th>
+									<th>修改</th>
+									<th>刪除</th>
 
 								</tr>
 								<%@ include file="page1.file"%>

@@ -51,7 +51,7 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+<!-- 	<h4>此頁暫練習採用 Script 的寫法取值:</h4> -->
 	<table id="table-1">
 		<tr>
 			<td>
