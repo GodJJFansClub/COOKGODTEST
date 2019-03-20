@@ -37,7 +37,6 @@
 			</tr>
 		</thead>
 		<tbody id="shopCartList">
-			<c:set var="total" value="0"/>
 			<c:forEach var="shopItem" items="${shoppingCart}">
 						<tr class="shopItemT">
 							<c:if test="${checkType.getIsFOD(shopItem)}">

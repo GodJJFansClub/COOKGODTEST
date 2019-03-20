@@ -29,7 +29,7 @@
 			<div class="col">統一寄送日期 : ${festMenuVO.fest_m_send}</div>
 			<div class="col">
 				<img
-					src="<%=request.getContextPath()%>/festmenu/festmenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"
+					src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"
 					height="400" width="300">
 			</div>
 			<div class="col">種類 : ${festMenuVO.fest_m_kind}</div>
@@ -58,7 +58,7 @@
 				$.ajax({
 					type:"POST",
 					url: "<%=request.getContextPath()%>/mall/mall.do",
-					data : crtQryStrFoodM($(this).attr("addFestMenu",$(this).parent("form").serializeArray()),
+					data : crtQryStrFoodM($(this).attr("addFestMenu",$(this).parent("form").serializeArray())),
 					dataType : "json",
 					success : function(data) {
 						if (data["foodMCardID"]) {

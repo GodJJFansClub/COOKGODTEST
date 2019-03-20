@@ -358,6 +358,7 @@ public class MallServlet extends HttpServlet{
 				failureView.forward(req, res);
 				return;
 			}
+			
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/foodOrder/addFoodOrder.jsp");
 			successView.forward(req, res);
 		}catch(Exception e) {
@@ -404,5 +405,9 @@ public class MallServlet extends HttpServlet{
 			errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
 			writeJson(res, errors);
 		}
+	}
+	
+	private void calCartTotal(List<Object> buycart) {
+		
 	}
 }
