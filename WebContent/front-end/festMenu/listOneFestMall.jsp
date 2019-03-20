@@ -26,7 +26,7 @@
 			<div class="col">數量 : ${festMenuVO.fest_m_qty}</div>
 			<div class="col">開始預購日期 : ${festMenuVO.fest_m_start}</div>
 			<div class="col">結束預購日期 : ${festMenuVO.fest_m_end}</div>
-			<div class="col">結束預購日期 : ${festMenuVO.fest_m_send}</div>
+			<div class="col">統一寄送日期 : ${festMenuVO.fest_m_send}</div>
 			<div class="col">
 				<img
 					src="<%=request.getContextPath()%>/festmenu/festmenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"
@@ -56,46 +56,25 @@
 				foodMName = foodMName.substring(foodMName.indexOf(':')+2);
 				console.log(foodMName);
 				$.ajax({
-					 type:"POST",
-					 url: "<%=request.getContextPath()%>
-		/mall/mall.do",
-															data : crtQryStrFoodM(
-																	$(this)
-																			.attr(
-																					"id"),
-																	"addFestMenu",
-																	$(this)
-																			.parent(
-																					"form")
-																			.serializeArray()),
-															dataType : "json",
-															success : function(
-																	data) {
+					type:"POST",
+					url: "<%=request.getContextPath()%>/mall/mall.do",
+					data : crtQryStrFoodM($(this).attr("addFestMenu",$(this).parent("form").serializeArray()),
+					dataType : "json",
+					success : function(data) {
+						if (data["foodMCardID"]) {
+							$("#mallItem").find(".errorMsgs").text(data["cartErrorMsgs"]);
+						} else {
+							cartItem(foodMName,data);
+						}
 
-																if (data["foodMCardID"]) {
-																	$(
-																			"#mallItem")
-																			.find(
-																					".errorMsgs")
-																			.text(
-																					data["cartErrorMsgs"]);
-																} else {
-
-																	cartItem(
-																			foodMName,
-																			data);
-																}
-
-															},
-															error : function(
-																	errdata) {
-																alert("ajax 錯誤");
-																console
-																		.log(errdata);
-															}
-														});
-											});
-						});
+					},
+					error : function(errdata) {
+								alert("ajax 錯誤");
+								console.log(errdata);
+					}
+				});
+			});
+		});
 		// 產生查詢字串
 		function crtQryStrFoodM(foodMCardID, action, foodMArr) {
 

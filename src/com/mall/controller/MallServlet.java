@@ -225,7 +225,9 @@ public class MallServlet extends HttpServlet{
 			return null;
 		}
 		/*************************** 2.查詢資料 ****************************************/
-		Integer fest_m_price = new FestMenuService().getOneFestMenu(fest_m_ID).getFest_m_price();
+		FestMenuService festMenuSvc = new FestMenuService();
+		FestMenuVO festMenuVO = festMenuSvc.getOneFestMenu(fest_m_ID);
+		Integer fest_m_price = festMenuVO.getFest_m_price() ;
 		if(fest_m_price == null) {
 			errors.addProperty("cartErrorMsgs", "查無此資料");
 			errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));

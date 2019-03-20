@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <jsp:useBean id="foodOrderSvc" class="com.foodOrder.model.FoodOrderService"/>
+<jsp:useBean id="festOrderSvc" class="com.festOrder.model.FestOrderService"/>
 <html>
 <head>
-<title>單一食材商城訂單</title>
+<title>付款成功</title>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
@@ -70,7 +71,7 @@
 				  	<tr>
 				  	  <td scope="col">${festOrderVO.fest_or_ID}</td>
 				  	  <td scope="col">${mallOrStatusMap[festOrderVO.fest_or_status]}</td>
-				  	  <td scope="col">${festOrderVO.fest_or_start}</td>
+				  	  <td scope="col">${festOrderSvc.getOneFestOrder(festOrderVO.fest_or_ID).fest_or_start}</td>
 				  	  <td scope="col">${festOrderVO.fest_or_send}</td>
 				  	  <td scope="col">${festOrderVO.fest_or_end}</td>
 				  	  <c:if test="${not empty foodOrderVO}">

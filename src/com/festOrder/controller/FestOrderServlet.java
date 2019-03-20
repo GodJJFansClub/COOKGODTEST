@@ -298,122 +298,122 @@ public class FestOrderServlet extends HttpServlet {
 
 		}
 
-		if ("insert".equals(action)) { // 來自addReport.jsp的請求
-//			System.out.println("檢查點256");
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-
-//			try {
-				int i = 1;
-//				System.out.println("檢查點"+i++);
-				/*********************** 1.接收請求參數-輸入格式的錯誤處理 *************************/
-				String fest_or_status = req.getParameter("fest_or_status").trim();
-				if (fest_or_status == null || fest_or_status.trim().length() == 0) {
-					errorMsgs.add("訂單狀態請勿空白");
-				}
-
-				Integer fest_or_price = null;
-				try {
-					fest_or_price = new Integer(req.getParameter("fest_or_price").trim());
-				} catch (NumberFormatException e) {
-					fest_or_price = 0;
-					errorMsgs.add("請輸入價格：");
-				}
-
-				java.sql.Date fest_or_start = null;
-				try {
-					fest_or_start = java.sql.Date.valueOf(req.getParameter("fest_or_start").trim());
-				} catch (IllegalArgumentException e) {
-					fest_or_start = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入訂單日期");
-				}
-
-				java.sql.Date fest_or_send = null;
-				try {
-					fest_or_send = java.sql.Date.valueOf(req.getParameter("fest_or_send").trim());
-				} catch (IllegalArgumentException e) {
-					fest_or_send = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入出貨日期");
-				}
-
-				java.sql.Date fest_or_end = null;
-				try {
-					fest_or_end = java.sql.Date.valueOf(req.getParameter("fest_or_end").trim());
-				} catch (IllegalArgumentException e) {
-					fest_or_end = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入訂單結束日期");
-				}
-
-				String fest_or_disc = req.getParameter("fest_or_disc").trim();
-
-				String cust_ID = req.getParameter("cust_ID").trim();
-				if (cust_ID == null || cust_ID.trim().length() == 0) {
-					errorMsgs.add("請輸入會員編號");
-				}
-				
-				/***********************1.接收請求參數-輸入格式的錯誤處理*************************/
-			
-				String fest_m_ID = req.getParameter("fest_m_ID").trim();
-				if (fest_m_ID == null || fest_m_ID.trim().length() == 0) {
-					errorMsgs.add("節慶料理編號請勿空白");
-				}
-				
-				Integer fest_or_qty = null;
-				try {
-					fest_or_qty = new Integer(req.getParameter("fest_or_qty").trim());
-				}catch(NumberFormatException e) {
-					fest_or_qty=0;
-					errorMsgs.add("請輸入訂單數量：");
-				}
-
-				
-
-				FestOrderVO festOrderVO = new FestOrderVO();
-				festOrderVO.setFest_or_status(fest_or_status);
-				festOrderVO.setFest_or_price(fest_or_price);
-				festOrderVO.setFest_or_start(fest_or_start);
-				festOrderVO.setFest_or_send(fest_or_send);
-				festOrderVO.setFest_or_end(fest_or_end);
-				festOrderVO.setFest_or_disc(fest_or_disc);
-				festOrderVO.setCust_ID(cust_ID);
-
-				
-				List<FestOrderDetailVO> testList = new ArrayList<FestOrderDetailVO>();
-				FestOrderDetailVO festOrderDetailVOs = new FestOrderDetailVO();
-
-
-				festOrderDetailVOs.setFest_m_ID(fest_m_ID);
-			
-				
-				festOrderDetailVOs.setFest_or_qty(fest_or_qty);
-				
-				
-				testList.add(festOrderDetailVOs);
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("festOrderVO", festOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/addFestOrder.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-
-				/*************************** 2.開始新增資料 **************************************/
-				FestOrderService festOrderSvc = new FestOrderService();
-				festOrderVO = festOrderSvc.insertFestOrder(fest_or_status, fest_or_price, fest_or_start, fest_or_send, fest_or_end, fest_or_disc, cust_ID, fest_m_ID, fest_or_qty);
-				/*************************** 3.新增完成，準備提交(Send the Success view **********/
-				String url = "/back-end/festOrder/listAllFestOrder.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); //
-				successView.forward(req, res);
-
-				/*************************** 其它可能的錯誤處理 *********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/addFestOrder.jsp");
-//				failureView.forward(req, res);
-//			}
-		}
+//		if ("insert".equals(action)) { // 來自addReport.jsp的請求
+////			System.out.println("檢查點256");
+//			List<String> errorMsgs = new LinkedList<String>();
+//			// Store this set in the request scope, in case we need to
+//			// send the ErrorPage view.
+//			req.setAttribute("errorMsgs", errorMsgs);
+//
+////			try {
+//				int i = 1;
+////				System.out.println("檢查點"+i++);
+//				/*********************** 1.接收請求參數-輸入格式的錯誤處理 *************************/
+//				String fest_or_status = req.getParameter("fest_or_status").trim();
+//				if (fest_or_status == null || fest_or_status.trim().length() == 0) {
+//					errorMsgs.add("訂單狀態請勿空白");
+//				}
+//
+//				Integer fest_or_price = null;
+//				try {
+//					fest_or_price = new Integer(req.getParameter("fest_or_price").trim());
+//				} catch (NumberFormatException e) {
+//					fest_or_price = 0;
+//					errorMsgs.add("請輸入價格：");
+//				}
+//
+//				java.sql.Date fest_or_start = null;
+//				try {
+//					fest_or_start = java.sql.Date.valueOf(req.getParameter("fest_or_start").trim());
+//				} catch (IllegalArgumentException e) {
+//					fest_or_start = new java.sql.Date(System.currentTimeMillis());
+//					errorMsgs.add("請輸入訂單日期");
+//				}
+//
+//				java.sql.Date fest_or_send = null;
+//				try {
+//					fest_or_send = java.sql.Date.valueOf(req.getParameter("fest_or_send").trim());
+//				} catch (IllegalArgumentException e) {
+//					fest_or_send = new java.sql.Date(System.currentTimeMillis());
+//					errorMsgs.add("請輸入出貨日期");
+//				}
+//
+//				java.sql.Date fest_or_end = null;
+//				try {
+//					fest_or_end = java.sql.Date.valueOf(req.getParameter("fest_or_end").trim());
+//				} catch (IllegalArgumentException e) {
+//					fest_or_end = new java.sql.Date(System.currentTimeMillis());
+//					errorMsgs.add("請輸入訂單結束日期");
+//				}
+//
+//				String fest_or_disc = req.getParameter("fest_or_disc").trim();
+//
+//				String cust_ID = req.getParameter("cust_ID").trim();
+//				if (cust_ID == null || cust_ID.trim().length() == 0) {
+//					errorMsgs.add("請輸入會員編號");
+//				}
+//				
+//				/***********************1.接收請求參數-輸入格式的錯誤處理*************************/
+//			
+//				String fest_m_ID = req.getParameter("fest_m_ID").trim();
+//				if (fest_m_ID == null || fest_m_ID.trim().length() == 0) {
+//					errorMsgs.add("節慶料理編號請勿空白");
+//				}
+//				
+//				Integer fest_or_qty = null;
+//				try {
+//					fest_or_qty = new Integer(req.getParameter("fest_or_qty").trim());
+//				}catch(NumberFormatException e) {
+//					fest_or_qty=0;
+//					errorMsgs.add("請輸入訂單數量：");
+//				}
+//
+//				
+//
+//				FestOrderVO festOrderVO = new FestOrderVO();
+//				festOrderVO.setFest_or_status(fest_or_status);
+//				festOrderVO.setFest_or_price(fest_or_price);
+//				festOrderVO.setFest_or_start(fest_or_start);
+//				festOrderVO.setFest_or_send(fest_or_send);
+//				festOrderVO.setFest_or_end(fest_or_end);
+//				festOrderVO.setFest_or_disc(fest_or_disc);
+//				festOrderVO.setCust_ID(cust_ID);
+//
+//				
+//				List<FestOrderDetailVO> testList = new ArrayList<FestOrderDetailVO>();
+//				FestOrderDetailVO festOrderDetailVOs = new FestOrderDetailVO();
+//
+//
+//				festOrderDetailVOs.setFest_m_ID(fest_m_ID);
+//			
+//				
+//				festOrderDetailVOs.setFest_or_qty(fest_or_qty);
+//				
+//				
+//				testList.add(festOrderDetailVOs);
+//				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					req.setAttribute("festOrderVO", festOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
+//					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/addFestOrder.jsp");
+//					failureView.forward(req, res);
+//					return;
+//				}
+//
+//				/*************************** 2.開始新增資料 **************************************/
+//				FestOrderService festOrderSvc = new FestOrderService();
+//				festOrderVO = festOrderSvc.insertFestOrder(fest_or_status, fest_or_price, fest_or_start, fest_or_send, fest_or_end, fest_or_disc, cust_ID, fest_m_ID, fest_or_qty);
+//				/*************************** 3.新增完成，準備提交(Send the Success view **********/
+//				String url = "/back-end/festOrder/listAllFestOrder.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); //
+//				successView.forward(req, res);
+//
+//				/*************************** 其它可能的錯誤處理 *********************************/
+////			} catch (Exception e) {
+////				errorMsgs.add(e.getMessage());
+////				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/addFestOrder.jsp");
+////				failureView.forward(req, res);
+////			}
+//		}
 
 		if ("delete".equals(action)) {
 			System.out.println("  " + "檢查點4");

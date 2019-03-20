@@ -39,40 +39,96 @@
 		<tbody id="shopCartList">
 			<c:set var="total" value="0"/>
 			<c:forEach var="shopItem" items="${shoppingCart}">
-				 <tr class="shopItemT">
-				      <c:if test="${checkType.getIsFOD(shopItem)}">
-						  <td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
-						  <td>${shopItem.food_od_qty}</td>
-						  <td>${shopItem.food_od_stotal}</td>
-						  <td>
-						  	<form>
-							  	<input type="hidden" name="food_sup_ID" value="${shopItem.food_sup_ID}">
-							    <input type="hidden" name="food_ID" value="${shopItem.food_ID}">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
-						  	</form>
-						  </td>
-						  <c:set var="total" value="${total+shopItem.food_od_stotal}"/>
-					  </c:if>
-					  <c:if test="${!checkType.getIsFOD(shopItem)}">
-						  <td>${festMenuSvc.getOneFestMenu(shopItem.fest_m_ID).fest_m_name}</td>
-						  <td>${shopItem.fest_or_qty}</td>
-						  <td>${shopItem.fest_or_stotal}</td>
-						  <td>
-						  	<form>
-							    <input type="hidden" name="fest_m_ID" value="${shopItem.fest_m_ID}">
-							    <input type="hidden" name="action" value="delCartItem">
-							  	<button id="btnDel" type="button" class="btn btn-dark">刪除</button>
-						  	</form>
-						  </td>
-						  <c:set var="total" value="${total+shopItem.fest_or_stotal}"/>
-					  </c:if>
-					  </tr>
-			</c:forEach>
+						<tr class="shopItemT">
+							<c:if test="${checkType.getIsFOD(shopItem)}">
+								<td>${foodMallSvc.getOneFoodMall(shopItem.food_sup_ID, shopItem.food_ID).food_m_name}</td>
+								<td>${shopItem.food_od_qty}</td>
+								<td>${shopItem.food_od_stotal}</td>
+								<td>
+									<form action="<%=request.getContextPath()%>/mall/mall.do"
+										method="post">
+										<input type="hidden" name="food_sup_ID"
+											value="${shopItem.food_sup_ID}"> 
+										<input type="hidden"
+											name="food_ID" value="${shopItem.food_ID}"> <input
+											type="hidden" name="action" value="delShoppingCartItem">
+										<button id="btnDel" type="button"
+											class="btn btn-dark shoppingCartItemDel">刪除</button>
+									</form>
+								</td>
+							</c:if>
+							<c:if test="${!checkType.getIsFOD(shopItem)}">
+								<td>${festMenuSvc.getOneFestMenu(shopItem.fest_m_ID).fest_m_name}</td>
+								<td>${shopItem.fest_or_qty}</td>
+								<td>${shopItem.fest_or_stotal}</td>
+								<td>
+									<form action="<%=request.getContextPath()%>/mall/mall.do"
+										method="post">
+										<input type="hidden" name="fest_m_ID"
+											value="${shopItem.fest_m_ID}"> 
+										<input type="hidden"
+											name="action" value="delShoppingCartItem">
+										<button id="btnDel" type="button"
+											class="btn btn-dark shoppingCartItemDel">刪除</button>
+									</form>
+								</td>
+							</c:if>
+						</tr>
+					</c:forEach>
+			<tr><th>總計</th></tr>
 			<tr><td>${total}</td></tr>
+			<tr>
+				<td></td>
+			</tr>
 		</tbody>
 	</table>
 	</section>
+	<script>
+		$(document).ready(function(){
+				$(".shoppingCartItemDel").click(delShoppingCartItem);
+		});
+		// 發送刪除訊息
+		function delShoppingCartItem(){
+			let waitDelItem = $(this);
+			console.log(waitDelItem.parent("form").serialize());
+			$.ajax({
+				type:"POST",
+				url: waitDelItem.parent("form").attr("action"),
+				data: waitDelItem.parent("form").serialize(),
+				dataType:"json",
+				success: function(data){
+					actDelSCartItem(data);
+				},
+				error: function(errdata){
+					alert("ajax 錯誤" + errdata);
+					console.log(errdata);
+				}
+			});
+		}
+		// 刪除購物車項目
+		function actDelSCartItem(data){
+			let shopCartTrs = $("#shopCartList>tr");
+			let shopCartLen = shopCartTrs.length;
+			let food_sup_ID = data.food_sup_ID;
+			let food_ID = data.food_ID;
+			let fest_m_ID = data.fest_m_ID;
+			
+			jQuery.each( shopCartTrs, function(i, val){
+				let inputArr = $(this).find("form").serializeArray();
+				if(food_sup_ID === inputArr[0].value 
+						&& inputArr[1].value === data.food_ID){
+					$(this).remove();
+					return;
+				}
+				console.log($(this));
+				if(fest_m_ID === inputArr[0].value){
+					console.log($(this));
+					$(this).remove();
+					return;
+				}
+			});
+		}
+	</script>
 
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>

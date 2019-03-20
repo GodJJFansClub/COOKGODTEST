@@ -253,6 +253,7 @@ public class FoodOrderServlet extends HttpServlet {
 			if(foodCart.size() > 0) {
 				FoodOrderService foodOrderSvc = new FoodOrderService();
 				foodOrderVO = foodOrderSvc.addFoodOrder("o1", food_or_name, food_or_addr, food_or_tel, cust_ID, foodCart);
+				foodOrderVO = foodOrderSvc.getOneFoodOrder(foodOrderVO.getFood_or_ID());
 				req.setAttribute("foodOrderVO", foodOrderVO);
 			}
 			
@@ -266,18 +267,22 @@ public class FoodOrderServlet extends HttpServlet {
 						.collect(Collectors.groupingBy(
 							festODVO -> fesMenuSvc.getOneFestMenu(festODVO.getFest_m_ID()).getFest_m_send()
 						));
-				
+				// 利用寄出日期分成多張訂單
 				festOrders.forEach((dateKey, festODVOs)->{
 					FestOrderVO festOrderVO =
 					festOrderSvc.insertFestOrder("o1", festODVOs.stream().mapToInt(
 							FestOrderDetailVO::getFest_or_stotal).sum(), dateKey, cust_ID, festODVOs);
 					festOrderVOs.add(festOrderVO);
 				});
+				
+				festOrderVOs.forEach(festORVO -> festORVO = festOrderSvc.getOneFestOrder(festORVO.getFest_or_ID()));
+				
 				req.setAttribute("festOrderList", festOrderVOs);
 			}
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/front-end/foodMall/comorder.jsp";
 			session.removeAttribute("shoppingCart");
+			
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 
