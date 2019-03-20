@@ -79,6 +79,16 @@ public class BroadcastWebSocket implements ServletContextListener{
 		foodUnitMap.put("single", "隻");
 		foodUnitMap.put("jin","斤");
 		
+		Map<String, String> adStatusMap = new LinkedHashMap<String, String>();
+		adStatusMap.put("d0", "未審核");
+		adStatusMap.put("d1", "審核通過");
+		adStatusMap.put("d2", "審核不過");
+		
+		Map<String, String> adTypeMap = new LinkedHashMap<String, String>();
+		adTypeMap.put("e0", "食材供應商廣告");
+		adTypeMap.put("e1", "節慶主題廣告");
+		adTypeMap.put("e2", "主打商品廣告");
+		
 		servletContext.setAttribute("foodTypeMap", foodTypeMap);
 		servletContext.setAttribute("mallStatusMap", mallStatusMap);
 		servletContext.setAttribute("mallOrStatusMap", mallOrStatusMap);
@@ -87,6 +97,9 @@ public class BroadcastWebSocket implements ServletContextListener{
 		servletContext.setAttribute("dishStatusMap", dishStatusMap);
 		servletContext.setAttribute("bcSessionMap", bcSessionMap);
 		servletContext.setAttribute("foodUnitMap", foodUnitMap);
+		servletContext.setAttribute("adStatusMap", adStatusMap);
+		servletContext.setAttribute("adTypeMap", adTypeMap);
+		
 	}
 	
 	
