@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>IBM Cust: Home</title>
+
 
 
 </head>
@@ -13,16 +13,6 @@
 
 	 <!-- ##### Contact Area Start #####-->
     <section class="contact-area section-padding-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h2>Get In Touch</h2>
-                        <img src="img/core-img/x.png" alt="">
-                    </div>
-                </div>
-            </div>
 
 
             <div class="row justify-content-center">
@@ -91,20 +81,10 @@
 	</ul>
 
                         </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
+         
+</section>
     <!-- ##### Contact Area End #####-->
 
-	<%-- 錯誤表列 --%>
-	
-	
-	
-	
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
-
 </body>
 </html>

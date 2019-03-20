@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>所有權限資料 - listAllAuth.jsp</title>
+<title>所有權限資料</title>
 
 
 
@@ -52,11 +52,11 @@ th, td {
 
 
 
-	<h4>此頁練習採用 EL 的寫法取值:</h4>
+	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>所有權限資料 - listAllAuth.jsp</h3>
+				<h3>所有權限資料</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/back-end/auth/select_page.jsp">回首頁</a>

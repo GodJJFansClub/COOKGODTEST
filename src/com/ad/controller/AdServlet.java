@@ -225,7 +225,7 @@ public class AdServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 
 				// 1.廣告標題
 				String ad_title = req.getParameter("ad_title");
@@ -289,7 +289,7 @@ public class AdServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("adVO", adVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/ad/update_ad_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -306,12 +306,12 @@ public class AdServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
-			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
-				failureView.forward(req, res);
-
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add("修改資料失敗:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
+//				failureView.forward(req, res);
+//
+//			}
 		}
 
 		// 刪除

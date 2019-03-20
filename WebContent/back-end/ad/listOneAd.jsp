@@ -55,7 +55,7 @@ h4 {
 				<h3>廣告資料 - ListOneAd.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>

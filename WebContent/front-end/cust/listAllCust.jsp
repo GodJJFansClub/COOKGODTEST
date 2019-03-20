@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>所有顧客資料 - listAllCust.jsp</title>
+<title>所有顧客資料</title>
 
 <style>
 table#table-1 {
@@ -54,13 +54,17 @@ th, td {
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
-	<h4>此頁練習採用 EL 的寫法取值:</h4>
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
+
+	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>所有顧客資料 - listAllCust.jsp</h3>
+				<h3>所有顧客資料</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp">回首頁</a>
@@ -155,5 +159,9 @@ th, td {
 	</table>
 	<%@ include file="/file/page2.file"%>
 
+ </section>
+    <!-- ##### Contact Area End #####-->
+
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

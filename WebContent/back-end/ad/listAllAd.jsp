@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.ad.model.*"%>
+
+
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
@@ -32,14 +34,14 @@
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-	<h4>此頁練習採用 EL 的寫法取值:</h4>
+	
 	<table id="table-1">
 		<tr>
 			<td>
 				<h3>所有廣告資料 - listAllAd.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -79,7 +81,7 @@
 				<td>${adVO.ad_con}</td>
 				<td>${adVO.ad_start}</td>
 				<td>${adVO.ad_end}</td>
-				<td>${adVO.ad_status}</td>
+				<td>${adStatusMap[adVO.ad_status]}</td>
 				<td>${adVO.ad_type}</td>
 				<td>${adVO.food_sup_ID}</td>
 				

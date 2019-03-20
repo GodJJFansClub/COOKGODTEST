@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>IBM Fun: Home</title>
+<title>功能管理</title>
 
 
 
@@ -21,17 +21,16 @@
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
-【
+
 
 	<table id="table-1">
 		<tr>
-			<td><h3>IBM Fun: Home</h3>
-				<h4>( MVC )</h4></td>
+			<td><h3>功能管理</h3>
+				</td>
 		</tr>
 	</table>
 
-	<p>This is the Home page forFun: Home</p>
-
+	
 	<h3>資料查詢:</h3>
 
 	<%-- 錯誤表列 --%>
@@ -54,7 +53,7 @@
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/fun/fun.do">
-				<b>輸入權限編號:</b> <input type="text" name="fun_ID"> <input
+				<b>輸入功能編號:</b> <input type="text" name="fun_ID"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
 					type="submit" value="送出">
 			</FORM>
@@ -66,7 +65,7 @@
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/fun/fun.do">
-				<b>選擇權限編號:</b> <select size="1" name="fun_ID">
+				<b>選擇功能編號:</b> <select size="1" name="fun_ID">
 					<c:forEach var="funVO" items="${funSvc.all}">
 						<option value="${funVO.fun_ID}">${funVO.fun_ID}
 					</c:forEach>
@@ -78,7 +77,7 @@
 		<li>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/fun/fun.do">
-				<b>選擇權限名稱:</b> <select size="1" name="fun_ID">
+				<b>選擇功能名稱:</b> <select size="1" name="fun_ID">
 					<c:forEach var="funVO" items="${funSvc.all}">
 						<option value="${funVO.fun_ID}">${funVO.fun_name}
 					</c:forEach>
@@ -89,7 +88,7 @@
 	</ul>
 
 
-	<h3>權限管理</h3>
+	<h3>功能管理</h3>
 
 	<ul>
 		<li><a href='addFun.jsp'>Add</a> a new Fun.</li>
