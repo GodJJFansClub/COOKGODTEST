@@ -15,13 +15,13 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 
-<title>Hello, Bootstrap!</title>
+<title>updateMenuOrder.jsp</title>
 </head>
 <body>
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
-			<h5 class="card-title">新增套餐訂單</h5>
-			<p class="card-text">addMenuOrder.jsp</p>
+			<h5 class="card-title">修改套餐訂單</h5>
+			<p class="card-text">updateMenuOrder.jsp</p>
 			<a href="index.jsp" class="btn btn-primary">回首頁</a>
 		</div>
 	</div>
@@ -38,22 +38,44 @@
 	<div class="container justify-content-center">
 		<div class="row">
 			<div class="col-12">
-				<form method="post" action="<%=request.getContextPath()%>/menuOrder/menuOrder.do" name="insertMenuOrderForm">
+				<form method="post" action="menuOrder.do" name="insertMenuOrderForm">
+					<jsp:useBean id="menuOrderSvc" scope="page"
+						class="com.menuOrder.model.MenuOrderService" />
+
+					<div class="form-group">
+						<label>訂單編號</label> <input type="text" readonly
+							class="form-control" name="menu_od_ID"
+							value="${menuOrderVO.menu_od_ID}" />
+					</div>
+					<%	
+							String status[] = new String [4];
+							status[0]="0";
+							status[1]="1";
+							status[2]="2";
+							status[3]="3";
+							request.setAttribute("mystatus", status);
+						%>
+					<div class="form-group">
+						<label>訂單狀態</label> <select size="1" name="menu_od_status"
+							class="form-control">
+							<c:forEach var="mydata" items="${mystatus}">
+								<option value="${mydata}"
+									${(menuOrderVO.menu_od_status==mydata)? 'selected':'' }>${mydata}
+							</c:forEach>
+						</select>
+					</div>
+
 					<div class="form-group">
 						<label>預約日期</label> <input name="menu_od_book"
-							class="form-control" id="book_time" type="text" />${errMsgs.menu_od_book}
+							class="form-control" id="book_time" type="text"
+							value="${menuOrderVO.menu_od_book}" />${errMsgs.menu_od_book}
 					</div>
 
 					<div class="form-group">
 						<jsp:useBean id="custSvc" scope="page"
 							class="com.cust.model.CustService" />
-						<label>顧客編號</label> <select size="1" name="cust_ID"
-							class="form-control">
-							<c:forEach var="custVO" items="${custSvc.all}">
-								<option value="${custVO.cust_ID}"
-									${(menuOrderVO.cust_ID==custVO.cust_ID)? 'selected':'' }>${custVO.cust_ID}
-							</c:forEach>
-						</select>
+						<label>顧客編號</label> <input type="text" readonly name="cust_ID"
+							class="form-control" value="${menuOrderVO.cust_ID}" />
 					</div>
 
 					<div class="form-group">
@@ -79,9 +101,39 @@
 							</c:forEach>
 						</select>
 					</div>
-					<input type="hidden" name="action" value="insert"> <input
+
+					<div class="form-group">
+						<label>完成日期</label> <input name="menu_od_end" id="end_time"
+							class="form-control" id="book_time" type="text"
+							value="${menuOrderVO.menu_od_end}" />${errMsgs.menu_od_end}
+					</div>
+					<%	
+							String rate[] = new String [5];
+							rate[0]="1";
+							rate[1]="2";
+							rate[2]="3";
+							rate[3]="4";
+							rate[4]="5";
+							request.setAttribute("myrate", rate);
+						%>
+					<div class="form-group">
+						<label>訂單評價</label> <select size="1" name="menu_od_rate"
+							class="form-control">
+							<c:forEach var="myrate" items="${myrate}">
+								<option value="${myrate}"
+									${(menuOrderVO.menu_od_rate==myrate)? 'selected':'' }>${myrate}
+							</c:forEach>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>訂單留言</label>
+						<textarea rows="3" cols="100" name="menu_od_msg"
+							class="form-control">${menuOrderVO.menu_od_msg}</textarea>
+					</div>
+					<input type="hidden" name="action" value="update"> <input
 						type="submit" class="btn btn-success btn-lg btn-block"
-						value="新增訂單">
+						value="修改訂單">
 				</form>
 			</div>
 		</div>
@@ -114,6 +166,14 @@
 	    menu_od_book = null;
    }
 %>
+<% 
+  java.sql.Timestamp menu_od_end = null;
+  try {
+	    menu_od_end = java.sql.Timestamp.valueOf(request.getParameter("menu_od_end").trim());
+   } catch (Exception e) {
+	    menu_od_end = null;
+   }
+%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
@@ -131,7 +191,7 @@
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
+        $.datetimepicker.setLocale('tw');
         $('#book_time').datetimepicker({
  	       theme: '',              //theme: 'dark',
 	       timepicker:true,       //timepicker:true,
@@ -141,7 +201,21 @@
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
            minDate:               '-1969-12-25', // 去除今日(不含)之前
-           maxDate:               '+1970-04-01'  // 去除今日(不含)之後
+           maxDate:               '+1970-02-01'  // 去除今日(不含)之後
+        });
+</script>
+<script>
+        $.datetimepicker.setLocale('tw');
+        $('#end_time').datetimepicker({
+ 	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       //step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d' ,         //format:'Y-m-d H:i:s',
+		   //value: '<%=menu_od_end%>' , // value:   new Date(),
+           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+           //startDate:	            '2017/07/10',  // 起始日
+           minDate:               '-1969-12-25', // 去除今日(不含)之前
+           maxDate:               '+1970-02-01'  // 去除今日(不含)之後
         });
 </script>
 </html>
