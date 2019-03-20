@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.cust.model.CustVO,com.broadcast.model.BroadcastVO"%>
-	<jsp:useBean id="broadcastSvc" scope="page"
-			class="com.broadcast.model.BroadcastService" />
+<%@ page
+	import="com.cust.model.CustVO,com.broadcast.model.BroadcastVO,java.util.stream.Collectors"%>
+<jsp:useBean id="broadcastSvc" scope="page"
+	class="com.broadcast.model.BroadcastService" />
 
 <!DOCTYPE html>
 <html>
@@ -103,22 +104,30 @@
 										<li><a>Hello:<font color=#ea7500>
 													${custVO.cust_name} </font>您好
 										</a></li>
-										
-										
-										
-										
-										<li><a><i class="fa fa-dribbble"></i><span class="badge badge-light">4${custVO.cust_ID}</span></a>
+
+
+
+
+										<li><a><i class="fa fa-dribbble"></i><span
+												class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
 											<ul class="dropdown">
-												<c:forEach var="broadcastVO" items="${broadcastSvc.all}">
-												<c:if test="${broadcastVO.cust_ID == custVO.cust_ID}">
+
+												<c:forEach var="broadcastVO"
+													items="${broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
+
 													<li><a>${broadcastVO.broadcast_con}</a></li>
-													</c:if>
+
 												</c:forEach>
+												<c:if
+													test="${empty broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
+													<li><a>目前尚無訊息</a></li>
+												</c:if>
+
 											</ul></li>
-										<FORM METHOD="get"
-											action="<%=request.getContextPath()%>/back-endTemplate/logout.do">
-											<input type="submit" value="登出">
-										</FORM>
+										<li><FORM METHOD="get"
+												action="<%=request.getContextPath()%>/back-endTemplate/logout.do">
+												<input type="submit" value="登出">
+											</FORM></li>
 									</c:if>
 									<c:if test="${empty custVO}">
 										<li><a
@@ -137,15 +146,7 @@
 								</ul>
 
 
-								<!-- Top Social Info -->
-								<div class="top-social-info ml-5">
-									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-										class="fa fa-dribbble"></i></a> <a href="#"><i
-										class="fa fa-flickr"></i></a> <a href="#"><i
-										class="fa fa-instagram"></i></a> <a href="#"><i
-										class="fa fa-linkedin"></i></a> <a href="#"><i
-										class="fa fa-pinterest"></i></a>
-								</div>
+
 							</div>
 							<!-- Nav End -->
 						</div>
@@ -241,6 +242,20 @@
 			webSocket.close();
 		}
 	</script>
+
+	<script>
+		setInterval(function () {
+    		$.ajax({
+       			 async: false,
+       			 url: "请求路径",
+        		type: "post",
+       
+        	success(data){
+         		console.log("success");
+    		})
+			},9000)
+	</script>
+
 </c:if>
 
 </html>
