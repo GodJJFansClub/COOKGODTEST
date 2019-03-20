@@ -92,7 +92,7 @@
 			<td>${dishVO.dish_price}</td>
 			
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/dishFood/addDishFood.jsp">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/dishFood/selectFood.jsp">
 			     <input type="submit" value="新增食材">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}"> 
 			     <input type="hidden" name="action"	value=""></FORM>

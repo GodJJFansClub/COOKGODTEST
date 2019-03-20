@@ -82,7 +82,7 @@ th, td {
 			<td>${dishVO.dish_ID}</td>      
 			<td>${dishVO.dish_name}</td>
 			<td><c:if test="${not empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"></c:if>
-				<c:if test="${empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/back-end/images/null2.jpg" width="300" height="200"></c:if>
+				<c:if test="${empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200"></c:if>
 			</td>
 			<td>${dishVO.dish_resume}</td>
 			<td>${dishVO.dish_status}</td>
@@ -105,6 +105,5 @@ th, td {
 	</c:forEach>
 </table> 
 <%@ include file="page2.file" %>
-
 </body>
 </html>
