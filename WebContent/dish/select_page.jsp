@@ -59,7 +59,8 @@
 </c:if>
 
 <ul>
-  <li><a href='AllDish.jsp'>菜色</a><br><br></li>
+  <li><a href='listAllDish.jsp'>新菜色</a><br><br></li>
+  <li><a href='allDish.jsp'>上架菜色</a><br><br></li>
   <li><a href='<%=request.getContextPath() %>/back-end/menuDish/listAllMenuDish.jsp'>套餐菜色</a><br><br></li>
   <li><a href='<%=request.getContextPath() %>/back-end/dishFood/listAllDishFood.jsp'>菜色食材</a> </li>
 

@@ -86,6 +86,7 @@
 	<%@ include file="page1.file" %> 
 	<c:forEach var="dishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr ${(dishVO.dish_ID==param.dish_ID) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
+		<c:if test ="${dishVO.dish_status eq 'D0'}">
 		<tr>
 			<td>${dishVO.dish_ID}</td>
 			<td>${dishVO.dish_name}</td>
@@ -111,6 +112,7 @@
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>
+		</c:if>
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
