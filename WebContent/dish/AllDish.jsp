@@ -78,7 +78,7 @@ th, td {
 	<%@ include file="page1.file" %> 
 	<c:forEach var="dishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
 		<tr>
-		
+			<c:if test ="${dishVO.dish_status eq 'D1'}">
 			<td>${dishVO.dish_ID}</td>      
 			<td>${dishVO.dish_name}</td>
 			<td><c:if test="${not empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"></c:if>
@@ -100,7 +100,7 @@ th, td {
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
-			
+			</c:if>
 		</tr>
 	</c:forEach>
 </table> 
