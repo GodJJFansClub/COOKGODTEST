@@ -84,15 +84,13 @@ th, td {
 						</c:if>
 
 
-<body bgcolor='white'>
 
 	<table id="table-1">
 		<tr>
 			<td>
 				<h3>節慶主題料理訂單資料 - listAllFestOrder.jsp</h3>
 				<h4>
-					<a
-						href="<%=request.getContextPath()%>/back-end/festOrder/select_page.jsp">回首頁</a>
+					<a href="<%=request.getContextPath()%>/back-end/festOrder/select_page.jsp" >回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -107,8 +105,12 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
-
-	<table>
+ <section class="page-content">
+   <div class="container pt-3 pb-3">
+   <div class="table-responsive-sm table-middle">
+           <thead class="thead-dark">
+	<table class="table table-hover">
+	   <thead class="thead-dark">
 		<tr>
 			<th>訂單編號</th>
 			<th>訂單狀態</th>
@@ -122,6 +124,7 @@ th, td {
 			<th>刪除</th>
 			<th>送出查詢</th>
 		</tr>
+		</thead>
 		<%@ include file="page1.file"%>
 		<c:forEach var="festOrderVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
@@ -139,7 +142,9 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
+						<button type="submit" class="btn btn-outline-secondary btn-block">修改</button>
+<!-- 						<input type="submit" value="修改"> -->
+						 <input type="hidden"
 							name="fest_or_ID" value="${festOrderVO.fest_or_ID}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
@@ -148,7 +153,9 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="刪除"> <input type="hidden"
+						<button type="submit" class="btn btn-outline-secondary btn-block">刪除</button>
+<!-- 						<input type="submit" value="刪除">  -->
+						<input type="hidden"
 							name="fest_or_ID" value="${festOrderVO.fest_or_ID}"> <input
 							type="hidden" name="action" value="delete">
 					</FORM>
@@ -157,15 +164,21 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="送出查詢"> <input type="hidden"
+						<button type="submit" class="btn btn-secondary text-white">送出查詢</button>
+<!-- 						<input type="submit" value="送出查詢" >  -->
+						<input type="hidden"
 							name="fest_or_ID" value="${festOrderVO.fest_or_ID}"> <input
-							type="hidden" name="action"
+							type="hidden" name="action" 
 							value="listFestOrderDetail_ByFest_or_ID">
 					</FORM>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+	</div>
+	</section>
+	
 	<%@ include file="page2.file"%>
 
 	<%
