@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>廣告資料修改 - update_ad_input.jsp</title>
+<title>廣告資料修改 </title>
 <link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
 <style>
 table#table-1 {
@@ -48,23 +48,16 @@ th, td {
 </style>
 
 </head>
-<body bgcolor='white'>
-		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
-		</aside>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+<body>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
 
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>廣告資料修改 - update_ad_input.jsp</h3>
+				<h3>廣告資料修改 </h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
@@ -142,13 +135,12 @@ th, td {
 			type="hidden" name="ad_ID" value="<%=adVO.getAd_ID()%>">
 		<input type="submit" value="送出修改">
 	</FORM>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
+
 	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+ </section>
+    <!-- ##### Contact Area End #####-->
+
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 
 <script>

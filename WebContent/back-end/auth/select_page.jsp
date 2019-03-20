@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>IBM Auth: Home</title>
+<title>權限管理</title>
 
 
 
@@ -25,12 +25,11 @@
 
 	<table id="table-1">
 		<tr>
-			<td><h3>IBM Auth: Home</h3>
-				<h4>( MVC )</h4></td>
+			<td><h3>權限管理</h3>
+			</td>
 		</tr>
 	</table>
 
-	<p>This is the Home page forAuth: Home</p>
 
 	<h3>資料查詢:</h3>
 

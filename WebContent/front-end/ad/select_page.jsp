@@ -4,7 +4,6 @@
 
 <html>
 <head>
-<title>IBM Ad: Home</title>
 
 <style>
 table#table-1 {
@@ -30,16 +29,20 @@ h4 {
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
 
 	<table id="table-1">
 		<tr>
-			<td><h3>IBM Ad: Home</h3>
-				<h4>( MVC )</h4></td>
+			<td><h3>管告管理</h3>
+				</td>
 		</tr>
 	</table>
 
-	<p>This is the Home page forAd: Home</p>
+	
 
 	<h3>資料查詢:</h3>
 
@@ -104,5 +107,9 @@ h4 {
 		<li><a href='addAd.jsp'>Add</a> a new Ad.</li>
 	</ul>
 
+ </section>
+    <!-- ##### Contact Area End #####-->
+
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

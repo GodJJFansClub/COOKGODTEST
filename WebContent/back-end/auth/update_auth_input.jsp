@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>權限資料修改 - update_auth_input.jsp</title>
+<title>權限資料修改</title>
 
 
 <style>
@@ -47,7 +47,7 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>權限資料修改 - update_auth_input.jsp</h3>
+				<h3>權限資料修改</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/back-end/auth/select_page.jsp">回首頁</a>

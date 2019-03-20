@@ -8,27 +8,18 @@
 
 
 </head>
-<body>
-	<jsp:include page="/froTempl/header.jsp" flush="true" />
-
-	 <!-- ##### Contact Area Start #####-->
-    <section class="contact-area section-padding-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h2>Get In Touch</h2>
-                        <img src="img/core-img/x.png" alt="">
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
-                    <!-- Contact Form -->
-                    <div class="contact-form-area text-center">
+<body bgcolor='white'>
+		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
                         <form action="#" method="post">
                            <c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -91,20 +82,13 @@
 	</ul>
 
                         </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!-- ##### Contact Area End #####-->
-
-	<%-- 錯誤表列 --%>
-	
-	
-	
-	
-	<jsp:include page="/froTempl/footer.jsp" flush="true" />
-
+          
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 </html>

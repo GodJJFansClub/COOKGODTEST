@@ -50,16 +50,20 @@ th, td {
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
 	<%
 		if (custVO != null) {
 	%>
 
-	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>顧客資料 - ListOneCust.jsp</h3>
+				<h3>顧客資料</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp">回首頁</a>
@@ -120,5 +124,9 @@ th, td {
 	<%
 		}
 	%>
+</section>
+    <!-- ##### Contact Area End #####-->
+
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

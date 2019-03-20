@@ -67,7 +67,7 @@ th, td {
 				<h3>廣告資料修改 - update_ad_input.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -123,6 +123,12 @@ th, td {
 
 			<tr>
 				<td>狀態:</td>
+				<td><input type="TEXT" name="ad_status" size="45"
+					value="<%=adVO.getAd_status()%>" /></td>
+			</tr>
+			
+			<tr>
+				<td>廣告類別:</td>
 				<td><input type="TEXT" name="ad_status" size="45"
 					value="<%=adVO.getAd_status()%>" /></td>
 			</tr>
