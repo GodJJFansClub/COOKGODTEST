@@ -1,12 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.dishFood.model.*"%>
+<%@ page import="java.util.*"%>
 <jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService"/>
 <jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService"/>
 <jsp:useBean id="dishFoodSvc" scope="page" class="com.dishFood.model.DishFoodService" />
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  DishFoodVO dishFoodVO = (DishFoodVO) request.getAttribute("dishFoodVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+  	DishFoodVO dishFoodVO = (DishFoodVO) request.getAttribute("dishFoodVO");
+	List<DishFoodVO> dishFoodList = dishFoodSvc.getAll();
+	pageContext.setAttribute("listFoods_ByDish",dishFoodList);
 %>
 
 <html>
@@ -69,16 +72,13 @@
 		
 	</tr>
 	
-	<c:forEach var="dishFoodVO" items="${list}">
+	<c:forEach var="dishFoodVO" items="${listFoods_ByDish}">
 	
-	<tr>
-	
-			<td>${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</td>
+	<td>${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</td>
 			<td>${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</td>
 			<td>${dishFoodVO.dish_f_qty}</td>
 			<td>${dishFoodVO.dish_f_unit}</td>
 		
-	</tr>
 	</c:forEach>
 </table>
 

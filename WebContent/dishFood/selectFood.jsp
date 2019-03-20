@@ -49,7 +49,7 @@
 				<table id="table-1" style="background-color:blue;">
 					<tr>
 						<td>
-							<h3>菜色食材新增 - addDishFood.jsp</h3>
+							<h3>菜色食材新增 - selectFood.jsp</h3>
 						</td>
 						<td>
 							<h4>
@@ -73,15 +73,10 @@
 				<FORM id="chBoxForm" METHOD="post"	ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do">
 					<table>
 						<tr>
-							<td>選擇菜色:</td>
 							
-							<td>
-								<select size="1" name="dish_ID">
-									<c:forEach var="dishFoodVO" items="${dishSvc.all}" >
-										<option value="${dishFoodVO.dish_ID}">${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}
-									</c:forEach>
-								</select>
-							</td>
+							<td><h3>菜色名稱:<font color=red><b>*</b></font></h3></td>
+							<td><a href="<%=request.getContextPath()%>dish/dish.do?dish_ID=${dishVO.dish_ID}&action=getDish"></a><h3>${dishVO.dish_name}</h3></td>
+							
 						</tr>
 					</table>
 						
@@ -100,12 +95,12 @@
 						<c:choose>
 						
 						<c:when test="${dishFoodList.size()>0}">
-								<input id="addMoreFAction" type="hidden" name="action" value="addMoreFood" >
+								<input id="addMoreFAction" type="hidden" name="action" value="InputFood" >
 								<button type="button" id="incDishFood">添加</button>
 						</c:when>
 						
 						<c:otherwise>
-								<input type="hidden" name="action" value="AllFood" >
+								<input type="hidden" name="action" value="completeNewdishes" >
 								<input type="submit" name="Sendout" value="送出新增"><br>
 						</c:otherwise>
 						
@@ -116,7 +111,7 @@
 			</div>
 			<div class="col-5" style="backgoung-color:gray;"><br>
 				<%if (request.getAttribute("dishFoodList")!=null){%>
-       				<jsp:include page="addDishFood2.jsp" />
+       				<jsp:include page="transmitFood.jsp" />
        				<script>
        					<%List<DishFoodVO> dishFoodList = (List<DishFoodVO>) request.getAttribute("dishFoodList");%>
        					$(document).ready(function( ){

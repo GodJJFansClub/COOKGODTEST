@@ -55,7 +55,7 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>菜色食材新增 </h3>
+				<h3>transmitFood.jsp </h3>
 			</td>
 			<td>
 				<h4>
@@ -80,7 +80,10 @@ th, td {
 	</c:if>
 	
 		<FORM id="dishFoodForm" METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" style="margin-bottom: 0px;">
-		<h4>菜色</h4>
+
+		<td><h3>菜色名稱:${dishVO.dish_ID}<font color=red><b>*</b></font></h3></td><h4> ${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</h4>
+		
+		
 		<h4> ${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</h4>
 		<c:forEach var="dishFoodVO" items="${dishFoodList}">
 		 <table>
@@ -94,8 +97,14 @@ th, td {
 				<td><input type="TEXT" name="dish_f_qty" size="42"value="${empty dishFoodVO? "MANAGER" : dishFoodVO.dish_f_qty}" /></td>
 			</tr>
 			<tr>
-				<td>食材重量</td>
-				<td><input type="TEXT" name="dish_f_unit" size="42"value="${empty dishFoodVO? "MANAGER" : dishFoodVO.dish_f_unit}" /></td>
+				<td>食材單位</td>
+				<td>
+				<select   size="1"   name="dish_f_unit">
+				<c:forEach var = "foodUnit" items="${foodUnitMap}">
+				<option value="${foodUnit.key}">${foodUnit.value}
+				</c:forEach>
+				</select>	
+				</td>
 			</tr>
 			<tr>
 				<td><input type="hidden" name="food_ID" value="${dishFoodVO.food_ID}"></td>
