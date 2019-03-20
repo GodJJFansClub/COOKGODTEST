@@ -298,4 +298,31 @@
 		    <url-pattern>/ScheduleServlet</url-pattern>
 	  </servlet-mapping>
 
+	<servlet>
+		<servlet-name>DishServlet</servlet-name>
+		<servlet-class>com.dish.controller.DishServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DishServlet</servlet-name>
+		<url-pattern>/dish/dish.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>DishFoodServlet</servlet-name>
+	<servlet-class>com.dishFood.controller.DishFoodServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DishFoodServlet</servlet-name>
+		<url-pattern>/dishFood/dishFood.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    <servlet-name>MenuDishServlet</servlet-name>
+    <servlet-class>com.menuDish.controller.MenuDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuDishServlet</servlet-name>
+    <url-pattern>/menuDish/menuDish.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>
