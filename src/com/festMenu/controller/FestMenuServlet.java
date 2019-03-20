@@ -11,6 +11,8 @@ import javax.servlet.http.*;
 
 import com.festMenu.model.FestMenuService;
 import com.festMenu.model.FestMenuVO;
+import com.foodMall.model.FoodMallService;
+import com.foodMall.model.FoodMallVO;
 
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)

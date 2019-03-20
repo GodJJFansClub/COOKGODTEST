@@ -37,18 +37,7 @@ th, td {
 </head>
 
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
-		</aside>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
-
+	
 
 	<h3>資料新增:</h3>
 
@@ -100,11 +89,6 @@ th, td {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="https://github.com/totobe/jQuery/blob/master/jquery.twzipcode.min.js"></script>
 
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
+		
 </body>
 </html>
