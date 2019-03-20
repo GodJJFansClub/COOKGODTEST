@@ -61,7 +61,7 @@ public class ScheduleServlet extends HttpServlet{
             	
             	int count = 0;
             	for(AdVO adVO: adVOs) {
-            		JsonObject jsonObject = jsObjBuilder.add("adWall", adVO.getAd_ID()).build();
+            		JsonObject jsonObject = jsObjBuilder.add("ad_ID", adVO.getAd_ID()).add("ad_con", adVO.getAd_con()).build();
             		jsArrBuilder.add(jsonObject);
             	}
             	JsonArray jsArr = jsArrBuilder.build();
