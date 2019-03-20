@@ -81,8 +81,8 @@ h4 {
 			<td><%=adVO.getAd_con()%></td>
 			<td><%=adVO.getAd_start()%></td>
 			<td><%=adVO.getAd_end()%></td>
-			<td><%=adVO.getAd_status()%></td>
-			<td><%=adVO.getAd_type()%></td>
+			<td>${adStatusMap[adVO.ad_status]}</td>
+			<td>${adTypeMap[adVO.ad_type]}</td>
 			<td><%=adVO.getFood_sup_ID()%></td>
 		
 

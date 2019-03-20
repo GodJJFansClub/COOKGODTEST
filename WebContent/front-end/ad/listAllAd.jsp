@@ -103,9 +103,9 @@ th, td {
 				<td>${adVO.ad_title}</td>
 				<td>${adVO.ad_start}</td>
 				<td>${adVO.ad_end}</td>
-				<td>${adVO.ad_status}</td>
+				<td>${adStatusMap[adVO.ad_status]}</td>
 				<td>${adVO.food_sup_ID}</td>
-			</c:if>
+			
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/ad/ad.do"
@@ -117,6 +117,7 @@ th, td {
 				</td>
 				
 			</tr>
+			</c:if>
 		</c:forEach>
 	</table>
 	

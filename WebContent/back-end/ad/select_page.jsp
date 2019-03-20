@@ -71,7 +71,7 @@
 					<li>
 						<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/ad/ad.do">
-							<b>選擇廣告姓名:</b> <select size="1" name="ad_ID">
+							<b>選擇廣告標題:</b> <select size="1" name="ad_ID">
 								<c:forEach var="adVO" items="${adSvc.all}">
 									<option value="${adVO.ad_ID}">${adVO.ad_title}
 								</c:forEach>

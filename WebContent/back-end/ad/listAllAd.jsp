@@ -82,7 +82,7 @@
 				<td>${adVO.ad_start}</td>
 				<td>${adVO.ad_end}</td>
 				<td>${adStatusMap[adVO.ad_status]}</td>
-				<td>${adVO.ad_type}</td>
+				<td>${adTypeMap[adVO.ad_type]}</td>
 				<td>${adVO.food_sup_ID}</td>
 				
 				<td>
