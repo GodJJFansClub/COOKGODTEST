@@ -86,6 +86,7 @@
 	<c:forEach var="dishFoodVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
+		
 			<td>${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</td>
 			<td>${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</td>
 			<td>${dishFoodVO.dish_f_qty}</td>
@@ -106,6 +107,7 @@
 			     <input type="hidden" name="food_ID"  value="${dishFoodVO.food_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
+		
 		</tr>
 	</c:forEach>
 </table>

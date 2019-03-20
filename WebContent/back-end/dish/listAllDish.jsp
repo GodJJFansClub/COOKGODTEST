@@ -36,7 +36,7 @@
 
 <style>
   table {
-	width: 1500px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -83,13 +83,14 @@
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="dishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr ${(dishVO.dish_ID==param.dish_ID) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
+	
+	<c:forEach var="dishVO" items="${list}">
+		
 		<tr>
+		<c:if test="${dishVO.dish_status eq 'D0'}">
 			<td>${dishVO.dish_ID}</td>
 			<td>${dishVO.dish_name}</td>
-			<td><img src ="<%=request.getContextPath()%>/back-end/dish/dish.do?dish_ID=${dishVO.dish_ID}"  width="300" height="200"></td>
+			<td><img src ="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"></td>
 			<td >${dishVO.dish_resume}</td>
 			<td>${dishVO.dish_status}</td>
 			<td>${dishVO.dish_price}</td>
@@ -98,22 +99,21 @@
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="審核">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}"> 
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+			 
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
+		</c:if>
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+
 
 </body>
 </html>
