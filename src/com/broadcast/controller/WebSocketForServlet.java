@@ -45,7 +45,6 @@ public class WebSocketForServlet implements ServletContextListener{
 		userSession.setMaxTextMessageBufferSize(maxBufferSize);
 		userSession.setMaxBinaryMessageBufferSize(maxBufferSize);
 		webSessions.add(userSession);
-		System.out.println(userSession);
 	
 
 

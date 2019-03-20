@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.Part;
 
 import org.json.JSONObject;
 
@@ -622,7 +621,8 @@ public class CustServlet extends HttpServlet {
 						cust_pid, cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
 //				custVO = custSvc.updateCust("C0055", "dddd", cust_name, "f", "050505", "8888", "H123456789", "@54564", cust_brd, cust_reg,by , "c","ff" );
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				HttpSession session = req.getSession();
+				session.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/front-end/cust/listOneCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

@@ -86,11 +86,9 @@ th, td {
 		<tr>
 			<th>廣告編號</th>
 			<th>廣告標題</th>
-			
 			<th>廣告上架日期</th>
 			<th>廣告下架日期</th>
 			<th>廣告狀態</th>
-			<th>廣告類別</th>
 			<th>食材供應商</th>
 		</tr>
 		
@@ -99,11 +97,9 @@ th, td {
 			<tr>
 				<td>${adVO.ad_ID}</td>
 				<td>${adVO.ad_title}</td>
-				
 				<td>${adVO.ad_start}</td>
 				<td>${adVO.ad_end}</td>
 				<td>${adVO.ad_status}</td>
-				<td>${adVO.ad_type}</td>
 				<td>${adVO.food_sup_ID}</td>
 			</c:if>
 				<td>

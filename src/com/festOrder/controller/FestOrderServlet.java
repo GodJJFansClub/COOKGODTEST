@@ -69,22 +69,22 @@ public class FestOrderServlet extends HttpServlet {
 				System.out.println("getOne_For_Display" + 33);
 				if (fest_or_ID == null || (fest_or_ID.trim()).length() == 0) {
 					errorMsgs.add("請輸入訂單編號");
-					System.out.println("getOne_For_Display" + (i++));
+//					System.out.println("getOne_For_Display" + (i++));
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					System.out.println("getOne_For_Display" + 40);
+//					System.out.println("getOne_For_Display" + 40);
 					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/select_page.jsp");
 					failureView.forward(req, res);
-					System.out.println("getOne_For_Display" + 43);
+//					System.out.println("getOne_For_Display" + 43);
 					return;
 				}
 
 				FestOrderService festOrderSvc = new FestOrderService();
-				System.out.println("getOne_For_Display" + 48);
+//				System.out.println("getOne_For_Display" + 48);
 				FestOrderVO festOrderVO = festOrderSvc.getOneFestOrder(fest_or_ID);
 				System.out.println(festOrderVO.getFest_or_ID());
-				System.out.println("getOne_For_Display" + 51);
+//				System.out.println("getOne_For_Display" + 51);
 				if (fest_or_ID == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -94,9 +94,63 @@ public class FestOrderServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				System.out.println("getOne_For_Display" + 61);
+//				System.out.println("getOne_For_Display" + 61);
 				req.setAttribute("festOrderVO", festOrderVO); // 資料庫取出的empVO物件，存入req
 				String url = "/front-end/festOrder/listFestOrderDetail_ByFest_or_ID.jsp";
+//				System.out.println("getOne_For_Display" + 64);
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				System.out.println("getOne_For_Display" + 66);
+				successView.forward(req, res);
+//				System.out.println("getOne_For_Display" + 68);
+
+			} catch (Exception e) {
+//				System.out.println("getOne_For_Display" + 71);
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		if ("getOne_For_Display_Back".equals(action)) {
+			System.out.println("getOne_For_Display"+56);
+			int i = 1;
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String fest_or_ID = req.getParameter("fest_or_ID");
+				System.out.println("getOne_For_Display" + 33);
+				if (fest_or_ID == null || (fest_or_ID.trim()).length() == 0) {
+					errorMsgs.add("請輸入訂單編號");
+					System.out.println("getOne_For_Display" + (i++));
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					System.out.println("getOne_For_Display" + 40);
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festOrder/select_page.jsp");
+					failureView.forward(req, res);
+					System.out.println("getOne_For_Display" + 43);
+					return;
+				}
+
+				FestOrderService festOrderSvc = new FestOrderService();
+				FestOrderVO festOrderVO = festOrderSvc.getOneFestOrder(fest_or_ID);
+				System.out.println(festOrderVO.getFest_or_ID());
+				System.out.println("getOne_For_Display" + 51);
+				if (fest_or_ID == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festOrder/select_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				System.out.println("getOne_For_Display" + 61);
+				req.setAttribute("festOrderVO", festOrderVO); // 資料庫取出的empVO物件，存入req
+			//	String url = "/back-end/festOrder/listFestOrderDetail_ByFest_or_ID.jsp";
+				String url = "/back-end/festOrder/listOneFestOrder.jsp";
 				System.out.println("getOne_For_Display" + 64);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				System.out.println("getOne_For_Display" + 66);
@@ -106,7 +160,7 @@ public class FestOrderServlet extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println("getOne_For_Display" + 71);
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/festOrder/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festOrder/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}

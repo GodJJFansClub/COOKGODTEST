@@ -97,6 +97,11 @@ th, td {
 				<td><input type="TEXT" name="ad_title" size="45"
 					value="<%=adVO.getAd_title()%>" /></td>
 			</tr>
+			<tr>
+				<td>廣告圖片:</td>
+				<td><input type="file" name="ad_pic" size="45" id="doc"
+					onchange="javascript:setImagePreview();" /></td>
+			</tr>
 
 			<tr>
 				<td>廣告內文:</td>

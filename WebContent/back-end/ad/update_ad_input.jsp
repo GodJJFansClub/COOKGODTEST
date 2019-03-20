@@ -98,10 +98,17 @@ th, td {
 					value="<%=adVO.getAd_title()%>" /></td>
 			</tr>
 
+				
+			<tr>
+				<td>廣告圖片:</td>
+				<td><input type="file" name="ad_pic" size="45" id="doc"
+					onchange="javascript:setImagePreview();" /></td>
+			</tr>
+		
 			<tr>
 				<td>廣告內文:</td>
 				<td><input type="TEXT" name="ad_con" size="45"
-					value="<%=adVO.getAd_con()%>" /></td>
+					value="<%=(adVO == null) ? "555" : adVO.getAd_con()%>" /></td>
 			</tr>
 			
 			<tr>

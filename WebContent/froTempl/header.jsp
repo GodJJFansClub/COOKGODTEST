@@ -94,7 +94,7 @@
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
 												<li><a
-													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupOD.jsp">訂單管理</a></li>
+													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
 											</ul></li>
 									</c:if>
 									<li><a href="contact.html">主廚論壇</a></li>

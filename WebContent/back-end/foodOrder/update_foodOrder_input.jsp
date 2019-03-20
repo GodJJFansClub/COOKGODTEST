@@ -5,7 +5,6 @@
 <html>
 <head>
 <title>修改食材商城訂單</title>
-<link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -25,32 +24,26 @@
                     </div>
                 </div>
             </div>
-            <%-- 錯誤列表 --%>
+            <%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
-				<font style="color: red">請修正以下錯誤:</font>
+				<font style="color:red">請修正以下錯誤:</font>
 				<ul>
-					<c:forEach var="message" items="${errorMsgs}">
-						<li style="color: red">${message}</li>
+				    <c:forEach var="message" items="${errorMsgs}">
+						<li style="color:red">${message}</li>
 					</c:forEach>
 				</ul>
 			</c:if>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
+			 <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
                 <div class="row">
                 	<!-- Column -->
-                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material">
+                                
                                     <div class="form-group">
                                         <label class="col-md-12">訂單編號</label>
                                         <div class="col-md-12">
@@ -90,47 +83,47 @@
                                     <div class="form-group">
                                         <label class="col-md-12">出貨日期</label>
                                         <div class="col-md-12">
-                                            <input name="food_or_send" id="f_date1" type="text" value="${foodOrderVO.food_or_send}">
+                                             <h4>${foodOrderVO.food_or_send}</h4>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">到貨日期</label>
                                         <div class="col-md-12">
-                                            <input name="food_or_rcv" id="f_date1" type="text" value="${foodOrderVO.food_or_rcv}">
+                                            <h4>${foodOrderVO.food_or_rcv}</h4>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">完成日期</label>
                                         <div class="col-md-12">
-                                            <input name="food_or_end" id="f_date1" type="text" value="${foodOrderVO.food_or_end}">
+                                           <h4>${foodOrderVO.food_or_end}</h4>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-12">訂單狀態</label>                                       
-                                        <div class="col-sm-12">
-                                        	<select name="food_or_status" class="form-control form-control-line">
-                                        	<c:forEach var="mallOrStatus" items="${mallOrStatusMap}">                
-                                            	<option value="${mallOrStatus.key}"
-                                            	 ${(foodOrder.food_or_status == mallOrStatus.key)? 'selected':''}>${mallOrStatus.value}</option>
-                                            </c:forEach>
-                                            </select>
+                                        <div class="col-sm-12" id="btnDivPos">
+                                        	<c:choose>
+                                        		<c:when test="${(foodOrderVO.food_or_status eq 'o0')||(foodOrderVO.food_or_status eq 'o1')}">
+                                        			${canSend?'<button id="fORCheck" type="button">送出貨物</button>':mallOrStatusMap[foodOrderVO.food_or_status]}
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<h4>${mallOrStatusMap[foodOrderVO.food_or_status]}</h4>
+                                        		</c:otherwise>
+                                        	</c:choose>	
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <input type="submit" value="送出" class="btn btn-success">
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>
+                    <form style="display:none" id="changeOrHid" method="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
+                    	<input type="hidden" name="action" value="bkChStatSend">
+                    	<input type="hidden" name="food_or_ID" value="${foodOrderVO.food_or_ID}">
+                    </form>
                     <!-- Column -->
                     <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                              
+                              <jsp:include page="/back-end/foodOrder/listFoodOrDetails_ByFood_or_ID.jsp" flush="true" />
                             </div>
                         </div>
                     </div>
@@ -139,23 +132,44 @@
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
-				<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-				<script>
-			        $.datetimepicker.setLocale('zh');
-			        $('#f_date1').datetimepicker({
-			           theme: '',              //theme: 'dark',
-			  	       timepicker:false,       //timepicker:true,
-			  	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-			  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-			  		   value: '<%=((FoodOrderVO) request.getAttribute("foodOrderVO"))%>', // value:   new Date(),
-			           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-			           //startDate:	            '2017/07/10',  // 起始日
-			           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-			           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-			        });
-			       </script>
 			</div>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$(".checkToSend").click(function(event){
+				let btnID = event.target.id;
+				$.ajax({
+					type:"POST",
+					url:"<%=request.getContextPath()%>/foodOrDetail/foodOrDetail.do",
+					data:$(this).parent("form").serialize(),
+					dataType:"json",
+					success: function(data){
+						if(data.food_od_status === "d2"){
+							$("#"+btnID).attr('disabled','true');
+							$("#"+btnID).text("確認到貨");
+						}
+						console.log(data);
+						if(data.canSend === true){
+							let tempBtnA = document.createElement("button");
+							tempBtnA.setAttribute("id","fORCheck");
+							tempBtnA.setAttribute("type","button");
+							tempBtnA.innerText = "送出貨物";
+							$("#btnDivPos").html(tempBtnA);
+						}
+					},
+					error: function(errdata){
+						alert("ajax 錯誤" + errdata);
+						console.log(errdata);
+					}
+				});
+			});
+			
+			$("#fORCheck").click(function(){
+				$("#changeOrHid").submit();
+				
+			});
+		});
+	</script>
 </body>
 </html>

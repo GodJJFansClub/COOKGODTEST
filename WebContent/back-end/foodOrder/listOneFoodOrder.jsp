@@ -1,26 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
-<jsp:useBean id="foodOrderSvc" class="com.foodOrder.model.FoodOrderService"/>
 <html>
 <head>
-<title>單一食材商城訂單</title>
+<title></title>
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
-
-		<div class="">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+			<jsp:include page="/back-end/foodOrder/sidebar.jsp" flush="true" />
+		</aside>
+		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 				<div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">單一食材商城訂單</h4>
+                        <h4 class="page-title">修改食材商城訂單</h4>
                     </div>
                 </div>
             </div>
-			<%-- 錯誤表列 --%>
+            <%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color:red">請修正以下錯誤:</font>
 				<ul>
@@ -100,6 +103,12 @@
                                         	<h4>${mallOrStatusMap[foodOrderVO.food_or_status]}</h4>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12">總計</label>                                       
+                                        <div class="col-sm-12">
+                                        	<h4>${total}</h4>
+                                        </div>
+                                    </div>
 
                             </div>
                         </div>
@@ -109,15 +118,14 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                              <jsp:include page="/back-end/foodOrder/listFoodOrDetails_ByFood_or_ID.jsp" flush="true" />
+                              <jsp:include page="/back-end/foodOrder/listFoodODs.jsp" flush="true" />
                             </div>
                         </div>
                     </div>
                     <!-- Column -->
                 </div>
-
 <%--=================================工作區================================================--%>			
-				
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
 			</div>
 		</div>

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>員工資料修改 - update_festMenu_input.jsp</title>
+<title>節慶主題料理修改 - update_festMenu_input.jsp</title>
 
 <style>
 table#table-1 {
@@ -53,10 +53,11 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>節慶主題料理訂單修改 - update_festOrder_input.jsp</h3>
+				<h3>節慶主題料理修改 - update_festMenu_input.jsp</h3>
 				<h4>
-					<a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp"><img src="images/back1.gif"
-						width="100" height="32" border="0">回首頁</a>
+					<a
+						href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp"><img
+						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -66,7 +67,8 @@ th, td {
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
+<!-- 		<font style="color: red">請修正以下錯誤:</font> -->
+		<font style="color: red"></font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -74,13 +76,15 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do" name="form1" enctype="multipart/form-data">
+	<FORM METHOD="post"
+		ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do"
+		name="form1" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>節慶主題料理編號:<font color=red><b>*</b></font></td>
-		        <td><%=festMenuVO.getFest_m_ID()%></td>
+				<td><%=festMenuVO.getFest_m_ID()%></td>
 			</tr>
-			
+
 			<tr>
 				<td>節慶主題料理名稱 :</td>
 				<td><input type="TEXT" name="fest_m_name" size="45"
@@ -137,9 +141,8 @@ th, td {
 			</tr>
 		</table>
 		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="fest_m_ID"
-			value="<%=festMenuVO.getFest_m_ID()%>"> <input type="submit"
-			value="送出修改">
+			type="hidden" name="fest_m_ID" value="<%=festMenuVO.getFest_m_ID()%>">
+		<input type="submit" value="送出修改">
 	</FORM>
 </body>
 
