@@ -130,6 +130,14 @@
 		<url-pattern>/cust/cust.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>MenuServlet</servlet-name>
+		<servlet-class>com.menu.controller.MenuServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuServlet</servlet-name>
+		<url-pattern>/menu/menu.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>MenuOrderServlet</servlet-name>
 		<servlet-class>com.menuOrder.controller.MenuOrderServlet</servlet-class>
 	</servlet>
