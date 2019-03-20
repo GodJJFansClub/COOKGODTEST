@@ -7,8 +7,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import com.dish.model.*;
 
-import com.broadcast.model.BroadcastService;
-
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class DishServlet extends HttpServlet {
 
@@ -76,12 +74,9 @@ public class DishServlet extends HttpServlet {
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			
-
 			// try {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			// 菜色編號判斷
@@ -147,8 +142,8 @@ public class DishServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			String requestURL = req.getParameter("requestURL");
-
-			// try {
+			
+			 try {
 			/*************************** 1.接收請求參數 ****************************************/
 			String dish_ID = new String(req.getParameter("dish_ID"));
 
@@ -164,24 +159,20 @@ public class DishServlet extends HttpServlet {
 			return;
 
 			/*************************** 其他可能的錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/dish/listAllDish.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher(requestURL);
+				failureView.forward(req, res);
+			}
 		}
 
 		// 修改
 		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
-			System.out.println("3");
+			
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			String requestURL = req.getParameter("requestURL");
-
 			// try {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			// 菜色編號
@@ -194,7 +185,6 @@ public class DishServlet extends HttpServlet {
 			} else if (!dish_name.trim().matches(dish_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("菜色命名: 只能是中字 , 且長度必需在2到10之間");
 			}
-			
 			
 			// 菜色照片
 			byte[] dish_pic = null;
@@ -214,16 +204,19 @@ public class DishServlet extends HttpServlet {
 					in.close();
 				}
 			}
+			
 			// 菜色內容
 			String dish_resume = req.getParameter("dish_resume").trim();
 			if (dish_resume == null || dish_resume.trim().length() == 0) {
 				errorMsgs.add("菜色內容請勿空白");
 			}
+			
 			//菜色狀態
 			String dish_status = req.getParameter("dish_status").trim();
 			if (dish_status == null || dish_status.trim().length() == 0) {
 				errorMsgs.add("菜色狀態,請勿空白");
 			}
+			
 			// 菜色價格
 			Integer dish_price = null;
 			try {
@@ -244,9 +237,9 @@ public class DishServlet extends HttpServlet {
 			dishVO.setDish_resume(dish_resume);
 			dishVO.setDish_price(dish_price);
 
-			// Send the use back to the form, if there were errors
+			
 			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("dishVO", dishVO); // 含有輸入格式錯誤的empVO物件,也存入req
+				req.setAttribute("dishVO", dishVO); 
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dish/update_dish_input.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
@@ -258,13 +251,13 @@ public class DishServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			
-			req.setAttribute("AllDish", dishSvc.getOneDish(dish_ID)); // 資料庫update成功後,正確的的empVO物件,存入req
-			System.out.println(requestURL);
-			String url = "/back-end/dish/AllDish.jsp";
+			req.setAttribute("AllDish", dishSvc.getOneDish(dish_ID)); 
 			
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			String url ="/back-end/dish/AllDish.jsp";
+			
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
-			return;
+			
 
 			/*************************** 其他可能的錯誤處理 *************************************/
 //			} catch (Exception e) {
@@ -361,36 +354,65 @@ public class DishServlet extends HttpServlet {
 
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp
 			System.out.println("5");
+			
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
+			
 
-			try {
-				/*************************** 1.接收請求參數 ***************************************/
+			//try {
+				
 				String dish_ID = new String(req.getParameter("dish_ID"));
-				System.out.println(dish_ID);
-				/*************************** 2.開始刪除資料 ***************************************/
+				
+				
 				DishService dishSvc = new DishService();
 				dishSvc.deleteDish(dish_ID);
 
-				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				System.out.println(action);
 				String url = "/back-end/dish/AllDish.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/*************************** 其他可能的錯誤處理 **********************************/
+//			} catch (Exception e) {
+//				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+//				failureView.forward(req, res);
+//				return;
+//			}
+//
+		}
+		
+		
+			
+			if ("NewSelectFood".equals(action)) { 
+				System.out.println("2");
+				
+				List<String> errorMsgs = new LinkedList<String>();
+				req.setAttribute("errorMsgs", errorMsgs);
+				
+				// try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String dish_ID = new String(req.getParameter("dish_ID"));
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				DishService dishSvc = new DishService();
+				DishVO dishVO = dishSvc.getOneDish(dish_ID);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("dishVO", dishVO); 
+				String url = "/back-end/dishFood/selectFood.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				return;
 
 				/*************************** 其他可能的錯誤處理 **********************************/
-			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dish/AllDish.jsp");
-				failureView.forward(req, res);
-				return;
+//				} catch (Exception e) {
+//					errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/dish/listAllDish.jsp");
+//					failureView.forward(req, res);
+//				}
 			}
 
-		}
-		
-}
+	}
 }
