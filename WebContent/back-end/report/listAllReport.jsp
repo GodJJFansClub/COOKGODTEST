@@ -49,8 +49,18 @@
 
 </head>
 <body bgcolor='white'>
+<body bgcolor='white'>
+		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+	</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
 		 <h3>所有檢舉文章資料 - listAllReport.jsp</h3>
@@ -87,7 +97,7 @@
 			<td>${reportVO.report_title}</td>
 			<td>${reportVO.report_sort}</td>
 			<td>${reportVO.report_start}</td>
-			<td>${reportVO.report_status}</td>
+			<td>${reportStatusMap[reportVO.report_status]}</td>
 			<td>${reportVO.report_con}</td> 
 			<td>${reportVO.cust_ID}</td>
 			<td>${reportVO.forum_art_ID}</td>

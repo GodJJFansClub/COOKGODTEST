@@ -100,7 +100,7 @@ public class ReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 	//		System.out.println("errorMsgs" + errorMsgs);
 
-			try {
+//			try {
 				System.out.println("  " +"檢查點3");
 				/***************************1.接收請求參數***************************************/
 				String report_ID = req.getParameter("report_ID");
@@ -110,20 +110,21 @@ public class ReportServlet extends HttpServlet {
 				ReportVO reportVO = reportSvc.getOneReport(report_ID);
 
 				/***************************3.查詢完成，準備轉交(Send the Success view)********/
-				req.setAttribute("reportVO", reportVO);   //資料庫取得的reportVO物件，存入req      
-				String url = "/back-end/report/update_report_input.jsp";
+				req.setAttribute("reportVO", reportVO);   //資料庫取得的reportVO物件，存入req   
+				System.out.println(report_ID);
+				String url = "/front-end/report/update_report_input.jsp";
 				System.out.println("  " +"檢查點4");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				System.out.println("  " +"檢查點5");
 
-			} catch (Exception e) {
-				System.out.println("  " +"檢查點6");
-				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/report/listAllReport.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				System.out.println("  " +"檢查點6");
+//				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/front-end/report/listAllReport.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 
 

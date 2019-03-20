@@ -84,6 +84,11 @@ public class BroadcastWebSocket implements ServletContextListener{
 		adStatusMap.put("d1", "審核通過");
 		adStatusMap.put("d2", "審核不過");
 		
+		Map<String, String> reportStatusMap = new LinkedHashMap<String, String>();
+		reportStatusMap.put("r0", "檢舉不同意");
+		reportStatusMap.put("r1", "檢舉同意");
+		reportStatusMap.put("r2", "檢舉處理中");
+		
 		Map<String, String> adTypeMap = new LinkedHashMap<String, String>();
 		adTypeMap.put("e0", "食材供應商廣告");
 		adTypeMap.put("e1", "節慶主題廣告");
@@ -98,6 +103,7 @@ public class BroadcastWebSocket implements ServletContextListener{
 		servletContext.setAttribute("bcSessionMap", bcSessionMap);
 		servletContext.setAttribute("foodUnitMap", foodUnitMap);
 		servletContext.setAttribute("adStatusMap", adStatusMap);
+		servletContext.setAttribute("reportStatusMap", reportStatusMap);
 		servletContext.setAttribute("adTypeMap", adTypeMap);
 		
 	}
