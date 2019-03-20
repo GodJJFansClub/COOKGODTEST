@@ -84,7 +84,7 @@
 	<tr>
 		<td>菜色照片:</td>
 		<td>
-		<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/back-end/images/null2.jpg"  width="300" height="200"/>
+		<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/images/null2.jpg"  width="300" height="200"/>
 		<br>
 		<input type="file" name="dish_pic" size="43" id="progressbarTWInput" 
 			 	value="<%= (dishVO==null)? "請輸入照片" : dishVO.getDish_pic()%>" />

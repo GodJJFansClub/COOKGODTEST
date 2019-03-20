@@ -78,18 +78,18 @@ th, td {
 	<%@ include file="page1.file" %> 
 	<c:forEach var="dishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
 		<tr>
-		
+			<c:if test="${dishVO.dish_status eq 'D1'}">
 			<td>${dishVO.dish_ID}</td>      
 			<td>${dishVO.dish_name}</td>
 			<td><c:if test="${not empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"></c:if>
-				<c:if test="${empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/back-end/images/null2.jpg" width="300" height="200"></c:if>
+				<c:if test="${empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200"></c:if>
 			</td>
 			<td>${dishVO.dish_resume}</td>
 			<td>${dishVO.dish_status}</td>
 			<td>${dishVO.dish_price}</td>
 			
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/dishFood/addDishFood.jsp">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/dish/dish.do">
 			     <input type="submit" value="審核">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
@@ -100,7 +100,7 @@ th, td {
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
-			
+		</c:if>
 		</tr>
 	</c:forEach>
 </table> 
