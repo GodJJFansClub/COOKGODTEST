@@ -12,42 +12,6 @@
 <head>
 <title>顧客資料 - listOneCust.jsp</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
 
 </head>
 <body bgcolor='white'>
@@ -66,14 +30,14 @@ th, td {
 		if (custVO != null) {
 	%>
 
-	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>顧客資料 - ListOneCust.jsp</h3>
+				<h3>顧客資料</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp">回首頁</a>
+						href="<%=request.getContextPath()%>/back-end/cust/listAllCust.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -137,6 +101,6 @@ th, td {
 			</div>
 		</div>
 	</div>
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+
 </body>
 </html>
