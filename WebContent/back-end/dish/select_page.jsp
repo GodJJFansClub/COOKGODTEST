@@ -87,7 +87,7 @@
 <li><a href='addDish.jsp'>新增菜色</a> </li>
 </ul>
 <ul>
-<li><a href="<%=request.getContextPath() %>/back-end/menuDish/addMenuDish.jsp">新增套餐菜色</a> </li>
+<li><a href="<%=request.getContextPath() %>/back-end/menu/index.jsp">新增套餐菜色</a> </li>
 </ul>
 
 

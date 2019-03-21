@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.dish.model.*"%>
 
+
 <%-- 此測試頁，練習採用 EL 的寫法取值 --%>
 
 
@@ -75,8 +76,8 @@ th, td {
 		<th>刪除</th>
 		
 	</tr>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="dishVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
+	
+	<c:forEach var="dishVO" items="${list}" >	
 		<tr>
 			<c:if test="${dishVO.dish_status eq 'D1'}">
 			<td>${dishVO.dish_ID}</td>      
@@ -85,7 +86,7 @@ th, td {
 				<c:if test="${empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200"></c:if>
 			</td>
 			<td>${dishVO.dish_resume}</td>
-			<td>${dishVO.dish_status}</td>
+			<td>${dishStatusMap[dishVO.dish_status]}</td>
 			<td>${dishVO.dish_price}</td>
 			
 			<td>
@@ -104,7 +105,7 @@ th, td {
 		</tr>
 	</c:forEach>
 </table> 
-<%@ include file="page2.file" %>
+
 
 </body>
 </html>

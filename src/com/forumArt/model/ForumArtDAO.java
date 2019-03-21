@@ -132,6 +132,7 @@ public class ForumArtDAO implements ForumArtDAO_interface{
 			pstmt.setString(1, forum_art_ID);
 			
 			pstmt.executeUpdate();
+			
 		}catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+se.getMessage());

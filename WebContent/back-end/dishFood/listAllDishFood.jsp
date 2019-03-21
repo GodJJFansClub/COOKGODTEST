@@ -89,7 +89,7 @@
 			<td>${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</td>
 			<td>${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</td>
 			<td>${dishFoodVO.dish_f_qty}</td>
-			<td>${foodUnitMap[dishdishFoodVO.dish_f_unit].foodUnitMapkey}</td>
+			<td>${foodUnitMap[dishdishFoodVO.dish_f_unit]}</td>
 			
 			
 			<td>

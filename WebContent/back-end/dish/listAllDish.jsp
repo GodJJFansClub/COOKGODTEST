@@ -2,9 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.dish.model.*"%>
-<%@ page import="com.broadcast.model.*" %>
+
 <jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService"/>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
 
@@ -91,8 +90,8 @@
 			<td>${dishVO.dish_ID}</td>
 			<td>${dishVO.dish_name}</td>
 			<td><img src ="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"></td>
-			<td >${dishVO.dish_resume}</td>
-			<td>${dishVO.dish_status}</td>
+			<td>${dishVO.dish_resume}</td>
+			<td>${dishStatusMap[dishVO.dish_status]}</td>
 			<td>${dishVO.dish_price}</td>
 			
 			<td>

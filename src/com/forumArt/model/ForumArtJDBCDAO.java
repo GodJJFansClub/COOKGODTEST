@@ -4,7 +4,6 @@ import java.util.*;
 
 import com.dish.model.DishJDBCDAO;
 import com.dish.model.DishVO;
-import com.forumMsg.model.ForumMsgVO;
 
 import java.sql.*;
 
@@ -331,11 +330,5 @@ public class ForumArtJDBCDAO implements ForumArtDAO_interface{
 			System.out.print(adish.getChef_ID() + ",");
 			System.out.println();
 		}
-	}
-
-	@Override
-	public Set<ForumMsgVO> getForumMsgsByForumArt(String forum_art_ID) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
