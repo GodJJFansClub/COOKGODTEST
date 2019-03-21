@@ -16,7 +16,7 @@ public class AdVO {
 		return ad_ID;
 	}
 	public void setAd_ID(String ad_ID) {
-		this.ad_ID = ad_ID;
+		this.ad_ID =ad_ID;
 	}
 	public String getAd_status() {
 		return ad_status;
