@@ -29,7 +29,6 @@
 			<th>產地</th>
 			<th>圖片</th>
 			<th>介紹</th>
-			<th>修改</th>
 		</tr>
 
 		<c:forEach var="foodMallVO" items="${listFoodMalls_ByFood_ID}">
@@ -48,7 +47,7 @@
 					<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}">
 				</td>
 				<td>
-					<FORM METHOD="post"
+					<%--<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/foodMall/foodMall.do"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="修改">
@@ -58,7 +57,7 @@
 						<!--送出本網頁的路徑給Controller-->
 						<!-- 目前尚未用到  -->
 						<input type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
+					</FORM> --%>
 				</td>
 			</tr>
 		</c:forEach>

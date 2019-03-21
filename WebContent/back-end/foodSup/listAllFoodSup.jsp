@@ -27,11 +27,6 @@
 						</c:forEach>
 					</ul>
 				</c:if>
-				<select size="1" name="getStatus_For_Display">
-					<c:forEach var="foodSupStatus" items="${foodSupStatusMap}">
-						<option value="${foodSupStatus.key}">${foodSupStatus.value}
-					</c:forEach>
-				</select>
 				<table>
 					<tr>
 						<th>食材供應商編號</th>

@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -108,9 +110,16 @@ public class MallServlet extends HttpServlet{
 				delShoppingCartItem(req,res,buyList);
 			} else if("getOneDisplayFestMall".equals(action)) {
 				getOneDisplayFestMall(req,res);
+			} else if("delSCShopCart".equals(action)) {
+				delSCShopCart(req, res, buyList);
 			}
 		} else if("CHECKOUTFOODMALL".equals(action)) {
-			Integer total = 0;
+			Integer total  = 0;
+			if(buyList != null && !buyList.isEmpty()) {
+				total = calCartTotal(buyList);
+				req.setAttribute("total", total);
+			}
+			req.setAttribute("prePageURL", req.getParameter("prePageURL"));
 			String url = "/front-end/foodMall/ShopCart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
@@ -145,6 +154,7 @@ public class MallServlet extends HttpServlet{
 		out.flush();
 		out.close();
 	}
+	
 	
 	
 	private FoodOrDetailVO getFOD(HttpServletRequest req, HttpServletResponse res,JsonObject errors) throws IOException , SQLException{
@@ -358,6 +368,7 @@ public class MallServlet extends HttpServlet{
 				failureView.forward(req, res);
 				return;
 			}
+			
 			RequestDispatcher successView = req.getRequestDispatcher("/front-end/foodOrder/addFoodOrder.jsp");
 			successView.forward(req, res);
 		}catch(Exception e) {
@@ -384,6 +395,8 @@ public class MallServlet extends HttpServlet{
 				if (buyList.contains(foodOrDetailVO)) {
 					FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
 					buyList.remove(innerFoodODVO);
+					
+
 					writeCartItem(res, innerFoodODVO);
 				}
 			}
@@ -395,6 +408,8 @@ public class MallServlet extends HttpServlet{
 				if (buyList.contains(festOrderDetailVO)) {
 					FestOrderDetailVO innerFestODVO = (FestOrderDetailVO)buyList.get(buyList.indexOf(festOrderDetailVO));
 					buyList.remove(innerFestODVO);
+					
+
 					writeCartItem(res, innerFestODVO);
 				}
 			}
@@ -403,6 +418,60 @@ public class MallServlet extends HttpServlet{
 			errors.addProperty("cartErrorMsgs", "請輸入食材編號");
 			errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
 			writeJson(res, errors);
+		}
+	}
+	
+	private Integer calCartTotal(List<Object> buycart) {
+		
+		
+		Integer foodCartTotal = buycart.stream().filter(obj -> obj instanceof FoodOrDetailVO)
+				.mapToInt(foodODVO->((FoodOrDetailVO) foodODVO).getFood_od_stotal()).sum();
+		Integer festCartTotal = buycart.stream().filter(obj -> obj instanceof FestOrderDetailVO)
+				.mapToInt(festODVO->((FestOrderDetailVO) festODVO).getFest_or_stotal()).sum();
+		
+		return foodCartTotal + festCartTotal;
+	}
+	
+	private void delSCShopCart(HttpServletRequest req, HttpServletResponse res, List<Object> buyList) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<>();
+		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String food_ID = req.getParameter("food_ID");
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String fest_m_ID = req.getParameter("fest_m_ID");
+			
+			if(food_ID != null && food_sup_ID != null) {
+				FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
+				foodOrDetailVO.setFood_ID(food_ID);
+				foodOrDetailVO.setFood_sup_ID(food_sup_ID);
+				
+				if (buyList.contains(foodOrDetailVO)) {
+					FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
+					buyList.remove(innerFoodODVO);
+					
+				}
+			}
+			
+			if(fest_m_ID != null) {
+				System.out.println(fest_m_ID);
+				FestOrderDetailVO festOrderDetailVO = new FestOrderDetailVO();
+				festOrderDetailVO.setFest_m_ID(fest_m_ID);
+				if (buyList.contains(festOrderDetailVO)) {
+					FestOrderDetailVO innerFestODVO = (FestOrderDetailVO)buyList.get(buyList.indexOf(festOrderDetailVO));
+					buyList.remove(innerFestODVO);
+					
+
+				}
+			}
+			req.setAttribute("total",  calCartTotal(buyList));
+			String url = "/front-end/foodMall/ShopCart.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}catch(Exception e) {
+			req.setAttribute("errorMsgs", "無法處理 : "+e.getMessage());
+			String url = "/front-end/foodMall/ShopCart.jsp";
+			RequestDispatcher failureView = req.getRequestDispatcher(url);
+			failureView.forward(req, res);
 		}
 	}
 }

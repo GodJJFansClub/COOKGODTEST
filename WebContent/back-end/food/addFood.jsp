@@ -36,7 +36,7 @@
 						<tr>
 								 
 							<td>食材名稱:${foodVO.food_name}</td>
-							<td><input type="TEXT" name="food_name" size="45" 
+							<td><input type="TEXT" name="food_name" size="15" 
 								 <%--value="<%= (foodVO==null)? "大白菜" : foodVO.getFood_name()%>" /></td> --%>
 								 value=${empty foodVO.food_name ? "大白菜":foodVO.food_name} /></td>
 						</tr>

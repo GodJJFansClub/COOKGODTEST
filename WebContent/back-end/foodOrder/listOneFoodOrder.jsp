@@ -12,14 +12,14 @@
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-			<jsp:include page="/back-end/foodOrder/sidebar.jsp" flush="true" />
+			<jsp:include page="/back-end/foodOrder/orManaSidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 				<div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">修改食材商城訂單</h4>
+                        <h4 class="page-title">訂單詳細資訊</h4>
                     </div>
                 </div>
             </div>

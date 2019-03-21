@@ -28,7 +28,7 @@ public class FestOrderServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/*************************** 1.接收請求參數 ****************************************/
 				String fest_or_ID = req.getParameter("fest_or_ID");
 				System.out.println(fest_or_ID);
@@ -51,9 +51,9 @@ public class FestOrderServlet extends HttpServlet {
 				successView.forward(req, res);
 				System.out.println("1");
 				/*************************** 其他可能的錯誤處理 ***********************************/
-			} catch (Exception e) {
-				throw new ServletException(e);
-			}
+//			} catch (Exception e) {
+//				throw new ServletException(e);
+//			}
 		}	
 		
 		if ("getOne_For_Display".equals(action)) {

@@ -61,7 +61,7 @@ th, td {
 				<h3>節慶主題料理訂單明細 - listFestOrderDetail_ByFest_or_ID.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front-end/festOrderDetail/select_page.jsp"><img
+						href="<%=request.getContextPath()%>/front-end/festOrder/listAllFestOrder.jsp"><img
 						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 				</h4>
 			</td>

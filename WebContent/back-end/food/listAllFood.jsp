@@ -23,6 +23,7 @@
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+			
 			<jsp:include page="/back-end/food/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">

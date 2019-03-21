@@ -330,7 +330,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 //		dao.delete("B00003");
 
 		
-		List<BroadcastVO> broadcastVO3 = dao.findByCust_ID("C00001");
+		List<BroadcastVO> broadcastVO3 = dao.findByCust_ID("C00011");
 		for(BroadcastVO broadcastVO : broadcastVO3) {
 			
 		

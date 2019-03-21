@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>食材資料 - listOneFood.jsp</title>
+<title></title>
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"

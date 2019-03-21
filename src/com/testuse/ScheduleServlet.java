@@ -1,6 +1,7 @@
 package com.testuse;
 
 import java.io.*;
+import java.time.LocalTime;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -34,7 +35,8 @@ public class ScheduleServlet extends HttpServlet{
     	ServletContext servletContext = getServletContext();
     	Set<javax.websocket.Session> webSessions = (Set<javax.websocket.Session>) servletContext.getAttribute("webSessions");
         timer = new Timer();
-        Calendar cal = new GregorianCalendar(2019, Calendar.MARCH, 16, 0, 0, 0);        
+        Calendar cal = new GregorianCalendar(2019, Calendar.MARCH, 20, 0, 0, 0);  
+        LocalTime now = LocalTime.now();
         TimerTask task = new TimerTask(){
         	//設定排程器執行內容
             public void run(){
@@ -59,9 +61,9 @@ public class ScheduleServlet extends HttpServlet{
             	JsonObjectBuilder jsObjBuilder = Json.createObjectBuilder();
             	JsonArrayBuilder jsArrBuilder = Json.createArrayBuilder();
             	
-            	int count = 0;
+//            	int count = 0;
             	for(AdVO adVO: adVOs) {
-            		JsonObject jsonObject = jsObjBuilder.add("ad_ID", adVO.getAd_ID()).add("ad_con", adVO.getAd_con()).build();
+            		JsonObject jsonObject = jsObjBuilder.add("ad_ID", adVO.getAd_ID()).add("ad_con", adVO.getAd_con()).add("ad_title",adVO.getAd_title()).build();
             		jsArrBuilder.add(jsonObject);
             	}
             	JsonArray jsArr = jsArrBuilder.build();
@@ -71,6 +73,7 @@ public class ScheduleServlet extends HttpServlet{
             }
         };
 
-        timer.schedule(task, 10*1000);
+//        timer.schedule(task, 10*1000);
+        timer.scheduleAtFixedRate(task, 10*1000, 10*1000);
     }
 }

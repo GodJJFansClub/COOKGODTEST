@@ -1,5 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.report.model.*"%>
+
+<%-- <% --%>
+//     ReportService reportSvc = new ReportService();
+// 	List<ReportVO> list = reportSvc.getAll();
+// 	;
+// 	pageContext.setAttribute("list", list);
+<%-- %> --%>
 
 <html>
 <head>
@@ -28,10 +37,27 @@
 
 </head>
 <body bgcolor='white'>
-
+       <div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 <table id="table-1">
-   <tr><td><h3>IBM Emp: Home</h3><h4>( MVC )</h4></td></tr>
-</table>
+		<tr>
+			<td>
+				<h3>所有檢舉文章資料 - listAllReport.jsp</h3>
+				<h4>
+					<a
+						href="<%=request.getContextPath()%>/back-end/report/select_page.jsp">回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
 
 <p>This is the Home page for IBM Emp: Home</p>
 

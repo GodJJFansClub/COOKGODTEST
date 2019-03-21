@@ -83,8 +83,9 @@
 			             }
 			         });	
 				} else if(eventData.target.name === "food_od_qty"){
-					
+					// 防止觸發displayOne
 				} else {
+					// 送出displayOne
 					let dpFestForm = $(this).find("form");
 					let action = document.createElement("input");
 					action.setAttribute("type","hidden");
@@ -99,13 +100,14 @@
 		});
 		// 產生查詢字串
 		function crtQryStrFoodM( foodMCardID , action, foodMArr){
-			
+			console.log(foodMCardID);
+			console.log(foodMArr);
 			let queryString = { "foodMCardID":foodMCardID , "action":action };
 			let foodMArrLen = foodMArr.length;
 			for(let i = 0; i < foodMArrLen; i++){
 				queryString[foodMArr[i].name] = foodMArr[i].value;
 			}
-			
+			console.log(queryString);
 			return queryString;
 		}
 		// 懶得在伺服器再查詢, 所以透過此方法再加入購物商時取得對應的食材名, 標題名, 供應商名

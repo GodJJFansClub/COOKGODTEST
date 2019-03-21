@@ -25,6 +25,7 @@
 <!-- Stylesheet -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/froTempl/temp/style.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 </head>
 
 <body>
@@ -194,6 +195,7 @@
 		src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
 	<!-- Active js -->
 	<script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 
 <c:if test="${not empty custVO}">
@@ -202,8 +204,7 @@
 			var MyPoint = "/BroadcastWebSocket";
 			var host = window.location.host;
 			var webCtx = '<%=request.getContextPath()%>';
-			var userID = '<%=custVO.getCust_ID()%>
-		'
+			var userID = '<%=custVO.getCust_ID()%>';
 		var endPointURL = "ws://" + host + webCtx + "/" + MyPoint + "/"
 				+ userID;
 

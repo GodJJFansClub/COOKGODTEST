@@ -11,12 +11,6 @@
     <!-- Title -->
     <title>Pixel - Digital Agency HTML Template</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="<%=request.getContextPath()%>/froTempl/temp/img/core-img/favicon.ico">
-	
-    <!-- Stylesheet -->
-    <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/froTempl/temp/style.css">
 </head>
 
 <body>
@@ -101,19 +95,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
     </footer>
-    <!-- ##### Footer Area Start ##### -->
-
-    <!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
     
 </body>
 </html>

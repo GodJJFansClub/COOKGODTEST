@@ -9,85 +9,23 @@
 	pageContext.setAttribute("list", list);
 %>
 
-
 <html>
 <head>
-<title>List_All_FestMenu.jsp</title>
-
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-
-
-</style>
-
+<title></title>
 </head>
-<jsp:include page="/froTempl/header.jsp" flush="true" />
-<!-- ##### Contact Area Start #####-->
-<section class="contact-area section-padding-100">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<!-- Section Heading -->
-				<div class="section-heading text-center wow fadeInUp"
-					data-wow-delay="100ms">
-					<h2>Get In Touch</h2>
-					<img src="img/core-img/x.png" alt="">
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-12 col-lg-8">
-				<!-- Contact Form -->
-				<div class="contact-form-area text-center">
-					<form
-						action="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do"
-						method="post">
-						<c:if test="${not empty errorMsgs}">
-							<font style="color: red">請修正以下錯誤:</font>
-							<ul>
-								<c:forEach var="message" items="${errorMsgs}">
-									<li style="color: red">${message}</li>
-								</c:forEach>
-							</ul>
-						</c:if>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
 		
-<body bgcolor='white'>
-
-
-	<table id="table-1">
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+<table id="table-1">
 		<tr>
 			<td>
 				<h3>節慶主題料理訂單資料 - listAllFestMenu.jsp</h3>
@@ -136,10 +74,10 @@ th, td {
 				<td>${festMenuVO.fest_m_start}</td>
 				<td>${festMenuVO.fest_m_end}</td>
 				<td><c:if test="${not empty festMenuVO.fest_m_pic}">
-						<img
-							src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}">
-					</c:if> <c:if test="${empty festMenuVO.fest_m_pic}">
-						<img src="<%=request.getContextPath()%>/images/null2.jpg">
+						<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" style="width:300px;height:200px;">
+					</c:if>
+					<c:if test="${empty festMenuVO.fest_m_pic}">
+						<img src="<%=request.getContextPath()%>/images/null2.jpg" style="width:300px;height:200px;">
 					</c:if></td>
 				<td>${festMenuVO.fest_m_resume}</td>
 				<td>${festMenuVO.fest_m_send}</td>
@@ -171,5 +109,13 @@ th, td {
 	<%@ include file="page2.file"%>
 	</section>
 <jsp:include page="/froTempl/footer.jsp" flush="true" />
+
+
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
