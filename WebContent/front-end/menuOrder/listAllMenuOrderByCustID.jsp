@@ -58,8 +58,8 @@ th, td {
 							<th>顧客編號</th>
 							<th>主廚編號</th>
 							<th>套餐編號</th>
-							<th>修改訂單</th>
-							<th>刪除訂單</th>
+							<th>評價訂單</th>
+							<% //<th>刪除訂單</th> %>
 						</tr>
 						<%@ include file="page1.file"%>
 						<c:forEach var="menuOrderVO" items="${listAll}"
@@ -76,21 +76,22 @@ th, td {
 								<td>${menuOrderVO.chef_ID}</td>
 								<td>${menuOrderVO.menu_ID}</td>
 								<td>
+								<c:if test="${(menuOrderVO.menu_od_end!=null)&&(menuOrderVO.menu_od_rate==0)}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-										<input type="submit" value="編輯"> <input type="hidden"
-											name="menu_od_ID" value="${menuOrderVO.menu_od_ID}"> <input
-											type="hidden" name="action" value="getOneForUpdate">
+										<input type="submit" value="評價"> <input type="hidden" name="menu_od_ID" value="${menuOrderVO.menu_od_ID}">
+										<input type="hidden" name="action" value="getOneForRate">
 									</form>
+								</c:if>
 								</td>
-								<td>
+								<!-- <td>
 									<form method="post"
 										action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
 										<input type="submit" value="刪除"> <input type="hidden"
 											name="menu_od_ID" value="${menuOrderVO.menu_od_ID}"> <input
 											type="hidden" name="action" value="delete">
 									</form>
-								</td>
+								</td> -->
 							</tr>
 						</c:forEach>
 					</table>
