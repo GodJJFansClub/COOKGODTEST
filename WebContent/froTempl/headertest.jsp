@@ -55,8 +55,7 @@
 								<h4 data-animation="fadeInUp" data-delay="500ms">
 									See the Cook God<span></span>
 								</h4>
-								<a href="#" class="btn pixel-btn mt-50"
-									data-animation="fadeInUp" data-delay="700ms">View Project</a>
+								
 							</div>
 						</div>
 					</div>
@@ -74,7 +73,7 @@
                             <div class="welcome-text">
                                 <h2 data-animation="fadeInUp" data-delay="300ms"><span>${adVO.ad_title}</span><br>In Cook God</h2>
                                 <h4 data-animation="fadeInUp" data-delay="500ms">${adVO.ad_con}<span></span></h4>
-                                <a href="#" class="btn pixel-btn mt-50" data-animation="fadeInUp" data-delay="700ms">View Project</a>
+                                
                             </div>
                         </div>
                     </div>
