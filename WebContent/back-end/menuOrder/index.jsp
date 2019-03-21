@@ -10,7 +10,10 @@
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<jsp:include page="/back-end/foodOrder/orManaSidebar.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+			<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+
+		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>
