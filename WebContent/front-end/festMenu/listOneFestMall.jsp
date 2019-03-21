@@ -39,8 +39,7 @@
 				action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
 				<button type="button" id="addShoppingcart" name="foodMBtn"
 					class="btn btn-primary">加入購物車</button>
-				<input type="hidden" name="fest_m_ID"
-					value="${festMenuVO.fest_m_ID}"> <input type="number"
+				<input type="hidden" name="fest_m_ID" value="${festMenuVO.fest_m_ID}"> <input type="number"
 					name="fest_or_qty" min="1" max="20" size="3" value="1">
 			</form>
 			<p class="card-text errorMsgs"></p>
@@ -54,11 +53,10 @@
 			$("#addShoppingcart").click(function(){
 				let foodMName = $("#festMName").text();
 				foodMName = foodMName.substring(foodMName.indexOf(':')+2);
-				console.log(foodMName);
 				$.ajax({
 					type:"POST",
 					url: "<%=request.getContextPath()%>/mall/mall.do",
-					data : crtQryStrFoodM($(this).attr("addFestMenu",$(this).parent("form").serializeArray())),
+					data : crtQryStrFoodM("addFestMenu",$(this).parent("form").serializeArray()),
 					dataType : "json",
 					success : function(data) {
 						if (data["foodMCardID"]) {
@@ -76,17 +74,17 @@
 			});
 		});
 		// 產生查詢字串
-		function crtQryStrFoodM(foodMCardID, action, foodMArr) {
-
+		function crtQryStrFoodM( action , festMArr) {
+			
 			let queryString = {
-				"foodMCardID" : foodMCardID,
 				"action" : action
 			};
-			let foodMArrLen = foodMArr.length;
-			for (let i = 0; i < foodMArrLen; i++) {
-				queryString[foodMArr[i].name] = foodMArr[i].value;
+			let festMArrLen = festMArr.length;
+			for(let i = 0; i < festMArrLen; i++){
+				queryString[festMArr[i].name] = festMArr[i].value;
 			}
-
+			console.log(queryString);
+			
 			return queryString;
 		}
 		// 懶得在伺服器再查詢, 所以透過此方法再加入購物商時取得對應的食材名, 標題名, 供應商名

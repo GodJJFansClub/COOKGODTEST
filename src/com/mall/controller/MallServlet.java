@@ -110,10 +110,12 @@ public class MallServlet extends HttpServlet{
 				delShoppingCartItem(req,res,buyList);
 			} else if("getOneDisplayFestMall".equals(action)) {
 				getOneDisplayFestMall(req,res);
+			} else if("delSCShopCart".equals(action)) {
+				delSCShopCart(req, res, buyList);
 			}
 		} else if("CHECKOUTFOODMALL".equals(action)) {
 			Integer total  = 0;
-			if(!buyList.isEmpty()) {
+			if(buyList != null && !buyList.isEmpty()) {
 				total = calCartTotal(buyList);
 				req.setAttribute("total", total);
 			}
@@ -393,6 +395,8 @@ public class MallServlet extends HttpServlet{
 				if (buyList.contains(foodOrDetailVO)) {
 					FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
 					buyList.remove(innerFoodODVO);
+					
+
 					writeCartItem(res, innerFoodODVO);
 				}
 			}
@@ -404,6 +408,8 @@ public class MallServlet extends HttpServlet{
 				if (buyList.contains(festOrderDetailVO)) {
 					FestOrderDetailVO innerFestODVO = (FestOrderDetailVO)buyList.get(buyList.indexOf(festOrderDetailVO));
 					buyList.remove(innerFestODVO);
+					
+
 					writeCartItem(res, innerFestODVO);
 				}
 			}
@@ -424,5 +430,48 @@ public class MallServlet extends HttpServlet{
 				.mapToInt(festODVO->((FestOrderDetailVO) festODVO).getFest_or_stotal()).sum();
 		
 		return foodCartTotal + festCartTotal;
+	}
+	
+	private void delSCShopCart(HttpServletRequest req, HttpServletResponse res, List<Object> buyList) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<>();
+		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String food_ID = req.getParameter("food_ID");
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String fest_m_ID = req.getParameter("fest_m_ID");
+			
+			if(food_ID != null && food_sup_ID != null) {
+				FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
+				foodOrDetailVO.setFood_ID(food_ID);
+				foodOrDetailVO.setFood_sup_ID(food_sup_ID);
+				
+				if (buyList.contains(foodOrDetailVO)) {
+					FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
+					buyList.remove(innerFoodODVO);
+					
+				}
+			}
+			
+			if(fest_m_ID != null) {
+				System.out.println(fest_m_ID);
+				FestOrderDetailVO festOrderDetailVO = new FestOrderDetailVO();
+				festOrderDetailVO.setFest_m_ID(fest_m_ID);
+				if (buyList.contains(festOrderDetailVO)) {
+					FestOrderDetailVO innerFestODVO = (FestOrderDetailVO)buyList.get(buyList.indexOf(festOrderDetailVO));
+					buyList.remove(innerFestODVO);
+					
+
+				}
+			}
+			req.setAttribute("total",  calCartTotal(buyList));
+			String url = "/front-end/foodMall/ShopCart.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}catch(Exception e) {
+			req.setAttribute("errorMsgs", "無法處理 : "+e.getMessage());
+			String url = "/front-end/foodMall/ShopCart.jsp";
+			RequestDispatcher failureView = req.getRequestDispatcher(url);
+			failureView.forward(req, res);
+		}
 	}
 }
