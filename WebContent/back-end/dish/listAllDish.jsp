@@ -57,7 +57,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有菜色資料 - listAllDish.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

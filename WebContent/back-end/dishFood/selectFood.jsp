@@ -73,8 +73,9 @@
 						<div class="container">
 							<div class="row">
 							<c:forEach var="food_type" items="${foodTypeMap}">
-							<br>
+								<br>
 								<div class="col-sm ${food_type.key}">${food_type.value}</div>
+								<br>
 							</c:forEach>
 							
 							</div>

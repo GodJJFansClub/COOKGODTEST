@@ -241,7 +241,7 @@ public class DishFoodServlet extends HttpServlet {
 
 					}
 				} catch (NumberFormatException e) {
-					errorMsgs.add("請輸入食材數量.");
+					errorMsgs.add("食材數量請勿空白,請輸入食材數量.");
 				}
 
 				// 菜色單位

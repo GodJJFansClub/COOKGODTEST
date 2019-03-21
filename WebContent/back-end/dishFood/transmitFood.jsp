@@ -59,9 +59,7 @@ th, td {
 			</td>
 			<td>
 				<h4>
-					<a
-						href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp"><img
-						src="images/tomcat.png" width="100" height="100" border="0">回首頁</a>
+					<a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
