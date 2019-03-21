@@ -24,7 +24,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginBackEndFilter</filter-name>
-		<url-pattern>/back-end/*</url-pattern>
+		<url-pattern>/back-end/1</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

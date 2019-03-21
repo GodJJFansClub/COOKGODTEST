@@ -28,6 +28,7 @@
 								method="POST">
 								<input type="hidden" name="action" value="CHECKOUTFOODMALL">
 								<input type="submit" value="查看購物車" class="btn btn-dark">
+								<input type="hidden" name="prePageURL" value="<%=request.getServletPath()%>">
 							</form>
 						</th>
 					</tr>
@@ -59,12 +60,9 @@
 								<td>
 									<form action="<%=request.getContextPath()%>/mall/mall.do"
 										method="post">
-										<input type="hidden" name="fest_m_ID"
-											value="${shopItem.fest_m_ID}"> 
-										<input type="hidden"
-											name="action" value="delShoppingCartItem">
-										<button id="btnDel" type="button"
-											class="btn btn-dark shoppingCartItemDel">刪除</button>
+										<input type="hidden" name="fest_m_ID" value="${shopItem.fest_m_ID}"> 
+										<input type="hidden" name="action" value="delShoppingCartItem">
+										<button id="btnDel" type="button" class="btn btn-dark shoppingCartItemDel">刪除</button>
 									</form>
 								</td>
 							</c:if>

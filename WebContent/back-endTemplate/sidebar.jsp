@@ -4,7 +4,7 @@
 
 </head>
 <body>
-		
+		<aside class="left-sidebar" data-sidebarbg="skin5">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -57,7 +57,7 @@
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
-        
+        </aside>
     
 </body>
 </html>

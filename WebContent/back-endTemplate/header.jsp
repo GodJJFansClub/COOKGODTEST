@@ -16,6 +16,7 @@
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
+	<
 </head>
 <body>
     <!-- All Jquery -->
@@ -37,6 +38,7 @@
     <script src="<%=request.getContextPath()%>/back-endTemplate/assets/libs/chartist/dist/chartist.min.js"></script>
     <script src="<%=request.getContextPath()%>/back-endTemplate/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="<%=request.getContextPath()%>/back-endTemplate/dist/js/pages/dashboards/dashboard1.js"></script>
+    <script src="<%=request.getContextPath()%>/publibrary/ckeditor4/ckeditor.js"></script>
     <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 	<header class="topbar" data-navbarbg="skin6">
 		<nav class="navbar top-navbar navbar-expand-md navbar-light">
@@ -48,12 +50,7 @@
 				<!-- ============================================================== -->
 				<!-- Toggle which is visible on mobile only -->
 				<!-- ============================================================== -->
-				<a class="topbartoggler d-block d-md-none waves-effect waves-light"
-					href="javascript:void(0)" data-toggle="collapse"
-					data-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation"> <i class="ti-more"></i>
-				</a>
+				
 			</div>
 			<!-- ============================================================== -->
 			<!-- End Logo -->
@@ -83,37 +80,27 @@
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">
-									<span>套餐訂單管理</span>
+									<span>訂單管理</span>
 								</div>
 							</div>
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+						href="<%=request.getContextPath()%>/back-end/foodSup/listAllFoodSup.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">
-									<span>食材訂單管理</span>
+									<span>食材供應商管理</span>
 								</div>
 							</div>
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
+						href="<%=request.getContextPath()%>/back-end/cust/listAllCust.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">
 									<span>顧客資料管理</span>
-								</div>
-							</div>
-					</a></li>
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
-									<span>合作夥伴</span>
 								</div>
 							</div>
 					</a></li>
@@ -144,26 +131,6 @@
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">
 									<span>菜色管理</span>
-								</div>
-							</div>
-					</a></li>
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
-									<span>審核檢舉文章</span>
-								</div>
-							</div>
-					</a></li>
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/food/select_page.jsp">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
-									<span>在線客服平台</span>
 								</div>
 							</div>
 					</a></li>

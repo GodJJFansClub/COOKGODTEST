@@ -77,7 +77,7 @@
 			<tr><th>總計</th></tr>
 			<tr><td>${total}</td></tr>
 			<tr>
-				<td></td>
+				<td><a href="${prePageURL}" class="btn btn-primary">繼續購物</a></td>
 			</tr>
 		</tbody>
 	</table>

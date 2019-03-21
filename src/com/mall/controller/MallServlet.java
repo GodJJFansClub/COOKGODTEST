@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -110,7 +112,12 @@ public class MallServlet extends HttpServlet{
 				getOneDisplayFestMall(req,res);
 			}
 		} else if("CHECKOUTFOODMALL".equals(action)) {
-			Integer total = 0;
+			Integer total  = 0;
+			if(!buyList.isEmpty()) {
+				total = calCartTotal(buyList);
+				req.setAttribute("total", total);
+			}
+			req.setAttribute("prePageURL", req.getParameter("prePageURL"));
 			String url = "/front-end/foodMall/ShopCart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
@@ -145,6 +152,7 @@ public class MallServlet extends HttpServlet{
 		out.flush();
 		out.close();
 	}
+	
 	
 	
 	private FoodOrDetailVO getFOD(HttpServletRequest req, HttpServletResponse res,JsonObject errors) throws IOException , SQLException{
@@ -407,7 +415,14 @@ public class MallServlet extends HttpServlet{
 		}
 	}
 	
-	private void calCartTotal(List<Object> buycart) {
+	private Integer calCartTotal(List<Object> buycart) {
 		
+		
+		Integer foodCartTotal = buycart.stream().filter(obj -> obj instanceof FoodOrDetailVO)
+				.mapToInt(foodODVO->((FoodOrDetailVO) foodODVO).getFood_od_stotal()).sum();
+		Integer festCartTotal = buycart.stream().filter(obj -> obj instanceof FestOrderDetailVO)
+				.mapToInt(festODVO->((FestOrderDetailVO) festODVO).getFest_or_stotal()).sum();
+		
+		return foodCartTotal + festCartTotal;
 	}
 }
