@@ -472,7 +472,7 @@ public class FestMenuServlet extends HttpServlet {
 						fest_m_resume, fest_m_send, fest_m_status, fest_m_kind,fest_m_price,chef_ID);
 
 				/*************************** 3.新增完成，準備提交(Send the Success view **********/
-				String url = "/front-end/festMenu/listAllFestMenu.jsp";
+				String url = "/front-end/festMenu/listFestMall.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // �s�W���\�����listAllEmp.jsp
 				successView.forward(req, res);
 
