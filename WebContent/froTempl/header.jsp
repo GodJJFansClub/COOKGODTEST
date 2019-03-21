@@ -109,6 +109,7 @@
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">廣告管理</a></li>
 											</ul>
 										</li>
 									</c:if>
@@ -125,19 +126,14 @@
 									<c:if test="${not empty custVO}">
 										<li><a>Hello:<font color=#ea7500>
 													${custVO.cust_name} </font>您好
-										<li><a><i class="fa fa-dribbble"></i><span
-												class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
+										</a></li>
+										<li><a><i class="fa fa-dribbble"></i><span class="badge badge-light">4${custVO.cust_ID}</span></a>
 											<ul class="dropdown">
-												<c:forEach var="broadcastVO"
-													items="${broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
-
+												<c:forEach var="broadcastVO" items="${broadcastSvc.all}">
+												<c:if test="${broadcastVO.cust_ID == custVO.cust_ID}">
 													<li><a>${broadcastVO.broadcast_con}</a></li>
-													</c:forEach>
-												<c:if
-													test="${empty broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
-													<li><a>目前尚無訊息</a></li>
-												</c:if>
-
+													</c:if>
+												</c:forEach>
 											</ul></li>
 										<FORM METHOD="get"
 											action="<%=request.getContextPath()%>/back-endTemplate/logout.do">

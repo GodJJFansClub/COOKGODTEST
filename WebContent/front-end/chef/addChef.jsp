@@ -8,7 +8,6 @@
 	ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
 %>
 
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -53,18 +52,10 @@ th, td {
 
 </head>
 
-<body bgcolor='white'>
-		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
-		</aside>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+<body>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<!-- ##### Contact Area Start #####-->
+	<section class="contact-area section-padding-100">
 	<h3>資料新增:</h3>
 
 	<%-- 錯誤表列 --%>
@@ -83,25 +74,25 @@ th, td {
 			<tr>
 				<td>主廚帳號:</td>
 				<td><input type="TEXT" id="cust_acc" name="cust_acc" size="45"
-					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /><p id="answer"></p></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_acc()%>" placeholder="請輸入帳號"/><p id="answer"></p></td>
 			</tr>
 
 			<tr>
 				<td>主廚密碼:</td>
 				<td><input type="password" name="cust_pwd" size="45"
-					value="<%=(custVO == null) ? "Aa123456" : custVO.getCust_pwd()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_pwd()%>" placeholder="請輸入密碼"/></td>
 			</tr>
 
 			<tr>
 				<td>主廚姓名:</td>
 				<td><input type="TEXT" name="cust_name" size="45"
-					value="<%=(custVO == null) ? "teddy" : custVO.getCust_name()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_name()%>" placeholder="請輸入姓名"/></td>
 			</tr>
 
 			<tr>
 				<td>身分證字號:</td>
 				<td><input type="TEXT" name="cust_pid" size="45"
-					value="<%=(custVO == null) ? "a987654321" : custVO.getCust_pid()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_pid()%>" placeholder="請輸入身分證字號"/></td>
 			</tr>
 
 			<tr>
@@ -170,14 +161,13 @@ th, td {
 
 	</FORM>
 	
-	<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+ </section>
+    <!-- ##### Contact Area End #####-->
+    <jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
+
+<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 <%
 	java.sql.Date cust_brd = null;
 	try {
@@ -186,9 +176,6 @@ th, td {
 		cust_brd = new java.sql.Date(System.currentTimeMillis());
 	}
 %>
-
-
-
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -203,63 +190,16 @@ th, td {
 <script>
         $.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:true,       //timepicker:true,
- 	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '${custVO.cust_brd}', // value:   new Date(),
-			
-			//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-			//startDate:	            '2017/07/10',  // 起始日
-			//minDate:               '-1970-01-01', // 去除今日(不含)之前
-			//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-		});
-
-	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-
-	//      1.以下為某一天之前的日期無法選擇
-	//      var somedate1 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      2.以下為某一天之後的日期無法選擇
-	//      var somedate2 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-	//      var somedate1 = new Date('2017-06-15');
-	//      var somedate2 = new Date('2017-06-25');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//		             ||
-	//		            date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
+ 	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       //step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d' ,         //format:'Y-m-d H:i:s',
+		   //value: '<%=cust_brd%>' , // value:   new Date(),
+           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+           //startDate:	            '2017/07/10',  // 起始日
+           minDate:               '-1970-01-01', // 去除今日(不含)之前
+           maxDate:               '+1970-04-01'  // 去除今日(不含)之後
+        });
 </script>
 
 <script>
@@ -339,9 +279,6 @@ th, td {
 				callback();
 			}, time);
 		}
-	</script>
-
-
-
+</script>
 
 </html>

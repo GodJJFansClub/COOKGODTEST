@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*"%>
 <%@ page import="com.menuOrder.model.*"%>
 
 <%
@@ -13,64 +13,70 @@
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
 
 <title>List_All_Menu_Order.jsp</title>
 <style type="text/css">
-	table{
-		border: 2px solid gray;
-		margin: 15px;
-	}
-	th,td{
-		border:1px solid;
-		width: 100px;
-		height: 50px;
-		text-align: center;
-		padding:3px;
-	}
+table {
+	border: 2px solid gray;
+	margin: 15px;
+}
+
+th, td {
+	border: 1px solid;
+	width: 100px;
+	height: 50px;
+	text-align: center;
+	padding: 3px;
+}
 </style>
 </head>
 <body>
-	<div class="card text-center" style="background-color: #D4E6F1">	  
-	  <div class="card-body" >
-	    <h5 class="card-title">¬d¸ß©Ò¦³­q³æ</h5>
-	    <p class="card-text">listAllMenuOrder.jsp</p>
-	    <a href="index.jsp" class="btn btn-primary">¦^­º­¶</a>
-	  </div>
+	<div class="card text-center" style="background-color: #D4E6F1">
+		<div class="card-body">
+			<h5 class="card-title">æŸ¥è©¢æ‰€æœ‰è¨‚å–®</h5>
+			<p class="card-text">listAllMenuOrder.jsp</p>
+			<a href="index.jsp" class="btn btn-primary">å›é¦–é </a>
+		</div>
 	</div>
 
-<%--Error Message--%>
-<c:if test = "${not empty errorMsgs} }">
-	<font style="color:red;font-size:30px;">Error</font>
-	<ul>
-		<c:forEach var="errMsgs" items="${errorMsgs}">
-			<li style="color:red;">${errMsgs}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+	<%--Error Message--%>
+	<c:if test="${not empty errorMsgs} }">
+		<font style="color: red; font-size: 30px;">Error</font>
+		<ul>
+			<c:forEach var="errMsgs" items="${errorMsgs}">
+				<li style="color: red;">${errMsgs}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 	<div class="container justify-content-center">
-  		<div class="row">
-  			<div class="col-12">  			
+		<div class="row">
+			<div class="col-12">
 				<table>
 					<tr>
-						<th>­q³æ½s¸¹</th>
-						<th>­q³æª¬ºA</th>
-						<th>¤U­q¤é´Á</th>
-						<th>¹w¬ù¤é´Á</th>
-						<th>§¹¦¨¤é´Á</th>
-						<th>­q³æµû»ù</th>
-						<th>­q³æ¯d¨¥</th>
-						<th>ÅU«È½s¸¹</th>
-						<th>¥D¼p½s¸¹</th>
-						<th>®MÀ\½s¸¹</th>
-						<th>­×§ï­q³æ</th>
-						<th>§R°£­q³æ</th>		
+						<th>è¨‚å–®ç·¨è™Ÿ</th>
+						<th>è¨‚å–®ç‹€æ…‹</th>
+						<th>ä¸‹è¨‚æ—¥æœŸ</th>
+						<th>é ç´„æ—¥æœŸ</th>
+						<th>å®Œæˆæ—¥æœŸ</th>
+						<th>è¨‚å–®è©•åƒ¹</th>
+						<th>è¨‚å–®ç•™è¨€</th>
+						<th>é¡§å®¢ç·¨è™Ÿ</th>
+						<th>ä¸»å»šç·¨è™Ÿ</th>
+						<th>å¥—é¤ç·¨è™Ÿ</th>
+						<th>ä¿®æ”¹è¨‚å–®</th>
+						<th>åˆªé™¤è¨‚å–®</th>
 					</tr>
-					<%@ include file="page1.file" %>
-					<c:forEach var="menuOrderVO" items="${listAll}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+					<%@ include file="page1.file"%>
+					<c:forEach var="menuOrderVO" items="${listAll}"
+						begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
 						<tr>
 							<td>${menuOrderVO.menu_od_ID}</td>
 							<td>${menuOrderVO.menu_od_status}</td>
@@ -83,34 +89,44 @@
 							<td>${menuOrderVO.chef_ID}</td>
 							<td>${menuOrderVO.menu_ID}</td>
 							<td>
-								<form method="post" action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-									<input type="submit" value="½s¿è">
-									<input type="hidden" name="menu_od_ID"  value="${menuOrderVO.menu_od_ID}">
-									<input type="hidden" name="action"	value="getOneForUpdate">
+								<form method="post"
+									action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
+									<input type="submit" value="ç·¨è¼¯"> <input type="hidden"
+										name="menu_od_ID" value="${menuOrderVO.menu_od_ID}"> <input
+										type="hidden" name="action" value="getOneForUpdate">
 								</form>
 							</td>
 							<td>
-								<form method="post" action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-									<input type="submit" value="§R°£">
-									<input type="hidden" name="menu_od_ID"  value="${menuOrderVO.menu_od_ID}">
-									<input type="hidden" name="action"	value="delete">
+								<form method="post"
+									action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
+									<input type="submit" value="åˆªé™¤"> <input type="hidden"
+										name="menu_od_ID" value="${menuOrderVO.menu_od_ID}"> <input
+										type="hidden" name="action" value="delete">
 								</form>
 							</td>
-						</tr>	
+						</tr>
 					</c:forEach>
 				</table>
-				<%@ include file="page2.file" %>
-  			</div>
-  		</div>
-  	</div>
+				<%@ include file="page2.file"%>
+			</div>
+		</div>
+	</div>
 
-<!-- Optional JavaScript -->
+	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous">
 	</script>
-	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"	crossorigin="anonymous">
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous">
 	</script>
-	<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous">
 	</script>
 
 </body>
