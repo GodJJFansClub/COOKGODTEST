@@ -51,9 +51,6 @@
 					</tr>
 				</table>
 
-				<h3>資料新增:</h3>
-
-				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
 					<font style="color: red">請修正以下錯誤:</font>
 					<ul>
@@ -76,8 +73,10 @@
 						<div class="container">
 							<div class="row">
 							<c:forEach var="food_type" items="${foodTypeMap}">
+							<br>
 								<div class="col-sm ${food_type.key}">${food_type.value}</div>
 							</c:forEach>
+							
 							</div>
 						</div>
 							
