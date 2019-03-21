@@ -51,24 +51,18 @@ th, td {
 }
 </style>
 </head>
-<jsp:include page="/froTempl/header.jsp" flush="true" />
-<!-- ##### Contact Area Start #####-->
-<section class="contact-area section-padding-100">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<!-- Section Heading -->
-				<div class="section-heading text-center wow fadeInUp"
-					data-wow-delay="100ms">
-					<h2>Get In Touch</h2>
-					<img src="img/core-img/x.png" alt="">
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-12 col-lg-8">
-				<!-- Contact Form -->
-				<div class="contact-form-area text-center">
+
+<body bgcolor='white'>
+		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 					<c:if test="${not empty errorMsgs}">
 						<font style="color: red">請修正以下錯誤:</font>
 						<ul>
@@ -77,15 +71,17 @@ th, td {
 							</c:forEach>
 						</ul>
 					</c:if>
-					<body bgcolor='white'>
+					
+					
+		
 
-						<table id="table-2">
+<!-- 						<table id="table-2"> -->
 							<tr>
 								<td>
 									<h3>節慶主題料理訂單明細 - listFestOrderDetail_ByFest_or_ID.jsp</h3>
 									<h4>
 										<a
-											href="<%=request.getContextPath()%>/front-end/festOrder/listAllFestOrder.jsp">回首頁</a>
+											href="<%=request.getContextPath()%>/back-end/festOrder/listAllFestOrder.jsp">回首頁</a>
 									</h4>
 								</td>
 							</tr>
@@ -100,8 +96,12 @@ th, td {
 								</c:forEach>
 							</ul>
 						</c:if>
-
-						<table>
+<section class="page-content">
+   <div class="container pt-3 pb-3">
+   <div class="table-responsive-sm table-middle">
+           <thead class="thead-dark">
+						<table class="table table-hover">
+	   <thead class="thead-dark">
 							<tr>
 								<th>節慶主題料理訂單編號</th>
 								<th>節慶料理編號</th>
@@ -112,9 +112,9 @@ th, td {
 								<th>修改</th>
 								<th>刪除</th>
 							</tr>
-
+</thead>
 							<c:forEach var="festOrderDetailVO"
-								items="${listFestOrderDetail_ByFest_or_ID}">
+								items="${listFestOrderDetail_ByFest_or_ID_Back}">
 								<tr>
 									<td>${festOrderDetailVO.fest_or_ID}</td>
 									<td>${festMenuSvc.getOneFestMenu(festOrderDetailVO.fest_m_ID).fest_m_name}</td>
@@ -156,7 +156,11 @@ th, td {
 <%-- 						<b> <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br> --%>
 <%-- 							<font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> --%>
 <!-- 						</b> -->
+</div>
+</div>
 </section>
-<jsp:include page="/froTempl/footer.jsp" flush="true" />
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
 </body>
 </html>

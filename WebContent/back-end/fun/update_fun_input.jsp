@@ -12,23 +12,6 @@
 <title>權限資料修改 - update_fun_input.jsp</title>
 
 
-<style>
-table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
-
-table, th, td {
-	border: 0px solid #CCCCFF;
-}
-
-th, td {
-	padding: 1px;
-}
-</style>
-
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -37,7 +20,7 @@ th, td {
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
+		<jsp:include page="/back-end/cust/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">

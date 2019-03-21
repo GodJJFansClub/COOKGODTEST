@@ -16,6 +16,7 @@ Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,
 Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_RESUME,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,FEST_M_PRICE,CHEF_ID) values ('FM'||LPAD(TO_CHAR(FEST_MENU_SEQ.NEXTVAL),4,'0'),'七夕情人節慶料理名稱_10',50,to_date('12-MAR-19','DD-MON-RR'),to_date('05-APR-19','DD-MON-RR'),'千鶴料理主廚精心炮製六道菜晚宴，當中包括主廚以三文魚茸壽司獨特創製的心型情人卷。主菜方面，您可選擇鐵板燒飛驒和牛薄燒配野菜或鐵板煎龍蝦配黑松露醬。最後更有白之戀人士多啤梨配沖繩海鹽雪糕作為甜品，讓愛侶們享受和風的幸福滋味！',to_date('24-APR-19','DD-MON-RR'),'1','1',1999,'C00002');
 Insert into FEST_MENU (FEST_M_ID,FEST_M_NAME,FEST_M_QTY,FEST_M_START,FEST_M_END,FEST_M_RESUME,FEST_M_SEND,FEST_M_STATUS,FEST_M_KIND,FEST_M_PRICE,CHEF_ID) values ('FM'||LPAD(TO_CHAR(FEST_MENU_SEQ.NEXTVAL),4,'0'),'七夕情人節慶料理名稱_10',50,to_date('13-MAR-19','DD-MON-RR'),to_date('06-APR-19','DD-MON-RR'),'開胃菜則以鴨肝、海膽、松露等頂級食材製成絕美小點放入西華珠寶盒，搭配上『波士頓龍蝦烏魚子濃湯』、曠日費時製成的夢幻料理—義大利傳統『維琴察式鹹鱈魚』，甜點則獻上甜蜜得恰到好處的『白乳酪千層蛋糕襯法芙娜奇想百香果冰沙』',to_date('25-APR-19','DD-MON-RR'),'1','1',2300,'C00002');
 
+COMMIT;
 
 --------------------------------------------------------
 --  File created - Tuesday-February-19-2019   
@@ -27,7 +28,7 @@ Insert into FEST_DISH (DISH_ID,FEST_M_ID) values ('D00005','FM0003');
 Insert into FEST_DISH (DISH_ID,FEST_M_ID) values ('D00002','FM0003');
 Insert into FEST_DISH (DISH_ID,FEST_M_ID) values ('D00004','FM0003');
 
-
+COMMIT;
 --------------------------------------------------------
 --  File created - Tuesday-February-19-2019   
 --------------------------------------------------------
@@ -41,6 +42,7 @@ Insert into FEST_ORDER (FEST_OR_ID,FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FE
 Insert into FEST_ORDER (FEST_OR_ID,FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) values ('FM'||'20190321'||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.NEXTVAL),6,'0'),'4',1888,to_date('20-FEB-19','DD-MON-RR'),to_date('18-APR-19','DD-MON-RR'),to_date('04-APR-19','DD-MON-RR'),'0.8','C00002');
 Insert into FEST_ORDER (FEST_OR_ID,FEST_OR_STATUS,FEST_OR_PRICE,FEST_OR_START,FEST_OR_SEND,FEST_OR_END,FEST_OR_DISC,CUST_ID) values ('FM'||'20190321'||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.NEXTVAL),6,'0'),'4',2888,to_date('21-FEB-19','DD-MON-RR'),to_date('19-APR-19','DD-MON-RR'),to_date('05-APR-19','DD-MON-RR'),'0.8','C00002');
 
+COMMIT;
 --------------------------------------------------------
 --  File created - Tuesday-February-19-2019   
 --------------------------------------------------------
@@ -53,6 +55,7 @@ INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_RATE,FEST_OR_MSG,FES
 INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_RATE,FEST_OR_MSG,FEST_OR_QTY,FEST_OR_STOTAL) VALUES ('FM'||'20190321'||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.CURRVAL), 6, '0'),'FM0005',1,'雞卷裡頭包了切丁的菇類，餐盤上的醬汁應該是用菇類熬煮出來的湯汁所做成的，沾著醬汁吃味道超香',45,50);
 INSERT INTO FEST_ORDER_DETAIL (FEST_OR_ID,FEST_M_ID,FEST_OR_RATE,FEST_OR_MSG,FEST_OR_QTY,FEST_OR_STOTAL) VALUES ('FM'||'20190321'||'-'||LPAD(TO_CHAR(FEST_ORDER_SEQ.CURRVAL), 6, '0'), 'FM0006', 1, '生蠔奶油濃湯，全是小J 不敢吃的食材，直接交給老公解決囉……', 40,50);
 
+COMMIT;
 --------------------------------------------------------
 --  File created - Tuesday-February-19-2019   
 --------------------------------------------------------

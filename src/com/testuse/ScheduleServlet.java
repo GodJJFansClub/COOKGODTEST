@@ -76,7 +76,7 @@ public class ScheduleServlet extends HttpServlet{
             }
         };
 
-        timer.schedule(task, 10*1000);
+//        timer.schedule(task, 10*1000);
 //        timer.schedule(new task, 20*1000);
 //        timer.scheduleAtFixedRate(task, 10*1000, 10*1000);
     }

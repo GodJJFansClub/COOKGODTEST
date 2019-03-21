@@ -15,7 +15,7 @@
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
+		<jsp:include page="/back-end/cust/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
@@ -32,7 +32,7 @@
 
 	<ul>
 		<li><a
-			href='<%=request.getContextPath()%>/front-end/cust/listAllCust.jsp'>List</a>
+			href='<%=request.getContextPath()%>/back-end/cust/listAllCust.jsp'>List</a>
 			all Cust. <br>
 		<br></li>
 
@@ -41,7 +41,7 @@
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/cust/cust.do">
 				<b>輸入顧客帳號:</b> <input type="text" name="cust_acc"> <input
-					type="hidden" name="action" value="getOne_For_Display"> <input
+					type="hidden" name="action" value="getOne_For_DisplayBack"> <input
 					type="submit" value="送出">
 			</FORM>
 		</li>
@@ -56,7 +56,7 @@
 					<c:forEach var="custVO" items="${custSvc.all}">
 						<option value="${custVO.cust_ID}">${custVO.cust_ID}
 					</c:forEach>
-				</select> <input type="hidden" name="action" value="getOne_For_Display">
+				</select> <input type="hidden" name="action" value="getOne_For_DisplayBack">
 				<input type="submit" value="送出">
 			</FORM>
 		</li>
@@ -68,18 +68,12 @@
 					<c:forEach var="custVO" items="${custSvc.all}">
 						<option value="${custVO.cust_ID}">${custVO.cust_name}
 					</c:forEach>
-				</select> <input type="hidden" name="action" value="getOne_For_Display">
+				</select> <input type="hidden" name="action" value="getOne_For_DisplayBack">
 				<input type="submit" value="送出">
 			</FORM>
 		</li>
 	</ul>
 
-
-	<h3>顧客管理</h3>
-
-	<ul>
-		<li><a href='<%=request.getContextPath() %>/front-end/login/addCust.jsp'>Add</a> a new Cust.</li>
-	</ul>
 
                         </form>
           

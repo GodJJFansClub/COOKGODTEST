@@ -55,6 +55,41 @@ public class FestOrderServlet extends HttpServlet {
 //				throw new ServletException(e);
 //			}
 		}	
+		if ("listFestOrderDetail_ByFest_or_ID_Back".equals(action)) {
+			
+//			System.out.println("listFestOrderDetail_ByFest_or_ID"+ 25);
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+//			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String fest_or_ID = req.getParameter("fest_or_ID");
+				System.out.println(fest_or_ID);
+				/*************************** 2.開始查詢資料 ****************************************/
+				FestOrderService festOrderSvc = new FestOrderService();
+	            System.out.println("5");
+				Set<FestOrderDetailVO> set = festOrderSvc.getFestOrderDetailByFest_or_ID(fest_or_ID);
+				
+				System.out.println("2");
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				
+				req.setAttribute("listFestOrderDetail_ByFest_or_ID_Back", set);    // 資料庫取出的set物件,存入request
+				System.out.println("3");
+				String url = null;
+				
+				if ("listFestOrderDetail_ByFest_or_ID_Back".equals(action))
+					url = "/back-end/festOrder/listFestOrderDetail_ByFest_or_ID.jsp";        // 成功轉交 dept/listEmps_ByDeptno.jsp
+//				else if ("listEmps_ByDeptno_B".equals(action))
+//					url = "/dept/listAllDept.jsp";              // 成功轉交 dept/listAllDept.jsp
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				System.out.println("1");
+				/*************************** 其他可能的錯誤處理 ***********************************/
+//			} catch (Exception e) {
+//				throw new ServletException(e);
+//			}
+		}
 		
 		if ("getOne_For_Display".equals(action)) {
 			System.out.println("getOne_For_Display"+56);

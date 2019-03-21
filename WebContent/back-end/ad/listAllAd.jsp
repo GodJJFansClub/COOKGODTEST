@@ -89,7 +89,7 @@
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/ad/ad.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
+						<input type="submit" value="審核廣告"> <input type="hidden"
 							name="ad_ID" value="${adVO.ad_ID}"> <input
 							type="hidden" name="action" value="getOne_For_UpdateBack">
 					</FORM>

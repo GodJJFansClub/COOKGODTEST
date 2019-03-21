@@ -30,7 +30,7 @@ public class AdService {
 	}
 
 	public AdVO updateAd(String ad_status, Timestamp ad_start, Timestamp ad_end, String ad_type, String ad_title,byte[] ad_pic,
-			String ad_con, String food_sup_ID) {
+			String ad_con, String food_sup_ID,String ad_ID) {
 		
 		AdVO adVO = new AdVO();
 		adVO.setAd_status(ad_status);
@@ -41,6 +41,7 @@ public class AdService {
 		adVO.setAd_pic(ad_pic);
 		adVO.setAd_con(ad_con);
 		adVO.setFood_sup_ID(food_sup_ID);
+		adVO.setAd_ID(ad_ID);
 		
 		dao.update(adVO);
 

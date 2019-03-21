@@ -17,13 +17,11 @@ table#table-1 {
 	border: 2px solid black;
 	text-align: center;
 }
-
 table#table-1 h4 {
 	color: red;
 	display: block;
 	margin-bottom: 1px;
 }
-
 h4 {
 	color: blue;
 	display: inline;
@@ -37,11 +35,9 @@ table {
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
-
 table, th, td {
 	border: 0px solid #CCCCFF;
 }
-
 th, td {
 	padding: 1px;
 }
@@ -156,9 +152,7 @@ th, td {
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	});
-
 	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-
 	//      1.以下為某一天之前的日期無法選擇
 	//      var somedate1 = new Date('2017-06-15');
 	//      $('#f_date1').datetimepicker({
@@ -171,7 +165,6 @@ th, td {
 	//              }
 	//              return [true, ""];
 	//      }});
-
 	//      2.以下為某一天之後的日期無法選擇
 	//      var somedate2 = new Date('2017-06-15');
 	//      $('#f_date1').datetimepicker({
@@ -184,7 +177,6 @@ th, td {
 	//              }
 	//              return [true, ""];
 	//      }});
-
 	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
 	//      var somedate1 = new Date('2017-06-15');
 	//      var somedate2 = new Date('2017-06-25');
@@ -216,7 +208,6 @@ th, td {
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-
 </script>
 <script>
 	function setImagePreview() {

@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.servlet.http.Part;
 
 import com.ad.model.*;
 
@@ -25,7 +24,7 @@ public class AdServlet extends HttpServlet {
 		String s = req.getParameter("ad_ID");
 		try {
 			AdService ds = new AdService();
-			AdVO dao = (AdVO) ds.getOneAd(s);
+			AdVO dao = (AdVO)ds.getOneAd(s);
 			byte[] sb = dao.getAd_pic();
 			out.write(sb);
 
@@ -315,7 +314,7 @@ public class AdServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 
 				// 1.廣告標題
 				String ad_title = req.getParameter("ad_title");
@@ -358,12 +357,10 @@ public class AdServlet extends HttpServlet {
 				String ad_status = "d2";
 
 				// 6.廣告類別
-				String ad_type = req.getParameter("ad_type").trim();
-				if (ad_type == null || ad_type.trim().length() == 0) {
-					errorMsgs.add("暱稱請勿空白");
-				}
+				String ad_type = "e0";
 				// 7.
 				String food_sup_ID = req.getParameter("food_sup_ID").trim();
+				String ad_ID= req.getParameter("ad_ID").trim();
 
 				// set
 				AdVO adVO = new AdVO();
@@ -375,6 +372,7 @@ public class AdServlet extends HttpServlet {
 				adVO.setAd_status(ad_status);
 				adVO.setAd_type(ad_type);
 				adVO.setFood_sup_ID(food_sup_ID);
+				adVO.setAd_ID(ad_ID);
 
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
@@ -388,20 +386,22 @@ public class AdServlet extends HttpServlet {
 //				/***************************2.開始修改資料*****************************************/
 				AdService adSvc = new AdService();
 
-				adVO = adSvc.updateAd(ad_status, ad_start, ad_end, ad_type, ad_title,ad_pic, ad_con, food_sup_ID);
+				adVO = adSvc.updateAd(ad_status, ad_start, ad_end, ad_type, ad_title,ad_pic, ad_con, food_sup_ID, ad_ID);
 //				adVO = adSvc.updateAd("C0055", "dddd", ad_title, "f", "050505", "8888", "H123456789", "@54564", ad_start, ad_reg,by , "c","ff" );
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("adVO", adVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				adVO =adSvc.getOneAd(ad_ID);
+				HttpSession session = req.getSession();
+				session.setAttribute("adVO", adVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/front-end/ad/listOneAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				/*************************** 其他可能的錯誤處理 *************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("修改資料失敗:" + e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
-//				failureView.forward(req, res);
-//
-//			}
+			} catch (Exception e) {
+				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/update_ad_input.jsp");
+				failureView.forward(req, res);
+
+			}
 		}
 		if ("updateBack".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();

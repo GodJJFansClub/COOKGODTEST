@@ -17,41 +17,7 @@
 <head>
 <title>所有顧客資料 - listAllCust.jsp</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 500px;
-	background-color: white;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 10px;
-	text-align: center;
-}
-</style>
 
 </head>
 <body bgcolor='white'>
@@ -61,17 +27,17 @@ th, td {
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
+		<jsp:include page="/back-end/cust/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-	<h4>此頁練習採用 EL 的寫法取值:</h4>
+	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>所有顧客資料 - listAllCust.jsp</h3>
+				<h3>所有顧客資料</h3>
 				
 			</td>
 		</tr>

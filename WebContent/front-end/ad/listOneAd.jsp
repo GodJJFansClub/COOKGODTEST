@@ -3,7 +3,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	AdVO adVO = (AdVO) request.getAttribute("adVO"); //SustServlet.java(Concroller), 存入req的adVO物件
+	AdVO adVO = (AdVO) session.getAttribute("adVO"); //SustServlet.java(Concroller), 存入req的adVO物件
 %>
 
 <html>
@@ -16,13 +16,11 @@ table#table-1 {
 	border: 2px solid black;
 	text-align: center;
 }
-
 table#table-1 h4 {
 	color: red;
 	display: block;
 	margin-bottom: 1px;
 }
-
 h4 {
 	color: blue;
 	display: inline;
@@ -36,11 +34,9 @@ table {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
-
 table, th, td {
 	border: 1px solid #CCCCFF;
 }
-
 th, td {
 	padding: 5px;
 	text-align: center;
@@ -85,8 +81,8 @@ th, td {
 		</tr>
 		<tr>
 			<td><%=adVO.getAd_ID()%></td>
-			<td><c:if test="${not empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></c:if>
-				    <c:if test="${empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
+			<td><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></c:if>
+				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
 			<td><%=adVO.getAd_con()%></td>
 			<td><%=adVO.getAd_start()%></td>
 			<td><%=adVO.getAd_end()%></td>

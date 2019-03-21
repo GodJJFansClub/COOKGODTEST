@@ -87,7 +87,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFrontChefFilter</filter-name>
-		<url-pattern>/front-end/chef/*</url-pattern>
+		<url-pattern>/front-end/chef/1</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
@@ -173,6 +173,14 @@
 	<servlet-mapping>
 		<servlet-name>MenuOrderServlet</servlet-name>
 		<url-pattern>/menuOrder/menuOrder.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChefServlet</servlet-name>
+		<servlet-class>com.chef.controller.ChefServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefServlet</servlet-name>
+		<url-pattern>/chef/chef.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ChefSchServlet</servlet-name>

@@ -149,7 +149,7 @@ th, td {
 						<input type="hidden"
 							name="fest_or_ID" value="${festOrderVO.fest_or_ID}"> <input
 							type="hidden" name="action" 
-							value="listFestOrderDetail_ByFest_or_ID">
+							value="listFestOrderDetail_ByFest_or_ID_Back">
 					</FORM>
 				</td>
 			</tr>
@@ -165,7 +165,7 @@ th, td {
 		if (request.getAttribute("listFestOrderDetail_ByFest_or_ID") != null) {
 	%>
 	<jsp:include
-		page="/front-end/festOrder/listFestOrderDetail_ByFest_or_ID.jsp" />
+		page="/back-end/festOrder/listFestOrderDetail_ByFest_or_ID.jsp" />
 	<%
 		}
 	%>

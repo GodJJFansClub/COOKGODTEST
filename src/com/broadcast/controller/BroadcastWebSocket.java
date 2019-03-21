@@ -82,9 +82,9 @@ public class BroadcastWebSocket implements ServletContextListener{
 		foodUnitMap.put("cc","豪公升");
 		
 		Map<String, String> adStatusMap = new LinkedHashMap<String, String>();
-		adStatusMap.put("d0", "未審核");
+		adStatusMap.put("d0", "審核不過");
 		adStatusMap.put("d1", "審核通過");
-		adStatusMap.put("d2", "審核不過");
+		adStatusMap.put("d2", "未審核");
 		
 		Map<String, String> reportStatusMap = new LinkedHashMap<String, String>();
 		reportStatusMap.put("r0", "檢舉不同意");

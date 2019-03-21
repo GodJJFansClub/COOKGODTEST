@@ -13,23 +13,7 @@
 <title>權限資料 - listOneAuth.jsp</title>
 
 
-<style>
-table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
 
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
 
 </head>
 <body>
@@ -39,7 +23,7 @@ th, td {
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
+		<jsp:include page="/back-end/cust/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
@@ -51,11 +35,11 @@ th, td {
 		if (authVO != null) {
 	%>
 
-	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>權限資料 - ListOneAuth.jsp</h3>
+				<h3>權限資料</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/back-end/auth/select_page.jsp">回首頁</a>

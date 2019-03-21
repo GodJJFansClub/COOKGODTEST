@@ -68,7 +68,8 @@
 
 						<tr>
 							<td>廣告圖片:</td>
-							<td><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></td>
+							<td><img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"width="300" height="200"></td>
+							<input id="progressbarTWInput"  type="file" name="ad_pic" size="45"	id="progressbarTWInput" value="<%=adVO.getAd_pic()%>" /><br>
 						</tr>
 
 						<tr>
@@ -236,5 +237,33 @@
 		return true;
 	}
 </script>
+<script>
 
+$("#progressbarTWInput").change(function(){
+
+  readURL(this);
+
+});
+
+ 
+
+function readURL(input){
+
+  if(input.files && input.files[0]){
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+       $("#preview_progressbarTW_img").attr('src', e.target.result);
+
+    }
+
+    reader.readAsDataURL(input.files[0]);
+
+  }
+
+}
+
+</script>
 </html>

@@ -11,25 +11,6 @@
 <title>權限資料</title>
 
 
-
-<style>
-table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
-
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -38,7 +19,7 @@ th, td {
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
+		<jsp:include page="/back-end/cust/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
