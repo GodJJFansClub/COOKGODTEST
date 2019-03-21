@@ -20,6 +20,7 @@ import com.cust.model.*;
 import com.foodSup.model.FoodSupVO;
 import com.menuOrder.model.MenuOrderService;
 import com.menuOrder.model.MenuOrderVO;
+import com.testuse.SendEmail;
 
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -177,7 +178,7 @@ public class ChefServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("custVO", custVO);// 以下練習正則(規)表示式(regular-expression)
 					request.setAttribute("chefVO", chefVO);
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/cust/addCust.jsp");
+					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/chef/addChef.jsp");
 
 					failureView.forward(request, response);
 					return;
@@ -185,12 +186,23 @@ public class ChefServlet extends HttpServlet {
 				//將資料加入資料庫
 				ChefService chefSvc = new ChefService();
 				chefVO = chefSvc.insertChef(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid, cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname, chef_area, chef_resume);
-				RequestDispatcher successView = request.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
+				
+				String subject = "主廚驗證";
+				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
+				String messageText = "Hello! " + cust_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
+
+				SendEmail mailService = new SendEmail();
+				mailService.sendMail(cust_mail, subject, messageText);
+				
+				
+				
+				
+				RequestDispatcher successView = request.getRequestDispatcher("/front-end/login/addSuccess.jsp");
 				successView.forward(request, response);
 				//除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher(request.getRequestURI());
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/chef/addChef.jsp");
 				failureView.forward(request, response);
 			}
 		}

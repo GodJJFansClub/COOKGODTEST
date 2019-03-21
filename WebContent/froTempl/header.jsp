@@ -73,49 +73,59 @@
 							<!-- Nav Start -->
 							<div class="classynav">
 								<ul>
-									<li><a
-										href="<%=request.getContextPath()%>/froTempl/headertest.jsp">首頁</a></li>
+									<li><a href="<%=request.getContextPath()%>/froTempl/headertest.jsp">首頁</a></li>
 									
-									<li><a
-										href="<%=request.getContextPath()%>/front-end/menu/listAllMenu.jsp">食神來了</a></li>
+									<li><a>食神來了</a>
+										<ul class="dropdown">
+											<li><a
+												href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp">瀏覽主廚</a></li>
+											<li><a
+												href="<%=request.getContextPath()%>/front-end/menu/menu.jsp">嚴選套餐</a></li>
+									</ul></li>
+									
 									<li><a>食神配送</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp">嚴選食材</a></li>
-										</ul></li>
-									<c:if test="${not empty foodSupVO}">
-										<li><a href="">食材供應商專區</a>
-											<ul class="dropdown">
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
-											</ul></li>
-									</c:if>
+										</ul>
+									</li>
+										
 									<c:if test="${not empty chefVO}">
 										<li><a href="">主廚專區</a>
 											<ul class="dropdown">
 												<li><a
-													href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
+													href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">個人檔案</a></li>
 												<li><a
-													href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
+													href="">訂單管理</a></li>
 											</ul></li>
+									</c:if>
+									<c:if test="${not empty foodSupVO}">
+										<li><a href="">食材供應商專區</a>
+											<ul class="dropdown">
+												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看個人資料</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/update_foodSup_input.jsp">編輯個人資料</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
+											</ul>
+										</li>
+									</c:if>
+									<c:if test="${not empty custVO}">
+										<li><a href="">顧客專區</a>
+											<ul class="dropdown">
+												<li><a href="<%=request.getContextPath()%>/front-end/cust/listOneCust.jsp">查看個人資料</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/cust/update_cust_input.jsp">編輯個人資料</a></li>
+												<li><a href="">食材訂單管理</a></li>
+											</ul>
+										</li>
 									</c:if>
 
 									<c:if test="${not empty custVO}">
 										<li><a>Hello:<font color=#ea7500>
 													${custVO.cust_name} </font>您好
 										</a></li>
-										
-										
-										
-										
 										<li><a><i class="fa fa-dribbble"></i><span class="badge badge-light">4${custVO.cust_ID}</span></a>
 											<ul class="dropdown">
 												<c:forEach var="broadcastVO" items="${broadcastSvc.all}">
