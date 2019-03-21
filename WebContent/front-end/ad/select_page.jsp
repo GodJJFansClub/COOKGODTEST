@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.ad.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<jsp:useBean id="adSvc" scope="page" class="com.ad.model.AdService" />
 <html>
 <head>
 
@@ -41,52 +41,17 @@
 	<ul>
 		<li><a
 			href='<%=request.getContextPath()%>/front-end/ad/listAllAd.jsp'>List</a>
-			all Ad. <br>
+			查看所有廣告. <br>
 		<br></li>
 
 
-		<li>
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/ad/ad.do">
-				<b>輸入廣告編號:</b> <input type="text" name="ad_ID"> <input
-					type="hidden" name="action" value="getOne_For_Display"> <input
-					type="submit" value="送出">
-			</FORM>
-		</li>
-
-		<jsp:useBean id="adSvc" scope="page"
-			class="com.ad.model.AdService" />
-
-		<li>
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/ad/ad.do">
-				<b>選擇廣告編號:</b> <select size="1" name="ad_ID">
-					<c:forEach var="adVO" items="${adSvc.all}">
-						<option value="${adVO.ad_ID}">${adVO.ad_ID}
-					</c:forEach>
-				</select> <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="送出">
-			</FORM>
-		</li>
-
-		<li>
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/ad/ad.do">
-				<b>選擇廣告姓名:</b> <select size="1" name="ad_ID">
-					<c:forEach var="adVO" items="${adSvc.all}">
-						<option value="${adVO.ad_ID}">${adVO.ad_title}
-					</c:forEach>
-				</select> <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="送出">
-			</FORM>
-		</li>
-	</ul>
+		
 
 
 	<h3>廣告管理</h3>
 
 	<ul>
-		<li><a href='addAd.jsp'>Add</a> a new Ad.</li>
+		<li><a href='addAd.jsp'>新增廣告</a> a new Ad.</li>
 	</ul>
 
  </section>

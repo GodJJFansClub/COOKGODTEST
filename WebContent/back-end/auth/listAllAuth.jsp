@@ -19,22 +19,7 @@
 
 
 
-<style>
-table {
-	width: 500px;
-	background-color: white;
-	margin-bottom: 5px;
-}
 
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 10px;
-	text-align: center;
-}
-</style>
 
 </head>
 <body>
@@ -44,7 +29,7 @@ th, td {
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
+		<jsp:include page="/back-end/cust/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">

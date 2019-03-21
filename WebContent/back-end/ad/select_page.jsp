@@ -42,7 +42,7 @@
 				<ul>
 					<li><a
 						href='<%=request.getContextPath()%>/back-end/ad/listAllAd.jsp'>List</a>
-						all Ad. <br> <br></li>
+						查看所有廣告 <br> <br></li>
 
 
 					<li>
