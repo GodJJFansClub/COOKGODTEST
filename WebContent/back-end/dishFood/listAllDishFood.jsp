@@ -36,7 +36,7 @@
 
 <style>
   table {
-	width: 1500px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -60,7 +60,6 @@
 	</td></tr>
 </table>
 
-<%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
@@ -82,15 +81,15 @@
 		<th>刪除</th>
 	</tr>
 	
-	<%@ include file="page1.file" %> 
-	<c:forEach var="dishFoodVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	
+	<c:forEach var="dishFoodVO" items="${list}">
 		
 		<tr>
 		
 			<td>${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</td>
 			<td>${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</td>
 			<td>${dishFoodVO.dish_f_qty}</td>
-			<td>${foodUnitMap[dishdishFoodVO.dish_f_unit]}</td>
+			<td>${foodUnitMap[dishdishFoodVO.dish_f_unit].foodUnitMapkey}</td>
 			
 			
 			<td>
@@ -111,7 +110,7 @@
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+
 
 </body>
 </html>

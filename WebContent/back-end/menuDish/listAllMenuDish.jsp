@@ -40,6 +40,23 @@
 
 <style>
   table {
+	width: 1000px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+  }
+  table, th, td {
+    border: 1px solid #CCCCFF;
+  }
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
+</style>
+
+
+<style>
+  table {
 	width: 800px;
 	background-color: white;
 	margin-top: 5px;
@@ -57,7 +74,13 @@
 </head>
 <body bgcolor='white'>
 
-<%-- 錯誤表列 --%>
+<table id="table-1">
+	<tr><td>
+		 <h3>所有套餐菜色</h3>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
+	</td></tr>
+</table>
+
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
@@ -65,11 +88,10 @@
 			<li style="color:red">${message}</li>
 		
 		</c:forEach>
-			
-  <li><a href='addMenuDish.jsp'>Add</a> a new Dish.</li>
 </ul>
-	
 </c:if>
+		
+	
 			
 <table>
 		
@@ -83,12 +105,8 @@
 	<c:forEach var="menuDishVO" items="${list}" varStatus="s" >
 	<tr>
 			<td>${menuSvc.getOneMenu(menuDishVO.menu_ID).menu_name}</td>
-			<td>${dishSvc.getOneDish(menuDishVO.dish_ID).dish_name}</td>
-		<td>
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/menuDish/menuDish.do" style="margin-bottom: 0px;">
-			<A href="<%=request.getContextPath()%>/menuDish/menuDish.do?dish_ID=${menuDishVO.dish_ID}&action=getAllDish">${dishSvc.getOneDish(menuDishVO.dish_ID).dish_name}</a>
-			</FORM>	
-		</td>        
+			<td>${dishSvc.getOneDish(menuDishVO.dish_ID).dish_ID}</td>
+		    <td>${dishSvc.getOneDish(menuDishVO.dish_ID).dish_name}</td>        
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/menuDish/menuDish.do" style="margin-bottom: 0px;">
