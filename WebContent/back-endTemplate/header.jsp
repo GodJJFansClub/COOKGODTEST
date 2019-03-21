@@ -141,7 +141,7 @@
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">
 									<FORM METHOD="get"
-										action="<%=request.getContextPath()%>/back-endTemplate/logout.do">
+										action="<%=request.getContextPath()%>/back-end/logoutBack.do">
 										<input type="submit" value="登出">
 									</FORM>
 								</div>

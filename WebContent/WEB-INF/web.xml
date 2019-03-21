@@ -24,7 +24,27 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginBackEndFilter</filter-name>
-		<url-pattern>/back-end/1</url-pattern>
+		<url-pattern>/back-end/ad/*</url-pattern>
+		<url-pattern>/back-end/auth/*</url-pattern>
+		<url-pattern>/back-end/chefDish/*</url-pattern>
+		<url-pattern>/back-end/chefSch/*</url-pattern>
+		<url-pattern>/back-end/cust/*</url-pattern>
+		<url-pattern>/back-end/dish/*</url-pattern>
+		<url-pattern>/back-end/dishFood/*</url-pattern>
+		<url-pattern>/back-end/emp/*</url-pattern>
+		<url-pattern>/back-end/festMenu/*</url-pattern>
+		<url-pattern>/back-end/festOrder/*</url-pattern>
+		<url-pattern>/back-end/festOrderDetail/*</url-pattern>
+		<url-pattern>/back-end/food/*</url-pattern>
+		<url-pattern>/back-end/foodMall/*</url-pattern>
+		<url-pattern>/back-end/foodOrder/*</url-pattern>
+		<url-pattern>/back-end/foodSup/*</url-pattern>
+		<url-pattern>/back-end/forumArt/*</url-pattern>
+		<url-pattern>/back-end/forumMsg/*</url-pattern>
+		<url-pattern>/back-end/fun/*</url-pattern>
+		<url-pattern>/back-end/menuDish/*</url-pattern>
+		<url-pattern>/back-end/menuOrder/*</url-pattern>
+		<url-pattern>/back-end/report/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
@@ -97,6 +117,15 @@
 	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>com.login.Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutBack</servlet-name>
+		<url-pattern>/back-end/logoutBack.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LogoutBack</servlet-name>
+		<servlet-class>com.login.LogoutBack</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>

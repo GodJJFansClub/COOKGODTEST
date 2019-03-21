@@ -21,17 +21,20 @@ import java.util.Map.Entry;
 
 
 public class ScheduleServlet extends HttpServlet{    
-    Timer timer ; 
 
+    
     int count = 0;        
     public void destroy(){
-        timer.cancel();
+    	
+    	
     }
     
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
     }
      //設定排程器       
-    public void init(){        
+    public void init(){
+    	Timer timer= new Timer();
+    	getServletContext().setAttribute("Servlettimer", timer);
     	ServletContext servletContext = getServletContext();
     	Set<javax.websocket.Session> webSessions = (Set<javax.websocket.Session>) servletContext.getAttribute("webSessions");
         timer = new Timer();
@@ -73,7 +76,8 @@ public class ScheduleServlet extends HttpServlet{
             }
         };
 
-//        timer.schedule(task, 10*1000);
-        timer.scheduleAtFixedRate(task, 10*1000, 10*1000);
+        timer.schedule(task, 10*1000);
+//        timer.schedule(new task, 20*1000);
+//        timer.scheduleAtFixedRate(task, 10*1000, 10*1000);
     }
 }
