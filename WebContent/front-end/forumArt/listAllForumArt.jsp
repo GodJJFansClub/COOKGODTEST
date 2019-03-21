@@ -91,6 +91,8 @@
 		<th>文章發表時間</th>
 		<th>文章狀態</th>
 		<th>主廚編號</th>
+		<th>審核</th>
+		<th>刪除</th>
 		
 	</tr>
 <%@ include file="page1.file" %> 
@@ -109,16 +111,25 @@
 			<td>${chefSvc.getOneChef(forumArtVO.chef_ID).chef_name}</td> 
 		
 		<td>
-				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forumArt/forumArt.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="送出查詢"> 
-			    <input type="hidden" name="forum_art_ID" value="${forumArtVO.forum_art_ID}">
-			    <input type="hidden" name="action" value="listAllForumArt_ByForumMsg"></FORM>
-			
-		</td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forumArt/forumArt.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="審核">
+			     <input type="hidden" name="forum_art_ID"  value="${forumArtVO.forum_art_ID}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/forumArt/forumArt.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="刪除">
+			     <input type="hidden" name="forum_art_ID"  value="${forumArtVO.forum_art_ID}">
+			     <input type="hidden" name="action" value="delete"></FORM>
+			</td>
+		
 			
 		</tr>
 	</c:forEach>
 </table>
+
+
+
 <%@ include file="page2.file" %>
 
 <c:if test="${openModal!=null}">
@@ -136,7 +147,7 @@
 			
 <!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
                <jsp:include page="/back-end/forumArt/listOneForumArt.jsp" />
-               
+               <jsp:include page="/back-end/forumMsg/listAllForumMsg.jsp"/>
 <!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
 			</div>
 				<div class="modal-footer">

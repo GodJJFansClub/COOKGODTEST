@@ -75,16 +75,13 @@
 <FORM METHOD="post" ACTION="forumArt.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
-		<td>文章編號:<font color=red><b>*</b></font></td>
-		<td><%=forumArtVO.getForum_art_ID()%></td>
+		<td>文章名稱:<font color=red><b>*</b></font></td>
+		<td><%=forumArtVO.getForum_art_name()%></td>
 	</tr>
-	<tr>
-		<td>文章名稱:</td>
-		<td><input type="TEXT" name="forum_art_name" size="45" value="<%=forumArtVO.getForum_art_name()%>" /></td>
-	</tr>
+	
 	<tr>
 		<td>文章照片:</td>
-		<td><img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/forumArt/forumArt.do?forum_art_ID=${forumArtVO.forum_art_ID}"  width="300" height="200" width="300" height="200"/><br>
+		<td><img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/forumArt/forumArt.do?forum_art_ID=${forumArtVO.forum_art_ID}" width="300" height="200"/><br>
 		<input type="file" name="forum_art_pic" value="<%=forumArtVO.getForum_art_pic()%>" /><br></td>
 	</tr>
 	<tr>
@@ -138,8 +135,8 @@ function readURL(input){
 
 <br>
 <input type="hidden" name="action" value="update">
+<input type="hidden" name="forum_art_name" value="<%=forumArtVO.getForum_art_name()%>">
 <input type="hidden" name="forum_art_ID" value="<%=forumArtVO.getForum_art_ID()%>">
-<input type="hidden" name="forum_art_start" value="<%=forumArtVO.getForum_art_start()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 </html>

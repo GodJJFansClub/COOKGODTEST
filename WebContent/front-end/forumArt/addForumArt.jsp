@@ -54,7 +54,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>文章新增 - addForumArt.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/forumArt/select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -80,23 +80,11 @@
 	</tr>
 	<tr>
 		<td>文章照片:</td>
-		<td><img id="preview_progressbarTW_img" src="#" width="300" height="200"/>
+		<td><img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/back-end/images/null2.jpg" width="300" height="200"/>
 		<input type="file" name="forum_art_pic" size="45" id="progressbarTWInput"
 			 value="<%= (forumArtVO==null)? "MANAGER" : forumArtVO.getForum_art_pic()%>" /><br></td>
 	</tr>
-	<script src="ckeditor.js"></script>
- <form id="addForumArt.jsp" runat="server">
-    <div style="margin: 0 auto; width: 700px">
-        <textarea id="editor"></textarea>
-    </div>
-</form>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            console.log(editor);
-        })
-</script>
+	
 
 	<tr>
 		<td>文章內容:</td>

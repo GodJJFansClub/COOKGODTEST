@@ -36,7 +36,7 @@
 
 <style>
   table {
-	width: 1200px;
+	width: 870px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
