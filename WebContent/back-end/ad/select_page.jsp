@@ -49,7 +49,7 @@
 						<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/ad/ad.do">
 							<b>輸入廣告編號:</b> <input type="text" name="ad_ID"> <input
-								type="hidden" name="action" value="getOne_For_Display">
+								type="hidden" name="action" value="getOne_For_DisplayBack">
 							<input type="submit" value="送出">
 						</FORM>
 					</li>
@@ -63,7 +63,7 @@
 								<c:forEach var="adVO" items="${adSvc.all}">
 									<option value="${adVO.ad_ID}">${adVO.ad_ID}
 								</c:forEach>
-							</select> <input type="hidden" name="action" value="getOne_For_Display">
+							</select> <input type="hidden" name="action" value="getOne_For_DisplayBack">
 							<input type="submit" value="送出">
 						</FORM>
 					</li>
@@ -75,14 +75,12 @@
 								<c:forEach var="adVO" items="${adSvc.all}">
 									<option value="${adVO.ad_ID}">${adVO.ad_title}
 								</c:forEach>
-							</select> <input type="hidden" name="action" value="getOne_For_Display">
+							</select> <input type="hidden" name="action" value="getOne_For_DisplayBack">
 							<input type="submit" value="送出">
 						</FORM>
 					</li>
 				</ul>
 
-
-				<h3>廣告管理</h3>
 
 
 				<%--=================================工作區================================================--%>

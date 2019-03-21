@@ -10,23 +10,6 @@
 <head>
 <title>廣告資料 - listOneAd.jsp</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
 </style>
 
 
@@ -48,11 +31,11 @@ h4 {
 		if (adVO != null) {
 	%>
 
-	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-	<table id="table-1">
+
+	<table >
 		<tr>
 			<td>
-				<h3>廣告資料 - ListOneAd.jsp</h3>
+				<h3>廣告資料</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">回首頁</a>

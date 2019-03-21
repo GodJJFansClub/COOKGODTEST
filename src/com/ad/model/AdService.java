@@ -46,6 +46,18 @@ public class AdService {
 
 		return adVO;
 	}
+	
+	public AdVO updateStatus(String ad_status,String ad_ID) {
+		
+		AdVO adVO = new AdVO();
+		adVO.setAd_status(ad_status);
+		
+		adVO.setAd_ID(ad_ID);
+		
+		dao.updateStatus(adVO);
+
+		return adVO;
+	}
 
 	public void deleteAd(String ad_ID) {
 		dao.delete(ad_ID);

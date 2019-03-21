@@ -411,4 +411,9 @@ public class AdJDBCDAO implements AdDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void updateStatus(AdVO adVO) {
+		// TODO Auto-generated method stub
+		
+	}
 }

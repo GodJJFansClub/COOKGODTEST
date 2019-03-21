@@ -145,6 +145,67 @@ public class AdServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				String ad_ID = null;
+				try {
+					ad_ID = new String(str);
+				} catch (Exception e) {
+					errorMsgs.add("廣告編號格式不正確");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				/*************************** 2.開始查詢資料 *****************************************/
+				AdService adSvc = new AdService();
+				AdVO adVO = adSvc.getOneAd(ad_ID);
+				if (adVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("adVO", adVO); // 資料庫取出的adVO物件,存入req
+				String url = "/front-end/ad/listOneAd.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAd.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		// 查詢-單一
+		if ("getOne_For_DisplayBack".equals(action)) { // 來自select_page.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("ad_ID");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入廣告編號");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/select_page.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
@@ -178,7 +239,7 @@ public class AdServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("adVO", adVO); // 資料庫取出的adVO物件,存入req
-				String url = "/front-end/ad/listOneAd.jsp";
+				String url = "/back-end/ad/listOneAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAd.jsp
 				successView.forward(req, res);
 
@@ -208,17 +269,46 @@ public class AdServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("adVO", adVO); // 資料庫取出的adVO物件,存入req
-				String url = "/back-end/ad/update_ad_input.jsp";
+				String url = "/front-end/ad/update_ad_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_ad_input.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/listAllAd.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/listAllAd.jsp");
 				failureView.forward(req, res);
 			}
 		}
+		// 查詢-全部
+				if ("getOne_For_UpdateBack".equals(action)) { // 來自listAllEmp.jsp的請求
+
+					List<String> errorMsgs = new LinkedList<String>();
+					// Store this set in the request scope, in case we need to
+					// send the ErrorPage view.
+					req.setAttribute("errorMsgs", errorMsgs);
+
+					try {
+						/*************************** 1.接收請求參數 ****************************************/
+						String ad_ID = new String(req.getParameter("ad_ID"));
+
+						/*************************** 2.開始查詢資料 ****************************************/
+						AdService adSvc = new AdService();
+						AdVO adVO = adSvc.getOneAd(ad_ID);
+
+						/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+						req.setAttribute("adVO", adVO); // 資料庫取出的adVO物件,存入req
+						String url = "/back-end/ad/update_ad_input.jsp";
+						RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_ad_input.jsp
+						successView.forward(req, res);
+
+						/*************************** 其他可能的錯誤處理 **********************************/
+					} catch (Exception e) {
+						errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+						RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/listAllAd.jsp");
+						failureView.forward(req, res);
+					}
+				}
 
 		// 修改
 		if ("update".equals(action)) {
@@ -289,7 +379,7 @@ public class AdServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("adVO", adVO);// 以下練習正則(規)表示式(regular-expression)
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-end/ad/update_ad_input.jsp");
 
 					failureView.forward(req, res);
 					return;
@@ -301,6 +391,55 @@ public class AdServlet extends HttpServlet {
 				adVO = adSvc.updateAd(ad_status, ad_start, ad_end, ad_type, ad_title,ad_pic, ad_con, food_sup_ID);
 //				adVO = adSvc.updateAd("C0055", "dddd", ad_title, "f", "050505", "8888", "H123456789", "@54564", ad_start, ad_reg,by , "c","ff" );
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("adVO", adVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				String url = "/front-end/ad/listOneAd.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				/*************************** 其他可能的錯誤處理 *************************************/
+//			} catch (Exception e) {
+//				errorMsgs.add("修改資料失敗:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
+//				failureView.forward(req, res);
+//
+//			}
+		}
+		if ("updateBack".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+//			try {
+				String ad_ID= req.getParameter("ad_ID").trim();
+				
+				// 5.狀態
+				String ad_status = req.getParameter("ad_status").trim();;
+				if (ad_status == null || ad_status.trim().length() == 0) {
+					errorMsgs.add("請勿空白");
+				}
+				
+				
+				// set
+				AdVO adVO = new AdVO();
+				
+				adVO.setAd_status(ad_status);
+
+				adVO.setAd_ID(ad_ID);
+
+				// 如果以上格式有錯
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("adVO", adVO);// 以下練習正則(規)表示式(regular-expression)
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/ad/update_ad_input.jsp");
+
+					failureView.forward(req, res);
+					return;
+				}
+
+//				/***************************2.開始修改資料*****************************************/
+				AdService adSvc = new AdService();
+
+				adVO = adSvc.updateStatus(ad_status, ad_ID);
+//				adVO = adSvc.updateAd("C0055", "dddd", ad_title, "f", "050505", "8888", "H123456789", "@54564", ad_start, ad_reg,by , "c","ff" );
+				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				adVO =adSvc.getOneAd(ad_ID);
 				req.setAttribute("adVO", adVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/back-end/ad/listOneAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);

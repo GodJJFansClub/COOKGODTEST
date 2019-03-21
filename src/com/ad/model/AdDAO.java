@@ -33,6 +33,8 @@ public class AdDAO implements AdDAO_interface {
 			"DELETE FROM AD where AD_ID=? ";
 	private static final String UPDATE =
 			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?,AD_PIC=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
+	private static final String UPDATE_STATUS =
+			"UPDATE AD set AD_STATUS=? Where AD_ID=?";
 	private static final String GET_NOW_AD_STMT = 
 			"SELECT * FROM AD where systimestamp >= AD_START AND systimestamp <=AD_END AND AD_STATUS ='d1'";
 	@Override
@@ -93,6 +95,40 @@ public class AdDAO implements AdDAO_interface {
 			pstmt.setString(7, adVO.getAd_con());
 			pstmt.setString(8, adVO.getFood_sup_ID());
 			pstmt.setString(9, adVO.getAd_ID());
+			
+			
+			pstmt.executeUpdate();		
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
+	public void updateStatus(AdVO adVO) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+			
+			pstmt.setString(1, adVO.getAd_status());
+			
+			pstmt.setString(2, adVO.getAd_ID());
 			
 			
 			pstmt.executeUpdate();		
