@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.dishFood.model.DishFoodVO;
+
 
 public class DishJNDIDAO implements DishDAO_interface{
 
@@ -262,6 +264,18 @@ public class DishJNDIDAO implements DishDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public Set<DishFoodVO> getFoodsByDishID(String dish_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertWithFoods(DishVO dishVO, List<DishFoodVO> list) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

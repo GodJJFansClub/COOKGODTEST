@@ -5,7 +5,7 @@
 <jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService" />
 <html>
 <head>
-<title>修改食材商城</title>
+<title>更改狀態</title>
 
 </head>
 <body>
@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 				<td>單位:</td>
-				<td>${foodMallVO.food_m_unit}</td>
+				<td>${foodUnitMap[foodMallVO.food_m_unit]}</td>
 			</tr>
 			<tr>
 				<td>產地:</td>

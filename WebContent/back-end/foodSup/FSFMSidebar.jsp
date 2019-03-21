@@ -12,8 +12,13 @@
 			<ul id="sidebarnav">
 				<li class="sidebar-item"><a
 					class="sidebar-link waves-effect waves-dark sidebar-link"
-					href="index.html" aria-expanded="false"> <i
+					href="<%=request.getContextPath()%>/listAllFoodSup.jsp" aria-expanded="false"> <i
 						class="mdi mdi-av-timer"></i> <span class="hide-menu">列出所有的食材供應商</span>
+				</a></li>
+				<li class="sidebar-item"><a
+					class="sidebar-link waves-effect waves-dark sidebar-link"
+					href="<%=request.getContextPath()%>/listAllFoodMall.jsp" aria-expanded="false"> <i
+						class="mdi mdi-av-timer"></i> <span class="hide-menu">列出所有的食材商城商品</span>
 				</a></li>
 
 			</ul>

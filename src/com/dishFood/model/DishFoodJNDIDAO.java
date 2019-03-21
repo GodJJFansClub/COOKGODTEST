@@ -255,5 +255,13 @@ public class DishFoodJNDIDAO implements DishFoodDAO_interface{
 		return list;
 	}
 
+
+
+	@Override
+	public void insert2(DishFoodVO dishFoodVO, Connection con) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
 

@@ -18,19 +18,6 @@
                                 <span class="hide-menu">食材管理</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            	href="<%=request.getContextPath()%>/back-end/menuOrder/index.jsp" aria-expanded="false">
-                                <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">套餐訂單</span>
-                            </a>
-                        </li>
-                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/festOrder/select_page.jsp" aria-expanded="false">
-                                <i class="mdi mdi-arrange-bring-forward"></i>
-                                <span class="hide-menu">節慶主題料理訂單</span>
-                            </a>
-                        </li>
                         
                     </ul>
                 </nav>

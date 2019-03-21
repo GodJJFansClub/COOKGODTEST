@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.forumMsg.model.ForumMsgVO;
 import com.testuse.PicIOTest;
 
 public class ForumArtJNDIDAO implements ForumArtDAO_interface{
@@ -267,6 +268,13 @@ public class ForumArtJNDIDAO implements ForumArtDAO_interface{
 		}
 
 		return list;
+	}
+
+
+	@Override
+	public Set<ForumMsgVO> getForumMsgsByForumArt(String forum_art_ID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

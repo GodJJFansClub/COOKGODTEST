@@ -39,12 +39,13 @@
 				<td>${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</td>
 				<td>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</td>
 				<td>${foodMallVO.food_m_name}</td>
-				<td>${foodMallVO.food_m_status}</td>
+				<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
 				<td>${foodMallVO.food_m_price}</td>
-				<td>${foodMallVO.food_m_unit}</td>
+				<td>${foodUnitMap[foodMallVO.food_m_unit]}</td>
 				<td>${foodMallVO.food_m_place}</td>
 				<td>
-					<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}">
+					<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"
+					 width="400" height="300">
 				</td>
 				<td>
 					<FORM METHOD="post"

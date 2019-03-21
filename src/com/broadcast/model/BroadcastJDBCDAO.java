@@ -352,4 +352,10 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 //			System.out.println();
 //		}
 	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

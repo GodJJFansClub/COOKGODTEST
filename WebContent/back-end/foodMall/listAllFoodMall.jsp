@@ -54,7 +54,7 @@
 							<td>${foodMallVO.food_m_name}</td>
 							<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
 							<td>${foodMallVO.food_m_price}</td>
-							<td>${foodMallVO.food_m_unit}</td>
+							<td>${foodUnitMap[foodMallVO.food_m_unit]}</td>
 							<td>${foodMallVO.food_m_place}</td>
 							<td>${foodMallVO.food_m_rate}</td>
 						
