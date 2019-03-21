@@ -44,7 +44,7 @@
 
 							<h3>節慶主題料理(FEST_MENU)</h3>
 							<ul>
-								<li><a href='addFestMenu.jsp'>Add</a> a new FestMenu.</li>
+								<li><a href='<%=request.getContextPath()%>/front-end/festMenu/addFestMenu.jsp'>Add</a> a new FestMenu.</li>
 							</ul>
 </section>
 <jsp:include page="/froTempl/footer.jsp" flush="true" />

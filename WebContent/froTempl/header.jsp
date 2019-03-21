@@ -75,12 +75,10 @@
 								<ul>
 									<li><a
 										href="<%=request.getContextPath()%>/froTempl/headertest.jsp">首頁</a></li>
+									
 									<li><a
-										href="<%=request.getContextPath()%>/froTemplabout.html">關於食神</a></li>
-									<li><a
-										href="<%=request.getContextPath()%>/froTemplservices.html">食神來了</a></li>
-									<li><a
-										href="<%=request.getContextPath()%>/froTemplportfolio.html">食神配送</a>
+										href="<%=request.getContextPath()%>/front-end/menu/listAllMenu.jsp">食神來了</a></li>
+									<li><a>食神配送</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
@@ -98,7 +96,17 @@
 													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
 											</ul></li>
 									</c:if>
-									<li><a href="contact.html">主廚論壇</a></li>
+									<c:if test="${not empty chefVO}">
+										<li><a href="">主廚專區</a>
+											<ul class="dropdown">
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
+											</ul></li>
+									</c:if>
 
 									<c:if test="${not empty custVO}">
 										<li><a>Hello:<font color=#ea7500>
@@ -122,8 +130,7 @@
 										</FORM>
 									</c:if>
 									<c:if test="${empty custVO}">
-										<li><a
-											href="<%=request.getContextPath()%>/froTemplportfolio.html">加入我們</a>
+										<li><a>加入我們</a>
 											<ul class="dropdown">
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/login/addCust.jsp">成為顧客</a></li>

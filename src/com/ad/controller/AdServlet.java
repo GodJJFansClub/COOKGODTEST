@@ -25,7 +25,7 @@ public class AdServlet extends HttpServlet {
 		String s = req.getParameter("ad_ID");
 		try {
 			AdService ds = new AdService();
-			AdVO dao = (AdVO) ds.getOneAd(s);
+			AdVO dao = (AdVO)ds.getOneAd(s);
 			byte[] sb = dao.getAd_pic();
 			out.write(sb);
 
