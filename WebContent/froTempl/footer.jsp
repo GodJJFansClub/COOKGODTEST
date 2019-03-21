@@ -25,7 +25,7 @@
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="single-footer-widget mb-100">
                         <!-- Footer Logo -->
-                        <a href="index.html" class="footer-logo"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
+                        <a href="<%=request.getContextPath()%>/froTempl/headertest.jsp" class="footer-logo"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                         <div class="copywrite-content">
                             <!-- Copywrite Text -->
                             <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> <i class="fa fa-heart-o" aria-hidden="true"></i> by <a target="_blank">CA106G3</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 </p>
                         </div>

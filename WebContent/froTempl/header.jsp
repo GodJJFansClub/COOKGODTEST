@@ -51,7 +51,7 @@
 					<nav class="classy-navbar justify-content-between" id="pixelNav">
 
 						<!-- Nav brand -->
-						<a href="headertest.jsp" class="nav-brand"><img
+						<a href="<%=request.getContextPath()%>/froTempl/headertest.jsp" class="nav-brand"><img
 							src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png"
 							alt=""></a>
 
@@ -147,12 +147,7 @@
 
 								<!-- Top Social Info -->
 								<div class="top-social-info ml-5">
-									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-										class="fa fa-dribbble"></i></a> <a href="#"><i
-										class="fa fa-flickr"></i></a> <a href="#"><i
-										class="fa fa-instagram"></i></a> <a href="#"><i
-										class="fa fa-linkedin"></i></a> <a href="#"><i
-										class="fa fa-pinterest"></i></a>
+									
 								</div>
 							</div>
 							<!-- Nav End -->
