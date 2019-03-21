@@ -18,6 +18,8 @@ import javax.servlet.http.Part;
 import com.chef.model.ChefService;
 import com.chef.model.ChefVO;
 import com.menu.model.*;
+import com.menuOrder.model.MenuOrderService;
+import com.menuOrder.model.MenuOrderVO;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MenuServlet extends HttpServlet {
@@ -26,18 +28,20 @@ public class MenuServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("image/jpg");
+		response.setContentType("image/gif");
 		
 		ServletOutputStream out = response.getOutputStream();		
 		List<String> errorMsgs = new LinkedList<String>();
 		
 		String showMenuPic = request.getParameter("showMenuPic");
+		
 		if("showMenuPic".equals(showMenuPic)) {
 			try {
 				String menu_ID = request.getParameter("menu_ID");
 				MenuService menuSvc = new MenuService();
 				MenuVO menuVO = (MenuVO) menuSvc.getOneMenu(menu_ID);
 				byte[] menu_pic = menuVO.getMenu_pic();	
+				System.out.println(menu_pic);
 				out.write(menu_pic);
 				request.setAttribute("menu_pic", menu_pic);
 			}catch(NullPointerException e){
@@ -66,6 +70,9 @@ public class MenuServlet extends HttpServlet {
 				Integer menu_price = null;
 				try {
 					menu_price = Integer.parseInt(request.getParameter("menu_price"));
+					if(menu_price<0) {
+						errorMsgs.add("請輸入大於零的數字");
+					}
 				}catch(Exception e) {
 					errorMsgs.add("請輸入數字");
 				}
@@ -87,23 +94,47 @@ public class MenuServlet extends HttpServlet {
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("menuVO", menuVO);
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/menu/addMenu.jsp");
+					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/menu/addMenu.jsp");
 					failureView.forward(request, response);
 					return;
 				}
 				//將資料加入資料庫
 				MenuService menuSvc = new MenuService();
 				menuVO = menuSvc.addMenu(menu_name, menu_resume, menu_pic, menu_price);
-				RequestDispatcher successView = request.getRequestDispatcher("/front-end/menu/listAllMenu.jsp");
+				System.out.println(menuVO.getMenu_ID());
+				request.setAttribute("menuVO", menuVO);
+				RequestDispatcher successView = request.getRequestDispatcher("/back-end/menuDish/addMenuDish.jsp");
 				successView.forward(request, response);
 				//除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/menu/addMenu.jsp");
+				RequestDispatcher failureView = request.getRequestDispatcher("/back-end/menu/addMenu.jsp");
 				failureView.forward(request, response);
 			}
 		}		
-		
+		//取出一筆訂單準備修改
+		if("getOneForUpdate".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			request.setAttribute("errorMsgs", errorMsgs);
+			
+			try {				
+				//1.接收請求參數，並做錯誤判斷				
+				String menu_ID = request.getParameter("menu_ID");
+				//2.開始查詢資料
+				MenuService menuSvc = new MenuService();
+				MenuVO menuVO = menuSvc.getOneMenu(menu_ID);
+				
+				//3.查詢完成，準備轉交
+				request.setAttribute("menuVO", menuVO);
+				RequestDispatcher sucessView = request.getRequestDispatcher("/back-end/menu/updateMenu.jsp");
+				sucessView.forward(request, response);
+				
+			}catch(Exception e) {
+				errorMsgs.add("無法取得要修改的資料:"+e.getMessage());
+				RequestDispatcher errView = request.getRequestDispatcher("/back-end/menu/listAllMenu.jsp");
+				errView.forward(request, response);
+			}
+		}
 		if ("getOneForDisplay".equals(action)) { // 來自select_page.jsp的請求
 
 			try {
@@ -121,7 +152,7 @@ public class MenuServlet extends HttpServlet {
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				RequestDispatcher failureView = request.getRequestDispatcher(request.getRequestURI());
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/menu/listAllMenu.jsp");
 				failureView.forward(request, response);
 			}
 		}
@@ -152,5 +183,27 @@ public class MenuServlet extends HttpServlet {
 				failureView.forward(request, response);
 			}
 		}
+		//刪除
+		if("delete".equals(action)) {
+				
+				List<String> errorMsgs = new LinkedList<String>();
+				request.setAttribute("errorMsgs", errorMsgs);
+				
+				try {
+					//1.接收參數
+					String menu_ID = request.getParameter("menu_ID");
+					//2.準備刪除
+					MenuService menuSvc = new MenuService();
+					menuSvc.deleteMenu(menu_ID);
+					//3.刪除完成，準備轉交
+					RequestDispatcher sucessView = request.getRequestDispatcher("/back-end/menu/listAllMenu.jsp");
+					sucessView.forward(request, response);
+					//其他可能的錯誤處理
+				}catch(Exception e){
+					errorMsgs.add("刪除資料失敗:"+e.getMessage());
+					RequestDispatcher errView = request.getRequestDispatcher("/back-end/menu/listAllMenu.jsp");
+					errView.forward(request, response);
+				}
+			}
+		}
 	}
-}

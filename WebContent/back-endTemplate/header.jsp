@@ -116,6 +116,16 @@
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
+						href="<%=request.getContextPath()%>/back-end/menu/index.jsp">
+							<div class="d-flex align-items-center">
+								<i class="font-20 mr-1"></i>
+								<div class="ml-1 d-none d-sm-block">
+									<span>套餐管理</span>
+								</div>
+							</div>
+					</a></li>
+					<li class="nav-item"><a
+						class="nav-link waves-effect waves-dark"
 						href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
