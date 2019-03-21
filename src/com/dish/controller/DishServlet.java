@@ -286,7 +286,7 @@ public class DishServlet extends HttpServlet {
 
 				// 菜色狀態
 //				String dish_status = null;
-			String dish_status = req.getParameter("dish_status").trim();
+				String dish_status = req.getParameter("dish_status").trim();
 //				if (dishstatus .equals("D0")) {
 //					dish_status = "D0";
 //				}
@@ -336,7 +336,8 @@ public class DishServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 ***************************************/
 				DishService dishSvc = new DishService();
 				dishVO = dishSvc.addDish(dish_name, dish_status, dish_pic, dish_resume, dish_price);
-				req.setAttribute("dishVO", dishVO);
+				HttpSession session = req.getSession();
+				session.setAttribute("dishVO", dishVO);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back-end/dish/completeDish.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
@@ -382,6 +383,35 @@ public class DishServlet extends HttpServlet {
 //
 		}
 		
+		if ("Newdelete".equals(action)) { // 來自listAllEmp.jsp
+			System.out.println("7");
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			
+
+			//try {
+				
+				String dish_ID = new String(req.getParameter("dish_ID"));
+				
+				
+				DishService dishSvc = new DishService();
+				dishSvc.deleteDish(dish_ID);
+
+				String url = "/back-end/dish/listAllDish.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/*************************** 其他可能的錯誤處理 **********************************/
+//			} catch (Exception e) {
+//				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+//				failureView.forward(req, res);
+//				return;
+//			}
+//
+		}
 		
 			
 			if ("NewSelectFood".equals(action)) { 

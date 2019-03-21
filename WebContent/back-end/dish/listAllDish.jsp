@@ -107,7 +107,7 @@
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
 
-			     <input type="hidden" name="action" value="delete"></FORM>
+			     <input type="hidden" name="action" value="Newdelete"></FORM>
 			</td>
 		</c:if>
 		</tr>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.dish.model.*"%>
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
   DishVO dishVO = (DishVO) request.getAttribute("dishVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
@@ -46,8 +46,20 @@
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 
+		
 <table id="table-1">
 	<tr><td>
 		 <h3>菜色瀏覽</h3>
@@ -81,15 +93,20 @@
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
-			<td>
+			<%-- <td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
+			     <input type="hidden" name="action" value="delete">
+			     </FORM> </td>--%>
 		
 	</tr>
 </table>
-
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

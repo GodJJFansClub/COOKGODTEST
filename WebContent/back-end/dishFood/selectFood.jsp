@@ -18,30 +18,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>文章新增 - addForumArt.jsp</title>
 
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-	crossorigin="anonymous">
 
-<style>
-	
-</style>
+
 
 </head>
-<body bgcolor='white'>
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	 <script src="<%=request.getContextPath()%>/back-endTemplate/assets/libs/jquery/dist/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-		crossorigin="anonymous"></script>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 	
 	<div class="container-fluid">
 		<div class="row">
@@ -75,7 +67,7 @@
 						<tr>
 							
 							<td><h3>菜色名稱:<font color=red><b>*</b></font></h3></td>
-							<td><a href="<%=request.getContextPath()%>dish/dish.do?dish_ID=${dishVO.dish_ID}&action=getDish"></a><h3>${dishVO.dish_name}</h3></td>
+							<td><a href="<%=request.getContextPath()%>dish/dish.do?dish_ID=${dishVO.dish_ID}"></a><h3>${dishVO.dish_name}</h3></td>
 							
 						</tr>
 					</table>
@@ -178,7 +170,12 @@
 			
 		</div>
 	</div>
-
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 	<script>
 		<%	
 			Map<String, String> foodTypeMap = (Map<String, String>)application.getAttribute("foodTypeMap");

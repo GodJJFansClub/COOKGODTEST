@@ -125,6 +125,19 @@ INSERT INTO MENU(MENU_ID,MENU_NAME,MENU_RESUME,MENU_STATUS,MENU_PRICE)
 VALUES('M'||LPAD(TO_CHAR(MENU_SEQ.NEXTVAL),5,'0'),'愛的烤肉套餐組合','由醃製無骨牛排、醃製小牛排、原味無骨牛排和原味牛肉片共同組成。客人可以同時享用醃製和原味兩種完全不同風味的肉品，豆腐煲可根據個人喜好任選。','M1',4520);
 INSERT INTO MENU(MENU_ID,MENU_NAME,MENU_RESUME,MENU_STATUS,MENU_PRICE)
 VALUES('M'||LPAD(TO_CHAR(MENU_SEQ.NEXTVAL),5,'0'),'京都懷石套餐','美饌之都 演繹佳餚，宮廷園藝造景的前菜作開場，色、味、感多重享受，『崇尚初心』的懷石料理，簡單調味，完美呈現，彷彿置身於京都舊址，感受歷史人文的風土軼事與美饌佳餚的演繹感動。','M1',6800);
+
+INSERT INTO MENU (MENU_ID,MENU_NAME,MENU_RESUME,MENU_STATUS,MENU_PRICE) 
+VALUES ('M'||LPAD((MENU_SEQ.NEXTVAL),5,'0'),'粵式套餐','大家在家中即可享用豐盛美食。行政總主廚保留傳統粵菜風味，精巧烹調頂級食材，推出「粵式套餐」。','M1',12000);
+
+INSERT INTO MENU (MENU_ID,MENU_NAME,MENU_RESUME,MENU_STATUS,MENU_PRICE)
+VALUES ('M'||LPAD((MENU_SEQ.NEXTVAL),5,'0'),'六六大順','包含五福錦繡拼盤、洋蔥桂花龍蝦、紅燒無錫大肋排、清蒸野生年年餘、浦燒鰻櫻花蝦米糕、蠔皇鮑魚烏參虎掌和頂級黑鑽養生雞湯組。','M1',8888);
+
+INSERT INTO MENU(MENU_ID,MENU_NAME,MENU_RESUME,MENU_STATUS,MENU_PRICE)
+VALUES('M'||LPAD((MENU_SEQ.NEXTVAL),5,'0'),'鴻運呈祥','內含「烏魚子大拼盤」、「寧式東坡肉」、「櫻花蝦珍珠」、「清蒸石斑魚」和「乾隆佛跳牆」5道菜色；還有9道膾炙人口的單點菜色，其中最受歡迎的「寧式東坡肉」（另附餅皮），醬濃肉嫩入味、似肥而不膩。','M0',8888);
+
+
+
+
 ---------------------------------------------------------------------------------------------------------------------------------
 --建立表格:推播通知--
 CREATE TABLE BROADCAST(

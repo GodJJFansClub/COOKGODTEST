@@ -81,7 +81,7 @@ th, td {
 	
 		<FORM id="dishFoodForm" METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" style="margin-bottom: 0px;">
 
-		<td><h3>菜色名稱:${dishVO.dish_ID}<font color=red><b>*</b></font></h3></td><h4> ${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</h4>
+		<h3>菜色名稱: <font color=red><b>*</b><h4>${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</h4></font></h3>
 		
 		
 		<h4> ${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</h4>
@@ -113,7 +113,7 @@ th, td {
 			
 		</c:forEach> 
 		
-			<input id="dishIdHidd" type="hidden" name="dish_ID" value="${param.dish_ID}">
+			<input id="dishIdHidd" type="hidden" name="dish_ID" value="${dishVO.dish_ID}">
 			<input id="dishAction" type="hidden" name="action" value="insert">
 			
 			<input  type="submit" value="新增完成">

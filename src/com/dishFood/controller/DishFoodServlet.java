@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import com.food.model.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.dishFood.model.*;
@@ -274,8 +273,9 @@ public class DishFoodServlet extends HttpServlet {
 				req.setAttribute("listFoods_ByDish", dishFoodList);
 				if (!errorMsgs.isEmpty()) {
 					System.out.println("errorMsgs.size() = " + errorMsgs.size());
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/addDishFood.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/selectFood.jsp");
 					failureView.forward(req, res);
+					
 					return; // 程式中斷
 				}
 
@@ -293,16 +293,14 @@ public class DishFoodServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/addDishFood.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/selectFood.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+		if ("delete".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -316,7 +314,7 @@ public class DishFoodServlet extends HttpServlet {
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 				String url = "/back-end/dishFood/listAllDishFood.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
@@ -328,55 +326,23 @@ public class DishFoodServlet extends HttpServlet {
 		}
 
 
-		if ("addMoreFood".equals(action)) {
+		if ("convey".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-//			JsonObject errorMsgs = new JsonObject();
-//			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try {
-//				String dish_ID = req.getParameter("dish_ID");
-//
-//				System.out.println("test");
-//				Map<String, String[]> dishFoodMap = new HashMap<String, String[]>(req.getParameterMap());
-//				dishFoodMap.forEach((key, arr) -> {
-//					for (int i = 0; i < arr.length; i++)
-//						System.out.println(key + arr[i]);
-//				});
-//
-//				req.setAttribute("dishFoodMap", dishFoodMap);
+//				
 
 				String dish_ID = req.getParameter("dish_ID");
-
-				String[] food_IDArr = req.getParameterValues("food_ID");
-
-				if (food_IDArr == null) {
-					errorMsgs.add("請勾選食材,空白無法送出");
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/addDishFood.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-
+				System.out.println(dish_ID);		
+				DishVO dishVO = new DishVO();
+				DishService dishSvc = new DishService();
+				dishVO = dishSvc.getOneDish(dish_ID);
+				req.setAttribute("dishVO",dishVO);
 				
-//				HttpSession session = req.getSession();
-//				List<DishFoodVO> dishFoodList = (List<DishFoodVO>) session.getAttribute("dishFoodList");
-				
-				List<DishFoodVO> dishFoodList = new ArrayList<DishFoodVO>();
-
-				DishFoodVO dishFoodVO = null;
-
-				for (int i = 0; i < food_IDArr.length; i++) {
-					dishFoodVO = new DishFoodVO();
-					dishFoodVO.setDish_ID(dish_ID);
-					dishFoodVO.setFood_ID(food_IDArr[i]);
-					dishFoodList.add(dishFoodVO);
-				}
-
-				req.setAttribute("dishFoodList", dishFoodList);
-				
-				String url = "/back-end/dishFood/addDishFood.jsp";
+				String url = "/back-end/dishFood/selectFood.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -384,7 +350,7 @@ public class DishFoodServlet extends HttpServlet {
 			} catch (Exception e) {
 
 //				errorMsgs.addProperty("無法取得資料:", e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/addDishFood2.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/dishFood/selectFood.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -465,10 +431,6 @@ public class DishFoodServlet extends HttpServlet {
 					return;
 				}
 
-				
-//				HttpSession session = req.getSession();
-//				List<DishFoodVO> dishFoodList = (List<DishFoodVO>) session.getAttribute("dishFoodList");
-				
 				List<DishFoodVO> dishFoodList = new ArrayList<DishFoodVO>();
 
 				DishFoodVO dishFoodVO = null;
@@ -481,7 +443,8 @@ public class DishFoodServlet extends HttpServlet {
 				}
 
 				req.setAttribute("dishFoodList", dishFoodList);
-				
+				HttpSession session = req.getSession();
+				session.removeAttribute("dishVO");
 				String url = "/back-end/dishFood/selectFood.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);

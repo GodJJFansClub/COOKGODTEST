@@ -35,7 +35,7 @@
 
 <style>
   table {
-	width:400px;
+	width:600px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -49,6 +49,20 @@
 </style>
 
 </head>
+
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		
+		</aside>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+
 <body bgcolor='white'>
 
 <table id="table-1">
@@ -94,8 +108,11 @@
 	
 	<tr>
 		<td>菜色內容:</td>
-		<td><textarea rows="20" cols="40" name="dish_resume" >
-		</textarea><br></td>
+		<td><script src="<%=request.getContextPath() %>/publibrary/ckeditor4/ckeditor.js"></script>
+		<textarea rows="20" cols="40" name="dish_resume" >
+		</textarea>
+		<script>CKEDITOR.replace('dish_resume');</script></td>
+		
 	</tr>
 	<tr>
 		<td>菜色價格:</td>
@@ -142,5 +159,11 @@ function readURL(input){
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
 
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

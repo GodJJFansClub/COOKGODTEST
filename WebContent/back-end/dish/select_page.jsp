@@ -69,33 +69,8 @@
   <jsp:useBean id="menuDishSvc" scope="page" class="com.menuDish.model.MenuDishService" />
   <jsp:useBean id="dishFoodSvc" scope="page" class="com.dishFood.model.DishFoodService" />
  
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" >
-       <b>選擇菜色:</b>
-       <select size="1" name="dish_ID">
-         <c:forEach var="dishVO" items="${dishSvc.all}" > 
-          <option value="${dishVO.dish_ID}">${dishVO.dish_name}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="送出">
-    </FORM>
-  </li>
   
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/menuDish/menuDish.do" >
-       <b>套餐菜色:</b>
-       <select size="1" name="menu_ID">
-         <c:forEach var="menuVO" items="${menuSvc.all}" > 
-          <option value="${MenuVO.menu_ID}">${menuVO.menu_name}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="listDishs_ByMenu">
-       <input type="submit" value="送出">
-    </FORM>
-  </li>
-  
-  <li>
+  <%--<li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" >
        <b>菜色食材:</b>
        <select size="1" name="dish_ID">
@@ -106,16 +81,13 @@
        <input type="hidden" name="action" value="listFoods_ByDish">
        <input type="submit" value="送出">
     </FORM>
-  </li>
+  </li>--%>
   
 </ul>
 <h6 >新增</h6>
 
 <ul>
 <li><a href='addDish.jsp'>新增菜色</a> </li>
-</ul>
-<ul>
-<li><a href="<%=request.getContextPath() %>/back-end/dishFood/addDishFood.jsp">新增菜色食材</a> </li>
 </ul>
 <ul>
 <li><a href="<%=request.getContextPath() %>/back-end/menuDish/addMenuDish.jsp">新增套餐菜色</a> </li>
