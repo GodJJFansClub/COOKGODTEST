@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.menuOrder.model.*"%>
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
+<jsp:useBean id="menuSvc" class="com.menu.model.MenuService"/>
 <%
 	MenuOrderService menuOrderSvc = new MenuOrderService();
 	List<MenuOrderVO> listAll = menuOrderSvc.getAll();
@@ -73,8 +75,8 @@ th,td{
 										<td>${menuOrderVO.menu_od_end}</td>
 										<td>${menuOrderVO.menu_od_rate}</td>
 										<td>${menuOrderVO.menu_od_msg}</td>
-										<td>${menuOrderVO.cust_ID}</td>
-										<td>${menuOrderVO.chef_ID}</td>
+										<td>${custSvc.getOneCust(menuOrderVO.cust_ID).cust_name}</td>
+										<td>${custSvc.getOneCust(menuOrderVO.chef_ID).cust_name}</td>
 										<td>${menuOrderVO.menu_ID}</td>
 										<td>
 											<form method="post"

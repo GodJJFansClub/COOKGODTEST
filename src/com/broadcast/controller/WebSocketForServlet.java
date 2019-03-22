@@ -41,35 +41,13 @@ public class WebSocketForServlet implements ServletContextListener{
 	Gson gson = new Gson();
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		ServletContext servletContext = event.getServletContext();
-		servletContext.setAttribute("webSessions", webSessions);
-		Timer timer= new Timer();
-		servletContext.setAttribute("Servlettimer", timer);
+		
 	}
 	
 
 	@OnOpen
 	public void onOpen( Session userSession) throws IOException {
-//		// 設定成500KB為了配合Android bundle傳送大小
-////		int maxBufferSize = 500 * 1024;
-////		userSession.setMaxTextMessageBufferSize(maxBufferSize);
-////		userSession.setMaxBinaryMessageBufferSize(maxBufferSize);
-//		
-//		webSessions.add(userSession);
-//		AdService adSvc =new AdService();
-//    	List<AdVO> adVOs = adSvc.getAllNowAd();
-//    
-//    	
-//    	
-//    	JsonObjectBuilder jsObjBuilder = Json.createObjectBuilder();
-//    	JsonArrayBuilder jsArrBuilder = Json.createArrayBuilder();
-//    	
-//    	for(AdVO adVO: adVOs) {
-//    		JsonObject jsonObject = jsObjBuilder.add("ad_ID", adVO.getAd_ID()).add("ad_con", adVO.getAd_con()).add("ad_title",adVO.getAd_title()).build();
-//    		jsArrBuilder.add(jsonObject);
-//    	}
-//    	JsonArray jsArr = jsArrBuilder.build();
-//    	userSession.getAsyncRemote().sendText(jsArr.toString());
+
 
 
 	}
@@ -97,12 +75,7 @@ public class WebSocketForServlet implements ServletContextListener{
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		ServletContext servletContext = sce.getServletContext();
-//		Timer timer = (Timer) servletContext.getAttribute("Servlettimer");
-//    	timer.cancel();
-//		ServletContextListener.super.contextDestroyed(sce);
-		Timer timer = (Timer) servletContext.getAttribute("Servlettimer");
-		timer.cancel();
+
 	}
 	
 	

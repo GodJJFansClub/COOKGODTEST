@@ -14,7 +14,6 @@
 <title>The God of Cooking is Coming!</title>
 <style type="text/css">
 .col-2 {
-	height: 200%;
 	background-color: #909497;
 }
 
@@ -34,44 +33,10 @@
 			<div class="col-8">
 				<div class="container-fliud">
 					<div class="row">
-						<div id="carouselExampleIndicators" class="carousel slide"
-							data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#carouselExampleIndicators" data-slide-to="0"
-									class="active"></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-							</ol>
-							<div class="carousel-inner">
-								<div class="carousel-item active">
-									<img src="<%=request.getContextPath()%>/images/food1.jpg"
-										class="d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item">
-									<img src="<%=request.getContextPath()%>/images/food2.jpg"
-										class="d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item">
-									<img src="<%=request.getContextPath()%>/images/food3.jpg"
-										class="d-block w-100" alt="...">
-								</div>
-							</div>
-							<a class="carousel-control-prev"
-								href="#carouselExampleIndicators" role="button"
-								data-slide="prev"> <span class="carousel-control-prev-icon"
-								aria-hidden="true"></span> <span class="sr-only">Previous</span>
-							</a> <a class="carousel-control-next"
-								href="#carouselExampleIndicators" role="button"
-								data-slide="next"> <span class="carousel-control-next-icon"
-								aria-hidden="true"></span> <span class="sr-only">Next</span>
-							</a>
-						</div>
 						<%@ include file="page1.file"%>
-						<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>"
-							end="<%=pageIndex+rowsPerPage-1%>">
+						<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<div class="col-4">
-								<form method="post"
-									action="<%=request.getContextPath()%>/menu/menu.do">
+								<form method="post" action="<%=request.getContextPath()%>/menu/menu.do">
 									<c:if test="${not empty menuVO.menu_pic}">
 										<img class="card-img-top" name="showMenuPic"
 											src="<%=request.getContextPath()%>/menu/menu.do?showMenuPic=showMenuPic&menu_ID=${menuVO.menu_ID}"

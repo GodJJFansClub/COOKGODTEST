@@ -17,8 +17,8 @@
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>
-				<a class="btn btn-outline-success" href='<%=request.getContextPath()%>/back-end/menu/addMenu.jsp' role="button" style="width: 50%; float: left;">新增套餐</a>
-				<a class="btn btn-outline-success" href='<%=request.getContextPath()%>/back-end/menu/listAllMenu.jsp' role="button" style="width: 50%;">查詢所有套餐</a>
+				<a class="btn btn-outline-success" href="<%=request.getContextPath()%>/back-end/menu/addMenu.jsp" role="button" style="width: 50%; float: left;">新增套餐</a>
+				<a class="btn btn-outline-success" href="<%=request.getContextPath()%>/back-end/menu/listAllMenu.jsp" role="button" style="width: 50%;">查詢所有套餐</a>
 				
 					<%--Error Message --%>
 					<c:if test="${not empty errorMsgs}">

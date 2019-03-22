@@ -58,7 +58,7 @@
 <ul>
   <li><a href='listAllDish.jsp'>新菜色申請</a><br><br></li>
   <li><a href='AllDish.jsp'>目前上架菜色</a><br><br></li>
-  <li><a href='<%=request.getContextPath() %>/back-end/menuDish/listAllMenuDish.jsp'>套餐菜色</a><br><br></li>
+  <!-- <li><a href='<%=request.getContextPath() %>/back-end/menuDish/listAllMenuDish.jsp'>套餐菜色</a><br><br></li> -->
   <li><a href='<%=request.getContextPath() %>/back-end/dishFood/listAllDishFood.jsp'>菜色食材</a> </li>
 
   <jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService"/>

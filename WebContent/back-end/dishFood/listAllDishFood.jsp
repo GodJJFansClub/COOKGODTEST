@@ -78,7 +78,6 @@
 		<th>食材數量:</th>
 		<th>數量單位:</th>
 		<th>修改</th>
-		<th>刪除</th>
 	</tr>
 	
 	
@@ -89,7 +88,7 @@
 			<td>${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</td>
 			<td>${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</td>
 			<td>${dishFoodVO.dish_f_qty}</td>
-			<td>${foodUnitMap[dishdishFoodVO.dish_f_unit]}</td>
+			<td>${foodUnitMap[dishFoodVO.dish_f_unit]}</td>
 			
 			
 			<td>
@@ -98,13 +97,6 @@
 			     <input type="hidden" name="dish_ID"  value="${dishFoodVO.dish_ID}">
 			     <input type="hidden" name="food_ID"  value="${dishFoodVO.food_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="dish_ID"  value="${dishFoodVO.dish_ID}">
-			     <input type="hidden" name="food_ID"  value="${dishFoodVO.food_ID}">
-			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		
 		</tr>

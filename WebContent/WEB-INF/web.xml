@@ -66,10 +66,14 @@
 		<url-pattern>/front-end/dishFood/*</url-pattern>
 		<url-pattern>/front-end/favFdSup/*</url-pattern>
 		<url-pattern>/front-end/festDish/*</url-pattern>
-		<url-pattern>/front-end/festMenu/*</url-pattern>
+		<url-pattern>/front-end/festMenu/addFestMenu.jsp</url-pattern>
+		<url-pattern>/front-end/festMenu/listAllFestMenu.jsp</url-pattern>
+		<url-pattern>/front-end/festMenu/listOneFestMenu.jsp</url-pattern>
+		<url-pattern>/front-end/festMenu/select_page.jsp</url-pattern>
+		<url-pattern>/front-end/festMenu/update_festMenu_input.jsp</url-pattern>
 		<url-pattern>/front-end/festOrder/*</url-pattern>
 		<url-pattern>/front-end/festOrderDetail/*</url-pattern>
-		<url-pattern>/front-end/foodMall/*</url-pattern>
+		<url-pattern>/front-end/foodMall/comorder.jsp</url-pattern>
 		<url-pattern>/front-end/foodOrder/*</url-pattern>
 		<url-pattern>/front-end/forumArt/*</url-pattern>
 		<url-pattern>/front-end/forumMsg/*</url-pattern>
@@ -93,7 +97,7 @@
 		<filter-name>LoginFrontFoodSupFilter</filter-name>
 		<url-pattern>/front-end/ad/*</url-pattern>
 		<url-pattern>/front-end/foodSup/addFoodMall.jsp</url-pattern>
-		<url-pattern>/front-end/foodSup/foodSupInfo.jsp</url-pattern>
+		<url-pattern>/front-end/foodSup/update_foodMall_input.jsp</url-pattern>
 		<url-pattern>/front-end/foodSup/listFoodMallsByFoodSupID.jsp</url-pattern>
 		<url-pattern>/front-end/foodSup/MFSupODs.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
@@ -109,7 +113,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFrontChefFilter</filter-name>
-		<url-pattern>/front-end/chef/1</url-pattern>
+		<url-pattern>/front-end/chef/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

@@ -97,6 +97,7 @@ th, td {
 		</tr>
 		
 		<c:forEach var="adVO" items="${list}" >
+			
 			<c:if test="${adVO.food_sup_ID == foodSupVO.getFood_sup_ID()}">
 			<tr>
 				<td>${adVO.ad_ID}</td>

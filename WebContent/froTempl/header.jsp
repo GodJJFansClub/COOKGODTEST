@@ -100,9 +100,14 @@
 											<ul class="dropdown">
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">個人檔案</a></li>
-												<li><a
-													href="">訂單管理</a></li>
-											</ul></li>
+												<li>
+												<a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">
+												節慶主題料理管理</a>
+												</li>
+												
+											</ul>
+										</li>
+											
 									</c:if>
 									<c:if test="${not empty foodSupVO}">
 										<li><a href="">食材供應商專區</a>

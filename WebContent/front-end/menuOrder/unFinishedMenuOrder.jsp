@@ -43,14 +43,7 @@ th, td {
 </style>
 </head>
 <body>
-	<div class="card text-center" style="background-color: #D4E6F1">
-		<div class="card-body">
-			<h5 class="card-title">未完成訂單</h5>
-			<a
-				href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp"
-				class="btn btn-primary">回上一頁</a>
-		</div>
-	</div>
+
 
 	<%--Error Message--%>
 	<c:if test="${not empty errorMsgs} }">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="foodOrSvc" class="com.foodOrder.model.FoodOrderService"/>
+<<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <html>
 <head>
 </head>
@@ -15,16 +16,16 @@
 			  <th scope="col">收件人姓名</th>
 			  <th scope="col">訂單狀態</th>
 			  <th scope="col">下訂日期</th>
-			 <th scope="col">出貨日期</th>
-							<th scope="col">到貨日期</th>
-							<th scope="col">完成日期</th>
+			  <th scope="col">出貨日期</th>
+			  <th scope="col">到貨日期</th>
+			  <th scope="col">完成日期</th>
 							<th scope="col">收件地址</th>
 							<th scope="col">收件人電話</th>
 							<th scope="col">總計</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	<c:forEach var="foodOrderVO" items="${foodOrdSvc.getFoodOrdersByCust(custVO.cust_ID)}" >
+		  	<c:forEach var="foodOrderVO" items="${foodOrSvc.getFoodOrdersByCust_ID(custVO.cust_ID)}" >
 		    <tr>
 		      <td scope="col">${foodOrderVO.food_or_ID}</td>
 			  <td scope="col">${custSvc.getOneCust(foodOrderVO.cust_ID).cust_name}</td>

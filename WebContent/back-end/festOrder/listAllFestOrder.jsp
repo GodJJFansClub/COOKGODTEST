@@ -101,7 +101,6 @@ th, td {
 <!-- 			<th>折扣</th> -->
 			<th>會員編號</th>
 			<th>修改</th>
-			<th>刪除</th>
 			<th>送出查詢</th>
 		</tr>
 		</thead>
@@ -129,17 +128,7 @@ th, td {
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
-						style="margin-bottom: 0px;">
-						<button type="submit" class="btn btn-outline-secondary btn-block">刪除</button>
-<!-- 						<input type="submit" value="刪除">  -->
-						<input type="hidden"
-							name="fest_or_ID" value="${festOrderVO.fest_or_ID}"> <input
-							type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
+
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
