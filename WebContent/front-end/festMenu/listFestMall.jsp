@@ -23,7 +23,7 @@
 	</c:if>
 	<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
 		<div class="container">
-			<a href='<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp'>食材商城</a>
+			
 			
 			<div class="row">
 				<c:forEach var="festMenuVO" items="${festMenuSvc.allIndate}" varStatus="s">

@@ -20,6 +20,69 @@ import com.foodOrDetail.model.FoodOrDetailVO;
 
 
 public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
+	@Override
+	public Set<FoodOrderVO> getFoodOrdersByCust(String cust_ID) {
+		Set<FoodOrderVO> foodOrderVOs = new LinkedHashSet<FoodOrderVO>(); 
+		FoodOrderVO foodOrderVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_FOD_BYCUST);
+			pstmt.setString(1, cust_ID);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				foodOrderVO = new FoodOrderVO();
+				foodOrderVO.setFood_or_ID(rs.getString(1));
+				foodOrderVO.setFood_or_status(rs.getString(2));
+				foodOrderVO.setFood_or_start(rs.getDate(3));
+				foodOrderVO.setFood_or_send(rs.getDate(4));
+				foodOrderVO.setFood_or_rcv(rs.getDate(5));
+				foodOrderVO.setFood_or_end(rs.getDate(6));
+				foodOrderVO.setFood_or_name(rs.getString(7));
+				foodOrderVO.setFood_or_addr(rs.getString(8));
+				foodOrderVO.setFood_or_tel(rs.getString(9));
+				foodOrderVO.setCust_ID(rs.getString(10));
+				foodOrderVOs.add(foodOrderVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return foodOrderVOs;
+	}
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String USER = "COOKGOD";
@@ -40,6 +103,8 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 			"UPDATE FOOD_ORDER SET FOOD_OR_STATUS = ?, FOOD_OR_SEND = ?, FOOD_OR_RCV = ?, FOOD_OR_END = ?, FOOD_OR_NAME = ?, FOOD_OR_ADDR = ?, FOOD_OR_TEL = ? WHERE FOOD_OR_ID = ?";
 	private static final String GET_FoodODs_ByFood_or_ID_STMT =
 			"SELECT * FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? ORDER BY FOOD_ID";
+	private static final String GET_FOD_BYCUST =
+			"SELECT * FROM FOOD_ORDER WHERE CUST_ID = ? ORDER BY FOOD_OR_ID";
 
 			
 	
@@ -546,7 +611,7 @@ public class FoodOrderJDBCDAO implements FoodOrderDAO_interface{
 //		System.out.println(foodOrderVO.getFood_or_tel());
 //		System.out.println(foodOrderVO.getCust_ID());
 		// 查詢全部
-		List<FoodOrderVO> foodOrderVOs = foodOrderJDBCDAO.getByStatus("o1");
+		Set<FoodOrderVO> foodOrderVOs = foodOrderJDBCDAO.getFoodOrdersByCust("C00033");
 		for(FoodOrderVO foodOrderVO: foodOrderVOs) {		
 			System.out.print(foodOrderVO.getFood_or_ID() + " ");
 			System.out.print(foodOrderVO.getFood_or_status() + " ");

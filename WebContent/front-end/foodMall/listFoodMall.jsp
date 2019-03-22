@@ -24,7 +24,7 @@
 			</ul>
 		</c:if>
 		<div class="container">
-			<a href='<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp'>節慶主題料理</a>
+			
 			
 			<div class="row">
 				<c:forEach var="foodMallVO" items='${foodMallSvc.getAllStatus("p4")}' varStatus="s">

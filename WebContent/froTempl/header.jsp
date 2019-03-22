@@ -25,6 +25,9 @@
 <!-- Stylesheet -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/froTempl/temp/style.css">
+<link
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
+	rel="stylesheet">
 
 </head>
 
@@ -51,7 +54,7 @@
 					<nav class="classy-navbar justify-content-between" id="pixelNav">
 
 						<!-- Nav brand -->
-						<a href="<%=request.getContextPath()%>/froTempl/headertest.jsp" class="nav-brand"><img
+						<a href="<%=request.getContextPath()%>/froTempl/index.jsp" class="nav-brand"><img
 							src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png"
 							alt=""></a>
 
@@ -73,7 +76,7 @@
 							<!-- Nav Start -->
 							<div class="classynav">
 								<ul>
-									<li><a href="<%=request.getContextPath()%>/froTempl/headertest.jsp">首頁</a></li>
+									<li><a href="<%=request.getContextPath()%>/froTempl/index.jsp">首頁</a></li>
 									
 									<li><a>食神來了</a>
 										<ul class="dropdown">
@@ -119,7 +122,7 @@
 												<li><a href="<%=request.getContextPath()%>/front-end/cust/listOneCust.jsp">查看個人資料</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/cust/update_cust_input.jsp">編輯個人資料</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/listAllMenuOrderByCustID.jsp">套餐訂單管理</a></li>
-												<li><a href="">食材訂單管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/cust/listCOR.jsp">食材訂單管理</a></li>
 											</ul>
 										</li>
 									</c:if>
@@ -209,7 +212,7 @@
 		src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
 	<!-- Active js -->
 	<script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
-	
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 
 <c:if test="${not empty custVO}">

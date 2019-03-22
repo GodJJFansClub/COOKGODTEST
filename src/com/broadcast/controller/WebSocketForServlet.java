@@ -97,10 +97,12 @@ public class WebSocketForServlet implements ServletContextListener{
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-//		ServletContext servletContext = sce.getServletContext();
+		ServletContext servletContext = sce.getServletContext();
 //		Timer timer = (Timer) servletContext.getAttribute("Servlettimer");
 //    	timer.cancel();
 //		ServletContextListener.super.contextDestroyed(sce);
+		Timer timer = (Timer) servletContext.getAttribute("Servlettimer");
+		timer.cancel();
 	}
 	
 	

@@ -49,7 +49,12 @@
 				    </tr>
 				    <tr>
 				      <td>聯絡人性別</td>
-				      <td>${custVO.cust_sex}</td>
+				      <td><c:if test="${custVO.cust_sex.equals('M')}" var="true" scope="request">
+						男生
+					</c:if>
+					<c:if test="${custVO.cust_sex.equals('F')}" var="true" scope="request">
+						女生
+					</c:if></td>
 				    </tr>
 				    <tr>
 				      <td>聯絡人電話</td>

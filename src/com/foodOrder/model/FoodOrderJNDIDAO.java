@@ -21,6 +21,12 @@ import com.foodOrDetail.model.FoodOrDetailVO;
 
 public class FoodOrderJNDIDAO implements FoodOrderDAO_interface {
 	
+	@Override
+	public Set<FoodOrderVO> getFoodOrdersByCust(String cust_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {

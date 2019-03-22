@@ -77,9 +77,10 @@
 			<tr><th>總計</th></tr>
 			<tr><td id="cartTotal">${total}</td></tr>
 			<tr><td>
-				<form method="post" action="<%=request.getContextPath()%>/mall/mall.do">
+				<%--<form method="post" action="<%=request.getContextPath()%>/mall/mall.do">
 				<a href="<%=request.getContextPath()%>/${prePageURL}" class="btn btn-primary">繼續購物</a>
-				</form>
+				</form> --%>
+				<a href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp" class="btn btn-primary">繼續購物</a>
 				</td>
 			</tr>
 		</tbody>

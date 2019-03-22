@@ -146,8 +146,8 @@
 			<div class="modal-body">
 			
 <!-- =========================================以下為原listOneEmp.jsp的內容========================================== -->
-               <jsp:include page="/back-end/forumArt/listOneForumArt.jsp" />
-               <jsp:include page="/back-end/forumMsg/listAllForumMsg.jsp"/>
+      <%--         <jsp:include page="/back-end/forumArt/listOneForumArt.jsp" />
+               <jsp:include page="/back-end/forumMsg/listAllForumMsg.jsp"/> --%>
 <!-- =========================================以上為原listOneEmp.jsp的內容========================================== -->
 			</div>
 				<div class="modal-footer">

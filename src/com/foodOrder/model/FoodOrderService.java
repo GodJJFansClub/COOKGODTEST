@@ -61,4 +61,8 @@ public class FoodOrderService {
 	public Set<FoodOrDetailVO> getFoodOrDetailsByFood_or_ID(String food_or_ID){
 		return dao.getFoodOrDetailsByFood_or_ID(food_or_ID);
 	}
+	
+	public Set<FoodOrderVO> getFoodOrdersByCust_ID(String cust_ID){
+		return dao.getFoodOrdersByCust(cust_ID);
+	}
 }

@@ -65,7 +65,7 @@
 					<!-- ============================================================== -->
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/menuOrder/index.jsp">
+						href="<%=request.getContextPath()%>/back-end/foodOrder/listAllFoodOrder.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">

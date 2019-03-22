@@ -15,4 +15,5 @@ public interface FoodOrderDAO_interface {
 	List<FoodOrderVO> getAll();
 	List<FoodOrderVO> getByStatus(String food_or_status);
 	Set<FoodOrDetailVO> getFoodOrDetailsByFood_or_ID(String food_or_ID);
+	Set<FoodOrderVO> getFoodOrdersByCust(String cust_ID);
 }
