@@ -39,7 +39,7 @@ public class LoginFrontEndFilter implements Filter {
 	
 		if (custVO == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/front-end/loginFrontEnd.jsp");
+			res.sendRedirect(req.getContextPath() + "/front-end/index.jsp");
 			return;
 		}else if(custVO.getCust_status().equals("a1")){
 			session.setAttribute("location", req.getRequestURI());
