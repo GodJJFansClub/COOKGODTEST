@@ -59,7 +59,25 @@
 	<filter-mapping>
 		<filter-name>LoginFrontEndFilter</filter-name>
 		<url-pattern>/front-end/cust/*</url-pattern>
-		<url-pattern>/front-end/foodOrder/addFoodOrder.jsp</url-pattern>
+		<url-pattern>/front-end/ad/*</url-pattern>
+		<url-pattern>/front-end/chef/*</url-pattern>
+		<url-pattern>/front-end/chefSch/*</url-pattern>
+		<url-pattern>/front-end/dish/*</url-pattern>
+		<url-pattern>/front-end/dishFood/*</url-pattern>
+		<url-pattern>/front-end/favFdSup/*</url-pattern>
+		<url-pattern>/front-end/festDish/*</url-pattern>
+		<url-pattern>/front-end/festMenu/*</url-pattern>
+		<url-pattern>/front-end/festOrder/*</url-pattern>
+		<url-pattern>/front-end/festOrderDetail/*</url-pattern>
+		<url-pattern>/front-end/foodMall/*</url-pattern>
+		<url-pattern>/front-end/foodOrder/*</url-pattern>
+		<url-pattern>/front-end/forumArt/*</url-pattern>
+		<url-pattern>/front-end/forumMsg/*</url-pattern>
+		<url-pattern>/front-end/menu/*</url-pattern>
+		<url-pattern>/front-end/menuCart/*</url-pattern>
+		<url-pattern>/front-end/menuDish/*</url-pattern>
+		<url-pattern>/front-end/menuOrder/*</url-pattern>
+		<url-pattern>/front-end/ShoppingServlet/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
