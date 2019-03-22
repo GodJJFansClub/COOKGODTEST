@@ -27,9 +27,8 @@
 						<tr>
 							<td colspan=2>
 								<p align=center>
-									輸入<b>後台(測試登入)</b>:<br> 
-									帳號:<b>emp1</b><br>
-									密碼:<b>123456</b><br>
+									輸入<b>後台登入</b>:<br> 
+									
 							</td>
 						</tr>
 		
