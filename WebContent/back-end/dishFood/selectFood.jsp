@@ -29,7 +29,7 @@
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
+		<jsp:include page="/back-end/dish/sidebar.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
@@ -38,14 +38,14 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-7">
-				<table id="table-1" style="background-color:blue;">
+				
 					<tr>
 						<td>
 							<h3>菜色食材新增 - selectFood.jsp</h3>
 						</td>
 						<td>
 							<h4>
-								<a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a>
+								
 							</h4>
 						</td>
 					</tr>
