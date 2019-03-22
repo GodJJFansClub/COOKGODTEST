@@ -43,8 +43,8 @@ public class LoginFrontEndFilter implements Filter {
 			return;
 		}else if(custVO.getCust_status().equals("a1")){
 			session.setAttribute("location", req.getRequestURI());
-			req.setAttribute("action", "updateCust_status");
-			res.sendRedirect(req.getContextPath() + "/cust/cust.do");
+			//req.setAttribute("action", "updateCust_status");
+			res.sendRedirect(req.getContextPath() + "/front-end/index.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

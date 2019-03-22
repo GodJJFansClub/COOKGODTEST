@@ -45,7 +45,7 @@
 				<td>${foodMallVO.food_m_place}</td>
 				<td>
 					<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"
-					 width="400" height="300">
+					 width="200" height="100">
 				</td>
 				<td>
 					<FORM METHOD="post"

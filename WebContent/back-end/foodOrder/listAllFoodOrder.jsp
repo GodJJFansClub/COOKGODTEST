@@ -36,7 +36,7 @@
 					</ul>
 				</c:if>
 				<div class="table-responsive">
-					<form action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
+					<%--<form action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
 						<b>輸入顧客姓名</b>
 						<input type="text" name="cust_name" value="" size="10">
 						<b>選擇訂單狀態</b>
@@ -46,7 +46,7 @@
 									${foodOrStat.value}
 								</option>
 							</c:forEach>
-						</select>
+						</select> --%>
 						<b>下訂日期</b>
 						<input name="food_or_start" id="foodOrStart_date" type="text">
 						<input type="hidden" name="action" value="compositeQuery">

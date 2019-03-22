@@ -35,8 +35,8 @@ public class LoginBackEnd extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		req.setCharacterEncoding("Big5");
-		res.setContentType("text/html; charset=Big5");
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		EmpVO empVO = (EmpVO) req.getAttribute("empVO");
 

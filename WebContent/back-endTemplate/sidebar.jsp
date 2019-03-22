@@ -5,7 +5,7 @@
 </head>
 <body>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
-            <!-- Sidebar scroll-->
+           <br><br> <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
