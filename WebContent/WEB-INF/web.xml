@@ -74,7 +74,10 @@
 	<filter-mapping>
 		<filter-name>LoginFrontFoodSupFilter</filter-name>
 		<url-pattern>/front-end/ad/*</url-pattern>
-		<url-pattern>/front-end/FoodSup/*</url-pattern>
+		<url-pattern>/front-end/foodSup/addFoodMall.jsp</url-pattern>
+		<url-pattern>/front-end/foodSup/foodSupInfo.jsp</url-pattern>
+		<url-pattern>/front-end/foodSup/listFoodMallsByFoodSupID.jsp</url-pattern>
+		<url-pattern>/front-end/foodSup/MFSupODs.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
