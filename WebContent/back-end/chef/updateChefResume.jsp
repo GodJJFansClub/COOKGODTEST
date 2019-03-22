@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.chefSch.model.*"%>
+<%@ page import="com.chef.model.*"%>
+<% //String chef_ID = request.getParameter(chef_ID); %>
 
 <html>
 <head>
@@ -15,14 +16,15 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 
-<title>updateChefSch.jsp</title>
+<title>updateFavFdSup.jsp</title>
 </head>
 <body>
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
-			<h5 class="card-title">修改套餐訂單</h5>
-			<p class="card-text">updateChefSch.jsp</p>
-			<a href="index.jsp" class="btn btn-primary">回首頁</a>
+			<h5 class="card-title">編輯主廚簡歷</h5>
+			<a
+				href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp"
+				class="btn btn-primary">回上一頁</a>
 		</div>
 	</div>
 
@@ -38,40 +40,22 @@
 	<div class="container justify-content-center">
 		<div class="row">
 			<div class="col-12">
-				<form method="post" action="chefSch.do">
-					<jsp:useBean id="chefSch" scope="page"
-						class="com.chefSch.model.ChefSchService" />
-
+				<form method="post"
+					action="<%=request.getContextPath()%>/chef/chef.do">
+					<jsp:useBean id="chef" scope="page"
+						class="com.chef.model.ChefService" />
 					<div class="form-group">
 						<label>主廚編號</label> <input type="text" readonly
-							class="form-control" name="chef_ID" value="${chefSchVO.chef_ID}" />
+							class="form-control" name="chef_ID" value="${chefVO.chef_ID}" />
 					</div>
 
 					<div class="form-group">
-						<label>排程日期</label> <input name="chef_sch_date" readonly
-							class="form-control" id="sch_date" type="text"
-							value="${chefSchVO.chef_sch_date}" />
+						<label>主廚簡介</label>
+						<textarea rows="3" cols="100" name="chef_resume"
+							class="form-control">${chefVO.chef_resume}</textarea>
 					</div>
-
-					<%	
-						String status[] = new String [2];
-						status[0]="0";
-						status[1]="1";							
-						request.setAttribute("mystatus", status);
-					%>
-
-					<div class="form-group">
-						<label>訂單狀態</label> <select size="1" name="chef_sch_status"
-							class="form-control">
-							<c:forEach var="mydata" items="${mystatus}">
-								<option value="${mydata}"
-									${(chefSchVO.chef_sch_status==mydata)? 'selected':'' }>${mydata}
-							</c:forEach>
-						</select>
-					</div>
-					<input type="hidden" name="action" value="update"> <input
-						type="submit" class="btn btn-success btn-lg btn-block"
-						value="修改訂單">
+					<input type="hidden" name="action" value="updateResume"> <input
+						type="submit" class="btn btn-success btn-lg btn-block" value="修改">
 				</form>
 			</div>
 		</div>

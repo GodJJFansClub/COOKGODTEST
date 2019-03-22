@@ -1,15 +1,13 @@
-<%@page import="java.sql.Date"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.chefSch.model.*"%>
+<%@ page import="com.chef.model.*"%>
 
 <%	
-	ChefSchService chefSchSvc = new ChefSchService();
-	java.sql.Date chef_sch_date = java.sql.Date.valueOf(request.getParameter("chef_sch_date"));
-	List<ChefSchVO> listAll = chefSchSvc.getAllChefSchByDate(chef_sch_date);
-	pageContext.setAttribute("listAll", listAll);
+	ChefService chefSvc = new ChefService();
+	String menu_ID = request.getParameter("menu_ID");
+	List<ChefVO> list = chefSvc.getAllByMenuID(menu_ID);
+	pageContext.setAttribute("list",list);
 %>
 
 <html>
@@ -26,7 +24,7 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 
-<title>List_Chef_Sch_By_Date.jsp</title>
+<title>List_All_By_Chef_Area.jsp</title>
 <style type="text/css">
 table {
 	border: 2px solid gray;
@@ -45,14 +43,14 @@ th, td {
 <body>
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
-			<h5 class="card-title">³æ¤é¥D¼p±Æµ{</h5>
-			<p class="card-text">listChefSchByDate.jsp</p>
-			<a href="index.jsp" class="btn btn-primary">¦^­º­¶</a>
+			<h5 class="card-title">ä¸»å»š</h5>
+			<p class="card-text">listOneByChefID.jsp</p>
+			<a href="index.jsp" class="btn btn-primary">å›é¦–é </a>
 		</div>
 	</div>
 
 	<%--Error Message--%>
-	<c:if test="${not empty errorMsgs} }">
+	<c:if test="${not empty errorMsgs}">
 		<font style="color: red; font-size: 30px;">Error</font>
 		<ul>
 			<c:forEach var="errMsgs" items="${errorMsgs}">
@@ -65,39 +63,34 @@ th, td {
 			<div class="col-12">
 				<table>
 					<tr>
-						<th>¥D¼p½s¸¹</th>
-						<th>¥D¼p©m¦W</th>
-						<th>±Æµ{¤é´Á</th>
-						<th>·í¤Ñª¬ºA</th>
-						<th>­×§ï­q³æ</th>
-						<th>§R°£­q³æ</th>
+						<th>ä¸»å»šç·¨è™Ÿ</th>
+						<th>ä¸»å»šæœå‹™åœ°å€</th>
+						<th>ä¸»å»šé »é“</th>
+						<th style="width:400px;">ä¸»å»šç°¡ä»‹</th>
+						<th>ç·¨è¼¯ä¸»å»š</th>
+						<th>åˆªé™¤ä¸»å»š</th>
 					</tr>
 					<%@ include file="page1.file"%>
-					<c:forEach var="chefSchVO" items="${listAll}"
-						begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+					<c:forEach var="chefVO" items="${list}" begin="<%=pageIndex %>"
+						end="<%=pageIndex+rowsPerPage-1 %>">
 						<tr>
-							<td>${chefSchVO.chef_ID}</td>
-							<td>${chefSchVO.chef_name}</td>
-							<td>${chefSchVO.chef_sch_date}</td>
-							<td>${chefSchVO.chef_sch_status}</td>
+							<td>${chefVO.chef_ID}</td>
+							<td>${chefVO.chef_area}</td>
+							<td>${chefVO.chef_channel}</td>
+							<td>${chefVO.chef_resume}</td>
 							<td>
 								<form method="post"
-									action="<%=request.getContextPath()%>/chefSch/chefSch.do">
-									<input type="submit" value="½s¿è"> <input type="hidden"
-										name="chef_ID" value="${chefSchVO.chef_ID}"> <input
-										type="hidden" name="chef_sch_date"
-										value="${chefSchVO.chef_sch_date}"> <input
-										type="hidden" name="action" value="getOneForUpdate">
+									action="<%=request.getContextPath()%>/chef/chef.do">
+									<input type="submit" value="ç·¨è¼¯"> 
+									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}"> 
+									<input type="hidden" name="action" value="getOneForDisplay">
 								</form>
 							</td>
 							<td>
-								<form method="post"
-									action="<%=request.getContextPath()%>/chefSch/chefSch.do">
-									<input type="submit" value="§R°£"> <input type="hidden"
-										name="chef_ID" value="${chefSchVO.chef_ID}"> <input
-										type="hidden" name="chef_sch_date"
-										value="${chefSchVO.chef_sch_date}"> <input
-										type="hidden" name="action" value="delete">
+								<form method="post" action="<%=request.getContextPath()%>/chef/chef.do">
+									<input type="submit" value="åˆªé™¤"> 
+									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}"> 
+									<input type="hidden" name="action" value="delete">
 								</form>
 							</td>
 						</tr>

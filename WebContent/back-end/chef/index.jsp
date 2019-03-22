@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.chefSch.model.*"%>
+<%@ page import="com.chef.model.*"%>
 
 <html>
 <head>
@@ -15,21 +15,23 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 
-<title>主廚排程管理系統</title>
+<title>主廚管理</title>
 </head>
 <body>
 
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
-			<h5 class="card-title">主廚排程管理</h5>
+			<h5 class="card-title">主廚管理</h5>
 			<p class="card-text">Index.jsp</p>
 		</div>
 	</div>
 
-	<a class="btn btn-outline-success" href='addChefSch.jsp' role="button"
-		style="width: 50%; float: left;">新增行程</a>
-	<a class="btn btn-outline-success" href='listAllChefSch.jsp'
-		role="button" style="width: 50%;">查詢所有主廚行程</a>
+	<a class="btn btn-outline-success"
+		href='<%=request.getContextPath()%>/front-end/chef/addChef.jsp'
+		role="button" style="width: 50%; float: left;">新增主廚</a>
+	<a class="btn btn-outline-success"
+		href='<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp'
+		role="button" style="width: 50%;">查詢所有主廚</a>
 
 	<%--Error Message --%>
 	<c:if test="${not empty errorMsgs}">
@@ -44,23 +46,23 @@
 		<div class="row">
 			<div class="col-12">
 
-				<div class="alert alert-success" role="alert">請輸入或選擇一位主廚以查詢排程
-				</div>
+				<div class="alert alert-success" role="alert">請輸入或選擇一位主廚以查詢</div>
 				<jsp:useBean id="chefSvc" scope="page"
 					class="com.chef.model.ChefService" />
 
-				<form method="post" action="listChefSchByID.jsp">
+				<form method="post"
+					action="<%=request.getContextPath()%>/back-end/chef/listOneByChefID.jsp">
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" name="chef_ID"
 							placeholder="請輸入主廚編號">
 						<div class="input-group-append">
-							<input type="hidden" name="action" value="getOneChefSchByID">
 							<input type="submit" class="btn btn-outline-secondary" value="送出">
 						</div>
 					</div>
 				</form>
 
-				<form method="post" action="listChefSchByID.jsp">
+				<form method="post"
+					action="<%=request.getContextPath()%>/back-end/chef/listOneByChefID.jsp">
 					<div class="input-group">
 						<select size="1" name="chef_ID" class="form-control">
 							<option value="請選擇主廚編號">請選擇主廚編號
@@ -69,41 +71,35 @@
 								</c:forEach>
 						</select>
 						<div class="input-group-append">
-							<input type="hidden" name="action" value="getOneChefSchByID">
 							<input type="submit" class="btn btn-outline-secondary" value="送出">
 						</div>
 					</div>
 				</form>
 
-				<form method="post" action="listChefSchByID.jsp">
+				<form method="post" action="<%=request.getContextPath()%>/back-end/chef/listAllByChefArea.jsp">
 					<div class="input-group">
-						<select size="1" name="chef_ID" class="form-control">
-							<option value="請選擇主廚姓名">請選擇主廚姓名
-								<c:forEach var="chefVO" items="${chefSvc.all}">
-									<option value="${chefVO.chef_ID}">${chefVO.chef_name}
-								</c:forEach>
+						<select size="1" name="chef_area" class="form-control">
+							<option value="請選擇服務地區">請選擇服務地區
+							<option value="0">北</option>
+							<option value="1">中</option>
+							<option value="2">南</option>
+							<option value="3">東</option>
 						</select>
 						<div class="input-group-append">
-							<input type="hidden" name="action" value="getOneChefSchByID">
 							<input type="submit" class="btn btn-outline-secondary" value="送出">
 						</div>
 					</div>
 				</form>
-
-				<div class="alert alert-success" role="alert">請選擇日期以查詢排程</div>
-				<jsp:useBean id="chefSchSvc" scope="page"
-					class="com.chefSch.model.ChefSchService" />
-
-				<form method="post" action="listChefSchByDate.jsp">
+				<form method="post" action="<%=request.getContextPath()%>/back-end/chef/listAllByMenuID.jsp">
 					<div class="input-group">
-						<select size="1" name="chef_sch_date" class="form-control">
-							<option value="請選擇預約日期">請選擇預約日期
-								<c:forEach var="chefSchVO" items="${chefSchSvc.all}">
-									<option value="${chefSchVO.chef_sch_date}">${chefSchVO.chef_sch_date}
-								</c:forEach>
+						<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
+						<select size="1" name="menu_ID" class="form-control">
+							<option value="請選擇套餐編號">請選擇套餐編號</option>
+							<c:forEach var="menuVO" items="${menuSvc.all}">
+								<option value="${menuVO.menu_ID}">${menuVO.menu_ID}</option>
+							</c:forEach>
 						</select>
 						<div class="input-group-append">
-							<input type="hidden" name="action" value="getOneChefSchByDate">
 							<input type="submit" class="btn btn-outline-secondary" value="送出">
 						</div>
 					</div>

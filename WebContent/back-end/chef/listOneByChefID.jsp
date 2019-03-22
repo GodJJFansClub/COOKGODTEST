@@ -5,9 +5,9 @@
 
 <%	
 	ChefService chefSvc = new ChefService();
-	String chef_area = request.getParameter("chef_area");
-	List<ChefVO> list = chefSvc.getAllByChefArea(chef_area);
-	pageContext.setAttribute("list",list);
+	String chef_ID = request.getParameter("chef_ID");
+	ChefVO chefVO = chefSvc.getOneByChefID(chef_ID);
+	pageContext.setAttribute("chefVO",chefVO);
 %>
 
 <html>
@@ -24,7 +24,7 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 
-<title>List_All_By_Chef_Area.jsp</title>
+<title>List_All_By_Chef_ID.jsp</title>
 <style type="text/css">
 table {
 	border: 2px solid gray;
@@ -50,54 +50,54 @@ th, td {
 	</div>
 
 	<%--Error Message--%>
-	<c:if test="${not empty errorMsgs} }">
-		<font style="color: red; font-size: 30px;">Error</font>
-		<ul>
-			<c:forEach var="errMsgs" items="${errorMsgs}">
-				<li style="color: red;">${errMsgs}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+	<% if(chefVO==null){ %>
+	<font style="color: red; font-size: 30px;">Error</font>
+	<ul>
+		<li style="color: red;">查無資料</li>
+	</ul>
+	<% } %>
 	<div class="container justify-content-center">
 		<div class="row">
 			<div class="col-12">
 				<table>
 					<tr>
 						<th>主廚編號</th>
+						<th>主廚狀態</th>
 						<th>主廚服務地區</th>
 						<th>主廚頻道</th>
-						<th>主廚簡介</th>
+						<th style="width:400px;">主廚簡介</th>
 						<th>編輯主廚</th>
 						<th>刪除主廚</th>
 					</tr>
-					<%@ include file="page1.file"%>
-					<c:forEach var="chefVO" items="${list}" begin="<%=pageIndex %>"
-						end="<%=pageIndex+rowsPerPage-1 %>">
-						<tr>
-							<td>${chefVO.chef_ID}</td>
-							<td>${chefVO.chef_area}</td>
-							<td>${chefVO.chef_channel}</td>
-							<td>${chefVO.chef_resume}</td>
-							<td>
-								<form method="post"
-									action="<%=request.getContextPath()%>/chef/chef.do">
-									<input type="submit" value="編輯"> <input type="hidden"
-										name="chef_ID" value="${chefVO.chef_ID}"> <input
-										type="hidden" name="action" value="getOneForUpdate">
-								</form>
-							</td>
-							<td>
-								<form method="post"
-									action="<%=request.getContextPath()%>/chef/chef.do">
-									<input type="submit" value="刪除"> <input type="hidden"
-										name="chef_ID" value="${chefVO.chef_ID}"> <input
-										type="hidden" name="action" value="delete">
-								</form>
-							</td>
-						</tr>
-					</c:forEach>
+					<tr>
+						<td>${chefVO.chef_ID}</td>
+						<td>
+							<c:if test="${chefVO.chef_status=='b0'}">未審核</c:if>
+							<c:if test="${chefVO.chef_status=='b1'}">審核通過</c:if>
+							<c:if test="${chefVO.chef_status=='b2'}">審核不過</c:if>
+							<c:if test="${chefVO.chef_status=='b3'}">停權</c:if>
+						</td>
+						<td>${chefVO.chef_area}</td>
+						<td>${chefVO.chef_channel}</td>
+						<td>${chefVO.chef_resume}</td>
+						<td>
+							<form method="post"
+								action="<%=request.getContextPath()%>/chef/chef.do">
+								<input type="submit" value="編輯"> <input type="hidden"
+									name="chef_ID" value="${chefVO.chef_ID}"> <input
+									type="hidden" name="action" value="getOneForDisplay">
+							</form>
+						</td>
+						<td>
+							<form method="post"
+								action="<%=request.getContextPath()%>/chef/chef.do">
+								<input type="submit" value="刪除"> <input type="hidden"
+									name="chef_ID" value="${chefVO.chef_ID}"> <input
+									type="hidden" name="action" value="delete">
+							</form>
+						</td>
+					</tr>
 				</table>
-				<%@ include file="page2.file"%>
 			</div>
 		</div>
 	</div>
