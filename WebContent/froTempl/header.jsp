@@ -76,7 +76,7 @@
 							<!-- Nav Start -->
 							<div class="classynav">
 								<ul>
-									<li><a href="<%=request.getContextPath()%>/froTempl/index.jsp">首頁</a></li>
+									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
 									
 									<li><a>食神來了</a>
 										<ul class="dropdown">
@@ -148,7 +148,7 @@
 												</c:if>
 											</ul></li>
 										<FORM METHOD="get"
-											action="<%=request.getContextPath()%>/back-endTemplate/logout.do">
+											action="<%=request.getContextPath()%>/front-end/logout.do">
 											<input type="submit" value="登出">
 										</FORM>
 									</c:if>

@@ -58,7 +58,9 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFrontEndFilter</filter-name>
-		<url-pattern>/front-end/cust/*</url-pattern>
+		<url-pattern>/front-end/cust/listCOR.jsp</url-pattern>
+		<url-pattern>/front-end/cust/listOneCust.jsp</url-pattern>
+		<url-pattern>/front-end/cust/update_cust_input.jsp</url-pattern>
 		<url-pattern>/front-end/ad/*</url-pattern>
 		<url-pattern>/front-end/chef/*</url-pattern>
 		<url-pattern>/front-end/chefSch/*</url-pattern>
@@ -82,6 +84,20 @@
 		<url-pattern>/front-end/menuDish/*</url-pattern>
 		<url-pattern>/front-end/menuOrder/*</url-pattern>
 		<url-pattern>/front-end/ShoppingServlet/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>LoginFrontCustStatus</filter-name>
+		<filter-class>com.frontEnd.filters.LoginFrontCustStatus</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFrontCustStatus</filter-name>
+		<url-pattern>/front-end/cust/logininStatus.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
@@ -145,8 +161,8 @@
 		<servlet-class>com.login.Logout</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>LogoutBack</servlet-name>
-		<url-pattern>/back-end/logoutBack.do</url-pattern>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/front-end/logout.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -155,7 +171,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
-		<url-pattern>/back-endTemplate/logout.do</url-pattern>
+		<url-pattern>/back-end/logoutBack.do</url-pattern>
 	</servlet-mapping>
 
 	<listener>
@@ -351,15 +367,6 @@
 		<url-pattern>/festMenu/festMenu.do</url-pattern>
 	</servlet-mapping>
 	
-	    <servlet>
-		    <servlet-name>ScheduleServlet</servlet-name>
-		    <servlet-class>com.testuse.ScheduleServlet</servlet-class>
-		    <load-on-startup>10</load-on-startup>
-	  </servlet>
-	  <servlet-mapping>
-		    <servlet-name>ScheduleServlet</servlet-name>
-		    <url-pattern>/ScheduleServlet</url-pattern>
-	  </servlet-mapping>
 
 	<servlet>
 		<servlet-name>DishServlet</servlet-name>

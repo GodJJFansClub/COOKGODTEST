@@ -912,7 +912,7 @@ public class CustServlet extends HttpServlet {
 		{
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			System.out.println("Test");
 			try {
 
 				// 0.id

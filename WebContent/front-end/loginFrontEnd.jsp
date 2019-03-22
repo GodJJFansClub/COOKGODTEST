@@ -50,8 +50,9 @@
 
 
 					<tr>
-						<td colspan=2 align=center><input type="hidden" name="action"
-							value="cust"> <input type=submit value="  ok   ">
+						<td colspan=2 align=center>
+						<input type="hidden" name="action" value="cust">
+						<input type=submit value="ok">
 
 						</td>
 					</tr>

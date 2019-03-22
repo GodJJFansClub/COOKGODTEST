@@ -80,28 +80,6 @@
                 </div>
             </div>  
 		</c:forEach>
-<!-- 			<div class="single-slide"> -->
-<!-- 				Background Image -->
-<!-- 				<div id="imgPos" class="slide-bg-img bg-img"></div> -->
-<!-- 				Welcome Text -->
-<!-- 				<div class="container h-100"> -->
-<!-- 					<div class="row h-100 align-items-center"> -->
-<!-- 						<div class="col-12 col-lg-9"> -->
-<!-- 							<div id="ad" class="welcome-text"> -->
-<!-- 								<h2 data-animation="fadeInUp" data-delay="300ms"> -->
-<!-- 									<span></span><br> -->
-<!-- 								</h2> -->
-<!-- 								<h4 data-animation="fadeInUp" data-delay="500ms"> -->
-<!-- 									<span></span> -->
-<!-- 								</h4> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-
-
-
 			
 		</div>
 	</section>
@@ -134,62 +112,6 @@
 		});
 		// 觸發connect()時註冊方法, 並建立WebSocket物件
 
-		function adWSconnect() {
-			//	建立 websocket 物件
-			adWebSocket = new WebSocket(endPointURL);
-
-			adWebSocket.onopen = function(event) {
-			
-			};
-
-			//	隨然我是在連線建立好時傳送訊息(ServerWebSocket), 依舊會觸發這個onmessage
-
-			adWebSocket.onmessage = function(event) {
-				console.log(event);
-// 				let adWallVar = $("#adWallhidden").clone();
-				let adWallmsgs = JSON.parse(event.data);
-// 				console.log(adWallmsgs);
-				let urlStr = "url(<%=request.getContextPath()%>/ad/ad.do?ad_ID=" +adWallmsgs[0].ad_ID+ ")";
-// 				console.log(urlStr);
-				
-// 				adWallVar.find("#imgPos").css('background-image', urlStr);
-// 				adWallVar.find("span").text(adWallmsgs[0].ad_con);
-// 				adWallVar.find("#imgPos").removeAttr("id");
-// 				adWallVar.removeAttr("style");
-// 				adWallVar.removeAttr("id");
-				
-		<%--		$("#adWall").append(
-				`
-					<div class="single-slide" >
-						<!-- Background Image-->
-						<div id="imgPos" class="slide-bg-img bg-img" style="background-image: `+urlStr+`;"></div>
-						<!-- Welcome Text -->
-						<div class="container h-100">
-							<div class="row h-100 align-items-center">
-								<div class="col-12 col-lg-9">
-									<div id="ad" class="welcome-text">
-										<h2 data-animation="fadeInUp" data-delay="300ms">
-											<span>`+adWallmsgs[0].ad_title+`</span><br>
-										</h2>
-										<h4 data-animation="fadeInUp" data-delay="500ms">
-											<span>`+adWallmsgs[0].ad_con+`</span>
-										</h4>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				`		
-				);
-				
-				$('#adWall').owlCarousel('destroy');--%> 
-				
-			};
-
-		}
-		function adWSsendMessage() {
-
-		}
 		
 	</script>
 </body>
