@@ -188,7 +188,7 @@ public class CustServlet extends HttpServlet {
 
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
-				String url = "/froTempl/headertest.jsp";
+				String url = "/froTempl/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
