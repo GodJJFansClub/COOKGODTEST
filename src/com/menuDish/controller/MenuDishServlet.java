@@ -185,7 +185,7 @@ public class MenuDishServlet extends HttpServlet {
 					menuDishVO = menuDishSvc.addMenuDish(menu_ID,dish_ID);
 				}
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				session.setAttribute("menu_ID", menu_ID);
+				req.setAttribute("menu_ID", menu_ID);
 				String url = "/back-end/menuDish/listAllDishByMenuID.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.festMenu.model.*"%>
-
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <%
 	FestMenuService festMenuSvc = new FestMenuService();
 	List<FestMenuVO> list = festMenuSvc.getAll();
@@ -32,7 +32,6 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
 	<table>
 		<tr>
 			<th>節慶料理編號</th>
@@ -43,10 +42,8 @@
 			<th>照片</th>
 			<th>介紹</th>
 			<th>出貨日期</th>
-			<th>節慶主題料理狀態</th>
-			<th>種類</th>
 			<th>價格</th>
-			<th>主廚編號</th>
+			<th>主廚</th>
 			<th>修改</th>
 		</tr>
 		<%@ include file="page1.file"%>
@@ -66,10 +63,8 @@
 					</c:if></td>
 				<td>${festMenuVO.fest_m_resume}</td>
 				<td>${festMenuVO.fest_m_send}</td>
-				<td>${festMenuVO.fest_m_status}</td>
-				<td>${festMenuVO.fest_m_kind}</td>
 				<td>${festMenuVO.fest_m_price}</td>
-				<td>${festMenuVO.chef_ID}</td>
+				<td>${custSvc.getOneCust(festMenuVO.chef_ID).cust_name}</td>
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do"
