@@ -50,7 +50,15 @@
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
@@ -80,7 +88,6 @@
 		<th>菜色狀態</th>
 		<th>菜色價格</th>
 		<th>修改</th>
-		<th>刪除</th>
 	</tr>
 	
 	<c:forEach var="dishVO" items="${list}">
@@ -101,13 +108,7 @@
 			 
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
-
-			     <input type="hidden" name="action" value="Newdelete"></FORM>
-			</td>
+			
 		</c:if>
 		</tr>
 	</c:forEach>

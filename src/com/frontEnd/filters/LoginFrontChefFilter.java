@@ -43,7 +43,7 @@ public class LoginFrontChefFilter implements Filter {
 			if (custVO != null) {
 				// 如果有登入帳號但不是食材供應商，將轉到到其他頁面
 				session.setAttribute("location", req.getRequestURI());
-				res.sendRedirect(req.getContextPath() + "/froTempl/index.jsp");
+				res.sendRedirect(req.getContextPath() + "/front-end/index.jsp");
 				return;
 			} else {
 			session.setAttribute("location", req.getRequestURI());

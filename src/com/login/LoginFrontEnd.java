@@ -42,8 +42,8 @@ public class LoginFrontEnd extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		req.setCharacterEncoding("Big5");
-		res.setContentType("text/html; charset=Big5");
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 //		CustVO custVO = (CustVO) req.getAttribute("custVO");
 
@@ -83,7 +83,7 @@ public class LoginFrontEnd extends HttpServlet {
 				} catch (Exception ignored) {
 				}
 
-				res.sendRedirect(req.getContextPath() + "/froTempl/index.jsp"); // *工作3:
+				res.sendRedirect(req.getContextPath() + "/front-end/index.jsp"); // *工作3:
 																							// (-->如無來源網頁:則重導至login_success.jsp)
 
 			} else if (chefSvc.getOneByChefID(custVO.getCust_ID()) != null) {
@@ -100,7 +100,7 @@ public class LoginFrontEnd extends HttpServlet {
 				} catch (Exception ignored) {
 				}
 
-				res.sendRedirect(req.getContextPath() + "/froTempl/index.jsp"); // *工作3:
+				res.sendRedirect(req.getContextPath() + "/front-end/index.jsp"); // *工作3:
 																							// (-->如無來源網頁:則重導至login_success.jsp)
 			} else {
 				// 3.判斷為顧客帳號
@@ -114,7 +114,7 @@ public class LoginFrontEnd extends HttpServlet {
 				} catch (Exception ignored) {
 				}
 
-				res.sendRedirect(req.getContextPath() + "/froTempl/index.jsp"); // *工作3:
+				res.sendRedirect(req.getContextPath() + "/front-end/index.jsp"); // *工作3:
 																							// (-->如無來源網頁:則重導至login_success.jsp)
 			}
 

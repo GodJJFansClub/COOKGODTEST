@@ -14,10 +14,11 @@
 
 <body>
  <script src="<%=request.getContextPath()%>/back-endTemplate/assets/libs/jquery/dist/jquery.min.js"></script>
+ 	
 	<FORM METHOD="post" id="sub" ACTION="<%=request.getContextPath()%>/cust/cust.do"
 		 name="form1" >
 		
-		 <input type="hidden" name="action" value="updateCust_status">
+		<input type="hidden" name="action" value="updateCust_status">
 		<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
 		
 		

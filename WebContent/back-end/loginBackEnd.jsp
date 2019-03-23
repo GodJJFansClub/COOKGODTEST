@@ -8,17 +8,7 @@
 <title>後台login</title>
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
-		</aside>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+
 
 		<center>
 			<form action="<%=request.getContextPath()%>/back-end/login.do" method="post">
@@ -27,9 +17,8 @@
 						<tr>
 							<td colspan=2>
 								<p align=center>
-									輸入<b>後台(測試登入)</b>:<br> 
-									帳號:<b>emp1</b><br>
-									密碼:<b>123456</b><br>
+									輸入<b>後台登入</b>:<br> 
+									
 							</td>
 						</tr>
 		
@@ -66,11 +55,6 @@
 					</table>
 			</form>
 		</center>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
+
 </body>
 </html>

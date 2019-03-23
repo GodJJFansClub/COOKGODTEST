@@ -118,9 +118,8 @@
 
 			<tr>
 				<td>顧客狀態:</td>
-				<td><input type="radio" name="cust_status" size="10" value="a0"
-					checked />未停權 <input type="radio" name="cust_status" size="10"
-					value="a1" />停權</td>
+				<td><input readonly type="TEXT" name="cust_niname" size="45"
+					value="<%=custVO.getCust_status()%>" /></td>
 			</tr>
 
 			<tr>

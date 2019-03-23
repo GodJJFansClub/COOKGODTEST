@@ -4,6 +4,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -188,7 +189,7 @@ public class CustServlet extends HttpServlet {
 
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
-				String url = "/froTempl/headertest.jsp";
+				String url = "/front-end/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -380,7 +381,7 @@ public class CustServlet extends HttpServlet {
 				custVO = custSvc.addFoodSup(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname, food_sup_name, food_sup_tel,
 						food_sup_status, food_sup_resume);
-				String url = "/froTempl/headertest.jsp";
+				String url = "/front-end/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -911,7 +912,7 @@ public class CustServlet extends HttpServlet {
 		{
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			System.out.println("Test");
 			try {
 
 				// 0.id
@@ -919,7 +920,7 @@ public class CustServlet extends HttpServlet {
 				
 				// set
 				CustVO custVO = new CustVO();
-						
+				System.out.println(custVO.getCust_ID());
 				
 				// 如果以上格式有錯
 				if (!errorMsgs.isEmpty()) {
@@ -931,10 +932,14 @@ public class CustServlet extends HttpServlet {
 				}
 
 				/***************************2.開始修改資料*****************************************/
+				
 				CustService custSvc = new CustService();
 				custVO = custSvc.updateCust_status(cust_ID);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 //				req.setAttribute("custVO", custVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				custVO = custSvc.getOneCust(cust_ID);
+				HttpSession session = req.getSession();
+				session.setAttribute("custVO", custVO);
 				String url = "/front-end/cust/listOneCust.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

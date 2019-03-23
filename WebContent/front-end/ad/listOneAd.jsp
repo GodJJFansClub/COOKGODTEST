@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.ad.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
@@ -81,7 +82,7 @@ th, td {
 		</tr>
 		<tr>
 			<td><%=adVO.getAd_ID()%></td>
-			<td><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></c:if>
+			<td><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}" width="300" height="200"></c:if>
 				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
 			<td><%=adVO.getAd_con()%></td>
 			<td><%=adVO.getAd_start()%></td>

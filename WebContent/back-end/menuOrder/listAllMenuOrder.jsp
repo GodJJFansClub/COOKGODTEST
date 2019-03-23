@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.menuOrder.model.*"%>
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
+<jsp:useBean id="menuSvc" class="com.menu.model.MenuService"/>
 <%
 	MenuOrderService menuOrderSvc = new MenuOrderService();
 	List<MenuOrderVO> listAll = menuOrderSvc.getAll();
@@ -24,10 +26,7 @@ th,td{
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-			<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-
-		</aside>
+		<jsp:include page="/back-end/sideBar/orderMana.jsp"></jsp:include>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>
@@ -73,9 +72,9 @@ th,td{
 										<td>${menuOrderVO.menu_od_end}</td>
 										<td>${menuOrderVO.menu_od_rate}</td>
 										<td>${menuOrderVO.menu_od_msg}</td>
-										<td>${menuOrderVO.cust_ID}</td>
-										<td>${menuOrderVO.chef_ID}</td>
-										<td>${menuOrderVO.menu_ID}</td>
+										<td>${custSvc.getOneCust(menuOrderVO.cust_ID).cust_name}</td>
+										<td>${custSvc.getOneCust(menuOrderVO.chef_ID).cust_name}</td>
+										<td>${menuSvc.getOneMenu(menuOrderVO.menu_ID).menu_name}</td>
 										<td>
 											<form method="post"
 												action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">

@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card card-body">
-					<h4 class="card-title">結帳</h4>
+					<h4 class="card-title">付款</h4>
 					<form class="form-horizontal m-t-30" method="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
 						<div class="form-group">
 						<label>收件人姓名</label>
@@ -42,25 +42,12 @@
 							<input type="number" name="credNum" class="form-control"
 									value="${empty credName ? '':credName}">
 						</div>
-						<div class="form-group">
-							<label>安全碼</label>
-							<input type="number" name="credSaf" class="form-control"
-									value="${empty credSaf ? '':credSaf}">
-						</div>
-						<div class="form-group">
-							<label>到期日</label>
-							<input type="text" id="credEnd" name="credEnd" class="form-control"
-									value="${empty credEnd ? '':credEnd}">
-						</div>
-						<div class="form-group">
-							<label>持卡人姓名</label>
-							<input type="text" name="credName" class="form-control"
-								size="10"	value="${empty credName ? '':credName}">
-						</div>
+						
+						
 							<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
 							<input type="hidden" name="action" value="insertOrODs">
 							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-							<input class="btn btn-success" type="submit" value="結帳">
+							<input class="btn btn-success" type="submit" value="付款">
 					</form>
 				</div>
 			</div>

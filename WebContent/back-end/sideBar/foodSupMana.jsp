@@ -13,13 +13,13 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
                                 <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">食材供應商</span>
+                                <span class="hide-menu">管理食材供應商</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/chef/index.jsp" aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">主廚</span>
+                                <span class="hide-menu">管理主廚</span>
                             </a>
                         </li>
                          <li class="sidebar-item">

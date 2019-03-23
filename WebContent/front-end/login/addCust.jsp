@@ -75,25 +75,25 @@ th, td {
 			<tr>
 				<td>顧客帳號:</td>
 				<td><input type="TEXT" id="cust_acc" name="cust_acc" size="45"
-					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /><p id="answer"></p></td>
+					value="<%=(custVO == null) ?"": custVO.getCust_acc()%>" placeholder="請輸入帳號" autocomplete="off"/><p id="answer"></p></td>
 			</tr>
 
 			<tr>
 				<td>顧客密碼:</td>
 				<td><input type="password" name="cust_pwd" size="45"
-					value="<%=(custVO == null) ? "Aa123456" : custVO.getCust_pwd()%>" /></td>
+					value="<%=(custVO == null) ?"": custVO.getCust_pwd()%>" placeholder="請輸入密碼" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>顧客姓名:</td>
 				<td><input type="TEXT" name="cust_name" size="45"
-					value="<%=(custVO == null) ? "teddy" : custVO.getCust_name()%>" /></td>
+					value="<%=(custVO == null) ? "": custVO.getCust_name()%>" placeholder="請輸入姓名" autocomplete="off" /></td>
 			</tr>
 
 			<tr>
 				<td>身分證字號:</td>
 				<td><input type="TEXT" name="cust_pid" size="45"
-					value="<%=(custVO == null) ? "a987654321" : custVO.getCust_pid()%>" /></td>
+					value="<%=(custVO == null) ? "": custVO.getCust_pid()%>" placeholder="請輸入身分證字號" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
@@ -113,26 +113,26 @@ th, td {
 			<tr>
 				<td>顧客電話:</td>
 				<td><input type="TEXT" name="cust_tel" size="45"
-					value="<%=(custVO == null) ? "09090909" : custVO.getCust_tel()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_tel()%>" placeholder="請輸入手機號碼" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>顧客地址:</td>
 				<td><input type="TEXT" name="cust_addr" size="45"
-					value="<%=(custVO == null) ? "09090909" : custVO.getCust_addr()%>" />
+					value="<%=(custVO == null) ? "" : custVO.getCust_addr()%>" placeholder="請輸入地址" autocomplete="off"/>
 					</td>
 			</tr>
 
 			<tr>
 				<td>顧客信箱:</td>
 				<td><input type="TEXT" name="cust_mail" size="45"
-					value="<%=(custVO == null) ? "gggccc@yahoo" : custVO.getCust_mail()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_mail()%>" placeholder="請輸入電子郵件"autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>顧客暱稱:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%=(custVO == null) ? "555" : custVO.getCust_niname()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_niname()%>" /></td>
 			</tr>
 
 			<tr>
@@ -147,7 +147,9 @@ th, td {
 		<div id="localImag">
 			<img id="preview" width=-1 height=-1 style="diplay: none" />
 		</div>
-		<br> <input type="hidden" name="action" value="insert"> 
+		<br> 
+			 <img src="<%=request.getContextPath()%>/images/x.png" height="20" width="20" onClick="idwrite(this)">
+			 <input type="hidden" name="action" value="insert"> 
 		     <input type="submit" value="送出新增">
 
 	</FORM>
@@ -179,6 +181,21 @@ th, td {
 	height: 151px; /* height:  151px; */
 }
 </style>
+<script>
+      function idwrite(name){
+    	  form1.cust_acc.value="ca106g3"
+    	  form1.cust_pwd.value="123456"
+    	  form1.cust_name.value="杜先生"
+    	  form1.cust_pid.value="H123456789"
+    	  form1.cust_sex.value="M"
+    	  form1.cust_brd.value="2018-12-01"
+    	  form1.cust_tel.value="0907077543"
+    	  form1.cust_addr.value="桃園市中壢區中大路1號"
+    	  form1.cust_mail.value="toy113355@hotmail.com"
+    	  form1.cust_niname.value="資策會小小書童" 
+    	 
+      }
+</script>
 
 <script>
         $.datetimepicker.setLocale('zh');

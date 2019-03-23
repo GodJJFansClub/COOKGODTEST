@@ -53,7 +53,15 @@ th, td {
 </style>
 
 </head>
-<body bgcolor='white'>
+<body>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 
 <table id="table-1">
 	<tr>
@@ -73,7 +81,7 @@ th, td {
 		<th>菜色狀態</th>
 		<th>菜色價格</th>
 		<th>審核</th>
-		<th>刪除</th>
+		
 		
 	</tr>
 	
@@ -94,12 +102,6 @@ th, td {
 			     <input type="submit" value="審核">
 			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}">
-			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</c:if>
 		</tr>

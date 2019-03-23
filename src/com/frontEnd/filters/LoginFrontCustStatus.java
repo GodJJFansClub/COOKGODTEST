@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.cust.model.CustVO;
 
-public class LoginFrontEndFilter implements Filter {
+public class LoginFrontCustStatus implements Filter {
 
 	private FilterConfig config;
 
@@ -40,11 +40,6 @@ public class LoginFrontEndFilter implements Filter {
 		if (custVO == null) {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/front-end/loginFrontEnd.jsp");
-			return;
-		}else if(custVO.getCust_status().equals("a1")){
-			session.setAttribute("location", req.getRequestURI());
-			//req.setAttribute("action", "updateCust_status");
-			res.sendRedirect(req.getContextPath() + "/front-end/index.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

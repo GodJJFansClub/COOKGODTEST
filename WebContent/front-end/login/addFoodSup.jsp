@@ -77,25 +77,25 @@ th, td {
 			<tr>
 				<td>食材供應商帳號:</td>
 				<td><input type="TEXT" id="cust_acc" name="cust_acc" size="45"
-					value="<%=(custVO == null) ? "Aa158556" : custVO.getCust_acc()%>" /><p id="answer"></p></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_acc()%>" placeholder="請輸入帳號" autocomplete="off"/><p id="answer"></p></td>
 			</tr>
 
 			<tr>
 				<td>食材供應商密碼:</td>
 				<td><input type="password" name="cust_pwd" size="45"
-					value="<%=(custVO == null) ? "Aa123456" : custVO.getCust_pwd()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_pwd()%>" placeholder="請輸入密碼" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>食材供應商姓名:</td>
 				<td><input type="TEXT" name="cust_name" size="45"
-					value="<%=(custVO == null) ? "teddy" : custVO.getCust_name()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_name()%>" placeholder="請輸入姓名" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>身分證字號:</td>
 				<td><input type="TEXT" name="cust_pid" size="45"
-					value="<%=(custVO == null) ? "a987654321" : custVO.getCust_pid()%>" /></td>
+					value="<%=(custVO == null) ? " " : custVO.getCust_pid()%>" placeholder="請輸入身分證字號" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
@@ -115,26 +115,26 @@ th, td {
 			<tr>
 				<td>食材供應商電話:</td>
 				<td><input type="TEXT" name="cust_tel" size="45"
-					value="<%=(custVO == null) ? "09090909" : custVO.getCust_tel()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_tel()%>" placeholder="請輸入手機號碼" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>食材供應商地址:</td>
 				<td><input type="TEXT" name="cust_addr" size="45"
-					value="<%=(custVO == null) ? "09090909" : custVO.getCust_addr()%>" />
+					value="<%=(custVO == null) ? "" : custVO.getCust_addr()%>" placeholder="請輸入地址" autocomplete="off"/>
 					</td>
 			</tr>
 
 			<tr>
 				<td>食材供應商信箱:</td>
 				<td><input type="TEXT" name="cust_mail" size="45"
-					value="<%=(custVO == null) ? "gggccc@yahoo" : custVO.getCust_mail()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_mail()%>" placeholder="請輸入電子郵件"autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>食材供應商暱稱:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%=(custVO == null) ? "555" : custVO.getCust_niname()%>" /></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_niname()%>" /></td>
 			</tr>
 
 			<tr>
@@ -144,8 +144,14 @@ th, td {
 			</tr>
 			<tr>
 				<td>食材供應商簡歷:</td>
-				<td><input type="TEXT" name="food_sup_resume" size="45"
-					value="<%=(custVO == null) ? "555" : custVO.getCust_niname()%>" /></td>
+				<td>
+				<textarea name="food_sup_resume">${chefVO==null? '請輸入簡介...':chefVO.chef_resume}</textarea>
+					
+					<script>CKEDITOR.replace('food_sup_resume');</script>
+				
+				<input type="TEXT" name="food_sup_resume" size="45"
+					value="${chefVO==null? '請輸入簡介...':chefVO.chef_resume}" /></td>
+					<script>CKEDITOR.replace('food_sup_resume');</script>
 			</tr>
 
 
@@ -153,7 +159,8 @@ th, td {
 		<div id="localImag">
 			<img id="preview" width=-1 height=-1 style="diplay: none" />
 		</div>
-		<br> <input type="hidden" name="action" value="insert2"> 
+		<br> <img src="<%=request.getContextPath()%>/images/x.png" height="20" width="20" onClick="idwrite(this)"> 
+			<input type="hidden" name="action" value="insert2"> 
 		     <input type="submit" value="送出新增">
 
 	</FORM>
@@ -186,6 +193,22 @@ th, td {
 	height: 151px; /* height:  151px; */
 }
 </style>
+<script>
+      function idwrite(name){
+    	  form1.cust_acc.value="peter"
+    	  form1.cust_pwd.value="123456"
+    	  form1.cust_name.value="大吳師傅"
+    	  form1.cust_pid.value="A123456789"
+    	  form1.cust_sex.value="M"
+    	  form1.cust_brd.value="2017-12-01"
+    	  form1.cust_tel.value="0906077543"
+    	  form1.cust_addr.value="台北市信義區信義路五段7號"
+    	  form1.cust_mail.value="toy113355@hotmail.com"
+    	 
+    	  form1.cust_niname.value="資策會大當家" 
+    	  form1.food_sup_resume.value="30年老廚師"
+      }
+</script>
 
 <script>
         $.datetimepicker.setLocale('zh');

@@ -381,6 +381,10 @@ public class FoodMallServlet extends HttpServlet{
 			getSelFoodFSAdd(req,res);
 		} else if("fsGetOneForDisplay".equals(action)) {
 			fsGetOneForDisplay(req,res);
+		}  else if("fsBKGetOne_For_Update".equals(action)) {
+			fsBKGetOne_For_Update(req,res);
+		} else if ("backUpByFS".equals(action)) {
+			backUpByFS(req,res);
 		}
 		
 		
@@ -583,5 +587,45 @@ public class FoodMallServlet extends HttpServlet{
 		out.print(gson.toJson(objToJson));
 		out.flush();
 		out.close();
+	}
+	
+
+	private void fsBKGetOne_For_Update(HttpServletRequest req , HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+		
+		try {
+			/***************************1.接收請求參數****************************************/
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String food_ID = req.getParameter("food_ID");
+			
+			/***************************2.開始查詢資料****************************************/
+			FoodMallService foodMallSvc = new FoodMallService();
+			FoodMallVO foodMallVO = foodMallSvc.getOneFoodMall(food_sup_ID, food_ID);
+			
+			/***************************3.查詢完成,準備轉交(Send the Success view)************/
+
+			
+			req.setAttribute("foodMallVO", foodMallVO);         // 資料庫取出的foodMallVO物件,存入req
+			String url = "/back-end/foodMall/upFMFSID.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+
+			/***************************其他可能的錯誤處理**********************************/
+		} catch (Exception e) {
+			
+			errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+			String url = "/back-end/foodSup/listAllFoodSup.jsp";
+			System.out.println(url);
+			RequestDispatcher failureView = req
+					.getRequestDispatcher(url);
+			failureView.forward(req, res);
+		}
+	}
+	
+	private void backUpByFS(HttpServletRequest req, HttpServletResponse res) {
+		
 	}
 }

@@ -76,7 +76,7 @@
 							<!-- Nav Start -->
 							<div class="classynav">
 								<ul>
-									<li><a href="<%=request.getContextPath()%>/froTempl/index.jsp">首頁</a></li>
+									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
 									
 									<li><a>食神來了</a>
 										<ul class="dropdown">
@@ -100,9 +100,14 @@
 											<ul class="dropdown">
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">個人檔案</a></li>
-												<li><a
-													href="">訂單管理</a></li>
-											</ul></li>
+												<li>
+												<a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">
+												節慶主題料理管理</a>
+												</li>
+												
+											</ul>
+										</li>
+											
 									</c:if>
 									<c:if test="${not empty foodSupVO}">
 										<li><a href="">食材供應商專區</a>
@@ -130,17 +135,20 @@
 									<c:if test="${not empty custVO}">
 										<li><a>Hello:<font color=#ea7500>
 													${custVO.cust_name} </font>您好
-										</a></li>
-										<li><a><i class="fa fa-dribbble"></i><span class="badge badge-light">4${custVO.cust_ID}</span></a>
+									<li><a><i class="fa fa-dribbble"></i><span
+												class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
 											<ul class="dropdown">
-												<c:forEach var="broadcastVO" items="${broadcastSvc.all}">
-												<c:if test="${broadcastVO.cust_ID == custVO.cust_ID}">
+											<c:forEach var="broadcastVO"
+													items="${broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
 													<li><a>${broadcastVO.broadcast_con}</a></li>
-													</c:if>
-												</c:forEach>
+														</c:forEach>
+												<c:if
+													test="${empty broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
+													<li><a>目前尚無訊息</a></li>
+												</c:if>
 											</ul></li>
 										<FORM METHOD="get"
-											action="<%=request.getContextPath()%>/back-endTemplate/logout.do">
+											action="<%=request.getContextPath()%>/front-end/logout.do">
 											<input type="submit" value="登出">
 										</FORM>
 									</c:if>

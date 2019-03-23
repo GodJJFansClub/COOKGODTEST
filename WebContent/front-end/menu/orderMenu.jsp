@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.chef.model.*"%>
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <html>
 <head>
 <title>訂購套餐</title>
@@ -23,7 +24,7 @@ input{
 </style>
 </head>
 <body>
-	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	
 
 	 <!-- ##### Contact Area Start #####-->
     <section class="contact-area section-padding-100">
@@ -74,10 +75,8 @@ input{
 								<c:if test="${chefVO.chef_area == '0'}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/chefSch/chefSch.do">
-										<input type="submit"
-											class="chef_ID btn btn-outline-secondary btn-block"
-											name="chef_ID" value="${chefVO.chef_ID}"> <input
-											type="hidden" name="action" value="listChefSchByID">
+										<button type="submit" class="chef_ID btn btn-outline-secondary btn-block" name="chef_ID" value="${chefVO.chef_ID}">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</button>
+										<input type="hidden" name="action" value="listChefSchByID">
 									</form>
 								</c:if>
 							</c:forEach>
@@ -88,9 +87,8 @@ input{
 								<c:if test="${chefVO.chef_area == '1'}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/chefSch/chefSch.do">
-										<input type="submit"
-											class="chef_ID btn btn-outline-secondary btn-block"
-											name="chef_ID" value="${chefVO.chef_ID}"> <input
+										<button type="submit" class="chef_ID btn btn-outline-secondary btn-block" name="chef_ID" value="${chefVO.chef_ID}">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</button>
+										<input
 											type="hidden" name="action" value="listChefSchByID">
 									</form>
 								</c:if>
@@ -102,10 +100,8 @@ input{
 								<c:if test="${chefVO.chef_area == '2'}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/chefSch/chefSch.do">
-										<input type="submit"
-											class="chef_ID btn btn-outline-secondary btn-block"
-											name="chef_ID" value="${chefVO.chef_ID}"> <input
-											type="hidden" name="action" value="listChefSchByID">
+										<button type="submit" class="chef_ID btn btn-outline-secondary btn-block" name="chef_ID" value="${chefVO.chef_ID}">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</button>
+										<input type="hidden" name="action" value="listChefSchByID">
 									</form>
 								</c:if>
 							</c:forEach>
@@ -116,10 +112,8 @@ input{
 								<c:if test="${chefVO.chef_area == '3'}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/chefSch/chefSch.do">
-										<input type="submit"
-											class="chef_ID btn btn-outline-secondary btn-block"
-											name="chef_ID" value="${chefVO.chef_ID}"> <input
-											type="hidden" name="action" value="listChefSchByID">
+										<button type="submit" class="chef_ID btn btn-outline-secondary btn-block" name="chef_ID" value="${chefVO.chef_ID}">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</button> 
+										<input type="hidden" name="action" value="listChefSchByID">
 									</form>
 								</c:if>
 							</c:forEach>
@@ -133,14 +127,12 @@ input{
 							<div class=chef_sch_time_title>
 								<p>請選擇日期</p>
 							</div>
-							<form method="post"
-								action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-								<input type="text" name="menu_od_book_time" class="form-control"
-									id="order_sch_date_time" /> <input type="hidden"
-									name="menu_od_book_date" value="${order_chef_sch_date}">
+							<form method="post" action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
+								<input type="text" name="menu_od_book_time" class="form-control" id="order_sch_date_time" /> 
+								<input type="hidden" name="menu_od_book_date" value="${order_chef_sch_date}">
+								<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
 								<input type="hidden" name="chef_ID" value="${order_chef_ID}">
-								<input type="hidden" name="cust_ID" value="C00002"> <input
-									type="hidden" name="menu_ID" value="${menuVO.menu_ID}">
+								<input type="hidden" name="menu_ID" value="${menuVO.menu_ID}">
 								<input type="hidden" name="action" value="insert"><br>
 								<input type="submit" class="btn btn-outline-secondary btn-block"
 									value="送出訂單">
@@ -156,7 +148,7 @@ input{
     </section>
     <!-- ##### Contact Area End #####-->
 
-	<jsp:include page="/froTempl/footer.jsp" flush="true" />
+	
 </body>
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 

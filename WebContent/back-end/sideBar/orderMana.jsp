@@ -12,12 +12,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/food/select_page.jsp" aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">食材管理</span>
-                            </a>
-                        </li>
+                        
                         
                     </ul>
                 </nav>

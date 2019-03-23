@@ -199,12 +199,12 @@ public class ChefServlet extends HttpServlet {
 				
 				
 				
-				RequestDispatcher successView = request.getRequestDispatcher("/front-end/login/addSuccess.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/froTempl/index.jsp");
 				successView.forward(request, response);
 				//除錯
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/chef/addChef.jsp");
+				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/login/addChef.jsp");
 				failureView.forward(request, response);
 			}
 		}

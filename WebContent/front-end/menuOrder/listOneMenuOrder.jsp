@@ -31,13 +31,6 @@ th, td {
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="card text-center" style="background-color: #D4E6F1">
-		<div class="card-body">
-			<h5 class="card-title">查詢單筆套餐</h5>
-			<p class="card-text">listOneMenu.jsp</p>
-			<a href="index.jsp" class="btn btn-primary">回首頁</a>
-		</div>
-	</div>
 
 	<%--Error Message--%>
 	<c:if test="${not empty errorMsgs} }">
