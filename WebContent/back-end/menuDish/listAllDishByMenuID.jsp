@@ -37,7 +37,15 @@
 </style>
 
 </head>
-<body bgcolor='white'>
+<body >
+<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 
 
 <%-- 錯誤表列 --%>
@@ -54,11 +62,11 @@
 	
 </c:if>
 			
-<table>
+<table  >
 		<tr><td colspan ="4">套餐名稱:<font color="red" size="5">${menuSvc.getOneMenu(menuVO.menu_ID).menu_name}</font></td></tr>
-	<tr>
+	<tr align='center'>
 		
-		<th>菜色名稱</th>
+		<th >菜色名稱</th>
 	</tr>
 	
 	<c:forEach var="menuDishVO" items="${list}" >
@@ -75,8 +83,11 @@
 	</tr>
 </table>
 
-
-
-
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

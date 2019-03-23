@@ -16,7 +16,6 @@
 <head>
 <title>菜色食材資料 </title>
 
-</style>
 
 <style>
   table {
@@ -35,16 +34,24 @@
 </style>
 
 </head>
-<body bgcolor='white'>
+<body >
 
+<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+<h3>查詢:</h3>
 
 <table>	
 		
 		<tr><td colspan ="4">菜色名稱:<font color="red" size="5">${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</font></td></tr>
 		
-	<tr>
+	<tr align='center'>
 	
-		
 		<th>食材名稱</th>
 		<th>食材數量</th>
 		<th>食材單位</th>
@@ -67,6 +74,11 @@
 	</td>
 	</tr>
 </table>
-
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

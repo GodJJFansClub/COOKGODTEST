@@ -47,14 +47,15 @@
 						end="<%=pageIndex+rowsPerPage-1%>">
 						<tr>
 							<td>${menuVO.menu_ID}</td>
-			
+							<br>
 							<td><c:if test="${not empty menuVO.menu_pic}">
-									<img class="menu_pic" src="<%=request.getContextPath()%>/menu/menu.do?showMenuPic=showMenuPic&menu_ID=${menuVO.menu_ID}">
+									<img class="menu_pic" src="<%=request.getContextPath()%>/menu/menu.do?showMenuPic=showMenuPic&menu_ID=${menuVO.menu_ID}" width="300" height="200">
 								</c:if> 
 								<c:if test="${empty menuVO.menu_pic}">
 									<img class="menu_pic" src="<%=request.getContextPath()%>/images/noimage.jpg">
 								</c:if>
 							</td>
+							
 							<td>${menuVO.menu_name}</td>
 							<td>${menuVO.menu_resume}</td>
 							<td>${menuVO.menu_price}</td>
