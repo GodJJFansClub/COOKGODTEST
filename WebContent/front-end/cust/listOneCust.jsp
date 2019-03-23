@@ -48,7 +48,7 @@ th, td {
 	text-align: center;
 }
 </style>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
