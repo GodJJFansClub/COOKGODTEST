@@ -18,35 +18,36 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	<table>
-		<tr>
-			<th>食材供應商</th>
-			<th>食材名稱</th>
-			<th>標題</th>
-			<th>狀態</th>
-			<th>價格</th>
-			<th>單位</th>
-			<th>產地</th>
-			<th>圖片</th>
-			<th>修改</th>
+
+	<table class="table">
+		<tr class="table-active">
+			<th scope="col">食材供應商</th>
+			<th scope="col">食材名稱</th>
+			<th scope="col">標題</th>
+			<th scope="col">狀態</th>
+			<th scope="col">價格</th>
+			<th scope="col">單位</th>
+			<th scope="col">產地</th>
+			<th scope="col">圖片</th>
+			<th scope="col">修改</th>
 		</tr>
 
-		<c:forEach var="foodMallVO" items="${listFoodMalls_ByFood_sup_ID}">
-			<tr 
-				${(	foodMallVO.food_sup_ID == param.food_sup_ID
-					&& foodMallVO.food_ID == param.food_ID) ? 'bgcolor=#CCCCFF':''}>
+		<c:forEach var="foodMallVO" items="${listFoodMalls_ByFood_sup_ID}" varStatus="tabIn">
+			<tr <c:if test="${tabIn.index%2 == 0}">class="table-success"</c:if>
+				<c:if test="${tabIn.index%2 == 1}">class="table-info"</c:if>>
 				<!--將修改的那一筆加入對比色-->
-				<td>${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</td>
+				<td class="row">${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</td>
 				<td>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</td>
 				<td>${foodMallVO.food_m_name}</td>
 				<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
 				<td>${foodMallVO.food_m_price}</td>
 				<td>${foodUnitMap[foodMallVO.food_m_unit]}</td>
-				<td>${foodMallVO.food_m_place}</td>
 				<td>
-					<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"
-					 width="200" height="100">
-				</td>
+					<div class="p-2">
+                        <img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" alt="user" width="100" class="rounded-circle">
+                    </div>
+                </td>
+				<td>${foodMallVO.food_m_place}</td>
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/foodMall/foodMall.do"
@@ -63,6 +64,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+
 </body>
 </html>
