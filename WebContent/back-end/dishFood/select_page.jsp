@@ -15,7 +15,7 @@
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
 		<aside class="left-sidebar" data-sidebarbg="skin5">
 <%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		<jsp:include page="/back-end/dishFood/sidebar.jsp" flush="true" />
+		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
 		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">

@@ -19,8 +19,8 @@
 			  <th scope="col">出貨日期</th>
 			  <th scope="col">到貨日期</th>
 			  <th scope="col">完成日期</th>
-							<th scope="col">收件地址</th>
-							<th scope="col">收件人電話</th>
+				<th scope="col">收件地址</th>
+				<th scope="col">收件人電話</th>
 							<th scope="col">總計</th>
 		    </tr>
 		  </thead>
@@ -30,13 +30,13 @@
 		      <td scope="col">${foodOrderVO.food_or_ID}</td>
 			  <td scope="col">${custSvc.getOneCust(foodOrderVO.cust_ID).cust_name}</td>
 			  <td scope="col">${foodOrderVO.food_or_name}</td>
-								<td scope="col">${mallOrStatusMap[foodOrderVO.food_or_status]}</td>
-								<td scope="col">${foodOrderVO.food_or_start}</td>
-								<td scope="col">${foodOrderVO.food_or_send}</td>
-								<td scope="col">${foodOrderVO.food_or_rcv}</td>
-								<td scope="col">${foodOrderVO.food_or_end}</td>
-								<td scope="col">${foodOrderVO.food_or_addr}</td>
-								<td scope="col">${foodOrderVO.food_or_tel}</td>
+			  <td scope="col">${mallOrStatusMap[foodOrderVO.food_or_status]}</td>
+			  <td scope="col">${foodOrderVO.food_or_start}</td>
+				<td scope="col">${foodOrderVO.food_or_send}</td>
+				<td scope="col">${foodOrderVO.food_or_rcv}</td>
+				<td scope="col">${foodOrderVO.food_or_end}</td>
+				<td scope="col">${foodOrderVO.food_or_addr}</td>
+				<td scope="col">${foodOrderVO.food_or_tel}</td>
 		    </tr>
 		    </c:forEach>
 		</table>

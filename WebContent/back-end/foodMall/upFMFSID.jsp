@@ -13,7 +13,7 @@
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<jsp:include page="/back-end/foodSup/FSFMSidebar.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/mallMana.jsp" flush="true"/>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>

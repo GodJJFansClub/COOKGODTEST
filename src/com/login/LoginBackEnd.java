@@ -55,9 +55,9 @@ public class LoginBackEnd extends HttpServlet {
 		} else { // 【帳號 , 密碼有效時, 才做以下工作】
 
 			try {
-				String location = (String) session.getAttribute("location");
+				String location = (String) session.getAttribute("backendLocation");
 				if (location != null) {
-					session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
+					session.removeAttribute("backendLocation"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
 					res.sendRedirect(location);
 					return;
 				}

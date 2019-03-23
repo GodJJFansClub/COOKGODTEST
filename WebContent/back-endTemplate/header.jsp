@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,31 +66,11 @@
 					<!-- ============================================================== -->
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/foodOrder/listAllFoodOrder.jsp">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
-									<span>訂單管理</span>
-								</div>
-							</div>
-					</a></li>
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/chef/index.jsp">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
-									<span>主廚供應商管理</span>
-								</div>
-							</div>
-					</a></li>
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark"
 						href="<%=request.getContextPath()%>/back-end/foodSup/listAllFoodSup.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">
-									<span>食材供應商管理</span>
+									<span>合作夥伴</span>
 								</div>
 							</div>
 					</a></li>
@@ -103,6 +84,29 @@
 								</div>
 							</div>
 					</a></li>
+					
+					<li class="nav-item"><a
+						class="nav-link waves-effect waves-dark"
+						href="<%=request.getContextPath()%>/back-end/foodMall/listAllFoodMall.jsp">
+							<div class="d-flex align-items-center">
+								<i class="font-20 mr-1"></i>
+								<div class="ml-1 d-none d-sm-block">
+									<span>商城管理</span>
+								</div>
+							</div>
+					</a></li>
+					
+					<li class="nav-item"><a
+						class="nav-link waves-effect waves-dark"
+						href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">
+							<div class="d-flex align-items-center">
+								<i class="font-20 mr-1"></i>
+								<div class="ml-1 d-none d-sm-block">
+									<span>菜色及食材管理</span>
+								</div>
+							</div>
+					</a></li>
+					
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
 						href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">
@@ -123,27 +127,6 @@
 								</div>
 							</div>
 					</a></li>
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/menu/index.jsp">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
-									<span>套餐管理</span>
-								</div>
-							</div>
-					</a></li>
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
-									<span>菜色管理</span>
-								</div>
-							</div>
-					</a></li>
-
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark">
 							<div class="d-flex align-items-center">
@@ -167,7 +150,7 @@
 							</div>
 					</a></li>
 				</ul>
-
+				
 			</div>
 		</nav>
 	</header>

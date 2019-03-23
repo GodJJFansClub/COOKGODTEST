@@ -28,7 +28,7 @@ public class LoginBackEndFilter implements Filter {
 		// 【從 session 判斷此user是否登入過】
 		EmpVO empVO = (EmpVO) session.getAttribute("empVO");
 		if (empVO == null) {
-			session.setAttribute("location", req.getRequestURI());
+			session.setAttribute("backendLocation", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/back-end/loginBackEnd.jsp");
 			return;
 		} else {
