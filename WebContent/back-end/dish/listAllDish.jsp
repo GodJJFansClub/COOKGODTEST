@@ -12,66 +12,130 @@
 %>
 
 
+
+
 <html>
 <head>
 <title>所有菜色資料 - listAllDish.jsp</title>
 
-<style>
-  table#table-1 {
+<%--<style>
+table#table-1 {
 	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+	border: 2px solid black;
+	text-align: center;
+}
+
+table#table-1 h4 {
+	color: red;
+	display: block;
+	margin-bottom: 1px;
+}
+
+h4 {
+	color: blue;
+	display: inline;
+}
 </style>
 
 <style>
-  table {
+table {
 	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
+}
+
+table, th, td {
+	border: 1px solid #CCCCFF;
+}
+
+th, td {
+	padding: 5px;
+	text-align: center;
+}
+</style> --%>
 
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
 		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+				<%--=================================工作區================================================--%>
 
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+				<%-- 錯誤表列 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
 
 
-<table>
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<caption>List of users</caption>
+									<thead>
+										<tr>
+											<th>菜色編號:</th>
+											<th>菜色名稱:</th>
+											<th>菜色照片:</th>
+											<th>菜色介紹:</th>
+											<th>菜色價格</th>
+											<th>審核</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="dishVO" items="${list}">
+
+											<tr>
+												<c:if test="${dishVO.dish_status eq 'D0'}">
+													<td>${dishVO.dish_ID}</td>
+													<td>${dishVO.dish_name}</td>
+													<td><img
+														src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}"
+														width="300" height="200"></td>
+													<td width="30%">${dishVO.dish_resume}</td>
+													<td>${dishVO.dish_price}</td>
+
+													<td>
+														<FORM METHOD="post"
+															ACTION="<%=request.getContextPath()%>/dish/dish.do"
+															style="margin-bottom: 0px;">
+															<input type="submit" value="審核"> <input
+																type="hidden" name="dish_ID" value="${dishVO.dish_ID}">
+
+															<input type="hidden" name="action"
+																value="getOne_For_Update">
+														</FORM>
+													</td>
+
+												</c:if>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
+
+
+<%--<table>
 	<tr>
 		<th>菜色編號:</th>
 		<th>菜色名稱:</th>
@@ -108,4 +172,4 @@
 
 
 </body>
-</html>
+</html> --%>
