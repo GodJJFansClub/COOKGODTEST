@@ -43,7 +43,7 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/chef/chef.do" enctype="multipart/form-data">
+	<FORM name="form1" METHOD="post" ACTION="<%=request.getContextPath()%>/chef/chef.do" enctype="multipart/form-data">
 
 		<table>
 			<tr>
@@ -85,26 +85,26 @@ th, td {
 			<tr>
 				<td>主廚電話:</td>
 				<td><input type="TEXT" name="cust_tel" size="45"
-					value="<%=(custVO == null) ? "09090909" : custVO.getCust_tel()%>" autocomplete="off"/></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_tel()%>" placeholder="請輸入手機號碼" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>主廚地址:</td>
 				<td><input type="TEXT" name="cust_addr" size="45"
-					value="<%=(custVO == null) ? "09090909" : custVO.getCust_addr()%>" autocomplete="off"/>
+					value="<%=(custVO == null) ? "" : custVO.getCust_addr()%>" placeholder="請輸入地址" autocomplete="off"/>
 					</td>
 			</tr>
 
 			<tr>
 				<td>主廚信箱:</td>
 				<td><input type="TEXT" name="cust_mail" size="45"
-					value="<%=(custVO == null) ? "gggccc@yahoo" : custVO.getCust_mail()%>" autocomplete="off"/></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_mail()%>" placeholder="請輸入電子郵件"autocomplete="off"/></td>
 			</tr>
 
 			<tr>
 				<td>主廚暱稱:</td>
 				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%=(custVO == null) ? "555" : custVO.getCust_niname()%>" autocomplete="off"/></td>
+					value="<%=(custVO == null) ? "" : custVO.getCust_niname()%>" autocomplete="off"/></td>
 			</tr>
 
 			<tr>
@@ -124,15 +124,20 @@ th, td {
 			<tr>
 				<td>主廚簡介:</td>
 				<td>
-					<input type="text"  name = "chef_resume" size="50" value="${chefVO==null? '請輸入簡介...':chefVO.chef_resume}">
+					<textarea name="chef_resume">${chefVO==null? '請輸入簡介...':chefVO.chef_resume}</textarea>
+					
+					<script>CKEDITOR.replace('chef_resume');</script>
 				</td>
 			</tr>
 		</table>
 		<div id="localImag">
 			<img id="preview" width=-1 height=-1 style="display: none" />
 		</div>
-		<br> <input type="hidden" name="action" value="insert"> 
+		<br>
+			<img src="<%=request.getContextPath()%>/images/x.png" height="20" width="20" onClick="idwrite(this)"> 
+			<input type="hidden" name="action" value="insert"> 
 		     <input type="submit" value="送出新增">
+		
 
 	</FORM>
 	
@@ -175,6 +180,22 @@ th, td {
            //minDate:               '-1970-01-01', // 去除今日(不含)之前
            maxDate:               '+1970-01-01'  // 去除今日(不含)之後
         });
+</script>
+<script>
+      function idwrite(name){
+    	  form1.cust_acc.value="david"
+    	  form1.cust_pwd.value="123456"
+    	  form1.cust_name.value="小吳師傅"
+    	  form1.cust_pid.value="B123456789"
+    	  form1.cust_sex.value="M"
+    	  form1.cust_brd.value="2017-12-01"
+    	  form1.cust_tel.value="0906077543"
+    	  form1.cust_addr.value="台北市信義區信義路五段7號"
+    	  form1.cust_mail.value="toy113355@hotmail.com"
+    	  form1.chef_area.value="0"
+    	  form1.cust_niname.value="海鮮小當家" 
+    	  form1.chef_resume.value="30年老廚師"
+      }
 </script>
 
 <script>

@@ -92,8 +92,8 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
-	
-		<filter>
+
+	<filter>
 		<filter-name>LoginFrontCustStatus</filter-name>
 		<filter-class>com.frontEnd.filters.LoginFrontCustStatus</filter-class>
 	</filter>
