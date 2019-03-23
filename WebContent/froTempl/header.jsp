@@ -154,9 +154,9 @@
 													<li><a>目前尚無訊息</a></li>
 												</c:if>
 											</ul></li>
-										<FORM METHOD="get" action="<%=request.getContextPath()%>/front-end/logout.do">
-											<input type="submit" value="登出">
-										</FORM>
+										<li><FORM METHOD="get" action="<%=request.getContextPath()%>/front-end/logout.do">
+											<button type="submit"class="btn btn-danger">登出</button>
+										</FORM></li>
 									</c:if>
 									<c:if test="${empty custVO.cust_ID}">
 										<li><a>加入我們</a>

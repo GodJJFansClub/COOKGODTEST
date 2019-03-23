@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.cust.model.*"%>
 
 <%
 	CustVO custVO = (CustVO) request.getAttribute("custVO");
-	
 %>
 
 <!DOCTYPE html>
@@ -13,7 +13,9 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>顧客資料新增 - addCust.jsp</title>
-<link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
+	rel="stylesheet">
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -35,7 +37,7 @@ h4 {
 
 <style>
 table {
-	width: 450px;
+	width: 700px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -55,109 +57,150 @@ th, td {
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
-	 <!-- ##### Contact Area Start #####-->
-    <section class="contact-area section-padding-100">
-	<h3>資料新增:</h3>
+	<!-- ##### Contact Area Start #####-->
+	<section class="contact-area section-padding-100">
 
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cust/cust.do"
-		name="form1" enctype="multipart/form-data">
-
-		<table>
-			<tr>
-				<td>顧客帳號:</td>
-				<td><input type="TEXT" id="cust_acc" name="cust_acc" size="45"
-					value="<%=(custVO == null) ?"": custVO.getCust_acc()%>" placeholder="請輸入帳號" autocomplete="off"/><p id="answer"></p></td>
-			</tr>
-
-			<tr>
-				<td>顧客密碼:</td>
-				<td><input type="password" name="cust_pwd" size="45"
-					value="<%=(custVO == null) ?"": custVO.getCust_pwd()%>" placeholder="請輸入密碼" autocomplete="off"/></td>
-			</tr>
-
-			<tr>
-				<td>顧客姓名:</td>
-				<td><input type="TEXT" name="cust_name" size="45"
-					value="<%=(custVO == null) ? "": custVO.getCust_name()%>" placeholder="請輸入姓名" autocomplete="off" /></td>
-			</tr>
-
-			<tr>
-				<td>身分證字號:</td>
-				<td><input type="TEXT" name="cust_pid" size="45"
-					value="<%=(custVO == null) ? "": custVO.getCust_pid()%>" placeholder="請輸入身分證字號" autocomplete="off"/></td>
-			</tr>
-
-			<tr>
-				<td>顧客性別:</td>
-				<td> <input type="radio" name="cust_sex" size="10" value="M" 
-				 ${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' } />男 
-					 <input type="radio" name="cust_sex" size="10" value="F"  
-				${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }/>女
-				</td>
-			</tr>
-
-			<tr>
-				<td>顧客生日:</td>
-				<td><input type="TEXT" name="cust_brd" id="f_date1" size="45" /></td>
-			</tr>
-
-			<tr>
-				<td>顧客電話:</td>
-				<td><input type="TEXT" name="cust_tel" size="45"
-					value="<%=(custVO == null) ? "" : custVO.getCust_tel()%>" placeholder="請輸入手機號碼" autocomplete="off"/></td>
-			</tr>
-
-			<tr>
-				<td>顧客地址:</td>
-				<td><input type="TEXT" name="cust_addr" size="45"
-					value="<%=(custVO == null) ? "" : custVO.getCust_addr()%>" placeholder="請輸入地址" autocomplete="off"/>
-					</td>
-			</tr>
-
-			<tr>
-				<td>顧客信箱:</td>
-				<td><input type="TEXT" name="cust_mail" size="45"
-					value="<%=(custVO == null) ? "" : custVO.getCust_mail()%>" placeholder="請輸入電子郵件"autocomplete="off"/></td>
-			</tr>
-
-			<tr>
-				<td>顧客暱稱:</td>
-				<td><input type="TEXT" name="cust_niname" size="45"
-					value="<%=(custVO == null) ? "" : custVO.getCust_niname()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>顧客大頭照:</td>
-				<td><input type="file" name="cust_pic" size="45" id="doc"
-					onchange="javascript:setImagePreview();" /></td>
-			</tr>
+		<section class="contact-area section-padding-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- Section Heading -->
+						<div class="section-heading text-center wow fadeInUp"
+							data-wow-delay="100ms">
+							<h2>成為顧客</h2>
+							<img
+								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"
+								alt="">
+							<%-- 錯誤表列 --%>
+							<c:if test="${not empty errorMsgs}">
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+						</div>
+					</div>
+				</div>
 
 
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-8">
+						<!-- Contact Form -->
+						<div class="contact-form-area text-center">
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/cust/cust.do" name="form1"
+								enctype="multipart/form-data">
 
-		</table>
-		<div id="localImag">
-			<img id="preview" width=-1 height=-1 style="diplay: none" />
-		</div>
-		<br> 
-			 <img src="<%=request.getContextPath()%>/images/x.png" height="20" width="20" onClick="idwrite(this)">
-			 <input type="hidden" name="action" value="insert"> 
-		     <input type="submit" value="送出新增">
+								<table>
+									<tr>
+										<td>顧客帳號:</td>
+										<td><input type="TEXT" id="cust_acc" name="cust_acc"
+											size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_acc()%>"
+											placeholder="請輸入帳號" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/>
+										<p id="answer"></p></td>
+									</tr>
 
-	</FORM>
+									<tr>
+										<td>顧客密碼:</td>
+										<td><input type="password" name="cust_pwd" size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_pwd()%>"
+											placeholder="請輸入密碼" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+									</tr>
 
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
- </section>
-    <!-- ##### Contact Area End #####-->
+									<tr>
+										<td>顧客姓名:</td>
+										<td><input type="TEXT" name="cust_name" size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_name()%>"
+											placeholder="請輸入姓名" autocomplete="off"class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
+									</tr>
 
+									<tr>
+										<td>身分證字號:</td>
+										<td><input type="TEXT" name="cust_pid" size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_pid()%>"
+											placeholder="請輸入身分證字號" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+									</tr>
+
+									<tr>
+										<td>顧客性別:</td>
+
+										<td>男<input type="radio" name="cust_sex" size="10"
+											value="M"
+											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' }
+											class="form-control wow fadeInUp" data-wow-delay="100ms"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" class="form-control wow fadeInUp" data-wow-delay="100ms"/> 女
+											<input type="radio" name="cust_sex" size="10" value="F"
+											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }
+											class="form-control wow fadeInUp" data-wow-delay="100ms"
+											class="form-control wow fadeInUp" data-wow-delay="100ms"class="form-control wow fadeInUp" data-wow-delay="100ms" />
+										</td>
+									</tr>
+
+									<tr>
+										<td>顧客生日:</td>
+										<td><input type="TEXT" name="cust_brd" id="f_date1"
+											size="45" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+									</tr>
+
+									<tr>
+										<td>顧客電話:</td>
+										<td><input type="TEXT" name="cust_tel" size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_tel()%>"
+											placeholder="請輸入手機號碼" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+									</tr>
+
+									<tr>
+										<td>顧客地址:</td>
+										<td><input type="TEXT" name="cust_addr" size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_addr()%>"
+											placeholder="請輸入地址" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+									</tr>
+
+									<tr>
+										<td>顧客信箱:</td>
+										<td><input type="TEXT" name="cust_mail" size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_mail()%>"
+											placeholder="請輸入電子郵件" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+									</tr>
+
+									<tr>
+										<td>顧客暱稱:</td>
+										<td><input type="TEXT" name="cust_niname" size="45"
+											value="<%=(custVO == null) ? "" : custVO.getCust_niname()%>"class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
+									</tr>
+
+									<tr>
+										<td>顧客大頭照:</td>
+										<td><input type="file" name="cust_pic" size="45" id="doc"
+											onchange="javascript:setImagePreview();"class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
+									</tr>
+
+
+
+								</table>
+								<div id="localImag">
+									<img id="preview" width=-1 height=-1 style="diplay: none" />
+								</div>
+								<br> <img src="<%=request.getContextPath()%>/images/x.png"
+									height="20" width="20" onClick="idwrite(this)"> <input
+									type="hidden" name="action" value="insert">
+								<button type="submit" class="btn pixel-btn wow fadeInUp"
+									data-wow-delay="300ms">送出</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- ##### Contact Area End #####-->
+
+
+
+	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 <%
@@ -313,30 +356,34 @@ th, td {
 			$('#answer').text('帳號驗證中');
 			$.ajax({
  			
-				url: '<%=request.getContextPath()%>/cust/cust.do',
-				type: "POST",
-				data: { action: 'ask', cust_acc: $('#cust_acc').val() },
-				//dataType: 'json',
-				success: function(res){
-					console.log(res);
-					$('#answer').text(res);
-					
-				},
-				error: function(res){
-					console.log(res);
-					$('#answer').text('Error! Could not reach the API. ');
-				}
-			});
-		}
-		
-		function _debounce(callback, time){
-			if(timer)
-				 clearTimeout(timer);
-			timer = setTimeout(function(){
-				callback();
-			}, time);
-		}
-	</script>
+				url: '<%=request.getContextPath()%>
+	/cust/cust.do',
+			type : "POST",
+			data : {
+				action : 'ask',
+				cust_acc : $('#cust_acc').val()
+			},
+			//dataType: 'json',
+			success : function(res) {
+				console.log(res);
+				$('#answer').text(res);
+
+			},
+			error : function(res) {
+				console.log(res);
+				$('#answer').text('Error! Could not reach the API. ');
+			}
+		});
+	}
+
+	function _debounce(callback, time) {
+		if (timer)
+			clearTimeout(timer);
+		timer = setTimeout(function() {
+			callback();
+		}, time);
+	}
+</script>
 
 
 

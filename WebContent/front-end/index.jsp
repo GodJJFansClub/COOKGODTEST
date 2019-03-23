@@ -61,6 +61,27 @@
 					</div>
 				</div>
 			</div>  
+			<div class="single-slide">
+				<!-- Background Image-->
+				<div class="slide-bg-img bg-img"
+					style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/2.jpg);"></div>
+				<!-- Welcome Text -->
+				<div class="container h-100">
+					<div class="row h-100 align-items-center">
+						<div class="col-12 col-lg-9">
+							<div class="welcome-text">
+								<h2 data-animation="fadeInUp" data-delay="300ms">
+									<span>Hungry?</span><br>Ready to Order
+								</h2>
+								<h4 data-animation="fadeInUp" data-delay="500ms">
+									See the Cook God<span></span>
+								</h4>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>  
 		<c:forEach var="adVO" items="${adSvc.allNowAd}">	
 			<!-- Single Slide -->
             <div class="single-slide">
@@ -87,6 +108,138 @@
 	
 
 	<!-- ##### Hero Area End ##### -->
+	
+	
+	 <!-- ##### Top Catagory Area Start ##### -->
+    <div class="top-catagory-area d-flex flex-wrap">
+        <!-- Single Catagory -->
+        <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/3.jpg);">
+            <a href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp">瀏覽主廚</a>
+        </div>
+        <!-- Single Catagory -->
+        <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/4.jpg);">
+            <a href="<%=request.getContextPath()%>/front-end/chef/menu/menu.jsp">食神來了</a>
+        </div>
+    </div>
+    <!-- ##### Top Catagory Area End ##### -->
+    
+     <!-- ##### Cool Facts Area Start ##### -->
+    <section class="pixel-cool-facts-area bg-gray section-padding-100-0">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- Single Cool Facts -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact mb-100">
+                        <div class="scf-icon">
+                            <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m1.png" alt="">
+                        </div>
+                        <div class="scf-text">
+                            <h2><span class="counter">26</span></h2>
+                            <h6>嚴選主廚</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Facts -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact mb-100">
+                        <div class="scf-icon">
+                            <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m5.png" alt="">
+                        </div>
+                        <div class="scf-text">
+                            <h2><span class="counter">37</span></h2>
+                            <h6>食神的顧客</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Facts -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact mb-100">
+                        <div class="scf-icon">
+                            <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m6.png" alt="">
+                        </div>
+                        <div class="scf-text">
+                            <h2><span class="counter">5</span></h2>
+                            <h6>嚴選套餐</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Cool Facts -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-cool-fact mb-100">
+                        <div class="scf-icon">
+                            <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m7.png" alt="">
+                        </div>
+                        <div class="scf-text">
+                            <h2><span class="counter">10</span></h2>
+                            <h6>嚴選食材</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### Cool Facts Area End ##### -->
+    
+     <!-- ##### Portfolio Area Start ###### -->
+    <div class="pixel-portfolio-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
+                        <h2>嚴選食材</h2>
+                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Menu -->
+       
+        <div class="pixel-portfolio">
+
+            <!-- Single gallery Item -->
+            <div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" alt="">
+                <div class="hover-content text-center d-flex align-items-center justify-content-center">
+                    <div class="hover-text">
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single gallery Item -->
+            <div class="single_gallery_item add wow fadeInUp" data-wow-delay="0.4s">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/6.jpg" alt="">
+                <div class="hover-content text-center d-flex align-items-center justify-content-center">
+                    <div class="hover-text">
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single gallery Item -->
+            <div class="single_gallery_item web wow fadeInUp" data-wow-delay="0.6s">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/7.jpg" alt="">
+                <div class="hover-content text-center d-flex align-items-center justify-content-center">
+                    <div class="hover-text">
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ##### Portfolio Area End ###### -->
+	
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
 	    var MyPoint = "/WebSocketForServlet";
