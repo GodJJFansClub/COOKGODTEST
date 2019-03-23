@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.dishFood.model.*,com.food.model.*"%>
-
-
 <jsp:useBean id="dishFoodSvc" scope="page" class="com.dishFood.model.DishFoodService" />
 <jsp:useBean id="foodSvc" scope="page" class="com.food.model.FoodService" />
 <jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService" />
@@ -11,8 +9,6 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
 </head>
 <body bgcolor='white'>
 
@@ -27,10 +23,10 @@
 	</c:if>
 	
 		<FORM id="dishFoodForm" METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" style="margin-bottom: 0px;">
-
-		<h3>菜色名稱: <font color=red><h3>${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</h3></font></h3>
-		
-		
+		<%--<tr>
+		<td><h3>菜色名稱: <font color=red>${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</font></h3></td>
+		</tr>--%>
+				
 		<h4> ${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</h4>
 		<c:forEach var="dishFoodVO" items="${dishFoodList}">
 		 <table>

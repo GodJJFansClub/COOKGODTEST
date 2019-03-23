@@ -36,7 +36,7 @@
 </c:if>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" name="form1" enctype="multipart/form-data">
-<table style="border-collapse:separate; border-spacing:10px 10px;" border="1">
+<table style="border-collapse:separate; border-spacing:10px 10px;" >
 	
 	<tr>
 		<td>菜色名稱:</td>

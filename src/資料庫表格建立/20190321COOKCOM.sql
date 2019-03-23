@@ -937,7 +937,7 @@ INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) 
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'蜜桃奶皇酥','D1',NULL,'秉持著ISO生產管理，由觀光飯店港式飲茶老字號師傅的一雙巧手，再加上刻意的烹調，佐以香料,鮮味,海鮮,乾貨，以冷凍食材方式包裝出貨，滿足客戶對港式飲茶點心，兒時記憶的懷舊夢。','480');
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'四季鮮水果','D1',NULL,'臺灣素有「水果王國」的美譽，水果種類豐富，一年四季皆可嘗到鮮甜可口的水果，走趟寶島。','350');
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'翡翠鮮蝦水餃','D1',NULL,' 100%新鮮菠菜泥製作餃皮，不含色素、防腐劑，宜蘭安心無毒蝦使用，絕不含硼砂，肉質乾淨鮮甜。，全蝦內餡，不惜成本以蝦粒混和蝦泥製作，吃一口滿滿的鮮味。','580');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'麒麟深海石斑','D1',NULL,' 麒麟石斑是特色名菜, 麒麟的意思是指用香菇、金華火腿、綠竹筍, 薑片等，以梅花間竹的方法夾著石斑魚肉來蒸. 此料理外型美觀, 魚肉鮮美, 湯汁濃厚, 用清蒸是一種健康的烹調方式,特色是石斑魚肉鮮而不腥, 堪稱是宴客豪華菜.','1580');
+
 
 
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'威靈頓牛排','D1',NULL,'1.將麵粉過篩、所有材料放入盆中揉至麵團顆粒粉粒狀態即可 (冷水的部份可以分次慢慢加入)，揉好的麵團搓圓放入抹少許油的盆中,再將盆用保鮮膜密封,放入冰箱冷藏隔夜
