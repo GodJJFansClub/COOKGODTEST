@@ -48,7 +48,7 @@ th, td {
 	text-align: center;
 }
 </style>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
@@ -64,10 +64,7 @@ th, td {
 		<tr>
 			<td>
 				<h3>顧客資料</h3>
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/front-end/cust/select_page.jsp">回首頁</a>
-				</h4>
+				
 			</td>
 		</tr>
 	</table>
@@ -111,7 +108,7 @@ th, td {
 
 			<c:if test="${custVO.cust_status.equals('a0')}" var="true"
 				scope="session">
-				<td>未停權</td>
+				<td>已啟用</td>
 			</c:if>
 			<c:if test="${custVO.cust_status.equals('a1')}" var="true"
 				scope="session">

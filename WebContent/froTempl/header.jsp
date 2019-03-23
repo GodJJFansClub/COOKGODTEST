@@ -155,7 +155,7 @@
 												</c:if>
 											</ul></li>
 										<li><FORM METHOD="get" action="<%=request.getContextPath()%>/front-end/logout.do">
-											<button type="submit"class="btn btn-danger">登出</button>
+											<button type="submit"class="btn btn-danger" id="alert">登出</button>
 										</FORM></li>
 									</c:if>
 									<c:if test="${empty custVO.cust_ID}">
@@ -272,6 +272,13 @@
 		function disconnect() {
 			webSocket.close();
 		}
+	</script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+	var btn = document.getElementById("alert");
+	btn.onclick = function() { 
+		swal("Good job!", "You clicked the button!", "success");
+			} 
 	</script>
 </c:if>
 
