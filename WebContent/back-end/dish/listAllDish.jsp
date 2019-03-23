@@ -60,14 +60,6 @@
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有菜色資料 - listAllDish.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
-
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>

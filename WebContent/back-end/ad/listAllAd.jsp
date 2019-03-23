@@ -21,31 +21,15 @@
 
 
 </head>
-<body bgcolor='white'>
+<body>
 		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		
-		</aside>
+		<jsp:include page="/back-end/sideBar/adMana.jsp"/>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
-
-	
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>所有廣告資料 - listAllAd.jsp</h3>
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">

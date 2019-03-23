@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.festOrder.model.*"%>
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
 
 <%
-	festOrderSvc = new FestOrderService();
 	List<FestOrderVO> list = festOrderSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
@@ -13,44 +13,8 @@
 
 <html>
 <head>
-<title>List_All_FestOrder.jsp</title>
+<title></title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
 
 </head>
 <body bgcolor='white'>
@@ -58,23 +22,10 @@ th, td {
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-</aside>
+		<jsp:include page="/back-end/sideBar/custMana.jsp" flush="true"/>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
-
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>節慶主題料理訂單資料 - listAllFestOrder.jsp</h3>
-				<h4>
-					<a href="<%=request.getContextPath()%>/back-end/festOrder/select_page.jsp" >回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -86,6 +37,7 @@ th, td {
 		</ul>
 	</c:if>
  <section class="page-content">
+ 	
    <div class="container pt-3 pb-3">
    <div class="table-responsive-sm table-middle">
            <thead class="thead-dark">
@@ -110,13 +62,13 @@ th, td {
 
 			<tr>
 				<td>${festOrderVO.fest_or_ID}</td>
-				<td>${festOrderVO.fest_or_status}</td>
+				<td>${mallOrStatusMap[festOrderVO.fest_or_status]}</td>
 				<td>${festOrderVO.fest_or_price}</td>
 				<td>${festOrderVO.fest_or_start}</td>
 				<td>${festOrderVO.fest_or_send}</td>
 				<td>${festOrderVO.fest_or_end}</td>
 <%-- 				<td>${festOrderVO.fest_or_disc}</td> --%>
-				<td>${festOrderVO.cust_ID}</td>
+				<td>${custSvc.getOneCust(festOrderVO.cust_ID).cust_name}</td>
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
@@ -158,9 +110,11 @@ th, td {
 	<%
 		}
 	%>
-</section>
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

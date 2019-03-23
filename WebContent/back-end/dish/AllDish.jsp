@@ -16,43 +16,7 @@
 <head>
 <title>所有菜色資料</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 1200px;
-	background-color: white;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 10px;
-	text-align: center;
-}
-</style>
-
-</head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
@@ -63,15 +27,6 @@ th, td {
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-<table id="table-1">
-	<tr>
-	<td>
-		 <h3><font color=red>全部<font color=blue>菜色資料</font></h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
-	</td>
-	</tr>
-</table>
-	<h2><font color=red>菜色狀態:D0=下架 D1=上架</font></h2>
 <table>
 	<tr>
 		<th>菜色編號:</th>
@@ -107,7 +62,12 @@ th, td {
 		</tr>
 	</c:forEach>
 </table> 
-
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

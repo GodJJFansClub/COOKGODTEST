@@ -58,25 +58,25 @@
 			</tr>
 			<tr>
 				<td>顧客帳號:</td>
-				<td><input type="TEXT" name="cust_acc" size="45"
+				<td><input readonly type="TEXT" name="cust_acc" size="45"
 					value="<%=custVO.getCust_acc()%>" /></td>
 			</tr>
 
 			<tr>
 				<td>顧客密碼:</td>
-				<td><input type="TEXT" name="cust_pwd" size="45"
+				<td><input readonly type="TEXT" name="cust_pwd" size="45"
 					value="<%=custVO.getCust_pwd()%>" /></td>
 			</tr>
 
 			<tr>
 				<td>顧客姓名:</td>
-				<td><input type="TEXT" name="cust_name" size="45"
+				<td><input readonly type="TEXT" name="cust_name" size="45"
 					value="<%=custVO.getCust_name()%>" /></td>
 			</tr>
 
 			<tr>
 				<td>顧客身分證字號:</td>
-				<td><input type="TEXT" name="cust_pid" size="45"
+				<td><input readonly type="TEXT" name="cust_pid" size="45"
 					value="<%=custVO.getCust_pid()%>" /></td>
 			</tr>
 
@@ -84,7 +84,7 @@
 				<td>顧客性別:</td>
 				<c:if test="${custVO.cust_sex.equals('M')}" var="true"
 					scope="session">
-					<td><input type="radio" name="cust_sex" size="10" value="M"
+					<td><input readonly type="radio" name="cust_sex" size="10" value="M"
 						checked />男 <input type="radio" name="cust_sex" size="10"
 						value="F" />女</td>
 				</c:if>

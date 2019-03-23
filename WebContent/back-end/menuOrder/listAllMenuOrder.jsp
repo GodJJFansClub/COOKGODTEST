@@ -26,7 +26,7 @@ th,td{
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<jsp:include page="/back-end/sideBar/orderMana.jsp"></jsp:include>
+		<jsp:include page="/back-end/sideBar/custMana.jsp"></jsp:include>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>

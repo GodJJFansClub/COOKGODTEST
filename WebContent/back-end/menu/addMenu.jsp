@@ -8,52 +8,15 @@
 
 <html>
 <head>
-<title>套餐資料新增 - addMenu</title>
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
+<title>新增套餐</title>
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
-
-table, th, td {
-	border: 0px solid #CCCCFF;
-}
-
-th, td {
-	padding: 1px;
-}
-</style>
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-			<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-
-		</aside>
+		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>
@@ -87,9 +50,9 @@ th, td {
 
 						<tr>
 							<td>套餐簡介:</td>
-							<td><input type="text" name="menu_resume"
+							<td><input type="textarea" name="menu_resume"
 								value="${menuVO==null? '':menuVO.menu_resume}"
-								placeholder="請輸入簡介"><br></td>
+								placeholder="請輸入簡介"><script>CKEDITOR.replace('menu_resume');</script><br></td>
 						</tr>
 
 						<tr>

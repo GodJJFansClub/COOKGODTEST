@@ -10,43 +10,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
- 
- <script 
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" 
-   crossorigin="anonymous"></script> 
-   
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width:600px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
 
 </head>
 
@@ -60,16 +24,6 @@
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-
-<table id="table-1">
-	<tr><td>
-	<br>
-		 <h3>新增菜色</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料新增:</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">

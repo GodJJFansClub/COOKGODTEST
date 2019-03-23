@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>文章新增 - addForumArt.jsp</title>
+<title></title>
 
 
 

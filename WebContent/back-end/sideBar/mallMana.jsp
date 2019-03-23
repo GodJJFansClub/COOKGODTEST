@@ -20,7 +20,7 @@
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" 
-                            href="<%=request.getContextPath()%>/back-end/festMenu/select_page.jsp" aria-expanded="false">
+                            href="<%=request.getContextPath()%>/back-end/festMenu/listAllFestMenu.jsp" aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
                                 <span class="hide-menu">管理節慶主題料理</span>
                             </a>
