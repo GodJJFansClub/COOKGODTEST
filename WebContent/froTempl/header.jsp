@@ -98,22 +98,18 @@
 									<c:if test="${not empty chefVO.chef_ID}">
 										<li><a href="">主廚專區</a>
 											<ul class="dropdown">
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">個人檔案</a></li>
+												
 												<li>
 												<a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">
 												節慶主題料理管理</a>
 												</li>
 												
 											</ul>
-										</li>
-											
+										</li>	
 									</c:if>
-									<c:if test="${not empty foodSupVO.foodSup_ID}">
+									<c:if test="${not empty foodSupVO.food_sup_ID}">
 										<li><a href="">食材供應商專區</a>
 											<ul class="dropdown">
-												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看個人資料</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/update_foodSup_input.jsp">編輯個人資料</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
@@ -122,10 +118,21 @@
 										</li>
 									</c:if>
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a href="">會員專區</a>
+										<li><a href="">顧客專區</a>
 											<ul class="dropdown">
-												<li><a href="<%=request.getContextPath()%>/front-end/cust/listOneCust.jsp">查看個人資料</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/cust/update_cust_input.jsp">編輯個人資料</a></li>
+												<c:choose>
+													<c:when test="${empty foodSupVO.food_sup_ID and not empty custVO.cust_ID and empty chefVO.chef_ID}">
+														<li><a href="<%=request.getContextPath()%>/front-end/cust/listOneCust.jsp">查看食材供應商資料</a></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/cust/update_cust_input.jsp">編輯食材供應商資料</a></li>		
+													</c:when>
+													<c:when test="${not empty foodSupVO.food_sup_ID}">
+														<li><a href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看個人資料</a></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/foodSup/update_foodSup_input.jsp">編輯個人資料</a></li>
+													</c:when>
+													<c:when test="${not empty custVO.cust_ID and not empty chefVo.chef_ID}">
+														<li><a href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">主廚資料</a></li>
+													</c:when>
+												</c:choose>
 												<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/listAllMenuOrderByCustID.jsp">套餐訂單管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/cust/listCOR.jsp">食材訂單管理</a></li>
 											</ul>
