@@ -16,21 +16,6 @@
 <head>
 <title>菜色食材資料 </title>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
 </style>
 
 <style>
@@ -52,16 +37,10 @@
 </head>
 <body bgcolor='white'>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>菜色食材資料 </h3>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
 
 <table>	
 		
-		<tr><td colspan ="4">菜色名稱:${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</td></tr>
+		<tr><td colspan ="4">菜色名稱:<font color="red" size="5">${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</font></td></tr>
 		
 	<tr>
 	
@@ -82,6 +61,11 @@
 			
 	</tr>
 	</c:forEach>
+	<tr>
+	<td colspan="3">
+		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
+	</td>
+	</tr>
 </table>
 
 </body>

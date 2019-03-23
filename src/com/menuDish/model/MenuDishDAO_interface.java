@@ -12,5 +12,5 @@ public interface MenuDishDAO_interface {
 	public List<MenuDishVO> getAllByMenuID(String menu_ID);
 	public List<MenuDishVO> getAll();
 	
-	public void insert2(MenuDishVO menuDishVO , java.sql.Connection con);
+	//public void insert2(MenuDishVO menuDishVO , java.sql.Connection con);
 }

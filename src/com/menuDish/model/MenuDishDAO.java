@@ -260,11 +260,7 @@ public class MenuDishDAO implements MenuDishDAO_interface{
 		return list;
 	}
 
-	@Override
-	public void insert2(MenuDishVO menuDishVO, Connection con) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 	@Override

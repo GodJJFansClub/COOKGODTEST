@@ -912,29 +912,38 @@ CREATE TABLE DISH (
 --(REMOVE DISH_PIC NOT NULL)--
 
 
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'XO醬炒雙脆','D0',NULL,'使用顏色鮮明、口感爽脆的蘭花蚌和甜豆拌炒，口感更有層次、配色鮮艷喜氣，加上以辣提鮮的康寶海龍皇爆炒醬，為歲末年終不可或缺的必勝菜式。','1800');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'百年慶好合','D0',NULL,'吃湯圓喜樂人團圓，今晚家家戶戶皆有喜，湯圓讓人在歲末年終有了圓圓滿滿的好彩頭！','200');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'芝麻流沙包','D0',NULL,'如果你是港式早茶愛好者，那一定吃過美味的流沙包，如果你還是個廚藝愛好者，那就不能錯過親手製作美味的流沙包！','380');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'魚子蒸燒賣','D0',NULL,'燒賣為港式點心中絕對不能錯過的美味,魚子蒸燒賣不但配色鮮豔動人,師傅四十餘年的料理經驗,運用獨特的內餡處理順序,帶給顧客最純正道地港式好滋味。','480');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'彭家招牌熬雞鍋','D0',NULL,'嚴選花東純正上等土雞 佐以日本北海道干貝、高山芽白心、精選排翅、冬菇、冬筍等食材以古法秘製高湯 金華火腿 悶燉數日而成 湯濃醇，味鮮美 肉質甜 營養成分更勝雞精 ，口味上乘，團圓年菜絕對極品！','2900');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'富貴牛腩筋','D0',NULL,'採用頂級紐西蘭KIWI羊肩排，以紅酒及獨特香料搭配特調羊排醬汁醃製，文火香煎而成，入口豐腴，口感極緻。','1280');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'黑椒羊小排','D0',NULL,'精選美國帶骨牛小排，稻草香入菜，與紅酒共同熬煮5小時，軟嫩滑順好入口','1440');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'花雕貴妃蝦','D0',NULL,'採用肉質飽滿富彈性的新鮮大蝦，以特調佐料及精選十餘種中藥材浸泡，?佳風味，爽口嫩脆，清甜夠味。','1000');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'蠔油美鮑片','D0',NULL,'獨家特殊調味配方，並透過長時間醃製，讓貝肉充分吸收滷汁，釋放出鮑貝鮮美香甜的口感。鮑貝肉質Q彈有嚼勁，經過蠔油烹調後，更能襯托出鮑貝於大海中的絕美海味，一口咬下後的湯汁瞬間在口中爆發，令人回味無窮。','1280');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'金華元蹄','D0',NULL,'CAS認證3斤以上豬腳，以獨家配料醃製5天，經文火滷製，外皮緊實香Q，肉質鮮嫩多汁，入口彈牙,口齒留香。','1000');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'綜合沙拉','D0',NULL,'炎炎夏日，總是讓人食慾不振，想要吃點清爽無負擔的餐點真的很簡單，就讓我們鮮採直送特別挑選的荷蘭頂級SalanovaR品種萵苣。','480');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'刺身拼盤','D0',NULL,'刺身是日式料理中著名菜式，通常是選用新鮮的魚類、蝦類、貝類等食材，去掉外殼、骨頭、內臟，只保留最鮮美的肉質，再將處理好的肉質切割成片，蘸醬油、山葵、味噌等調味料食用。肉質鮮嫩爽口有咬勁，營養價值頗高，含有豐富的蛋白質、維生素及微量礦物質，脂肪含量低，且容易吸收，對身體非常有益，是難得的天然美味。','750');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'炸蝦天婦羅','D0',NULL,'把蝦腸跟尾巴前的外殼取下、一尾一尾的下鍋炸，新鮮的魚肉跟脆脆的麵衣口感正是它的魅力所在啊！','490');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'墨魚蒸飯','D0',NULL,'整隻新鮮墨魚下鍋，細火慢煎，再送進烤箱，烤出Q度，逼出的鮮甜醬 汁、墨魚汁，再遵循義大利古法，和著米飯小火慢炒，綿密香濃的墨魚飯，全部包進墨魚的肚子裡，Q彈有勁墨 魚，有著海洋的鮮，醬汁的甜，配上米飯，讓口感更上層樓。','490');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'土瓶蒸','D0',NULL,'食材有雞肉、蛤蠣、白果、魚片、竹輪等?因為蒸煮過後所有食材的精華都在湯裡面只能用一個「鮮」字來形容記得在湯裡面加點檸檬汁會有不一樣的風味喔??。','200');
+
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'臘味櫻花蝦米糕','D1',NULL,'臘味櫻花蝦米糕，透亮鮮美的櫻花蝦，與香氣四溢的肝臘腸，搭配口感十足糯米糕，嚴選台灣在地食材、天然配料，堅持不添加味精、味素、人工香料，這天然的滋味，讓你吃得好安心，腸腸久久！','588');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'百年慶好合','D1',NULL,'吃湯圓喜樂人團圓，今晚家家戶戶皆有喜，湯圓讓人在歲末年終有了圓圓滿滿的好彩頭！','200');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'芝麻流沙包','D1',NULL,'如果你是港式早茶愛好者，那一定吃過美味的流沙包，如果你還是個廚藝愛好者，那就不能錯過親手製作美味的流沙包！','380');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'魚子蒸燒賣','D1',NULL,'燒賣為港式點心中絕對不能錯過的美味,魚子蒸燒賣不但配色鮮豔動人,師傅四十餘年的料理經驗,運用獨特的內餡處理順序,帶給顧客最純正道地港式好滋味。','480');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'彭家招牌熬雞鍋','D1',NULL,'嚴選花東純正上等土雞 佐以日本北海道干貝、高山芽白心、精選排翅、冬菇、冬筍等食材以古法秘製高湯 金華火腿 悶燉數日而成 湯濃醇，味鮮美 肉質甜 營養成分更勝雞精 ，口味上乘，團圓年菜絕對極品！','2900');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'富貴牛腩筋','D1',NULL,'採用頂級紐西蘭KIWI羊肩排，以紅酒及獨特香料搭配特調羊排醬汁醃製，文火香煎而成，入口豐腴，口感極緻。','1280');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'香煎羊小排','D1',NULL,'精選美國帶骨牛小排，稻草香入菜，與紅酒共同熬煮5小時，軟嫩滑順好入口','1440');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'花雕貴妃蝦','D1',NULL,'採用肉質飽滿富彈性的新鮮大蝦，以特調佐料及精選十餘種中藥材浸泡，?佳風味，爽口嫩脆，清甜夠味。','1000');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'蠔油美鮑片','D1',NULL,'獨家特殊調味配方，並透過長時間醃製，讓貝肉充分吸收滷汁，釋放出鮑貝鮮美香甜的口感。鮑貝肉質Q彈有嚼勁，經過蠔油烹調後，更能襯托出鮑貝於大海中的絕美海味，一口咬下後的湯汁瞬間在口中爆發，令人回味無窮。','1280');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'金華元蹄','D1',NULL,'CAS認證3斤以上豬腳，以獨家配料醃製5天，經文火滷製，外皮緊實香Q，肉質鮮嫩多汁，入口彈牙,口齒留香。','1000');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'綜合沙拉','D1',NULL,'炎炎夏日，總是讓人食慾不振，想要吃點清爽無負擔的餐點真的很簡單，就讓我們鮮採直送特別挑選的荷蘭頂級SalanovaR品種萵苣。','480');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'刺身拼盤','D1',NULL,'刺身是日式料理中著名菜式，通常是選用新鮮的魚類、蝦類、貝類等食材，去掉外殼、骨頭、內臟，只保留最鮮美的肉質，再將處理好的肉質切割成片，蘸醬油、山葵、味噌等調味料食用。肉質鮮嫩爽口有咬勁，營養價值頗高，含有豐富的蛋白質、維生素及微量礦物質，脂肪含量低，且容易吸收，對身體非常有益，是難得的天然美味。','750');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'炸蝦天婦羅','D1',NULL,'把蝦腸跟尾巴前的外殼取下、一尾一尾的下鍋炸，新鮮的魚肉跟脆脆的麵衣口感正是它的魅力所在啊！','490');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'墨魚蒸飯','D1',NULL,'整隻新鮮墨魚下鍋，細火慢煎，再送進烤箱，烤出Q度，逼出的鮮甜醬 汁、墨魚汁，再遵循義大利古法，和著米飯小火慢炒，綿密香濃的墨魚飯，全部包進墨魚的肚子裡，Q彈有勁墨 魚，有著海洋的鮮，醬汁的甜，配上米飯，讓口感更上層樓。','490');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'土瓶蒸','D1',NULL,'食材有雞肉、蛤蠣、白果、魚片、竹輪等?因為蒸煮過後所有食材的精華都在湯裡面只能用一個「鮮」字來形容記得在湯裡面加點檸檬汁會有不一樣的風味喔??。','200');
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'雞祥如意','D1',NULL,'精選8種頂級餡料，特別保留烘烤時滲出的精華原汁，加入白酒與洋蔥拌炒成烤雞肉汁，享用時佐以微酸帶甜的蔓越莓醬，襯托出雞肉的鮮甜美味。即日起至1月28日開放預購，售完為止，要買要快唷！','1280');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'砂鍋八寶雞燉翅','D1',NULL,'主廚特選上等魚翅與多種珍貴食材，以恰到好處的火候精燉4小時，味香四溢，是除夕圍爐不可或缺的一道功夫大菜','3600');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'鮑魚干貝火烔燉雞湯','D0',NULL,'主廚特選上等魚翅與多種珍貴食材，以恰到好處的火候精燉4小時，味香四溢，是除夕圍爐不可或缺的一道功夫大菜','3600');
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'古傳老鴨煲','D1',NULL,'承襲正統江浙菜烹調手法，特選2公斤肥鴨細火慢燉4小時，熬製成乳白色的湯底，味濃而不膩，再加入扁魚乾、邊尖筍、金針花、家鄉肉、蹄筋、海參及包心白菜，文火再燜煮2小時，將邊尖筍鹹香滋味、金針花的自然花香、鴨骨精華及海味膠質完全釋放在湯底中；鴨肉纖維則變得綿密軟嫩、包心白菜滑口回甘、吸滿湯汁。一口湯再加上一口料，讓饕客們口口生香、口口滿足。','1380');
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'炙烤美國Prime牛肉','D1',NULL,'選用美國最高等級Prime牛肉，肉質與脂肪分佈比例堪稱最佳。調味堅持極簡精神，烹製工法卻極其細膩，以純天然酸性醃料醃漬並輕柔按摩一小時，讓肉香全然釋放、軟化肉質，表層油脂在燒烤過程中，漸成焦糖色澤並鎖住濃郁肉汁，最後僅以少量鹽巴與胡椒粉點出濃厚肉香，讓頂級牛肉的原始風味能盡其展現！','1880');
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'酸菜白肉鍋','D1',NULL,'主廚特選上等魚翅與多種珍貴食材，以恰到好處的火候精燉4小時，味香四溢，是除夕圍爐不可或缺的一道功夫大菜','900');
-INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'泰式酸辣貴妃腿','D1',NULL,'嚴選上等豬後腿(一隻約600g)，先川燙去除腥味，再以主廚特調香料及調味料醃製一天一夜，隔日取出後用當令蔬菜及香料滷1.5小時熟成入味後，再以200度高溫油炸瞬間鎖住肉並達到表皮酥香的效果，最後淋上主廚秘制以台灣本地蝦米、鹹蛋黃爆香再加上多種南洋辛香料調製而成的泰式風味酸辣醬，即完成一道外皮酥脆、肉嫩多汁有豐富層次口感的豬腳料理。','880');
 INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'紅酒稻草西施牛','D1',NULL,'精選美國帶骨牛小排，稻草香入菜，與紅酒共同熬煮5小時，軟嫩滑順好入口','1580');
-  
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'蜜桃奶皇酥','D1',NULL,'秉持著ISO生產管理，由觀光飯店港式飲茶老字號師傅的一雙巧手，再加上刻意的烹調，佐以香料,鮮味,海鮮,乾貨，以冷凍食材方式包裝出貨，滿足客戶對港式飲茶點心，兒時記憶的懷舊夢。','480');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'四季鮮水果','D1',NULL,'臺灣素有「水果王國」的美譽，水果種類豐富，一年四季皆可嘗到鮮甜可口的水果，走趟寶島。','350');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'翡翠鮮蝦水餃','D1',NULL,' 100%新鮮菠菜泥製作餃皮，不含色素、防腐劑，宜蘭安心無毒蝦使用，絕不含硼砂，肉質乾淨鮮甜。，全蝦內餡，不惜成本以蝦粒混和蝦泥製作，吃一口滿滿的鮮味。','580');
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'麒麟深海石斑','D1',NULL,' 麒麟石斑是特色名菜, 麒麟的意思是指用香菇、金華火腿、綠竹筍, 薑片等，以梅花間竹的方法夾著石斑魚肉來蒸. 此料理外型美觀, 魚肉鮮美, 湯汁濃厚, 用清蒸是一種健康的烹調方式,特色是石斑魚肉鮮而不腥, 堪稱是宴客豪華菜.','1580');
+
+
+INSERT INTO DISH(DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE) VALUES ('D'||LPAD((DISH_SEQ.NEXTVAL),5,'0'),'威靈頓牛排','D1',NULL,'1.將麵粉過篩、所有材料放入盆中揉至麵團顆粒粉粒狀態即可 (冷水的部份可以分次慢慢加入)，揉好的麵團搓圓放入抹少許油的盆中,再將盆用保鮮膜密封,放入冰箱冷藏隔夜
+（避免產生過大的筋性，麵團不要揉太久）。  2.將奶油切成厚度約1公分的片狀，奶油排列成整齊的長方形後，稍微用桿麵棍壓平，用保鮮膜包起來後放入冷藏備用。  3.將冷藏好的麵團灑上低筋麵粉放於工作台上，用橄麵棍慢慢將麵團桿成為一個長方形（起碼比奶油大2.5倍以上），將奶油放於正中央，將麵皮把奶油緊緊包覆。 4.將包覆好的麵皮桿成長方形後折四折，用保鮮膜包好後冰入冷藏30分鐘。  5.重複步驟7.四次就會形成4x4x4x4=1024層酥皮，做好的酥皮可以放入冷凍保存、備用。
+ 6.栗子蘑菇泥製作，將材料全丟進調理機打成泥，乾鍋將栗子蘑菇泥的水份煮乾（栗子蘑菇泥的水份越乾越好）。  7.牛排本體，將菲力退至室溫後簡單黑胡椒、海鹽調味，熱鍋將菲力表面煎至上色，從鍋中取出菲力後，立即刷上英式芥末。  8.將帕瑪火腿平整鋪在保鮮膜上，簡單黑胡椒調味即可，將栗子蘑菇泥鋪在帕瑪火腿上，再將菲力放在最上層。  
+9.將菲力用保鮮膜緊緊的捲起來塑形，將捲好的菲力冷藏約半小時定型，將酥皮桿平平鋪於保鮮膜上，將菲力取出放於酥皮上，將牛排緊緊捲起來塑形，放入冷藏約30分鐘塑形。  10.將烤箱220度預熱，牛排取出，表面刷上蛋黃液送入烤箱，上下火220度烤35分鐘（如果怕太生可以多烤一些）  11.烤箱取出後靜置10分鐘後再切開，完成','880');
 
 ------------------------------------------------------------------
 --建立表格:主廚擅長菜色--
@@ -1503,9 +1512,7 @@ INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (F
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '黃甜椒','g1');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '紅甜椒','g1');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '洋地瓜','g1');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '香菇片','g4');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '海龍皇爆炒醬','g4');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '康寶精製蠔油','g4');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '香菇','g4');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '胡椒粉','g4');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '雞粉','g4');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '新鮮湯圓', 'g4');
@@ -1519,17 +1526,16 @@ INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (F
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '新鮮大蝦', 'g2');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '牛腩', 'g0');
 INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'牛大骨', 'g0');
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'肥鴨', 'g0');
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'邊尖筍', 'g1'); 
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'金針花', 'g4'); 
-INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'家鄉肉','g4'); 
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'菲力牛排', 'g0');
+
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'奶油', 'g4'); 
+INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'砂糖','g4'); 
 INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'蹄筋', 'g0');
 INSERT INTO  FOOD (FOOD_ID,FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(FOOD_SEQ.NEXTVAL,5,'0'),'白菜', 'g1');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '低筋麵粉','g3');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '紅酒','g4');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '魚翅','g2');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '北海道干貝','g2');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '冬菇','g4');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '豬肚','g0');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '大甲芋頭','g1');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '冬筍','g1');
@@ -1541,17 +1547,30 @@ INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (F
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '沙公','g2');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '羊排','g0');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '波士頓龍蝦','g2');
-
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '鮭魚','g2');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '鮪魚','g2');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '鮭魚卵','g2');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '天使紅蝦','g2');
 INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '生食干貝','g2');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '五花肉','g1');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '松阪豬肉','g1');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), 'CAS認證豬腳','g1');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '板腱牛','g1');
-INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '紐約客','g1');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '五花肉','g0');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '松阪豬肉','g0');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), 'CAS認證豬腳','g0');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '板腱牛','g0');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '紐約客','g0');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '鹽','g4');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '香油','g4');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '木薯粉','g3');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '鬆餅粉','g3');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '高筋麵粉','g3');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '小蘇打粉','g3');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '玉米粉','g3');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '越光米','g3');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '芋香米','g3');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '黑胡椒粉','g4');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '栗子','g4');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '百里香','g4');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '帕瑪火腿','g0');
+INSERT INTO FOOD (FOOD_ID, FOOD_NAME, FOOD_TYPE_ID) VALUES ('F'||LPAD(TO_CHAR (FOOD_SEQ.NEXTVAL), 5, '0'), '洋菇','g1');
 
 
 ------------------------------------------------------------------
