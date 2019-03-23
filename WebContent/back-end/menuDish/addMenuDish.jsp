@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.menuDish.model.*"%>
-<jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService" />
+<jsp:useBean id="dishSvc" scope="page" class="com.dish.model.DishService"/>
+<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService"/>
 <%
   MenuDishVO menuDishVO = (MenuDishVO) request.getAttribute("MenuDishVO");
 %>
@@ -81,8 +82,8 @@
 				<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/menuDish/menuDish.do" >
 					<table>
 						<tr>
-							<th>選擇套餐:</th>
-							<td><input readonly type="text" name="menu_ID" value="${menuVO.menu_ID}" /></td>
+							<th>套餐名稱:</th>
+							<td><input readonly  name="menu_ID" value="${menuVO.menu_ID}"></td>
 						</tr>
 						<tr>
 							<th>選擇菜色:</th>

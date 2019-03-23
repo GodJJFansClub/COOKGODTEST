@@ -3,6 +3,7 @@ package com.menu.model;
 import java.util.*;
 
 public interface MenuDAO_interface {
+	
 	public MenuVO insert(MenuVO menuVO);
 
 	public void update(MenuVO menuVO);
@@ -12,4 +13,5 @@ public interface MenuDAO_interface {
 	public MenuVO findByPrimaryKey(String menu_ID);
 
 	public List<MenuVO> getAll();
+	
 }
