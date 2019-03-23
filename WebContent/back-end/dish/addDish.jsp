@@ -10,7 +10,6 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
- 
  <script 
   src="https://code.jquery.com/jquery-3.3.1.min.js"
    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" 
@@ -35,7 +34,7 @@
 
 <style>
   table {
-	width:600px;
+	width:800px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -60,17 +59,6 @@
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-
-<table id="table-1">
-	<tr><td>
-	<br>
-		 <h3>新增菜色</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料新增:</h3>
-
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -82,7 +70,7 @@
 </c:if>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" name="form1" enctype="multipart/form-data">
-<table>
+<table style="border-collapse:separate; border-spacing:10px 10px;" border="1">
 	
 	<tr>
 		<td>菜色名稱:</td>
@@ -90,9 +78,10 @@
 			 value="<%= (dishVO==null)? "請輸入菜色名稱" : dishVO.getDish_name()%>" /><br></td>
 	</tr>
 	
-
+	
 	<tr>
-		<td>菜色照片:</td>
+	
+   		<td>菜色照片:</td>
 		<td>
 		<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/images/null2.jpg"  width="300" height="200"/>
 		<br>
@@ -104,7 +93,7 @@
 	
 	<tr>
 		<td>菜色內容:</td>
-		<td><script src="<%=request.getContextPath() %>/publibrary/ckeditor4/ckeditor.js"></script>
+		<td><script src="<%=request.getContextPath() %>/publibrary/ckeditor4/ckeditor.js" ></script>
 		<textarea rows="20" cols="40" name="dish_resume" >
 		</textarea>
 		<script>CKEDITOR.replace('dish_resume');</script></td>
@@ -149,12 +138,19 @@ function readURL(input){
 
 </script>
 
+<script>
+      function idwrite(name){
+    	  form1.dish_name.value="麒麟深海石斑"
+    	  form1.dish_price.value="1580"     	 
+      }
+</script>
+
 
 <br>
 <input type="hidden"  name="dish_status" value="D0">
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
-
+<img src="<%=request.getContextPath()%>/images/x.png" height="20" width="20" onClick="idwrite(this)">
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>

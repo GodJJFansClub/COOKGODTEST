@@ -16,21 +16,6 @@
 </head>
 <body bgcolor='white'>
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>transmitFood.jsp </h3>
-			</td>
-			<td>
-				<h4>
-					<a href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
-
-	<h3>資料新增:</h3>
-
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -43,7 +28,7 @@
 	
 		<FORM id="dishFoodForm" METHOD="post" ACTION="<%=request.getContextPath()%>/dishFood/dishFood.do" style="margin-bottom: 0px;">
 
-		<h3>菜色名稱: <font color=red><b>*</b><h4>${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</h4></font></h3>
+		<h3>菜色名稱: <font color=red><h3>${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</h3></font></h3>
 		
 		
 		<h4> ${dishSvc.getOneDish(dishFoodVO.dish_ID).dish_name}</h4>

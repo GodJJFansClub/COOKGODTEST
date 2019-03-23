@@ -443,8 +443,8 @@ public class DishFoodServlet extends HttpServlet {
 				}
 
 				req.setAttribute("dishFoodList", dishFoodList);
-				HttpSession session = req.getSession();
-				session.removeAttribute("dishVO");
+//				HttpSession session = req.getSession();
+//				session.removeAttribute("dishVO");
 				String url = "/back-end/dishFood/selectFood.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);

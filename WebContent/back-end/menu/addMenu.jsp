@@ -8,6 +8,12 @@
 
 <html>
 <head>
+
+<script 
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" 
+   crossorigin="anonymous"></script> 
+
 <title>套餐資料新增 - addMenu</title>
 <style>
 table#table-1 {
@@ -30,7 +36,7 @@ h4 {
 
 <style>
 table {
-	width: 450px;
+	width: 800px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -72,38 +78,85 @@ th, td {
 					ACTION="<%=request.getContextPath()%>/menu/menu.do" name="form1"
 					enctype="multipart/form-data">
 
-					<table>
+					<table style="border-collapse:separate; border-spacing:40px 10px;" border="1">
 						<tr>
 							<td>套餐名稱:</td>
 							<td><input type="text" name="menu_name"
 								value="${menuVO==null? '': menuVO.menu_name}" /></td>
 						</tr>
 
+						
+						<tr>
+							<td>套餐照片:</td>
+							<td><img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/images/null2.jpg"  width="300" height="200"/>
+							<input type="file" name="menu_pic"  id="progressbarTWInput" value="<%= (menuVO==null)? "請上傳照片": menuVO.getMenu_pic()%>" />
+							<br></td>
+						</tr>
+						
+
+						<tr>
+							<td>套餐簡介:</td>
+							<td>
+							<script src="<%=request.getContextPath() %>/publibrary/ckeditor4/ckeditor.js" ></script>
+							<textarea rows="20" cols="40" name="menu_resume" ></textarea>
+							<script>CKEDITOR.replace('menu_resume');</script></td>	
+								
+						</tr>
+						
 						<tr>
 							<td>套餐價錢:</td>
 							<td><input type="number" name="menu_price"
 								value="${menuVO==null? '': menuVO.menu_price}" /></td>
 						</tr>
-
-						<tr>
-							<td>套餐簡介:</td>
-							<td><input type="text" name="menu_resume"
-								value="${menuVO==null? '':menuVO.menu_resume}"
-								placeholder="請輸入簡介"><br></td>
-						</tr>
-
-						<tr>
-							<td>套餐照片:</td>
-							<td><input type="file" name="menu_pic" id="doc"
-								onchange="javascript:setImagePreview();" /><br></td>
-						</tr>
+						
+						
 
 					</table>
+					
+<script>
+
+$("#progressbarTWInput").change(function(){
+
+  readURL(this);
+
+});
+
+ 
+
+function readURL(input){
+
+  if(input.files && input.files[0]){
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+       $("#preview_progressbarTW_img").attr('src', e.target.result);
+
+    }
+
+    reader.readAsDataURL(input.files[0]);
+
+  }
+
+}
+
+</script>
+
+<script>
+      function idwrite(name){
+    	  form1.menu_name.value="六六大順"
+    	  form1.menu_price.value="6666"     	 
+      }
+</script>
+
+
 					<div id="localImag">
 						<img id="preview" width=-1 height=-1 style="display: none" />
 					</div>
 					<input type="hidden" name="action" value="insert"> <input
 						type="submit" value="送出新增"><br>
+						<img src="<%=request.getContextPath()%>/images/x.png" height="20" width="20" onClick="idwrite(this)">
 				</FORM>
 
 				<%--=================================工作區================================================--%>

@@ -35,18 +35,8 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-7">
+
 				
-					<tr>
-						<td>
-							<h3>菜色食材新增 - selectFood.jsp</h3>
-						</td>
-						<td>
-							<h4>
-								
-							</h4>
-						</td>
-					</tr>
-				</table>
 
 				<c:if test="${not empty errorMsgs}">
 					<font style="color: red">請修正以下錯誤:</font>
@@ -60,18 +50,18 @@
 					<table>
 						<tr>
 							
-							<td><h3>菜色名稱:<font color=red><b>*</b></font></h3></td>
-							<td><a href="<%=request.getContextPath()%>dish/dish.do?dish_ID=${dishVO.dish_ID}"></a><h3>${dishVO.dish_name}</h3></td>
+							<td><h3>菜色名稱:</h3></td>
+							<td><a href="<%=request.getContextPath()%>dish/dish.do?dish_ID=${dishVO.dish_ID}"></a><h3><font color="red">${dishVO.dish_name}</font></h3></td>
 							
 						</tr>
 					</table>
 						
-					<h3>選擇食材:</h3>	
+					<h3><font color="blue">選擇食材:</font></h3>	
 						<div class="container">
 							<div class="row">
 							<c:forEach var="food_type" items="${foodTypeMap}">
 								<br>
-								<div class="col-sm ${food_type.key}">${food_type.value}</div>
+								<div class="col-sm ${food_type.key}"><h3><font color="blue">${food_type.value}</font></h3></div>
 								<br>
 							</c:forEach>
 							
