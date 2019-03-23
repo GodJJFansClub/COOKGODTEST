@@ -147,18 +147,7 @@ public class CustServlet extends HttpServlet {
 				in.read(cust_pic);
 				in.close();
 
-				// 寄Email
-				String to = cust_mail;
-
-				String subject = "會員驗證";
-
-				String ch_name = cust_name;
-				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
-				String messageText = "Hello! " + ch_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
-
-				SendEmail mailService = new SendEmail();
-				mailService.sendMail(to, subject, messageText);
-
+				
 				// set
 				CustVO custVO = new CustVO();
 				custVO.setCust_acc(cust_acc);
@@ -183,6 +172,7 @@ public class CustServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
+				
 
 				// 將資料加入資料庫
 				CustService custSvc = new CustService();
@@ -192,6 +182,27 @@ public class CustServlet extends HttpServlet {
 				String url = "/front-end/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
+				
+				// 寄Email
+				String to = cust_mail;
+
+				String subject = "會員驗證";
+
+				String ch_name = cust_name;
+				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
+				String messageText = "Hello! " + ch_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
+
+				
+				try {
+					SendEmail mailService = new SendEmail();
+					mailService.sendMail(to, subject, messageText);
+				} catch (IllegalArgumentException e) {
+				
+					errorMsgs.add("請輸入E-mail!");
+				}catch (Exception e) {
+				
+					errorMsgs.add("請輸入E-mail!");
+					}
 
 				// 除錯
 			} catch (Exception e) {
@@ -199,6 +210,7 @@ public class CustServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/login/addCust.jsp");
 				failureView.forward(req, res);
 			}
+			
 
 		}
 		// 新增食材供應商

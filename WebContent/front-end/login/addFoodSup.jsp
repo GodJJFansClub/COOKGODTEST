@@ -149,9 +149,7 @@ th, td {
 					
 					<script>CKEDITOR.replace('food_sup_resume');</script>
 				
-				<input type="TEXT" name="food_sup_resume" size="45"
-					value="${chefVO==null? '請輸入簡介...':chefVO.chef_resume}" /></td>
-					<script>CKEDITOR.replace('food_sup_resume');</script>
+				
 			</tr>
 
 

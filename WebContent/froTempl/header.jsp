@@ -95,7 +95,7 @@
 										</ul>
 									</li>
 										
-									<c:if test="${not empty chefVO}">
+									<c:if test="${not empty chefVO.chef_ID}">
 										<li><a href="">主廚專區</a>
 											<ul class="dropdown">
 												<li><a
@@ -109,7 +109,7 @@
 										</li>
 											
 									</c:if>
-									<c:if test="${not empty foodSupVO}">
+									<c:if test="${not empty foodSupVO.foodSup_ID}">
 										<li><a href="">食材供應商專區</a>
 											<ul class="dropdown">
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看個人資料</a></li>
@@ -121,7 +121,7 @@
 											</ul>
 										</li>
 									</c:if>
-									<c:if test="${not empty custVO}">
+									<c:if test="${not empty custVO.cust_ID}">
 										<li><a href="">會員專區</a>
 											<ul class="dropdown">
 												<li><a href="<%=request.getContextPath()%>/front-end/cust/listOneCust.jsp">查看個人資料</a></li>
@@ -132,9 +132,9 @@
 										</li>
 									</c:if>
 
-									<c:if test="${not empty custVO}">
+									<c:if test="${not empty custVO.cust_ID}">
 										<li><a>Hello:<font color=#ea7500>
-													${custVO.cust_name} </font>您好
+													${custVO.cust_niname} </font>您好
 									<li><a><i class="fa fa-dribbble"></i><span
 												class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
 											<ul class="dropdown">
@@ -147,12 +147,11 @@
 													<li><a>目前尚無訊息</a></li>
 												</c:if>
 											</ul></li>
-										<FORM METHOD="get"
-											action="<%=request.getContextPath()%>/front-end/logout.do">
+										<FORM METHOD="get" action="<%=request.getContextPath()%>/front-end/logout.do">
 											<input type="submit" value="登出">
 										</FORM>
 									</c:if>
-									<c:if test="${empty custVO}">
+									<c:if test="${empty custVO.cust_ID}">
 										<li><a>加入我們</a>
 											<ul class="dropdown">
 												<li><a
@@ -223,7 +222,7 @@
 	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 
-<c:if test="${not empty custVO}">
+<c:if test="${not empty custVO.cust_name}">
 	<jsp:useBean id="custVO" scope="session" type="com.cust.model.CustVO" />
 	<script>
 			var MyPoint = "/BroadcastWebSocket";
