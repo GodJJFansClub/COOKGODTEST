@@ -64,18 +64,18 @@
 			<div class="single-slide">
 				<!-- Background Image-->
 				<div class="slide-bg-img bg-img"
-					style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/2.jpg);"></div>
+					style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/F4_2.png);"></div>
 				<!-- Welcome Text -->
 				<div class="container h-100">
 					<div class="row h-100 align-items-center">
 						<div class="col-12 col-lg-9">
 							<div class="welcome-text">
 								<h2 data-animation="fadeInUp" data-delay="300ms">
-									<span>Hungry?</span><br>Ready to Order
+									<span style="color:black; font-weight:bold">嚴選四大廚神</span><br>
 								</h2>
-								<h4 data-animation="fadeInUp" data-delay="500ms">
-									See the Cook God<span></span>
-								</h4>
+								<h3 data-animation="fadeInUp" data-delay="500ms">
+									<spanstyle="color:black">為您服務</span>
+								</h3>
 								
 							</div>
 						</div>
@@ -113,12 +113,13 @@
 	 <!-- ##### Top Catagory Area Start ##### -->
     <div class="top-catagory-area d-flex flex-wrap">
         <!-- Single Catagory -->
-        <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/3.jpg);">
-            <a href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp">瀏覽主廚</a>
+        <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/F4_2.png);">
+            <a href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp" style="font-weight:bold"><font color = '#000000' onmouseout="this.style.color = '#000000';" onmouseover="this.style.color ='#FF7B0F';">瀏覽主廚</font></a>
+            
         </div>
         <!-- Single Catagory -->
         <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/4.jpg);">
-            <a href="<%=request.getContextPath()%>/front-end/chef/menu/menu.jsp">食神來了</a>
+            <a href="<%=request.getContextPath()%>/front-end/chef/menu/menu.jsp" style="font-weight:bold">嚴選套餐</a>
         </div>
     </div>
     <!-- ##### Top Catagory Area End ##### -->
@@ -192,7 +193,7 @@
                 <div class="col-12">
                     <!-- Section Heading -->
                     <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h2>嚴選食材</h2>
+                        <h2 style="font-weight:bold">嚴選食材</h2>
                         <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png" alt="">
                     </div>
                 </div>

@@ -78,7 +78,7 @@
 								<ul>
 									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
 									
-									<li><a>食神來了</a>
+									<li><a style="font-weight:bold">食神來了</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp">瀏覽主廚</a></li>
@@ -86,7 +86,7 @@
 												href="<%=request.getContextPath()%>/front-end/menu/menu.jsp">嚴選套餐</a></li>
 									</ul></li>
 									
-									<li><a>食神配送</a>
+									<li><a style="font-weight:bold">食神配送</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
@@ -96,7 +96,7 @@
 									</li>
 										
 									<c:if test="${not empty chefVO.chef_ID}">
-										<li><a href="">主廚專區</a>
+										<li><a href="" style="font-weight:bold">主廚專區</a>
 											<ul class="dropdown">
 												
 												<li>
@@ -108,7 +108,7 @@
 										</li>	
 									</c:if>
 									<c:if test="${not empty foodSupVO.food_sup_ID}">
-										<li><a href="">食材供應商專區</a>
+										<li><a href="" style="font-weight:bold">食材供應商專區</a>
 											<ul class="dropdown">
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
@@ -118,7 +118,7 @@
 										</li>
 									</c:if>
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a href="">顧客專區</a>
+										<li><a href="" style="font-weight:bold">顧客專區</a>
 											<ul class="dropdown">
 												<c:choose>
 													<c:when test="${empty foodSupVO.food_sup_ID and not empty custVO.cust_ID and empty chefVO.chef_ID}">
@@ -140,7 +140,7 @@
 									</c:if>
 
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a>Hello:<font color=#ea7500>
+										<li><a>Hello:<font style="font-weight:bold"color=#ea7500>
 													${custVO.cust_niname} </font>您好
 									<li><a><i class="fa fa-dribbble"></i><span
 												class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
