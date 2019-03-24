@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.chef.model.*"%>
+<jsp:useBean id="custSvc" scope="page" class="com.cust.model.CustService"/>
 
 <%	
 	ChefService chefSvc = new ChefService();
@@ -44,7 +45,7 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th scope="col">主廚編號</th>
+										<th scope="col">主廚名稱</th>
 										<th scope="col">主廚狀態</th>
 										<th scope="col">主廚服務地區</th>
 										<th scope="col">主廚頻道</th>
@@ -54,7 +55,7 @@
 								</thead>
 								
 								<tr>
-									<th scope="row">${chefVO.chef_ID}</th>
+									<th scope="row">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</th>
 									<th scope="row"><c:if test="${chefVO.chef_status=='b0'}">未審核</c:if> <c:if
 											test="${chefVO.chef_status=='b1'}">審核通過</c:if> <c:if
 											test="${chefVO.chef_status=='b2'}">審核不過</c:if> <c:if
