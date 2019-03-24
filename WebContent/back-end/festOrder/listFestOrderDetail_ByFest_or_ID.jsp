@@ -1,55 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.festOrderDetail.model.*"%>
-
-
-
-<jsp:useBean id="festOrderSvc" scope="page"
-	class="com.festOrder.model.FestOrderService" />
+<jsp:useBean id="festOrderSvc" scope="page" class="com.festOrder.model.FestOrderService" />
 <jsp:useBean id="festMenuSvc" class="com.festMenu.model.FestMenuService" />
 
 
 <html>
-<!--  <head><title>部門員工 - listEmps_ByDeptno.jsp</title>  -->
+
 <head>
-<title>節慶主題料理訂單明細 - listFestOrderDetail_ByFest_or_ID.jsp</title>
+<title>節慶主題料理訂單明細</title>
 
-<style>
-table#table-2 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
 
-table#table-2 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
 </head>
 
 <body bgcolor='white'>
@@ -57,9 +18,7 @@ th, td {
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-</aside>
+		<jsp:include page="/back-end/sideBar/custMana.jsp" flush="true"/>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
@@ -71,21 +30,6 @@ th, td {
 							</c:forEach>
 						</ul>
 					</c:if>
-					
-					
-		
-
-<!-- 						<table id="table-2"> -->
-							<tr>
-								<td>
-									<h3>節慶主題料理訂單明細 - listFestOrderDetail_ByFest_or_ID.jsp</h3>
-									<h4>
-										<a
-											href="<%=request.getContextPath()%>/back-end/festOrder/listAllFestOrder.jsp">回首頁</a>
-									</h4>
-								</td>
-							</tr>
-						</table>
 
 						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
@@ -99,7 +43,7 @@ th, td {
 <section class="page-content">
    <div class="container pt-3 pb-3">
    <div class="table-responsive-sm table-middle">
-           <thead class="thead-dark">
+
 						<table class="table table-hover">
 	   <thead class="thead-dark">
 							<tr>
@@ -151,16 +95,14 @@ th, td {
 							</c:forEach>
 						</table>
 
-<!-- 						<br>本網頁的路徑: -->
-<!-- 						<br> -->
-<%-- 						<b> <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br> --%>
-<%-- 							<font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> --%>
-<!-- 						</b> -->
-</div>
-</div>
-</section>
+			</div>
+			</div>
+			</section>
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
+	</div>
+	</div>
+	</div>
 </body>
 </html>

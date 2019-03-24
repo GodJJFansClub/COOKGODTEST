@@ -13,7 +13,7 @@
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+		<jsp:include page="/back-end/sideBar/foodSupMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
@@ -32,9 +32,6 @@
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
 			<h5 class="card-title">編輯主廚簡歷</h5>
-			<a
-				href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp"
-				class="btn btn-primary">回上一頁</a>
 		</div>
 	</div>
 
@@ -78,10 +75,12 @@
 					<input type="hidden" name="action" value="getOneForUpdate"> 
 					<input type="submit" class="btn btn-success btn-lg btn-block" value="修改">
 				</form>
+				</div>
 			</div>
 		</div>
+		</div>
 	</div>
-
+</div>
 	
 </body>
 </html>

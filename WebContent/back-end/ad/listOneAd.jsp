@@ -9,7 +9,6 @@
 <html>
 <head>
 <title>廣告資料 - listOneAd.jsp</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
 
 </head>
 <body >
@@ -17,7 +16,7 @@
         data-layout="vertical" data-sidebartype="full"
         data-boxed-layout="full">
         <jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-        <jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+        <jsp:include page="/back-end/sideBar/adMana.jsp" flush="true" />
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <%--=================================工作區================================================--%>

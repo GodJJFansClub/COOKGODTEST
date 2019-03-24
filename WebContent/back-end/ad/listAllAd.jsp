@@ -15,17 +15,14 @@
 
 <html>
 <head>
-<title>所有廣告資料 - listAllAd.jsp</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
-
-
+<title>所有廣告資料</title>
 </head>
 <body>
     <div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
         data-layout="vertical" data-sidebartype="full"
         data-boxed-layout="full">
         <jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-        <jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+        <jsp:include page="/back-end/sideBar/adMana.jsp" flush="true" />
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <%--=================================工作區================================================--%>

@@ -14,22 +14,12 @@
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
 		<jsp:include page="/back-end/sideBar/empMana.jsp" flush="true" />
-		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
 
-
-	<table id="table-1">
-		<tr>
-			<td><h3>IBM Emp: Home</h3>
-				<h4>( MVC )</h4></td>
-		</tr>
-	</table>
 
 	<p>This is the Home page forEmp: Home</p>
 
@@ -96,11 +86,12 @@
 		<li><a href='addEmp.jsp'>Add</a> a new Emp.</li>
 	</ul>
 
-</body>
+
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

@@ -19,7 +19,6 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<title>List_All_By_Chef_ID.jsp</title>
 </head>
 <body>
 		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"

@@ -12,15 +12,13 @@
 %>
 <html>
 <head>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
-
 </head>
 <body>
     <div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
         data-layout="vertical" data-sidebartype="full"
         data-boxed-layout="full">
         <jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-        <jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+        <jsp:include page="/back-end/sideBar/mallMana.jsp" flush="true" />
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <%--=================================工作區================================================--%>

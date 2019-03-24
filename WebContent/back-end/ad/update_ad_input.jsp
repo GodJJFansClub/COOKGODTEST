@@ -10,21 +10,13 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>廣告資料修改 - update_ad_input.jsp</title>
-<link
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
-	rel="stylesheet">
-
-
 </head>
 <body bgcolor='white'>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-			<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-
-		</aside>
+		<jsp:include page="/back-end/sideBar/adMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>

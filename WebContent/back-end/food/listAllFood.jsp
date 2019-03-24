@@ -13,7 +13,6 @@
 <html>
 <head>
 <title>所有食材資料 - listAllFood.jsp</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -35,7 +34,27 @@
                         </c:forEach>
                     </ul>
                 </c:if>
-
+                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/food/food.do" name="form1">
+					<table>
+					<tr>
+						<td>食材名稱:${foodVO.food_name}</td>
+						<td><input type="TEXT" name="food_name" size="15" value=${empty foodVO.food_name ? "大白菜":foodVO.food_name} /></td>
+					</tr>
+					<tr>
+						<td>食材種類:</td>
+						<td>
+							<select size="1" name="food_type_ID">
+								<c:forEach var="food_type" items="${foodTypeMap}">
+									<option value="${food_type.key}" ${(foodVO.food_type_ID == food_type.key)?'selected':''}>${food_type.value}
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					</table>
+				<br>
+					<input type="hidden" name="action" value="insert">
+					<input type="submit" value="送出新增">
+				</FORM>
 
        			 <div class="col">
                         <div class="card">
@@ -75,9 +94,12 @@
                         </div>
                     </div>
                 <%@ include file="/file/page2.file"%>
-                <%if (request.getAttribute("listFoodMalls_ByFood_ID") != null ) {%>
+                <%if (request.getAttribute("listFoodMalls_ByFood_ID") != null && !(boolean)request.getAttribute("foodNoApply")  ) {%>
                     <jsp:include page="/back-end/food/listFoodMalls_ByFood_ID.jsp" flush="true" />
                 <%}%>
+                <c:if test="${foodNoApply}">
+                	<h4>暫無供應商提供</h4>
+                </c:if>
 <%--=================================工作區================================================--%>            
                 <jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>

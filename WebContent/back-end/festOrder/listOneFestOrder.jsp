@@ -9,47 +9,17 @@
 <head>
 <title>查詢一筆節慶主題料理訂單(FestOrder) - listOneFestOrder.jsp</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
-
 </head>
-<jsp:include page="/froTempl/header.jsp" flush="true" />
-<!-- ##### Contact Area Start #####-->
-<section class="contact-area section-padding-100">
+
+<body bgcolor='white'>
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
 <div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -65,8 +35,7 @@ th, td {
 			<div class="col-12 col-lg-8">
 				<!-- Contact Form -->
 				<div class="contact-form-area text-center">
-					<form
-						action="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do"
+					<form action="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do"
 						method="post">
 						<c:if test="${not empty errorMsgs}">
 							<font style="color: red"></font>
@@ -76,8 +45,6 @@ th, td {
 								</c:forEach>
 							</ul>
 						</c:if>
-<body bgcolor='white'>
-
 
 	<table id="table-1">
 		<tr>
@@ -114,6 +81,11 @@ th, td {
 		</tr>
 	</table>
 </section>
-<jsp:include page="/froTempl/footer.jsp" flush="true" />
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+<%--=================================jQuery===============================================--%>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

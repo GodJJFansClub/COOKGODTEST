@@ -12,7 +12,8 @@
 	<!-- ##### Breadcrumb Area End ##### -->
 
 	<!-- ##### Contact Area Start #####-->
-
+	<section>
+	<div>
 		<table class="table table-striped">
 		  <thead>
 		    <tr>

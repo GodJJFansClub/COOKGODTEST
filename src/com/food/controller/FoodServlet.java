@@ -184,7 +184,7 @@ public class FoodServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("foodVO", foodVO);
-				String url = "/back-end/food/listOneFood.jsp";
+				String url = "/back-end/food/listAllFood.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
@@ -225,7 +225,7 @@ public class FoodServlet extends HttpServlet {
 				if(!errorMsgs.isEmpty()) {
 					req.setAttribute("foodVO", foodVO);
 					RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/food/addFood.jsp");
+						.getRequestDispatcher("/back-end/food/listAllFood.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -241,7 +241,7 @@ public class FoodServlet extends HttpServlet {
 			}catch(Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/food/addFood.jsp");
+						.getRequestDispatcher("/back-end/food/listAllFood.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -283,7 +283,12 @@ public class FoodServlet extends HttpServlet {
 				Set<FoodMallVO> set = foodSvc.getFoodMallsByFood_ID(food_ID);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("listFoodMalls_ByFood_ID", set);    // 資料庫取出的set物件,存入request
+				if(set.isEmpty()) {
+					req.setAttribute("foodNoApply", true);
+				} else {
+					req.setAttribute("foodNoApply", false);
+					req.setAttribute("listFoodMalls_ByFood_ID", set);    // 資料庫取出的set物件,存入request
+				}
 
 
 //				if ("listEmps_ByDeptno_A".equals(action))
