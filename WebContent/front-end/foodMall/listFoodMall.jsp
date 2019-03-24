@@ -73,7 +73,7 @@
 						 data: crtQryStrFoodM( $(this).attr("id") , "addFoodMShoppingCart", $(this).find("form").serializeArray()),
 						 dataType: "json",
 						 success: function (data){
-							 
+							 console.log(data);
 							 if(data["foodMCardID"]){
 								 $("#"+data["foodMCardID"]).find(".errorMsgs").text(data["cartErrorMsgs"]);	 
 							 }else{

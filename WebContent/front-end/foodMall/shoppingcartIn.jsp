@@ -98,7 +98,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<c:forEach var="dish" items="${shoppingCart}">
+			<%--<c:forEach var="dish" items="${shoppingCart}"> --%>
 				<p>
 					<button  class="btn btn-primary" type="button" data-toggle="collapse"
 						data-target="#claDFsCart" aria-expanded="false"
@@ -117,7 +117,7 @@
 						</table>
 					</div>
 				</div>
-			</c:forEach>		
+			<%--</c:forEach> --%>		
 		</div>
 	</div>
 	
