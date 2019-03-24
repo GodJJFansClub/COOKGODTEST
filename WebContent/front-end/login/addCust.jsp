@@ -127,15 +127,15 @@ th, td {
 									<tr>
 										<td>顧客性別:</td>
 
-										<td>男<input type="radio" name="cust_sex" size="10"
+										<td><input type="radio" name="cust_sex" size="5" 
 											value="M"
 											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms"
-											class="form-control wow fadeInUp" data-wow-delay="100ms" class="form-control wow fadeInUp" data-wow-delay="100ms"/> 女
-											<input type="radio" name="cust_sex" size="10" value="F"
+											
+											style="width:20px;height:20px"/>男 
+											<input type="radio" name="cust_sex" size="5" value="F"
 											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms"
-											class="form-control wow fadeInUp" data-wow-delay="100ms"class="form-control wow fadeInUp" data-wow-delay="100ms" />
+											
+											style="width:20px;height:20px"/>女
 										</td>
 									</tr>
 

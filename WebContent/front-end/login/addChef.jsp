@@ -133,17 +133,13 @@ th, td {
 									<tr>
 										<td>顧客性別:</td>
 
-										<td>男<input type="radio" name="cust_sex" size="10"
+										<td><input type="radio" name="cust_sex" size="10"
 											value="M"
 											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms"
-											class="form-control wow fadeInUp" data-wow-delay="100ms"
-											class="form-control wow fadeInUp" data-wow-delay="100ms" /> 女
+											style="width:20px;height:20px" />男
 											<input type="radio" name="cust_sex" size="10" value="F"
 											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms"
-											class="form-control wow fadeInUp" data-wow-delay="100ms"
-											class="form-control wow fadeInUp" data-wow-delay="100ms" />
+											style="width:20px;height:20px"/>女
 										</td>
 									</tr>
 
@@ -197,16 +193,16 @@ th, td {
 										<td><input type="radio" name="chef_area" size="10"
 											value="0"
 											${chefVO.chef_area=='0'||chefVO ==null ? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms" />北<br>
+											 data-wow-delay="100ms" style="width:20px;height:20px"/>北<br>
 											<input type="radio" name="chef_area" size="10" value="1"
 											${chefVO.chef_area=='1'? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms" />中<br>
+											data-wow-delay="100ms" style="width:20px;height:20px"/>中<br>
 											<input type="radio" name="chef_area" size="10" value="2"
 											${chefVO.chef_area=='2'? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms" />南<br>
+											 data-wow-delay="100ms" style="width:20px;height:20px"/>南<br>
 											<input type="radio" name="chef_area" size="10" value="3"
 											${chefVO.chef_area=='3'? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms" />東<br></td>
+											data-wow-delay="100ms" style="width:20px;height:20px"/>東<br></td>
 									</tr>
 									<tr>
 										<td>主廚簡介:</td>

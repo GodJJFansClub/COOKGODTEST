@@ -209,7 +209,7 @@ th, td {
 
 												<tr>
 													<td>廣告圖片:</td>
-													<td><input type="file" name="ad_pic" size="45"
+													<td><input type="file" name="ad_pic" size="1"style="width:80px;height:40px"
 														id="doc" onchange="javascript:setImagePreview();" /></td>
 												</tr>
 

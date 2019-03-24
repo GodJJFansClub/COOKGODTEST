@@ -119,18 +119,17 @@ th, td {
 
 												<tr>
 													<td>顧客性別:</td>
-													<c:if test="${custVO.cust_sex.equals('M')}" var="true"
-														scope="session">
+													<c:if test="${custVO.cust_sex.equals('M')}" var="true">
 														<td><input type="radio" name="cust_sex" size="10"
-															value="M" checked />男 <input type="radio"
-															name="cust_sex" size="10" value="F" />女</td>
+															value="M" checked style="width:20px;height:20px"/>男 
+															<input type="radio"
+															name="cust_sex" size="10" value="F" style="width:20px;height:20px"/>女</td>
 													</c:if>
 
-													<c:if test="${custVO.cust_sex.equals('F')}" var="true"
-														scope="session">
+													<c:if test="${custVO.cust_sex.equals('F')}" var="true">
 														<td><input type="radio" name="cust_sex" size="10"
-															value="M" checked />男 <input type="radio"
-															name="cust_sex" size="10" value="F" checked />女</td>
+															value="M" style="width:20px;height:20px"/>男 <input type="radio"
+															name="cust_sex" size="10" value="F" checked style="width:20px;height:20px"/>女</td>
 													</c:if>
 
 												</tr>

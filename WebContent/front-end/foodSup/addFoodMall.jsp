@@ -157,7 +157,7 @@
 				<td>
 					<c:forEach var="foodUnit" items="${foodUnitMap}">
 						<input type="radio" name="food_m_unit" value="${foodUnit.key}"
-							${(foodUnit.key == foodMallVO.food_m_unit)?'checked':''}>${foodUnit.value}
+							${(foodUnit.key == foodMallVO.food_m_unit)?'checked':''} style="width:15px;height:15px">${foodUnit.value}
 					</c:forEach>
 				</td><td><font color=red>${errorMsgs.em_unit}</font></td>
 			</tr>
