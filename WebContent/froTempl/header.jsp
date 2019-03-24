@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.cust.model.CustVO,com.broadcast.model.BroadcastVO"%>
-	<jsp:useBean id="broadcastSvc" scope="page"
-			class="com.broadcast.model.BroadcastService" />
+<jsp:useBean id="broadcastSvc" scope="page"
+	class="com.broadcast.model.BroadcastService" />
 
 <!DOCTYPE html>
 <html>
@@ -54,7 +54,8 @@
 					<nav class="classy-navbar justify-content-between" id="pixelNav">
 
 						<!-- Nav brand -->
-						<a href="<%=request.getContextPath()%>/froTempl/index.jsp" class="nav-brand"><img
+						<a href="<%=request.getContextPath()%>/front-end/index.jsp"
+							class="nav-brand"><img
 							src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png"
 							alt=""></a>
 
@@ -76,87 +77,111 @@
 							<!-- Nav Start -->
 							<div class="classynav">
 								<ul>
-									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
-									
-									<li><a style="font-weight:bold">食神來了</a>
+									<li><a
+										href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
+
+									<li><a style="font-weight: bold">食神來了</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp">瀏覽主廚</a></li>
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/menu/menu.jsp">嚴選套餐</a></li>
-									</ul></li>
-									
-									<li><a style="font-weight:bold">食神配送</a>
+										</ul></li>
+
+									<li><a style="font-weight: bold">食神配送</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp">嚴選食材</a></li>
-										</ul>
-									</li>
-										
+										</ul></li>
+
 									<c:if test="${not empty chefVO.chef_ID}">
-										<li><a href="" style="font-weight:bold">主廚專區</a>
+										<li><a style="font-weight: bold">主廚專區</a>
 											<ul class="dropdown">
-												
-												<li>
-												<a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">
-												節慶主題料理管理</a>
-												</li>
-												
-											</ul>
-										</li>	
+
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/festMenu/addFestMenu.jsp">新增節慶主題料理</a></li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/chefDish/addChefDish.jsp">擅長菜色管理</a></li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/chefSch/addChefSch.jsp">主廚排程</a></li>
+												<li><a href="">訂單審核</a>
+													<ul class="dropdown">
+
+														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/unCheckMenuOrder.jsp">未審核訂單</a></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/unFinishedMenuOrder.jsp">未完成訂單</a></li>
+													</ul></li>
+											</ul></li>
 									</c:if>
 									<c:if test="${not empty foodSupVO.food_sup_ID}">
-										<li><a href="" style="font-weight:bold">食材供應商專區</a>
+										<li><a style="font-weight: bold">食材供應商專區</a>
 											<ul class="dropdown">
-												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">廣告管理</a></li>
-											</ul>
-										</li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
+												<li><a >廣告管理</a>
+													<ul class="dropdown">
+														<li><a href="<%=request.getContextPath()%>/front-end/ad/addAd.jsp">新增廣告</a></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/ad/listAllAd.jsp">所有廣告</a></li>
+													</ul></li>
+											</ul></li>
 									</c:if>
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a href="" style="font-weight:bold">顧客專區</a>
+										<li><a style="font-weight: bold">顧客專區</a>
 											<ul class="dropdown">
 												<c:choose>
-													<c:when test="${empty foodSupVO.food_sup_ID and not empty custVO.cust_ID and empty chefVO.chef_ID}">
-														<li><a href="<%=request.getContextPath()%>/front-end/cust/listOneCust.jsp">查看食材供應商資料</a></li>
-														<li><a href="<%=request.getContextPath()%>/front-end/cust/update_cust_input.jsp">編輯食材供應商資料</a></li>		
+													<c:when
+														test="${empty foodSupVO.food_sup_ID and not empty custVO.cust_ID and empty chefVO.chef_ID}">
+														<li><a
+															href="<%=request.getContextPath()%>/front-end/cust/listOneCust.jsp">查看個人資料</a></li>
+														<li><a
+															href="<%=request.getContextPath()%>/front-end/cust/update_cust_input.jsp">編輯個人資料</a></li>
 													</c:when>
 													<c:when test="${not empty foodSupVO.food_sup_ID}">
-														<li><a href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看個人資料</a></li>
-														<li><a href="<%=request.getContextPath()%>/front-end/foodSup/update_foodSup_input.jsp">編輯個人資料</a></li>
+														<li><a
+															href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看食材供應商資料</a></li>
+														<li><a
+															href="<%=request.getContextPath()%>/front-end/foodSup/update_foodSup_input.jsp">編輯食材供應商資料</a></li>
 													</c:when>
-													<c:when test="${not empty custVO.cust_ID and not empty chefVo.chef_ID}">
-														<li><a href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">主廚資料</a></li>
+													<c:when
+														test="${not empty custVO.cust_ID and not empty chefVO.chef_ID}">
+														<li><a
+															href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">主廚資料</a></li>
+														<li><a
+															href="<%=request.getContextPath()%>/front-end/chef/updateChefResume.jsp">修改主廚資料</a></li>
 													</c:when>
 												</c:choose>
-												<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/listAllMenuOrderByCustID.jsp">套餐訂單管理</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/cust/listCOR.jsp">食材訂單管理</a></li>
-											</ul>
-										</li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/menuOrder/listAllMenuOrderByCustID.jsp">套餐訂單管理</a></li>
+												<li><a
+													href="<%=request.getContextPath()%>/front-end/cust/listCOR.jsp">食材訂單管理</a></li>
+											</ul></li>
 									</c:if>
 
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a>Hello:<font style="font-weight:bold"color=#ea7500>
-													${custVO.cust_niname} </font>您好
-									<li><a><i class="fa fa-dribbble"></i><span
-												class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
-											<ul class="dropdown">
-											<c:forEach var="broadcastVO"
-													items="${broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
-													<li><a>${broadcastVO.broadcast_con}</a></li>
+										<li><a>Hello:<font style="font-weight: bold"
+												color=#ea7500> ${custVO.cust_niname} </font>您好
+												<li><a><i class="fa fa-dribbble"></i><span
+														class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
+													<ul class="dropdown">
+														<c:forEach var="broadcastVO"
+															items="${broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
+															<li><a>${broadcastVO.broadcast_con}</a></li>
 														</c:forEach>
-												<c:if
-													test="${empty broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
-													<li><a>目前尚無訊息</a></li>
-												</c:if>
-											</ul></li>
-										<li><FORM id="frontLogOutBTN" METHOD="get" action="<%=request.getContextPath()%>/front-end/logout.do">
-											<button type="button"class="btn btn-danger" id="alertLogOutBTN">登出</button>
-										</FORM></li>
+														<c:if
+															test="${empty broadcastSvc.getOneBroadcastByCustID(custVO.cust_ID)}">
+															<li><a>目前尚無訊息</a></li>
+														</c:if>
+													</ul></li>
+												<li><FORM id="frontLogOutBTN" METHOD="get"
+														action="<%=request.getContextPath()%>/front-end/logout.do">
+														<button type="button" class="btn btn-danger"
+															id="alertLogOutBTN">登出</button>
+													</FORM></li>
 									</c:if>
 									<c:if test="${empty custVO.cust_ID}">
 										<li><a>加入我們</a>
@@ -175,9 +200,7 @@
 
 
 								<!-- Top Social Info -->
-								<div class="top-social-info ml-5">
-									
-								</div>
+								<div class="top-social-info ml-5"></div>
 							</div>
 							<!-- Nav End -->
 						</div>
@@ -226,7 +249,8 @@
 		src="<%=request.getContextPath()%>/froTempl/temp/js/plugins/plugins.js"></script>
 	<!-- Active js -->
 	<script src="<%=request.getContextPath()%>/froTempl/temp/js/active.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 
 <c:if test="${not empty custVO.cust_name}">
@@ -275,11 +299,24 @@
 	</script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
-	var btn = document.getElementById("alertLogOutBTN");
-	btn.onclick = function() { 
-		swal("Good job!", "You clicked the button!", "success");
-		$("#frontLogOutBTN").submit();
-			} 
+		var btn = document.getElementById("alertLogOutBTN");
+		btn.onclick = function() {
+			swal({
+				title : "Good job!",
+				text : "You clicked the button!",
+				icon : "success",
+				buttons : {
+					confirm : {
+						text : "OK",
+						value : true,
+						visible : true,
+						className : "",
+						closeModal : true
+					}
+				},
+
+			}, $("#frontLogOutBTN").submit())
+		};
 	</script>
 </c:if>
 

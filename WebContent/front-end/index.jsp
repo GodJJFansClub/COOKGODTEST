@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.cust.model.CustVO"%>
+<%@ page import="com.cust.model.CustVO,com.ad.model.AdVO,com.chef.model.ChefVO,com.menu.model.*,com.foodMall.model.*"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.ad.model.AdVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="adSvc" class="com.ad.model.AdService"/>
+<jsp:useBean id="chefSvc" class="com.chef.model.ChefService"/>
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
+<jsp:useBean id="menuSvc" class="com.menu.model.MenuService"/>
+<jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
 
 <!DOCTYPE html>
 <html>
@@ -136,7 +139,7 @@
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m1.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2><span class="counter">26</span></h2>
+                            <h2><span class="counter">${chefSvc.selectChefTotal}</span></h2>
                             <h6>嚴選主廚</h6>
                         </div>
                     </div>
@@ -149,7 +152,7 @@
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m5.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2><span class="counter">37</span></h2>
+                            <h2><span class="counter">${custSvc.selectCustTotal}</span></h2>
                             <h6>食神的顧客</h6>
                         </div>
                     </div>
@@ -162,7 +165,7 @@
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m6.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2><span class="counter">5</span></h2>
+                            <h2><span class="counter">${menuSvc.selectMenuTotal}</span></h2>
                             <h6>嚴選套餐</h6>
                         </div>
                     </div>
@@ -175,7 +178,7 @@
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m7.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2><span class="counter">10</span></h2>
+                            <h2><span class="counter">${foodMallSvc.selectFoodMallTotal}</span></h2>
                             <h6>嚴選食材</h6>
                         </div>
                     </div>

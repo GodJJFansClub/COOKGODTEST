@@ -7,7 +7,12 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	<section class="contact-area section-padding-100">
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
+	<!-- ##### Breadcrumb Area End ##### -->
+
+	<!-- ##### Contact Area Start #####-->
+
 		<table class="table table-striped">
 		  <thead>
 		    <tr>
@@ -40,7 +45,14 @@
 		    </tr>
 		    </c:forEach>
 		</table>
+	</div>
 	</section>
+	<!-- ##### Feature Area End ##### -->
+
+
+
+	<!-- ##### Contact Area End #####-->
+
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>
