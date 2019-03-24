@@ -3,6 +3,7 @@ package com.dish.model;
 import java.util.*;
 import com.dishFood.model.DishFoodJDBCDAO;
 import com.dishFood.model.DishFoodVO;
+import com.fdsview.model.FdsViewVO;
 import com.testuse.PicIOTest;
 import java.sql.*;
 
@@ -22,6 +23,8 @@ public class DishJDBCDAO implements DishDAO_interface {
 	private static final String DELETE_DISH ="DELETE FROM DISH where DISH_ID=?";
 	
 	private static final String UPDATE = "UPDATE DISH set DISH_NAME=?,DISH_STATUS=?,DISH_PIC=?,DISH_RESUME=?,DISH_PRICE=? where DISH_ID=?";
+	private static final String GetFdsViewByDish_ID =
+			"SELECT * FROM FDSVIEW WHERE DISH_ID = ?";
 
 	@Override
 	public void insert(DishVO DishVO) {
@@ -500,7 +503,78 @@ public class DishJDBCDAO implements DishDAO_interface {
 //			System.out.print(adish.getDish_resume() + ",");
 //			System.out.print(adish.getDish_price() + ",");
 //			System.out.println();
+		
+		Set<FdsViewVO> set = dao.getFdsByDishID("D00003");
+		for(FdsViewVO fdsViewVO: set) {
+			System.out.print(fdsViewVO.getFood_ID());
+			System.out.print(fdsViewVO.getFood_name());
+			System.out.print(fdsViewVO.getFood_type_ID());
+			System.out.print(fdsViewVO.getDish_ID());
+			System.out.print(fdsViewVO.getDish_f_qty());
+			System.out.print(fdsViewVO.getDish_f_unit());
+			System.out.println(fdsViewVO.getDish_name());
+		}
+		
 	 }
+
+	@Override
+	public Set<FdsViewVO> getFdsByDishID(String dish_ID) {
+		Set<FdsViewVO> set = new LinkedHashSet<FdsViewVO>();
+		FdsViewVO fdsViewVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GetFdsViewByDish_ID);
+			pstmt.setString(1, dish_ID);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				fdsViewVO = new FdsViewVO();
+				fdsViewVO.setFood_ID(rs.getString(1));
+				fdsViewVO.setFood_name(rs.getString(2));
+				fdsViewVO.setFood_type_ID(rs.getString(3));
+				fdsViewVO.setDish_ID(rs.getString(4));
+				fdsViewVO.setDish_f_qty(rs.getInt(5));
+				fdsViewVO.setDish_f_unit(rs.getString(6));
+				fdsViewVO.setDish_name(rs.getString(7));
+				
+				set.add(fdsViewVO); // Store the row in the vector
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
 	}
+}
 
 	

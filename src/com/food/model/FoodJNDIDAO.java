@@ -15,6 +15,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.fdsview.model.FdsViewVO;
 import com.foodMall.model.FoodMallVO;
 
 public class FoodJNDIDAO implements FoodDAO_interface {
@@ -42,7 +43,8 @@ public class FoodJNDIDAO implements FoodDAO_interface {
 			"SELECT FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME,FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL WHERE FOOD_ID = ? ORDER BY FOOD_SUP_ID";
 	private static final String GET_FoodByFood_type_ID = 
 			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_TYPE_ID = ? ORDER BY FOOD_ID";
-	
+	private static final String GET_DishsByFood_ID = 
+			"SELECT * FROM FDSVIEW WHERE FOOD_ID = ? ORDER BY DISH_ID";
 	@Override
 	public void insert(FoodVO foodVO) {
 		Connection con = null;
@@ -353,6 +355,60 @@ public class FoodJNDIDAO implements FoodDAO_interface {
 				foodVO.setFood_name(rs.getString(2));
 				foodVO.setFood_type_ID(rs.getString(3));
 				set.add(foodVO);
+			}
+	
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+
+	@Override
+	public Set<FdsViewVO> getDishsByFood_ID(String food_ID) {
+		Set<FdsViewVO> set = new LinkedHashSet<FdsViewVO>();
+		FdsViewVO fdsViewVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_DishsByFood_ID);
+			pstmt.setString(1, food_ID);
+			rs = pstmt.executeQuery();
+	
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				fdsViewVO = new FdsViewVO();
+				fdsViewVO.setFood_ID(rs.getString(1));
+				fdsViewVO.setFood_name(rs.getString(2));
+				fdsViewVO.setFood_type_ID(rs.getString(3));
+				set.add(fdsViewVO);
 			}
 	
 			// Handle any driver errors
