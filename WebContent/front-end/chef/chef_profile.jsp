@@ -174,7 +174,7 @@
 			<!-- Feature Thumbnail -->
 			</div>
 			<div class="feature-thumbnail bg-img jarallax"
-				style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodPic.jpg);"></div>
+				style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/chefPic.jpg);"></div>
 		
 	</section>
 
