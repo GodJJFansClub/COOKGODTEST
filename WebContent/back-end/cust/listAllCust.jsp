@@ -50,14 +50,8 @@
 										<th scope="col">顧客姓名</th>
 										<th scope="col">顧客性別</th>
 										<th scope="col">顧客電話</th>
-										<th scope="col">顧客地址</th>
-										<th scope="col">顧客身份證字號</th>
-										<th scope="col">E-mail</th>
-										<th scope="col">顧客生日</th>
-										<th scope="col">顧客註冊日</th>
 										<th scope="col">大頭照</th>
 										<th scope="col">顧客狀態</th>
-										<th scope="col">顧客暱稱</th>
 										
 									</tr>
 								</thead>
@@ -82,11 +76,6 @@
 												<td>女生</td>
 											</c:if>
 											<th scope="row">${custVO.cust_tel}</th>
-											<th scope="row">${custVO.cust_addr}</th>
-											<th scope="row">${custVO.cust_pid}</th>
-											<th scope="row">${custVO.cust_mail}</th>
-											<th scope="row">${custVO.cust_brd}</th>
-											<th scope="row">${custVO.cust_reg}</th>
 											<th scope="row"><c:if test="${not empty custVO.cust_pic}">
 													<img
 														src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}" width="300" height="200">
@@ -102,7 +91,7 @@
 												scope="session">
 												<td>停權</td>
 											</c:if>
-											<th scope="row">${custVO.cust_niname}</th>
+											
 
 											<th scope="row">
 												<FORM METHOD="post"
