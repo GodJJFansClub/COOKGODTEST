@@ -79,6 +79,10 @@ public class CustService {
 		return dao.getAll();
 	}
 	
+	public int getSelectCustTotal() {
+		return  getAll().size(); 
+	}
+	
 
 	public CustVO addFoodSup(String cust_acc, String cust_pwd, String cust_name, String cust_sex, String cust_tel,
 			String cust_addr, String cust_pid, String cust_mail, Date cust_brd, Date cust_reg, byte[] cust_pic,

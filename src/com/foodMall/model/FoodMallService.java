@@ -72,6 +72,9 @@ public class FoodMallService {
 	public FoodMallVO getOneFoodMall(String food_sup_ID, String food_ID) {
 		return dao.findByPrimaryKey(food_sup_ID, food_ID);
 	}
+	public int getSelectFoodMallTotal(){
+		return getAll().size();
+	}
 	
 	
 }

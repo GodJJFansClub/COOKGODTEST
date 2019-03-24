@@ -74,7 +74,7 @@ public class ChefService {
 	public List<ChefVO> getAll(){
 		return dao.getAll();
 	}
-	public int selectChefTotal() {
+	public int getSelectChefTotal() {
 		return getAll().size();
 	}
 }

@@ -1,6 +1,7 @@
 package com.menu.model;
 
 import java.util.List;
+import com.festMenu.model.*;
 
 public class MenuService {
 	private MenuDAO_interface dao;
@@ -44,6 +45,9 @@ public class MenuService {
 
 	public List<MenuVO> getAll() {
 		return dao.getAll();
+	}
+	public int getSelectMenuTotal() {
+		return getAll().size()+(new FestMenuService().getAll().size());
 	}
 
 }
