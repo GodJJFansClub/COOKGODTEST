@@ -123,8 +123,11 @@
 													href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">廣告管理</a></li>
+												<li><a >廣告管理</a>
+													<ul class="dropdown">
+														<li><a href="<%=request.getContextPath()%>/front-end/ad/addAd.jsp">新增廣告</a></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/ad/listAllAd.jsp">所有廣告</a></li>
+													</ul></li>
 											</ul></li>
 									</c:if>
 									<c:if test="${not empty custVO.cust_ID}">
