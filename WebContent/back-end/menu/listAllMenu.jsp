@@ -31,63 +31,69 @@
 						</c:forEach>
 					</ul>
 				</c:if>
-				<table>
-					<tr>
-						<th>套餐編號</th>
-						<th>套餐照片</th>
-						<th>套餐名稱</th>
-						<th>套餐介紹</th>
-						<th>套餐價錢</th>
-						<th>套餐狀態</th>
-						<th>編輯喜愛食材供應商</th>
-						<th>刪除喜愛食材供應商</th>
-					</tr>
-					<%@ include file="page1.file"%>
-					<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>"
-						end="<%=pageIndex+rowsPerPage-1%>">
-						<tr>
-							<td>${menuVO.menu_ID}</td>
-							<br>
-							<td><c:if test="${not empty menuVO.menu_pic}">
-									<img class="menu_pic" src="<%=request.getContextPath()%>/menu/menu.do?showMenuPic=showMenuPic&menu_ID=${menuVO.menu_ID}" width="300" height="200">
-								</c:if> 
-								<c:if test="${empty menuVO.menu_pic}">
-									<img class="menu_pic" src="<%=request.getContextPath()%>/images/noimage.jpg">
-								</c:if>
-							</td>
-							
-							<td>${menuVO.menu_name}</td>
-							<td>${menuVO.menu_resume}</td>
-							<td>${menuVO.menu_price}</td>
-							<td><c:if test="${menuVO.menu_status=='m0'}">上架</c:if>
-								<c:if test="${menuVO.menu_status=='m1'}">下架</c:if>
-							</td>
-							<td>
-							<form method="post"
-								action="<%=request.getContextPath()%>/menu/menu.do">
-								<input type="submit" value="編輯"> 
-								<input type="hidden" name="menu_ID" value="${menuVO.menu_ID}"> 
-								<input type="hidden" name="action" value="getOneForUpdate">
-							</form>
-						</td>
-						<td>
-							<form method="post"
-								action="<%=request.getContextPath()%>/menu/menu.do">
-								<input type="submit" value="刪除"> 
-								<input type="hidden" name="menu_ID" value="${menuVO.menu_ID}"> 
-								<input type="hidden" name="action" value="delete">
-							</form>
-						</td>
-						</tr>
-					</c:forEach>
-				</table>
+
+
+				<div class="col">
+					<div class="card">
+
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+
+										<th scope="col">套餐編號</th>
+										<th scope="col">套餐照片</th>
+										<th scope="col">套餐名稱</th>
+										<th scope="col">套餐介紹</th>
+										<th scope="col">套餐價錢</th>
+										
+										<th scope="col">編輯喜愛食材供應商</th>
+										
+
+
+									</tr>
+								</thead>
+
+								<%@ include file="page1.file"%>
+								<c:forEach var="menuVO" items="${list}" begin="<%=pageIndex%>"
+									end="<%=pageIndex+rowsPerPage-1%>">
+									<tr>
+										<th scope="row">${menuVO.menu_ID}</th>
+
+										<th scope="row"><c:if test="${not empty menuVO.menu_pic}">
+												<img class="menu_pic"
+													src="<%=request.getContextPath()%>/menu/menu.do?showMenuPic=showMenuPic&menu_ID=${menuVO.menu_ID}"
+													width="300" height="200">
+											</c:if> <c:if test="${empty menuVO.menu_pic}">
+												<img class="menu_pic"
+													src="<%=request.getContextPath()%>/images/noimage.jpg">
+											</c:if></th>
+
+										<th scope="row">${menuVO.menu_name}</th>
+										<th scope="row" width="30%">${menuVO.menu_resume}</th>
+										<th scope="row">${menuVO.menu_price}</th>
+										
+										<th scope="row">
+											<form method="post"
+												action="<%=request.getContextPath()%>/menu/menu.do">
+												<input type="submit" value="編輯"> <input
+													type="hidden" name="menu_ID" value="${menuVO.menu_ID}">
+												<input type="hidden" name="action" value="getOneForUpdate">
+											</form>
+										</th>
+										
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+					</div>
+				</div>
 				<%@ include file="page2.file"%>
 
-				<%--=================================工作區================================================--%>
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-				<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
-</body>
+								<%--=================================工作區================================================--%>
+								<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+								<%--=================================jQuery===============================================--%>
+						</div>
+					</div>
+				</div></body>
 </html>

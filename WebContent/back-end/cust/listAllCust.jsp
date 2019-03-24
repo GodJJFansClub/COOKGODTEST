@@ -15,7 +15,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -45,7 +44,7 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>顧客編號</th>
+										<th scope="col">顧客編號</th>
 										<th scope="col">顧客帳號</th>
 										<th scope="col">顧客密碼</th>
 										<th scope="col">顧客姓名</th>
