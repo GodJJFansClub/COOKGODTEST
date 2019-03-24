@@ -16,8 +16,6 @@
 <html>
 <head>
 <title>所有員工資料 - listAllEmp.jsp</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
-
 
 </head>
 <body>
