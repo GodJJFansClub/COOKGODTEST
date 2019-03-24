@@ -4,8 +4,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.ad.model.AdVO"%>
+<%@ page import="com.chef.model.ChefVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="adSvc" class="com.ad.model.AdService"/>
+
 
 <!DOCTYPE html>
 <html>

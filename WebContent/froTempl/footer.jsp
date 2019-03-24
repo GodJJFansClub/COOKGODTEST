@@ -25,7 +25,7 @@
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="single-footer-widget mb-100">
                         <!-- Footer Logo -->
-                        <a href="<%=request.getContextPath()%>/froTempl/index.jsp" class="footer-logo"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
+                        <a href="<%=request.getContextPath()%>/front-end/index.jsp" class="footer-logo"><img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.png" alt=""></a>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <i cl
                     <div class="col-12 col-md-6">
                         <nav class="footer-nav">
                             <ul>
-                                <li><a href="<%=request.getContextPath()%>/froTempl/index.jsp">首頁</a></li>
+                                <li><a href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
                                 <li><a href="<%=request.getContextPath()%>/front-end/menu/listAllMenu.jsp">食神來了</a></li>
                                 <li><a href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp">嚴選食材</a></li>
                                 <li><a href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>

@@ -10,130 +10,181 @@
 
 <html>
 <head>
-<title>顧客資料 - listOneCust.jsp</title>
+<title>顧客資料</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
-
-<style>
-table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
 
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
+	<!-- ##### Breadcrumb Area End ##### -->
 
-	 <!-- ##### Contact Area Start #####-->
-    <section class="contact-area section-padding-100">
-	<%
-		if (custVO != null) {
-	%>
+	<!-- ##### Contact Area Start #####-->
 
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>顧客資料</h3>
-				
-			</td>
-		</tr>
-	</table>
+	<!-- ##### Feature Area Start ##### -->
+	<section class="pixel-feature-area d-flex flex-wrap">
+		<!-- Feature Thumbnail -->
+		<div class="feature-thumbnail bg-img jarallax"
+			style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/custPic.jpg);"></div>
 
-	<table>
-		<tr>
-			
-			<th>顧客帳號</th>
-			<th>顧客密碼</th>
-			<th>顧客姓名</th>
-			<th>顧客性別</th>
-			<th>顧客電話</th>
-			<th>顧客地址</th>
-			<th>顧客身份證字號</th>
-			<th>E-mail</th>
-			<th>顧客生日</th>
-			<th>顧客註冊日</th>
-			<th>大頭照</th>
-			<th>顧客狀態</th>
-			<th>顧客暱稱</th>
-		</tr>
-		<tr>
-			
-			<td><%=custVO.getCust_acc()%></td>
-			<td><%=custVO.getCust_pwd()%></td>
-			<td><%=custVO.getCust_name()%></td>
-			<c:if test="${custVO.cust_sex.equals('M')}" var="true" scope="request">
-				<td>男生</td>
-			</c:if>
-			<c:if test="${custVO.cust_sex.equals('F')}" var="true" scope="request">
-				<td>女生</td>
-			</c:if>
-			<td><%=custVO.getCust_tel()%></td>
-			<td><%=custVO.getCust_addr()%></td>
-			<td><%=custVO.getCust_pid()%></td>
-			<td><%=custVO.getCust_mail()%></td>
-			<td><%=custVO.getCust_brd()%></td>
-			<td><%=custVO.getCust_reg()%></td>
-			<td><c:if test="${not empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></c:if>
-				    <c:if test="${empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
+		<!-- Feature Content -->
+		<div class="feature-content">
+			<h1 style="font-weight: bold">顧客資料</h1>
+			<%
+				if (custVO != null) {
+			%>
 
-			<c:if test="${custVO.cust_status.equals('a0')}" var="true"
-				scope="session">
-				<td>已啟用</td>
-			</c:if>
-			<c:if test="${custVO.cust_status.equals('a1')}" var="true"
-				scope="session">
-				<td>停權</td>
-			</c:if>
-			<td><%=custVO.getCust_niname()%></td>
-
-		</tr>
-		
-		
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/cust/cust.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="cust_ID" value="${custVO.cust_ID}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
+			<div class="single-testimonial-slide">
+				<c:if test="${not empty custVO.cust_pic}">
+					<img
+						src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}">
+				</c:if>
+				<c:if test="${empty custVO.cust_pic}">
+					<img src="<%=request.getContextPath()%>/images/null2.jpg">
+				</c:if>
 				</td>
-	</table>
-	<%
-		}
-	%>
-</section>
-    <!-- ##### Contact Area End #####-->
+
+				<h4y style="font-weight:bold"><%=custVO.getCust_name()%></h4>
+				<span><%=custVO.getCust_niname()%></span>
+			</div>
+
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客帳號</h6>
+					<p><%=custVO.getCust_acc()%>
+					</p>
+				</div>
+			</div>
+
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客密碼</h6>
+					<p><%=custVO.getCust_pwd()%></p>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客性別</h6>
+					<c:if test="${custVO.cust_sex.equals('M')}" var="true">
+						<p>男生</p>
+					</c:if>
+					<c:if test="${custVO.cust_sex.equals('F')}" var="true">
+						<p>女生</p>
+					</c:if>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客電話</h6>
+					<p><%=custVO.getCust_tel()%></p>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客地址</h6>
+					<p><%=custVO.getCust_addr()%></p>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客身份證字號</h6>
+					<p><%=custVO.getCust_pid()%></p>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>E-Mail</h6>
+					<p><%=custVO.getCust_mail()%></p>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客生日</h6>
+					<p><%=custVO.getCust_brd()%></p>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客註冊日</h6>
+					<p><%=custVO.getCust_reg()%></p>
+				</div>
+			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>顧客狀態</h6>
+					<c:if test="${custVO.cust_status.equals('a0')}" var="true">
+						<p>已啟用</p>
+					</c:if>
+					<c:if test="${custVO.cust_status.equals('a1')}" var="true">
+						<p>停權</p>
+					</c:if>
+				</div>
+			</div>
+
+
+			<!-- ##### Contact Area End #####-->
+
+			<FORM METHOD="post"
+				ACTION="<%=request.getContextPath()%>/cust/cust.do"
+				style="margin-bottom: 0px;">
+				<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
+				<input type="hidden" name="action" value="getOne_For_Update">
+				<button type="submit" class="btn pixel-btn btn-3 m-2" value="修改">修改資料</button>
+			</FORM>
+
+			<%
+				}
+			%>
+
+		</div>
+	</section>
+	<!-- ##### Feature Area End ##### -->
+
+
+
+	<!-- ##### Contact Area End #####-->
 
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>

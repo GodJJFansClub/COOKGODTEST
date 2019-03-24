@@ -2,22 +2,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title></title>
+<title>食材供應商資料修改</title>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
-	 <!-- ##### Contact Area Start #####-->
-    <section class="contact-area section-padding-100">
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/foodSup/foodSup.do" name="form1">
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<jsp:include page="/froTempl/headerFoodSup.jsp" flush="true" />
+	<!-- ##### Breadcrumb Area End ##### -->
+
+	<!-- ##### Contact Area Start #####-->
+	<section class="contact-area section-padding-100">
+		<section class="contact-area section-padding-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- Section Heading -->
+						<div class="section-heading text-center wow fadeInUp"
+							data-wow-delay="100ms">
+
+							<h2 style="font-weight:bold">食材供應商資料修改</h2>
+							<img
+								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"alt="">
+
+
+
+							<%-- 錯誤表列 --%>
+							<c:if test="${not empty errorMsgs}">
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+
+							<div class="row justify-content-center">
+								<div class="col-12 col-lg-8">
+									<!-- Contact Form -->
+									<div class="contact-form-area text-center">
+										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/foodSup/foodSup.do" name="form1">
 			<table>
 				<tr>
 					<td>食材供應商編號:</td>
@@ -47,12 +71,19 @@
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="food_sup_ID" value="${foodSupVO.food_sup_ID}">
 				<input type="hidden" name="food_sup_status" value="${foodSupVO.food_sup_status}">
-				<input type="submit" value="送出修改">
-			</FORM>
+				<button type="submit" class="btn pixel-btn wow fadeInUp"
+												data-wow-delay="300ms">送出</button>
+										</form>
+									</div>
+								</div>
+							</div>
 
- 	</section>
-    <!-- ##### Contact Area End #####-->
+						</div>
+		</section>
+		<!-- ##### Contact Area End #####-->
 
+
+
+	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
-</html>
