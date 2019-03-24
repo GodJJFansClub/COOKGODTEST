@@ -82,12 +82,12 @@
 	  <br>
 	   <br>
 	    <br>
-	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodSupPic.jpg);">
+	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/headChef.jpg);">
         <div class="container-fluid h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold">食材供應商專區</h2>
+                        <h2 style="font-weight:bold">主廚專區</h2>
                     </div>
                 </div>
             </div>
