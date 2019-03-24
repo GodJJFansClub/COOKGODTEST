@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dish.model.DishService;
+import com.fdsview.model.FdsViewService;
 import com.fdsview.model.FdsViewVO;
 import com.festMenu.model.FestMenuService;
 import com.festMenu.model.FestMenuVO;
@@ -46,14 +50,14 @@ public class MallServlet extends HttpServlet{
 		@SuppressWarnings("unchecked")
 		List<Object> buyList = (Vector<Object>) session.getAttribute("shoppingCart");
 		@SuppressWarnings("unchecked")
-		Map<String, Set<FdsViewVO>> foodMapDishs = (Map<String, Set<FdsViewVO>>) session.getAttribute("foodMapDishs");
+		Map<String, Set<FdsViewVO>> dMapFViews = (Map<String, Set<FdsViewVO>>)session.getAttribute("dMapFViews"); 
 		String action = req.getParameter("action");
 		FoodService foodSvc = new FoodService();
 		System.out.println(action);
 		if(!"CHECKOUTFOODMALL".equals(action)) {
 			if("addFoodMShoppingCart".equals(action)) {
 				JsonObject errors = new JsonObject();
-//				try {
+				try {
 					/*************************** 1.接收請求參數 ****************************************/
 					
 					FoodOrDetailVO foodOrDetailVO = getFOD(req, res, errors);
@@ -63,43 +67,40 @@ public class MallServlet extends HttpServlet{
 					}
 					/*************************** 3.加入購物車 ****************************************/
 					if (buyList == null) {
-						
+
 						buyList = new Vector<Object>();
 						buyList.add(foodOrDetailVO);
 						// 新車代表一定沒有食材, 找菜色囉
-						System.out.println("test1");
-						Set<FdsViewVO> fdsViewVos = foodSvc.getDishsByFood_ID(foodOrDetailVO.getFood_ID());
-						foodMapDishs = Collections.synchronizedMap(new LinkedHashMap<>());
-						if( !fdsViewVos.isEmpty() ) {
-							foodMapDishs.put(foodOrDetailVO.getFood_ID(), fdsViewVos);
-						}
 						
-						writeCartItem(res, foodOrDetailVO, foodMapDishs);
+						Set<FdsViewVO> fdsViewVOs = foodSvc.getDishsByFood_ID(foodOrDetailVO.getFood_ID());
+						// 將這個食材對應的所有菜色及其包含的
+						dMapFViews = fMToDM(fdsViewVOs);
+						
+						writeCartItem(res, foodOrDetailVO, dMapFViews);
 					} else {
-						if (buyList.contains(foodOrDetailVO)) {
-							System.out.println("test2");
+						if (buyList.contains(foodOrDetailVO)) { //有在購物車中, 那對應的菜色一定也在, 要不然就是沒有對應的菜色
+							
 							FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
 							innerFoodODVO.setFood_od_qty(innerFoodODVO.getFood_od_qty() + foodOrDetailVO.getFood_od_qty());
 							innerFoodODVO.setFood_od_stotal(innerFoodODVO.getFood_od_stotal() + foodOrDetailVO.getFood_od_stotal());
-							writeCartItem(res, innerFoodODVO, foodMapDishs);
+							writeCartItem(res, innerFoodODVO, dMapFViews);
 						} else {
 							System.out.println("test3");
 							buyList.add(foodOrDetailVO);
 							Set<FdsViewVO> fdsViewVOs = foodSvc.getDishsByFood_ID(foodOrDetailVO.getFood_ID());
-							
-							foodMapDishs.put(foodOrDetailVO.getFood_ID(), fdsViewVOs);
-							
-							writeCartItem(res, foodOrDetailVO, foodMapDishs);
+							// 沒有在車中的食材很有可能有新菜色
+							foodDishsJoinDishFoodMap(fdsViewVOs, dMapFViews);
+							writeCartItem(res, foodOrDetailVO, dMapFViews);
 						}
 					}
 					
 					session.setAttribute("shoppingCart", buyList);
-					session.setAttribute("foodMapDishs", foodMapDishs);
-//				}catch(Exception e) {
-//					System.out.println("96" + e.getMessage());
-//					errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
-//					writeJson(res, errors);
-//				}
+					session.setAttribute("dMapFViews", dMapFViews);
+				}catch(Exception e) {
+					System.out.println("96" + e.getMessage());
+					errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
+					writeJson(res, errors);
+				}
 			} else if ("addFestMenu".equals(action)) {
 				JsonObject errors = new JsonObject();
 				try {
@@ -135,13 +136,16 @@ public class MallServlet extends HttpServlet{
 			} else if("toCheckOutOR".equals(action)) {
 				toCheckOutOR(req,res);
 			} else if("delShoppingCartItem".equals(action)) {
-				delShoppingCartItem(req,res,buyList,foodMapDishs);
+				// 兩個刪除的地方要特別做處理可能
+				delShoppingCartItem(req,res,buyList,dMapFViews);
 			} else if("getOneDisplayFestMall".equals(action)) {
 				getOneDisplayFestMall(req,res);
 			} else if("delSCShopCart".equals(action)) {
+				// 兩個刪除的地方要特別做處理可能
 				delSCShopCart(req, res, buyList);
 			}
 		} else if("CHECKOUTFOODMALL".equals(action)) {
+			// 進入獨立購物車頁面時, 先記錄總價
 			Integer total  = 0;
 			if(buyList != null && !buyList.isEmpty()) {
 				total = calCartTotal(buyList);
@@ -176,19 +180,22 @@ public class MallServlet extends HttpServlet{
 		out.close();
 	}
 	
-	private javax.json.JsonObject fdsViewSetToJson (FoodOrDetailVO foodODVO, Map<String,Set<FdsViewVO>> foodMapDishs){
+	
+	private javax.json.JsonObject fdsViewSetToJson (FoodOrDetailVO foodODVO, Map<String,Set<FdsViewVO>> dishMapFoods){
 		javax.json.JsonArrayBuilder foodDishSetBuild = javax.json.Json.createArrayBuilder();
 		javax.json.JsonObject  foodODjson;
-		System.out.println("179行 test5");
-		if(null != foodMapDishs && !foodMapDishs.isEmpty()) {
-			foodMapDishs.get(foodODVO.getFood_ID()).forEach((FdsViewVO fdsViewVO) -> {
-				javax.json.JsonObject fdsViewJson = javax.json.Json.createObjectBuilder()
-						.add("food_ID", fdsViewVO.getFood_ID())
-						.add("food_name", fdsViewVO.getFood_name())
+		System.out.println("186行 test5");
+		if(null != dishMapFoods && !dishMapFoods.isEmpty()) {
+			dishMapFoods.forEach((k,v)->{
+				v.forEach(fdsViewVO -> {
+					javax.json.JsonObject fdsViewJson = javax.json.Json.createObjectBuilder()
+						.add("dish_name", fdsViewVO.getDish_name())
 						.add("dish_ID", fdsViewVO.getDish_ID())
 						.add("dish_f_qty", fdsViewVO.getDish_f_qty())
-						.add("dish_name", fdsViewVO.getDish_name()).build();
-				foodDishSetBuild.add(fdsViewJson);
+						.add("food_ID", fdsViewVO.getFood_ID())
+						.add("food_name", fdsViewVO.getFood_name()).build();
+					foodDishSetBuild.add(fdsViewJson);
+				});
 			});
 		
 			foodODjson = javax.json.Json.createObjectBuilder()
@@ -198,7 +205,7 @@ public class MallServlet extends HttpServlet{
 				.add("food_od_stotal", foodODVO.getFood_od_stotal())
 				.add("fdsViewArr", foodDishSetBuild.build()).build();
 		} else {
-			System.out.println("199行test6");
+			System.out.println("208行test6");
 			foodODjson = javax.json.Json.createObjectBuilder()
 				.add("food_sup_ID", foodODVO.getFood_sup_ID())
 				.add("food_ID", foodODVO.getFood_ID())
@@ -207,6 +214,8 @@ public class MallServlet extends HttpServlet{
 		}
 		return foodODjson;
 	}
+	
+
 	
 	private void writeCartItem(HttpServletResponse res, FestOrderDetailVO festOrderDetailVO) throws IOException{
 		res.setContentType("application/Json");
@@ -223,7 +232,7 @@ public class MallServlet extends HttpServlet{
 	private FoodOrDetailVO getFOD(HttpServletRequest req, HttpServletResponse res,JsonObject errors) throws IOException {
 		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
 		String food_ID = req.getParameter("food_ID");
-		System.out.println("223行" + food_ID);
+		
 		if(food_ID == null) {
 			errors.addProperty("cartErrorMsgs", "請輸入食材編號");
 			errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
@@ -416,6 +425,7 @@ public class MallServlet extends HttpServlet{
 		}
 	}
 	
+	// 進入付款頁面時
 	private void toCheckOutOR(HttpServletRequest req , HttpServletResponse res) throws ServletException, IOException {
 		List<String> errorMsgs = new LinkedList<String>();
 		// Store this set in the request scope, in case we need to
@@ -442,7 +452,8 @@ public class MallServlet extends HttpServlet{
 		}
 	}
 	
-	private void delShoppingCartItem(HttpServletRequest req, HttpServletResponse res, List<Object> buyList, Map<String, Set<FdsViewVO>> foodMapDishs) throws IOException {
+	// 刪除節慶主題料理時會進入此
+	private void delShoppingCartItem(HttpServletRequest req, HttpServletResponse res, List<Object> buyList, Map<String, Set<FdsViewVO>> dMapFViews) throws IOException {
 		JsonObject errors = new JsonObject();
 		try {
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
@@ -459,8 +470,7 @@ public class MallServlet extends HttpServlet{
 					FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
 					buyList.remove(innerFoodODVO);
 					
-
-					writeCartItem(res, innerFoodODVO, foodMapDishs);
+					writeCartItem(res, innerFoodODVO, dMapFViews);
 				}
 			}
 			
@@ -484,6 +494,7 @@ public class MallServlet extends HttpServlet{
 		}
 	}
 	
+	// 計算購物車總價用
 	private Integer calCartTotal(List<Object> buycart) {
 		
 		
@@ -495,6 +506,7 @@ public class MallServlet extends HttpServlet{
 		return foodCartTotal + festCartTotal;
 	}
 	
+	// 在獨立的購物車頁面的刪除, 利用include
 	private void delSCShopCart(HttpServletRequest req, HttpServletResponse res, List<Object> buyList) throws ServletException, IOException {
 		List<String> errorMsgs = new LinkedList<>();
 		try {
@@ -537,4 +549,68 @@ public class MallServlet extends HttpServlet{
 			failureView.forward(req, res);
 		}
 	}
+	
+	private void calCartFoodAndDishFood(Map<String, Set<FdsViewVO>> foodMapDishs, Set<FdsViewVO> fdsViewVOs, FoodOrDetailVO foodOrDetailVO, char calMethod ) {
+		
+		FdsViewService fdsViewSvc = new FdsViewService();
+		if( !fdsViewVOs.isEmpty() ) {
+			switch (calMethod) {
+			case '-':
+				// 這是+購物車時會用到
+				fdsViewVOs.forEach(fdsViewVO->{
+					if(foodOrDetailVO.getFood_od_qty() > fdsViewVO.getDish_f_qty())
+						fdsViewVO.setDish_f_qty(0);
+					else
+						fdsViewVO.setDish_f_qty(fdsViewVO.getDish_f_qty() - foodOrDetailVO.getFood_od_qty());
+				});	
+				break;
+			case '+':
+				// 這一段基本只有在有減購物車數量時, 才會用到
+				fdsViewVOs.forEach(fdsViewVO->{
+					Integer dish_f_qty = fdsViewSvc.getOneFdsUnit(fdsViewVO.getFood_ID(), fdsViewVO.getDish_ID()).getDish_f_qty();
+					if((foodOrDetailVO.getFood_od_qty() + fdsViewVO.getDish_f_qty()) >= dish_f_qty){
+						fdsViewVO.setDish_f_qty(dish_f_qty);
+					} else {
+						fdsViewVO.setDish_f_qty(foodOrDetailVO.getFood_od_qty() + fdsViewVO.getDish_f_qty());
+					}
+				});
+			}
+			foodMapDishs.put(foodOrDetailVO.getFood_ID(), fdsViewVOs);
+		}
+
+	}
+	
+	// 不取type_ID, 用來判別是否在購物車中
+	private Map<String,Set<FdsViewVO>> fMToDM(Set<FdsViewVO> fdsSet) {
+		DishService dishSvc = new DishService();
+		Map<String, Set<FdsViewVO>> dishMapFood = new LinkedHashMap<>();
+		fdsSet.forEach(fdsVO -> dishMapFood.put( fdsVO.getDish_ID(), dishSvc.getFoodsByDish(fdsVO.getDish_ID())));
+		
+		
+		return dishMapFood;
+	}
+	
+	private void foodDishsJoinDishFoodMap(Set<FdsViewVO> fdsViewVOs , Map<String, Set<FdsViewVO>> dishMapFood) {
+		DishService dishSvc = new DishService();
+		// 如果是true就是已經有在購物車
+		Map<Boolean, List<FdsViewVO>> groupMap =
+		fdsViewVOs.stream().collect(Collectors.partitioningBy(
+			fdsViewVO->dishMapFood.containsKey(fdsViewVO.getDish_ID())));
+		
+		// 如果是false就是
+		groupMap.get(false).forEach(fdsVO->dishMapFood.put(fdsVO.getDish_ID(), dishSvc.getFoodsByDish(fdsVO.getDish_ID())));
+		
+	}
+	
+	private void changeStateFood(Map<String, Set<FdsViewVO>> dMapFViews, String food_id, boolean isInCart) {
+		dMapFViews.forEach((k,v)->{
+			v.forEach(dsViewVO->{
+				if(food_id.equals(dsViewVO.getFood_ID())) {
+					dsViewVO.setFood_type_ID("1");
+				}
+			});
+		});
+	}
+	
+	
 }

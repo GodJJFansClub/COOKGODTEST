@@ -98,11 +98,11 @@
 					</tr>
 				</tbody>
 			</table>
-			<%--<c:forEach var="dish" items="${shoppingCart}"> --%>
+			<c:forEach var="dish" items="${dMapFViews}">
 				<p>
 					<button  class="btn btn-primary" type="button" data-toggle="collapse"
 						data-target="#claDFsCart" aria-expanded="false"
-						aria-controls="claDFsCart">XXXname</button>
+						aria-controls="claDFsCart">${dish.value[0].dish_name}</button>
 				</p>
 				<div class="collapse" id="claDFsCart">
 					<div class="card card-body">
@@ -113,11 +113,16 @@
 									<th scope="col">尚需數量</th>
 								</tr>
 							</thead>
-							<!--foreach...-->
+							<c:forEach var="dishUseFood" items="${dish.value}">
+								<tr>
+									<td>${dishUseFood.food_name}</td>
+									<td>${dishUseFood.dish_f_qty}</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 				</div>
-			<%--</c:forEach> --%>		
+			</c:forEach>		
 		</div>
 	</div>
 	
