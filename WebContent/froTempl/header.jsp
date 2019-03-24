@@ -101,7 +101,7 @@
 											<ul class="dropdown">
 
 												<li><a
-													href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">節慶主題料理管理</a></li>
+													href="<%=request.getContextPath()%>/front-end/festMenu/addFestMenu.jsp">新增節慶主題料理</a></li>
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/chefDish/addChefDish.jsp">擅長菜色管理</a></li>
 												<li><a
