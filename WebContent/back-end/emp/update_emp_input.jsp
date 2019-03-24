@@ -11,25 +11,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>員工資料修改 - update_emp_input.jsp</title>
 
-
-
-<style>
-table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
-
-table, th, td {
-	border: 0px solid #CCCCFF;
-}
-
-th, td {
-	padding: 1px;
-}
-</style>
-
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -46,17 +27,7 @@ th, td {
 
 
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>員工資料修改 - update_emp_input.jsp</h3>
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
+	
 
 	<h3>資料修改:</h3>
 
@@ -92,15 +63,22 @@ th, td {
 			<tr>
 				<td>員工姓名:</td>
 				<td><input type="TEXT" name="emp_name" size="45"
+			
 					value="<%=empVO.getEmp_name()%>" /></td>
+			
 			</tr>
-
+			
 						
 			<tr>
 				<td>員工大頭照:</td>
-				<td><input type="file" name="emp_pic" size="45" id="doc"
-					onchange="javascript:setImagePreview();" /></td>
-			</tr>
+			<td>	
+			<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/images/null2.jpg"  width="300" height="200"/>
+			<br>
+			<input type="file" name="emp_pic" size="43" id="progressbarTWInput"  value="<%= (empVO==null)? "請輸入照片" : empVO.getEmp_pic()%>" />
+			<br>
+		</td>	 
+	</tr>
+			
 
 
 		</table>
@@ -112,6 +90,36 @@ th, td {
 		<input type="submit" value="送出修改">
 	</FORM>
 
+
+<script>
+
+$("#progressbarTWInput").change(function(){
+
+  readURL(this);
+
+});
+
+ 
+
+function readURL(input){
+
+  if(input.files && input.files[0]){
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+       $("#preview_progressbarTW_img").attr('src', e.target.result);
+
+    }
+
+    reader.readAsDataURL(input.files[0]);
+
+  }
+
+}
+
+</script>
 
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />

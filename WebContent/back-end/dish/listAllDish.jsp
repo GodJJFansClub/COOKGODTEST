@@ -58,7 +58,7 @@
                                     </thead>
                                      <c:forEach var="dishVO" items="${list}">
 											<c:if test="${dishVO.dish_status eq 'D1'}">
-                                    <tbody>
+                                    <tr>
                                    
                                         
                                             <th scope="row">${dishVO.dish_name}</th>
@@ -85,18 +85,12 @@
 														type="hidden" name="dish_ID" value="${dishVO.dish_ID}">
 													<input type="hidden" name="action"
 														value="getOne_For_Update">
-												</FORM></th>
-                                           
-                                    
-                                        
-                                    </tbody>
+												</FORM>
+												</th>
+                          			      </tr>
                                            </c:if>
 									</c:forEach>
-									
-									
-									
                                 </table>
-                                
                             </div>
                         </div>
                     </div>

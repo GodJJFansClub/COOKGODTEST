@@ -12,7 +12,7 @@
 <html>
 <head>
 <title>食材供應商資料 - listOneEmp.jsp</title>
-
+<link href="../../dist/css/style.min.css" rel="stylesheet">
 </head>
 <body>
 	<%-- 錯誤表列 --%>

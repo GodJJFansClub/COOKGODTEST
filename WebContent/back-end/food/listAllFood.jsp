@@ -15,7 +15,6 @@
 <title>所有食材資料 - listAllFood.jsp</title>
 <link href="../../dist/css/style.min.css" rel="stylesheet">
 
-
 </head>
 <body>
     <div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -38,7 +37,7 @@
                 </c:if>
 
 
-        <div class="col">
+       			 <div class="col">
                         <div class="card">
                             
                             <div class="table-responsive">
@@ -56,7 +55,7 @@
                     <%@ include file="/file/page1.file"%>
                     <c:forEach var="foodVO" items="${list}" begin="<%=pageIndex%>"
                         end="<%=pageIndex+rowsPerPage-1%>">
-                       <tbody>
+                      
                         <tr class="foodEntiy">
                            <th scope="row">${foodVO.food_ID}</th>
                             <th scope="row">${foodVO.food_name}</th>
@@ -69,11 +68,10 @@
                                     <input type="hidden" id="requestURL" name="requestURL">
                                 </FORM>
                             </th>
-                        </tbody>
                         </tr>
                     </c:forEach>
                 </table>
-                  </div>
+                 </div>
                         </div>
                     </div>
                 <%@ include file="/file/page2.file"%>

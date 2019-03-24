@@ -13,63 +13,69 @@
 	pageContext.setAttribute("list", list);
 %>
 
-
-<!DOCTYPE html>
 <html>
 <head>
 <title>所有廣告資料 - listAllAd.jsp</title>
+<link href="../../dist/css/style.min.css" rel="stylesheet">
 
 
 </head>
 <body>
-		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<jsp:include page="/back-end/sideBar/adMana.jsp"/>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+        data-layout="vertical" data-sidebartype="full"
+        data-boxed-layout="full">
+        <jsp:include page="/back-endTemplate/header.jsp" flush="true" />
+        <jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+        <div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <%--=================================工作區================================================--%>
 
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<table>
-		<tr>
-			<th>廣告編號</th>
-			<th>廣告標題</th>
-			<th>廣告內文</th>
-			<th>廣告內文</th>
-			<th>廣告上架日期</th>
-			<th>廣告下架日期</th>
-			<th>廣告狀態</th>
-			<th>廣告類別</th>
-			<th>食材供應商</th>
-		</tr>
-		<%@ include file="/file/page1.file"%>
-		<c:forEach var="adVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
+                <%-- 錯誤表列 --%>
+                <c:if test="${not empty errorMsgs}">
+                    <font style="color: red">請修正以下錯誤:</font>
+                    <ul>
+                        <c:forEach var="message" items="${errorMsgs}">
+                            <li style="color: red">${message}</li>
+                        </c:forEach>
+                    </ul>
+                </c:if>
+                
+                 <div class="col">
+                        <div class="card">
+                            
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">廣告編號:</th>
+                                            <th scope="col">廣告標題:</th>
+                                            <th scope="col">廣告內文:</th>
+                                            <th scope="col">廣告內文:</th>
+                                            <th scope="col">廣告上架日期:</th>
+                                            <th scope="col">廣告下架日期:</th>
+                                            <th scope="col">廣告狀態:</th>
+                                            <th scope="col">廣告類別:</th>
+                                            <th scope="col">食材供應商:</th>
+                                          
+                                        </tr>
+                                    </thead>
+                
+								<%@ include file="/file/page1.file"%>
+		                  <c:forEach var="adVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 
 			<tr>
-				<td>${adVO.ad_ID}</td>
-				<td>${adVO.ad_title}</td>
-				<td><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></c:if>
-				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
-				<td>${adVO.ad_con}</td>
-				<td>${adVO.ad_start}</td>
-				<td>${adVO.ad_end}</td>
-				<td>${adStatusMap[adVO.ad_status]}</td>
-				<td>${adTypeMap[adVO.ad_type]}</td>
-				<td>${adVO.food_sup_ID}</td>
+				<th scope="row">${adVO.ad_ID}</th>
+				<th scope="row">${adVO.ad_title}</th>
+				<th scope="row"><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></c:if>
+				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></th>
+				<th scope="row">${adVO.ad_con}</th>
+				<th scope="row">${adVO.ad_start}</th>
+				<th scope="row">${adVO.ad_end}</th>
+				<th scope="row">${adStatusMap[adVO.ad_status]}</th>
+				<th scope="row">${adTypeMap[adVO.ad_type]}</th>
+				<th scope="row">${adVO.food_sup_ID}</th>
 				
-				<td>
+				<th scope="row">
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/ad/ad.do"
 						style="margin-bottom: 0px;">
@@ -77,11 +83,13 @@
 							name="ad_ID" value="${adVO.ad_ID}"> <input
 							type="hidden" name="action" value="getOne_For_UpdateBack">
 					</FORM>
-				</td>
-				
+				</th>			
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+           </div>
+        </div>
 	<%@ include file="/file/page2.file"%>
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />

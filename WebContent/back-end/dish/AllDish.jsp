@@ -47,12 +47,10 @@
                                     </thead>
                                      <c:forEach var="dishVO" items="${list}">
 											<c:if test="${dishVO.dish_status eq 'D2'}">
-                                    <tbody>
-                                   
-                                        
+                                    <tr>
+                                 
                                             <th scope="row">${dishVO.dish_name}</th>
-                                            
-                                        	
+                                          
                                             <th scope="row"><c:if test="${not empty dishVO.dish_pic}">
 														<img
 															src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}"
@@ -78,7 +76,7 @@
                                            
                                     
                                         
-                                    </tbody>
+                                    </tr>
                                            </c:if>
 									</c:forEach>
 									

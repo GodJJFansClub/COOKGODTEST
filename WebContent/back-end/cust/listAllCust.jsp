@@ -15,113 +15,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
-
-
+<link href="../../dist/css/style.min.css" rel="stylesheet">
 
 </head>
 <body>
-		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<jsp:include page="/back-end/sideBar/custMana.jsp" flush="true" />
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
+		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+				<%--=================================工作區================================================--%>
 
-	
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>所有顧客資料</h3>
-				
-			</td>
-		</tr>
-	</table>
-
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<table>
-		<tr>
-			<th>顧客編號</th>
-			<th>顧客帳號</th>
-			<th>顧客密碼</th>
-			<th>顧客姓名</th>
-			<th>顧客性別</th>
-			<th>顧客電話</th>
-			<th>顧客地址</th>
-			<th>顧客身份證字號</th>
-			<th>E-mail</th>
-			<th>顧客生日</th>
-			<th>顧客註冊日</th>
-			<th>大頭照</th>
-			<th>顧客狀態</th>
-			<th>顧客暱稱</th>
-		</tr>
-		<%@ include file="/file/page1.file"%>
-		<c:forEach var="custVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-
-			<tr>
-				<td>${custVO.cust_ID}</td>
-				<td>${custVO.cust_acc}</td>
-				<td>${custVO.cust_pwd}</td>
-				<td>${custVO.cust_name}</td>
-				<c:if test="${custVO.cust_sex.equals('M')}" var="true"
-					scope="session">
-					<td>男生</td>
+				<%-- 錯誤表列 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
 				</c:if>
-				<c:if test="${custVO.cust_sex.equals('F')}" var="true"
-					scope="session">
-					<td>女生</td>
-				</c:if>
-				<td>${custVO.cust_tel}</td>
-				<td>${custVO.cust_addr}</td>
-				<td>${custVO.cust_pid}</td>
-				<td>${custVO.cust_mail}</td>
-				<td>${custVO.cust_brd}</td>
-				<td>${custVO.cust_reg}</td>
-				<td><c:if test="${not empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}"></c:if>
-				    <c:if test="${empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
+			
+			<div class="col">
+					<div class="card">
 
-				<c:if test="${custVO.cust_status.equals('a0')}" var="true"
-					scope="session">
-					<td>未停權</td>
-				</c:if>
-				<c:if test="${custVO.cust_status.equals('a1')}" var="true"
-					scope="session">
-					<td>停權</td>
-				</c:if>
-				<td>${custVO.cust_niname}</td>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>顧客編號</th>
+										<th scope="col">顧客帳號</th>
+										<th scope="col">顧客密碼</th>
+										<th scope="col">顧客姓名</th>
+										<th scope="col">顧客性別</th>
+										<th scope="col">顧客電話</th>
+										<th scope="col">顧客地址</th>
+										<th scope="col">顧客身份證字號</th>
+										<th scope="col">E-mail</th>
+										<th scope="col">顧客生日</th>
+										<th scope="col">顧客註冊日</th>
+										<th scope="col">大頭照</th>
+										<th scope="col">顧客狀態</th>
+										<th scope="col">顧客暱稱</th>
+										
+									</tr>
+								</thead>
 
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/cust/cust.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="cust_ID" value="${custVO.cust_ID}"> <input
-							type="hidden" name="action" value="getOne_For_UpdateBack">
-					</FORM>
-				</td>
-				
-			</tr>
-		</c:forEach>
-	</table>
-	<%@ include file="/file/page2.file"%>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
+
+								
+									<%@ include file="/file/page1.file"%>
+									<c:forEach var="custVO" items="${list}" begin="<%=pageIndex%>"
+										end="<%=pageIndex+rowsPerPage-1%>">
+
+										<tr>
+											<th scope="row">${custVO.cust_ID}</th>
+											<th scope="row">${custVO.cust_acc}</th>
+											<th scope="row">${custVO.cust_pwd}</th>
+											<th scope="row">${custVO.cust_name}</th>
+											<c:if test="${custVO.cust_sex.equals('M')}" var="true"
+												scope="session">
+												<td>男生</td>
+											</c:if>
+											<c:if test="${custVO.cust_sex.equals('F')}" var="true"
+												scope="session">
+												<td>女生</td>
+											</c:if>
+											<th scope="row">${custVO.cust_tel}</th>
+											<th scope="row">${custVO.cust_addr}</th>
+											<th scope="row">${custVO.cust_pid}</th>
+											<th scope="row">${custVO.cust_mail}</th>
+											<th scope="row">${custVO.cust_brd}</th>
+											<th scope="row">${custVO.cust_reg}</th>
+											<th scope="row"><c:if test="${not empty custVO.cust_pic}">
+													<img
+														src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}" width="300" height="200">
+												</c:if> <c:if test="${empty custVO.cust_pic}" >
+													<img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200">
+												</c:if></th>
+
+											<c:if test="${custVO.cust_status.equals('a0')}" var="true"
+												scope="session">
+												<td>未停權</td>
+											</c:if>
+											<c:if test="${custVO.cust_status.equals('a1')}" var="true"
+												scope="session">
+												<td>停權</td>
+											</c:if>
+											<th scope="row">${custVO.cust_niname}</th>
+
+											<th scope="row">
+												<FORM METHOD="post"
+													ACTION="<%=request.getContextPath()%>/cust/cust.do"
+													style="margin-bottom: 0px;">
+													<input type="submit" value="修改"> <input
+														type="hidden" name="cust_ID" value="${custVO.cust_ID}">
+													<input type="hidden" name="action"
+														value="getOne_For_UpdateBack">
+												</FORM>
+											</th>
+										</tr>
+									</c:forEach>
+								</table>
+						</div>
+					</div>
+				</div>
+								<%@ include file="/file/page2.file"%>
+								<%--=================================工作區================================================--%>
+								<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+								<%--=================================jQuery===============================================--%>
+						</div>
+					</div>
 	</div>
 	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>

@@ -43,11 +43,11 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
-                                        
-                                </thead>
-                            <th>套餐名稱:</th>
-                            <td><input readonly  name="menu_ID" value="${menuVO.menu_ID}"></td>
-                        	 </thead>
+                                         <th>套餐名稱:</th>
+                            			<td><input readonly  name="menu_ID" value="${menuVO.menu_ID}"></td>
+                             		</thead>
+                           
+                        	 
                         <tr>
                             <th>選擇菜色:</th>
                             <td>
@@ -57,20 +57,23 @@
                                     <a href="<%=request.getContextPath()%>/menuDish/menuDish.do?dish_ID=${menuDishVO.dish_ID}">${dishSvc.getOneDish(menuDishVO.dish_ID).dish_name}</a>
                                 <c:if test="${sc.count%5 == 0 }">                                   
                                     <br>
+                                    <br>
                                 </c:if> 
                                 
                                 </c:forEach>
                             </td>
                         
                         </tr>
-                            </div>
-                    </div>
-                </div>
+                     
                     
                     </table>
                     <input type="hidden" name="action" value="insert">
                     <input type="submit" value="送出"><br>
-                </FORM>
+               
+                
+                       </div>
+                    </div>
+                </div>
                 <%--=================================工作區================================================--%>
                 <jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
                 <%--=================================jQuery===============================================--%>

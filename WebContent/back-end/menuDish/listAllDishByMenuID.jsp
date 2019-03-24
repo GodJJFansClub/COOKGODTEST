@@ -44,11 +44,6 @@
 				</c:if>
 
 
-				<tr>
-					<td colspan="4">套餐名稱:<font color="red" size="5">${menuSvc.getOneMenu(menuVO.menu_ID).menu_name}</font></td>
-				</tr>
-
-
 				<div class="col">
 					<div class="card">
 						<div class="table-responsive">
@@ -56,19 +51,18 @@
 								<thead>
 									<tr align='center'>
 
-										<th>菜色名稱</th>
+										<td colspan="4">套餐名稱:<font color="red" size="5">${menuSvc.getOneMenu(menuVO.menu_ID).menu_name}</font></td>
 
 									</tr>
 								</thead>
 
 
-								</thead>
 								<c:forEach var="menuDishVO" items="${list}">
-									<tbody align='center'>
+									<tr align='center'>
 
-										<th scope="row-4">${dishSvc.getOneDish(menuDishVO.dish_ID).dish_name}</tH>
+										<th scope="row-4">${dishSvc.getOneDish(menuDishVO.dish_ID).dish_name}</th>
 
-									</tbody>
+									</tr>
 								</c:forEach>
 
 								<td colspan="3" align='center'>
