@@ -72,16 +72,18 @@ public class BroadcastWebSocket implements ServletContextListener{
 		Map<String, String> foodUnitMap = new HashMap<String, String>();
 		
 		foodUnitMap.put("g", "克");
-		foodUnitMap.put("Kg", "公斤");
+		foodUnitMap.put("tea","茶匙");
 		foodUnitMap.put("hea", "顆");
 		foodUnitMap.put("pie", "塊");
 		foodUnitMap.put("sti", "條");
-		foodUnitMap.put("clo", "瓣");
 		foodUnitMap.put("sin", "隻");
 		foodUnitMap.put("jin","斤");
 		foodUnitMap.put("flo", "朵");
 		foodUnitMap.put("cc"," c.c");
 		foodUnitMap.put("sup"," 支");
+		foodUnitMap.put("she", "片");
+		foodUnitMap.put("box", "盒");
+		foodUnitMap.put("Kg", "公斤");
 		
 		Map<String, String> adStatusMap = new LinkedHashMap<String, String>();
 		adStatusMap.put("d0", "審核不過");
