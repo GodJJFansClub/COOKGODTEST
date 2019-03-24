@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>食材資料新增 - addFood.jsp</title>
+<title>新增食材</title>
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"

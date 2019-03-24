@@ -6,7 +6,8 @@
 <%
 	
 	CustVO custVO = custSvc.getOneCust(
-			((FoodSupVO)request.getAttribute("foodSupVO")).getFood_sup_ID()); 
+			((FoodSupVO)request.getAttribute("foodSupVO")).getFood_sup_ID());
+	pageContext.setAttribute("custVO", custVO);
 %>
 <html>
 <head>

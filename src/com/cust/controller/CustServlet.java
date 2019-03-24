@@ -179,7 +179,8 @@ public class CustServlet extends HttpServlet {
 
 				custVO = custSvc.addCust(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname);
-				String url = "/front-end/index.jsp";
+				//add成功導向跳轉頁面
+				String url = "/front-end/login/addSuccess.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
@@ -393,7 +394,8 @@ public class CustServlet extends HttpServlet {
 				custVO = custSvc.addFoodSup(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid,
 						cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname, food_sup_name, food_sup_tel,
 						food_sup_status, food_sup_resume);
-				String url = "/front-end/index.jsp";
+				//加入成功，導向跳轉頁
+				String url = "/front-end/login/addSuccess.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

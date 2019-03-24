@@ -154,8 +154,8 @@
 													<li><a>目前尚無訊息</a></li>
 												</c:if>
 											</ul></li>
-										<li><FORM METHOD="get" action="<%=request.getContextPath()%>/front-end/logout.do">
-											<button type="submit"class="btn btn-danger">登出</button>
+										<li><FORM id="frontLogOutBTN" METHOD="get" action="<%=request.getContextPath()%>/front-end/logout.do">
+											<button type="button"class="btn btn-danger" id="alertLogOutBTN">登出</button>
 										</FORM></li>
 									</c:if>
 									<c:if test="${empty custVO.cust_ID}">
@@ -272,6 +272,14 @@
 		function disconnect() {
 			webSocket.close();
 		}
+	</script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+	var btn = document.getElementById("alertLogOutBTN");
+	btn.onclick = function() { 
+		swal("Good job!", "You clicked the button!", "success");
+		$("#frontLogOutBTN").submit();
+			} 
 	</script>
 </c:if>
 

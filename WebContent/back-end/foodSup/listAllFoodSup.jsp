@@ -24,12 +24,14 @@
 						</c:forEach>
 					</ul>
 				</c:if>
-				<table>
+				<div class="table-responsive">
+				<table class="table">
 					<tr>
 						<th>食材供應商編號</th>
 						<th>食材供應商名稱</th>
 						<th>聯絡電話</th>
 						<th>狀態</th>
+						<th>更改狀態</th>
 					</tr>
 					<c:forEach var="foodSupVO" items="${foodSupSvc.all}">
 						<tr class="foodSupEntiy">
@@ -57,6 +59,7 @@
 <%--=================================jQuery===============================================--%>
 			</div>
 		</div>
+	</div>
 	</div>
 	<script>
 	

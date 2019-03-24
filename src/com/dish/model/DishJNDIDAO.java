@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.dishFood.model.DishFoodVO;
+import com.fdsview.model.FdsViewVO;
 
 
 public class DishJNDIDAO implements DishDAO_interface{
@@ -33,6 +34,8 @@ public class DishJNDIDAO implements DishDAO_interface{
 			"DELETM FROM DISH where DISH_ID = ?";
 	private static final String UPDATE = 
 			"UPDATE DISH set DISH_NAME = ?,DISH_STATUS = ?,DISH_PIC = ?,DISH_RESUME = ?,DISH_PRICE = ? where DISH_ID = ?";
+	private static final String GetFdsViewByDish_ID =
+			"SELECT * FROM FDSVIEW WHERE DISH_ID = ?";
 			
 	@Override
 	public void insert(DishVO DishVO) {
@@ -276,6 +279,12 @@ public class DishJNDIDAO implements DishDAO_interface{
 	public void insertWithFoods(DishVO dishVO, List<DishFoodVO> list) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Set<FdsViewVO> getFdsByDishID(String dish_ID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import com.dishFood.model.DishFoodJDBCDAO;
 import com.dishFood.model.DishFoodVO;
+import com.fdsview.model.FdsViewVO;
 
 
 public class DishDAO implements DishDAO_interface{
@@ -36,7 +37,8 @@ public class DishDAO implements DishDAO_interface{
 			"DELETE FROM DISH where DISH_ID=?";
 	private static final String UPDATE = 
 			"UPDATE DISH set DISH_NAME = ?,DISH_STATUS = ?,DISH_PIC = ?,DISH_RESUME = ?,DISH_PRICE = ? where DISH_ID = ?";
-			
+	private static final String GetFdsViewByDish_ID =
+			"SELECT * FROM FDSVIEW WHERE DISH_ID = ?";
 	@Override
 	public void insert(DishVO dishVO) {
 		
@@ -414,6 +416,65 @@ public class DishDAO implements DishDAO_interface{
 				}
 			}
 		}
+	}
+
+	@Override
+	public Set<FdsViewVO> getFdsByDishID(String dish_ID) {
+		Set<FdsViewVO> set = new LinkedHashSet<FdsViewVO>();
+		FdsViewVO fdsViewVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GetFdsViewByDish_ID);
+			pstmt.setString(1, dish_ID);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				fdsViewVO = new FdsViewVO();
+				fdsViewVO.setFood_ID(rs.getString(1));
+				fdsViewVO.setFood_name(rs.getString(2));
+				fdsViewVO.setFood_type_ID(rs.getString(3));
+				fdsViewVO.setDish_ID(rs.getString(4));
+				fdsViewVO.setDish_f_qty(rs.getInt(5));
+				fdsViewVO.setDish_f_unit(rs.getString(6));
+				fdsViewVO.setDish_name(rs.getString(7));
+				
+				set.add(fdsViewVO); // Store the row in the vector
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
 	}		
 }
 

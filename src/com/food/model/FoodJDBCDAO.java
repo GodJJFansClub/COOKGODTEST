@@ -10,6 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fdsview.model.FdsViewVO;
 import com.foodMall.model.FoodMallVO;
 
 
@@ -32,7 +33,8 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			"SELECT FOOD_SUP_ID, FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL WHERE FOOD_ID = ? ORDER BY FOOD_SUP_ID";
 	private static final String GET_FoodByFood_type_ID = 
 			"SELECT FOOD_ID, FOOD_NAME, FOOD_TYPE_ID FROM FOOD WHERE FOOD_TYPE_ID = ? ORDER BY FOOD_ID";
-	
+	private static final String GET_DishsByFood_ID = 
+			"SELECT * FROM FDSVIEW WHERE FOOD_ID = ? ORDER BY DISH_ID";
 	@Override
 	public void insert(FoodVO foodVO) {
 		Connection con = null;
@@ -449,5 +451,73 @@ public class FoodJDBCDAO implements FoodDAO_interface {
 			System.out.print(foodVO.getFood_type_ID());
 			System.out.println();
 		}
+		
+		Set<FdsViewVO> fdsViewVOs = dao.getDishsByFood_ID("F00001");
+		for(FdsViewVO fdsViewVO:fdsViewVOs) {
+			System.out.print(fdsViewVO.getFood_ID());
+			System.out.print(fdsViewVO.getFood_name());
+			System.out.print(fdsViewVO.getFood_type_ID());
+			System.out.print(fdsViewVO.getDish_ID());
+			System.out.print(fdsViewVO.getDish_f_qty());
+			System.out.print(fdsViewVO.getDish_f_unit());
+			System.out.println(fdsViewVO.getDish_name());
+		}
+	}
+	@Override
+	public Set<FdsViewVO> getDishsByFood_ID(String food_ID) {
+		Set<FdsViewVO> set = new LinkedHashSet<FdsViewVO>();
+		FdsViewVO fdsViewVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_DishsByFood_ID);
+			pstmt.setString(1, food_ID);
+			rs = pstmt.executeQuery();
+	
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				fdsViewVO = new FdsViewVO();
+				fdsViewVO.setFood_ID(rs.getString(1));
+				fdsViewVO.setFood_name(rs.getString(2));
+				fdsViewVO.setFood_type_ID(rs.getString(3));
+				fdsViewVO.setDish_ID(rs.getString(4));
+				fdsViewVO.setDish_f_qty(rs.getInt(5));
+				fdsViewVO.setDish_f_unit(rs.getString(6));
+				fdsViewVO.setDish_name(rs.getString(7));
+				set.add(fdsViewVO);
+			}
+	
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
 	}
 }

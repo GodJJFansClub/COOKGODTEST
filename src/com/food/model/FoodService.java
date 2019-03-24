@@ -3,6 +3,7 @@ package com.food.model;
 import java.util.List;
 import java.util.Set;
 
+import com.fdsview.model.FdsViewVO;
 import com.foodMall.model.FoodMallVO;
 
 public class FoodService {
@@ -50,5 +51,9 @@ public class FoodService {
 	
 	public Set<FoodVO> getFoodsByFood_type_ID( String food_type_ID){
 		return dao.getFoodsByFood_type_ID(food_type_ID);
+	}
+	
+	public Set<FdsViewVO> getDishsByFood_ID(String food_ID){
+		return dao.getDishsByFood_ID(food_ID);
 	}
 }
