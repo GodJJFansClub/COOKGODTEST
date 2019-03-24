@@ -362,8 +362,7 @@ width: 1px;
 			$('#answer').text('帳號驗證中');
 			$.ajax({
  			
-				url: '<%=request.getContextPath()%>
-	/cust/cust.do',
+				url: '<%=request.getContextPath()%>/cust/cust.do',
 			type : "POST",
 			data : {
 				action : 'ask',

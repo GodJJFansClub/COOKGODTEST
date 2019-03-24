@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=Big5">
-<title>前台login</title>
+<title>登入</title>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />

@@ -12,7 +12,7 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>顧客資料新增 - addCust.jsp</title>
+<title>顧客資料新增</title>
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
@@ -356,8 +356,7 @@ th, td {
 			$('#answer').text('帳號驗證中');
 			$.ajax({
  			
-				url: '<%=request.getContextPath()%>
-	/cust/cust.do',
+				url: '<%=request.getContextPath()%>/cust/cust.do',
 			type : "POST",
 			data : {
 				action : 'ask',

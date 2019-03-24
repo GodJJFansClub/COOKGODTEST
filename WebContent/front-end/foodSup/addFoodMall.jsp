@@ -143,13 +143,13 @@
 			<tr>
 				<td>標題:<font color=red><b>*</b></font></td>
 				<td><input type="TEXT" name="food_m_name" size="20" 
-					 value="<%= (foodMallVO==null)? "又大又甜的蘋果" : foodMallVO.getFood_m_name()%>" /></td>
+					 value="<%= (foodMallVO==null)? "又大又甜的蘋果" : foodMallVO.getFood_m_name()%>" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
 					 <td><font color=red>${errorMsgs.em_name}</font></td>
 			</tr>
 			<tr>
 				<td>商品價格:<font color=red><b>*</b></font></td>
 				<td><input type="TEXT" name="food_m_price" size="7"
-					 value="<%= (foodMallVO==null)? "10000" : foodMallVO.getFood_m_price()%>" /></td>
+					 value="<%= (foodMallVO==null)? "10000" : foodMallVO.getFood_m_price()%>" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
 					 <td><font color=red>${errorMsgs.em_price}</font></td>
 			</tr>
 			<tr>
@@ -164,7 +164,7 @@
 			<tr>
 				<td>產地:<font color=red><b>*</b></font></td>
 				<td><input type="TEXT" name="food_m_place" size="7"
-					 value="<%= (foodMallVO==null)? "台灣" : foodMallVO.getFood_m_place()%>" /></td>
+					 value="<%= (foodMallVO==null)? "台灣" : foodMallVO.getFood_m_place()%>" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
 				<td><font color=red>${errorMsgs.em_place}</font></td>
 			</tr>
 			<tr>

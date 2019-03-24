@@ -12,7 +12,7 @@
 
 <html>
 <head>
-<title>供應商顯示所有食材商品 listAllFoodMall.jsp</title>
+<title>供應商顯示所有食材商品</title>
 
 <style>
 table#table-1 {
@@ -135,7 +135,7 @@ th, td {
 			<div class="row h-100 align-items-center">
 				<div class="col-12">
 					<div class="breadcrumb-content">
-						<h2 style="font-weight: bold">食材供應商專區-廣告管理</h2>
+						<h2 style="font-weight: bold">食材供應商專區-食材管理</h2>
 					</div>
 				</div>
 			</div>
@@ -224,6 +224,6 @@ th, td {
 
 
 	</section>
-	<jsp:include page="/froTempl/footer.jsp" flush="true" />
+	
 </body>
 </html>

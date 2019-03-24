@@ -22,7 +22,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title -->
-<title>Pixel - Digital Agency HTML Template</title>
+<title>食神來了</title>
 
 <!-- Favicon -->
 <link rel="icon"
@@ -197,7 +197,7 @@
                     <!-- Section Heading -->
                     <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
                         <h2 style="font-weight:bold">嚴選食材</h2>
-                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png" alt="">
+                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo_cut.gif" style="width:200px;height=500px" "alt="">
                     </div>
                 </div>
             </div>
@@ -209,33 +209,33 @@
 
             <!-- Single gallery Item -->
             <div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s">
-                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img//foodMall3.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h4>Branding Identity</h4>
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMal3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>不幸的雞</h4>
                     </div>
                 </div>
             </div>
 
             <!-- Single gallery Item -->
             <div class="single_gallery_item add wow fadeInUp" data-wow-delay="0.4s">
-                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/6.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h4>Branding Identity</h4>
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>頂級牛</h4>
                     </div>
                 </div>
             </div>
 
             <!-- Single gallery Item -->
             <div class="single_gallery_item web wow fadeInUp" data-wow-delay="0.6s">
-                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/7.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h4>Branding Identity</h4>
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>嗆辣紅椒</h4>
                     </div>
                 </div>
             </div>
