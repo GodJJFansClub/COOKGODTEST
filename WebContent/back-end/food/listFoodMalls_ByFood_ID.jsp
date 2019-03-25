@@ -18,10 +18,6 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	
-	
-			
-	
 	<table>
 		<tr>
 			<th>食材供應商</th>

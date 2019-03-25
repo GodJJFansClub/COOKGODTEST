@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>節慶主題料理新增</title>
+<title>節慶主題料理新增 - addFestMenu.jsp</title>
 
 <style>
 table#table-1 {
@@ -42,7 +42,7 @@ h4 {
 
 <style>
 table {
-	width: 600px;
+	width: 450px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -58,43 +58,33 @@ th, td {
 </style>
 
 </head>
-<body>
-	<jsp:include page="/froTempl/header.jsp" flush="true" />
+<body bgcolor='white'>
 
-	<!-- ##### Breadcrumb Area Start ##### -->
-	<jsp:include page="/froTempl/headerChef.jsp" flush="true" />
-	<!-- ##### Breadcrumb Area End ##### -->
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>節慶主題料理新增 - addFestMenu.jsp</h3>
+			</td>
+			<td>
+				<h4>
+					<a href="select_page.jsp">回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
 
-	<!-- ##### Contact Area Start #####-->
-	<section class="contact-area section-padding-100">
-		<section class="contact-area section-padding-100">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<!-- Section Heading -->
-						<div class="section-heading text-center wow fadeInUp"
-							data-wow-delay="100ms">
+	<h3>資料新增:</h3>
 
-							<h2 style="font-weight:bold">節慶主題料理新增</h2>
-							<img
-								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"alt="">
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
-
-
-							<%-- 錯誤表列 --%>
-							<c:if test="${not empty errorMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
-
-							<div class="row justify-content-center">
-								<div class="col-12 col-lg-8">
-									<!-- Contact Form -->
-									<div class="contact-form-area text-center">
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do"
 		name="form1" enctype="multipart/form-data">
@@ -175,21 +165,9 @@ th, td {
 		<div id="localImag">
 			<img id="preview" width=-1 height=-1 style="diplay: none" />
 		</div>
-		<br> <input type="hidden" name="action" value="insert"> <button type="submit" class="btn pixel-btn wow fadeInUp"
-												data-wow-delay="300ms">送出</button>
-										</form>
-									</div>
-								</div>
-							</div>
-
-						</div>
-		</section>
-		<!-- ##### Contact Area End #####-->
-
-
-
-	</section>
-	<jsp:include page="/froTempl/footer.jsp" flush="true" />
+		<br> <input type="hidden" name="action" value="insert"> <input
+			type="submit" value="送出新增">
+	</FORM>
 </body>
 
 
@@ -218,7 +196,9 @@ th, td {
 		fest_m_send = new java.sql.Date(System.currentTimeMillis());
 	}
 %>
-
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 

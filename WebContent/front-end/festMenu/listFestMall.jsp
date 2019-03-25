@@ -8,36 +8,6 @@
 
 <html>
 <head>
-<style>
-
-    
-.card {
-	overflow: hidden;
-}
-.card-img-top{
-width:100%;
-border-top-left-radius:calc(.25rem - 1px);
-border-top-right-radius:calc(.25rem - 1px);
-transform:scale(1,1);transition: all 1s ease-out;
-}
-
-.fest_m_name{
-	margin-top:20px;
-
-}
-.card-img-top:hover{
-width:100%;
-border-top-left-radius:calc(.25rem - 1px);
-border-top-right-radius:calc(.25rem - 1px);
-transform:scale(1.2,1.2);
-}
-img{
-	weight:400px;
-	height:600px;
-}
-
-</style>
-
 </head>
 <body>
 	
@@ -59,7 +29,7 @@ img{
 				<c:forEach var="festMenuVO" items="${festMenuSvc.allIndate}" varStatus="s">
 					<div class="col-3">
 						<div id="foodMCard${s.index}" class="card foodMCard">
-				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" class="card-img-top" height="200px" width="100px">
+				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" class="card-img-top">
 				  			<div class="card-body">
 				    			<p class="card-text shopUse fest_m_name">
 				    				${festMenuVO.fest_m_name}

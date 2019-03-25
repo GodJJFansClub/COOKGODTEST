@@ -1,8 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.cust.model.*"%>
 <%@ page import="com.chef.model.*"%>
-
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <%	
 	ChefService chefSvc = new ChefService();
 	List<ChefVO> list = chefSvc.getAll();
@@ -11,37 +12,13 @@
 
 <html>
 <head>
-
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-	crossorigin="anonymous">
-
-<title>List_All_By_Chef_Area.jsp</title>
-<style type="text/css">
-table {
-	border: 2px solid gray;
-	margin: 15px;
-}
-
-th, td {
-	border: 1px solid;
-	width: 100px;
-	height: 50px;
-	text-align: center;
-	padding: 3px;
-}
-</style>
+<title>瀏覽所有主廚</title>
 </head>
 <body>
-
-	<%--Error Message--%>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
+    <%--Error Message--%>
 	<c:if test="${not empty errorMsgs} }">
 		<font style="color: red; font-size: 30px;">Error</font>
 		<ul>
@@ -53,45 +30,42 @@ th, td {
 	<div class="container justify-content-center">
 		<div class="row">
 			<div class="col-12">
-				<table>
-					<tr>
-						<th>主廚編號</th>
-						<th>主廚服務地區</th>
-						<th>主廚頻道</th>
-						<th style="width:400px;">主廚簡介</th>
-					</tr>
-					<%@ include file="page1.file"%>
-					<c:forEach var="chefVO" items="${list}" begin="<%=pageIndex %>"
-						end="<%=pageIndex+rowsPerPage-1 %>">
-						<tr>
-							<td>${chefVO.chef_ID}</td>
-							<td>${chefVO.chef_area}</td>
-							<td>${chefVO.chef_channel}</td>
-							<td>${chefVO.chef_resume}</td>
-						</tr>
-					</c:forEach>
-				</table>
-				<%@ include file="page2.file"%>
+				<%@ include file="page1.file"%>
 			</div>
 		</div>
 	</div>
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous">
-	</script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-		crossorigin="anonymous">
-	</script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-		crossorigin="anonymous">
-	</script>
-
+	<div class="container-fliud justify-content-center">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="container justify-content-center">
+					<div class="row">
+						<c:forEach var="chefVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+							<div class="col-4" >
+								<a href="<%=request.getContextPath()%>/front-end/chef/listOneChefProfile.jsp?chef_ID=${chefVO.chef_ID}">
+									<div class="card bg-dark text-white" style="margin-bottom:25px;">
+										<c:if test="${not empty custSvc.getOneCust(chefVO.chef_ID).cust_pic}">
+											<img class="card-img" src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${chefVO.chef_ID}" style="width:350px;height:350px;">
+										</c:if>
+										<c:if test="${empty custSvc.getOneCust(chefVO.chef_ID).cust_pic}">
+											<img class="card-img"src="<%=request.getContextPath()%>/images/noimage.jpg">
+										</c:if>
+										<div class="card-img-overlay">
+											<h5 class="card-title"><font style="font-family: Microsoft JhengHei;font-weight:bolder;color:white;">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</font></h5>
+										</div>
+									</div>
+								</a>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+				<%@ include file="page2.file"%>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+    </section>
+    <!-- ##### Contact Area End #####-->
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

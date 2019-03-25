@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>所有廣告資料 </title>
+<title>所有廣告資料 - listAllAd.jsp</title>
 
 <style>
 table#table-1 {
@@ -55,131 +55,74 @@ th, td {
 	text-align: center;
 }
 </style>
-<style>
-
-/* :: 12.0 Blog Area CSS */
-.breadcrumb-area1 {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 380px;
-  padding: 0 35px; }
-  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .breadcrumb-area1 {
-      height: 300px; } }
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .breadcrumb-area1 {
-      height: 280px; } }
-  @media only screen and (max-width: 767px) {
-    .breadcrumb-area1 {
-      height: 250px; } }
-  .breadcrumb-area1::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    background-color: rgba(163, 163, 163, 0.3); }
-  .breadcrumb-area1 .breadcrumb-content {
-    text-align: center; }
-    .breadcrumb-area1 .breadcrumb-content h2 {
-      color: #ffffff;
-      font-size: 60px;
-      font-weight: 600;
-      text-transform: capitalize;
-      margin-bottom: 0;
-      display: inline-block; }
-      @media only screen and (min-width: 992px) and (max-width: 1199px) {
-        .breadcrumb-area1 .breadcrumb-content h2 {
-          font-size: 42px; } }
-      @media only screen and (min-width: 768px) and (max-width: 991px) {
-        .breadcrumb-area1 .breadcrumb-content h2 {
-          font-size: 36px; } }
-      @media only screen and (max-width: 767px) {
-        .breadcrumb-area1 .breadcrumb-content h2 {
-          font-size: 24px; } }
-
-</style>
 
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	<!-- ##### Breadcrumb Area Start ##### -->
-<br>
-	  <br>
-	   <br>
-	    <br>
-	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodSupPic.jpg);">
-        <div class="container-fluid h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold">食材供應商專區-廣告管理</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ##### Breadcrumb Area End ##### -->
+	
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
 
-	<!-- ##### Portfolio Area Start ###### -->
-    <div class="pixel-portfolio-area section-padding-100-0">
-    <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h2>所有廣告</h2>
-                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.gif" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-    
-    
-       <div class="pixel-portfolio">
-        
-        <c:forEach var="adVO" items="${list}" >
+	
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>所有廣告資料</h3>
+				<h4>
+					<a
+						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
+
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+
+	<table>
+		<tr>
+			<th>廣告編號</th>
+			<th>廣告標題</th>
+			<th>廣告上架日期</th>
+			<th>廣告下架日期</th>
+			<th>廣告狀態</th>
+			<th>食材供應商</th>
+		</tr>
+		
+		<c:forEach var="adVO" items="${list}" >
 			
 			<c:if test="${adVO.food_sup_ID == foodSupVO.getFood_sup_ID()}">
+			<tr>
+				<td>${adVO.ad_ID}</td>
+				<td>${adVO.ad_title}</td>
+				<td>${adVO.ad_start}</td>
+				<td>${adVO.ad_end}</td>
+				<td>${adStatusMap[adVO.ad_status]}</td>
+				<td>${adVO.food_sup_ID}</td>
 			
-			<div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s">
-                <img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}" width="800px" height="600px" alt="">
-                <div class="hover-content text-center d-flex align-items-center justify-content-center">
-                    <div class="hover-text">
-                        
-                        <h3>${adVO.ad_title}</h3>
-                     		<h4>上架時間</h4>
-				<a>${adVO.ad_start}</a><br>
-							<h4>審核狀態</h4>
-				<a>${adStatusMap[adVO.ad_status]}</a>
-			
+				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/ad/ad.do"
 						style="margin-bottom: 0px;">
-						<button type="submit" class="btn btn-info"
-												data-wow-delay="300ms">修改內容</button><input type="hidden"
-							name="ad_ID" value="${adVO.ad_ID}">
-							 <input
+						<input type="submit" value="修改"> <input type="hidden"
+							name="ad_ID" value="${adVO.ad_ID}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
+				</td>
 				
-                    </div>
-                </div>
-            </div>
-			
+			</tr>
 			</c:if>
 		</c:forEach>
 	</table>
-
-
-        </div>
-    </div>
-
-
+	
+</section>
     <!-- ##### Contact Area End #####-->
 
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
@@ -187,6 +130,6 @@ th, td {
 			</div>
 		</div>
 	</div>
-
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 </html>

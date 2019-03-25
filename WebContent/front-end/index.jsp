@@ -22,7 +22,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title -->
-<title>食神來了</title>
+<title>Pixel - Digital Agency HTML Template</title>
 
 <!-- Favicon -->
 <link rel="icon"
@@ -74,12 +74,11 @@
 						<div class="col-12 col-lg-9">
 							<div class="welcome-text">
 								<h2 data-animation="fadeInUp" data-delay="300ms">
-									<span style="color:black; font-weight:bold">嚴選四大廚神</span><br>
+									<span style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">嚴選四大廚神</span><br>
 								</h2>
 								<h3 data-animation="fadeInUp" data-delay="500ms">
-									<spanstyle="color:black">為您服務</span>
+									<span style="color:black; font-family: Microsoft JhengHei;" >為您服務</span>
 								</h3>
-								
 							</div>
 						</div>
 					</div>
@@ -117,12 +116,12 @@
     <div class="top-catagory-area d-flex flex-wrap">
         <!-- Single Catagory -->
         <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/F4_2.png);">
-            <a href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp" style="font-weight:bold"><font color = '#000000' onmouseout="this.style.color = '#000000';" onmouseover="this.style.color ='#FF7B0F';">瀏覽主廚</font></a>
+            <a href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp" style="font-weight:bold"><font color='#000000' onmouseout="this.style.color ='#000000';" onmouseover="this.style.color ='#FF7B0F';" style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">瀏覽主廚</font></a>
             
         </div>
         <!-- Single Catagory -->
         <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/4.jpg);">
-            <a href="<%=request.getContextPath()%>/front-end/chef/menu/menu.jsp" style="font-weight:bold">嚴選套餐</a>
+            <a href="<%=request.getContextPath()%>/front-end/chef/menu/menu.jsp" style="font-weight:bold;"><font color='#000000' onmouseout="this.style.color ='#000000';" onmouseover="this.style.color ='#FF7B0F';" style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">嚴選套餐</font></a>
         </div>
     </div>
     <!-- ##### Top Catagory Area End ##### -->
@@ -197,7 +196,7 @@
                     <!-- Section Heading -->
                     <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
                         <h2 style="font-weight:bold">嚴選食材</h2>
-                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo_cut.gif" style="width:200px;height=500px" "alt="">
+                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png" alt="">
                     </div>
                 </div>
             </div>
@@ -209,33 +208,33 @@
 
             <!-- Single gallery Item -->
             <div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s">
-                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img//foodMall3.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMal3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h4>不幸的雞</h4>
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
                     </div>
                 </div>
             </div>
 
             <!-- Single gallery Item -->
             <div class="single_gallery_item add wow fadeInUp" data-wow-delay="0.4s">
-                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/6.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h4>頂級牛</h4>
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
                     </div>
                 </div>
             </div>
 
             <!-- Single gallery Item -->
             <div class="single_gallery_item web wow fadeInUp" data-wow-delay="0.6s">
-                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/7.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h4>嗆辣紅椒</h4>
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
                     </div>
                 </div>
             </div>

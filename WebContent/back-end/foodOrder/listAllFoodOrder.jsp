@@ -35,8 +35,22 @@
 					</ul>
 				</c:if>
 				<div class="table-responsive">
-					
-						
+					<%--<form action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
+						<b>輸入顧客姓名</b>
+						<input type="text" name="cust_name" value="" size="10">
+						<b>選擇訂單狀態</b>
+						<select name="food_or_status">
+							<c:forEach var="foodOrStat" items="${mallOrStatusMap}">
+								<option value="${foodOrStat.key}" ${(queryStat.food_or_status == food_type.key)?'selected':''}>
+									${foodOrStat.value}
+								</option>
+							</c:forEach>
+						</select> --%>
+						<b>下訂日期</b>
+						<input name="food_or_start" id="foodOrStart_date" type="text">
+						<input type="hidden" name="action" value="compositeQuery">
+						<input type="submit" value="送出查詢">
+					</form>
 					<table class="table">
 						<tr>
 							<th scope="col">訂單編號</th>

@@ -8,20 +8,26 @@
 
 <html>
 <head>
-<title>新增節慶主題料理資料</title>
+<title>新增節慶主題料理資料 - listOneFestMenu.jsp</title>
 
 
 
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>節慶主題料理訂單資料 - ListOneFestMenu.jsp</h3>
+				<h4>
+					<a
+						href="<%=request.getContextPath()%>/bank-end/festMenu/select_page.jsp">回首頁</a>
+
+				</h4>
+			</td>
+		</tr>
+	</table>
+
 	<table>
 		<tr>
 			<th>節慶料理編號</th>
@@ -59,11 +65,6 @@
 
 		</tr>
 	</table>
-	<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
+	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

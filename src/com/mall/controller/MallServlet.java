@@ -3,9 +3,14 @@ package com.mall.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
@@ -16,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fdsview.model.FdsViewVO;
 import com.festMenu.model.FestMenuService;
 import com.festMenu.model.FestMenuVO;
 import com.festOrderDetail.model.FestOrderDetailVO;
@@ -27,6 +33,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import javafx.print.Collation;
+
 public class MallServlet extends HttpServlet{
 
 
@@ -37,15 +45,19 @@ public class MallServlet extends HttpServlet{
 		
 		@SuppressWarnings("unchecked")
 		List<Object> buyList = (Vector<Object>) session.getAttribute("shoppingCart");
+		@SuppressWarnings("unchecked")
+		Map<String, Set<FdsViewVO>> foodMapDishs = (Map<String, Set<FdsViewVO>>) session.getAttribute("foodMapDishs");
 		String action = req.getParameter("action");
+		FoodService foodSvc = new FoodService();
 		System.out.println(action);
 		if(!"CHECKOUTFOODMALL".equals(action)) {
 			if("addFoodMShoppingCart".equals(action)) {
 				JsonObject errors = new JsonObject();
-				try {
+//				try {
 					/*************************** 1.接收請求參數 ****************************************/
 					
 					FoodOrDetailVO foodOrDetailVO = getFOD(req, res, errors);
+					// 不用傳回fdsview, 因為其跟foodOrDetailVO有連動關係
 					if(foodOrDetailVO == null) {
 						return;
 					}
@@ -54,24 +66,40 @@ public class MallServlet extends HttpServlet{
 						
 						buyList = new Vector<Object>();
 						buyList.add(foodOrDetailVO);
-						writeCartItem(res, foodOrDetailVO);
+						// 新車代表一定沒有食材, 找菜色囉
+						System.out.println("test1");
+						Set<FdsViewVO> fdsViewVos = foodSvc.getDishsByFood_ID(foodOrDetailVO.getFood_ID());
+						foodMapDishs = Collections.synchronizedMap(new LinkedHashMap<>());
+						if( !fdsViewVos.isEmpty() ) {
+							foodMapDishs.put(foodOrDetailVO.getFood_ID(), fdsViewVos);
+						}
+						
+						writeCartItem(res, foodOrDetailVO, foodMapDishs);
 					} else {
 						if (buyList.contains(foodOrDetailVO)) {
+							System.out.println("test2");
 							FoodOrDetailVO innerFoodODVO = (FoodOrDetailVO)buyList.get(buyList.indexOf(foodOrDetailVO));
 							innerFoodODVO.setFood_od_qty(innerFoodODVO.getFood_od_qty() + foodOrDetailVO.getFood_od_qty());
 							innerFoodODVO.setFood_od_stotal(innerFoodODVO.getFood_od_stotal() + foodOrDetailVO.getFood_od_stotal());
-							writeCartItem(res, innerFoodODVO);
+							writeCartItem(res, innerFoodODVO, foodMapDishs);
 						} else {
+							System.out.println("test3");
 							buyList.add(foodOrDetailVO);
-							writeCartItem(res, foodOrDetailVO);
+							Set<FdsViewVO> fdsViewVOs = foodSvc.getDishsByFood_ID(foodOrDetailVO.getFood_ID());
+							
+							foodMapDishs.put(foodOrDetailVO.getFood_ID(), fdsViewVOs);
+							
+							writeCartItem(res, foodOrDetailVO, foodMapDishs);
 						}
 					}
-					session.setAttribute("shoppingCart", buyList);
 					
-				}catch(Exception e) {
-					errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
-					writeJson(res, errors);
-				}
+					session.setAttribute("shoppingCart", buyList);
+					session.setAttribute("foodMapDishs", foodMapDishs);
+//				}catch(Exception e) {
+//					System.out.println("96" + e.getMessage());
+//					errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
+//					writeJson(res, errors);
+//				}
 			} else if ("addFestMenu".equals(action)) {
 				JsonObject errors = new JsonObject();
 				try {
@@ -107,7 +135,7 @@ public class MallServlet extends HttpServlet{
 			} else if("toCheckOutOR".equals(action)) {
 				toCheckOutOR(req,res);
 			} else if("delShoppingCartItem".equals(action)) {
-				delShoppingCartItem(req,res,buyList);
+				delShoppingCartItem(req,res,buyList,foodMapDishs);
 			} else if("getOneDisplayFestMall".equals(action)) {
 				getOneDisplayFestMall(req,res);
 			} else if("delSCShopCart".equals(action)) {
@@ -135,14 +163,49 @@ public class MallServlet extends HttpServlet{
 		out.close();
 	}
 	
-	private void writeCartItem(HttpServletResponse res, FoodOrDetailVO foodODVO) throws IOException{
+	private void writeCartItem(HttpServletResponse res, FoodOrDetailVO foodODVO, Map<String,Set<FdsViewVO>> foodMapDishs) throws IOException{
 		res.setContentType("application/Json");
 		res.setCharacterEncoding("UTF-8");
-		Gson gson = new Gson();
+		
 		PrintWriter out = res.getWriter();
-		out.print(gson.toJson(foodODVO));
+		
+			
+		System.out.println(fdsViewSetToJson(foodODVO, foodMapDishs));
+		out.print(fdsViewSetToJson(foodODVO, foodMapDishs));
 		out.flush();
 		out.close();
+	}
+	
+	private javax.json.JsonObject fdsViewSetToJson (FoodOrDetailVO foodODVO, Map<String,Set<FdsViewVO>> foodMapDishs){
+		javax.json.JsonArrayBuilder foodDishSetBuild = javax.json.Json.createArrayBuilder();
+		javax.json.JsonObject  foodODjson;
+		System.out.println("179行 test5");
+		if(null != foodMapDishs && !foodMapDishs.isEmpty()) {
+			foodMapDishs.get(foodODVO.getFood_ID()).forEach((FdsViewVO fdsViewVO) -> {
+				javax.json.JsonObject fdsViewJson = javax.json.Json.createObjectBuilder()
+						.add("food_ID", fdsViewVO.getFood_ID())
+						.add("food_name", fdsViewVO.getFood_name())
+						.add("dish_ID", fdsViewVO.getDish_ID())
+						.add("dish_f_qty", fdsViewVO.getDish_f_qty())
+						.add("dish_name", fdsViewVO.getDish_name()).build();
+				foodDishSetBuild.add(fdsViewJson);
+			});
+		
+			foodODjson = javax.json.Json.createObjectBuilder()
+				.add("food_sup_ID", foodODVO.getFood_sup_ID())
+				.add("food_ID", foodODVO.getFood_ID())
+				.add("food_od_qty", foodODVO.getFood_od_qty())
+				.add("food_od_stotal", foodODVO.getFood_od_stotal())
+				.add("fdsViewArr", foodDishSetBuild.build()).build();
+		} else {
+			System.out.println("199行test6");
+			foodODjson = javax.json.Json.createObjectBuilder()
+				.add("food_sup_ID", foodODVO.getFood_sup_ID())
+				.add("food_ID", foodODVO.getFood_ID())
+				.add("food_od_qty", foodODVO.getFood_od_qty())
+				.add("food_od_stotal", foodODVO.getFood_od_stotal()).build();
+		}
+		return foodODjson;
 	}
 	
 	private void writeCartItem(HttpServletResponse res, FestOrderDetailVO festOrderDetailVO) throws IOException{
@@ -157,10 +220,10 @@ public class MallServlet extends HttpServlet{
 	
 	
 	
-	private FoodOrDetailVO getFOD(HttpServletRequest req, HttpServletResponse res,JsonObject errors) throws IOException , SQLException{
+	private FoodOrDetailVO getFOD(HttpServletRequest req, HttpServletResponse res,JsonObject errors) throws IOException {
 		FoodOrDetailVO foodOrDetailVO = new FoodOrDetailVO();
 		String food_ID = req.getParameter("food_ID");
-		System.out.println(food_ID);
+		System.out.println("223行" + food_ID);
 		if(food_ID == null) {
 			errors.addProperty("cartErrorMsgs", "請輸入食材編號");
 			errors.addProperty("foodMCardID", req.getParameter("foodMCardID"));
@@ -379,7 +442,7 @@ public class MallServlet extends HttpServlet{
 		}
 	}
 	
-	private void delShoppingCartItem(HttpServletRequest req, HttpServletResponse res, List<Object> buyList) throws IOException {
+	private void delShoppingCartItem(HttpServletRequest req, HttpServletResponse res, List<Object> buyList, Map<String, Set<FdsViewVO>> foodMapDishs) throws IOException {
 		JsonObject errors = new JsonObject();
 		try {
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
@@ -397,7 +460,7 @@ public class MallServlet extends HttpServlet{
 					buyList.remove(innerFoodODVO);
 					
 
-					writeCartItem(res, innerFoodODVO);
+					writeCartItem(res, innerFoodODVO, foodMapDishs);
 				}
 			}
 			

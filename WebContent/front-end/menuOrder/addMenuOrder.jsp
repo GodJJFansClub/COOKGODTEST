@@ -1,6 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.menuOrder.model.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.chef.model.*"%>
+<%@ page import="com.chefDish.model.*"%>
+
+<%	
+	ChefDishService chefDishSvc = new ChefDishService();
+	ChefVO chefVO = (ChefVO)session.getAttribute("chefVO"); 
+	String chef_ID = chefVO.getChef_ID();
+	List<ChefDishVO> listAll = chefDishSvc.getAllByChefID(chef_ID);
+	session.setAttribute("listAll", listAll);
+%>
 
 <html>
 <head>

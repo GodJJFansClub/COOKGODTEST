@@ -103,9 +103,10 @@ public class FestOrderDetailServlet extends HttpServlet {
 				}
 				
 				FestOrderDetailService festOrderDetailSvc = new FestOrderDetailService();
-				
+				System.out.println("getOne_For_Display_Back106");
 				FestOrderDetailVO festOrderDetailVO = festOrderDetailSvc.getOneFestOrderDetail(fest_or_ID);
-				
+				System.out.println(festOrderDetailVO.getFest_or_ID());
+				System.out.println("getOne_For_Display_Back109");
 				if (fest_or_ID == null) {
 					errorMsgs.add("查無資料");
 				}

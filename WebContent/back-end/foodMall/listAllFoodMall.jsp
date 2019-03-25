@@ -12,65 +12,60 @@
 %>
 <html>
 <head>
+<title></title>
 </head>
 <body>
-    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-        data-layout="vertical" data-sidebartype="full"
-        data-boxed-layout="full">
-        <jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-        <jsp:include page="/back-end/sideBar/mallMana.jsp" flush="true" />
-        <div class="page-wrapper">
-            <div class="page-breadcrumb">
-                <%--=================================工作區================================================--%>
-
-                
-                
-                 <div class="col">
-                        <div class="card">
-                            
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">食材供應商名稱:</th>
-                                            <th scope="col">食材名稱:</th>
-                                            <th scope="col">食材介紹:</th>
-                                            <th scope="col">商品狀態:</th>
-                                            <th scope="col">價格:</th>
-                                            <th scope="col">單位:</th>
-                                            <th scope="col">產地:</th>
-                                            <th scope="col">評價:</th>
-                                          
-                                        </tr>
-                                    </thead>
-                
-				
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
+		data-layout="vertical" data-sidebartype="full"
+		data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/mallMana.jsp" flush="true"/>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+<%--=================================工作區================================================--%>
+				<%-- 錯誤列表 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color:red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color:red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				<table>
+					<tr>
+						<th>食材供應商名稱</th>
+						<th>食材名稱</th>
+						<th>標題</th>
+						<th>商品狀態</th>
+						<th>價格</th>
+						<th>單位</th>
+						<th>產地</th>
+						<th>評價</th>
+					</tr>
 					
 					<c:forEach var="foodMallVO" items="${list}" >
 						<tr>
-							<th scope="row">${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</th>
-							<th scope="row">${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</th>
-							<th scope="row">${foodMallVO.food_m_name}</th>
-							<th scope="row">${mallStatusMap[foodMallVO.food_m_status]}</th>
-							<th scope="row">${foodMallVO.food_m_price}</th>
-							<th scope="row">${foodUnitMap[foodMallVO.food_m_unit]}</th>
-							<th scope="row">${foodMallVO.food_m_place}</th>
-							<th scope="row">${foodMallVO.food_m_rate}</th>
+							<td>${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</td>
+							<td>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</td>
+							<td>${foodMallVO.food_m_name}</td>
+							<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
+							<td>${foodMallVO.food_m_price}</td>
+							<td>${foodUnitMap[foodMallVO.food_m_unit]}</td>
+							<td>${foodMallVO.food_m_place}</td>
+							<td>${foodMallVO.food_m_rate}</td>
 						
-							<th scope="row">
+							<td>
 								<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
 									<input type="submit" value="審核">
 									<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 									<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 									<input type="hidden" name="action" value="getOne_For_Update">
 								</form>
-							</th>
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
-           </div>
-        </div>
 				
 				<c:if test="${openModal!=null}">
 

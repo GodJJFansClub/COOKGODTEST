@@ -71,6 +71,9 @@ public class ChefService {
 	public List<ChefVO> getAllByChefArea(String chef_area) {
 		return dao.getAllByChefArea(chef_area);
 	}
+	public List<ChefVO> getAllFromEmp(){
+		return dao.getAllFromEmp();
+	}
 	public List<ChefVO> getAll(){
 		return dao.getAll();
 	}

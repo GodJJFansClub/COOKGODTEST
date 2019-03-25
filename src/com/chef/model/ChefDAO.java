@@ -23,7 +23,7 @@ public class ChefDAO implements ChefDAO_Interface{
 	}
 	
 	private static final String Insert_Stmt = 
-			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, 'b0', 'NoChannel', ?)";
+			"INSERT INTO CHEF (CHEF_ID, CHEF_AREA, CHEF_STATUS, CHEF_CHANNEL, CHEF_RESUME) VALUES (?, ?, 'b1', 'NoChannel', ?)";
 	private static final String Insert_Stmt_With_Cust = 
 			"INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) VALUES ('C'||LPAD((CUST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String Updata_Stmt_From_Emp = 
@@ -35,11 +35,13 @@ public class ChefDAO implements ChefDAO_Interface{
 	private static final String Get_One_Chef_By_Chef_ID = 
 			"SELECT * FROM CHEF WHERE CHEF_ID = ?";
 	private static final String Get_All_Chef_By_Menu_ID =
-			"SELECT CHEF_ID FROM CHEF_DISH WHERE EXISTS (SELECT 1 FROM MENU_DISH WHERE MENU_ID = ? AND MENU_DISH.DISH_ID = CHEF_DISH.DISH_ID ) GROUP BY CHEF_ID HAVING COUNT(DISH_ID) = ( SELECT COUNT(*) FROM MENU_DISH WHERE MENU_ID = ?)";
+			"SELECT CHEF_ID FROM CHEF_DISH WHERE EXISTS (SELECT 1 FROM MENU_DISH WHERE MENU_ID = ? AND MENU_DISH.DISH_ID = CHEF_DISH.DISH_ID AND CHEF_DISH.CHEF_DISH_STATUS ='d1' ) GROUP BY CHEF_ID HAVING COUNT(DISH_ID) = ( SELECT COUNT(*) FROM MENU_DISH WHERE MENU_ID = ?)";
 	private static final String Get_All_Chef_By_Chef_Area = 
 			"SELECT * FROM CHEF WHERE CHEF_AREA = ?";
 	private static final String Get_All_Chef_From_Emp = 
 			"SELECT * FROM CHEF";
+	private static final String Get_All_Chef_From_Cust = 
+			"SELECT * FROM CHEF WHERE CHEF_STATUS='b1'";
 	
 	@Override
 	public void insert(CustVO custVO, ChefVO chefVO) {
@@ -364,6 +366,56 @@ public class ChefDAO implements ChefDAO_Interface{
 
 	@Override
 	public List<ChefVO> getAll() {
+		List<ChefVO> listAllChef = new ArrayList<ChefVO>();
+		ChefVO chefVO = null;		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Get_All_Chef_From_Cust);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				chefVO = new ChefVO();				
+				chefVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefVO.setChef_status(rs.getString("CHEF_STATUS"));
+				chefVO.setChef_area(rs.getString("CHEF_AREA"));
+				chefVO.setChef_channel(rs.getString("CHEF_CHANNEL"));
+				chefVO.setChef_resume(rs.getString("CHEF_RESUME"));
+				listAllChef.add(chefVO); // Store the row in the list
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("Database Error : "+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return listAllChef;
+	}
+
+	@Override
+	public List<ChefVO> getAllFromEmp() {
 		List<ChefVO> listAllChef = new ArrayList<ChefVO>();
 		ChefVO chefVO = null;		
 		Connection con = null;

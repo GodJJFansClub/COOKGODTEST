@@ -129,13 +129,13 @@ width: 1px;
 									<tr>
 										<td>顧客性別:</td>
 
-										<td><input type="radio" name="cust_sex" size="10"
+										<td>男<input type="radio" name="cust_sex" size="10"
 											value="M"
 											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' }
-											style="width:20px;height:20px"/>男
-											<input type="radio" name="cust_sex" size="10" value="F"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" class="form-control wow fadeInUp" data-wow-delay="100ms"/>
+											女 <input type="radio" name="cust_sex" size="10" value="F"
 											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }
-											style="width:20px;height:20px"/>女 
+											class="form-control wow fadeInUp" data-wow-delay="100ms" class="form-control wow fadeInUp" data-wow-delay="100ms"/>
 										</td>
 									</tr>
 
@@ -362,7 +362,8 @@ width: 1px;
 			$('#answer').text('帳號驗證中');
 			$.ajax({
  			
-				url: '<%=request.getContextPath()%>/cust/cust.do',
+				url: '<%=request.getContextPath()%>
+	/cust/cust.do',
 			type : "POST",
 			data : {
 				action : 'ask',

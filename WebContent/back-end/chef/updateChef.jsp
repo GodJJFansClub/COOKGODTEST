@@ -5,37 +5,38 @@
 
 <html>
 <head>
-<title>updateFavFdSup.jsp</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+
+<title>updateFavFdSup.jsp</title>
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-		data-layout="vertical" data-sidebartype="full"
-		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-		<jsp:include page="/back-end/sideBar/foodSupMana.jsp" flush="true" />
-		<div class="page-wrapper">
-			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
-	<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-
-
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
 			<h5 class="card-title">編輯主廚簡歷</h5>
+			<a
+				href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp"
+				class="btn btn-primary">回上一頁</a>
 		</div>
 	</div>
 
-	
+	<%--Error Message --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red; font-size: 20px;">Error:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 	<div class="container justify-content-center">
 		<div class="row">
 			<div class="col-12">
@@ -75,12 +76,25 @@
 					<input type="hidden" name="action" value="getOneForUpdate"> 
 					<input type="submit" class="btn btn-success btn-lg btn-block" value="修改">
 				</form>
-				</div>
 			</div>
 		</div>
-		</div>
 	</div>
-</div>
-	
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous">
+	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous">
+	</script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous">
+	</script>
 </body>
 </html>

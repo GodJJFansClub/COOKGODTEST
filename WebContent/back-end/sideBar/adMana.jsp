@@ -18,12 +18,6 @@
 								class="mdi mdi-av-timer"></i>
 								<span class="hide-menu">查看所有廣告管理</span>
 						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp" aria-expanded="false"> <i
-								class="mdi mdi-av-timer"></i>
-								<span class="hide-menu">查詢廣告</span>
-						</a></li>
                         
                     </ul>
                 </nav>

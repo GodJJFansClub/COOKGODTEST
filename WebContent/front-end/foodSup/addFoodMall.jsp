@@ -12,144 +12,26 @@
 <head>
 
 <title>新增食材商品</title>
-<style>
-
-/* :: 12.0 Blog Area CSS */
-.breadcrumb-area1 {
-	position: relative;
-	z-index: 1;
-	width: 100%;
-	height: 380px;
-	padding: 0 35px;
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-	.breadcrumb-area1 {
-		height: 300px;
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.breadcrumb-area1 {
-		height: 280px;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.breadcrumb-area1 {
-		height: 250px;
-	}
-}
-
-.breadcrumb-area1::after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	top: 0;
-	left: 0;
-	background-color: rgba(163, 163, 163, 0.3);
-}
-
-.breadcrumb-area1 .breadcrumb-content {
-	text-align: center;
-}
-
-.breadcrumb-area1 .breadcrumb-content h2 {
-	color: #ffffff;
-	font-size: 60px;
-	font-weight: 600;
-	text-transform: capitalize;
-	margin-bottom: 0;
-	display: inline-block;
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 42px;
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 36px;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 24px;
-	}
-}
-</style>
-
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	<!-- ##### Breadcrumb Area Start ##### -->
-	<br>
-	<br>
-	<br>
-	<br>
-	<section class="breadcrumb-area1 bg-img bg-overlay jarallax"
-		style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodSupPic.jpg);">
-		<div class="container-fluid h-100">
-			<div class="row h-100 align-items-center">
-				<div class="col-12">
-					<div class="breadcrumb-content">
-						<h2 style="font-weight: bold">食材供應商專區-新增食材</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- ##### Breadcrumb Area End ##### -->
 
-	<!-- ##### Contact Area Start #####-->
-	<section class="contact-area section-padding-100">
-		<section class="contact-area section-padding-100">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<!-- Section Heading -->
-						<div class="section-heading text-center wow fadeInUp"
-							data-wow-delay="100ms">
-
-							<h2 style="font-weight: bold">新增食材</h2>
-							<img
-								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"
-								alt="">
-
-
-
-							<%-- 錯誤表列 --%>
-							<c:if test="${not empty errorMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
-
-							<div class="row justify-content-center">
-								<div class="col-12 col-lg-8">
-									<!-- Contact Form -->
-									<div class="contact-form-area text-center">
+	 <!-- ##### Contact Area Start #####-->
+    <section class="contact-area section-padding-100">
+    	<h3>食材供應商新增食材</h3>
 		<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do" name="form1" enctype="multipart/form-data">
 			<table>
 			<tr><td>${errorMsgs.excMsgs}</td></tr>
 			<tr>
 				<td>標題:<font color=red><b>*</b></font></td>
 				<td><input type="TEXT" name="food_m_name" size="20" 
-					 value="<%= (foodMallVO==null)? "又大又甜的蘋果" : foodMallVO.getFood_m_name()%>" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+					 value="<%= (foodMallVO==null)? "又大又甜的蘋果" : foodMallVO.getFood_m_name()%>" /></td>
 					 <td><font color=red>${errorMsgs.em_name}</font></td>
 			</tr>
 			<tr>
 				<td>商品價格:<font color=red><b>*</b></font></td>
 				<td><input type="TEXT" name="food_m_price" size="7"
-					 value="<%= (foodMallVO==null)? "10000" : foodMallVO.getFood_m_price()%>" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+					 value="<%= (foodMallVO==null)? "10000" : foodMallVO.getFood_m_price()%>" /></td>
 					 <td><font color=red>${errorMsgs.em_price}</font></td>
 			</tr>
 			<tr>
@@ -157,14 +39,14 @@
 				<td>
 					<c:forEach var="foodUnit" items="${foodUnitMap}">
 						<input type="radio" name="food_m_unit" value="${foodUnit.key}"
-							${(foodUnit.key == foodMallVO.food_m_unit)?'checked':''} style="width:15px;height:15px">${foodUnit.value}
+							${(foodUnit.key == foodMallVO.food_m_unit)?'checked':''}>${foodUnit.value}
 					</c:forEach>
 				</td><td><font color=red>${errorMsgs.em_unit}</font></td>
 			</tr>
 			<tr>
 				<td>產地:<font color=red><b>*</b></font></td>
 				<td><input type="TEXT" name="food_m_place" size="7"
-					 value="<%= (foodMallVO==null)? "台灣" : foodMallVO.getFood_m_place()%>" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+					 value="<%= (foodMallVO==null)? "台灣" : foodMallVO.getFood_m_place()%>" /></td>
 				<td><font color=red>${errorMsgs.em_place}</font></td>
 			</tr>
 			<tr>
@@ -208,15 +90,8 @@
 			</table>
 			<input type="hidden" name="food_sup_ID" value="${foodSupVO.food_sup_ID}">
 			<input type="hidden" name="action" value="insert">
-			<button type="submit" class="btn pixel-btn wow fadeInUp"
-												data-wow-delay="300ms">送出</button>
-										</form>
-								
-		<!-- ##### Contact Area End #####-->
-
-
-
-	
+			<input type="submit" value="送出">
+		</form>
 		<img id="preView">
 		<script>
 			$(document).ready(
@@ -266,13 +141,9 @@
 				$('#foodSelect').append("<option value='-1'>請選擇</option>");
 			}
 		</script>
-			</div>
-								</div>
-							</div>
+	</section>
+    <!-- ##### Contact Area End #####-->
 
-						</div>
-		</section>
-</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

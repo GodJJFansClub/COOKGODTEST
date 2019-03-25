@@ -7,6 +7,9 @@
 <head>
 <!-- Required meta tags -->
 <style>
+body{
+	font-family:Microsoft JhengHei;"
+}
 table#table-1 {
 	background-color: #CCCCFF;
 	border: 2px solid black;
@@ -86,47 +89,25 @@ th, td {
 								<div class="col-12 col-lg-8">
 									<!-- Contact Form -->
 									<div class="contact-form-area text-center">
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/chef/chef.do"
-											name="form1">
-											<table>
-												<tr>
-													<td>主廚編號:</td>
-													<td>${chefVO.chef_ID}</td>
-												</tr>
-												<tr>
-													<td><font color=red><b>*</b></font>主廚名稱:</td>
-													<td>${custVO.cust_name}</td>
-												</tr>
-												<tr>
-													<td>服務地區:</td>
-													<td><input type="radio" name="chef_area" size="10"
-														value="0"
-														${chefVO.chef_area=='0'||chefVO ==null ? 'checked':'' }
-														class="form-control wow fadeInUp" data-wow-delay="100ms" />北<br>
-														<input type="radio" name="chef_area" size="10" value="1"
-														${chefVO.chef_area=='1'? 'checked':'' }
-														class="form-control wow fadeInUp" data-wow-delay="100ms" />中<br>
-														<input type="radio" name="chef_area" size="10" value="2"
-														${chefVO.chef_area=='2'? 'checked':'' }
-														class="form-control wow fadeInUp" data-wow-delay="100ms" />南<br>
-														<input type="radio" name="chef_area" size="10" value="3"
-														${chefVO.chef_area=='3'? 'checked':'' }
-														class="form-control wow fadeInUp" data-wow-delay="100ms" />東<br></td>
-												</tr>
-												<tr>
-													<td>狀態:</td>
-													<td>${chefStatusMap[chefVO.chef_status]}</td>
-												</tr>
-												<tr>
-													<td>介紹:</td>
-													<td><textarea name="chef_resume">${chefVO.chef_resume}</textarea>
-														<script>
-															CKEDITOR.replace('chef_resume');
-														</script></td>
-												</tr>
-											</table>
-											<br> <input type="hidden" name="action" value="update">
+										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/chef/chef.do" name="form1">
+											<div class="form-group">
+											    <label for="chef_area">服務地區</label>
+											    <select class="form-control" name="chef_area" id="chef_area">
+											      <option value="0">北部</option>
+											      <option value="1">中部</option>
+											      <option value="2">南部</option>
+											      <option value="3">東部</option>
+											    </select>
+											</div>
+											
+											<div class="form-group">
+											    <label for="exampleFormControlTextarea1">主廚簡介</label>
+											    <textarea class="form-control" name="chef_resume" id="exampleFormControlTextarea1" rows="3">${chefVO.chef_resume}</textarea>
+												<script>
+														CKEDITOR.replace('chef_resume');
+													</script>
+											</div>
+											<input type="hidden" name="action" value="updateResume">
 											<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}">
 											<input type="hidden" name="chef_status"
 												value="${chefVO.chef_status}">
@@ -136,8 +117,10 @@ th, td {
 									</div>
 								</div>
 							</div>
-
 						</div>
+					</div>				
+				</div>
+			</div>
 		</section>
 		<!-- ##### Contact Area End #####-->
 

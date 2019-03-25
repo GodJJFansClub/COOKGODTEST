@@ -10,18 +10,39 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>廣告資料修改 - update_ad_input.jsp</title>
+<link
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
+	rel="stylesheet">
+
+
 </head>
 <body bgcolor='white'>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<jsp:include page="/back-end/sideBar/adMana.jsp" flush="true" />
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+			<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
+
+		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>
 
-			
+				<table id="table-1">
+					<tr>
+						<td>
+							<h3>廣告資料審核 </h3>
+							<h4>
+								<a
+									href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">回首頁</a>
+							</h4>
+						</td>
+					</tr>
+				</table>
+
+				<h3>資料修改:</h3>
+
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
 					<font style="color: red">請修正以下錯誤:</font>
@@ -47,11 +68,8 @@
 
 						<tr>
 							<td>廣告圖片:</td>
-							<td>
-							
-							<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/images/null2.jpg"  width="300" height="200"/>
-							<br>
-							<input id="progressbarTWInput"  type="file" name="ad_pic" size="45"	id="progressbarTWInput" value="<%=adVO.getAd_pic()%>" /></td>
+							<td><img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"width="300" height="200"></td>
+							<input id="progressbarTWInput"  type="file" name="ad_pic" size="45"	id="progressbarTWInput" value="<%=adVO.getAd_pic()%>" /><br>
 						</tr>
 
 						<tr>

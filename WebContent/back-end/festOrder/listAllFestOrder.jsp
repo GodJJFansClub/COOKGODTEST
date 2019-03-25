@@ -40,6 +40,7 @@
  	
    <div class="container pt-3 pb-3">
    <div class="table-responsive-sm table-middle">
+           <thead class="thead-dark">
 	<table class="table table-hover">
 	   <thead class="thead-dark">
 		<tr>

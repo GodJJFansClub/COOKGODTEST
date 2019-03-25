@@ -17,8 +17,43 @@
 <html>
 <head>
 <title>所有菜色資料 - listAllDish.jsp</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
 
+<%--<style>
+table#table-1 {
+	background-color: #CCCCFF;
+	border: 2px solid black;
+	text-align: center;
+}
+
+table#table-1 h4 {
+	color: red;
+	display: block;
+	margin-bottom: 1px;
+}
+
+h4 {
+	color: blue;
+	display: inline;
+}
+</style>
+
+<style>
+table {
+	width: 1000px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+table, th, td {
+	border: 1px solid #CCCCFF;
+}
+
+th, td {
+	padding: 5px;
+	text-align: center;
+}
+</style> --%>
 
 </head>
 <body>
@@ -42,68 +77,99 @@
 				</c:if>
 
 
-				<div class="col">
-                        <div class="card">
-                            
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">菜色名稱:</th>
-											<th scope="col">菜色照片:</th>
-											<th scope="col">菜色介紹:</th>
-											<th scope="col">菜色價格:</th>
-											<th scope="col">審核:</th>
-                                        </tr>
-                                    </thead>
-                                     <c:forEach var="dishVO" items="${list}">
-											<c:if test="${dishVO.dish_status eq 'D1'}">
-                                    <tr>
-                                   
-                                        
-                                            <th scope="row">${dishVO.dish_name}</th>
-                                            
-                                        	
-                                            <th scope="row"><c:if test="${not empty dishVO.dish_pic}">
-														<img
-															src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}"
-															width="300" height="200">
-													</c:if> <c:if test="${empty dishVO.dish_pic}">
-														<img src="<%=request.getContextPath()%>/images/null2.jpg"
-															width="300" height="200">
-													</c:if></th>
-                                           
-                                        
-                                            <th scope="row" width="30%">${dishVO.dish_resume}</th>
-                                           
-                                        
-                                            <th scope="row">${dishVO.dish_price}</th>
-                                           
-                                       
-                                            <th scope="row"><FORM METHOD="post" ACTION="<%=request.getContextPath() %>/dish/dish.do">
-													<input type="submit" value="審核"> <input
-														type="hidden" name="dish_ID" value="${dishVO.dish_ID}">
-													<input type="hidden" name="action"
-														value="getOne_For_Update">
-												</FORM>
-												</th>
-                          			      </tr>
-                                           </c:if>
-									</c:forEach>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<caption>List of users</caption>
+									<thead>
+										<tr>
+											<th>菜色編號:</th>
+											<th>菜色名稱:</th>
+											<th>菜色照片:</th>
+											<th>菜色介紹:</th>
+											<th>菜色價格</th>
+											<th>審核</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="dishVO" items="${list}">
 
+											<tr>
+												<c:if test="${dishVO.dish_status eq 'D0'}">
+													<td>${dishVO.dish_ID}</td>
+													<td>${dishVO.dish_name}</td>
+													<td><img
+														src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}"
+														width="300" height="200"></td>
+													<td width="30%">${dishVO.dish_resume}</td>
+													<td>${dishVO.dish_price}</td>
 
-		
-<%--=================================工作區================================================--%>            
-                <jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+													<td>
+														<FORM METHOD="post"
+															ACTION="<%=request.getContextPath()%>/dish/dish.do"
+															style="margin-bottom: 0px;">
+															<input type="submit" value="審核"> <input
+																type="hidden" name="dish_ID" value="${dishVO.dish_ID}">
+
+															<input type="hidden" name="action"
+																value="getOne_For_Update">
+														</FORM>
+													</td>
+
+												</c:if>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+<%--=================================工作區================================================--%>			
+				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
+
+
+<%--<table>
+	<tr>
+		<th>菜色編號:</th>
+		<th>菜色名稱:</th>
+		<th>菜色照片:</th>
+		<th>菜色介紹:</th>
+		<th>菜色狀態</th>
+		<th>菜色價格</th>
+		<th>修改</th>
+	</tr>
+	
+	<c:forEach var="dishVO" items="${list}">
+		
+		<tr>
+		<c:if test="${dishVO.dish_status eq 'D0'}">
+			<td>${dishVO.dish_ID}</td>
+			<td>${dishVO.dish_name}</td>
+			<td><img src ="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"></td>
+			<td>${dishVO.dish_resume}</td>
+			<td>${dishStatusMap[dishVO.dish_status]}</td>
+			<td>${dishVO.dish_price}</td>
+			
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dish/dish.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="審核">
+			     <input type="hidden" name="dish_ID"  value="${dishVO.dish_ID}"> 
+			 
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
+			
+		</c:if>
+		</tr>
+	</c:forEach>
+</table>
+
 
 </body>
-</html>
+</html> --%>

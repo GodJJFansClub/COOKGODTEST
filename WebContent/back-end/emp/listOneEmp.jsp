@@ -10,84 +10,86 @@
 <html>
 <head>
 <title>員工資料 - listOneEmp.jsp</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
+
+<style>
+table {
+	width: 600px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+table, th, td {
+	border: 1px solid #CCCCFF;
+}
+
+th, td {
+	padding: 5px;
+	text-align: center;
+}
+</style>
 
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<aside class="left-sidebar" data-sidebarbg="skin5">
+<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
 		<jsp:include page="/back-end/sideBar/empMana.jsp" flush="true" />
+		</aside>
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
-				<%--=================================工作區================================================--%>
+<%--=================================工作區================================================--%>
 
-
-				<%-- 錯誤表列 --%>
-				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-				<%
+	<%
 		if (empVO != null) {
 	%>
 
-
+	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>員工資料 - ListOneEmp.jsp</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">回首頁</a>
 				</h4>
+			</td>
+		</tr>
+	</table>
 
-				<div class="col">
-					<div class="card">
+	<table>
+		<tr>
+			<th>員工編號</th>
+			<th>員工帳號</th>
+			<th>員工密碼</th>
+			<th>員工姓名</th>
+			<th>大頭照</th>
+			
+		</tr>
+		<tr>
+			<td><%=empVO.getEmp_ID()%></td>
+			<td><%=empVO.getEmp_acc()%></td>
+			<td><%=empVO.getEmp_pwd()%></td>
+			<td><%=empVO.getEmp_name()%></td>
+			<td><c:if test="${not empty empVO.emp_pic}"><img src="<%=request.getContextPath()%>/emp/emp.do?emp_ID=${empVO.emp_ID}"></c:if>
+				    <c:if test="${empty empVO.emp_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></td>
 
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">員工編號:</th>
-										<th scope="col">員工帳號:</th>
-										<th scope="col">員工帳號:</th>
-										<th scope="col">員工姓名:</th>
-										<th scope="col">大頭照:</th>
-									</tr>
-								</thead>
+			
 
-
-								<tr>
-									<th scope="row"><%=empVO.getEmp_ID()%></th>
-									<th scope="row"><%=empVO.getEmp_acc()%></th>
-									<th scope="row"><%=empVO.getEmp_pwd()%></th>
-									<th scope="row"><%=empVO.getEmp_name()%></th>
-									<th scope="row"><img src="<%=request.getContextPath()%>/emp/emp.do?emp_ID=${empVO.emp_ID}" width="300" height="200"></th>	
-								</tr>
-								<tr>
-									<td>
-										<h4>
-											<a
-												href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">回首頁</a>
-										</h4>
-									</td>
-								</tr>
-							</table>
-
-						</div>
-					</div>
-				</div>
-				<%
+		</tr>
+	</table>
+	<%
 		}
 	%>
 
-				<%--=================================工作區================================================--%>
+		<%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-				<%--=================================jQuery===============================================--%>
+<%--=================================jQuery===============================================--%>
 			</div>
 		</div>
 	</div>

@@ -438,7 +438,7 @@ public class DishDAO implements DishDAO_interface{
 				fdsViewVO = new FdsViewVO();
 				fdsViewVO.setFood_ID(rs.getString(1));
 				fdsViewVO.setFood_name(rs.getString(2));
-				//fdsViewVO.setFood_type_ID(rs.getString(3));
+				fdsViewVO.setFood_type_ID(rs.getString(3));
 				fdsViewVO.setDish_ID(rs.getString(4));
 				fdsViewVO.setDish_f_qty(rs.getInt(5));
 				fdsViewVO.setDish_f_unit(rs.getString(6));

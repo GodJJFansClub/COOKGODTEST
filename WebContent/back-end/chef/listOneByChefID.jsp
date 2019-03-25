@@ -19,6 +19,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
+<title>List_All_By_Chef_ID.jsp</title>
 </head>
 <body>
 		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -37,46 +38,44 @@
 		<li style="color: red;">查無資料</li>
 	</ul>
 	<% } %>
+	<div class="container justify-content-center">
+		<div class="row">
+			<div class="col-12">
+				<table>
+					<tr>
+						<th>主廚編號</th>
+						<th>主廚狀態</th>
+						<th>主廚服務地區</th>
+						<th>主廚頻道</th>
+						<th style="width:400px;">主廚簡介</th>
+						<th>審核主廚</th>
+					</tr>
+					<tr>
+						<td>${chefVO.chef_ID}</td>
+						<td>
+							<c:if test="${chefVO.chef_status=='b0'}">未審核</c:if>
+							<c:if test="${chefVO.chef_status=='b1'}">審核通過</c:if>
+							<c:if test="${chefVO.chef_status=='b2'}">審核不過</c:if>
+							<c:if test="${chefVO.chef_status=='b3'}">停權</c:if>
+						</td>
+						<td>${chefVO.chef_area}</td>
+						<td>${chefVO.chef_channel}</td>
+						<td>${chefVO.chef_resume}</td>
+						<td>
+							<form method="post"
+								action="<%=request.getContextPath()%>/chef/chef.do">
+								<input type="submit" value="編輯"> <input type="hidden"
+									name="chef_ID" value="${chefVO.chef_ID}"> <input
+									type="hidden" name="action" value="getOneForDisplay">
+							</form>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 
-				<div class="col">
-					<div class="card">
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">主廚編號</th>
-										<th scope="col">主廚狀態</th>
-										<th scope="col">主廚服務地區</th>
-										<th scope="col">主廚頻道</th>
-										<th scope="col">主廚簡介</th>
-										<th scope="col">審核主廚</th>
-									</tr>
-								</thead>
-								
-								<tr>
-									<th scope="row">${chefVO.chef_ID}</th>
-									<th scope="row"><c:if test="${chefVO.chef_status=='b0'}">未審核</c:if> <c:if
-											test="${chefVO.chef_status=='b1'}">審核通過</c:if> <c:if
-											test="${chefVO.chef_status=='b2'}">審核不過</c:if> <c:if
-											test="${chefVO.chef_status=='b3'}">停權</c:if></th>
-									<th scope="row">${chefVO.chef_area}</th>
-									<th scope="row">${chefVO.chef_channel}</th>
-									<th scope="row"  width="40%">${chefVO.chef_resume}</th>
-									<th scope="row">
-										<form method="post"
-											action="<%=request.getContextPath()%>/chef/chef.do">
-											<input type="submit" value="編輯"> <input type="hidden"
-												name="chef_ID" value="${chefVO.chef_ID}"> <input
-												type="hidden" name="action" value="getOneForDisplay">
-										</form>
-									</th>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-
-				<%--=================================工作區================================================--%>			
+<%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
 			</div>

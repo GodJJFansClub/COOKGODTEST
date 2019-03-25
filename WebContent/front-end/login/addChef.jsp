@@ -12,7 +12,7 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>主廚資料新增</title>
+<title>主廚資料新增 - addCust.jsp</title>
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
@@ -131,15 +131,16 @@ th, td {
 									</tr>
 
 									<tr>
-										<td>顧客性別:</td>
-
-										<td><input type="radio" name="cust_sex" size="10"
-											value="M"
-											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' }
-											style="width:20px;height:20px" />男
-											<input type="radio" name="cust_sex" size="10" value="F"
-											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }
-											style="width:20px;height:20px"/>女
+										<td>主廚性別:</td>
+										<td>
+											<div class="form-check form-check-inline">
+											  <input class="form-check-input" type="radio" name="cust_sex" id="inlineRadio1" value="M" ${custVO.cust_sex=='M'||custVO ==null ? 'checked':''} style="width:15px;height:15px;">
+											  <label class="form-check-label" for="inlineRadio1">男</label>
+											</div>
+											<div class="form-check form-check-inline">
+											  <input class="form-check-input" type="radio" name="cust_sex" id="inlineRadio2" value="F" ${custVO.cust_sex=='F'? 'checked':''  } style="width:15px;height:15px;">
+											  <label class="form-check-label" for="inlineRadio2">女</label>
+											</div>
 										</td>
 									</tr>
 
@@ -186,34 +187,40 @@ th, td {
 										<td>主廚大頭照:</td>
 										<td><input type="file" name="cust_pic" size="45" id="doc"
 											onchange="javascript:setImagePreview();"
-											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
+											class="form-control wow fadeInUp" data-wow-delay="100ms" />
+											<div id="localImag">
+												<img id="preview" width=-1 height=-1 style="display: none" />
+											</div>
+										</td>
 									</tr>
 									<tr>
 										<td>服務地區:</td>
-										<td><input type="radio" name="chef_area" size="10"
-											value="0"
-											${chefVO.chef_area=='0'||chefVO ==null ? 'checked':'' }
-											 data-wow-delay="100ms" style="width:20px;height:20px"/>北<br>
-											<input type="radio" name="chef_area" size="10" value="1"
-											${chefVO.chef_area=='1'? 'checked':'' }
-											data-wow-delay="100ms" style="width:20px;height:20px"/>中<br>
-											<input type="radio" name="chef_area" size="10" value="2"
-											${chefVO.chef_area=='2'? 'checked':'' }
-											 data-wow-delay="100ms" style="width:20px;height:20px"/>南<br>
-											<input type="radio" name="chef_area" size="10" value="3"
-											${chefVO.chef_area=='3'? 'checked':'' }
-											data-wow-delay="100ms" style="width:20px;height:20px"/>東<br></td>
+										<td>
+											<div class="form-check form-check-inline">
+											  <input class="form-check-input" type="radio" name="chef_area" id="inlineRadio3" value="0" ${chefVO.chef_area=='0'||chefVO ==null ? 'checked':''} style="width:15px;height:15px;">
+											  <label class="form-check-label" for="inlineRadio3">北</label>
+											</div>
+											<div class="form-check form-check-inline">
+											  <input class="form-check-input" type="radio" name="chef_area" id="inlineRadio4" value="1" ${chefVO.chef_area=='1'? 'checked':''  } style="width:15px;height:15px;">
+											  <label class="form-check-label" for="inlineRadio4">中</label>
+											</div>
+											<div class="form-check form-check-inline">
+											  <input class="form-check-input" type="radio" name="chef_area" id="inlineRadio5" value="2" ${chefVO.chef_area=='2'? 'checked':''} style="width:15px;height:15px;">
+											  <label class="form-check-label" for="inlineRadio5">南</label>
+											</div>
+											<div class="form-check form-check-inline">
+											  <input class="form-check-input" type="radio" name="chef_area" id="inlineRadio6" value="3" ${chefVO.chef_area=='3'? 'checked':''  } style="width:15px;height:15px;">
+											  <label class="form-check-label" for="inlineRadio6">東</label>
+											</div>
+										</td>
 									</tr>
 									<tr>
 										<td>主廚簡介:</td>
-										<td><textarea name="chef_resume">${chefVO==null? '請輸入簡介...':chefVO.chef_resume}</textarea>
+										<td><textarea name="chef_resume" placeholder="請輸入簡介...">${chefVO==null? chefVO.chef_resume:''}</textarea>
 
 											<script>CKEDITOR.replace('chef_resume');</script></td>
 									</tr>
 								</table>
-								<div id="localImag">
-									<img id="preview" width=-1 height=-1 style="display: none" />
-								</div>
 								<br> <img src="<%=request.getContextPath()%>/images/x.png"
 									height="20" width="20" onClick="idwrite(this)"> <input
 									type="hidden" name="action" value="insert">

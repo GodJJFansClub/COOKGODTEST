@@ -134,9 +134,9 @@ img {
 									<td>${festMenuVO.fest_m_end}</td>
 									<td><c:if test="${not empty festMenuVO.fest_m_pic}">
 											<img
-												src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" height=" 200px" width=" 100px">
+												src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}">
 										</c:if> <c:if test="${empty festMenuVO.fest_m_pic}">
-											<img src="<%=request.getContextPath()%>/images/null2.jpg" height=" 200px" width=" 100px">
+											<img src="<%=request.getContextPath()%>/images/null2.jpg">
 										</c:if></td>
 									<td>${festMenuVO.fest_m_resume}</td>
 									<td>${festMenuVO.fest_m_send}</td>

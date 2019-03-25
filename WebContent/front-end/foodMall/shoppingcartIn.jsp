@@ -121,8 +121,29 @@
 					</tr>
 				</tbody>
 			</table>
+			<%--<c:forEach var="dish" items="${shoppingCart}"> --%>
+				<p>
+					<button  class="btn btn-primary" type="button" data-toggle="collapse"
+						data-target="#claDFsCart" aria-expanded="false"
+						aria-controls="claDFsCart">XXXname</button>
+				</p>
+				<div class="collapse" id="claDFsCart">
+					<div class="card card-body">
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">食材</th>
+									<th scope="col">尚需數量</th>
+								</tr>
+							</thead>
+							<!--foreach...-->
+						</table>
+					</div>
+				</div>
+			<%--</c:forEach> --%>		
 		</div>
 	</div>
+	
 	<script>
 		$(document).ready(function(){
 				$(".shoppingCartItemDel").click(delShoppingCartItem);
@@ -137,6 +158,7 @@
 				data: waitDelItem.parent("form").serialize(),
 				dataType:"json",
 				success: function(data){
+					console.log(data);
 					actDelSCartItem(data);
 				},
 				error: function(errdata){

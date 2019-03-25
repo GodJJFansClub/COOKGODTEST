@@ -11,6 +11,7 @@ public interface MenuOrderDAO_Interface {
     public MenuOrderVO findByPrimaryKey(String menu_od_ID);
     public List<MenuOrderVO> getAll();
     public List<MenuOrderVO> getAllByCustID(String cust_ID);
+    public List<MenuOrderVO> getFinished(String chef_ID);
     public List<MenuOrderVO> getUnCheck(String chef_ID);
     public List<MenuOrderVO> getUnFinished(String chef_ID);
 //  萬用複合查詢(傳入參數型態Map)(回傳 List)

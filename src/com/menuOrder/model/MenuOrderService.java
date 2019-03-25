@@ -60,4 +60,7 @@ public class MenuOrderService {
 	public List<MenuOrderVO> getUnFinished(String chef_ID){
 		return dao.getUnFinished(chef_ID);
 	}
+	public List<MenuOrderVO> getAllFinished(String chef_ID){
+		return dao.getFinished(chef_ID);
+	}
 }

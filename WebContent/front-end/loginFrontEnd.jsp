@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=Big5">
-<title>登入</title>
+<title>前台login</title>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
@@ -23,10 +23,8 @@
                 <div class="col-12">
                     <!-- Section Heading -->
                     <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        
-                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo_cut.gif" width="200px"
-                         height="500px"alt="">
                         <h2>登入</h2>
+                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png" alt="">
                     </div>
                 </div>
             </div>
@@ -39,9 +37,9 @@
                         <form action="<%=request.getContextPath()%>/front-end/login.do" method="post">
                            
                            <b>account:</b>
-                            <input type=text name="account"  class="form-control wow fadeInUp" data-wow-delay="300ms" placeholder="請輸入帳號">
+                            <input type=text name="account"  class="form-control wow fadeInUp" data-wow-delay="300ms" placeholder="請輸入帳號" autocomplete="off">
                             <b>password:</b>
-                            <input  type=password name="password" class="form-control wow fadeInUp" data-wow-delay="500ms" placeholder="請輸入密碼">
+                            <input  type=password name="password" class="form-control wow fadeInUp" data-wow-delay="500ms" placeholder="請輸入密碼" autocomplete="off">
                            
                           
                            <input type="hidden" name="action" value="cust">

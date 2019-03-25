@@ -119,7 +119,7 @@
 					</a></li>
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/ad/listAllAd.jsp">
+						href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">

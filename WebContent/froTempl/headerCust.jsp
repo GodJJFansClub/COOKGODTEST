@@ -87,7 +87,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold">顧客專區</h2>
+                        <h2 style="font-weight:bold">會員專區</h2>
                     </div>
                 </div>
             </div>

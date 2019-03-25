@@ -7,13 +7,7 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	<!-- ##### Breadcrumb Area Start ##### -->
-	<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
-	<!-- ##### Breadcrumb Area End ##### -->
-
-	<!-- ##### Contact Area Start #####-->
-	<section>
-	<div>
+	<section class="contact-area section-padding-100">
 		<table class="table table-striped">
 		  <thead>
 		    <tr>
@@ -69,14 +63,16 @@
 		    </tr>
 		    </c:forEach>
 		</table>
-	</div>
 	</section>
+<<<<<<< HEAD
 	<!-- ##### Feature Area End ##### -->
 	
 	
 
 	<!-- ##### Contact Area End #####-->
 
+=======
+>>>>>>> branch 'master' of https://github.com/GodJJFansClub/COOKGODTEST.git
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>
