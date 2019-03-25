@@ -19,7 +19,7 @@
 <html>
 <head>
 <title>所有套餐菜色</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
+
 
 </head>
 <body>

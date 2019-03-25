@@ -57,21 +57,19 @@
                                         </tr>
                                     </thead>
                                      <c:forEach var="dishVO" items="${list}">
-											<c:if test="${dishVO.dish_status eq 'D1'}">
+											<c:if test="${dishVO.dish_status eq 'D0'}">
                                     <tr>
                                    
                                         
                                             <th scope="row">${dishVO.dish_name}</th>
                                             
                                         	
-                                            <th scope="row"><c:if test="${not empty dishVO.dish_pic}">
-														<img
-															src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}"
-															width="300" height="200">
-													</c:if> <c:if test="${empty dishVO.dish_pic}">
-														<img src="<%=request.getContextPath()%>/images/null2.jpg"
-															width="300" height="200">
-													</c:if></th>
+                                            <th scope="row">
+                                            <c:if test="${not empty dishVO.dish_pic}">
+											<img src="<%=request.getContextPath()%>/dish/dish.do?dish_ID=${dishVO.dish_ID}" width="300" height="200"></c:if> 
+											<c:if test="${empty dishVO.dish_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200"></c:if>
+													
+											</th>
                                            
                                         
                                             <th scope="row" width="30%">${dishVO.dish_resume}</th>

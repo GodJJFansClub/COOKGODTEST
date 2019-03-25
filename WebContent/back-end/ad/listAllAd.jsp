@@ -63,8 +63,8 @@
 			<tr>
 				<th scope="row">${adVO.ad_ID}</th>
 				<th scope="row">${adVO.ad_title}</th>
-				<th scope="row"><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"></c:if>
-				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg"></c:if></th>
+				<th scope="row"><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}" width="300" height="200"></c:if>
+				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200"></c:if></th>
 				<th scope="row">${adVO.ad_con}</th>
 				<th scope="row">${adVO.ad_start}</th>
 				<th scope="row">${adVO.ad_end}</th>

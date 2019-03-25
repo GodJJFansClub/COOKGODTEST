@@ -19,7 +19,7 @@
 <html>
 <head>
 <title>菜色食材資料</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -44,31 +44,32 @@
 				</c:if>
 
 
-				<tr>
-					<td colspan="4">菜色名稱:<font color="red" size="5">${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</font></td>
-				</tr>
-
+				
+				
 				<div class="col">
 					<div class="card">
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<thead>
+								<tr align='center'>
+								<td colspan="4">菜色名稱:<font color="red" size="5">${dishSvc.getOneDish(dishVO.dish_ID).dish_name}</font></td>
+								</tr>
 									<tr align='center'>
-
-										<th>食材名稱</th>
-										<th>食材數量</th>
-										<th>食材單位</th>
+										
+										<th scope="col">食材名稱</th>
+										<th scope="col">食材數量</th>
+										<th scope="col">食材單位</th>
 
 									</tr>
 								</thead>
 								<c:forEach var="dishFoodVO" items="${listFoods_ByDish}">
-									<tbody align='center'>
+									<tr align='center'>
 
 
-										<th scope="row-4">${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</th>
-										<th scope="row-4">${dishFoodVO.dish_f_qty}</th>
-										<th scope="row-4">${foodUnitMap[dishFoodVO.dish_f_unit]}</th>
-									</tbody>
+										<th scope="row">${foodSvc.getOneFood(dishFoodVO.food_ID).food_name}</th>
+										<th scope="row">${dishFoodVO.dish_f_qty}</th>
+										<th scope="row">${foodUnitMap[dishFoodVO.dish_f_unit]}</th>
+									</tr>
 
 								</c:forEach>
 								<tr>

@@ -104,8 +104,8 @@ function readURL(input){
 
 <script>
       function idwrite(name){
-    	  form1.dish_name.value="麒麟深海石斑"
-    	  form1.dish_price.value="1580"     	 
+    	  form1.dish_name.value="黑椒羊小排"
+    	  form1.dish_price.value="1440"     	 
       }
 </script>
 
