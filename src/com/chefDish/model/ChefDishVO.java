@@ -1,6 +1,12 @@
 package com.chefDish.model;
 
-public class ChefDishVO {
+import java.io.Serializable;
+
+public class ChefDishVO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String chef_ID;
 	private String dish_ID;
 	private String chef_dish_status;

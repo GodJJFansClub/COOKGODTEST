@@ -9,6 +9,9 @@
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <jsp:useBean id="menuSvc" class="com.menu.model.MenuService"/>
 <jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
+<%
+	HttpSession sessiond = request.getSession();
+%>
 
 <!DOCTYPE html>
 <html>
@@ -121,7 +124,7 @@
         </div>
         <!-- Single Catagory -->
         <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/4.jpg);">
-            <a href="<%=request.getContextPath()%>/front-end/chef/menu/menu.jsp" style="font-weight:bold;"><font color='#000000' onmouseout="this.style.color ='#000000';" onmouseover="this.style.color ='#FF7B0F';" style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">嚴選套餐</font></a>
+            <a href="<%=request.getContextPath()%>/front-end/menu/menu.jsp" style="font-weight:bold;"><font color='#000000' onmouseout="this.style.color ='#000000';" onmouseover="this.style.color ='#FF7B0F';" style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">嚴選套餐</font></a>
         </div>
     </div>
     <!-- ##### Top Catagory Area End ##### -->
@@ -211,7 +214,7 @@
                 <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                       <%-- <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>--%>
                         <h4>不幸的雞</h4>
                     </div>
                 </div>
@@ -222,7 +225,7 @@
                 <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                       <%-- <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a> --%>
                         <h4>威靈頓牛</h4>
                     </div>
                 </div>
@@ -233,7 +236,7 @@
                 <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <%--<a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>--%>
                         <h4>嗆辣紅椒</h4>
                     </div>
                 </div>
@@ -241,8 +244,8 @@
 
         </div>
     </div>
-    <!-- ##### Portfolio Area End ###### -->
-	
+    <!-- ##### Port<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>folio Area End ###### -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
 	    var MyPoint = "/WebSocketForServlet";
@@ -269,6 +272,22 @@
 		// 觸發connect()時註冊方法, 並建立WebSocket物件
 
 		
+		window.onload= function(){
+			<% 	CustVO custVO = (CustVO)sessiond.getAttribute("custVO");
+				if (custVO!=null){
+			%>
+				var user = ''+'<%=custVO.getCust_name()%>';
+			<%}else{%>
+				var user =null;
+			<%}%>
+			
+				if(user != null){
+					
+				}else{
+					swal("Good job!","You clicked the button!","success")
+					
+				}
+			}
 	</script>
 </body>
 </html>

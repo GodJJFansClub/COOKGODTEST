@@ -6,8 +6,8 @@
 <%	
 	ChefDishService chefDishSvc = new ChefDishService();
 	String dish_ID = request.getParameter("dish_ID");
-	List<ChefDishVO> listAll = chefDishSvc.getAllByDishID(dish_ID);
-	pageContext.setAttribute("listAll", listAll);
+	List<ChefDishVO> list = chefDishSvc.getAllByDishID(dish_ID);
+	pageContext.setAttribute("list", list);
 %>
 
 <html>
@@ -67,7 +67,7 @@
 						<th>§R°£µæ¦â</th>
 					</tr>
 					<%@ include file="page1.file" %>
-					<c:forEach var="chefDishVO" items="${listAll}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+					<c:forEach var="chefDishVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
 						<tr>
 							<td>${chefDishVO.chef_ID}</td>
 							<td>${chefDishVO.chef_name}</td>

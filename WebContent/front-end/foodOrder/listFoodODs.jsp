@@ -71,8 +71,8 @@
 			<th></th>
 		</tr>
 		
-		<c:forEach var="foodOrDetailVO" items="${foodODVOset}">
-			<form method="<%=request.getContextPath()%>/foodOrDetail/foodOrDetail.do" method="post">
+		<c:forEach var="foodOrDetailVO" items="${foodODVOset}" varStatus="x">
+			
 				<tr>
 					<td>${foodMallSvc.getOneFoodMall(foodOrDetailVO.food_sup_ID, foodOrDetailVO.food_ID).food_m_name}</td>
 					<td>${foodSupSvc.getOneFoodSup(foodOrDetailVO.food_sup_ID).food_sup_name}</td>
@@ -82,22 +82,25 @@
 					<td>
 						<div class="rate">
 						<% for(int i = 1; i <= 5; i++){ %>
-							<input type="radio" id="star${i}" name="rate" value="${i}"
+							<input type="radio" id="star${i}" name="food_od_rate" value="${i}"
 								${(foodOrDetailVO.food_od_rate == i)?'checked':''}/>
 							<label for="star${i}" title="text">${i} stars</label>				
 						<% } %>
 						</div>
 					</td>
-					<td>${foodOrDetailVO.food_od_msg}
+					<td>
+						<textarea id="odMessage${x.index}" name="food_od_msgs" rows="4" cols="50">${foodOrDetailVO.food_od_msg}</textarea>
 					</td>
 					<td>
 						<c:choose>
 							<c:when test="${foodOrderVO.food_or_status == 'o4'}">
-								<button type="submit">送出評價及留言</button>
+							<form method="<%=request.getContextPath()%>/foodOrDetail/foodOrDetail.do" method="POST">
+								<button class="btnUpStaClass" id="btnUpSta${x.index}" type="button">送出評價及留言</button>
 								<input type="hidden" name="food_or_ID" value="${foodOrDetailVO.food_or_ID}">
 								<input type="hidden" name="food_ID" value="${foodOrDetailVO.food_ID}">
 								<input type="hidden" name="food_sup_ID" value="${foodOrDetailVO.food_sup_ID}">
 								<input type="hidden" name="action" value="custUpODRateS">
+							</form>
 							</c:when>
 							<c:otherwise>
 								訂單尚未完成無法評價及留言
@@ -105,9 +108,18 @@
 						</c:choose>	
 					</td>
 				</tr>
-			</form>
+			
 		</c:forEach>
 		
 	</table>
+	<script >
+		$(document).ready(function(){
+			
+			$(".btnUpStaClass").click(function(){
+				
+			});
+			
+		});
+	</script>
 </body>
 </html>

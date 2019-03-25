@@ -3,6 +3,8 @@
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <jsp:useBean id="foodOrderSvc" class="com.foodOrder.model.FoodOrderService"/>
 <jsp:useBean id="festOrderSvc" class="com.festOrder.model.FestOrderService"/>
+<jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
+<jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService"/>
 <html>
 <head>
 <title>付款成功</title>
@@ -49,6 +51,15 @@
 				  	  <td scope="col">${custSvc.getOneCust(foodOrderVO.cust_ID).cust_name}</td>
 				  	</tr>
 				  </tbody>
+				 </table>
+				 <table class="table">
+				 	<tr>
+				 		<th scope="col">食材供應商</th> <th scope="col">食材</th> <th scope="col">數量</th> <th scope="col">小計</th>
+				 	</tr>
+				 	<c:forEach var="foodOrODVO" items="${foodOrODs}">
+				 		<tr><td scope="col">${foodSupSvc.getOneFoodSup(foodOrODVO.food_sup_ID).food_sup_name}</td>
+				 			<td scope="col">${foodSvc.getOneFood(foodOrODVO.food_ID).food_name}</td><td scope="col">${foodOrODVO.food_od_qty}</td><td scope="col">${foodOrODVO.food_od_stotal}</td></tr>
+				 	</c:forEach>
 				 </table>
 			 </c:if>
 			 <c:if test="${not empty festOrderList}">

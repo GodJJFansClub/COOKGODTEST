@@ -25,7 +25,7 @@
                 <div class="col-12">
                     <!-- Section Heading -->
                     <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h2>此帳號尚未啟用</h2>
+                        <h2>帳號密碼錯誤</h2>
                         <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo_cut.gif"  width="200px"
                          height="500px"alt="">
                         

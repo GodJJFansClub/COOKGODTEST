@@ -175,7 +175,7 @@ public class FoodOrDetailServlet extends HttpServlet {
 		out.flush();
 		out.close();
 	}
-	private void custUpODRateS(HttpServletRequest req, HttpServletResponse res) {
+	private void custUpODRateS(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		List<String> errorMsgs = new LinkedList<>();
 		
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -184,10 +184,40 @@ public class FoodOrDetailServlet extends HttpServlet {
 			String food_or_ID = req.getParameter("food_or_ID");
 			String food_ID = req.getParameter("food_ID");
 			String food_sup_ID = req.getParameter("food_sup_ID");
+			String food_od_msg = req.getParameter("food_od_msg");
+			String rate = req.getParameter("food_od_rate");
+			Integer food_od_rate = 0;
+			if(null != rate) {
+				try {
+					food_od_rate = Integer.valueOf(rate);
+				}catch (Exception e) {
+					errorMsgs.add("請輸入數字" + e.getMessage());
+				}
+			}
 			
+			if(errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
+				failureView.forward(req, res);
+			}
 			
+			FoodOrderService foodOrSvc = new FoodOrderService();
+			FoodOrderVO foodOrderVO = foodOrSvc.getOneFoodOrder(food_or_ID);
+			FoodOrDetailService foodOrDetailService = new FoodOrDetailService();
+			FoodOrDetailVO foodODVO = foodOrDetailService.getOneFoodOrDetail(food_or_ID, food_sup_ID, food_ID);
+			
+			FoodOrDetailVO foodOrDVO = foodOrDetailService.updateFoodOrDetail(food_or_ID, food_sup_ID, food_ID, 
+					foodODVO.getFood_od_qty(), foodODVO.getFood_od_stotal(), food_od_rate, food_od_msg, foodODVO.getFood_od_status());
+			Set<FoodOrDetailVO> foodOrDetailVOs = foodOrSvc.getFoodOrDetailsByFood_or_ID(food_or_ID);
+			req.setAttribute("foodOrderVO", foodOrderVO);
+			req.setAttribute("foodOrODs", foodOrDetailVOs);
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
 		} catch(Exception e) {
-			
+			errorMsgs.add("無法取得資料" + e.getMessage());
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
+			failureView.forward(req, res);
 		}
 	}
 }

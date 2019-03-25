@@ -132,7 +132,7 @@ h2 {
 						</div>
 					</div>
 					<div class="chef_sch_date">
-						<jsp:include page="/back-end/chefSch/listChefSchDateByID.jsp" flush="true"/>
+						<jsp:include page="<%=request.getContextPath() %>/back-end/chefSch/listChefSchDateByID.jsp" flush="true"/>
 					</div>
 					<c:if test="${order_chef_sch_date!=null}">
 						<div class="chef_sch_time">

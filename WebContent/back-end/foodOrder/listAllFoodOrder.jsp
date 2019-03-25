@@ -137,6 +137,8 @@
 							</div>
 
 							<script>
+							
+							
 			    		$("#basicModal").modal({show: true});
 			    		$(document).ready(function(){
 				    		$(".checkToSend").click(function(event){

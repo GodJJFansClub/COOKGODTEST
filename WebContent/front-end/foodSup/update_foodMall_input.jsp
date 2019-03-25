@@ -11,8 +11,24 @@
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
-	 <!-- ##### Contact Area Start #####-->
-    <section class="contact-area section-padding-100">
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<jsp:include page="/froTempl/headerFoodSup.jsp" flush="true" />
+	<!-- ##### Breadcrumb Area End ##### -->
+
+	<!-- ##### Contact Area Start #####-->
+	<section class="contact-area section-padding-100">
+		<section class="contact-area section-padding-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- Section Heading -->
+						<div class="section-heading text-center wow fadeInUp"
+							data-wow-delay="100ms">
+
+							<h2 style="font-weight:bold">食材商品修改</h2>
+							<img
+								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"alt="">
+
             <%-- 錯誤列表 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color: red">請修正以下錯誤:</font>
@@ -23,6 +39,11 @@
 				</ul>
 			</c:if>
 				<br>
+				
+				<div class="row justify-content-center">
+								<div class="col-12 col-lg-8">
+									<!-- Contact Form -->
+									<div class="contact-form-area text-center">
 				<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do" name="form1" enctype="multipart/form-data">
 				<table>
 					<tr>
@@ -36,14 +57,14 @@
 							<c:choose>
 								<c:when test="${foodMallVO.food_m_status eq 'p3' || foodMallVO.food_m_status eq 'p4'}">
 									<c:forEach var="chooseMall" items="${mallStatusMap}" begin="3" end="4">
-										<input type="radio" name="food_m_status" value="${chooseMall.key}"
+										<input type="radio" name="food_m_status" style="width:20px;height:20px" value="${chooseMall.key}"
 											${(chooseMall.key == foodMallVO.food_m_status)?'checked':''}>${chooseMall.value}
 									</c:forEach>
 								</c:when>
 								<c:when test="${foodMallVO.food_m_status eq 'p1'}">
 									${mallStatusMap[foodMallVO.food_m_status]}
-									<c:forEach var="chooseMall" items="${mallStatusMap}" begin="3" end="4">
-										<input type="radio" name="food_m_status" value="${chooseMall.key}"
+									<c:forEach var="chooseMall"  items="${mallStatusMap}" begin="3" end="4">
+										<input type="radio" style="width:20px;height:20px" name="food_m_status" value="${chooseMall.key}"
 											${(chooseMall.key == foodMallVO.food_m_status)?'checked':''}>${chooseMall.value}
 									</c:forEach>
 								</c:when>
@@ -63,7 +84,7 @@
 						<td>
 							<c:forEach var="foodUnit" items="${foodUnitMap}">
 								<input type="radio" name="food_m_unit" value="${foodUnit.key}"
-									${(foodUnit.key == foodMallVO.food_m_unit)?'checked':''}>${foodUnit.value}
+									${(foodUnit.key == foodMallVO.food_m_unit)?'checked ':''}  style="width:20px;height:20px" >${foodUnit.value}
 							</c:forEach>
 					</tr>
 					<tr>
@@ -99,15 +120,27 @@
 				<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 				<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 				<input type="hidden" name="action" value="update">
-				<input type="submit" value="送出">
-			</form>
-			<img id="preView">
-	
-           
-	</section>
-    <!-- ##### Contact Area End #####-->
+				<button type="submit" class="btn pixel-btn wow fadeInUp"
+												data-wow-delay="300ms">送出</button>
+										</form>
+										
+										<img id="preView">
+									</div>
+								</div>
+							</div>
 
+						</div>
+		</section>
+		<!-- ##### Contact Area End #####-->
+
+
+
+	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
+</body>
+		
+	      
+	
 	<script>
 		$(document).ready(
 			function(){
@@ -127,5 +160,5 @@
 		);
 		
 	</script>
-</body>
+
 </html>

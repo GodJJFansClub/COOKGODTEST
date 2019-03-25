@@ -183,7 +183,7 @@ th, td {
 
 						<td>
 							<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
-								<button type="submit" class="btn pixel-btn wow fadeInUp" data-wow-delay="300ms">送出</button>
+								<button type="submit" class="btn pixel-btn wow fadeInUp" data-wow-delay="300ms">修改</button>
 								<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 								<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 								<input type="hidden" id="action" name="action" value="foodSupGetUpdate">

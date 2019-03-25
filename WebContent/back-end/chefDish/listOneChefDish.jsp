@@ -28,7 +28,7 @@
 <body>
 	<div class="card text-center" style="background-color: #D4E6F1">	  
 	  <div class="card-body" >
-	    <h5 class="card-title">單項主廚擅長菜色</h5>
+	    <h5 class="card-title">單位主廚擅長菜色</h5>
 	    <p class="card-text">listOneChefDish.jsp</p>
 	    <a href="index.jsp" class="btn btn-primary">回首頁</a>
 	  </div>

@@ -17,7 +17,6 @@
 <html>
 <head>
 <title>所有菜色資料 - listAllDish.jsp</title>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
 
 
 </head>

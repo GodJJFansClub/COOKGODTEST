@@ -47,7 +47,7 @@
 										<th scope="col">套餐介紹</th>
 										<th scope="col">套餐價錢</th>
 										
-										<th scope="col">編輯喜愛食材供應商</th>
+										<th scope="col">編輯套餐</th>
 										
 
 

@@ -60,6 +60,31 @@ public class ChefDishServlet extends HttpServlet {
 				errView.forward(request, response);
 			}
 		}
+		if("getAllByChefID".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			request.setAttribute("errorMsgs", errorMsgs);
+			
+			try{
+				//1.接收請求參數，並做錯誤判斷
+				String chef_ID = request.getParameter("chef_ID");
+
+				//2.開始查詢資料
+				ChefDishService chefDishSvc = new ChefDishService();
+				List<ChefDishVO> list = chefDishSvc.getAllByChefID(chef_ID);
+				
+				//3.查詢完成，準備轉交
+				//資料庫取出的menuOrderVO物件,存入request
+				session.setAttribute("list", list);
+				RequestDispatcher successView = 
+						request.getRequestDispatcher("/back-end/chefDish/listAllByChefID.jsp");
+				successView.forward(request, response);
+			}catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher errView = 
+						request.getRequestDispatcher("/back-end/chef/listAllChef.jsp");
+				errView.forward(request, response);
+			}	
+		}
 		if("getOneForUpdate".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -104,7 +129,7 @@ public class ChefDishServlet extends HttpServlet {
 				if(!errorMsgs.isEmpty()) {
 					request.setAttribute("chefDishVO", chefDishVO);
 					RequestDispatcher errView = 
-							request.getRequestDispatcher("/front-end/chefDish/updateChefDish.jsp");
+							request.getRequestDispatcher("/back-end/chefDish/listAllByChefID.jsp");
 					errView.forward(request, response);
 					return;
 				}
@@ -112,16 +137,16 @@ public class ChefDishServlet extends HttpServlet {
 				//2.開始修改資料
 				ChefDishService cheDishSvc = new ChefDishService();
 				chefDishVO = cheDishSvc.update(chef_ID, dish_ID, chef_dish_status);
-				chefDishVO = cheDishSvc.getOneChefDish(chef_ID, dish_ID);
+				List<ChefDishVO> list = cheDishSvc.getAllByChefID(chef_ID);
 				//3.修改完成，準備轉交
-				request.setAttribute("chefDishVO", chefDishVO);
+				session.setAttribute("list", list);
 				RequestDispatcher successView = 
-						request.getRequestDispatcher("/front-end/chefDish/listOneChefDish.jsp");
+						request.getRequestDispatcher("/back-end/chefDish/listAllByChefID.jsp");
 				successView.forward(request, response);
 			}catch (Exception e) {
 				errorMsgs.add("Update error:" + e.getMessage());
 				RequestDispatcher errView = 
-						request.getRequestDispatcher("/front-end/chefDish/updateChefDish.jsp");
+						request.getRequestDispatcher("/back-end/chefDish/listAllByChefID.jsp");
 				errView.forward(request, response);
 			}	
 		}

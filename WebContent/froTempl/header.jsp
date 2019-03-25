@@ -300,7 +300,7 @@
 			webSocket.close();
 		}
 	</script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="<%=request.getContextPath()%>/publibrary/sweetalert.min.js"></script>
 	<script>
 		var btn = document.getElementById("alertLogOutBTN");
 		btn.onclick = function() {

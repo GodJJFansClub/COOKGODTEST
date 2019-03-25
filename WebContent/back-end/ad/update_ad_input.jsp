@@ -48,10 +48,13 @@
 						<tr>
 							<td>廣告圖片:</td>
 							<td>
-							
-							<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/images/null2.jpg"  width="300" height="200"/>
-							<br>
-							<input id="progressbarTWInput"  type="file" name="ad_pic" size="45"	id="progressbarTWInput" value="<%=adVO.getAd_pic()%>" /></td>
+							<c:if test="${not empty adVO.ad_pic}">
+								<img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}"  width="300" height="200" />
+							</c:if>
+							<c:if test="${empty adVO.ad_pic}">
+								<img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/images/null2.jpg"  width="300" height="200"/>
+							</c:if><br>
+							</td>
 						</tr>
 
 						<tr>

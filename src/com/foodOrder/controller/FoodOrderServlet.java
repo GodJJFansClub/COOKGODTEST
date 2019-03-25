@@ -24,6 +24,7 @@ import com.festMenu.model.FestMenuService;
 import com.festOrder.model.FestOrderService;
 import com.festOrder.model.FestOrderVO;
 import com.festOrderDetail.model.FestOrderDetailVO;
+import com.foodOrDetail.model.FoodOrDetailService;
 import com.foodOrDetail.model.FoodOrDetailVO;
 import com.foodOrder.model.FoodOrderService;
 import com.foodOrder.model.FoodOrderVO;
@@ -258,7 +259,9 @@ public class FoodOrderServlet extends HttpServlet {
 				FoodOrderService foodOrderSvc = new FoodOrderService();
 				foodOrderVO = foodOrderSvc.addFoodOrder("o1", food_or_name, food_or_addr, food_or_tel, cust_ID, foodCart);
 				foodOrderVO = foodOrderSvc.getOneFoodOrder(foodOrderVO.getFood_or_ID());
+				Set<FoodOrDetailVO> foodOrODs = foodOrderSvc.getFoodOrDetailsByFood_or_ID(foodOrderVO.getFood_or_ID());
 				req.setAttribute("foodOrderVO", foodOrderVO);
+				req.setAttribute("foodOrODs", foodOrODs);
 			}
 			
 			if(festCart.size() > 0) {

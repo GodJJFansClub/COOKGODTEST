@@ -53,8 +53,8 @@
 										<th scope="col">主廚姓名</th>
 										<th scope="col">主廚狀態</th>
 										<th scope="col">主廚服務地區</th>
-										
 										<th scope="col">審核主廚</th>
+										<th scope="col">審核主廚菜色</th>
 									</tr>
 								</thead>
 	
@@ -79,6 +79,13 @@
 									<input type="submit" value="編輯"> 
 									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}"> 
 									<input type="hidden" name="action" value="getOneForDisplay">
+								</form>
+							</th>
+							<th>
+								<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
+									<input type="submit" value="審核主廚菜色"> 
+									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}">
+									<input type="hidden" name="action" value="getAllByChefID"> 
 								</form>
 							</th>
 						</tr>

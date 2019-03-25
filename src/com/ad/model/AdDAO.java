@@ -24,7 +24,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String INSERT_STMT =
 			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_PIC,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?,? ,?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT * FROM AD ORDER BY AD_ID";
+			"SELECT * FROM AD ORDER BY AD_ID DESC";
 	private static final String GET_ONE_STMT = 
 			"SELECT * FROM AD where AD_ID = ?";
 	private static final String GET_ONE_FOODSUP_ID_STMT = 
@@ -34,7 +34,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String UPDATE =
 			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?,AD_PIC=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
 	private static final String UPDATE_STATUS =
-			"UPDATE AD set AD_STATUS=? Where AD_ID=?";
+			"UPDATE AD set AD_STATUS=? Where AD_ID=? ";
 	private static final String GET_NOW_AD_STMT = 
 			"SELECT * FROM AD where systimestamp >= AD_START AND systimestamp <=AD_END AND AD_STATUS ='d1'";
 	@Override
