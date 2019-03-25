@@ -208,10 +208,10 @@
 
             <!-- Single gallery Item -->
             <div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s">
-                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img//foodMall3.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" alt="">
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMal3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         <h4>不幸的雞</h4>
                     </div>
                 </div>
@@ -223,7 +223,7 @@
                 <div class="hover-content text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
                         <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h4>頂級牛</h4>
+                        <h4>威靈頓牛</h4>
                     </div>
                 </div>
             </div>
