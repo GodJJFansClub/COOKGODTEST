@@ -31,7 +31,7 @@
 					<img src="<%=request.getContextPath()%>/images/null2.jpg">
 				</c:if>
 				
-				<h4y style="font-weight:bold">${custVO.cust_name}</h4>
+				<h4 style="font-weight:bold">${custVO.cust_name}</h4>
 				<span>${custVO.cust_niname}</span>
 			</div>
 

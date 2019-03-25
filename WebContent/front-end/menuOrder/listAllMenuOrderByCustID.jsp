@@ -20,7 +20,7 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-
+<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
 	 <!-- ##### Contact Area Start #####-->
     <section class="contact-area section-padding-100">
 	    <%--Error Message--%>

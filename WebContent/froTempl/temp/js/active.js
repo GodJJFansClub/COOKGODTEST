@@ -105,16 +105,16 @@
     // :: 7.0 ScrollUp Active Code
     if ($.fn.scrollUp) {
         browserWindow.scrollUp({
-            scrollSpeed: 1500,
+            scrollSpeed: 5000,
             scrollText: '<i class="fa fa-angle-up"></i> Top'
         });
     }
 
     // :: 8.0 CounterUp Active Code
     if ($.fn.counterUp) {
-        $('.counter').counterUp({
+        $('.counter1').counterUp({
             delay: 10,
-            time: 2000
+            time: 8000
         });
     }
 

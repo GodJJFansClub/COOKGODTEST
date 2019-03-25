@@ -39,6 +39,7 @@ th, td {
 </style>
 </head>
 <body>
+<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
 			<h5 class="card-title">查詢所有訂單</h5>

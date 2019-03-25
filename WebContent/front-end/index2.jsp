@@ -9,9 +9,6 @@
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <jsp:useBean id="menuSvc" class="com.menu.model.MenuService"/>
 <jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
-<%
-	HttpSession sessiond = request.getSession();
-%>
 
 <!DOCTYPE html>
 <html>
@@ -34,9 +31,8 @@
 <!-- Stylesheet -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/froTempl/temp/style.css">
-
-
-<style>
+	
+	<style>
 	.pixel-projects-menu {
   position: relative;
   z-index: 1;
@@ -176,10 +172,7 @@
     .single-catagory:hover .hover-content .zoom-img {
       margin-top: 0;
       opacity: 1; }
-	</style>	
-	
-	
-
+	</style>
 </head>
 
 <body>
@@ -187,7 +180,6 @@
 
 
 	<!-- ##### Hero Area Start ##### -->
-	
 	<section class="hero-area">
 		<div id="adWall" class="hero-slideshow owl-carousel">
 
@@ -266,12 +258,14 @@
     <div class="top-catagory-area d-flex flex-wrap">
         <!-- Single Catagory -->
         <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/F4_2.png);">
-            <a href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp" style="font-weight:bold"><font color='#000000' onmouseout="this.style.color ='#000000';" onmouseover="this.style.color ='#FF7B0F';" style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">瀏覽主廚</font></a>
+            <a href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp" style="font-weight:bold">
+            <font color='#000000' onmouseout="this.style.color ='#000000';" onmouseover="this.style.color ='#FF7B0F';" style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">瀏覽主廚</font></a>
             
         </div>
         <!-- Single Catagory -->
         <div class="single-catagory bg-img d-flex align-items-center justify-content-center jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/4.jpg);">
-            <a href="<%=request.getContextPath()%>/front-end/menu/menu.jsp" style="font-weight:bold;"><font >嚴選套餐</font></a>
+            <a href="<%=request.getContextPath()%>/front-end/chef/menu/menu.jsp" style="font-weight:bold;">
+            <font color='#000000' onmouseout="this.style.color ='#000000';" onmouseover="this.style.color ='#FF7B0F';" style="color:black; font-weight:bold; font-family: Microsoft JhengHei;">嚴選套餐</font></a>
         </div>
     </div>
     <!-- ##### Top Catagory Area End ##### -->
@@ -282,14 +276,14 @@
             <div class="row">
 
                 <!-- Single Cool Facts -->
-                <div class="col-12 col-sm-6 col-lg-3">
+                <div class="col-12 col-sm-6 col-lg-3" >
                     <div class="single-cool-fact mb-100">
                         <div class="scf-icon">
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m1.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2><span class="counter1"  style="font-size:60px">${chefSvc.selectChefTotal}</span></h2>
-                            <h6 style="font-size:30px">嚴選主廚</h6>
+                            <h2><span class="counter1">${chefSvc.selectChefTotal}</span></h2>
+                            <h6>嚴選主廚</h6>
                         </div>
                     </div>
                 </div>
@@ -301,8 +295,8 @@
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m5.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2><span class="counter1"  style="font-size:60px">${custSvc.selectCustTotal}</span></h2>
-                            <h6 style="font-size:30px">食神的顧客</h6>
+                            <h2><span class="counter1">${custSvc.selectCustTotal}</span></h2>
+                            <h6>食神的顧客</h6>
                         </div>
                     </div>
                 </div>
@@ -314,8 +308,8 @@
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m6.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2><span class="counter1"  style="font-size:60px">${menuSvc.selectMenuTotal}</span></h2>
-                            <h6 style="font-size:30px">嚴選套餐</h6>
+                            <h2><span class="counter1">${menuSvc.selectMenuTotal}</span></h2>
+                            <h6>嚴選套餐</h6>
                         </div>
                     </div>
                 </div>
@@ -327,8 +321,8 @@
                             <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/m7.png" alt="">
                         </div>
                         <div class="scf-text">
-                            <h2 ><span class="counter1" style="font-size:60px">${foodMallSvc.selectFoodMallTotal}</span></h2>
-                            <h6 style="font-size:30px">嚴選食材</h6>
+                            <h2><span class="counter1">${foodMallSvc.selectFoodMallTotal}</span></h2>
+                            <h6>嚴選食材</h6>
                         </div>
                     </div>
                 </div>
@@ -352,7 +346,7 @@
             </div>
         </div>
 
-         <!-- Portfolio Menu -->
+        <!-- Portfolio Menu -->
        
         <div class="pixel-portfolio">
 
@@ -362,7 +356,7 @@
                 <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
                     <div class="hover-text">
                         <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h3 style="color:white" >不幸的雞</h3>
+                        <h4>不幸的雞</h4>
                     </div>
                 </div>
             </div>
@@ -373,7 +367,7 @@
                 <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
                     <div class="hover-text">
                         <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h3 style="color:white" >威靈頓牛 </h3>
+                        <h4 >威靈頓牛</h4>
                     </div>
                 </div>
             </div>
@@ -384,15 +378,15 @@
                 <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
                     <div class="hover-text">
                         <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <h3 style="color:white">嗆辣紅椒</h3>
+                        <h4>嗆辣紅椒</h4>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    <!-- ##### Port<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>folio Area End ###### -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- ##### Portfolio Area End ###### -->
+	
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
 	    var MyPoint = "/WebSocketForServlet";
@@ -419,22 +413,6 @@
 		// 觸發connect()時註冊方法, 並建立WebSocket物件
 
 		
-		window.onload= function(){
-			<% 	CustVO custVO = (CustVO)sessiond.getAttribute("custVO");
-				if (custVO!=null){
-			%>
-				var user = ''+'<%=custVO.getCust_status()%>';
-			<%}else{%>
-				var user =null;
-			<%}%>
-			
-				if(user === "a0"){
-					
-				}else{
-					swal("驗證錯誤","此帳號尚未通過驗證，趕快去E-Mail收信哦!","error")
-					
-				}
-			}
 	</script>
 	<script>
 	var browserWindow = $(window);
@@ -455,5 +433,6 @@
         });
     }
 	</script>
+	
 </body>
 </html>

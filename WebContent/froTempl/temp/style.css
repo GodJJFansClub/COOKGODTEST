@@ -447,19 +447,19 @@ img {
       .header-area .pixel-main-menu .classy-navbar .classynav ul li a {
         font-weight: 500;
         text-transform: capitalize;
-        font-size: 18px;
+        font-size: 19px;
         padding: 0 10px;
         color: #ffffff; }
         .header-area .pixel-main-menu .classy-navbar .classynav ul li a:hover, .header-area .pixel-main-menu .classy-navbar .classynav ul li a:focus {
           color: #ff7902; }
         @media only screen and (min-width: 992px) and (max-width: 1199px) {
           .header-area .pixel-main-menu .classy-navbar .classynav ul li a {
-            font-size: 16px;
+            font-size: 23px;
             padding: 0 5px; } }
         @media only screen and (min-width: 768px) and (max-width: 991px) {
           .header-area .pixel-main-menu .classy-navbar .classynav ul li a {
             color: #212121;
-            font-size: 14px; } }
+            font-size: 23px; } }
         @media only screen and (max-width: 767px) {
           .header-area .pixel-main-menu .classy-navbar .classynav ul li a {
             color: #212121;
@@ -488,7 +488,6 @@ img {
         color: #212121; }
       .header-area .pixel-main-menu .classy-navbar .classynav ul li ul li a {
         color: #212121;
-        font-size: 14px;
         padding: 0 20px; }
   .header-area .top-social-info {
     position: relative;
@@ -987,10 +986,10 @@ img {
     margin: 0 auto 30px;
     width: 80px !important; }
   .single-testimonial-slide h4 {
-    font-size: 24px;
+    font-size: 34px;
     color: #969696; }
   .single-testimonial-slide span {
-    font-size: 14px;
+    font-size: 28px;
     font-weight: 300;
     color: #969696;
     margin-bottom: 40px;
@@ -1464,7 +1463,7 @@ img {
   width: 100%;
   height: 50px;
   margin-bottom: 25px;
-  font-size: 13px;
+  font-size: 25px;
   color: #969696;
   text-align: center;
   border: none;
@@ -1523,9 +1522,14 @@ img {
     position: relative;
     z-index: 1; }
     .single-contact-content .text h6 {
-      font-size: 18px;
+      font-size: 36px;
       margin-bottom: 10px; }
     .single-contact-content .text p {
+    	font-size: 33px;
+      margin-bottom: 0; }
+     .single-contact-content .text th,td {
+    	font-size: 20px;
+    	width:auto;
       margin-bottom: 0; }
 
 /* :: 14.0 Elements Area CSS */

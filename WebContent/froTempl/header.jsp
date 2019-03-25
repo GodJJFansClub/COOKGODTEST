@@ -142,9 +142,9 @@
 													</c:when>
 													<c:when test="${not empty foodSupVO.food_sup_ID}">
 														<li><a
-															href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看食材供應商資料</a></li>
+															href="<%=request.getContextPath()%>/front-end/foodSup/foodSupInfo.jsp">查看食材商資料</a></li>
 														<li><a
-															href="<%=request.getContextPath()%>/front-end/foodSup/update_foodSup_input.jsp">編輯食材供應商資料</a></li>
+															href="<%=request.getContextPath()%>/front-end/foodSup/update_foodSup_input.jsp">編輯食材商資料</a></li>
 													</c:when>
 													<c:when
 														test="${not empty custVO.cust_ID and not empty chefVO.chef_ID}">

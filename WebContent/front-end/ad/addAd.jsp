@@ -209,7 +209,9 @@ th, td {
 
 												<tr>
 													<td>廣告圖片:</td>
-													<td><input type="file" name="ad_pic" size="1"style="width:80px;height:40px"
+													<td>
+													
+													<input type="file" class="form-control-file" name="ad_pic" size="1"
 														id="doc" onchange="javascript:setImagePreview();" /></td>
 												</tr>
 
@@ -256,7 +258,7 @@ th, td {
 	$('#f_date1').datetimepicker({
 		theme : '', //theme: 'dark',
 		timepicker : true, //timepicker:true,
-		step : 60, //step: 60 (這是timepicker的預設間隔60分鐘)
+		step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
 		format : 'Y-m-d H:i:s', //format:'Y-m-d H:i:s',
 		value : '${adVO.ad_start}', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
@@ -333,8 +335,8 @@ th, td {
 		if (docObj.files && docObj.files[0]) {
 			//火狐下，直接设img属性
 			imgObjPreview.style.display = 'block';
-			imgObjPreview.style.width = '200px';
-			imgObjPreview.style.height = '120px';
+			imgObjPreview.style.width = '800px';
+			imgObjPreview.style.height = '480px';
 			//imgObjPreview.src = docObj.files[0].getAsDataURL();
 			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
 			imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);

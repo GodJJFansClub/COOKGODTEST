@@ -46,7 +46,7 @@
 				</c:if>
 				</td>
 
-				<h4y style="font-weight:bold"><%=custVO.getCust_name()%></h4>
+				<h4 style="font-weight:bold"><%=custVO.getCust_name()%></h4>
 				<span><%=custVO.getCust_niname()%></span>
 			</div>
 

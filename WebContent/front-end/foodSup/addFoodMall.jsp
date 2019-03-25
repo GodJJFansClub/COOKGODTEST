@@ -12,6 +12,30 @@
 <head>
 
 <title>新增食材商品</title>
+
+
+<style>
+table {
+	width: 600px;
+	background-color: white;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	font-size: 22px;
+}
+
+table, th, td {
+	border: 0px solid #CCCCFF;
+	font-size: 22px;
+}
+
+th, td {
+	padding: 1px;
+	width: 1px;
+	font-size: 22px;
+}
+</style>
+
+
 <style>
 
 /* :: 12.0 Blog Area CSS */
@@ -82,6 +106,33 @@
 		font-size: 24px;
 	}
 }
+
+
+
+
+
+.contact-form-area1 input,
+.contact-form-area1 textarea {
+  background-color: #f6f6f6;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+  font-size: 22px;
+  color: #969696;
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  transition-duration: 500ms; }
+  .contact-form-area1 input:focus,
+  .contact-form-area1 textarea:focus {
+    background-color: #f6f6f6;
+    box-shadow: none;
+    border-bottom-color: #ff7902; }
+.contact-form-area1 textarea {
+  height: 170px;
+  padding-top: 20px;
+  margin-bottom: 50px; }
 </style>
 
 </head>
@@ -136,7 +187,7 @@
 							<div class="row justify-content-center">
 								<div class="col-12 col-lg-8">
 									<!-- Contact Form -->
-									<div class="contact-form-area text-center">
+									<div class="contact-form-area1 text-center">
 		<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do" name="form1" enctype="multipart/form-data">
 			<table>
 			<tr><td>${errorMsgs.excMsgs}</td></tr>
