@@ -32,40 +32,47 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	<table>
-		<tr>
-			<th>節慶料理編號</th>
-			<th>節慶主題料理名稱</th>
-			<th>數量</th>
-			<th>開始預購日期</th>
-			<th>結束預購日期</th>
-			<th>照片</th>
-			<th>介紹</th>
-			<th>出貨日期</th>
-			<th>價格</th>
-			<th>主廚</th>
-			<th>修改</th>
-		</tr>
-		<%@ include file="page1.file"%>
+	
+				<div class="col">
+					<div class="card">
+
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th scope="col">節慶料理編號</th>
+										<th scope="col">節慶主題料理名稱</th>
+										<th scope="col">數量</th>
+										<th scope="col">開始預購日期</th>
+										<th scope="col">結束預購日期</th>
+										<th scope="col">照片</th>
+										<th scope="col">介紹</th>
+										<th scope="col">出貨日期</th>
+										<th scope="col">價格</th>
+										<th scope="col">主廚</th>
+										<th scope="col">修改</th>
+									</tr>
+								</thead>
+									<%@ include file="page1.file"%>
 		<c:forEach var="festMenuVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
 			<tr>
-				<td>${festMenuVO.fest_m_ID}</td>
-				<td>${festMenuVO.fest_m_name}</td>
-				<td>${festMenuVO.fest_m_qty}</td>
-				<td>${festMenuVO.fest_m_start}</td>
-				<td>${festMenuVO.fest_m_end}</td>
-				<td><c:if test="${not empty festMenuVO.fest_m_pic}">
+				<th scope="row">${festMenuVO.fest_m_ID}</th>
+				<th scope="row">${festMenuVO.fest_m_name}</th>
+				<th scope="row">${festMenuVO.fest_m_qty}</th>
+				<th scope="row">${festMenuVO.fest_m_start}</th>
+				<th scope="row">${festMenuVO.fest_m_end}</th>
+				<th scope="row"><c:if test="${not empty festMenuVO.fest_m_pic}">
 						<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" style="width:300px;height:200px;">
 					</c:if>
 					<c:if test="${empty festMenuVO.fest_m_pic}">
 						<img src="<%=request.getContextPath()%>/images/null2.jpg" style="width:300px;height:200px;">
-					</c:if></td>
-				<td>${festMenuVO.fest_m_resume}</td>
-				<td>${festMenuVO.fest_m_send}</td>
-				<td>${festMenuVO.fest_m_price}</td>
-				<td>${custSvc.getOneCust(festMenuVO.chef_ID).cust_name}</td>
-				<td>
+					</c:if></th>
+				<th scope="row">${festMenuVO.fest_m_resume}</th>
+				<th scope="row">${festMenuVO.fest_m_send}</th>
+				<th scope="row">${festMenuVO.fest_m_price}</th>
+				<th scope="row">${custSvc.getOneCust(festMenuVO.chef_ID).cust_name}</th>
+				<th scope="row">
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do"
 						style="margin-bottom: 0px;">
@@ -73,10 +80,13 @@
 							name="fest_m_ID" value="${festMenuVO.fest_m_ID}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
-				</td>
+				</th>
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+	</div>
+	</div>
 	<%@ include file="page2.file"%>
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />

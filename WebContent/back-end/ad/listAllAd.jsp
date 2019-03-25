@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.ad.model.*"%>
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 
 
 <%-- 此頁練習採用 EL 的寫法取值 --%>
@@ -70,7 +71,7 @@
 				<th scope="row">${adVO.ad_end}</th>
 				<th scope="row">${adStatusMap[adVO.ad_status]}</th>
 				<th scope="row">${adTypeMap[adVO.ad_type]}</th>
-				<th scope="row">${adVO.food_sup_ID}</th>
+				<th scope="row">${custSvc.getOneCust(adVO.food_sup_ID).cust_name}</th>
 				
 				<th scope="row">
 					<FORM METHOD="post"

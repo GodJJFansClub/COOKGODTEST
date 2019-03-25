@@ -36,39 +36,40 @@
 			</c:forEach>
 		</ul>
 	</c:if>
- <section class="page-content">
- 	
-   <div class="container pt-3 pb-3">
-   <div class="table-responsive-sm table-middle">
-	<table class="table table-hover">
-	   <thead class="thead-dark">
-		<tr>
-			<th>訂單編號</th>
-			<th>訂單狀態</th>
-			<th>價格</th>
-			<th>訂單成立日期</th>
-			<th>出貨日期</th>
-			<th>訂單結束日期</th>
-<!-- 			<th>折扣</th> -->
-			<th>會員編號</th>
-			<th>修改</th>
-			<th>送出查詢</th>
-		</tr>
-		</thead>
+	
+ <div class="col">
+                        <div class="card">
+                            
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">訂單編號</th>
+										<th scope="col">訂單狀態</th>
+										<th scope="col">價格</th>
+										<th scope="col">訂單成立日期</th>
+										<th scope="col">出貨日期</th>
+										<th scope="col">訂單結束日期</th>
+										<th scope="col">會員編號</th>
+										<th scope="col">修改</th>
+										<th scope="col">送出查詢</th>
+										<th scope="col">審核:</th>
+                                        </tr>
+                                    </thead>
+		
 		<%@ include file="page1.file"%>
 		<c:forEach var="festOrderVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
 
 			<tr>
-				<td>${festOrderVO.fest_or_ID}</td>
-				<td>${mallOrStatusMap[festOrderVO.fest_or_status]}</td>
-				<td>${festOrderVO.fest_or_price}</td>
-				<td>${festOrderVO.fest_or_start}</td>
-				<td>${festOrderVO.fest_or_send}</td>
-				<td>${festOrderVO.fest_or_end}</td>
-<%-- 				<td>${festOrderVO.fest_or_disc}</td> --%>
-				<td>${custSvc.getOneCust(festOrderVO.cust_ID).cust_name}</td>
-				<td>
+				 <th scope="row">${festOrderVO.fest_or_ID}</th>
+				 <th scope="row">${mallOrStatusMap[festOrderVO.fest_or_status]}</th>
+				 <th scope="row">${festOrderVO.fest_or_price}</th>
+				 <th scope="row">${festOrderVO.fest_or_start}</th>
+				 <th scope="row">${festOrderVO.fest_or_send}</th>
+				 <th scope="row">${festOrderVO.fest_or_end}</th>
+				 <th scope="row">${custSvc.getOneCust(festOrderVO.cust_ID).cust_name}</th>
+				 <th scope="row">
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
 						style="margin-bottom: 0px;">
@@ -78,9 +79,9 @@
 							name="fest_or_ID" value="${festOrderVO.fest_or_ID}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
-				</td>
+				</th>
 
-				<td>
+				 <th scope="row">
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/festOrder/festOrder.do"
 						style="margin-bottom: 0px;">
@@ -91,13 +92,13 @@
 							type="hidden" name="action" 
 							value="listFestOrderDetail_ByFest_or_ID_Back">
 					</FORM>
-				</td>
+				</th>
 			</tr>
 		</c:forEach>
 	</table>
 	</div>
 	</div>
-	</section>
+	</div>
 	
 	<%@ include file="page2.file"%>
 

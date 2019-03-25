@@ -39,71 +39,79 @@ th,td{
 						</c:forEach>
 					</ul>
 				</c:if>
-				<div class="container-filed justify-content-center">
-					<div class="row">
-						<div class="col-12">
-							<table>
-								<tr>
-									<th>訂單編號</th>
-									<th>訂單狀態</th>
-									<th>下訂日期</th>
-									<th>預約日期</th>
-									<th>完成日期</th>
-									<th>訂單評價</th>
-									<th style="width:400px;">訂單留言</th>
-									<th>顧客編號</th>
-									<th>主廚編號</th>
-									<th>套餐編號</th>
-									<th>修改訂單</th>
-									<th>刪除訂單</th>
-								</tr>
-								<%@ include file="page1.file"%>
-								<c:forEach var="menuOrderVO" items="${listAll}"
-									begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+
+				<div class="col">
+					<div class="card">
+
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
 									<tr>
-										<td>${menuOrderVO.menu_od_ID}</td>
-										<td><c:if test="${menuOrderVO.menu_od_status=='g0'}">未審核</c:if>
-											<c:if test="${menuOrderVO.menu_od_status=='g1'}">審核通過</c:if>
-											<c:if test="${menuOrderVO.menu_od_status=='g2'}">審核不通過</c:if>
-											<c:if test="${menuOrderVO.menu_od_status=='g3'}">主廚到府</c:if>
-											<c:if test="${menuOrderVO.menu_od_status=='g4'}">訂單完成</c:if></td>
-										<td>${menuOrderVO.menu_od_start}</td>
-										<td>${menuOrderVO.menu_od_book}</td>
-										<td>${menuOrderVO.menu_od_end}</td>
-										<td>${menuOrderVO.menu_od_rate}</td>
-										<td>${menuOrderVO.menu_od_msg}</td>
-										<td>${custSvc.getOneCust(menuOrderVO.cust_ID).cust_name}</td>
-										<td>${custSvc.getOneCust(menuOrderVO.chef_ID).cust_name}</td>
-										<td>${menuSvc.getOneMenu(menuOrderVO.menu_ID).menu_name}</td>
-										<td>
-											<form method="post"
-												action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-												<input type="submit" value="編輯"> <input type="hidden"
-													name="menu_od_ID" value="${menuOrderVO.menu_od_ID}"> <input
-													type="hidden" name="action" value="getOneForDispaly">
-											</form>
-										</td>
-										<td>
-											<form method="post"
-												action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-												<input type="submit" value="刪除"> <input type="hidden"
-													name="menu_od_ID" value="${menuOrderVO.menu_od_ID}"> <input
-													type="hidden" name="action" value="delete">
-											</form>
-										</td>
+										<th scope="col">訂單編號</th>
+										<th scope="col">訂單狀態</th>
+										<th scope="col">下訂日期</th>
+										<th scope="col">預約日期</th>
+										<th scope="col">完成日期</th>
+										<th scope="col">訂單評價</th>
+										<th scope="col">訂單留言</th>
+										<th scope="col">顧客編號</th>
+										<th scope="col">主廚編號</th>
+										<th scope="col">套餐編號</th>
+										<th scope="col">修改訂單</th>
+										<th scope="col">刪除訂單</th>
+
 									</tr>
-								</c:forEach>
-							</table>
-							<%@ include file="page2.file"%>
+								</thead>
+
+								
+												<%@ include file="page1.file"%>
+												<c:forEach var="menuOrderVO" items="${listAll}"
+													begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+													<tr>
+														<th scope="row">${menuOrderVO.menu_od_ID}</th>
+														<th scope="row"><c:if test="${menuOrderVO.menu_od_status=='g0'}">未審核</c:if>
+															<c:if test="${menuOrderVO.menu_od_status=='g1'}">審核通過</c:if>
+															<c:if test="${menuOrderVO.menu_od_status=='g2'}">審核不通過</c:if>
+															<c:if test="${menuOrderVO.menu_od_status=='g3'}">主廚到府</c:if>
+															<c:if test="${menuOrderVO.menu_od_status=='g4'}">訂單完成</c:if></th>
+														<th scope="row">${menuOrderVO.menu_od_start}</th>
+														<th scope="row">${menuOrderVO.menu_od_book}</th>
+														<th scope="row">${menuOrderVO.menu_od_end}</th>
+														<th scope="row">${menuOrderVO.menu_od_rate}</th>
+														<th scope="row">${menuOrderVO.menu_od_msg}</th>
+														<th scope="row">${custSvc.getOneCust(menuOrderVO.cust_ID).cust_name}</th>
+														<th scope="row">${custSvc.getOneCust(menuOrderVO.chef_ID).cust_name}</th>
+														<th scope="row">${menuSvc.getOneMenu(menuOrderVO.menu_ID).menu_name}</th>
+														<th scope="row">
+															<form method="post"
+																action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
+																<input type="submit" value="編輯"> <input
+																	type="hidden" name="menu_od_ID"
+																	value="${menuOrderVO.menu_od_ID}"> <input
+																	type="hidden" name="action" value="getOneForDispaly">
+															</form>
+														</th>
+														<th scope="row">
+															<form method="post"
+																action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
+																<input type="submit" value="刪除"> <input
+																	type="hidden" name="menu_od_ID"
+																	value="${menuOrderVO.menu_od_ID}"> <input
+																	type="hidden" name="action" value="delete">
+															</form>
+														</th>
+													</tr>
+												</c:forEach>
+											</table>
+											<%@ include file="page2.file"%>
+										</div>
+									</div>
+								</div>
+
+								<%--=================================工作區================================================--%>
+								<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+								<%--=================================jQuery===============================================--%>
 						</div>
 					</div>
-				</div>
-
-				<%--=================================工作區================================================--%>
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-				<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
-</body>
+				</div></body>
 </html>
