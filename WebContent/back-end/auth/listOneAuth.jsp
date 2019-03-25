@@ -10,7 +10,7 @@
 
 <html>
 <head>
-<title>權限資料 - listOneAuth.jsp</title>
+<title>權限資料</title>
 
 
 

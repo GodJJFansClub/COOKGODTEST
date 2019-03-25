@@ -9,7 +9,7 @@
 
 <html>
 <head>
-<title>員工資料 - listOneEmp.jsp</title>
+<title>員工資料</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
@@ -40,11 +40,7 @@
 	%>
 
 
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">回首頁</a>
-				</h4>
-
+			
 				<div class="col">
 					<div class="card">
 

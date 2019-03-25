@@ -13,7 +13,7 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>員工資料新增 - addEmp.jsp</title>
+<title>員工資料新增</title>
 
 
 <style>
@@ -65,13 +65,22 @@ th, td {
 				<td><input type="TEXT" name="emp_acc" size="45"
 					value="<%=(empVO == null) ? "Aa158556" : empVO.getEmp_acc()%>" /></td>
 			</tr>
+			
+			
+			tr>
+				<td>員工密碼:</td>
+				<td><input type="password" name="emp_pwd" size="45"
+					value="<%=(empVO == null) ? "teddy" : empVO.getEmp_pwd()%>" /></td>
+			</tr>
 
 			<tr>
 				<td>員工姓名:</td>
 				<td><input type="TEXT" name="emp_name" size="45"
 					value="<%=(empVO == null) ? "teddy" : empVO.getEmp_name()%>" /></td>
 			</tr>
-
+			
+			
+			
 			
 			<tr>
 				<td>員工大頭照:</td>

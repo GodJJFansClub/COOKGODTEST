@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>廣告資料修改 - update_ad_input.jsp</title>
+<title>廣告資料修改</title>
 </head>
 <body bgcolor='white'>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"

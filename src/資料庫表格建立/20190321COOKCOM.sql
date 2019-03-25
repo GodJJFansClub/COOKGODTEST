@@ -2319,7 +2319,7 @@ CREATE TABLE EMP(
  EMP_ACC		           VARCHAR2(15)     NOT NULL,
  EMP_PWD		           VARCHAR2(15)     NOT NULL,
  EMP_NAME	               VARCHAR2(30)     NOT NULL,
- EMP_PIC		           BLOB             NOT NULL,
+ EMP_PIC		           BLOB             ,
  PRIMARY KEY (EMP_ID)
 );
 

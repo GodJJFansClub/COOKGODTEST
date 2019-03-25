@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>廣告資料 - listOneAd.jsp</title>
+<title>廣告資料 </title>
 
 </head>
 <body >
@@ -70,13 +70,7 @@
 			
 		</tr>
 		
-		<tr align='center' valign="middle">
-			<td>
-				
-				<h4>
-					<a href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp">回首頁</a>
-				</h4>
-			</td>
+		
 		</tr>
 	
 	</table>

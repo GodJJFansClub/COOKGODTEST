@@ -42,8 +42,8 @@
 
 	<ul>
 		<li><a
-			href='<%=request.getContextPath()%>/back-end/fun/listAllFun.jsp'>List</a>
-			all Fun. <br>
+			href='<%=request.getContextPath()%>/back-end/fun/listAllFun.jsp'>查詢</a>
+			所有功能<br>
 		<br></li>
 
 
@@ -88,7 +88,7 @@
 	<h3>功能管理</h3>
 
 	<ul>
-		<li><a href='addFun.jsp'>Add</a> a new Fun.</li>
+		<li><a href='addFun.jsp'>新增功能</a></li>
 	</ul>
 <%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />

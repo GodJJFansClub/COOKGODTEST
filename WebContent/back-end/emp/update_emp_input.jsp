@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>員工資料修改 - update_emp_input.jsp</title>
+<title>員工資料修改</title>
 
 </head>
 <body>
