@@ -29,9 +29,9 @@
                         <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo_cut.gif"  width="200px"
                          height="500px"alt="">
                         
-                        <h3>  請按此重新登入
-                        <a href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp" class="btn pixel-btn m-2">重新登入</a>
-                        </h3>
+                        <br>
+                        <a href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp" class="btn pixel-btn m-2">請按此重新登入</a>
+                        
                     </div>
                 </div>
             </div>
