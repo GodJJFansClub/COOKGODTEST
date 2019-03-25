@@ -18,6 +18,7 @@
 <body>
 
 		<jsp:include page="/froTempl/header.jsp" flush="true" />
+		<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
 		<section class="contact-area section-padding-100">
 		<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
 		<c:if test="${not empty errorMsgs}">

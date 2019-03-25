@@ -10,12 +10,12 @@
 <head>
 	<style type="text/css">
 		#foodFestShopCart{
-			position: absolute;
+			position: fixed; 
 		    right: 0px;
 		    bottom: 45%;
 		    width: 40px;
 		    height: 80px;
-		    z-index: 954;
+		    z-index: 9999;
 		}
 		#collapseShoppingCart{
 			height: 100hv;
@@ -29,6 +29,7 @@
 			padding:0;
 			font-family: 微軟正黑體;
 			border-sizing: border-box;
+			
 
 		}
 	</style>
@@ -125,7 +126,16 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-				$(".shoppingCartItemDel").click(delShoppingCartItem);
+				$(".shoppingCartItemDel").click(function(){
+					
+					if($('#delShoppingCartItem').is(':hidden')){
+						$('#delShoppingCartItem').slideDown('slow');
+					}else{
+						$('#delShoppingCartItem').slidUp('slow');
+					}
+					
+					
+				});
 		});
 		// 發送刪除訊息
 		function delShoppingCartItem(){

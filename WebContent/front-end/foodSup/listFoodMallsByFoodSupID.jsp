@@ -124,6 +124,7 @@ th, td {
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<br>
 	<br>

@@ -42,6 +42,7 @@ img{
 <body>
 	
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
 	<section class="contact-area section-padding-100">
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red">請修正以下錯誤:</font>
