@@ -112,7 +112,7 @@ public class FoodOrderDAO implements FoodOrderDAO_interface {
 	private static final String GET_FoodODs_ByFood_or_ID_STMT =
 			"SELECT * FROM FOOD_OR_DETAIL WHERE FOOD_OR_ID = ? ORDER BY FOOD_ID";
 	private static final String GET_FOD_BYCUST =
-			"SELECT * FROM FOOD_ORDER WHERE CUST_ID = ? ORDER BY FOOD_OR_ID";
+			"SELECT * FROM FOOD_ORDER WHERE CUST_ID = ? ORDER BY FOOD_OR_ID DESC";
 	
 	@Override
 	public void insert(FoodOrderVO foodOrderVO) {

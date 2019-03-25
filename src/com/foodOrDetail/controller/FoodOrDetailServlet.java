@@ -33,7 +33,7 @@ public class FoodOrDetailServlet extends HttpServlet {
 		if("fsUpdateFoodODstatus".equals(action)) {
 			fsUpdateFoodODstatus(req, res);
 		} else if("custUpODRateS".equals(action)) {
-			
+			custUpODRateS(req,res);
 		} else if("backUpFODStatus".equals(action)) {
 			// 更新fod的狀態, 並檢查是否所有食材商品都已到貨
 			backUpFODStatus(req, res);
@@ -174,5 +174,20 @@ public class FoodOrDetailServlet extends HttpServlet {
 		out.print(jsonResStr);
 		out.flush();
 		out.close();
+	}
+	private void custUpODRateS(HttpServletRequest req, HttpServletResponse res) {
+		List<String> errorMsgs = new LinkedList<>();
+		
+		req.setAttribute("errorMsgs", errorMsgs);
+		try {
+			
+			String food_or_ID = req.getParameter("food_or_ID");
+			String food_ID = req.getParameter("food_ID");
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			
+			
+		} catch(Exception e) {
+			
+		}
 	}
 }

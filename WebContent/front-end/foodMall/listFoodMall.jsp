@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.cust.model.CustVO" %>
-<
+<%@ page import="java.util.List" %>
+<%@ page import="com.foodMall.model.FoodMallVO" %>
 <jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
 <jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
 <jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService" />
@@ -30,7 +31,8 @@
 		<div class="container">
 			<div class="row">
 				<%@ include file="/front-end/foodMall/page1.file" %>
-				<c:forEach var="foodMallVO" items="" varStatus="s" >
+				<c:forEach var="foodMallVO" items="${list}" varStatus="s" begin="<%=pageIndex%>"
+					end="<%=pageIndex+rowsPerPage-1%>">
 					<div class="col-3">
 						<div id="foodMCard${s.index}" class="card foodMCard">
 				  			<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" class="card-img-top">

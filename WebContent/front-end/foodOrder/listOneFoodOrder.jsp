@@ -100,7 +100,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                              <jsp:include page="/back-end/foodOrder/listFoodOrDetails_ByFood_or_ID.jsp" flush="true" />
+                              <jsp:include page="/front-end/foodOrder/listFoodODs.jsp" flush="true" />
                             </div>
                         </div>
                     </div>

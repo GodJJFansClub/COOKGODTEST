@@ -192,6 +192,10 @@ public class FoodOrderServlet extends HttpServlet {
 		} else if("bkChStatSend".equals(action)) {
 			// 當所有貨物都已到達, 並確認後由此發送貨物給客戶
 			bkChStatSend(req, res);
+		} else if("frontGetOneDisplay".equals(action)) {
+			frontGetOneDisplay(req, res);
+		} else if("frontChaStatus".equals(action)) { // 客戶完成訂單
+			frontChaStatus(req,res);
 		}
 
 	}
@@ -386,5 +390,106 @@ public class FoodOrderServlet extends HttpServlet {
 	private void calOrTotalInReq(HttpServletRequest req, Set<FoodOrDetailVO> foodODVOset) {
 		Integer total = foodODVOset.stream().mapToInt(FoodOrDetailVO::getFood_od_stotal).sum();
 		req.setAttribute("total", total);
+	}
+	
+	private void frontGetOneDisplay(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+
+		try {
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			String str = req.getParameter("food_or_ID");
+
+			if (str == null || (str.trim()).length() == 0) {
+				errorMsgs.add("請輸入食材編號");
+			} 
+			
+
+			if (!errorMsgs.isEmpty()) {
+
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+
+			String food_or_ID = str;
+			// Send the use back to the form, if there were errors
+
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			/*************************** 2.開始查詢資料 *****************************************/
+			FoodOrderService foodOrderSvc = new FoodOrderService();
+			
+			FoodOrderVO foodOrderVO = foodOrderSvc.getOneFoodOrder(food_or_ID);
+			if (foodOrderVO == null) {
+				errorMsgs.add("查無資料");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+			Set<FoodOrDetailVO> set = foodOrderSvc.getFoodOrDetailsByFood_or_ID(food_or_ID);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			
+			
+			req.setAttribute("foodOrderVO", foodOrderVO);
+			req.setAttribute("foodODVOset", set);
+			/*********************/
+			String url = "/front-end/foodOrder/listOneFoodOrder.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+
+
+			/*************************** 其他可能的錯誤處理 *************************************/
+		} catch (Exception e) {
+			errorMsgs.add("無法取得資料:" + e.getMessage());
+			RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listAllCust.jsp");
+			failureView.forward(req, res);
+		}
+		
+		
+	}
+	
+	private void frontChaStatus(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		req.setAttribute("errorMsgs", errorMsgs);
+		try {
+			
+			String food_or_ID = req.getParameter("food_or_ID");
+
+			FoodOrderService foodOrderSvc = new FoodOrderService();
+			FoodOrderVO foodOrderVO = foodOrderSvc.getOneFoodOrder(food_or_ID); 
+			
+			if(!"o3".equals(foodOrderVO.getFood_or_status())) {
+				errorMsgs.add("貨物尚未送達");
+			}
+			
+			if(!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listCOR.jsp");
+				failureView.forward(req, res);
+			}
+			
+			java.sql.Date endDate = new Date(System.currentTimeMillis());
+			
+			foodOrderVO = foodOrderSvc.updateFoodOrder("o4", foodOrderVO.getFood_or_send(), foodOrderVO.getFood_or_rcv(), endDate, foodOrderVO.getFood_or_name(), foodOrderVO.getFood_or_addr(), foodOrderVO.getFood_or_tel(), foodOrderVO.getFood_or_ID());
+			req.setAttribute("foodOrderVO", foodOrderVO); // 資料庫取出的list物件,存入request
+			RequestDispatcher successView = req.getRequestDispatcher("/front-end/cust/listCOR.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+			successView.forward(req, res);
+			
+			
+		} catch(Exception e) {
+			errorMsgs.add("無法取得資料:" + e.getMessage());
+			RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listCOR.jsp");
+			failureView.forward(req, res);
+		}
 	}
 }

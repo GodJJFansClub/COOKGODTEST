@@ -8,13 +8,36 @@
 <jsp:useBean id="checkType" class="com.mall.controller.CheckType"/>
 <html>
 <head>
+	<style type="text/css">
+		#foodFestShopCart{
+			position: absolute;
+		    right: 0px;
+		    bottom: 45%;
+		    width: 40px;
+		    height: 80px;
+		    z-index: 954;
+		}
+		#collapseShoppingCart{
+			height: 100hv;
+			right: 0px;
+			top: 200px;
+			width: 300px;
+			position: fixed;
+    		background-color: rgba(0, 0, 0, 0.2);
+			z-index: 50;
+			margin:0;
+			padding:0;
+			font-family: 微軟正黑體;
+			border-sizing: border-box;
+
+		}
+	</style>
 </head>
 <body>
-	<p>
-		<button class="btn btn-primary" type="button" data-toggle="collapse"
-			data-target="#collapseShoppingCart" aria-expanded="false"
-			aria-controls="collapseShoppingCart">購物車</button>
-	</p>
+	<div id="foodFestShopCart">
+	 <img data-toggle="collapse" data-target="#collapseShoppingCart" aria-expanded="false"
+		aria-controls="collapseShoppingCart" src="<%=request.getContextPath()%>/images/shopcart.png" width="50px" height="50px">
+	</div>
 	<div class="collapse" id="collapseShoppingCart">
 		<div class="card card-body">
 			<table class="table">
