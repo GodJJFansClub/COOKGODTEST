@@ -97,13 +97,13 @@
 										</ul></li>
 
 									<c:if test="${not empty chefVO.chef_ID}">
-										<li><a style="font-weight: bold">主廚專區</a>
+										<li><a href="#" style="font-weight: bold">主廚專區</a>
 											<ul class="dropdown">
 												<li><a href="<%=request.getContextPath()%>/front-end/chef/updateChefResume.jsp">主廚資料管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">節慶主題料理管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/chefDish/addChefDish.jsp">擅長菜色管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/chefSch/addChefSch.jsp">主廚排程管理</a></li>
-												<li><a href="">訂單管理</a>
+												<li><a href="#">訂單管理</a>
 													<ul class="dropdown">
 														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/unCheckMenuOrder.jsp">未審核訂單</a></li>
 														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/unFinishedMenuOrder.jsp">已審核訂單</a></li>
@@ -122,8 +122,11 @@
 													href="<%=request.getContextPath()%>/front-end/foodSup/listFoodMallsByFoodSupID.jsp">食材商品管理</a></li>
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/foodSup/MFSupODs.jsp">訂單管理</a></li>
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">廣告管理</a></li>
+												<li><a >廣告管理</a>
+													<ul class="dropdown">
+														<li><a href="<%=request.getContextPath()%>/front-end/ad/addAd.jsp">新增廣告</a></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/ad/listAllAd.jsp">所有廣告</a></li>
+													</ul></li>
 											</ul></li>
 									</c:if>
 									<c:if test="${not empty custVO.cust_ID}">

@@ -82,7 +82,6 @@ public class ChefSchDAO implements ChefSchDAO_Interface {
 			pstmt.setString(1, chefSchVO.getChef_sch_status());
 			pstmt.setString(2, chefSchVO.getChef_ID());
 			pstmt.setDate(3, chefSchVO.getChef_sch_date());
-
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {

@@ -253,7 +253,6 @@ public class MenuDishJDBCDAO implements MenuDishDAO_interface {
 		}
 		return list;
 	}
-	@Override
 	public void insert2(MenuDishVO menuDishVO, Connection con) {
 	
 		
@@ -293,6 +292,11 @@ public class MenuDishJDBCDAO implements MenuDishDAO_interface {
 				}
 			}
 		}
+	}
+	@Override
+	public List<MenuDishVO> getAllByMenuID(String menu_ID) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }
 	

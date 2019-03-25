@@ -72,7 +72,6 @@ public class MenuOrderServlet extends HttpServlet {
 				errView.forward(request, response);
 			}
 		}
-		//取出一筆訂單準備修改
 		if("getOneForDispaly".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -113,7 +112,7 @@ public class MenuOrderServlet extends HttpServlet {
 				
 				String chef_ID = menuOrderVO.getChef_ID();
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Timestamp date = menuOrderVO.getMenu_od_start();
+				Timestamp date = menuOrderVO.getMenu_od_book();
 				Date chef_sch_date = Date.valueOf(sdFormat.format(date));
 				
 				ChefSchVO chefSchVO = null;

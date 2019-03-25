@@ -12,7 +12,7 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>主廚資料新增 - addCust.jsp</title>
+<title>主廚資料新增</title>
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">

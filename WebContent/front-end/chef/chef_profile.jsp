@@ -171,7 +171,6 @@
 	</section>
 	<!-- ##### Feature Area End ##### -->
 
-
 	<section class="pixel-feature-area d-flex flex-wrap">
 		<!-- Feature Content -->
 		<div class="feature-content">
@@ -190,10 +189,8 @@
 			<div class="feature-thumbnail bg-img jarallax"
 				style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/chefPic.jpg);"></div>
 		
-	</section>
-
 	<!-- ##### Contact Area End #####-->
-
+	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

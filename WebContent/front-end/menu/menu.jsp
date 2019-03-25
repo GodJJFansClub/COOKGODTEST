@@ -13,10 +13,6 @@
 <head>
 <title>The God of Cooking is Coming!</title>
 <style type="text/css">
-.col-2 {
-	background-color: #909497;
-}
-
 .col-4 {
 	margin-top: 30px;
 }
@@ -53,15 +49,14 @@
 									</div>
 									<input type="hidden" name="menu_ID" value="${menuVO.menu_ID}">
 									<input type="hidden" name="action" value="getOneForDisplay">
-									<input type="submit" class="btn btn-success btn-lg btn-block"
-										value="查看更多">
+									<input type="submit" class="btn btn-success btn-lg btn-block" value="查看更多">
 								</form>
 							</div>
 						</c:forEach>
 					</div>
+					<%@ include file="page2.file"%>
 				</div>
 			</div>
-			<%@ include file="page2.file"%>
 			<div class="col-2"></div>
 		</div>
 	</div>

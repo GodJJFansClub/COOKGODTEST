@@ -51,7 +51,7 @@
 											<img class="card-img"src="<%=request.getContextPath()%>/images/noimage.jpg">
 										</c:if>
 										<div class="card-img-overlay">
-											<h5 class="card-title"><font style="font-family: Microsoft JhengHei;font-weight:bolder;color:white;">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</font></h5>
+											<h5 class="card-title"><font style="font-size:22px;font-family: Microsoft JhengHei;font-weight:bolder;color:white;">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</font></h5>
 										</div>
 									</div>
 								</a>

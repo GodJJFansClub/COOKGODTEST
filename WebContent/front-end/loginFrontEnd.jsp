@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=Big5">
-<title>前台login</title>
+<title>登入</title>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
@@ -23,8 +23,10 @@
                 <div class="col-12">
                     <!-- Section Heading -->
                     <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
+                        
+                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo_cut.gif" width="200px"
+                         height="500px"alt="">
                         <h2>登入</h2>
-                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png" alt="">
                     </div>
                 </div>
             </div>

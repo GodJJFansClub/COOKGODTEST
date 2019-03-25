@@ -1,6 +1,9 @@
 package com.dish.model;
 
 import java .util.List;
+import java.util.Set;
+
+import com.fdsview.model.FdsViewVO;
 
 public class DishService {
 	
@@ -60,7 +63,9 @@ public class DishService {
 			return dao.getAll();
 		}
 		
-		
+		public Set<FdsViewVO> getFoodsByDish(String dish_ID){
+			return dao.getFdsByDishID(dish_ID);
+		}
 		
 	}
 
