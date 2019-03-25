@@ -35,7 +35,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 380px;
+  height: 280px;
   padding: 0 35px; }
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .breadcrumb-area1 {

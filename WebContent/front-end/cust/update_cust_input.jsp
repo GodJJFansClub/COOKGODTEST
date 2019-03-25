@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>顧客資料修改</title>
+<title>會員資料修改</title>
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -65,7 +65,7 @@ th, td {
 						<div class="section-heading text-center wow fadeInUp"
 							data-wow-delay="100ms">
 
-							<h2 style="font-weight:bold">顧客資料修改</h2>
+							<h2 style="font-weight:bold">會員資料修改</h2>
 							<img
 								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"alt="">
 
@@ -90,97 +90,96 @@ th, td {
 											name="form1" enctype="multipart/form-data">
 											<table>
 												<tr>
-													<td>顧客編號:<font color=red><b>*</b></font></td>
-													<td><%=custVO.getCust_ID()%></td>
+													<td>會員編號</td>
+													<td>
+														<input type="TEXT" readonly name="cust_acc" size="45" value="<%=custVO.getCust_ID()%>" />
+													</td>
 												</tr>
 												<tr>
-													<td>顧客帳號:</td>
+													<td>會員帳號</td>
 													<td><input type="TEXT" name="cust_acc" size="45"
 														value="<%=custVO.getCust_acc()%>" /></td>
 												</tr>
 
 												<tr>
-													<td>顧客密碼:</td>
+													<td>會員密碼</td>
 													<td><input type="TEXT" name="cust_pwd" size="45"
 														value="<%=custVO.getCust_pwd()%>" /></td>
 												</tr>
 
 												<tr>
-													<td>顧客姓名:</td>
+													<td>會員姓名</td>
 													<td><input type="TEXT" name="cust_name" size="45"
 														value="<%=custVO.getCust_name()%>" /></td>
 												</tr>
 
 												<tr>
-													<td>顧客身分證字號:</td>
+													<td>會員身分證字號</td>
 													<td><input type="TEXT" name="cust_pid" size="45"
 														value="<%=custVO.getCust_pid()%>" /></td>
 												</tr>
 
 												<tr>
-													<td>顧客性別:</td>
-													<c:if test="${custVO.cust_sex.equals('M')}" var="true"
-														scope="session">
-														<td><input type="radio" name="cust_sex" size="10"
-															value="M" checked />男 <input type="radio"
-															name="cust_sex" size="10" value="F" />女</td>
-													</c:if>
-
-													<c:if test="${custVO.cust_sex.equals('F')}" var="true"
-														scope="session">
-														<td><input type="radio" name="cust_sex" size="10"
-															value="M" checked />男 <input type="radio"
-															name="cust_sex" size="10" value="F" checked />女</td>
-													</c:if>
-
+													<td>會員性別</td>
+													<td>
+														<div class="form-check form-check-inline">
+														  <input class="form-check-input" type="radio" name="cust_sex" id="inlineRadio1" value="M" ${custVO.cust_sex=='M'||custVO ==null ? 'checked':''} style="width:15px;height:15px;">
+														  <label class="form-check-label" for="inlineRadio1">男</label>
+														</div>
+														<div class="form-check form-check-inline">
+														  <input class="form-check-input" type="radio" name="cust_sex" id="inlineRadio2" value="F" ${custVO.cust_sex=='F'? 'checked':''  } style="width:15px;height:15px;">
+														  <label class="form-check-label" for="inlineRadio2">女</label>
+														</div>
+													</td>
 												</tr>
 
 												<tr>
-													<td>顧客生日:</td>
+													<td>會員生日</td>
 													<td><input type="text" name="cust_brd" id="f_date1"
 														size="45" value="<%=custVO.getCust_brd()%>"></td>
 												</tr>
 
 												<tr>
-													<td>顧客電話:</td>
+													<td>會員電話</td>
 													<td><input type="TEXT" name="cust_tel" size="45"
 														value="<%=custVO.getCust_tel()%>" /></td>
 												</tr>
 
 												<tr>
-													<td>顧客地址:</td>
+													<td>會員地址</td>
 													<td><input type="TEXT" name="cust_addr" size="45"
 														value="<%=custVO.getCust_addr()%>" /></td>
 												</tr>
 
 												<tr>
-													<td>顧客信箱:</td>
+													<td>會員信箱</td>
 													<td><input type="TEXT" name="cust_mail" size="45"
 														value="<%=custVO.getCust_mail()%>" /></td>
 												</tr>
 
 												
 												<tr>
-													<td>顧客暱稱:</td>
+													<td>會員暱稱:</td>
 													<td><input type="TEXT" name="cust_niname" size="45"
 														value="<%=custVO.getCust_niname()%>" /></td>
 												</tr>
 
 												<tr>
-													<td>顧客大頭照:</td>
-													<td><input type="file" name="cust_pic" size="45"
-														id="doc" onchange="javascript:setImagePreview();" /></td>
+													<td>會員大頭照</td>
+													<td>
+													<c:if test="${not empty custVO.cust_pic}">
+														<img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}">
+													</c:if>
+													<input type="file" name="cust_pic" size="45" id="doc" onchange="javascript:setImagePreview();" />
+													</td>
 												</tr>
-
-													<input type="hidden" name="cust_status"
-														size="45" value="<%=custVO.getCust_status()%>" />
 											</table>
 											<div id="localImag">
 												<img id="preview" width=-1 height=-1 style="diplay: none" />
 											</div>
 											<br> <input type="hidden" name="action" value="update">
-											<input type="hidden" name="cust_ID"
-												value="<%=custVO.getCust_ID()%>">
+											<input type="hidden" name="cust_status" size="45" value="<%=custVO.getCust_status()%>">
+											<input type="hidden" name="cust_ID" value="<%=custVO.getCust_ID()%>">
 											<button type="submit" class="btn pixel-btn wow fadeInUp"
 												data-wow-delay="300ms">送出</button>
 										</form>
@@ -217,12 +216,12 @@ th, td {
  	       timepicker:true,       //timepicker:true,
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=custVO.getCust_brd()%>'
+ 		   value: '<%=custVO.getCust_brd()%>',
  		   //value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
-	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+			maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	});
 
 	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------

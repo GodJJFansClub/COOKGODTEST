@@ -156,6 +156,9 @@ public class ChefServlet extends HttpServlet {
 
 				//15.簡介
 				String chef_resume = request.getParameter("chef_resume");
+				if (chef_resume == null || chef_resume.trim().length() == 0) {
+					errorMsgs.add("簡介請勿空白");
+				}
 
 				// set
 				CustVO custVO = new CustVO();

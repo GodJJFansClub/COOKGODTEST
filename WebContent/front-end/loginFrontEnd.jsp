@@ -37,9 +37,9 @@
                         <form action="<%=request.getContextPath()%>/front-end/login.do" method="post">
                            
                            <b>account:</b>
-                            <input type=text name="account"  class="form-control wow fadeInUp" data-wow-delay="300ms" placeholder="請輸入帳號">
+                            <input type=text name="account"  class="form-control wow fadeInUp" data-wow-delay="300ms" placeholder="請輸入帳號" autocomplete="off">
                             <b>password:</b>
-                            <input  type=password name="password" class="form-control wow fadeInUp" data-wow-delay="500ms" placeholder="請輸入密碼">
+                            <input  type=password name="password" class="form-control wow fadeInUp" data-wow-delay="500ms" placeholder="請輸入密碼" autocomplete="off">
                            
                           
                            <input type="hidden" name="action" value="cust">

@@ -340,4 +340,16 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<MenuOrderVO> getAllByCustID(String cust_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MenuOrderVO> getFinished(String chef_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

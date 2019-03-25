@@ -20,19 +20,31 @@
 
 		<!-- Feature Content -->
 		<div class="feature-content">
-			<h1 style="font-weight: bold">主廚資料</h1>
+			<h1 style="font-weight: bolder;">個人資料</h1>
 
 			<div class="single-testimonial-slide">
 				<c:if test="${not empty custVO.cust_pic}">
-					<img
-						src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}">
+					<img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}">
 				</c:if>
 				<c:if test="${empty custVO.cust_pic}">
-					<img src="<%=request.getContextPath()%>/images/null2.jpg">
+					<img src="<%=request.getContextPath()%>/images/noimage.jpg">
 				</c:if>
-				
-				<h4y style="font-weight:bold">${custVO.cust_name}</h4>
-				<span>${custVO.cust_niname}</span>
+				<c:if test="${not empty custVO.cust_niname}">
+					<h4 style="font-weight:bold">${custVO.cust_niname}</h4>
+				</c:if>
+				<c:if test="${empty custVO.cust_niname}">
+					<h4 style="font-weight:bold">${custVO.cust_name}</h4>
+				</c:if>
+			</div>
+			
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>主廚姓名</h6>
+					<p>${custVO.cust_name}</p>
+				</div>
 			</div>
 
 
@@ -41,28 +53,37 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客帳號</h6>
+					<h6>主廚帳號</h6>
 					<p>${custVO.cust_acc}</p>
 				</div>
 			</div>
-
+			
 			<div class="single-contact-content d-flex">
 				<div class="icon">
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客密碼</h6>
-					<p>${custVO.cust_pwd}</p>
+					<h6>主廚生日</h6>
+					<p>${custVO.cust_brd}</p>
+				</div>
+			</div>
+			
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>身份證字號</h6>
+					<p>${custVO.cust_pid}</p>
 				</div>
 			</div>
 
-
 			<div class="single-contact-content d-flex">
 				<div class="icon">
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客性別</h6>
+					<h6>性別</h6>
 					<c:if test="${custVO.cust_sex.equals('M')}" var="true">
 						<p>男生</p>
 					</c:if>
@@ -77,17 +98,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>狀態</h6>
-					<p>${chefStatusMap[chefVO.chef_status]}</p>
-				</div>
-			</div>
-
-			<div class="single-contact-content d-flex">
-				<div class="icon">
-					<i class="fa fa-star" aria-hidden="true"></i>
-				</div>
-				<div class="text">
-					<h6>聯絡電話</h6>
+					<h6>電話</h6>
 					<p>${custVO.cust_tel}</p>
 				</div>
 			</div>
@@ -107,40 +118,54 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客身份證字號</h6>
-					<p>${custVO.cust_pid}</p>
-				</div>
-			</div>
-
-			<div class="single-contact-content d-flex">
-				<div class="icon">
-					<i class="fa fa-star" aria-hidden="true"></i>
-				</div>
-				<div class="text">
 					<h6>E-Mail</h6>
 					<p>${custVO.cust_mail}</p>
 				</div>
 			</div>
-
+			
 			<div class="single-contact-content d-flex">
 				<div class="icon">
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>聯絡人生日</h6>
-					<p>${custVO.cust_brd}</p>
+					<h6>主廚服務地區</h6>
+					<c:if test="${chefVO.chef_area=='0'}"><p>北部</p></c:if>
+					<c:if test="${chefVO.chef_area=='1'}"><p>中部</p></c:if>
+					<c:if test="${chefVO.chef_area=='2'}"><p>南部</p></c:if>
+					<c:if test="${chefVO.chef_area=='3'}"><p>東部</p></c:if>
 				</div>
 			</div>
-
+			
 			<div class="single-contact-content d-flex">
 				<div class="icon">
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>聯絡人註冊日期</h6>
+					<h6>主廚註冊日期</h6>
 					<p>${custVO.cust_reg}</p>
 				</div>
 			</div>
+
+			<div class="single-contact-content d-flex">
+				<div class="icon">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<h6>主廚狀態</h6>
+					<c:if test="${chefVO.chef_status=='b0'}"><p>未審核</p></c:if>
+					<c:if test="${chefVO.chef_status=='b1'}"><p>正常</p></c:if>
+					<c:if test="${chefVO.chef_status=='b2'}"><p>審核未通過</p></c:if>
+					<c:if test="${chefVO.chef_status=='b3'}"><p>停權</p></c:if>
+				</div>
+			</div>
+			
+			<FORM METHOD="post"
+				ACTION="<%=request.getContextPath()%>/cust/cust.do"
+				style="margin-bottom: 0px;">
+				<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
+				<input type="hidden" name="action" value="getOne_For_Update">
+				<button type="submit" class="btn pixel-btn btn-3 m-2" value="修改">修改資料</button>
+			</FORM>
 
 		</div>
 	</section>
@@ -156,18 +181,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>主廚服務地區</h6>
-					<p>${chefVO.chef_area}</p>
-				</div>
-			</div>
-
-
-			<div class="single-contact-content d-flex">
-				<div class="icon">
-					<i class="fa fa-star" aria-hidden="true"></i>
-				</div>
-				<div class="text">
-					<h6>介紹</h6>
+					<h6>個人簡介</h6>
 					<p>${chefVO.chef_resume}</p>
 				</div>
 			</div>

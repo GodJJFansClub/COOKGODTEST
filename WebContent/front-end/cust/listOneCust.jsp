@@ -10,7 +10,7 @@
 
 <html>
 <head>
-<title>顧客資料</title>
+<title>會員資料</title>
 
 
 </head>
@@ -31,7 +31,7 @@
 
 		<!-- Feature Content -->
 		<div class="feature-content">
-			<h1 style="font-weight: bold">顧客資料</h1>
+			<h1 style="font-weight: bold">會員資料</h1>
 			<%
 				if (custVO != null) {
 			%>
@@ -44,9 +44,8 @@
 				<c:if test="${empty custVO.cust_pic}">
 					<img src="<%=request.getContextPath()%>/images/null2.jpg">
 				</c:if>
-				</td>
 
-				<h4y style="font-weight:bold"><%=custVO.getCust_name()%></h4>
+				<h4 style="font-weight:bold"><%=custVO.getCust_name()%></h4>
 				<span><%=custVO.getCust_niname()%></span>
 			</div>
 
@@ -56,19 +55,18 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客帳號</h6>
+					<h6>帳號</h6>
 					<p><%=custVO.getCust_acc()%>
 					</p>
 				</div>
 			</div>
-
 
 			<div class="single-contact-content d-flex">
 				<div class="icon">
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客密碼</h6>
+					<h6>密碼</h6>
 					<p><%=custVO.getCust_pwd()%></p>
 				</div>
 			</div>
@@ -78,7 +76,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客性別</h6>
+					<h6>性別</h6>
 					<c:if test="${custVO.cust_sex.equals('M')}" var="true">
 						<p>男生</p>
 					</c:if>
@@ -93,7 +91,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客電話</h6>
+					<h6>電話</h6>
 					<p><%=custVO.getCust_tel()%></p>
 				</div>
 			</div>
@@ -103,7 +101,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客地址</h6>
+					<h6>地址</h6>
 					<p><%=custVO.getCust_addr()%></p>
 				</div>
 			</div>
@@ -113,7 +111,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客身份證字號</h6>
+					<h6>身份證字號</h6>
 					<p><%=custVO.getCust_pid()%></p>
 				</div>
 			</div>
@@ -133,7 +131,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客生日</h6>
+					<h6>生日</h6>
 					<p><%=custVO.getCust_brd()%></p>
 				</div>
 			</div>
@@ -143,7 +141,7 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客註冊日</h6>
+					<h6>註冊日</h6>
 					<p><%=custVO.getCust_reg()%></p>
 				</div>
 			</div>
@@ -153,9 +151,9 @@
 					<i class="fa fa-star" aria-hidden="true"></i>
 				</div>
 				<div class="text">
-					<h6>顧客狀態</h6>
+					<h6>帳戶狀態</h6>
 					<c:if test="${custVO.cust_status.equals('a0')}" var="true">
-						<p>已啟用</p>
+						<p>正常</p>
 					</c:if>
 					<c:if test="${custVO.cust_status.equals('a1')}" var="true">
 						<p>停權</p>

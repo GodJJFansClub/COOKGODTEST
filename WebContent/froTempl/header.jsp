@@ -99,20 +99,19 @@
 									<c:if test="${not empty chefVO.chef_ID}">
 										<li><a style="font-weight: bold">主廚專區</a>
 											<ul class="dropdown">
-
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">節慶主題料理管理</a></li>
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/chefDish/addChefDish.jsp">擅長菜色管理</a></li>
-												<li><a
-													href="<%=request.getContextPath()%>/front-end/chefSch/addChefSch.jsp">主廚排程</a></li>
-												<li><a href="">訂單審核</a>
+												<li><a href="<%=request.getContextPath()%>/front-end/chef/updateChefResume.jsp">主廚資料管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">節慶主題料理管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/chefDish/addChefDish.jsp">擅長菜色管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/chefSch/addChefSch.jsp">主廚排程管理</a></li>
+												<li><a href="">訂單管理</a>
 													<ul class="dropdown">
-
 														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/unCheckMenuOrder.jsp">未審核訂單</a></li>
-														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/unFinishedMenuOrder.jsp">未完成訂單</a></li>
-													</ul></li>
-											</ul></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/unFinishedMenuOrder.jsp">已審核訂單</a></li>
+														<li><a href="<%=request.getContextPath()%>/front-end/menuOrder/FinishedMenuOrder.jsp">已完成訂單</a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
 									</c:if>
 									<c:if test="${not empty foodSupVO.food_sup_ID}">
 										<li><a style="font-weight: bold">食材供應商專區</a>
@@ -128,7 +127,7 @@
 											</ul></li>
 									</c:if>
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a style="font-weight: bold">顧客專區</a>
+										<li><a style="font-weight: bold">會員專區</a>
 											<ul class="dropdown">
 												<c:choose>
 													<c:when
@@ -147,9 +146,7 @@
 													<c:when
 														test="${not empty custVO.cust_ID and not empty chefVO.chef_ID}">
 														<li><a
-															href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">主廚資料</a></li>
-														<li><a
-															href="<%=request.getContextPath()%>/front-end/chef/updateChefResume.jsp">修改主廚資料</a></li>
+															href="<%=request.getContextPath()%>/front-end/chef/chef_profile.jsp">查看個人資料</a></li>
 													</c:when>
 												</c:choose>
 												<li><a
@@ -160,8 +157,14 @@
 									</c:if>
 
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a>Hello:<font style="font-weight: bold"
-												color=#ea7500> ${custVO.cust_niname} </font>您好
+										<li><a>Hello:<font style="font-weight: bold" color=#ea7500> 
+												<c:if test="${not empty custVO.cust_niname}">
+													${custVO.cust_niname}
+												</c:if>
+												<c:if test="${empty custVO.cust_niname}">
+													${custVO.cust_name}
+												</c:if> </font>您好
+												</a></li>
 												<li><a><i class="fa fa-dribbble"></i><span
 														class="badge badge-danger">${broadcastSvc.countSelect(custVO.cust_ID)}</span></a>
 													<ul class="dropdown">

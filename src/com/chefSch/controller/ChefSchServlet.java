@@ -56,7 +56,7 @@ public class ChefSchServlet extends HttpServlet {
 				
 				if(!errorMsgs.isEmpty()) {
 					request.setAttribute("chefSchVO", chefSchVO);
-					RequestDispatcher errView = request.getRequestDispatcher("/chefSch/addChefSch.jsp"); 
+					RequestDispatcher errView = request.getRequestDispatcher("/front-end/chefSch/addChefSch.jsp"); 
 					errView.forward(request, response);
 					return;
 				}
@@ -68,18 +68,18 @@ public class ChefSchServlet extends HttpServlet {
 				}catch(Exception e){
 					errorMsgs.add("排程已存在");
 					session.setAttribute("chefSchVO", chefSchVO);
-					RequestDispatcher errView = request.getRequestDispatcher("/chefSch/addChefSch.jsp"); 
+					RequestDispatcher errView = request.getRequestDispatcher("/front-end/chefSch/addChefSch.jsp"); 
 					errView.forward(request, response);
 					return;
 				}
 				//3.新增成功
-				RequestDispatcher successView = request.getRequestDispatcher("/chefSch/addChefSch.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/front-end/chefSch/addChefSch.jsp");
 				successView.forward(request, response);				
 			//其他可能的Error
 			}catch(Exception e){
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher errView = 
-						request.getRequestDispatcher("/chefSch/addChefSch.jsp");
+						request.getRequestDispatcher("/front-end/chefSch/addChefSch.jsp");
 				errView.forward(request, response);
 			}
 		}
@@ -102,12 +102,12 @@ public class ChefSchServlet extends HttpServlet {
 				//資料庫取出的menuOrderVO物件,存入request
 				request.setAttribute("chefVO", chefVO);
 				RequestDispatcher successView = 
-						request.getRequestDispatcher("/chefSch/updateChefSch.jsp");
+						request.getRequestDispatcher("/front-end/chefSch/updateChefSch.jsp");
 				successView.forward(request, response);
 			}catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher errView = 
-						request.getRequestDispatcher("/chefSch/listAllChefSch.jsp");
+						request.getRequestDispatcher("/front-end/chefSch/listAllChefSch.jsp");
 				errView.forward(request, response);
 			}	
 		}
@@ -130,7 +130,7 @@ public class ChefSchServlet extends HttpServlet {
 				if(!errorMsgs.isEmpty()) {
 					request.setAttribute("chefSchVO", chefSchVO);
 					RequestDispatcher errView = 
-							request.getRequestDispatcher("/chefSch/updateChefSch.jsp");
+							request.getRequestDispatcher("/front-end/chefSch/updateChefSch.jsp");
 					errView.forward(request, response);
 					return;
 				}
@@ -142,12 +142,12 @@ public class ChefSchServlet extends HttpServlet {
 				//3.修改完成，準備轉交
 				request.setAttribute("chefSchVO", chefSchVO);
 				RequestDispatcher successView = 
-						request.getRequestDispatcher("/chefSch/listOneChefSch.jsp");
+						request.getRequestDispatcher("/front-end/chefSch/listOneChefSch.jsp");
 				successView.forward(request, response);
 			}catch (Exception e) {
 				errorMsgs.add("Update error:" + e.getMessage());
 				RequestDispatcher errView = 
-						request.getRequestDispatcher("/chefSch/updateChefSch.jsp");
+						request.getRequestDispatcher("/front-end/chefSch/updateChefSch.jsp");
 				errView.forward(request, response);
 			}	
 		}
@@ -168,12 +168,12 @@ public class ChefSchServlet extends HttpServlet {
 				request.setAttribute("chefVO", chefVO);
 				
 				//3.刪除完成，準備轉交
-				RequestDispatcher sucessView = request.getRequestDispatcher("/chefSch/addChefSch.jsp");
+				RequestDispatcher sucessView = request.getRequestDispatcher("/front-end/chefSch/addChefSch.jsp");
 				sucessView.forward(request, response);
 				//其他可能的錯誤處理
 			}catch(Exception e){
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher errView = request.getRequestDispatcher("/chefSch/addChefSch.jsp");
+				RequestDispatcher errView = request.getRequestDispatcher("/front-end/chefSch/addChefSch.jsp");
 				errView.forward(request, response);
 			}
 		}

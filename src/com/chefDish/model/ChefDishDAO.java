@@ -25,7 +25,7 @@ public class ChefDishDAO implements ChefDishDAO_Interface{
 	}
 	
 	private static final String Insert_Stmt = 
-			"INSERT INTO CHEF_DISH (CHEF_ID,DISH_ID,CHEF_DISH_STATUS) VALUES (?,?,'0')";
+			"INSERT INTO CHEF_DISH (CHEF_ID,DISH_ID,CHEF_DISH_STATUS) VALUES (?,?,'d0')";
 	private static final String Updata_Stmt = 
 			"UPDATE CHEF_DISH SET CHEF_DISH_STATUS = ? WHERE CHEF_ID = ? AND DISH_ID = ?";
 	private static final String Delete_Stmt = 
