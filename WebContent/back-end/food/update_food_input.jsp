@@ -32,16 +32,18 @@
 				</c:if>
 				<form method="post"
 					action="<%=request.getContextPath()%>/food/food.do" name="form1">
-					<table>
+					<table align="center">
 						<tr>
 							<td>食材編號:<font color=red><b>*</b></font></td>
 							<td>${foodVO.food_ID}</td>
 						</tr>
 						<tr>
 							<td>食材名稱:</td>
-							<td><input type="TEXT" name="food_name" size="45"
+							<td><input type="TEXT" name="food_name" size="20"
 								value="${foodVO.food_name}" /></td>
+						
 						</tr>
+						
 						<tr>
 							<td>食材種類:</td>
 							<td>
@@ -53,12 +55,13 @@
 								</select>
 							</td>
 						</tr>
+						
 					</table>
 					<br> <input type="hidden" name="action" value="update">
 					<input type="hidden" name="food_ID" value="${foodVO.food_ID}">
 					<input type="submit" value="送出修改">
 				</form>
-<<%--=================================工作區================================================--%>			
+<%--=================================工作區================================================--%>			
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 <%--=================================jQuery===============================================--%>
 			</div>

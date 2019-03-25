@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.cust.model.CustVO" %>
-<<<<<<< HEAD
 <%@ page import="java.util.List" %>
 <%@ page import="com.foodMall.model.FoodMallVO" %>
-=======
->>>>>>> branch 'master' of https://github.com/GodJJFansClub/COOKGODTEST.git
 <jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
 <jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
 <jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService" />
 <jsp:useBean id="festMenuSvc" class="com.festMenu.model.FestMenuService"/>
 <jsp:useBean id="checkType" class="com.mall.controller.CheckType"/>
-
+<%
+	List<FoodMallVO> list = foodMallSvc.getAllStatus("p4"); 
+	pageContext.setAttribute("list", list);
+%>
 <html>
 <head>
 </head>
@@ -29,16 +29,10 @@
 			</ul>
 		</c:if>
 		<div class="container">
-			
-			
 			<div class="row">
-<<<<<<< HEAD
 				<%@ include file="/front-end/foodMall/page1.file" %>
 				<c:forEach var="foodMallVO" items="${list}" varStatus="s" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
-=======
-				<c:forEach var="foodMallVO" items='${foodMallSvc.getAllStatus("p4")}' varStatus="s">
->>>>>>> branch 'master' of https://github.com/GodJJFansClub/COOKGODTEST.git
 					<div class="col-3">
 						<div id="foodMCard${s.index}" class="card foodMCard">
 				  			<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" class="card-img-top">
@@ -66,6 +60,7 @@
 						</div>
 	            	</div>
 				</c:forEach>
+				<%@ include file="/front-end/foodMall/page2.file" %>
 	         </div>
 	    </div>
 	</section>

@@ -9,19 +9,23 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>廣告資料修改 </title>
-<link href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+<title>廣告資料修改</title>
+<link
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
+	rel="stylesheet">
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
 	border: 2px solid black;
 	text-align: center;
 }
+
 table#table-1 h4 {
 	color: red;
 	display: block;
 	margin-bottom: 1px;
 }
+
 h4 {
 	color: blue;
 	display: inline;
@@ -30,123 +34,225 @@ h4 {
 
 <style>
 table {
-	width: 450px;
+	width: 600px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
+
 table, th, td {
 	border: 0px solid #CCCCFF;
 }
+
 th, td {
 	padding: 1px;
+}
+</style>
+<style>
+
+/* :: 12.0 Blog Area CSS */
+.breadcrumb-area1 {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	height: 380px;
+	padding: 0 35px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.breadcrumb-area1 {
+		height: 300px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.breadcrumb-area1 {
+		height: 280px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.breadcrumb-area1 {
+		height: 250px;
+	}
+}
+
+.breadcrumb-area1::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	background-color: rgba(163, 163, 163, 0.3);
+}
+
+.breadcrumb-area1 .breadcrumb-content {
+	text-align: center;
+}
+
+.breadcrumb-area1 .breadcrumb-content h2 {
+	color: #ffffff;
+	font-size: 60px;
+	font-weight: 600;
+	text-transform: capitalize;
+	margin-bottom: 0;
+	display: inline-block;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.breadcrumb-area1 .breadcrumb-content h2 {
+		font-size: 42px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.breadcrumb-area1 .breadcrumb-content h2 {
+		font-size: 36px;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.breadcrumb-area1 .breadcrumb-content h2 {
+		font-size: 24px;
+	}
 }
 </style>
 
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-
-	 <!-- ##### Contact Area Start #####-->
-    <section class="contact-area section-padding-100">
-
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>廣告資料修改 </h3>
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/front-end/ad/select_page.jsp">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
-
-	<h3>資料修改:</h3>
-
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do"
-		name="form1" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<td>廣告編號:<font color=red><b>*</b></font></td>
-				<td><%=adVO.getAd_ID()%></td>
-			</tr>
-			<tr>
-				<td>廣告標題:</td>
-				<td><input type="TEXT" name="ad_title" size="45"
-					value="<%=adVO.getAd_title()%>" /></td>
-			</tr>
-			<tr>
-				<td>廣告圖片:</td>
-				<td><input type="file" name="ad_pic" size="45" id="doc"
-					onchange="javascript:setImagePreview();" /></td>
-			</tr>
-
-			<tr>
-				<td>廣告內文:</td>
-				<td><input type="TEXT" name="ad_con" size="45"
-					value="<%=adVO.getAd_con()%>" /></td>
-			</tr>
-			
-			<tr>
-				<td>廣告上架日期:</td>
-				<td><input type="text" name="ad_start" id="f_date1" size="45"></td>
-			</tr>
-			
-			<tr>
-				<td>廣告下架日期:</td>
-				<td><input type="text" name="ad_end" id="f_date2" size="45"></td>
-			</tr>
-
-			<tr>
-				<td>狀態:</td>
-				<td><input type="TEXT" name="ad_status" size="45"
-					value="<%=adVO.getAd_status()%>" /></td>
-			</tr>
-
-			<tr>
-				<td>廣告地址:</td>
-				<td><input type="TEXT" name="food_sup_ID" size="45"
-					value="<%=adVO.getFood_sup_ID()%>" /></td>
-			</tr>
-
-			
-
-
-		</table>
-		<div id="localImag">
-			<img id="preview" width=-1 height=-1 style="diplay: none" />
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<br>
+	<br>
+	<br>
+	<br>
+	<section class="breadcrumb-area1 bg-img bg-overlay jarallax"
+		style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodSupPic.jpg);">
+		<div class="container-fluid h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-12">
+					<div class="breadcrumb-content">
+						<h2 style="font-weight: bold">食材供應商專區-廣告管理</h2>
+					</div>
+				</div>
+			</div>
 		</div>
-		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="ad_ID" value="<%=adVO.getAd_ID()%>">
-		<input type="submit" value="送出修改">
-	</FORM>
+	</section>
+	<!-- ##### Breadcrumb Area End ##### -->
 
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
- </section>
-    <!-- ##### Contact Area End #####-->
+	<!-- ##### Contact Area Start #####-->
+	<section class="contact-area section-padding-100">
+		<section class="contact-area section-padding-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- Section Heading -->
+						<div class="section-heading text-center wow fadeInUp"
+							data-wow-delay="100ms">
 
+							<h2 style="font-weight: bold">廣告資料修改</h2>
+							<img
+								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"
+								alt="">
+
+
+
+							<%-- 錯誤表列 --%>
+							<c:if test="${not empty errorMsgs}">
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+
+							<div class="row justify-content-center">
+								<div class="col-12 col-lg-8">
+									<!-- Contact Form -->
+									<div class="contact-form-area text-center">
+									
+										<FORM METHOD="post"
+											ACTION="<%=request.getContextPath()%>/ad/ad.do" name="form1"
+											enctype="multipart/form-data">
+											<table>
+												<tr>
+													<td>廣告編號:<font color=red><b>*</b></font></td>
+													<td><%=adVO.getAd_ID()%></td>
+												</tr>
+												<tr>
+													<td>廣告標題:</td>
+													<td><input type="TEXT" name="ad_title" size="45"
+														value="<%=adVO.getAd_title()%>" /></td>
+												</tr>
+												<tr>
+													<td>廣告圖片:</td>
+													<td><input type="file" name="ad_pic" size="45"
+														id="doc" onchange="javascript:setImagePreview();" /></td>
+												</tr>
+
+												<tr>
+													<td>廣告上架日期:</td>
+													<td><input type="text" name="ad_start" id="f_date1"
+														size="45"></td>
+												</tr>
+
+												<tr>
+													<td>廣告下架日期:</td>
+													<td><input type="text" name="ad_end" id="f_date2"
+														size="45"></td>
+												</tr>
+
+												<tr>
+													<td>廣告地址:</td>
+													<td><input type="TEXT" name="food_sup_ID" size="45"
+														value="<%=adVO.getFood_sup_ID()%>" /></td>
+												</tr>
+												
+												<tr>
+													<td>廣告內文:</td>
+													<td>
+													<textarea type="TEXT"  name="ad_con" class="form-control" value="<%=adVO.getAd_con()%>"></textarea>
+													</td>
+												</tr>
+
+
+
+
+											</table>
+											<div id="localImag">
+												<img id="preview" width=-1 height=-1 style="diplay: none" />
+											</div>
+											<br> <input type="hidden" name="action" value="update">
+											<input type="hidden" name="ad_ID"
+												value="<%=adVO.getAd_ID()%>">
+											<button type="submit" class="btn pixel-btn wow fadeInUp"
+												data-wow-delay="300ms">送出</button>
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+		</section>
+		<!-- ##### Contact Area End #####-->
+
+
+
+	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:true,       //timepicker:true,
- 	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
- 		   value: '${adVO.ad_start}', // value:   new Date(),
+	$.datetimepicker.setLocale('zh');
+	$('#f_date1').datetimepicker({
+		theme : '', //theme: 'dark',
+		timepicker : true, //timepicker:true,
+		step : 60, //step: 60 (這是timepicker的預設間隔60分鐘)
+		format : 'Y-m-d H:i:s', //format:'Y-m-d H:i:s',
+		value : '${adVO.ad_start}', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
@@ -196,14 +302,15 @@ th, td {
 	//      }});
 </script>
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date2').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:true,       //timepicker:true,
- 	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
- 		   value: '${adVO.ad_end}', });
- 		   // value:   new Date(),
+	$.datetimepicker.setLocale('zh');
+	$('#f_date2').datetimepicker({
+		theme : '', //theme: 'dark',
+		timepicker : true, //timepicker:true,
+		step : 60, //step: 60 (這是timepicker的預設間隔60分鐘)
+		format : 'Y-m-d H:i:s', //format:'Y-m-d H:i:s',
+		value : '${adVO.ad_end}',
+	});
+	// value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前

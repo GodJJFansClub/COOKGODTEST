@@ -116,7 +116,7 @@ th, td {
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold">食材供應商專區-廣告管理</h2>
+                        <h2 style="font-weight:bold">廣告管理-所有廣告</h2>
                     </div>
                 </div>
             </div>
@@ -124,61 +124,52 @@ th, td {
     </section>
     <!-- ##### Breadcrumb Area End ##### -->
 
-	<!-- ##### Portfolio Area Start ###### -->
-    <div class="pixel-portfolio-area section-padding-100-0">
-    <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h2>所有廣告</h2>
-                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo.gif" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-    
-    
-       <div class="pixel-portfolio">
-        
-        <c:forEach var="adVO" items="${list}" >
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+
+	<table>
+		<tr>
+			<th>廣告編號</th>
+			<th>廣告標題</th>
+			<th>廣告上架日期</th>
+			<th>廣告下架日期</th>
+			<th>廣告狀態</th>
+			<th>食材供應商</th>
+		</tr>
+		
+		<c:forEach var="adVO" items="${list}" >
 			
 			<c:if test="${adVO.food_sup_ID == foodSupVO.getFood_sup_ID()}">
+			<tr>
+				<td>${adVO.ad_ID}</td>
+				<td>${adVO.ad_title}</td>
+				<td>${adVO.ad_start}</td>
+				<td>${adVO.ad_end}</td>
+				<td>${adStatusMap[adVO.ad_status]}</td>
+				<td>${adVO.food_sup_ID}</td>
 			
-			<div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s">
-                <img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}" width="800px" height="600px" alt="">
-                <div class="hover-content text-center d-flex align-items-center justify-content-center">
-                    <div class="hover-text">
-                        
-                        <h3>${adVO.ad_title}</h3>
-                     		<h4>上架時間</h4>
-				<a>${adVO.ad_start}</a><br>
-							<h4>審核狀態</h4>
-				<a>${adStatusMap[adVO.ad_status]}</a>
-			
+				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/ad/ad.do"
 						style="margin-bottom: 0px;">
-						<button type="submit" class="btn btn-info"
-												data-wow-delay="300ms">修改內容</button><input type="hidden"
-							name="ad_ID" value="${adVO.ad_ID}">
-							 <input
+						<input type="submit" value="修改"> <input type="hidden"
+							name="ad_ID" value="${adVO.ad_ID}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
+				</td>
 				
-                    </div>
-                </div>
-            </div>
-			
+			</tr>
 			</c:if>
 		</c:forEach>
 	</table>
-
-
-        </div>
-    </div>
-
+	
 
     <!-- ##### Contact Area End #####-->
 

@@ -11,9 +11,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>顧客資料修改</title>
 
-
-
-
 </head>
 <body bgcolor='white'>
 		<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"

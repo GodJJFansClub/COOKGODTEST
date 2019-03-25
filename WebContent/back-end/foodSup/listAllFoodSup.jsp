@@ -4,7 +4,7 @@
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <html>
 <head>
-<title></title>
+<link href="../../dist/css/style.min.css" rel="stylesheet">
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
@@ -24,33 +24,44 @@
 						</c:forEach>
 					</ul>
 				</c:if>
-				<div class="table-responsive">
-				<table class="table">
-					<tr>
-						<th>食材供應商編號</th>
-						<th>食材供應商名稱</th>
-						<th>聯絡電話</th>
-						<th>狀態</th>
-						<th>更改狀態</th>
-					</tr>
+				
+				<div class="col">
+					<div class="card">
+
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th scope="col">食材供應商編號</th>
+										<th scope="col">食材供應商名稱</th>
+										<th scope="col">聯絡電話</th>
+										<th scope="col">狀態</th>
+										<th scope="col">更改狀態</th>
+										
+									</tr>
+								</thead>
+				
 					<c:forEach var="foodSupVO" items="${foodSupSvc.all}">
 						<tr class="foodSupEntiy">
-							<td>${foodSupVO.food_sup_ID}</td>
-							<td>${foodSupVO.food_sup_name}</td>
-							<td>${foodSupVO.food_sup_tel}</td>
-							<td>${foodSupStatusMap[foodSupVO.food_sup_status]}</td>
+							<th scope="row">${foodSupVO.food_sup_ID}</th>
+							<th scope="row">${foodSupVO.food_sup_name}</th>
+							<th scope="row">${foodSupVO.food_sup_tel}</th>
+							<th scope="row">${foodSupStatusMap[foodSupVO.food_sup_status]}</th>
 
-							<td>
+							<th scope="row">
 							<form method="post" action="<%=request.getContextPath()%>/foodSup/foodSup.do">
 								<button id="update">修改</button>
 								<input type="hidden" id="food_sup_ID" name="food_sup_ID" value="${foodSupVO.food_sup_ID}">
 								<input type="hidden" id="action" name="action">
 								<input type="hidden" id="requestURL" name="requestURL" value="<%=request.getServletPath()%>">
 							</form>
-							</td>
+							</th>
 						</tr>
 					</c:forEach>
 				</table>
+				</div>
+					</div>
+				</div>
 				<%if (request.getAttribute("listFoodMalls_ByFood_sup_ID") != null ) {%>
 					<jsp:include page="/back-end/foodSup/listFoodMalls_ByFood_sup_ID.jsp" flush="true" />
 				<%}%>
@@ -60,7 +71,7 @@
 			</div>
 		</div>
 	</div>
-	</div>
+	
 	<script>
 	
 		$(document).ready(function(){
