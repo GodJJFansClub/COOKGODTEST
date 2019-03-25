@@ -57,11 +57,14 @@ public class LoginFrontEnd extends HttpServlet {
 
 		
 		if (!allowUser(account, password, session)) {
+//			out.println("<script>alert('你的帳號 ,密碼無效!', '請重新登入！','success');</script>");
+//			out.println("<script>alert()</script>");
+			res.sendRedirect(req.getContextPath() + "/front-end/login_fail.jsp"); 
 			// 判斷為無效帳號密碼時
-			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
-			out.println("<BODY>你的帳號 , 密碼無效!<BR>");
-			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/front-end/loginFrontEnd.jsp>重新登入</A>");
-			out.println("</BODY></HTML>");
+//			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
+//			out.println("<BODY>你的帳號 , 密碼無效!<BR>");
+//			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/front-end/loginFrontEnd.jsp>重新登入</A>");
+//			out.println("</BODY></HTML>");
 		} else {
 			custVO = custSvc.getOneCust_acc(account);
 			// 判斷為有效帳號

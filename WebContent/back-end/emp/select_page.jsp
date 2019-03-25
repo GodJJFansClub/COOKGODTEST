@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>IBM Emp: Home</title>
+<title>員工管理</title>
 
 
 
@@ -21,7 +21,7 @@
 
 
 
-	<p>This is the Home page forEmp: Home</p>
+	<p>員工管理</p>
 
 	<h3>資料查詢:</h3>
 
@@ -37,8 +37,8 @@
 
 	<ul>
 		<li><a
-			href='<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp'>List</a>
-			all Emp. <br>
+			href='<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp'>查詢</a>
+			所有員工<br>
 		<br></li>
 
 
@@ -83,7 +83,7 @@
 	<h3>員工管理</h3>
 
 	<ul>
-		<li><a href='addEmp.jsp'>Add</a> a new Emp.</li>
+		<li><a href='addEmp.jsp'>新增員工</a> </li>
 	</ul>
 
 

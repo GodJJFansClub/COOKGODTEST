@@ -8,17 +8,50 @@
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
 	<!-- ##### Contact Area Start #####-->
-	<section class="contact-area section-padding-100">
-		<div class="container-fliud" style="margin: 100px">
-			<div class="row">
-				<h2>加入成功，請至信箱收信</h2>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	
+	
+	<div class="pixel-portfolio-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
+                        <h2>加入成功，請至信箱收信</h2>
+                        <img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/logo_cut.gif" width="200px"
+                         height="500px"alt="">
+                        
+                        <h3>系統將於 <span id='timer'>5</span> 秒後，為您轉跳至首頁。</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-				系統將於 <span id='timer'>3</span> 秒後，為您自動轉跳。
+      
+        <div class="pixel-portfolio">
 
-
-			</div>
-		</div>
-	</section>
+         
+        </div>
+    </div>
+    <!-- ##### Portfolio Area End ###### -->
+	
+	
+	
+	
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
 	<!-- ##### Contact Area End #####-->
 
 

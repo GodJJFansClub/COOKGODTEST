@@ -13,7 +13,7 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>權限資料新增 - addAuth.jsp</title>
+<title>權限資料新增</title>
 
 
 

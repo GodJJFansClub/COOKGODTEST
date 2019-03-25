@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>IBM Ad: Home</title>
+<title>廣告管理</title>
 
 
 

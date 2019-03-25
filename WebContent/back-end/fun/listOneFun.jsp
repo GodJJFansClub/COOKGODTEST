@@ -31,10 +31,7 @@
 		<tr>
 			<td>
 				<h3>權限資料</h3>
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/back-end/fun/select_page.jsp">回首頁</a>
-				</h4>
+				
 			</td>
 		</tr>
 	</table>

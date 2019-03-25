@@ -42,8 +42,8 @@
 
 	<ul>
 		<li><a
-			href='<%=request.getContextPath()%>/back-end/auth/listAllAuth.jsp'>List</a>
-			all Auth. <br>
+			href='<%=request.getContextPath()%>/back-end/auth/listAllAuth.jsp'>查詢</a>
+			所有權限<br>
 		<br></li>
 
 
@@ -88,7 +88,7 @@
 	<h3>權限管理</h3>
 
 	<ul>
-		<li><a href='<%=request.getContextPath()%>/back-end/auth/addAuth.jsp'>Add</a> a new Auth.</li>
+		<li><a href='<%=request.getContextPath()%>/back-end/auth/addAuth.jsp'>新增管理員</a></li>
 	</ul>
 
 <%--=================================工作區================================================--%>			
