@@ -59,6 +59,7 @@ th, td {
 
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+<jsp:include page="/froTempl/headerJoin.jsp" flush="true" />
 
 	<!-- ##### Contact Area Start #####-->
 	<section class="contact-area section-padding-100">

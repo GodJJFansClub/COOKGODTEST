@@ -59,6 +59,7 @@ width: 1px;
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
+<jsp:include page="/froTempl/headerJoin.jsp" flush="true" />
 	<!-- ##### Contact Area Start #####-->
 	<section class="contact-area section-padding-100">
 
@@ -129,13 +130,13 @@ width: 1px;
 									<tr>
 										<td>顧客性別:</td>
 
-										<td>男<input type="radio" name="cust_sex" size="10"
-											value="M"
+										<td><input type="radio" name="cust_sex" size="10"
+											value="M" style="width:20px;height:20px"
 											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms" class="form-control wow fadeInUp" data-wow-delay="100ms"/>
-											女 <input type="radio" name="cust_sex" size="10" value="F"
+											 />男
+											 <input type="radio" name="cust_sex" size="10" value="F" style="width:20px;height:20px"
 											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }
-											class="form-control wow fadeInUp" data-wow-delay="100ms" class="form-control wow fadeInUp" data-wow-delay="100ms"/>
+											 />女
 										</td>
 									</tr>
 

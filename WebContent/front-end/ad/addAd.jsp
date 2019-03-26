@@ -53,98 +53,15 @@ th, td {
 	padding: 1px;
 }
 </style>
-<style>
 
-/* :: 12.0 Blog Area CSS */
-.breadcrumb-area1 {
-	position: relative;
-	z-index: 1;
-	width: 100%;
-	height: 380px;
-	padding: 0 35px;
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-	.breadcrumb-area1 {
-		height: 300px;
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.breadcrumb-area1 {
-		height: 280px;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.breadcrumb-area1 {
-		height: 250px;
-	}
-}
-
-.breadcrumb-area1::after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	top: 0;
-	left: 0;
-	background-color: rgba(163, 163, 163, 0.3);
-}
-
-.breadcrumb-area1 .breadcrumb-content {
-	text-align: center;
-}
-
-.breadcrumb-area1 .breadcrumb-content h2 {
-	color: #ffffff;
-	font-size: 60px;
-	font-weight: 600;
-	text-transform: capitalize;
-	margin-bottom: 0;
-	display: inline-block;
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 42px;
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 36px;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 24px;
-	}
-}
-</style>
 
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerFoodSup.jsp" flush="true" />
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<br>
-	<br>
-	<br>
-	<br>
-	<section class="breadcrumb-area1 bg-img bg-overlay jarallax"
-		style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodSupPic.jpg);">
-		<div class="container-fluid h-100">
-			<div class="row h-100 align-items-center">
-				<div class="col-12">
-					<div class="breadcrumb-content">
-						<h2 style="font-weight: bold">食材供應商專區-廣告管理</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	
 	<!-- ##### Breadcrumb Area End ##### -->
 
 	<!-- ##### Contact Area Start #####-->

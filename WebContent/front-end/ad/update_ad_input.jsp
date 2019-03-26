@@ -48,77 +48,6 @@ th, td {
 	padding: 1px;
 }
 </style>
-<style>
-
-/* :: 12.0 Blog Area CSS */
-.breadcrumb-area1 {
-	position: relative;
-	z-index: 1;
-	width: 100%;
-	height: 380px;
-	padding: 0 35px;
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-	.breadcrumb-area1 {
-		height: 300px;
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.breadcrumb-area1 {
-		height: 280px;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.breadcrumb-area1 {
-		height: 250px;
-	}
-}
-
-.breadcrumb-area1::after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	top: 0;
-	left: 0;
-	background-color: rgba(163, 163, 163, 0.3);
-}
-
-.breadcrumb-area1 .breadcrumb-content {
-	text-align: center;
-}
-
-.breadcrumb-area1 .breadcrumb-content h2 {
-	color: #ffffff;
-	font-size: 60px;
-	font-weight: 600;
-	text-transform: capitalize;
-	margin-bottom: 0;
-	display: inline-block;
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 42px;
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 36px;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.breadcrumb-area1 .breadcrumb-content h2 {
-		font-size: 24px;
-	}
-}
-</style>
 
 </head>
 <body>
@@ -217,7 +146,6 @@ th, td {
 													<textarea type="TEXT"  name="ad_con" class="form-control" value="<%=adVO.getAd_con()%>"></textarea>
 													</td>
 												</tr>
-
 
 
 
