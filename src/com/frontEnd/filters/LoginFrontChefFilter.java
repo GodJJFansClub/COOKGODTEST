@@ -42,6 +42,7 @@ public class LoginFrontChefFilter implements Filter {
 		if (chefVO == null) {
 			if (custVO != null) {
 				// 如果有登入帳號但不是食材供應商，將轉到到其他頁面
+				session.setAttribute("filter", "a1");
 				session.setAttribute("location", req.getRequestURI());
 				res.sendRedirect(req.getContextPath() + "/front-end/index.jsp");
 				return;
@@ -51,6 +52,7 @@ public class LoginFrontChefFilter implements Filter {
 			return;
 			}
 		}else if(chefVO.getChef_status().equals("b1")) {
+			session.setAttribute("filter", "a1");
 			chain.doFilter(request, response);
 		} else {
 			session.setAttribute("location", req.getRequestURI());

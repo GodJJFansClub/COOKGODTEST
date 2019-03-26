@@ -79,9 +79,7 @@
 
 <body>
  <br>
-	  <br>
-	   <br>
-	    <br>
+	 
 	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodSupPic.jpg);">
         <div class="container-fluid h-100">
             <div class="row h-100 align-items-center">

@@ -43,8 +43,6 @@ img{
 	
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
-	<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
-	
 	<section class="contact-area section-padding-100">
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red">請修正以下錯誤:</font>
@@ -54,26 +52,23 @@ img{
 			</c:forEach>
 		</ul>
 	</c:if>
-		
-<div class="pixel-portfolio-area section-padding-100-0">
-		 <div class="container">
-		   <div class="pixel-portfolio">
+	<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
+		<div class="container">
 			
 			
+			<div class="row">
 				<c:forEach var="festMenuVO" items="${festMenuSvc.allIndate}" varStatus="s">
-					
-						<div id="foodMCard${s.index}" class="single_gallery_item visual wow fadeInUp foodMCard" data-wow-delay="0.2s">
-				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"  height="600px" width="600px">
-				  			<div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
-				    			<div class="hover-text" sytle="margin-top: 40%;" >
-				    			<h3 class="shopUse food_m_name" style="margin-bottom: 70px;">
+					<div class="col-3">
+						<div id="foodMCard${s.index}" class="card foodMCard">
+				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" class="card-img-top" height="200px" width="100px">
+				  			<div class="card-body">
+				    			<p class="card-text shopUse fest_m_name">
 				    				${festMenuVO.fest_m_name}
-				    			</h3>
-				    			<div style="margin-top: 220px;">
-				    			<p class="shopUse food_name">
+				    			</p>
+				    			<p class="card-text shopUse fest_m_qty">
 				    				${festMenuVO.fest_m_qty}
 				    			</p>
-				    			<p class="shopUse food_sup_name">
+				    			<p class="card-text">
 				    				預購結束日期 : ${festMenuVO.fest_m_end}
 				    			</p>
 				    			<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">

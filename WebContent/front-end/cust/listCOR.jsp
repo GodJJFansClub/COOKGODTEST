@@ -10,7 +10,8 @@
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
 	<!-- ##### Breadcrumb Area End ##### -->
-
+<section class="team-member-area section-padding-100-0">
+        <div class="container">
 	<!-- ##### Contact Area Start #####-->
 	<section>
 	<div>
@@ -73,8 +74,13 @@
 	</section>
 	<!-- ##### Feature Area End ##### -->
 	
-	
-
+	</div>
+    </section>
+<br>
+<br>
+<br>
+<br>
+<br>
 	<!-- ##### Contact Area End #####-->
 
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />

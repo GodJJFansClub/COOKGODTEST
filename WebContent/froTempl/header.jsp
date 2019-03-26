@@ -19,6 +19,8 @@
 <title>Pixel - Digital Agency HTML Template</title>
 
 <!-- Favicon -->
+<%-- <link href="<%=request.getContextPath()%>/publibrary/sweetalert.css"> --%>
+
 <link rel="icon"
 	href="<%=request.getContextPath()%>/froTempl/temp/img/core-img/favicon.ico">
 
@@ -56,6 +58,10 @@
 		</div>
 	</div>
 
+
+<br>
+<br>
+<br>
 	<!-- ##### Header Area Start ##### -->
 	<header class="header-area">
 		<!-- Navbar Area -->
@@ -90,7 +96,7 @@
 							<div class="classynav">
 								<ul>
 									<li><a
-										href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
+										href="<%=request.getContextPath()%>/front-end/index.jsp"  style="font-weight: bold">首頁</a></li>
 
 									<li><a style="font-weight: bold">食神來了</a>
 										<ul class="dropdown">
@@ -172,7 +178,7 @@
 									</c:if>
 
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a>Hello:<font style="font-weight: bold" color=#ea7500> 
+										<li><a style="font-weight: bold">Hello:<font style="font-weight: bold" color=#ea7500> 
 												<c:if test="${not empty custVO.cust_niname}">
 													${custVO.cust_niname}
 												</c:if>
@@ -199,7 +205,7 @@
 													</FORM></li>
 									</c:if>
 									<c:if test="${empty custVO.cust_ID}">
-										<li><a>加入我們</a>
+										<li><a style="font-weight: bold">加入我們</a>
 											<ul class="dropdown">
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/login/addCust.jsp">成為顧客</a></li>
@@ -209,7 +215,7 @@
 													href="<%=request.getContextPath()%>/front-end/login/addFoodSup.jsp">成為食材供應商</a></li>
 											</ul></li>
 										<li><a
-											href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp">請登入</a></li>
+											href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp" style="font-weight: bold">請登入</a></li>
 									</c:if>
 								</ul>
 
@@ -312,25 +318,42 @@
 			webSocket.close();
 		}
 	</script>
+	<%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>--%>
 	<script src="<%=request.getContextPath()%>/publibrary/sweetalert.min.js"></script>
+
 	<script>
 		var btn = document.getElementById("alertLogOutBTN");
 		btn.onclick = function() {
-			swal({
-				title : "Good job!",
-				text : "You clicked the button!",
-				icon : "success",
-				buttons : {
-					confirm : {
-						text : "OK",
-						value : true,
-						visible : true,
-						className : "",
-						closeModal : true
-					}
-				},
 
-			}, $("#frontLogOutBTN").submit())
+			
+			swal({ 
+				  title: '這是登出按鈕', 
+				  text: '你確定登出嗎?', 
+				  type: 'warning',
+				  showCancelButton: true, 
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '確定登出！', 
+				}).then(function(x){
+					if(x)
+						$("#frontLogOutBTN").submit();
+				});
+				
+// 			swal({
+// 				title : "Good job!",
+// 				text : "You clicked the button!",
+// 				icon : "success",
+// 				buttons : {
+// 					confirm : {
+// 						text : "OK",
+// 						value : true,
+// 						visible : true,
+// 						className : "",
+// 						closeModal : true
+// 					}
+// 				},
+
+// 			}, $("#frontLogOutBTN").submit())
 		};
 	</script>
 </c:if>

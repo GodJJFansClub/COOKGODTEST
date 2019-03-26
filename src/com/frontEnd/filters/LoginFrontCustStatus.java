@@ -38,6 +38,7 @@ public class LoginFrontCustStatus implements Filter {
 		CustVO custVO = (CustVO) session.getAttribute("custVO");
 	
 		if (custVO == null) {
+			
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/front-end/loginFrontEnd.jsp");
 			return;

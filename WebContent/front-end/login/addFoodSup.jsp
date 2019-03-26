@@ -240,7 +240,7 @@ width: 1px;
     	  form1.cust_brd.value="2017-12-01"
     	  form1.cust_tel.value="0906077543"
     	  form1.cust_addr.value="台北市信義區信義路五段7號"
-    	  form1.cust_mail.value="toy113355@hotmail.com"
+    	  form1.cust_mail.value="ca106g3@hotmail.com"
     	 
     	  form1.cust_niname.value="資策會大當家" 
     	  form1.food_sup_resume.value="30年老廚師"

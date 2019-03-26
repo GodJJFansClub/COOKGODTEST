@@ -17,7 +17,8 @@
 	<br>
 	<br>
 	<br>
-	
+	<section class="team-member-area section-padding-100-0">
+        <div class="container">
 	<!-- ##### Breadcrumb Area End ##### -->
     <table class="table table-striped">
 	  <thead>
@@ -63,7 +64,12 @@
 	    </c:forEach>
 	</table>
     
-    
+   </div>
+    </section> 
+    <br>
+	<br>
+	<br>
+	<br>
     <!-- ##### Contact Area End #####-->
 	<script>
 		$(document).ready(function(){
@@ -92,17 +98,13 @@
 		
 		
 	</script>
-</div>
-								</div>
-							</div>
 
-						</div>
-		</section>
+			
 		<!-- ##### Contact Area End #####-->
 
 
 
-	</section>
+
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
 </html>

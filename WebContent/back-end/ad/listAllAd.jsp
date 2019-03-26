@@ -107,6 +107,16 @@
 			</div>
 		</div>
 	</div>
+	
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
 	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 </html>
