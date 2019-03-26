@@ -49,10 +49,8 @@
                                             <th scope="col">廣告標題:</th>
                                             <th scope="col">廣告內文:</th>
                                             <th scope="col">廣告內文:</th>
-                                            <th scope="col">廣告上架日期:</th>
                                             <th scope="col">廣告下架日期:</th>
                                             <th scope="col">廣告狀態:</th>
-                                            <th scope="col">廣告類別:</th>
                                             <th scope="col">食材供應商:</th>
                                           
                                         </tr>
@@ -65,12 +63,26 @@
 				<th scope="row">${adVO.ad_ID}</th>
 				<th scope="row">${adVO.ad_title}</th>
 				<th scope="row"><c:if test="${not empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}" width="300" height="200"></c:if>
-				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200"></c:if></th>
-				<th scope="row">${adVO.ad_con}</th>
-				<th scope="row">${adVO.ad_start}</th>
+				    <c:if test="${empty adVO.ad_pic}"><img src="<%=request.getContextPath()%>/images/null2.jpg" width="180" height="200"></c:if></th>
+				<th scope="row" width="20%">${adVO.ad_con}</th>
+				
 				<th scope="row">${adVO.ad_end}</th>
-				<th scope="row">${adStatusMap[adVO.ad_status]}</th>
-				<th scope="row">${adTypeMap[adVO.ad_type]}</th>
+				<th scope="row">
+				<c:choose>
+				<c:when test="${adVO.ad_status eq 'd2'}">
+					<span class="label label-danger label-rounded">
+						${adStatusMap[adVO.ad_status]}
+					</span>
+				</c:when>
+				<c:otherwise>
+					<span class="label label-success label-rounded">
+						${adStatusMap[adVO.ad_status]}
+					</span>
+				</c:otherwise>
+				</c:choose>
+				</th>
+				
+				
 				<th scope="row">${custSvc.getOneCust(adVO.food_sup_ID).cust_name}</th>
 				
 				<th scope="row">

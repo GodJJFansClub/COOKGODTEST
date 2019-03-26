@@ -46,8 +46,20 @@
 							<th scope="row">${foodSupVO.food_sup_ID}</th>
 							<th scope="row">${foodSupVO.food_sup_name}</th>
 							<th scope="row">${foodSupVO.food_sup_tel}</th>
-							<th scope="row">${foodSupStatusMap[foodSupVO.food_sup_status]}</th>
-
+							<th scope="row">
+							<c:choose>
+								<c:when test="${foodSupVO.food_sup_status eq 's0'}">
+									<span class="label label-danger label-rounded">
+									${foodSupStatusMap[foodSupVO.food_sup_status]}
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span class="label label-success label-rounded">
+										${foodSupStatusMap[foodSupVO.food_sup_status]}
+									</span>
+								</c:otherwise>
+							</c:choose>
+						</th>
 							<th scope="row">
 							<form method="post" action="<%=request.getContextPath()%>/foodSup/foodSup.do">
 								<button id="update">修改</button>
