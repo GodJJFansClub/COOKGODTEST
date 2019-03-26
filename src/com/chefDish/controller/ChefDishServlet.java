@@ -162,12 +162,12 @@ public class ChefDishServlet extends HttpServlet {
 				ChefDishService chefDishSvc = new ChefDishService();
 				chefDishSvc.delete(chef_ID, dish_ID);
 				//3.刪除完成，準備轉交
-				RequestDispatcher sucessView = request.getRequestDispatcher("/front-end/chefDish/listAllChefDish.jsp");
+				RequestDispatcher sucessView = request.getRequestDispatcher("/front-end/chefDish/addChefDish.jsp");
 				sucessView.forward(request, response);
 				//其他可能的錯誤處理
 			}catch(Exception e){
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher errView = request.getRequestDispatcher("/front-end/chefDish/listAllChefDish.jsp");
+				RequestDispatcher errView = request.getRequestDispatcher("/front-end/chefDish/addChefDish.jsp");
 				errView.forward(request, response);
 			}
 		}

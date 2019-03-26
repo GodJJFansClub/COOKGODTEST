@@ -52,6 +52,9 @@ padding:100px;
 		  <div class="clear"> </div>
 		</div>
 		
+		<div class="footer">
+		<p>© 2017  Master  Login form. All Rights Reserved | Design by  <a href="https://w3layouts.com/" >  w3layouts </a></p>
+		</div>
 	</div>
 </body>
 </html>
