@@ -21,7 +21,7 @@
 			<div class="col-12">
 				<div class="card card-body">
 					<h4 class="card-title">付款</h4>
-					<form class="form-horizontal m-t-30" method="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
+					<form id="endOrder" class="form-horizontal m-t-30" method="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
 						<div class="form-group">
 						<label>收件人姓名</label>
 						<input type="text" class="form-control" name="food_or_name"
@@ -29,8 +29,17 @@
 						</div>
 						<div class="form-group">
 							<label>收件地址</label>
-							<input  id="addr" name="food_or_addr" class="form-control"
-									type="text" value="${empty foodOrderVO ? '': foodOrderVO.food_or_addr}">
+							<select name="cityName" id="twCityName">
+								<option value="-1">--請選擇縣市--</option>
+							</select>
+							<select name="areaName" id="CityAreaName">
+								<option value="-1">--請選擇區域--</option>
+							</select>
+							<input readonly id="zipCode" name="zipCode" type="text" size="10" placeholder="區域號碼">
+							<select name="roadName" id="AreaRoadName">
+								<option value="-1">--請選擇路名--</option>
+							</select>
+							<input type="text" name="partAddr"  class="form-control" >
 						</div>
 						<div class="form-group">
 							<label>收件人電話</label>
@@ -42,12 +51,10 @@
 							<input type="number" name="credNum" class="form-control"
 									value="${empty credName ? '':credName}">
 						</div>
-						
-						
 							<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
 							<input type="hidden" name="action" value="insertOrODs">
 							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-							<input class="btn btn-success" type="submit" value="付款">
+							<input id="btnLoc" class="btn btn-success" type="submit" value="付款">
 					</form>
 				</div>
 			</div>
@@ -55,16 +62,86 @@
 	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
+		.xdsoft_datetimepicker .xdsoft_datepicker {
+			width: 300px; /* width:  300px; */
+		}
+		
+		.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+			height: 151px; /* height:  151px; */
+		}
+	</style>
 
 <script>
+		$(document).ready(function(){
+			$.ajax({
+				type: "POST",
+				url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+				data: {"action":"getCity"},
+				dataType: "json",
+				success: function(result){
+					 let len = result.length;
+					 console.log(result);
+					 for(let i = 0; i < len; i++){
+						 $("#twCityName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+					 }
+				 },
+		         error: function(){
+		        	 alert("AJAX-grade發生錯誤囉!");
+				}
+			});
+			
+			$("#twCityName").change(function(){
+				$.ajax({
+					type: "POST",
+					url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+					data: {"action":"twCityName","twCityName":$('#twCityName option:selected').val()},
+					dataType: "json",
+					success: function(result){
+						
+						 $("#CityAreaName").empty();
+						
+						 $("#CityAreaName").append("<option value='-1'>--請選擇區域--</option>")
+						 for(var i=0; i<result.length; i++){
+						 	$("#CityAreaName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+						 }
+					 },
+			         error: function(){
+			        	 alert("AJAX-grade發生錯誤囉!");
+					}
+				});
+			});
+			
+			
+			$("#CityAreaName").change(function(){
+				$.ajax({
+					 type: "POST",
+					 url: "<%=request.getContextPath()%>/food/AddrSelect.do",
+					 data: {"action":"CityAreaName",
+						 	"twCityName":$('#twCityName option:selected').val(),
+						 	"CityAreaName":$('#CityAreaName option:selected').val()},
+					 dataType: "json",
+					 success: function(result){
+						 console.log(result);
+						 $("#AreaRoadName").empty();
+						 $("#zipCode").val(result.ZipCode);
+						 $("#AreaRoadName").append('<option value="-1">--請選擇區域--</option>');
+						 console.log(result.roadName);
+						 for(var i=0; i<result.roadName.length; i++){
+						 	$("#AreaRoadName").append('<option value="'+result.roadName[i]+'">'+result.roadName[i]+'</option>');
+						 }
+					 },
+			         error: function(result){
+			        	 console.log(result);
+			        	 alert("AJAX-grade發生錯誤囉!");
+			         }
+			    });
+			});
+			
+		});
+		
+		
+		
+		
         $.datetimepicker.setLocale('zh');
         $('#credEnd').datetimepicker({
            theme: '',              //theme: 'dark',
@@ -72,11 +149,11 @@
  	       step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
  		   value: '<%=request.getAttribute("credEnd")%>', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-	//startDate:	            '2017/07/10',  // 起始日
-	minDate:               '-1970-01-01', // 去除今日(不含)之前
-	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-	});
+			//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+			//startDate:	            '2017/07/10',  // 起始日
+			minDate:               '-1970-01-01', // 去除今日(不含)之前
+			//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+		});
 
 	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
 

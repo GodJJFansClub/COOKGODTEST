@@ -215,11 +215,22 @@ public class FoodOrderServlet extends HttpServlet {
 				errorMsgs.add("收件人 : 只能是中文且長度必需在1到30之間");
 			}
 
-			String food_or_addr = req.getParameter("food_or_addr");
-			if (food_or_addr == null || food_or_addr.trim().length() == 0) {
-				errorMsgs.add("收件地址請勿空白");
+			String cityName = req.getParameter("cityName");
+			if("-1".equals(cityName)) {
+				errorMsgs.add("請選擇城市");
 			}
-			
+			String areaName = req.getParameter("areaName");
+			if("-1".equals(areaName)) {
+				errorMsgs.add("請選擇區域");
+			}
+			String roadName = req.getParameter("roadName");
+			if("-1".equals(roadName)) {
+				errorMsgs.add("請選擇路");
+			}
+			String partAddr = req.getParameter("partAddr");
+			if(null != partAddr && partAddr.trim().length() == 0) {
+				errorMsgs.add("請輸入全部地址");
+			}
 			
 			String food_or_tel = req.getParameter("food_or_tel");
 			String food_or_telReg = "^[\\d]{10}$";
@@ -228,7 +239,11 @@ public class FoodOrderServlet extends HttpServlet {
 			} else if (!food_or_tel.trim().matches(food_or_telReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("收件人電話 : 09XXXXXXXX");
 			}
-			
+			String credNum = req.getParameter("credNum");
+			if(credNum == null || credNum.trim().length() == 0) {
+				errorMsgs.add("請輸入信用卡號");
+			}
+			String food_or_addr = req.getParameter("zipCode") + cityName + areaName + roadName + partAddr;
 			HttpSession session = req.getSession();
 			@SuppressWarnings("unchecked")
 			List<Object> shoppingCart = (Vector<Object>) session.getAttribute("shoppingCart");
