@@ -233,7 +233,7 @@ th, td {
     	  form1.cust_brd.value="2018-12-01"
     	  form1.cust_tel.value="0907077543"
     	  form1.cust_addr.value="桃園市中壢區中大路1號"
-    	  form1.cust_mail.value="toy113355@hotmail.com"
+    	  form1.cust_mail.value="ca106g3@hotmail.com"
     	  form1.cust_niname.value="資策會小小書童" 
     	 
       }

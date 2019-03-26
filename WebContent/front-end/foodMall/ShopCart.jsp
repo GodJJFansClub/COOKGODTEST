@@ -11,6 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
 	<section class="contact-area section-padding-100">
 	<%-- 錯誤列表 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -31,7 +32,8 @@
 					<form action="<%=request.getContextPath()%>/mall/mall.do" method="post">
 						<input type="hidden" name="action" value="toCheckOutOR">
 						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-						<input type="submit" value="結帳">
+						<button type="submit" value="結帳" class="btn btn-warning">結帳</button>
+						
 					</form>
 				</th>
 			</tr>

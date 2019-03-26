@@ -187,7 +187,7 @@
 
 
 	<!-- ##### Hero Area Start ##### -->
-	
+	<br>
 	<section class="hero-area">
 		<div id="adWall" class="hero-slideshow owl-carousel">
 
@@ -427,12 +427,12 @@
 			<%}else{%>
 				var user =null;
 			<%}%>
+				var filter =''+'<%=session.getAttribute("filter")%>'
 			
-				if(user === "a0"){
-					
-				}else{
+				if(user === "a1"){
 					swal("驗證錯誤","此帳號尚未通過驗證，趕快去E-Mail收信哦!","error")
-					
+				}else if(filter === "a1"){
+					swal("驗證錯誤","此帳號尚無權限","error")				
 				}
 			}
 	</script>

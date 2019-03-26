@@ -367,4 +367,10 @@ public class ChefJNDIDAO implements ChefDAO_Interface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<ChefVO> getAllFromEmp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

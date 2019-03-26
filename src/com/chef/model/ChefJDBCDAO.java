@@ -422,4 +422,10 @@ con.setAutoCommit(false);
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<ChefVO> getAllFromEmp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -44,7 +44,7 @@ padding:100px;
 		<div class="design-w3l">
 			<div class="mail-form-agile">
 				<form  action="<%=request.getContextPath()%>/back-end/login.do" method="post" >
-					<input type="text" name="account" placeholder="請輸入帳號"  style="font-weight:bold; font-size:25px" required=""/>
+					<input type="text" name="account" placeholder="請輸入帳號"  style="font-weight:bold; font-size:25px" required="" autocomplete="off"/>
 					<input type="password"  name="password" class="padding" style="font-weight:bold; font-size:25px" placeholder="請輸入密碼" required=""/>
 					<input type="submit" value="登入">
 				</form>

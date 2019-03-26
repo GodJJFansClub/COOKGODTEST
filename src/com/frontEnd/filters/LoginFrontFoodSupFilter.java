@@ -43,6 +43,7 @@ public class LoginFrontFoodSupFilter implements Filter {
 		if (foodSupVO == null) {
 			if (custVO != null) {
 				// 如果有登入帳號但不是食材供應商，將轉到到其他頁面
+				session.setAttribute("filter", "a1");
 				session.setAttribute("location", req.getRequestURI());
 				res.sendRedirect(req.getContextPath() + "/front-end/index.jsp");
 				return;
@@ -52,8 +53,10 @@ public class LoginFrontFoodSupFilter implements Filter {
 				return;
 			}
 		}else if(foodSupVO.getFood_sup_status().equals("s1")) {
+			session.setAttribute("filter", "a0");
 			chain.doFilter(request, response);
 		} else {
+			session.setAttribute("filter", "a0");
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/front-end/foodSup/update_foodSup_input.jsp");
 			return;

@@ -397,4 +397,12 @@
     <url-pattern>/menuDish/menuDish.do</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+  	<servlet-name>AddrSelect</servlet-name>
+    <servlet-class>com.food.controller.AddrSelect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddrSelect</servlet-name>
+    <url-pattern>/food/AddrSelect.do</url-pattern>
+  </servlet-mapping>
 </web-app>

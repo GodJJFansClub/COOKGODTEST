@@ -8,88 +8,42 @@
 
 <html>
 <head>
-<style type="text/css">
-		.single_gallery_item {
-		  display: inline-block;
-		  float: left;
-		  position: relative;
-		  z-index: 2;
-		  width: 33.3333334%;
-		  overflow: hidden;
-		  -webkit-transition-duration: 500ms;
-		  -o-transition-duration: 500ms;
-		  transition-duration: 500ms; }
-		  @media only screen and (max-width: 767px) {
-		   .single_gallery_item {
-		      width: 100%; } }
-		  .single_gallery_item img {
-		    width: 100%;
-		    -webkit-transition-duration: 2000ms;
-		    -o-transition-duration: 2000ms;
-		    transition-duration: 2000ms; }
-		  .single_gallery_item .hover-content1 {
-		    width: 100%;
-		    height: 100%;
-		    position: absolute;
-		    top: 0;
-		    bottom: 0;
-		    opacity: 0;
-		    background-color: rgba(92, 92, 92, 0.7);
-		    left: 0;
-		    right: 0;
-		    -webkit-transition-duration: 500ms;
-		    -o-transition-duration: 500ms;
-		    transition-duration: 500ms; }
-	    .single_gallery_item .hover-content1 .zoom-img {
-	      display: inline-block;
-	      width: 50px;
-	      height: 50px;
-	      border-radius: 50%;
-	      border: 2px solid #ffffff;
-	      font-size: 20px;
-	      margin-bottom: 30px;
-	      color: #ffffff;
-	      line-height: 46px;
-	      margin-top: -15px;
-	      -webkit-transition-duration: 500ms;
-	      -o-transition-duration: 500ms;
-	      transition-duration: 500ms; }
-	    .single_gallery_item .hover-content1 h4 {
-	      margin-bottom: 0;
-	      color: #ffffff; }
-	      @media only screen and (min-width: 992px) and (max-width: 1199px) {
-	        .single_gallery_item .hover-content1 h4 {
-	          font-size: 20px; } }
-	      @media only screen and (min-width: 768px) and (max-width: 991px) {
-	        .single_gallery_item .hover-content1 h4 {
-	          font-size: 16px; } }
-	      @media only screen and (max-width: 767px) {
-	        .single_gallery_item .hover-content1 h4 {
-	          font-size: 16px; } }
-		  .single_gallery_item:hover img {
-		    -webkit-transform: scale(1.1);
-		    -ms-transform: scale(1.1);
-		    transform: scale(1.1); }
-		  .single_gallery_item:hover .hover-content1 {
-		    opacity: 1;
-		    visibility: visible; }
-	      .single_gallery_item:hover .hover-content1 .zoom-img {
-	      margin-top: 0;
-	      opacity: 1; }
-	      .marginall{
-	     
-	      
-	</style>
+<style>
+
+    
+.card {
+	overflow: hidden;
+}
+.card-img-top{
+width:100%;
+border-top-left-radius:calc(.25rem - 1px);
+border-top-right-radius:calc(.25rem - 1px);
+transform:scale(1,1);transition: all 1s ease-out;
+}
+
+.fest_m_name{
+	margin-top:20px;
+
+}
+.card-img-top:hover{
+width:100%;
+border-top-left-radius:calc(.25rem - 1px);
+border-top-right-radius:calc(.25rem - 1px);
+transform:scale(1.2,1.2);
+}
+img{
+	weight:400px;
+	height:600px;
+}
+
+</style>
 
 </head>
 <body>
 	
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
-	
-	
 	<section class="contact-area section-padding-100">
-	<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red">請修正以下錯誤:</font>
 		<ul>
@@ -98,26 +52,23 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-		
-<div class="pixel-portfolio-area section-padding-100-0">
-		 <div class="container">
-		   <div class="pixel-portfolio">
+	<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
+		<div class="container">
 			
 			
+			<div class="row">
 				<c:forEach var="festMenuVO" items="${festMenuSvc.allIndate}" varStatus="s">
-					
-						<div id="foodMCard${s.index}" class="single_gallery_item visual wow fadeInUp foodMCard" data-wow-delay="0.2s">
-				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" style="height:600px; weight:600px" >
-				  			<div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
-				    			<div class="hover-text"  >
-				    			<h3 class="shopUse food_m_name" style="color:#ff359a">
+					<div class="col-3">
+						<div id="foodMCard${s.index}" class="card foodMCard">
+				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" class="card-img-top" height="200px" width="100px">
+				  			<div class="card-body">
+				    			<p class="card-text shopUse fest_m_name">
 				    				${festMenuVO.fest_m_name}
-				    			</h3>
-				    			<div >
-				    			<p style="color:white">
-				    				數量:${festMenuVO.fest_m_qty}
 				    			</p>
-				    			<p style="color:white">
+				    			<p class="card-text shopUse fest_m_qty">
+				    				${festMenuVO.fest_m_qty}
+				    			</p>
+				    			<p class="card-text">
 				    				預購結束日期 : ${festMenuVO.fest_m_end}
 				    			</p>
 				    			<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
@@ -128,10 +79,8 @@
 				    			<p class="card-text errorMsgs"></p>
 				  			</div>
 						</div>
-	            		</div>
 	            	</div>
 				</c:forEach>
-	         </div>
 	         </div>
 	    </div>
 	    </section>
