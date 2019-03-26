@@ -51,7 +51,20 @@
 							<th scope="row">${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</th>
 							<th scope="row">${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</th>
 							<th scope="row">${foodMallVO.food_m_name}</th>
-							<th scope="row">${mallStatusMap[foodMallVO.food_m_status]}</th>
+							<th scope="row">
+								<c:choose>
+									<c:when test="${foodMallVO.food_m_status eq 'p2'}">
+										<span class="label label-danger label-rounded">
+											${mallStatusMap[foodMallVO.food_m_status]}
+										</span>
+									</c:when>
+									<c:otherwise>
+										<span class="label label-success label-rounded">
+											${mallStatusMap[foodMallVO.food_m_status]}
+										</span>
+									</c:otherwise>
+								</c:choose>
+							</th>
 							<th scope="row">${foodMallVO.food_m_price}</th>
 							<th scope="row">${foodUnitMap[foodMallVO.food_m_unit]}</th>
 							<th scope="row">${foodMallVO.food_m_place}</th>

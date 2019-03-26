@@ -75,15 +75,15 @@
 						</td>
 					</tr>
 					<tr>
-						<td>商品價格:<font color=red><b>*</b></font></td>
-						<td><input type="TEXT" name="food_m_price" size="7"
+						<td>商品價格:</td>
+						<td><input readonly type="TEXT" name="food_m_price" size="7"
 							 value="${foodMallVO.food_m_price}" /></td>
 					</tr>
 					<tr>
-						<td>單位:<font color=red><b>*</b></font></td>
+						<td>單位:</td>
 						<td>
 							<c:forEach var="foodUnit" items="${foodUnitMap}">
-								<input type="radio" name="food_m_unit" value="${foodUnit.key}"
+								<input disabled type="radio" name="food_m_unit" value="${foodUnit.key}"
 									${(foodUnit.key == foodMallVO.food_m_unit)?'checked ':''}  style="width:20px;height:20px" >${foodUnit.value}
 							</c:forEach>
 					</tr>

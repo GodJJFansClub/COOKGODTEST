@@ -48,6 +48,7 @@ public class FoodMallServlet extends HttpServlet{
 		// Store this set in the request scope, in case we need to
 		// send the ErrorPage view.
 		req.setAttribute("errorMsgs", errorMsgs);
+		
 		try {
 			String food_ID = req.getParameter("food_ID");
 			String food_sup_ID = req.getParameter("food_sup_ID");
@@ -77,6 +78,7 @@ public class FoodMallServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		System.out.println("test");
 		if("getOne_For_Display".equals(action)) {
 			
 			List<String> errorMsgs = new LinkedList<String>();
@@ -385,6 +387,8 @@ public class FoodMallServlet extends HttpServlet{
 			fsBKGetOne_For_Update(req,res);
 		} else if ("backUpByFS".equals(action)) {
 			backUpByFS(req,res);
+		} else if ("foodSupChStat".equals(action)) {
+			foodSupChStat(req, res);
 		}
 		
 		
@@ -627,5 +631,47 @@ public class FoodMallServlet extends HttpServlet{
 	
 	private void backUpByFS(HttpServletRequest req, HttpServletResponse res) {
 		
+	}
+	
+	private void foodSupChStat(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		JsonObject errorMsgs = new JsonObject();
+		
+	
+//		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			
+			String food_m_status = req.getParameter("food_m_status");
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String food_ID = req.getParameter("food_ID");
+			System.out.println(food_ID+food_sup_ID);
+			FoodMallVO foodMallVO = new FoodMallVO();
+			foodMallVO.setFood_ID(food_ID);
+			foodMallVO.setFood_sup_ID(food_sup_ID);
+			switch(food_m_status){
+			case "p1":
+			case "p3":
+				food_m_status = "p4";
+				break;
+			case "p4":
+				food_m_status = "p3";
+				break;
+			}
+			// Send the use back to the form, if there were errors
+			
+			
+			/***************************2.開始修改資料*****************************************/
+			FoodMallService foodMallSvc = new FoodMallService();
+			System.out.println("tezst");
+			foodMallVO = foodMallSvc.updateStatus(food_sup_ID, food_ID, food_m_status);
+			JsonObject successF = new JsonObject();
+			successF.addProperty("food_m_status", food_m_status);
+			System.out.println(successF);
+			writeJson(res,successF);
+//		}
+//		catch (Exception e) {
+//			
+//			errorMsgs.addProperty("exception", e.getMessage());
+//			writeJson(res, errorMsgs);
+//		}
 	}
 }

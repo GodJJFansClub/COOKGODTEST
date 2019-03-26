@@ -124,7 +124,6 @@ th, td {
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	<jsp:include page="/froTempl/headerCust.jsp" flush="true" />
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<br>
 	<br>
@@ -161,29 +160,43 @@ th, td {
 				<th>食材名稱</th>
 				<th>食材種類</th>
 				<th>標題</th>
-				<th>商品狀態</th>
+				<th>更改狀態</th>
 				<th>價格</th>
 				<th>單位</th>
 				<th>產地</th>
 				<th>圖片</th>
-				<th>評價</th>
 			</tr>
 
 					
-			<c:forEach var="foodMallVO" items="${foodSupSvc.getFoodMallsByFood_sup_ID(foodSupVO.food_sup_ID)}">
+			<c:forEach var="foodMallVO" items="${foodSupSvc.getFoodMallsByFood_sup_ID(foodSupVO.food_sup_ID)}" varStatus="ma">
 					<tr class="foodMallEntiy">
 						<td>${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</td>
 						<td>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</td>
 						<td>${foodTypeMap[foodSvc.getOneFood(foodMallVO.food_ID).food_type_ID]}</td>
 						<td>${foodMallVO.food_m_name}</td>
-						<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
+						<td><form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
+								<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
+								<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
+							<c:choose>
+								<c:when test="${foodMallVO.food_m_status eq 'p1' || foodMallVO.food_m_status eq 'p3'}">
+									<button id="staBtn${ma.index}" class="manaMallBtn" value="p4" type="button">上架</button>
+									<input type="hidden" name="food_m_status" value="${foodMallVO.food_m_status}">
+								</c:when>
+								<c:when test="${foodMallVO.food_m_status eq 'p4'}">
+									<button id="staBtn${ma.index}" class="manaMallBtn" value="p3" type="button">下架</button>
+									<input type="hidden" name="food_m_status" value="${foodMallVO.food_m_status}">
+								</c:when>
+								<c:otherwise>
+									${mallStatusMap[foodMallVO.food_m_status]}
+								</c:otherwise>
+							</c:choose>
+							</form>
+						</td>
 						<td>${foodMallVO.food_m_price}</td>
 						<td>${foodUnitMap[foodMallVO.food_m_unit]}</td>
 						<td>${foodMallVO.food_m_place}</td>
-						<%--<td><img src="data:image/png;base64,${foodMallVO.food_m_pic}"></td> --%>
 						<td><img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"
 							width="300" height="400"></td>
-						<td>${foodMallVO.food_m_rate}</td>
 
 						<td>
 							<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
@@ -203,17 +216,42 @@ th, td {
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<script>
 		$(document).ready(function(){
-			//$(".foodMallEntiy").click(function(evt){
-				//let foodForm = $(this).find("form");
-				//if(evt.target.id != "update") { 
-					<%--foodForm.children("#requestURL").val('<%=request.getServletPath()%>');
-					foodForm.children("#action").val("frontDisplay");--%>
-				//}else{
-					//foodForm.children("#action").val("foodSupGetUpdate");	
-				//}
-				//foodForm.submit();
-			//});
-		}); 
+			
+			$(".manaMallBtn").click(manaMallEvt);
+		});
+		function manaMallEvt(data){
+			let manaAction;
+			
+			$.ajax({
+				type:"post",
+				url:"<%=request.getContextPath()%>/foodMall/foodMall.do",
+				data:crtQryStrfS("foodSupChStat", $(this).parent("form").serializeArray()),
+				dataType:"json",
+				success:function (data){
+					console.log(data);
+					console.log($(this));
+					if(data.food_m_status === "p3"){
+						$(this).children(".manaMallBtn").text("下架");
+					} else if(data.food_m_status === "p4"){
+						$(this).children(".manaMallBtn").text("上架");
+					} else {
+						console.log(data);
+					}
+				},
+				error:function (data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function crtQryStrfS(action, formInputArr){
+			let queryString = {"action":action};
+			let leng = formInputArr.length;
+			for(let i = 0; i < leng; i++){
+				queryString[formInputArr[i].name] = formInputArr[i].value;
+			}
+			return queryString;
+		}
 	</script>
 
 										</form>
