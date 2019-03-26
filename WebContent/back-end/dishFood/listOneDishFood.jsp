@@ -76,7 +76,7 @@
 									<td colspan="3" align='center'>
 										<h4>
 											<a
-												href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">回首頁</a>
+												href="<%=request.getContextPath()%>/back-end/dish/AllDish.jsp">回首頁</a>
 										</h4>
 									</td>
 								</tr>

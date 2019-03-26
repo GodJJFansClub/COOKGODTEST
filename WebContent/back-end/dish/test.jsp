@@ -1,14 +1,21 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.dish.model.*"%>
+<%@ page import="com.emp.model.*"%>
 
 <%
-  DishVO dishVO = (DishVO) request.getAttribute("dishVO");
+	EmpVO empVO = (EmpVO) request.getAttribute("empVO");
+	
 %>
 
+<!DOCTYPE html>
 <html>
+
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>員工資料新增</title>
+
+
 
 </head>
 
@@ -17,116 +24,97 @@
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<jsp:include page="/back-end/sideBar/dishFoodMana.jsp" flush="true" />
+		<jsp:include page="/back-end/sideBar/empMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>
 
-
-				<%-- 錯誤表列 --%>
-				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-
-
+				<span class="hide-menu"><h3>資料新增:</h3></span>
 				<div class="col-lg-8 col-xlg-9 col-md-7">
 					<div class="card">
 						<div class="card-body">
-							<FORM METHOD="post"
-								ACTION="<%=request.getContextPath()%>/menu/menu.do" name="form1"
-								enctype="multipart/form-data"
-								class="form-horizontal form-material">
-
+							<form METHOD="post"
+								ACTION="<%=request.getContextPath()%>/emp/emp.do" name="form1"
+								enctype="multipart/form-data">
 								<div class="form-group">
-									<label class="col-md-12">套餐名稱:</label>
+									<label class="col-md-12">員工帳號:</label>
 									<div class="col-md-12">
-										<input type="text" name="menu_name"
-											value="${menuVO==null? '': menuVO.menu_name}" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="example-email" class="col-md-12">套餐照片:</label>
-									<div class="col-md-12">
-										<img id="preview_progressbarTW_img"
-											src="<%=request.getContextPath()%>/images/null2.jpg"
-											width="300" height="200" /> <br> <input type="file"
-											name="menu_pic" id="progressbarTWInput" /> <br>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-12">套餐簡介:</label>
-									<div class="col-md-12">
-										<input type="textarea" name="menu_resume"
-											value="${menuVO==null? '':menuVO.menu_resume}"
-											placeholder="請輸入簡介">
-										<script>CKEDITOR.replace('menu_resume');</script>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-12">套餐價錢:</label>
-									<div class="col-md-12">
-										<input type="number" name="menu_price"
-											value="${menuVO==null? '': menuVO.menu_price}" />
+										<input type="TEXT" name="emp_acc" size="45"
+					value="<%=(empVO == null) ? "Aa158556" : empVO.getEmp_acc()%>" />
+                                        
 									</div>
 								</div>
 
 								<div class="form-group">
-									<div class="col-sm-12">
-										<button class="btn btn-success" type="submit">送出新增</button>
-										<br> <input type="hidden" name="action" value="insert">
-										<img src="<%=request.getContextPath()%>/images/x.png"
-											height="20" width="20" onClick="idwrite(this)">
+									<label for="example-email" class="col-md-12">員工姓名:</label>
+									<div class="col-md-12">
+										<input type="TEXT" name="emp_name" size="45"
+											value="<%=(empVO == null) ? "teddy" : empVO.getEmp_name()%>" />
 									</div>
-								</div>
+									<div class="form-group">
+										
+											<label class="col-md-12">員工大頭照:</label>
+											<div class="col-md-12">
+												<input type="file" name="emp_pic" size="45" id="doc"
+													onchange="javascript:setImagePreview();" />
+											</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<button class="btn btn-success" type="submit">送出新增</button>
+											<div id="localImag">
+												<img id="preview" width=-1 height=-1 style="diplay: none" />
+											</div>
+											<br> <input type="hidden" name="action" value="insert">
+
+										</div>
+
+
+									</div>
 							</form>
 						</div>
 					</div>
 				</div>
-				<script>
-
-$("#progressbarTWInput").change(function(){
-
-  readURL(this);
-
-});
-
- 
-
-function readURL(input){
-
-  if(input.files && input.files[0]){
-
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-
-       $("#preview_progressbarTW_img").attr('src', e.target.result);
-
-    }
-
-    reader.readAsDataURL(input.files[0]);
-
-  }
-
-}
-
-</script>
-
-				<script>
-      function idwrite(name){
-          form1.menu_name.value="六六六大順"
-          form1.menu_price.value="6666"          
-      }
-</script>
-
-				<br>
-
 				<%--=================================工作區================================================--%>
+
+
+				<script>
+	function setImagePreview() {
+		var docObj = document.getElementById("doc");
+		var imgObjPreview = document.getElementById("preview");
+		if (docObj.files && docObj.files[0]) {
+			//火狐下，直接设img属性
+			imgObjPreview.style.display = 'block';
+			imgObjPreview.style.width = '200px';
+			imgObjPreview.style.height = '120px';
+			//imgObjPreview.src = docObj.files[0].getAsDataURL();
+			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+			imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+		} else {
+			//IE下，使用滤镜
+			docObj.select();
+			var imgSrc = document.selection.createRange().text;
+			var localImagId = document.getElementById("localImag");
+			//必须设置初始大小
+			localImagId.style.width = "250px";
+			localImagId.style.height = "200px";
+			//图片异常的捕捉，防止用户修改后缀来伪造图片
+			try {
+				localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+				localImagId.filters
+						.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+			} catch (e) {
+				alert("您上传的图片格式不正确，请重新选择!");
+				return false;
+			}
+			imgObjPreview.style.display = 'none';
+			document.selection.empty();
+		}
+		return true;
+	}
+</script>
+
+
 				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
 				<%--=================================jQuery===============================================--%>
 			</div>
