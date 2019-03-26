@@ -107,17 +107,17 @@
 				<c:forEach var="festMenuVO" items="${festMenuSvc.allIndate}" varStatus="s">
 					
 						<div id="foodMCard${s.index}" class="single_gallery_item visual wow fadeInUp foodMCard" data-wow-delay="0.2s">
-				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" style="height:900px; weight:600px" >
+				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" style="height:600px; weight:600px" >
 				  			<div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
 				    			<div class="hover-text"  >
-				    			<h3 class="shopUse food_m_name" >
+				    			<h3 class="shopUse food_m_name" style="color:#ff359a">
 				    				${festMenuVO.fest_m_name}
 				    			</h3>
 				    			<div >
-				    			<p >
-				    				${festMenuVO.fest_m_qty}
+				    			<p style="color:white">
+				    				數量:${festMenuVO.fest_m_qty}
 				    			</p>
-				    			<p >
+				    			<p style="color:white">
 				    				預購結束日期 : ${festMenuVO.fest_m_end}
 				    			</p>
 				    			<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
