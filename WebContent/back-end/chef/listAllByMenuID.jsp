@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.chef.model.*"%>
-
+<jsp:useBean id="custSvc" scope="page" class="com.cust.model.CustService"/>
 <%	
 	ChefService chefSvc = new ChefService();
 	String menu_ID = request.getParameter("menu_ID");
@@ -44,7 +44,7 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th scope="col">主廚編號</th>
+										<th scope="col">主廚名稱</th>
 										<th scope="col">主廚服務地區</th>
 										<th scope="col">主廚簡介</th>
 										<th scope="col">審核主廚</th>
@@ -54,7 +54,7 @@
 								<c:forEach var="chefVO" items="${list}" begin="<%=pageIndex %>"
 									end="<%=pageIndex+rowsPerPage-1 %>">
 									<tr>
-										<th scope="row">${chefVO.chef_ID}</th>
+										<th scope="row">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</th>
 										<th scope="row">${chefLocal[chefVO.chef_area]}</th>
 										<th scope="row" width="50%">${chefVO.chef_resume}</th>
 										<th scope="row">
