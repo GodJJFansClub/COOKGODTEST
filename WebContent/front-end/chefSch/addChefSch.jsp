@@ -16,6 +16,37 @@
 <head>
 <title>主廚排程管理</title>
 </head>
+<style>
+.table-hidden tbody{
+  overflow-y: auto;/*設定卷軸 auto 是有超過我的高度的時候才會出現卷軸*/
+    height: 400px;/*自己設定*/
+    display: block;
+}
+.table-hidden tr {
+	height:50px;
+    width: 100%;
+    display: inline-table;
+}
+/*因為 display: block 打壞了 tbody 的結構，
+  所以 thead 的 tr 跟 tbody 的 td 寬度拆開了，
+  所以必須重新設定表格的寬度，
+  但是 tbody 有包括卷軸 針對bootstrap 去修正卷軸
+*/
+.table-hidden thead th[data-th="其他"]{ width:400px;}
+/*因為 tbody 多了卷軸 尺寸多了 17px*/
+.table-hidden tbody td[data-th="其他"]{ width:383px;}
+
+.table-hidden td[data-th="chefSchDate"],.table-hidden th[data-th="chefSchDate"]{
+	width:33%; 
+}
+.table-hidden td[data-th="chefSchStatus"],.table-hidden th[data-th="chefSchStatus"]{ 
+	width:33%;
+}
+.table-hidden td[data-th="checkChefSch"],.table-hidden th[data-th="checkChefSch"]{ 
+	width:33%;
+}
+
+</style>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 	<jsp:include page="/froTempl/headerChef.jsp" flush="true" />
@@ -44,32 +75,24 @@
 					</c:if>
 				</div>
 				<div class="col-7" style="font-family:Microsoft JhengHei;">
-					<%@ include file="page1.file"%>
-					<table class="table">
+					<table class="table table-striped table-bordered table-hidden">
 						<thead>
 							<tr>
-								<th scope="col">排程日期</th>
-								<th scope="col">當天狀態</th>
-								<th scope="col">刪除排程</th>
+							　　<th data-th="chefSchDate">排程日期</th>
+							　　<th data-th="chefSchStatus">當天狀態</th>
+							　　<th data-th="checkChefSch">排程管理</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="chefSchVO" items="${listAll}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+							<c:forEach var="chefSchVO" items="${listAll}">
 								<tr>
-									<th scope="row">${chefSchVO.chef_sch_date}</th>
-									<td>
+									<td data-th="chefSchDate">${chefSchVO.chef_sch_date}</td>
+									<td data-th="chefSchStatus">
 										<c:if test="${chefSchVO.chef_sch_status=='c0'}">閒置</c:if>
-										<c:if test="${chefSchVO.chef_sch_status=='c1'}">預定</c:if>
+										<c:if test="${chefSchVO.chef_sch_status=='c1'}">已預定</c:if>
+										<c:if test="${chefSchVO.chef_sch_status=='c2'}">新的訂單</c:if>
 									</td>
-									<td>
-										<c:if test="${chefSchVO.chef_sch_status=='c1'}">
-											<form method="post" action="<%=request.getContextPath()%>/chefSch/chefSch.do">
-												<input type="hidden" name="chef_ID" value="${chefSchVO.chef_ID}"> 
-												<input type="hidden" name="chef_sch_date" value="${chefSchVO.chef_sch_date}"> 
-												<input type="hidden" name="action" value="delete">
-												<input type="submit" class="btn btn-secondary" value="刪除" disabled>
-											</form>
-										</c:if>
+									<td data-th="checkChefSch">
 										<c:if test="${chefSchVO.chef_sch_status=='c0'}">
 											<form method="post" action="<%=request.getContextPath()%>/chefSch/chefSch.do">
 												<input type="hidden" name="chef_ID" value="${chefSchVO.chef_ID}"> 
@@ -78,12 +101,22 @@
 												<input type="submit" class="btn btn-danger" value="刪除">
 											</form>
 										</c:if>
+										<c:if test="${chefSchVO.chef_sch_status=='c1'}">
+											<form method="post" action="<%=request.getContextPath()%>/chefSch/chefSch.do">
+												<input type="hidden" name="chef_ID" value="${chefSchVO.chef_ID}"> 
+												<input type="hidden" name="chef_sch_date" value="${chefSchVO.chef_sch_date}"> 
+												<input type="hidden" name="action" value="delete">
+												<input type="submit" class="btn btn-secondary" value="刪除" disabled>
+											</form>
+										</c:if>
+										<c:if test="${chefSchVO.chef_sch_status=='c2'}">
+											<a href="<%=request.getContextPath()%>/front-end/menuOrder/unCheckMenuOrder.jsp"><input type="button" class="btn btn-warning" value="審核"></a>
+										</c:if>
 									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					<%@ include file="page2.file"%>
 				</div>
 				<div class="col-1"></div>
 			</div>

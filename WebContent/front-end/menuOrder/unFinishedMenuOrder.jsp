@@ -23,9 +23,10 @@
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 	<jsp:include page="/froTempl/headerChef.jsp" flush="true" />
 	<!-- #####  Start ##### -->
-		<div class="container">
+		<div class="container-fliud">
 			<div class="row">
-				<div class="col-12" style="font-family:Microsoft JhengHei;">
+				<div class="col-2"></div>
+				<div class="col-8" style="font-family:Microsoft JhengHei;">
 					<%@ include file="page1.file"%>
 					<table class="table">
 						<thead>
@@ -59,6 +60,7 @@
 					</table>
 					<%@ include file="page2.file"%>
 				</div>
+				<div class="col-2"></div>
 			</div>
 		</div>
 	<!-- #####  End #####-->

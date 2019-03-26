@@ -53,6 +53,14 @@ public class MenuOrderServlet extends HttpServlet {
 				menuOrderVO.setChef_ID(chef_ID);
 				menuOrderVO.setMenu_ID(menu_ID);
 				
+				//insert訂單時同時改變chefSch當天狀態
+				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Timestamp date = menuOrderVO.getMenu_od_book();
+				Date chef_sch_date = Date.valueOf(sdFormat.format(date));
+				ChefSchVO chefSchVO = null;
+				ChefSchService chefSchSvc = new ChefSchService();
+				chefSchVO = chefSchSvc.update(chef_ID, chef_sch_date, "c2");
+				
 				if(!errorMsgs.isEmpty()) {
 					request.setAttribute("menuOrderVO", menuOrderVO);
 					RequestDispatcher errView = request.getRequestDispatcher("/front-end/menu/orderMenu.jsp");
@@ -119,6 +127,9 @@ public class MenuOrderServlet extends HttpServlet {
 				if("g1".equals(menu_od_status)) {
 					ChefSchService chefSchSvc = new ChefSchService();
 					chefSchVO = chefSchSvc.update(chef_ID, chef_sch_date, "c1");
+				}else if("g2".equals(menu_od_status)) {
+					ChefSchService chefSchSvc = new ChefSchService();
+					chefSchVO = chefSchSvc.update(chef_ID, chef_sch_date, "c0");
 				}
 				
 				RequestDispatcher sucessView = request.getRequestDispatcher("/front-end/menuOrder/unCheckMenuOrder.jsp");
@@ -365,12 +376,12 @@ public class MenuOrderServlet extends HttpServlet {
 				MenuOrderService menuOrderSvc = new MenuOrderService();
 				menuOrderSvc.deleteMenuOrder(menu_od_ID);
 				//3.刪除完成，準備轉交
-				RequestDispatcher sucessView = request.getRequestDispatcher("/front-end/menuOrder/listAllMenuOrder.jsp");
+				RequestDispatcher sucessView = request.getRequestDispatcher("/back-end/menuOrder/listAllMenuOrder.jsp");
 				sucessView.forward(request, response);
 				//其他可能的錯誤處理
 			}catch(Exception e){
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher errView = request.getRequestDispatcher("/front-end/menuOrder/listAllMenuOrder.jsp");
+				RequestDispatcher errView = request.getRequestDispatcher("/back-end/menuOrder/listAllMenuOrder.jsp");
 				errView.forward(request, response);
 			}
 		}

@@ -89,10 +89,9 @@
 							<!-- Nav Start -->
 							<div class="classynav">
 								<ul>
-									<li><a
-										href="<%=request.getContextPath()%>/front-end/index.jsp">首頁</a></li>
+									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp" style="font-weight: bold;">首頁</a></li>
 
-									<li><a style="font-weight: bold">食神來了</a>
+									<li><a href="#" style="font-weight: bold">食神來了</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp">瀏覽主廚</a></li>
@@ -100,7 +99,7 @@
 												href="<%=request.getContextPath()%>/front-end/menu/menu.jsp">嚴選套餐</a></li>
 										</ul></li>
 
-									<li><a style="font-weight: bold">食神配送</a>
+									<li><a href="#" style="font-weight: bold">食神配送</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
@@ -112,7 +111,7 @@
 										<li><a href="#" style="font-weight: bold">主廚專區</a>
 											<ul class="dropdown">
 												<li><a href="<%=request.getContextPath()%>/front-end/chef/updateChefResume.jsp">主廚資料管理</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">節慶料理管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/festMenu/addFestMenu.jsp">節慶料理管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/chefDish/addChefDish.jsp">擅長菜色管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/chefSch/addChefSch.jsp">主廚排程管理</a></li>
 												<li><a href="#">訂單管理</a>
@@ -126,7 +125,7 @@
 										</li>
 									</c:if>
 									<c:if test="${not empty foodSupVO.food_sup_ID}">
-										<li><a style="font-weight: bold">食材供應商專區</a>
+										<li><a href="#" style="font-weight: bold">食材供應商專區</a>
 											<ul class="dropdown">
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>

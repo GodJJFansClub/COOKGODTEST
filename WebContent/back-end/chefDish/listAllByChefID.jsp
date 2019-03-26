@@ -61,39 +61,41 @@
 					</tr>
 					<%@ include file="page1.file" %>
 					<c:forEach var="chefDishVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
-						<tr>
-							<td>${chefDishVO.chef_ID}</td>
-							<td>${chefDishVO.chef_name}</td>
-							<td>${chefDishVO.dish_ID}</td>
-							<td>${chefDishVO.dish_name}</td>
-							<td>
-								<c:if test="${chefDishVO.chef_dish_status=='d0'}">未審核</c:if>
-								<c:if test="${chefDishVO.chef_dish_status=='d1'}">審核通過</c:if>
-								<c:if test="${chefDishVO.chef_dish_status=='d2'}">審核不通過</c:if>
-							</td>
-							<td>
-							<c:if test="${chefDishVO.chef_dish_status=='d0'}">
-								<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
-									<input type="submit" value="審核通過">
-									<input type="hidden" name="chef_ID"  value="${chefDishVO.chef_ID}">
-									<input type="hidden" name="dish_ID"  value="${chefDishVO.dish_ID}">
-									<input type="hidden" name="chef_dish_status"  value="d1">
-									<input type="hidden" name="action"	value="update">
-								</form>
-							</c:if>
-							</td>
-							<td>
-							<c:if test="${chefDishVO.chef_dish_status=='d0'}">
-								<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
-									<input type="submit" value="審核不通過">
-									<input type="hidden" name="chef_ID"  value="${chefDishVO.chef_ID}">
-									<input type="hidden" name="dish_ID"  value="${chefDishVO.dish_ID}">
-									<input type="hidden" name="chef_dish_status"  value="d2">
-									<input type="hidden" name="action"	value="update">
-								</form>
-							</c:if>
-							</td>
-						</tr>	
+						<c:if test="${chefDishVO.chef_dish_status=='d0'}">
+							<tr>
+								<td>${chefDishVO.chef_ID}</td>
+								<td>${chefDishVO.chef_name}</td>
+								<td>${chefDishVO.dish_ID}</td>
+								<td>${chefDishVO.dish_name}</td>
+								<td>
+									<c:if test="${chefDishVO.chef_dish_status=='d0'}">未審核</c:if>
+									<c:if test="${chefDishVO.chef_dish_status=='d1'}">審核通過</c:if>
+									<c:if test="${chefDishVO.chef_dish_status=='d2'}">審核不通過</c:if>
+								</td>
+								<td>
+								<c:if test="${chefDishVO.chef_dish_status=='d0'}">
+									<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
+										<input type="submit" value="審核通過">
+										<input type="hidden" name="chef_ID"  value="${chefDishVO.chef_ID}">
+										<input type="hidden" name="dish_ID"  value="${chefDishVO.dish_ID}">
+										<input type="hidden" name="chef_dish_status"  value="d1">
+										<input type="hidden" name="action"	value="update">
+									</form>
+								</c:if>
+								</td>
+								<td>
+								<c:if test="${chefDishVO.chef_dish_status=='d0'}">
+									<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
+										<input type="submit" value="審核不通過">
+										<input type="hidden" name="chef_ID"  value="${chefDishVO.chef_ID}">
+										<input type="hidden" name="dish_ID"  value="${chefDishVO.dish_ID}">
+										<input type="hidden" name="chef_dish_status"  value="d2">
+										<input type="hidden" name="action"	value="update">
+									</form>
+								</c:if>
+								</td>
+							</tr>	
+						</c:if>
 					</c:forEach>
 				</table>
 				<%@ include file="page2.file" %>

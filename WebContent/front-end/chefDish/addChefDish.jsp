@@ -48,39 +48,81 @@
 						</ul>
 					</c:if>
 				</div>
+				
 				<div class="col-7" style="font-family:Microsoft JhengHei;">
 					<%@ include file="page1.file"%>
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">菜色編號</th>
-								<th scope="col">菜色名稱</th>
-								<th scope="col">審核狀態</th>
-								<th scope="col">刪除菜色</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="chefDishVO" items="${listAll}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
-								<tr>
-									<th scope="row">${chefDishVO.dish_ID}</th>
-									<td>${chefDishVO.dish_name}</td>
-									<td>
-										<c:if test="${chefDishVO.chef_dish_status=='d0'}">未審核</c:if>
-										<c:if test="${chefDishVO.chef_dish_status=='d1'}">通過</c:if>
-										<c:if test="${chefDishVO.chef_dish_status=='d2'}">未通過</c:if>
-									</td>
-									<td>
-										<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
-											<input type="submit" class="btn btn-danger" value="刪除"> 
-											<input type="hidden" name="chef_ID" value="${chefDishVO.chef_ID}"> 
-											<input type="hidden" name="dish_ID" value="${chefDishVO.dish_ID}">
-											<input type="hidden" name="action" value="delete">
-										</form>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+					<div class="container-fliud">
+						<div class="row">
+							<div class="col-6">
+								<h5 style="font-family:Microsoft JhengHei;">未審核菜色</h5>
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">菜色名稱</th>
+											<th scope="col">狀態</th>
+											<th scope="col">刪除菜色</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="chefDishVO" items="${listAll}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+											<c:if test="${chefDishVO.chef_dish_status=='d0'}">
+											<tr>
+												<th scope="row">${chefDishVO.dish_name}</th>
+												<td>
+													<c:if test="${chefDishVO.chef_dish_status=='d0'}">
+														<img src="<%=request.getContextPath() %>/front-end/chefDish/img/uncheck.png" style="width:35px;height:35px;">
+													</c:if>
+												</td>
+												<td>
+													<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
+														<input type="submit" class="btn btn-danger" value="刪除"> 
+														<input type="hidden" name="chef_ID" value="${chefDishVO.chef_ID}"> 
+														<input type="hidden" name="dish_ID" value="${chefDishVO.dish_ID}">
+														<input type="hidden" name="action" value="delete">
+													</form>
+												</td>
+											</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-6">
+								<h5 style="font-family:Microsoft JhengHei;">已審核菜色</h5>
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">菜色名稱</th>
+											<th scope="col">狀態</th>
+											<th scope="col">刪除菜色</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="chefDishVO" items="${listAll}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+											<c:if test="${chefDishVO.chef_dish_status=='d1'}">
+												<tr>
+													<th scope="row">${chefDishVO.dish_name}</th>
+													<td>
+														<c:if test="${chefDishVO.chef_dish_status=='d1'}">
+															<img src="<%=request.getContextPath() %>/front-end/chefDish/img/check.png" style="width:35px;height:35px;">
+														</c:if>
+													</td>
+													<td>
+														<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
+															<input type="submit" class="btn btn-danger" value="刪除"> 
+															<input type="hidden" name="chef_ID" value="${chefDishVO.chef_ID}"> 
+															<input type="hidden" name="dish_ID" value="${chefDishVO.dish_ID}">
+															<input type="hidden" name="action" value="delete">
+														</form>
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 					<%@ include file="page2.file"%>
 				</div>
 				<div class="col-1"></div>

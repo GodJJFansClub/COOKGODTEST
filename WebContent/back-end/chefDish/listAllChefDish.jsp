@@ -38,7 +38,7 @@
 
 	<div class="card text-center" style="background-color: #D4E6F1">	  
 	  <div class="card-body" >
-	    <h5 class="card-title">所有主廚擅長菜色</h5>
+	    <h5 class="card-title">主廚擅長菜色</h5>
 	    <p class="card-text">listAllChefDish.jsp</p>
 	    <a href="index.jsp" class="btn btn-primary">回首頁</a>
 	  </div>
@@ -64,7 +64,6 @@
 						<th>菜色名稱</th>
 						<th>審核狀態</th>
 						<th>編輯菜色</th>
-						<th>刪除菜色</th>
 					</tr>
 					<%@ include file="page1.file" %>
 					
@@ -81,14 +80,6 @@
 									<input type="hidden" name="chef_ID"  value="${chefDishVO.chef_ID}">
 									<input type="hidden" name="dish_ID"  value="${chefDishVO.dish_ID}">
 									<input type="hidden" name="action"	value="getOneForUpdate">
-								</form>
-							</td>
-							<td>
-								<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
-									<input type="submit" value="刪除">
-									<input type="hidden" name="chef_ID"  value="${chefDishVO.chef_ID}">
-									<input type="hidden" name="dish_ID"  value="${chefDishVO.dish_ID}">
-									<input type="hidden" name="action"	value="delete">
 								</form>
 							</td>
 						</tr>	

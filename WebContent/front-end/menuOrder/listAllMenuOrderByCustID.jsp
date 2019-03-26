@@ -76,7 +76,10 @@
 										</c:forEach>
 									</c:if>
 									<c:if test="${menuOrderVO.menu_od_rate=='0'}"></c:if></td>
-								<td>${menuOrderVO.menu_od_msg}</td>
+								<td>
+								${menuOrderVO.menu_od_msg}
+								
+								</td>
 <!-- 								<td> -->
 <%-- 								<c:if test="${(menuOrderVO.menu_od_end!=null)&&(menuOrderVO.menu_od_rate==0)}"> --%>
 <%-- 									<form method="post" action="<%=request.getContextPath()%>/menuOrder/menuOrder.do"> --%>
