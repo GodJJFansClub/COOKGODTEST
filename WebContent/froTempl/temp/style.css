@@ -436,7 +436,7 @@ img {
       background-color: transparent; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .header-area .pixel-main-menu .classy-navbar {
-          height: 70px; } }
+          height: 100px; } }
       @media only screen and (max-width: 767px) {
         .header-area .pixel-main-menu .classy-navbar {
           height: 100px; } }
