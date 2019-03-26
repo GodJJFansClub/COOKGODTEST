@@ -82,7 +82,6 @@
 	      .single_gallery_item:hover .hover-content1 .zoom-img {
 	      margin-top: 0;
 	      opacity: 1; }
-	      .marginall{
 	     
 	      
 	</style>
