@@ -100,6 +100,81 @@ th, td {
       @media only screen and (max-width: 767px) {
         .breadcrumb-area1 .breadcrumb-content h2 {
           font-size: 24px; } }
+          
+
+
+
+
+
+.single_gallery_item {
+  display: inline-block;
+  float: left;
+  position: relative;
+  z-index: 2;
+  width: 33.3333334%;
+  overflow: hidden;
+  -webkit-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
+  transition-duration: 500ms; }
+  @media only screen and (max-width: 767px) {
+    .single_gallery_item {
+      width: 100%; } }
+  .single_gallery_item img {
+    width: 100%;
+    -webkit-transition-duration: 2000ms;
+    -o-transition-duration: 2000ms;
+    transition-duration: 2000ms; }
+  .single_gallery_item .hover-content1 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(92, 92, 92, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms; }
+    .single_gallery_item .hover-content1 .zoom-img {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #ffffff;
+      line-height: 46px;
+      margin-top: -15px;
+      opacity: 0;
+      -webkit-transition-duration: 500ms;
+      -o-transition-duration: 500ms;
+      transition-duration: 500ms; }
+    .single_gallery_item .hover-content1 h4 {
+      margin-bottom: 0;
+      color: #ffffff; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .single_gallery_item .hover-content1 h4 {
+          font-size: 20px; } }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .single_gallery_item .hover-content1 h4 {
+          font-size: 16px; } }
+      @media only screen and (max-width: 767px) {
+        .single_gallery_item .hover-content1 h4 {
+          font-size: 16px; } }
+  .single_gallery_item:hover img {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1); }
+  .single_gallery_item:hover .hover-content1 {
+    opacity: 1;
+    visibility: visible; }
+    .single_gallery_item:hover .hover-content1 .zoom-img {
+      margin-top: 0;
+      opacity: 1; }          
 
 </style>
 
@@ -148,14 +223,14 @@ th, td {
 			
 			<div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s">
                 <img src="<%=request.getContextPath()%>/ad/ad.do?ad_ID=${adVO.ad_ID}" width="800px" height="600px" alt="">
-                <div class="hover-content text-center d-flex align-items-center justify-content-center">
+                <div class="hover-content1 text-center d-flex align-items-center justify-content-center">
                     <div class="hover-text">
                         
-                        <h3>${adVO.ad_title}</h3>
-                     		<h4>上架時間</h4>
-				<a>${adVO.ad_start}</a><br>
+                        <h3 style="color:#ff8000">${adVO.ad_title}</h3>
+                     		<h4 >上架時間</h4>
+				<a style="color:#ff8000">${adVO.ad_start}</a><br>
 							<h4>審核狀態</h4>
-				<a>${adStatusMap[adVO.ad_status]}</a>
+				<a style="color:#ff8000">${adStatusMap[adVO.ad_status]}</a>
 			
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/ad/ad.do"
