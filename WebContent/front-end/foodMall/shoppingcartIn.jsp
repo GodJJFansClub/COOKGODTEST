@@ -13,8 +13,8 @@
 			position: fixed; 
 		    right: 0px;
 		    bottom: 45%;
-		    width: 40px;
-		    height: 80px;
+		    width: 100px;
+		    height: 120px;
 		    z-index: 9999;
 		}
 		#collapseShoppingCart{
@@ -29,15 +29,13 @@
 			padding:0;
 			font-family: 微軟正黑體;
 			border-sizing: border-box;
-			
-
 		}
 	</style>
 </head>
 <body>
 	<div id="foodFestShopCart">
 	 <img data-toggle="collapse" data-target="#collapseShoppingCart" aria-expanded="false"
-		aria-controls="collapseShoppingCart" src="<%=request.getContextPath()%>/images/shopcart.png" width="50px" height="50px">
+		aria-controls="collapseShoppingCart" src="<%=request.getContextPath()%>/images/shopcart.png" >
 	</div>
 	<div class="collapse" id="collapseShoppingCart">
 		<div class="card card-body">
@@ -126,15 +124,13 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-				$(".shoppingCartItemDel").click(function(){
-					
-					if($('#delShoppingCartItem').is(':hidden')){
-						$('#delShoppingCartItem').slideDown('slow');
+				$(".shoppingCartItemDel").click(delShoppingCartItem);
+				$("#foodFestShopCart").click(function(){
+					if($('#collapseShoppingCart').is(':hidden')){
+						$('#collapseShoppingCart').slideDown('slow');
 					}else{
-						$('#delShoppingCartItem').slidUp('slow');
+						$('#collapseShoppingCart').slideUp('slow');
 					}
-					
-					
 				});
 		});
 		// 發送刪除訊息

@@ -34,9 +34,6 @@
 	    			height = "400" width="300">
 	    	</div>
 	    	<div class="col">
-	    		評價 : ${foodMallVO.food_m_rate}
-	    	</div>
-	    	<div class="col">
 	    		介紹 : ${foodMallVO.food_m_resume}
 	    	</div>
 	    	<form class="foodMCard" action="<%=request.getContextPath()%>/mall/mall.do" method="POST">

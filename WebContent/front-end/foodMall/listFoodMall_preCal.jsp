@@ -14,80 +14,45 @@
 %>
 <html>
 <head>
-	<style type="text/css">
-		.single_gallery_item {
-		  display: inline-block;
-		  float: left;
-		  position: relative;
-		  z-index: 2;
-		  width: 33.3333334%;
-		  overflow: hidden;
-		  -webkit-transition-duration: 500ms;
-		  -o-transition-duration: 500ms;
-		  transition-duration: 500ms; }
-		  @media only screen and (max-width: 767px) {
-		   .single_gallery_item {
-		      width: 100%; } }
-		  .single_gallery_item img {
-		    width: 100%;
-		    -webkit-transition-duration: 2000ms;
-		    -o-transition-duration: 2000ms;
-		    transition-duration: 2000ms; }
-		  .single_gallery_item .hover-content1 {
-		    width: 100%;
-		    height: 100%;
-		    position: absolute;
-		    top: 0;
-		    bottom: 0;
-		    opacity: 0;
-		    background-color: rgba(92, 92, 92, 0.7);
-		    left: 0;
-		    right: 0;
-		    -webkit-transition-duration: 500ms;
-		    -o-transition-duration: 500ms;
-		    transition-duration: 500ms; }
-	    .single_gallery_item .hover-content1 .zoom-img {
-	      display: inline-block;
-	      width: 50px;
-	      height: 50px;
-	      border-radius: 50%;
-	      border: 2px solid #ffffff;
-	      font-size: 20px;
-	      margin-bottom: 30px;
-	      color: #ffffff;
-	      line-height: 46px;
-	      margin-top: -15px;
-	      -webkit-transition-duration: 500ms;
-	      -o-transition-duration: 500ms;
-	      transition-duration: 500ms; }
-	    .single_gallery_item .hover-content1 h4 {
-	      margin-bottom: 0;
-	      color: #ffffff; }
-	      @media only screen and (min-width: 992px) and (max-width: 1199px) {
-	        .single_gallery_item .hover-content1 h4 {
-	          font-size: 20px; } }
-	      @media only screen and (min-width: 768px) and (max-width: 991px) {
-	        .single_gallery_item .hover-content1 h4 {
-	          font-size: 16px; } }
-	      @media only screen and (max-width: 767px) {
-	        .single_gallery_item .hover-content1 h4 {
-	          font-size: 16px; } }
-		  .single_gallery_item:hover img {
-		    -webkit-transform: scale(1.1);
-		    -ms-transform: scale(1.1);
-		    transform: scale(1.1); }
-		  .single_gallery_item:hover .hover-content1 {
-		    opacity: 1;
-		    visibility: visible; }
-	      .single_gallery_item:hover .hover-content1 .zoom-img {
-	      margin-top: 0;
-	      opacity: 1; }
-	      .marginall{
-	     
-	      
-	</style>
 </head>
 <body>
+
+
+
+            <!-- Single gallery Item -->
+            <div class="single_gallery_item visual wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp; position: absolute; left: 0%; top: 0px;">
+                <img src="img/bg-img/5.jpg" alt="">
+                <div class="hover-content text-center d-flex align-items-center justify-content-center">
+                    <div class="hover-text">
+                        <a href="img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single gallery Item -->
+            <div class="single_gallery_item add wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp; position: absolute; left: 33.2632%; top: 0px;">
+                <img src="img/bg-img/6.jpg" alt="">
+                <div class="hover-content text-center d-flex align-items-center justify-content-center">
+                    <div class="hover-text">
+                        <a href="img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single gallery Item -->
+            <div class="single_gallery_item web wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp; position: absolute; left: 66.6316%; top: 0px;">
+                <img src="img/bg-img/7.jpg" alt="">
+                <div class="hover-content text-center d-flex align-items-center justify-content-center">
+                    <div class="hover-text">
+                        <a href="img/bg-img/5.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <h4>Branding Identity</h4>
+                    </div>
+                </div>
+            </div>
+
+        
 
 
 		<jsp:include page="/froTempl/header.jsp" flush="true" />
@@ -103,41 +68,38 @@
 			</ul>
 		</c:if>
 		<div class="pixel-portfolio-area section-padding-100-0">
-		 <div class="container">
-		   <div class="pixel-portfolio">
-
-            <!-- Single gallery Item -->
-				<%@ include file="/front-end/foodMall/page1.file" %>
+			<div class="container">
+				<div class="pixel-portfolio" >
+				 
+					<%@ include file="/front-end/foodMall/page1.file" %>
 					<c:forEach var="foodMallVO" items="${list}" varStatus="s" begin="<%=pageIndex%>"
 						end="<%=pageIndex+rowsPerPage-1%>">
-						 <div id="foodMCard${s.index}" class="single_gallery_item visual wow fadeInUp foodMCard" data-wow-delay="0.2s">
-			               <img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" style="height:600px; weight:600px">
-			               <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
-			                   <div class="hover-text" sytle="margin-top: 40%;" >
-				                <h3 class="shopUse food_m_name" style="margin-bottom: 70px;">
-								 ${foodMallVO.food_m_name}
-								</h3>
-								<div style="margin-top: 220px;">
-									<p class="shopUse food_name">
-									 ${foodSvc.getOneFood(foodMallVO.food_ID).food_name}
-									</p>
-									<p class="shopUse food_sup_name">
-									 ${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}
-									</p>
-									<p class="marginall">
-									 ${foodMallVO.food_m_price}
-									</p>
-									<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST" >
-									 <button type="button" name="foodMBtn" class="btn btn-primary">加入購物車</button>
-										<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
-										<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">	
-										<input type="number"   name="food_od_qty" min="1" max="20" size="3" value="1">
-									</form>
-									<p class="errorMsgs cardInfo"></p>
-								</div>
-			                   </div>
-			                </div>
-			            </div>
+					 <div class="col-3">
+					 <div id="foodMCard${s.index}" class="card foodMCard">
+					  <img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" class="card-img-top">
+					 <div class="card-body">
+					 <p class="card-text shopUse food_m_name">
+					   ${foodMallVO.food_m_name}
+					 </p>
+					 <p class="card-text shopUse food_name">
+					   ${foodSvc.getOneFood(foodMallVO.food_ID).food_name}
+					 </p>
+					 <p class="card-text shopUse food_sup_name">
+					   ${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}
+					 </p>
+					 <p class="card-text">
+					   ${foodMallVO.food_m_price}
+					 </p>
+					 <form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
+					    <button type="button" name="foodMBtn" class="btn btn-primary">加入購物車</button>
+					    <input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
+					    <input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">	
+					    <input type="number"   name="food_od_qty" min="1" max="20" size="3" value="1">
+					 </form>
+					<p class="card-text errorMsgs"></p>
+				  </div>
+				 </div>
+		        </div>
 			 </c:forEach>
 			<%@ include file="/front-end/foodMall/page2.file" %>
 	      </div>
@@ -203,12 +165,12 @@
 		// 懶得在伺服器再查詢, 所以透過此方法再加入購物商時取得對應的食材名, 標題名, 供應商名
 		// 並暫存到記憶體中, 等伺服器回應時就可以一起加入到購物車
 		function getfoodMNames(shopUseClass){
-			console.log(shopUseClass);
+			
 			let shopUseClassLen = shopUseClass.length;
 			let foodMNames = {};
 			
 			for(let i = 0; i < shopUseClassLen; i++){
-				foodMNames[shopUseClass[i].className.split(" ",3)[1]] = shopUseClass[i].innerText;
+				foodMNames[shopUseClass[i].className.split(" ",3)[2]] = shopUseClass[i].innerText;
 			}
 			
 			return foodMNames;

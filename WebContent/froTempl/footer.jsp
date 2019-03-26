@@ -11,13 +11,23 @@
     <!-- Title -->
     <title>Pixel - Digital Agency HTML Template</title>
 
+	<style type="text/css">
+		#Main {
+	　padding-bottom: 100px;
+	}
+	#front-footer {
+	　height: 100px;
+	　position: relative;
+	　margin-top: -100px;
+	}
+	</style>
 </head>
 
 <body>
     
-
+	
     <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area section-padding-100-0">
+    <footer id="front-footer" class="footer-area section-padding-100-0">
         <div class="container-fluid">
             <div class="row justify-content-between">
 

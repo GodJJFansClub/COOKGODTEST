@@ -160,8 +160,7 @@ th, td {
 				<th>食材名稱</th>
 				<th>食材種類</th>
 				<th>標題</th>
-				<th>狀態</th>
-				<th>上/下架</th>
+				<th>更改狀態</th>
 				<th>價格</th>
 				<th>單位</th>
 				<th>產地</th>
@@ -175,21 +174,22 @@ th, td {
 						<td>${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</td>
 						<td>${foodTypeMap[foodSvc.getOneFood(foodMallVO.food_ID).food_type_ID]}</td>
 						<td>${foodMallVO.food_m_name}</td>
-						<td>${mallStatusMap[foodMallVO.food_m_status]}</td>
 						<td><form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
 								<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 								<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 							<c:choose>
 								<c:when test="${foodMallVO.food_m_status eq 'p1' || foodMallVO.food_m_status eq 'p3'}">
-									<button id="staBtn${ma.index}"  value="p4" type="submit">上架商品</button>
-									<input type="hidden"  name="food_m_status" value="p4">
+									<button id="staBtn${ma.index}" class="manaMallBtn" value="p4" type="button">上架</button>
+									<input type="hidden" id="sta${ma.index}" name="food_m_status" value="${foodMallVO.food_m_status}">
 								</c:when>
 								<c:when test="${foodMallVO.food_m_status eq 'p4'}">
-									<button id="staBtn${ma.index}" class="manaMallBtn" value="p3" type="submit">下架商品</button>
-									<input type="hidden"  name="food_m_status" value="p3">
+									<button id="staBtn${ma.index}" class="manaMallBtn" value="p3" type="button">下架</button>
+									<input type="hidden" id="sta${ma.index}" name="food_m_status" value="${foodMallVO.food_m_status}">
 								</c:when>
+								<c:otherwise>
+									${mallStatusMap[foodMallVO.food_m_status]}
+								</c:otherwise>
 							</c:choose>
-							<input type="hidden" name="action" value="fsChStaNoAjax">
 							</form>
 						</td>
 						<td>${foodMallVO.food_m_price}</td>
@@ -214,7 +214,47 @@ th, td {
     <!-- ##### Contact Area End #####-->
 
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
-
+	<script>
+		$(document).ready(function(){
+			
+			$(".manaMallBtn").click(manaMallEvt);
+		});
+		function manaMallEvt(data){
+			let manaAction;
+			let btnID = data.target.id;
+			let staNumber = $("#"+btnID).next().attr("id");
+			console.log(staNumber);
+			$.ajax({
+				type:"post",
+				url:"<%=request.getContextPath()%>/foodMall/foodMall.do",
+				data:crtQryStrfS("foodSupChStat", $(this).parent("form").serializeArray()),
+				dataType:"json",
+				success:function (data){
+					if(data.food_m_status == "p3"){
+						$("#"+btnID).text("下架");
+						$("#"+staNumber).val("p3");
+					} else if(data.food_m_status == "p4"){
+						$("#"+btnID).text("上架");
+						$("#"+staNumber).val("p4");
+					} else {
+						console.log(data);
+					}
+				},
+				error:function (data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function crtQryStrfS(action, formInputArr){
+			let queryString = {"action":action};
+			let leng = formInputArr.length;
+			for(let i = 0; i < leng; i++){
+				queryString[formInputArr[i].name] = formInputArr[i].value;
+			}
+			return queryString;
+		}
+	</script>
 
 										</form>
 									</div>

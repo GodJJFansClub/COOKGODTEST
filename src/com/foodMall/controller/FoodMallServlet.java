@@ -389,6 +389,8 @@ public class FoodMallServlet extends HttpServlet{
 			backUpByFS(req,res);
 		} else if ("foodSupChStat".equals(action)) {
 			foodSupChStat(req, res);
+		} else if("fsChStaNoAjax".equals(action)) {
+			fsChStaNoAjax(req, res);
 		}
 		
 		
@@ -637,13 +639,13 @@ public class FoodMallServlet extends HttpServlet{
 		JsonObject errorMsgs = new JsonObject();
 		
 	
-//		try {
+		try {
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			
 			String food_m_status = req.getParameter("food_m_status");
 			String food_sup_ID = req.getParameter("food_sup_ID");
 			String food_ID = req.getParameter("food_ID");
-			System.out.println(food_ID+food_sup_ID);
+			String nextSelect = food_m_status;
 			FoodMallVO foodMallVO = new FoodMallVO();
 			foodMallVO.setFood_ID(food_ID);
 			foodMallVO.setFood_sup_ID(food_sup_ID);
@@ -661,17 +663,66 @@ public class FoodMallServlet extends HttpServlet{
 			
 			/***************************2.開始修改資料*****************************************/
 			FoodMallService foodMallSvc = new FoodMallService();
-			System.out.println("tezst");
 			foodMallVO = foodMallSvc.updateStatus(food_sup_ID, food_ID, food_m_status);
 			JsonObject successF = new JsonObject();
-			successF.addProperty("food_m_status", food_m_status);
+			successF.addProperty("food_m_status", nextSelect);
 			System.out.println(successF);
 			writeJson(res,successF);
-//		}
-//		catch (Exception e) {
-//			
-//			errorMsgs.addProperty("exception", e.getMessage());
-//			writeJson(res, errorMsgs);
-//		}
+		}
+		catch (Exception e) {
+			
+			errorMsgs.addProperty("exception", e.getMessage());
+			writeJson(res, errorMsgs);
+		}
+	}
+	
+	private void fsChStaNoAjax(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+	
+		try {
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			
+			String food_m_status = req.getParameter("food_m_status");
+			String food_sup_ID = req.getParameter("food_sup_ID");
+			String food_ID = req.getParameter("food_ID");
+			
+			FoodMallVO foodMallVO = new FoodMallVO();
+			foodMallVO.setFood_m_status(food_m_status);
+			foodMallVO.setFood_ID(food_ID);
+			foodMallVO.setFood_sup_ID(food_sup_ID);
+
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("foodMallVO", foodMallVO); // 含有輸入格式錯誤的foodMallVO物件,也存入req
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/foodSup/listFoodMallsByFoodSupID.jsp");
+				failureView.forward(req, res);
+				return; //程式中斷
+			}
+			
+			/***************************2.開始修改資料*****************************************/
+			FoodMallService foodMallSvc = new FoodMallService();
+			foodMallVO = foodMallSvc.updateStatus(food_sup_ID, food_ID, food_m_status);
+
+			/***************************審核通過 發送通知***************************/
+			
+			
+			/***************************3.修改完成,準備轉交(Send the Success view)*************/
+			req.setAttribute("foodMallVO", foodMallVO); // 資料庫update成功後,正確的的foodMallVO物件,存入req
+			String url = "/front-end/foodSup/listFoodMallsByFoodSupID.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+
+			/***************************其他可能的錯誤處理*************************************/
+		} catch (Exception e) {
+			errorMsgs.add("修改資料失敗:"+e.getMessage());
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/front-end/foodSup/listFoodMallsByFoodSupID.jsp");
+			failureView.forward(req, res);
+		}
 	}
 }

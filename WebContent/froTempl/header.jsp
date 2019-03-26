@@ -28,7 +28,16 @@
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
-
+<style type="text/css">
+		#Main {
+	　padding-bottom: 100px;
+	}
+	#front-footer {
+	　height: 100px;
+	　position: relative;
+	　margin-top: -100px;
+	}
+	</style>
 </head>
 
 <body>

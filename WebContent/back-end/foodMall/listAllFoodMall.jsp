@@ -39,7 +39,7 @@
                                             <th scope="col">價格:</th>
                                             <th scope="col">單位:</th>
                                             <th scope="col">產地:</th>
-                                            <th scope="col">評價:</th>
+                                            
                                           
                                         </tr>
                                     </thead>
@@ -68,7 +68,6 @@
 							<th scope="row">${foodMallVO.food_m_price}</th>
 							<th scope="row">${foodUnitMap[foodMallVO.food_m_unit]}</th>
 							<th scope="row">${foodMallVO.food_m_place}</th>
-							<th scope="row">${foodMallVO.food_m_rate}</th>
 						
 							<th scope="row">
 								<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
