@@ -112,7 +112,7 @@
 										<li><a href="#" style="font-weight: bold">主廚專區</a>
 											<ul class="dropdown">
 												<li><a href="<%=request.getContextPath()%>/front-end/chef/updateChefResume.jsp">主廚資料管理</a></li>
-												<li><a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">節慶主題料理管理</a></li>
+												<li><a href="<%=request.getContextPath()%>/front-end/festMenu/select_page.jsp">節慶料理管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/chefDish/addChefDish.jsp">擅長菜色管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/chefSch/addChefSch.jsp">主廚排程管理</a></li>
 												<li><a href="#">訂單管理</a>
