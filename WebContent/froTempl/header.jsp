@@ -29,6 +29,9 @@
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
 <style type="text/css">
+	*{
+		font-family:Microsoft JhengHei;
+	}
 		#Main {
 	　padding-bottom: 100px;
 	}
