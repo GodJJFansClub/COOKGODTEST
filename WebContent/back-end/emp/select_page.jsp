@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.emp.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
 
 <html>
 <head>
@@ -13,85 +14,85 @@
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
-		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
 		<jsp:include page="/back-end/sideBar/empMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
-<%--=================================工作區================================================--%>
+				<%--=================================工作區================================================--%>
 
 
 
-	<p>員工管理</p>
+				
 
-	<h3>資料查詢:</h3>
+				<%-- 錯誤表列 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
 
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+				<span class="hide-menu"><h3>員工管理</h3></span>
+				<div class="col-lg-8 col-xlg-9 col-md-7">
+					<div class="card">
+						<div class="card-body">
 
-	<ul>
-		<li><a
-			href='<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp'>查詢</a>
-			所有員工<br>
-		<br></li>
+							<div class="form-group">
+								<label class="col-md-12"></label>
+								<div class="col-md-12">
+									<a
+										href='<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp'>查詢所有員工</a>
+									<br>
+								</div>
+							</div>
+							<form METHOD="post"
+								ACTION="<%=request.getContextPath()%>/emp/emp.do"
+								class="form-horizontal form-material">
+								<div class="form-group">
+									<label for="example-email" class="col-md-12">輸入員工編號:</label>
+									<div class="col-md-12">
+										<input type="text" name="emp_ID"> <input type="hidden"
+											name="action" value="getOne_For_Display">
+										<button type="submit" class="btn btn-success">送出</button>
+							</form>
+						</div>
+					</div>
+					<div class="form-group">
+						<form FMETHOD="post"
+							ACTION="<%=request.getContextPath()%>/emp/emp.do">
+							<label class="col-md-12">選擇員工編號:</label>
+							<div class="col-md-12">
+								<select size="1" name="emp_ID"
+									class="form-control form-control-line">
+									<c:forEach var="empVO" items="${empSvc.all}">
+										<option value="${empVO.emp_ID}">${empVO.emp_name}
+									</c:forEach>
+								</select>
+								<button type="submit" class="btn btn-success"
+									value="getOne_For_Display">送出</button>
+						</form>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-12"></label>
+					<div class="col-md-12">
+						<a href='addEmp.jsp'>新增員工</a>
+					</div>
+				</div>
 
-
-		<li>
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>輸入員工編號:</b> <input type="text" name="emp_ID"> <input
-					type="hidden" name="action" value="getOne_For_Display"> <input
-					type="submit" value="送出">
-			</FORM>
-		</li>
-
-		<jsp:useBean id="empSvc" scope="page"
-			class="com.emp.model.EmpService" />
-
-		<li>
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>選擇員工編號:</b> <select size="1" name="emp_ID">
-					<c:forEach var="empVO" items="${empSvc.all}">
-						<option value="${empVO.emp_ID}">${empVO.emp_ID}
-					</c:forEach>
-				</select> <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="送出">
-			</FORM>
-		</li>
-
-		<li>
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/emp/emp.do">
-				<b>選擇員工姓名:</b> <select size="1" name="emp_ID">
-					<c:forEach var="empVO" items="${empSvc.all}">
-						<option value="${empVO.emp_ID}">${empVO.emp_name}
-					</c:forEach>
-				</select> <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="送出">
-			</FORM>
-		</li>
-	</ul>
-
-
-	<h3>員工管理</h3>
-
-	<ul>
-		<li><a href='addEmp.jsp'>新增員工</a> </li>
-	</ul>
-
-
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
 			</div>
 		</div>
+
 	</div>
-	
+
+
+
+	<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+	<%--=================================jQuery===============================================--%>
+
+
 </body>
 </html>

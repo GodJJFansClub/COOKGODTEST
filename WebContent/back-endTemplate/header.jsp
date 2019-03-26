@@ -98,7 +98,7 @@
 					
 					<li class="nav-item"><a
 						class="nav-link waves-effect waves-dark"
-						href="<%=request.getContextPath()%>/back-end/dish/select_page.jsp">
+						href="<%=request.getContextPath()%>/back-end/dish/listAllDish.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">

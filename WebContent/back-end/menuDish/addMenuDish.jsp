@@ -44,7 +44,7 @@
                                     <table class="table table-striped">
                                         <thead>
                                          <th>套餐名稱:</th>
-                            			<td><input readonly  name="menu_ID" value="${menuVO.menu_ID}"></td>
+                            			<td>${menuSvc.getOneMenu(menuVO.menu_ID).menu_name}</td>
                              		</thead>
                            
                         	 
@@ -68,6 +68,7 @@
                     
                     </table>
                     <input type="hidden" name="action" value="insert">
+                    <input type="hidden" name="menu_ID" value="${menuVO.menu_ID}" >
                     <input type="submit" value="送出"><br>
                
                 

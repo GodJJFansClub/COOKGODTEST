@@ -26,18 +26,19 @@
                                 <span class="hide-menu">新增菜色</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/dish/AllDish.jsp" aria-expanded="false" aria-expanded="false">
-                                <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">上架中菜色</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
+                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/dish/listAllDish.jsp" aria-expanded="false" aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">下架中菜色</span>
+                                <span class="hide-menu">新菜色申請</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/dish/Obtainedish.jsp" aria-expanded="false" aria-expanded="false">
+                                <i class="mdi mdi-account-network"></i>
+                                <span class="hide-menu">下架菜色</span>
+                            </a>
+                        </li>
+                       
                         
                         <span class="hide-menu">套餐</span>
                         <li class="sidebar-item">
