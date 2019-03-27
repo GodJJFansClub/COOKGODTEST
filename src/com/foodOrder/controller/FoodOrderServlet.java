@@ -210,7 +210,7 @@ public class FoodOrderServlet extends HttpServlet {
 			String food_or_name = req.getParameter("food_or_name");
 			String food_or_nameReg = "^[(\u4e00-\u9fa5)]{1,30}$";
 			if (food_or_name == null || food_or_name.trim().length() == 0) {
-				errorMsgs.add("收件人 : 起勿空白");
+				errorMsgs.add("收件人 : 請勿空白");
 			} else if (!food_or_name.trim().matches(food_or_nameReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("收件人 : 只能是中文且長度必需在1到30之間");
 			}
@@ -239,10 +239,23 @@ public class FoodOrderServlet extends HttpServlet {
 			} else if (!food_or_tel.trim().matches(food_or_telReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("收件人電話 : 09XXXXXXXX");
 			}
-			String credNum = req.getParameter("credNum");
+			
+			String credNum1 = req.getParameter("credNum1");
+			String credNum2 = req.getParameter("credNum2");
+			String credNum3 = req.getParameter("credNum3");
+			String credNum4 = req.getParameter("credNum4");
+			String credNum = credNum1+credNum2+credNum3+credNum4;
+			String credNum_Reg = "^[0-9]{16}$";
 			if(credNum == null || credNum.trim().length() == 0) {
 				errorMsgs.add("請輸入信用卡號");
+			}else if (!credNum.trim().matches(credNum_Reg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.add("信用卡號請輸入數字");
 			}
+			
+			
+			
+			
+			
 			String food_or_addr = req.getParameter("zipCode") + cityName + areaName + roadName + partAddr;
 			HttpSession session = req.getSession();
 			@SuppressWarnings("unchecked")

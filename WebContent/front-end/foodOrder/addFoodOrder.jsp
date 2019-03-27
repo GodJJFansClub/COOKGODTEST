@@ -48,8 +48,20 @@
 						</div>
 						<div class="form-group">
 							<label>卡號</label>
-							<input type="number" name="credNum" class="form-control"
-									value="${empty credName ? '':credName}">
+							<div class="form-row">
+								<div class="form-group col-md-1">
+									<input type="text" class="form-control" id="credNum1" name="credNum1" maxlength="4">
+								</div>
+								<div class="form-group col-md-1">
+									<input type="password" class="form-control" id="credNum2" name="credNum2" maxlength="4">
+								</div>
+								<div class="form-group col-md-1">
+									<input type="password" class="form-control" id="credNum3" name="credNum3" maxlength="4">
+								</div>
+								<div class="form-group col-md-1">
+									<input type="text" class="form-control" id="credNum4" name="credNum4" maxlength="4">
+								</div>
+							</div>
 						</div>
 							<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
 							<input type="hidden" name="action" value="insertOrODs">
@@ -143,7 +155,6 @@
 			});
 			
 		});
-		
 		
 		
 		
