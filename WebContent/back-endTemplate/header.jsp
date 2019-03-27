@@ -153,7 +153,7 @@
 								<div class="ml-1 d-none d-sm-block">
 									<FORM METHOD="get"
 										action="<%=request.getContextPath()%>/back-end/logoutBack.do">
-										<input type="submit" value="登出">
+										<input type="submit" class="btn btn-dark" value="登出" style="margin-top:15px;">
 									</FORM>
 								</div>
 							</div>

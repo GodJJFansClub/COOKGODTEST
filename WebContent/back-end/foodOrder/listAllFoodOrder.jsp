@@ -62,7 +62,16 @@
 										${(foodORVO.food_or_ID==foodOrderVO.food_or_ID) ? 'bgcolor=#CCCCFF':''}>
 										 <th scope="row">${foodORVO.food_or_ID}</th>
 										<th scope="row">${foodORVO.food_or_name}</th>
-										<th scope="row">${mallOrStatusMap[foodORVO.food_or_status]}</th>
+										<th scope="row">
+											<c:if test="${foodORVO.food_or_status eq 'o1'}">
+												<span class="label label-danger label-rounded">
+													${mallOrStatusMap[foodORVO.food_or_status]}
+												</span>
+											</c:if>
+											<c:if test="${not (foodORVO.food_or_status eq 'o1')}">
+												${mallOrStatusMap[foodORVO.food_or_status]}
+											</c:if>
+										</th>
 										<th scope="row">${foodORVO.food_or_start}</th>
 										<th scope="row">${foodORVO.food_or_send}</th>
 										<th scope="row">${foodORVO.food_or_rcv}</th>

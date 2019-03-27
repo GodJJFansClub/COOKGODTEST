@@ -55,7 +55,7 @@
 								
 								<tr>
 									<th scope="row">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</th>
-									<th scope="row"><c:if test="${chefVO.chef_status=='b0'}">未審核</c:if> <c:if
+									<th scope="row"><c:if test="${chefVO.chef_status=='b0'}"><span class="label label-danger label-rounded">未審核</span></c:if> <c:if
 											test="${chefVO.chef_status=='b1'}">審核通過</c:if> <c:if
 											test="${chefVO.chef_status=='b2'}">審核不過</c:if> <c:if
 											test="${chefVO.chef_status=='b3'}">停權</c:if></th>

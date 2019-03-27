@@ -76,20 +76,23 @@
 												<td>女生</td>
 											</c:if>
 											<th scope="row">${custVO.cust_tel}</th>
-											<th scope="row"><c:if test="${not empty custVO.cust_pic}">
-													<img
-														src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}" width="300" height="200">
+											<th scope="row">
+											<div class="p-2">
+											<c:if test="${not empty custVO.cust_pic}"><img
+														src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}" height="150" width="150" class="rounded-circle">
 												</c:if> <c:if test="${empty custVO.cust_pic}" >
-													<img src="<%=request.getContextPath()%>/images/null2.jpg" width="300" height="200">
-												</c:if></th>
-
+													<img src="<%=request.getContextPath()%>/images/null2.jpg" height="150" width="150" class="rounded-circle">
+												</c:if>
+											</div>
+												</th>
+											
 											<c:if test="${custVO.cust_status.equals('a0')}" var="true"
 												scope="session">
 												<td>未停權</td>
 											</c:if>
 											<c:if test="${custVO.cust_status.equals('a1')}" var="true"
 												scope="session">
-												<td>停權</td>
+												<td><span class="label label-danger label-rounded">停權</span></td>
 											</c:if>
 											
 

@@ -49,7 +49,7 @@
 
 			<tr>
 				<td>顧客密碼:</td>
-				<td><input readonly type="TEXT" name="cust_pwd" size="45"
+				<td><input readonly type="password" name="cust_pwd" size="45"
 					value="<%=custVO.getCust_pwd()%>" /></td>
 			</tr>
 
@@ -85,12 +85,12 @@
 
 			<tr>
 				<td>顧客生日:</td>
-				<td><input type="text" name="cust_brd" id="f_date1" size="45"></td>
+				<td><input type="text" readonly name="cust_brd" id="f_date1" size="45"></td>
 			</tr>
 
 			<tr>
 				<td>顧客電話:</td>
-				<td><input type="TEXT" name="cust_tel" size="45"
+				<td><input type="TEXT" readonly name="cust_tel" size="45"
 					value="<%=custVO.getCust_tel()%>" /></td>
 			</tr>
 
@@ -108,8 +108,8 @@
 
 			<tr>
 				<td>顧客狀態:</td>
-				<td><input type="radio" name="cust_status" size="10" value="a0"
-					checked />未停權 <input type="radio" name="cust_status" size="10"
+				<td><input type="radio" readonly name="cust_status" size="10" value="a0"
+					checked />未停權 <input readonly type="radio" name="cust_status" size="10"
 					value="a1" />停權</td>
 			</tr>
 

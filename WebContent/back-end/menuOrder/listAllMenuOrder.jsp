@@ -67,7 +67,8 @@ th,td{
 													begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
 													<tr>
 														<th scope="row">${menuOrderVO.menu_od_ID}</th>
-														<th scope="row"><c:if test="${menuOrderVO.menu_od_status=='g0'}">未審核</c:if>
+														<th scope="row">
+															<c:if test="${menuOrderVO.menu_od_status=='g0'}"><span class="label label-danger label-rounded">未審核</span></c:if>
 															<c:if test="${menuOrderVO.menu_od_status=='g1'}">審核通過</c:if>
 															<c:if test="${menuOrderVO.menu_od_status=='g2'}">審核不通過</c:if>
 															<c:if test="${menuOrderVO.menu_od_status=='g3'}">主廚到府</c:if>
@@ -81,7 +82,7 @@ th,td{
 														<th scope="row">
 															<form method="post"
 																action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-																<input type="submit" value="編輯"> <input
+																<input type="submit" class="btn btn-secondary" value="編輯"> <input
 																	type="hidden" name="menu_od_ID"
 																	value="${menuOrderVO.menu_od_ID}"> <input
 																	type="hidden" name="action" value="getOneForDispaly">
@@ -90,7 +91,7 @@ th,td{
 														<th scope="row">
 															<form method="post"
 																action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
-																<input type="submit" value="刪除"> <input
+																<input type="submit" class="btn btn-secondary" value="刪除"> <input
 																	type="hidden" name="menu_od_ID"
 																	value="${menuOrderVO.menu_od_ID}"> <input
 																	type="hidden" name="action" value="delete">

@@ -53,9 +53,9 @@
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="label label-success label-rounded">
+									
 										${foodSupStatusMap[foodSupVO.food_sup_status]}
-									</span>
+									
 								</c:otherwise>
 							</c:choose>
 						</th>

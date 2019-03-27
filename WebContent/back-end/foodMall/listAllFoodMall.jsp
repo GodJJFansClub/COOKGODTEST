@@ -45,8 +45,9 @@
                                     </thead>
                 
 				
-
-					<c:forEach var="foodMallVO" items="${list}">
+					<%@ include file="/back-end/file/page1.file" %>
+					<c:forEach var="foodMallVO" items="${list}" begin="<%=pageIndex%>"
+						end="<%=pageIndex+rowsPerPage-1%>">
 						<tr>
 							<th scope="row">${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</th>
 							<th scope="row">${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</th>
@@ -58,11 +59,7 @@
 											${mallStatusMap[foodMallVO.food_m_status]}
 										</span>
 									</c:when>
-									<c:otherwise>
-										<span class="label label-success label-rounded">
-											${mallStatusMap[foodMallVO.food_m_status]}
-										</span>
-									</c:otherwise>
+									<c:otherwise>${mallStatusMap[foodMallVO.food_m_status]}</c:otherwise>
 								</c:choose>
 							</th>
 							<th scope="row">${foodMallVO.food_m_price}</th>
@@ -71,7 +68,7 @@
 						
 							<th scope="row">
 								<form method="post" action="<%=request.getContextPath()%>/foodMall/foodMall.do">
-									<input type="submit" value="審核">
+									<input type="submit" value="審核" class="btn btn-secondary">
 									<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 									<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 									<input type="hidden" name="action" value="getOne_For_Update">
@@ -79,8 +76,10 @@
 							</th>
 						</tr>
 					</c:forEach>
-					
 				</table>
+				<div>
+				<%@ include file="/back-end/file/page2.file" %>
+				</div>
 			</div>
            </div>
         </div>
