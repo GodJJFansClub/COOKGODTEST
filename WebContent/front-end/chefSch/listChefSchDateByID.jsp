@@ -43,7 +43,7 @@ th, td {
 								action="<%=request.getContextPath()%>/chefSch/chefSch.do">
 								<input type="hidden" name="action" value="setOrderDate">
 								<input type="hidden" name="order_chef_sch_date" value="${chefSchVO.chef_sch_date}"> 
-								<input type="submit" class="chef_sch_date btn btn-outline-secondary btn-block" value="${chefSchVO.chef_sch_date}">
+								<input type="submit" class="chef_sch_date btn btn-outline-secondary btn-block" value="${chefSchVO.chef_sch_date}" style="margin-top:5px;">
 							</form>
 						</div>
 					</c:if>

@@ -34,7 +34,8 @@
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-8">
-				<div class="container-fliud">
+				<div class="container-fliud" >
+					<div class="header"><h2 class="card-title" style="font-family:Microsoft JhengHei;font-weight:bold;font-size:36px;text-align:center">${menuVO.menu_name}</h2></div>
 					<div class="row">
 						<div class="col-5">
 							<c:if test="${not empty menuVO.menu_pic}">
@@ -47,11 +48,10 @@
 							</c:if>
 						</div>
 						<div class="col-7">
-							<div class="card-body" style="font-family:Microsoft JhengHei;">
+							<div class="card-body">
 								<form method="post" action="<%=request.getContextPath()%>/menu/menu.do">
-									<h4 class="card-title">${menuVO.menu_name}</h4>
-									<p class="card-text" style="height: 200px;">${menuVO.menu_resume}</p>
-									<p class="card-text text-right">$${menuVO.menu_price}</p>
+									<p class="card-text" style="height: 240px;" style="font-family:Microsoft JhengHei;">${menuVO.menu_resume}</p>
+									<p class="card-text text-right" style="font-family:Microsoft JhengHei;">$${menuVO.menu_price}</p>
 									<input type="hidden" name="menu_ID" value="${menuVO.menu_ID}">
 									<input type="hidden" name="action" value="buyThisMenu">
 									<input type="submit" class="btn btn-outline-secondary " style="float: right;" value="購買套餐" >
@@ -59,6 +59,7 @@
 							</div>
 						</div>
 					</div>
+					<hr class="border:0;height: 1px;background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));"/>
 					<div class="container-fliud">
 						<div class="header" style="margin:20px;"><font style="font-size:21px;font-weight:bolder;font-family: Microsoft JhengHei;">套&nbsp;餐&nbsp;菜&nbsp;色</font></div>
 						<div class="row">
