@@ -29,7 +29,7 @@
 			<th scope="col">單位</th>
 			<th scope="col">產地</th>
 			<th scope="col">圖片</th>
-			<th scope="col">修改</th>
+			<th scope="col">更改狀態</th>
 		</tr>
 
 		<c:forEach var="foodMallVO" items="${listFoodMalls_ByFood_sup_ID}" varStatus="tabIn">
@@ -52,7 +52,7 @@
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/foodMall/foodMall.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改">
+						<input type="submit" class="btn btn-secondary" value="更改狀態">
 						<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 						<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">

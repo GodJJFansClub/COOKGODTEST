@@ -37,11 +37,11 @@ public class ChefDAO implements ChefDAO_Interface{
 	private static final String Get_All_Chef_By_Menu_ID =
 			"SELECT CHEF_ID FROM CHEF_DISH WHERE EXISTS (SELECT 1 FROM MENU_DISH WHERE MENU_ID = ? AND MENU_DISH.DISH_ID = CHEF_DISH.DISH_ID AND CHEF_DISH.CHEF_DISH_STATUS ='d1' ) GROUP BY CHEF_ID HAVING COUNT(DISH_ID) = ( SELECT COUNT(*) FROM MENU_DISH WHERE MENU_ID = ?)";
 	private static final String Get_All_Chef_By_Chef_Area = 
-			"SELECT * FROM CHEF WHERE CHEF_AREA = ?";
+			"SELECT * FROM CHEF WHERE CHEF_AREA = ? ORDER BY CHEF_ID DESC";
 	private static final String Get_All_Chef_From_Emp = 
-			"SELECT * FROM CHEF";
+			"SELECT * FROM CHEF ORDER BY CHEF_ID DESC";
 	private static final String Get_All_Chef_From_Cust = 
-			"SELECT * FROM CHEF WHERE CHEF_STATUS='b1'";
+			"SELECT * FROM CHEF WHERE CHEF_STATUS='b1' ORDER BY CHEF_ID DESC";
 	
 	@Override
 	public void insert(CustVO custVO, ChefVO chefVO) {

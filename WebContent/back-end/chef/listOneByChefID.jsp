@@ -48,7 +48,6 @@
 										<th scope="col">主廚名稱</th>
 										<th scope="col">主廚狀態</th>
 										<th scope="col">主廚服務地區</th>
-										<th scope="col">主廚頻道</th>
 										<th scope="col">主廚簡介</th>
 										<th scope="col">審核主廚</th>
 									</tr>
@@ -61,7 +60,6 @@
 											test="${chefVO.chef_status=='b2'}">審核不過</c:if> <c:if
 											test="${chefVO.chef_status=='b3'}">停權</c:if></th>
 									<th scope="row">${chefLocal[chefVO.chef_area]}</th>
-									<th scope="row">${chefVO.chef_channel}</th>
 									<th scope="row"  width="40%">${chefVO.chef_resume}</th>
 									<th scope="row">
 										<form method="post"

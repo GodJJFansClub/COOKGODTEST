@@ -66,24 +66,40 @@
 							<th scope="row">${chefVO.chef_ID}</th>
 							<th scope="row">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</th>
 							<th scope="row">
-								<c:if test="${chefVO.chef_status=='b0'}">未審核</c:if>
-								<c:if test="${chefVO.chef_status=='b1'}">審核通過</c:if>
-								<c:if test="${chefVO.chef_status=='b2'}">審核不過</c:if>
-								<c:if test="${chefVO.chef_status=='b3'}">停權</c:if>
+								<c:if test="${chefVO.chef_status=='b0'}">
+									<span class="label label-danger label-rounded">
+										未審核
+									</span>	
+								</c:if>
+								<c:if test="${chefVO.chef_status=='b1'}">
+									<span class="label label-success label-rounded">
+										審核通過
+									</span>
+								</c:if>
+								<c:if test="${chefVO.chef_status=='b2'}">
+									<span class="label label-success label-rounded">
+										審核不過
+									</span>
+								</c:if>
+								<c:if test="${chefVO.chef_status=='b3'}">
+									<span class="label label-success label-rounded">
+										停權
+									</span>
+								</c:if>
 							</th>
 							<th scope="row">${chefLocal[chefVO.chef_area]}</th>
 							
 							<th>
 								<form method="post"
 									action="<%=request.getContextPath()%>/chef/chef.do">
-									<input type="submit" value="編輯"> 
+									<input type="submit" class="btn btn-secondary" value="編輯"> 
 									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}"> 
 									<input type="hidden" name="action" value="getOneForDisplay">
 								</form>
 							</th>
 							<th>
 								<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
-									<input type="submit" value="審核主廚菜色"> 
+									<input type="submit" class="btn btn-secondary" value="審核主廚菜色"> 
 									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}">
 									<input type="hidden" name="action" value="getAllByChefID"> 
 								</form>

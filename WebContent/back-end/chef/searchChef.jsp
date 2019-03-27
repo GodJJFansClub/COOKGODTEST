@@ -27,26 +27,16 @@
 				<div class="row">
 					<div class="col-12">
 		
-						<div class="alert alert-success" role="alert">請輸入或選擇一位主廚以查詢</div>
+						<div class="alert alert-success" role="alert">查詢主廚</div>
 						<jsp:useBean id="chefSvc" scope="page"
 							class="com.chef.model.ChefService" />
 		
-						<form method="post"
-							action="<%=request.getContextPath()%>/back-end/chef/listOneByChefID.jsp">
-							<div class="input-group mb-3">
-								<input type="text" class="form-control" name="chef_ID"
-									placeholder="請輸入主廚編號">
-								<div class="input-group-append">
-									<input type="submit" class="btn btn-outline-secondary" value="送出">
-								</div>
-							</div>
-						</form>
 		
 						<form method="post"
 							action="<%=request.getContextPath()%>/back-end/chef/listOneByChefID.jsp">
 							<div class="input-group">
 								<select size="1" name="chef_ID" class="form-control">
-									<option value="請選擇主廚編號">請選擇主廚編號
+									<option value="請選擇主廚編號">請選擇主廚
 										<c:forEach var="chefVO" items="${chefSvc.all}">
 											<option value="${chefVO.chef_ID}">${custSvc.getOneCust(chefVO.chef_ID).cust_name}
 										</c:forEach>
