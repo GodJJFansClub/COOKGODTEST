@@ -35,7 +35,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/dish/Obtainedish.jsp" aria-expanded="false" aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">下架菜色</span>
+                                <span class="hide-menu">菜色下架</span>
                             </a>
                         </li>
                        

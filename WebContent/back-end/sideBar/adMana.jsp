@@ -16,13 +16,13 @@
 							class="sidebar-link waves-effect waves-dark sidebar-link"
 							href="<%=request.getContextPath()%>/back-end/ad/listAllAd.jsp" aria-expanded="false"> <i
 								class="mdi mdi-av-timer"></i>
-								<span class="hide-menu">查看所有廣告管理</span>
+								<span class="hide-menu">廣告資料管理</span>
 						</a></li>
 						<li class="sidebar-item"><a
 							class="sidebar-link waves-effect waves-dark sidebar-link"
 							href="<%=request.getContextPath()%>/back-end/ad/select_page.jsp" aria-expanded="false"> <i
 								class="mdi mdi-av-timer"></i>
-								<span class="hide-menu">查詢廣告</span>
+								<span class="hide-menu">廣告查詢</span>
 						</a></li>
                         
                     </ul>

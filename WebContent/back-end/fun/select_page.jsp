@@ -19,14 +19,8 @@
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-
-	<table id="table-1">
-		<tr>
-			<td><h3>功能管理</h3>
-				</td>
-		</tr>
-	</table>
-
+ 	<div class="alert alert-secondary text-center" role="alert" ><font style="font-weight:bold;font-size:26px;">功能管理</font></div>
+	<hr class="border:0;height: 1px;background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));"/>
 	
 	<h3>資料查詢:</h3>
 
