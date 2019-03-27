@@ -4,9 +4,30 @@
 <jsp:useBean id="chefSvc" class="com.chef.model.ChefService" />
 <html>
 <head>
+<style>
+.col{
+font-weight:bold;
+font-size:25px;
+}
+.col a{
+font-size:30px;
+
+}
+.col a:focus {
+  -webkit-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
+  transition-duration: 500ms;
+  text-decoration: none;
+  outline: 0 solid transparent;
+  color: #000000;
+  font-weight: 500;
+  font-size: 45px; }
+
+</style>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
 
 	<!-- ##### Contact Area Start #####-->
 	<section class="contact-area section-padding-100">
@@ -20,25 +41,25 @@
 			</ul>
 		</c:if>
 		<div id="mallItem" class="container foodMCard">
-			<div class="col">節慶料理編號 : ${festMenuVO.fest_m_ID}</div>
-			<div class="col" id="festMName">節慶主題料理名稱 :
-				${festMenuVO.fest_m_name}</div>
-			<div class="col">數量 : ${festMenuVO.fest_m_qty}</div>
-			<div class="col">開始預購日期 : ${festMenuVO.fest_m_start}</div>
-			<div class="col">結束預購日期 : ${festMenuVO.fest_m_end}</div>
-			<div class="col">統一寄送日期 : ${festMenuVO.fest_m_send}</div>
+			
+			<div class="col" id="festMName">節慶主題料理名稱 :<a>
+				${festMenuVO.fest_m_name}</a></div>
+			<div class="col">數量 : <a>${festMenuVO.fest_m_qty}</a></div>
+			<div class="col">開始預購日期 :<a> ${festMenuVO.fest_m_start}</a></div>
+			<div class="col">結束預購日期 : <a>${festMenuVO.fest_m_end}</a></div>
+			<div class="col">統一寄送日期 : <a>${festMenuVO.fest_m_send}</a></div>
 			<div class="col">
 				<img
 					src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}"
 					height="400" width="300">
 			</div>
-			<div class="col">種類 : ${festMenuVO.fest_m_kind}</div>
-			<div class="col">價格 : ${festMenuVO.fest_m_price}</div>
-			<div class="col">介紹 : ${festMenuVO.fest_m_resume}</div>
+			<div class="col">種類 : <a>${festMenuVO.fest_m_kind}</a></div>
+			<div class="col">價格 : <a>${festMenuVO.fest_m_price}</a></div>
+			<div class="col">介紹 :<u> ${festMenuVO.fest_m_resume}</u></div>
 			<form class="foodMCard"
 				action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
 				<button type="button" id="addShoppingcart" name="foodMBtn"
-					class="btn btn-primary">加入購物車</button>
+					class="btn btn-info">加入購物車</button>
 				<input type="hidden" name="fest_m_ID" value="${festMenuVO.fest_m_ID}"> <input type="number"
 					name="fest_or_qty" min="1" max="20" size="3" value="1">
 			</form>

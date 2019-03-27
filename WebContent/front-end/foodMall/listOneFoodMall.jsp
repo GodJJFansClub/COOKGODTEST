@@ -3,9 +3,30 @@
 <jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
 <html>
 <head>
+<style>
+.col{
+font-weight:bold;
+font-size:25px;
+}
+.col a{
+font-size:30px;
+
+}
+.col a:focus {
+  -webkit-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
+  transition-duration: 500ms;
+  text-decoration: none;
+  outline: 0 solid transparent;
+  color: #000000;
+  font-weight: 500;
+  font-size: 45px; }
+
+</style>
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
 	
 	 <!-- ##### Contact Area Start #####-->
     <section class="contact-area section-padding-100">
@@ -13,35 +34,35 @@
     	
     	<div id="mallItem" class="container foodMCard">
 	    	<div class="col">
-	    		食材供應商 : ${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}
+	    		食材供應商 :<a> ${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</a>
 	    	</div>
 	    	<div class="col" id="foodMName">
-	    		標題 : ${foodMallVO.food_m_name}
+	    		標題 :<a> ${foodMallVO.food_m_name}</a>
 	    	</div>
 	    	<div class="col">
-	    		食材名 : ${foodSvc.getOneFood(foodMallVO.food_sup_ID).food_name}
+	    		食材名 :<a> ${foodSvc.getOneFood(foodMallVO.food_sup_ID).food_name}</a>
 	    	</div>
 	    	<div class="col">
-	    		價格 : ${foodMallVO.food_m_price}
+	    		價格 :<a> ${foodMallVO.food_m_price}</a>
 	    	</div>
 	    	<div class="col">
-	    		單位 : ${foodMallVO.food_m_unit}
+	    		單位 :<a> ${foodMallVO.food_m_unit}</a>
 	    	</div>
 	    	<div class="col">
-	    		產地 : ${foodMallVO.food_m_place}
+	    		產地 :<a> ${foodMallVO.food_m_place}</a>
 	    	</div>
 	    	<div class="col">
 	    		<img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}"
 	    			height = "400" width="300">
 	    	</div>
 	    	<div class="col">
-	    		介紹 : ${foodMallVO.food_m_resume}
+	    		介紹 :<u> ${foodMallVO.food_m_resume}</u>
 	    	</div>
 	    	<form class="foodMCard" action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
-				<button type="button" id="addShoppingcart" name="foodMBtn" class="btn btn-primary">加入購物車</button>
+				<button type="button" id="addShoppingcart" name="foodMBtn" class="btn btn-info">加入購物車</button>
 				<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 				<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">	
-				<input type="number" name="food_od_qty" min="1" max="20" size="3" value="1">
+				<input type="number" style="font-size:25px"name="food_od_qty" min="1" max="20" size="3" value="1">
 			</form>
 			<p class="card-text errorMsgs"></p>
 		</div>

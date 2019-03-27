@@ -113,24 +113,23 @@
 			               <img src="<%=request.getContextPath()%>/foodMall/foodMall.do?food_sup_ID=${foodMallVO.food_sup_ID}&food_ID=${foodMallVO.food_ID}" style="height:600px; weight:600px">
 			               <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
 			                   <div class="hover-text" sytle="margin-top: 40%;" >
-				                <h3 class="shopUse food_m_name" style="margin-bottom: 70px;">
+				                <h3 class="shopUse food_m_name" style="margin-bottom: 70px;color:#ffd306; font-weight:bolder; font-size:35px;">
 								 ${foodMallVO.food_m_name}
 								</h3>
 								<div style="margin-top: 220px;">
-									<p class="shopUse food_name">
+									<p class="shopUse food_name" style="color:white; font-size:25px; font-weight:bolder">
 									 ${foodSvc.getOneFood(foodMallVO.food_ID).food_name}
 									</p>
-									<p class="shopUse food_sup_name">
+									<p class="shopUse food_sup_name" style="color:white; font-size:25px; font-weight:bolder">
 									 ${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}
 									</p>
-									<p class="marginall">
-									 ${foodMallVO.food_m_price}
-									</p>
+									<p class="marginall" style="color:white; font-size:25px; font-weight:bolder">
+									 價格:<a style="color:#ffd306; font-size:25px; font-weight:bolder">${foodMallVO.food_m_price}</a>									</p>
 									<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST" >
-									 <button type="button" name="foodMBtn" class="btn btn-primary">加入購物車</button>
+									 <button type="button" style="font-size:25px " name="foodMBtn" class="btn btn-info">加入購物車</button>
 										<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 										<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">	
-										<input type="number"   name="food_od_qty" min="1" max="20" size="3" value="1">
+										<input type="number" style="font-size:25px; font-weight:bolder"  name="food_od_qty" min="1" max="20" size="3" value="1">
 									</form>
 									<p class="errorMsgs cardInfo"></p>
 								</div>

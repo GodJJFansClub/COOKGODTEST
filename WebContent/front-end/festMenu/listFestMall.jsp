@@ -110,20 +110,20 @@
 				  			<img src="<%=request.getContextPath()%>/festMenu/festMenu.do?fest_m_ID=${festMenuVO.fest_m_ID}" style="height:600px; weight:600px" >
 				  			<div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
 				    			<div class="hover-text"  >
-				    			<h3 class="shopUse food_m_name" style="color:#ff359a">
+				    			<h3 class="shopUse food_m_name" style="color:#ff359a; font-weight:bolder; font-size:30px;">
 				    				${festMenuVO.fest_m_name}
 				    			</h3>
 				    			<div >
-				    			<p style="color:white">
+				    			<p style="color:white; font-size:25px">
 				    				數量:${festMenuVO.fest_m_qty}
 				    			</p>
-				    			<p style="color:white">
+				    			<p style="color:white ; font-size:25px">
 				    				預購結束日期 : ${festMenuVO.fest_m_end}
 				    			</p>
 				    			<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST">
-				    				<button type="button" name="foodMBtn" class="btn btn-primary">加入購物車</button>
+				    				<button type="button" style="font-size:25px"  name="foodMBtn" class="btn btn-info">加入購物車</button>
 				    				<input type="hidden" name="fest_m_ID" value="${festMenuVO.fest_m_ID}">
-				    				<input type="number"   name="fest_or_qty" min="1" max="20" size="3" value="1">
+				    				<input type="number" style="font-size:25px"  name="fest_or_qty" min="1" max="20" size="3" value="1">
 				    			</form>
 				    			<p class="card-text errorMsgs"></p>
 				  			</div>

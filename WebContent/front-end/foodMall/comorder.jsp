@@ -8,12 +8,22 @@
 <html>
 <head>
 <title>付款成功</title>
+
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
+	
+	
+	<section class="contact-area section-padding-100">
+        <div >
+            
+            <div class="row justify-content-center">
+                <div >
+                
 
 	 <!-- ##### Contact Area Start #####-->
-    <section class="contact-area section-padding-100">
+   
 			<%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
 				<font style="color:red">請修正以下錯誤:</font>
@@ -25,7 +35,7 @@
 			</c:if>
 			<c:if test="${not empty foodOrderVO}">
 				<table class="table">
-				  <thead>
+				  <thead style="font-weight:blod;font-size:25px">
 				    <tr>
 				      <th scope="col">食材訂單編號</th>
 				      <th scope="col">訂單狀態</th>
@@ -53,7 +63,7 @@
 				  </tbody>
 				 </table>
 				 <table class="table">
-				 	<tr>
+				 	<tr style="font-weight:blod;font-size:25px">
 				 		<th scope="col">食材供應商</th> <th scope="col">食材</th> <th scope="col">數量</th> <th scope="col">小計</th>
 				 	</tr>
 				 	<c:forEach var="foodOrODVO" items="${foodOrODs}">
@@ -63,8 +73,8 @@
 				 </table>
 			 </c:if>
 			 <c:if test="${not empty festOrderList}">
-				<table class="table">
-				  <thead>
+				<table class="table" style="background-color: transparent;table-layout: fixed;">
+				  <thead style="font-weight:blod;font-size:25px">
 				    <tr>
 				      <th scope="col">節慶訂單編號</th>
 				      <th scope="col">訂單狀態</th>
@@ -103,7 +113,14 @@
 			 </c:if>
             
 
+	
+	
+			</div>
+			</div>
+		</div>
+		
 	</section>
+	
     <!-- ##### Contact Area End #####-->
 
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
