@@ -16,7 +16,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title -->
-<title>Pixel - Digital Agency HTML Template</title>
+<title>CA106G3</title>
 
 <!-- Favicon -->
 <%-- <link href="<%=request.getContextPath()%>/publibrary/sweetalert.css"> --%>

@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 
 <head>
-<title> Master login Form Responsive Widget Template  :: w3layouts</title>
+<title>CA106G3</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content=" Master  Login Form Widget Tab Form,Login Forms,Sign up Forms,Registration Forms,News letter Forms,Elements"/>

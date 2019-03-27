@@ -33,9 +33,9 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 	private static final String Get_One_Stmt = 
 			"SELECT * FROM MENU_ORDER WHERE MENU_OD_ID = ?";
 	private static final String Get_All_Stmt = 
-			"SELECT * FROM MENU_ORDER ORDER BY MENU_OD_ID";
+			"SELECT * FROM MENU_ORDER ORDER BY MENU_OD_ID desc";
 	private static final String Get_All_By_Cust_ID = 
-			"SELECT * FROM MENU_ORDER WHERE CUST_ID = ? ORDER BY MENU_OD_ID";
+			"SELECT * FROM MENU_ORDER WHERE CUST_ID = ? ORDER BY MENU_OD_ID desc";
 	private static final String Get_UnCheck_Menu_Order = 
 			"SELECT * FROM MENU_ORDER WHERE CHEF_ID=? AND MENU_OD_STATUS='g0' ORDER BY MENU_OD_ID";
 	private static final String Get_UnFinished_Menu_Order = 

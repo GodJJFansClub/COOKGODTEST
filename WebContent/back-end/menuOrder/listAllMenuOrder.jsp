@@ -49,14 +49,12 @@ th,td{
 									<tr>
 										<th scope="col">訂單編號</th>
 										<th scope="col">訂單狀態</th>
-										<th scope="col">下訂日期</th>
 										<th scope="col">預約日期</th>
 										<th scope="col">完成日期</th>
 										<th scope="col">訂單評價</th>
-										<th scope="col">訂單留言</th>
-										<th scope="col">顧客編號</th>
-										<th scope="col">主廚編號</th>
-										<th scope="col">套餐編號</th>
+										<th scope="col">顧客</th>
+										<th scope="col">主廚</th>
+										<th scope="col">套餐</th>
 										<th scope="col">修改訂單</th>
 										<th scope="col">刪除訂單</th>
 
@@ -74,11 +72,9 @@ th,td{
 															<c:if test="${menuOrderVO.menu_od_status=='g2'}">審核不通過</c:if>
 															<c:if test="${menuOrderVO.menu_od_status=='g3'}">主廚到府</c:if>
 															<c:if test="${menuOrderVO.menu_od_status=='g4'}">訂單完成</c:if></th>
-														<th scope="row">${menuOrderVO.menu_od_start}</th>
 														<th scope="row">${menuOrderVO.menu_od_book}</th>
 														<th scope="row">${menuOrderVO.menu_od_end}</th>
 														<th scope="row">${menuOrderVO.menu_od_rate}</th>
-														<th scope="row">${menuOrderVO.menu_od_msg}</th>
 														<th scope="row">${custSvc.getOneCust(menuOrderVO.cust_ID).cust_name}</th>
 														<th scope="row">${custSvc.getOneCust(menuOrderVO.chef_ID).cust_name}</th>
 														<th scope="row">${menuSvc.getOneMenu(menuOrderVO.menu_ID).menu_name}</th>
