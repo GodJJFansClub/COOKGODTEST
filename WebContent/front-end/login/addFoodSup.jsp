@@ -13,7 +13,7 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>食材供應商資料新增 </title>
+<title>食材供應商資料新增</title>
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
@@ -49,7 +49,7 @@ table, th, td {
 }
 
 th, td {
-width: 1px;
+	width: 1px;
 	padding: 1px;
 }
 </style>
@@ -59,7 +59,7 @@ width: 1px;
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
 
-<jsp:include page="/froTempl/headerJoin.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerJoin.jsp" flush="true" />
 	<!-- ##### Contact Area Start #####-->
 	<section class="contact-area section-padding-100">
 
@@ -102,7 +102,8 @@ width: 1px;
 										<td><input type="TEXT" id="cust_acc" name="cust_acc"
 											size="45"
 											value="<%=(custVO == null) ? "" : custVO.getCust_acc()%>"
-											placeholder="請輸入帳號" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/>
+											placeholder="請輸入帳號" autocomplete="off"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" />
 											<p id="answer"></p></td>
 									</tr>
 
@@ -110,77 +111,93 @@ width: 1px;
 										<td>食材供應商密碼:</td>
 										<td><input type="password" name="cust_pwd" size="45"
 											value="<%=(custVO == null) ? "" : custVO.getCust_pwd()%>"
-											placeholder="請輸入密碼" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											placeholder="請輸入密碼" autocomplete="off"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
 									</tr>
 
 									<tr>
 										<td>食材供應商姓名:</td>
 										<td><input type="TEXT" name="cust_name" size="45"
 											value="<%=(custVO == null) ? "" : custVO.getCust_name()%>"
-											placeholder="請輸入姓名" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											placeholder="請輸入姓名" autocomplete="off"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
 									</tr>
 
 									<tr>
 										<td>身分證字號:</td>
 										<td><input type="TEXT" name="cust_pid" size="45"
 											value="<%=(custVO == null) ? " " : custVO.getCust_pid()%>"
-											placeholder="請輸入身分證字號" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											placeholder="請輸入身分證字號" autocomplete="off"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
 									</tr>
 
 									<tr>
 										<td>顧客性別:</td>
 
 										<td><input type="radio" name="cust_sex" size="10"
-											value="M" style="width:20px;height:20px"
-											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' }
-											 />男
-											 <input type="radio" name="cust_sex" size="10" value="F" style="width:20px;height:20px"
-											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' }
-											 />女
+											value="M" style="width: 20px; height: 20px"
+											${custVO.cust_sex=='M'||custVO ==null ? 'checked':'' } />男
+											<input type="radio" name="cust_sex" size="10" value="F"
+											style="width: 20px; height: 20px"
+											${custVO.cust_sex=='F'||custVO ==null ? 'checked':'' } />女
 										</td>
 									</tr>
 
 									<tr>
 										<td>食材供應商生日:</td>
 										<td><input type="TEXT" name="cust_brd" id="f_date1"
-											size="45" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											size="45" class="form-control wow fadeInUp"
+											data-wow-delay="100ms" /></td>
 									</tr>
 
 									<tr>
 										<td>食材供應商電話:</td>
 										<td><input type="TEXT" name="cust_tel" size="45"
 											value="<%=(custVO == null) ? "" : custVO.getCust_tel()%>"
-											placeholder="請輸入手機號碼" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											placeholder="請輸入手機號碼" autocomplete="off"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
 									</tr>
 
 									<tr>
 										<td>食材供應商地址:</td>
-										<td><input type="TEXT" name="cust_addr" size="45"
-											value="<%=(custVO == null) ? "" : custVO.getCust_addr()%>"
-											placeholder="請輸入地址" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+										<td><select name="cityName" id="twCityName">
+												<option value="-1">--請選擇縣市--</option>
+										</select> <select name="areaName" id="CityAreaName">
+												<option value="-1">--請選擇區域--</option>
+										</select> <input readonly id="zipCode" name="zipCode" type="text"
+											placeholder="區域號碼" style="width: 75px; font-size: 18px">
+											<select name="roadName" id="AreaRoadName">
+												<option value="-1">--請選擇路名--</option>
+										</select> <input type="text" name="partAddr" class="form-control">
+										</td>
+
 									</tr>
 
 									<tr>
 										<td>食材供應商信箱:</td>
 										<td><input type="TEXT" name="cust_mail" size="45"
 											value="<%=(custVO == null) ? "" : custVO.getCust_mail()%>"
-											placeholder="請輸入電子郵件" autocomplete="off" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											placeholder="請輸入電子郵件" autocomplete="off"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
 									</tr>
 
 									<tr>
 										<td>食材供應商暱稱:</td>
 										<td><input type="TEXT" name="cust_niname" size="45"
-											value="<%=(custVO == null) ? "" : custVO.getCust_niname()%>" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											value="<%=(custVO == null) ? "" : custVO.getCust_niname()%>"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
 									</tr>
 
 									<tr>
 										<td>食材供應商大頭照:</td>
 										<td><input type="file" name="cust_pic" size="45" id="doc"
-											onchange="javascript:setImagePreview();" class="form-control wow fadeInUp" data-wow-delay="100ms"/></td>
+											onchange="javascript:setImagePreview();"
+											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
 									</tr>
 									<tr>
 										<td>食材供應商簡歷:</td>
-										<td><textarea name="food_sup_resume" class="form-control wow fadeInUp" data-wow-delay="100ms">${chefVO==null? '請輸入簡介...':chefVO.chef_resume}</textarea>
+										<td><textarea name="food_sup_resume"
+												class="form-control wow fadeInUp" data-wow-delay="100ms">${chefVO==null? '請輸入簡介...':chefVO.chef_resume}</textarea>
 
 											<script>CKEDITOR.replace('food_sup_resume');</script>
 									</tr>
@@ -239,12 +256,89 @@ width: 1px;
     	  form1.cust_sex.value="M"
     	  form1.cust_brd.value="2017-12-01"
     	  form1.cust_tel.value="0906077543"
-    	  form1.cust_addr.value="台北市信義區信義路五段7號"
+    	  form1.partAddr.value="1號"
     	  form1.cust_mail.value="ca106g3@hotmail.com"
     	 
     	  form1.cust_niname.value="資策會大當家" 
     	  form1.food_sup_resume.value="30年老廚師"
       }
+      
+      
+      $(document).ready(function(){
+  		$.ajax({
+  			type: "POST",
+  			url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+  			data: {"action":"getCity"},
+  			dataType: "json",
+  			success: function(result){
+  				 let len = result.length;
+  				 console.log(result);
+  				 for(let i = 0; i < len; i++){
+  					 $("#twCityName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+  				 }
+  			 },
+  	         error: function(){
+  	        	 alert("AJAX-grade發生錯誤囉!");
+  			}
+  		});
+  		
+  		$("#twCityName").change(function(event){
+  			
+  			if(event.target.value != "-1"){				
+  				$.ajax({
+  					type: "POST",
+  					url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+  					data: {"action":"twCityName","twCityName":$('#twCityName option:selected').val()},
+  					dataType: "json",
+  					success: function(result){
+  						
+  						 $("#CityAreaName").empty();
+  						
+  						 $("#CityAreaName").append("<option value='-1'>--請選擇區域--</option>")
+  						 for(var i=0; i<result.length; i++){
+  						 	$("#CityAreaName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+  						 }
+  					 },
+  			         error: function(){
+  			        	 alert("AJAX-grade發生錯誤囉!");
+  					}
+  				});
+  			}
+  		});
+  		
+  		
+  		$("#CityAreaName").change(function(){
+  			if(event.target.value != "-1"){
+  				$.ajax({
+  					 type: "POST",
+  					 url: "<%=request.getContextPath()%>/food/AddrSelect.do",
+  					 data: {"action":"CityAreaName",
+  						 	"twCityName":$('#twCityName option:selected').val(),
+  						 	"CityAreaName":$('#CityAreaName option:selected').val()},
+  					 dataType: "json",
+  					 success: function(result){
+  						 console.log(result);
+  						 $("#AreaRoadName").empty();
+  						 $("#zipCode").val(result.ZipCode);
+  						 $("#AreaRoadName").append('<option value="-1">--請選擇區域--</option>');
+  						 console.log(result.roadName);
+  						 for(var i=0; i<result.roadName.length; i++){
+  						 	$("#AreaRoadName").append('<option value="'+result.roadName[i]+'">'+result.roadName[i]+'</option>');
+  						 }
+  					 },
+  			         error: function(result){
+  			        	 console.log(result);
+  			        	 alert("AJAX-grade發生錯誤囉!");
+  			         }
+  			    });
+  			}
+  		});
+  		
+  	});
+  	
+      
+      
+      
 </script>
 
 <script>
@@ -363,8 +457,7 @@ width: 1px;
 			$('#answer').text('帳號驗證中');
 			$.ajax({
  			
-				url: '<%=request.getContextPath()%>
-	/cust/cust.do',
+		url:'<%=request.getContextPath()%>/cust/cust.do',
 			type : "POST",
 			data : {
 				action : 'ask',

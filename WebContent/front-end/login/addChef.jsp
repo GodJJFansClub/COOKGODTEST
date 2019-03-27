@@ -162,10 +162,18 @@ th, td {
 
 									<tr>
 										<td>主廚地址:</td>
-										<td><input type="TEXT" name="cust_addr" size="45"
-											value="<%=(custVO == null) ? "" : custVO.getCust_addr()%>"
-											placeholder="請輸入地址" autocomplete="off"
-											class="form-control wow fadeInUp" data-wow-delay="100ms" /></td>
+										<td><select name="cityName"id="twCityName">
+												<option value="-1">--請選擇縣市--</option>
+										</select> 
+											<select name="areaName" id="CityAreaName">
+												<option value="-1">--請選擇區域--</option>
+										</select> <input readonly id="zipCode" name="zipCode" type="text"
+											 placeholder="區域號碼" style="width:75px;font-size:18px">
+											 <select name="roadName"id="AreaRoadName">
+												<option value="-1">--請選擇路名--</option>
+										</select> <input type="text" name="partAddr" class="form-control">
+										</td>
+
 									</tr>
 
 									<tr>
@@ -285,11 +293,11 @@ th, td {
     	  form1.cust_sex.value="M"
     	  form1.cust_brd.value="2017-12-01"
     	  form1.cust_tel.value="0906077543"
-    	  form1.cust_addr.value="台北市信義區信義路五段7號"
+    	  form1.partAddr.value="1號"
     	  form1.cust_mail.value="ca106g3@hotmail.com"
     	  form1.chef_area.value="0"
     	  form1.cust_niname.value="海鮮小當家" 
-    	  form1.chef_resume.value="30年老廚師"
+    	  form1.chef_resume.text="30年老廚師"
       }
 </script>
 
@@ -373,6 +381,90 @@ th, td {
 			callback();
 		}, time);
 	}
+	
+	
+	$(document).ready(function(){
+		$.ajax({
+			type: "POST",
+			url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+			data: {"action":"getCity"},
+			dataType: "json",
+			success: function(result){
+				 let len = result.length;
+				 console.log(result);
+				 for(let i = 0; i < len; i++){
+					 $("#twCityName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+				 }
+			 },
+	         error: function(){
+	        	 alert("AJAX-grade發生錯誤囉!");
+			}
+		});
+		
+		$("#twCityName").change(function(event){
+			
+			if(event.target.value != "-1"){				
+				$.ajax({
+					type: "POST",
+					url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+					data: {"action":"twCityName","twCityName":$('#twCityName option:selected').val()},
+					dataType: "json",
+					success: function(result){
+						
+						 $("#CityAreaName").empty();
+						
+						 $("#CityAreaName").append("<option value='-1'>--請選擇區域--</option>")
+						 for(var i=0; i<result.length; i++){
+						 	$("#CityAreaName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+						 }
+					 },
+			         error: function(){
+			        	 alert("AJAX-grade發生錯誤囉!");
+					}
+				});
+			}
+		});
+		
+		
+		$("#CityAreaName").change(function(){
+			if(event.target.value != "-1"){
+				$.ajax({
+					 type: "POST",
+					 url: "<%=request.getContextPath()%>/food/AddrSelect.do",
+					 data: {"action":"CityAreaName",
+						 	"twCityName":$('#twCityName option:selected').val(),
+						 	"CityAreaName":$('#CityAreaName option:selected').val()},
+					 dataType: "json",
+					 success: function(result){
+						 console.log(result);
+						 $("#AreaRoadName").empty();
+						 $("#zipCode").val(result.ZipCode);
+						 $("#AreaRoadName").append('<option value="-1">--請選擇區域--</option>');
+						 console.log(result.roadName);
+						 for(var i=0; i<result.roadName.length; i++){
+						 	$("#AreaRoadName").append('<option value="'+result.roadName[i]+'">'+result.roadName[i]+'</option>');
+						 }
+					 },
+			         error: function(result){
+			        	 console.log(result);
+			        	 alert("AJAX-grade發生錯誤囉!");
+			         }
+			    });
+			}
+		});
+		
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 
 </html>

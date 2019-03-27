@@ -97,11 +97,26 @@ public class CustServlet extends HttpServlet {
 				}
 
 				// 6.地址
-				String cust_addr = req.getParameter("cust_addr").trim();
-				if (cust_addr == null || cust_addr.trim().length() == 0) {
-					errorMsgs.add("地址請勿空白");
+				
+				String cityName = req.getParameter("cityName");
+				if("-1".equals(cityName)) {
+					errorMsgs.add("請選擇城市");
 				}
-
+				String areaName = req.getParameter("areaName");
+				if("-1".equals(areaName)) {
+					errorMsgs.add("請選擇區域");
+				}
+				String roadName = req.getParameter("roadName");
+				if("-1".equals(roadName)) {
+					errorMsgs.add("請選擇路");
+				}
+				String partAddr = req.getParameter("partAddr");
+				if(null != partAddr && partAddr.trim().length() == 0) {
+					errorMsgs.add("請輸入全部地址");
+				}
+				//地址總和
+				String cust_addr = req.getParameter("zipCode") + cityName + areaName + roadName + partAddr;
+				
 				// 7.身分證字號
 				String cust_pid = req.getParameter("cust_pid").trim();
 				if (cust_pid == null || cust_pid.trim().length() == 0) {
@@ -266,11 +281,25 @@ public class CustServlet extends HttpServlet {
 					errorMsgs.add("電話號碼: 只能是數字");
 				}
 
-				// 6.地址
-				String cust_addr = req.getParameter("cust_addr").trim();
-				if (cust_addr == null || cust_addr.trim().length() == 0) {
-					errorMsgs.add("地址請勿空白");
+				String cityName = req.getParameter("cityName");
+				if("-1".equals(cityName)) {
+					errorMsgs.add("請選擇城市");
 				}
+				String areaName = req.getParameter("areaName");
+				if("-1".equals(areaName)) {
+					errorMsgs.add("請選擇區域");
+				}
+				String roadName = req.getParameter("roadName");
+				if("-1".equals(roadName)) {
+					errorMsgs.add("請選擇路");
+				}
+				String partAddr = req.getParameter("partAddr");
+				if(null != partAddr && partAddr.trim().length() == 0) {
+					errorMsgs.add("請輸入全部地址");
+				}
+				//地址總和
+				String cust_addr = req.getParameter("zipCode") + cityName + areaName + roadName + partAddr;
+				
 
 				// 7.身分證字號
 				String cust_pid = req.getParameter("cust_pid").trim();
