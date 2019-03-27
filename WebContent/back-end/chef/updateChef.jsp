@@ -32,7 +32,7 @@
 
 	<div class="card text-center" style="background-color: #D4E6F1">
 		<div class="card-body">
-			<h5 class="card-title">編輯主廚簡歷</h5>
+			<h5 class="card-title">審核主廚</h5>
 		</div>
 	</div>
 
@@ -78,7 +78,7 @@
 					<input type="hidden" name="chef_channel" value="${chefVO.chef_channel}">
 					<input type="hidden" name="chef_area" value="${chefVO.chef_area}">
 					<input type="hidden" name="action" value="getOneForUpdate"> 
-					<input type="submit" class="btn btn-success btn-lg btn-block" value="修改">
+					<input type="submit" class="btn btn-success btn-lg btn-block" value="送出">
 				</form>
 				</div>
 			</div>

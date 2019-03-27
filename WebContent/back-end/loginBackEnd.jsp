@@ -31,7 +31,7 @@ background-attachment: fixed;
 .padding-all{
 padding:100px;
 }
-/* 去掉私有前缀，谷歌和火狐有效；IE和edge无效 */
+/* 谷歌和火狐有效；IE和edge無效 */
 input::placeholder{
 	color: white;
 	font-size:28px;
@@ -49,8 +49,8 @@ input::placeholder{
 		<div class="design-w3l">
 			<div class="mail-form-agile">
 				<form  action="<%=request.getContextPath()%>/back-end/login.do" method="post" >
-					<input type="text" name="account" placeholder="請輸入帳號..."  style="font-family:'ZCOOL QingKe HuangYou';" required="" autocomplete="off"/>
-					<input type="password"  name="password" class="padding" style="font-family:'ZCOOL QingKe HuangYou';" placeholder="請輸入密碼..." required=""/>
+					<input type="text" name="account" placeholder="請輸入帳號..."  style="color:white;font-family:'ZCOOL QingKe HuangYou';font-size:28px;" required="" autocomplete="off"/>
+					<input type="password"  name="password" class="padding" style="color:white;font-family:'ZCOOL QingKe HuangYou';font-size:28px;" placeholder="請輸入密碼..." required=""/>
 					<input type="submit" value="Login" style="color:white;font-family:'ZCOOL QingKe HuangYou';">
 				</form>
 			</div>

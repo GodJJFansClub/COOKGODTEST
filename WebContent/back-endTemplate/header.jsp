@@ -20,9 +20,8 @@
 	rel="stylesheet">
 	
 	<style type="text/css">
-		*{
-			font-family:Microsoft JhengHei;
-			font-size:16px;
+		.topbar {
+			background:#2E4053;
 		}
 	</style>
 	
@@ -78,7 +77,7 @@
 						href="<%=request.getContextPath()%>/back-end/foodSup/listAllFoodSup.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
+								<div class="ml-1 d-none d-sm-block" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;">
 									<span>合作夥伴</span>
 								</div>
 							</div>
@@ -88,7 +87,7 @@
 						href="<%=request.getContextPath()%>/back-end/cust/listAllCust.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
+								<div class="ml-1 d-none d-sm-block" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;">
 									<span>顧客資料管理</span>
 								</div>
 							</div>
@@ -99,7 +98,7 @@
 						href="<%=request.getContextPath()%>/back-end/foodMall/listAllFoodMall.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
+								<div class="ml-1 d-none d-sm-block" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;">
 									<span>商城管理</span>
 								</div>
 							</div>
@@ -110,7 +109,7 @@
 						href="<%=request.getContextPath()%>/back-end/dish/AllDish.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
+								<div class="ml-1 d-none d-sm-block" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;">
 									<span>菜色及食材管理</span>
 								</div>
 							</div>
@@ -121,7 +120,7 @@
 						href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
+								<div class="ml-1 d-none d-sm-block" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;">
 									<span>員工管理</span>
 								</div>
 							</div>
@@ -131,8 +130,18 @@
 						href="<%=request.getContextPath()%>/back-end/ad/listAllAd.jsp">
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
+								<div class="ml-1 d-none d-sm-block" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;">
 									<span>廣告管理</span>
+								</div>
+							</div>
+					</a></li>
+					<li class="nav-item"><a
+						class="nav-link waves-effect waves-dark">
+							<div class="d-flex align-items-center" style="margin-left:150px;">
+								<i class="font-20 mr-1"></i>
+								<div class="ml-1 d-none d-sm-block" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;">
+									<span>歡迎:<font style="text-transform:capitalize;font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:red;"> ${empVO.emp_name} </font>您好
+									</span>
 								</div>
 							</div>
 					</a></li>
@@ -141,19 +150,9 @@
 							<div class="d-flex align-items-center">
 								<i class="font-20 mr-1"></i>
 								<div class="ml-1 d-none d-sm-block">
-									<span>歡迎:<font color=red> ${empVO.emp_name} </font>您好
-									</span>
-								</div>
-							</div>
-
-					<li class="nav-item"><a
-						class="nav-link waves-effect waves-dark">
-							<div class="d-flex align-items-center">
-								<i class="font-20 mr-1"></i>
-								<div class="ml-1 d-none d-sm-block">
 									<FORM METHOD="get"
 										action="<%=request.getContextPath()%>/back-end/logoutBack.do">
-										<input type="submit" class="btn btn-dark" value="登出" style="margin-top:15px;">
+										<input type="submit" class="btn btn-danger" value="登出" style="font-family:Microsoft JhengHei;font-size:18px;font-weight:bold;color:white;margin-top:12px;">
 									</FORM>
 								</div>
 							</div>

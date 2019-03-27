@@ -14,6 +14,8 @@
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
+	<div class="alert alert-secondary text-center" role="alert" ><font style="font-weight:bold;font-size:26px;">食材供應商資料</font></div>
+	<hr class="border:0;height: 1px;background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));"/>
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
 				<font color='red'>請修正以下錯誤:</font>

@@ -38,6 +38,11 @@
 			</c:forEach>
 		</ul>
 	</c:if>
+	
+	<div class="alert alert-secondary text-center" role="alert" ><font style="font-weight:bold;font-size:26px;">主廚資料</font></div>
+	<hr class="border:0;height: 1px;background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));"/>
+	
+	
 		<div class="col">
 			<div class="card">
 				<div class="table-responsive">
@@ -49,7 +54,6 @@
 								<th scope="col">主廚狀態</th>
 								<th scope="col">主廚服務地區</th>
 								<th scope="col">審核主廚</th>
-								<th scope="col">審核主廚菜色</th>
 							</tr>
 						</thead>
 							<%@ include file="page1.file"%>
@@ -70,13 +74,6 @@
 									<input type="submit" class="btn btn-secondary" value="編輯"> 
 									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}"> 
 									<input type="hidden" name="action" value="getOneForDisplay">
-								</form>
-							</th>
-							<th>
-								<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
-									<input type="submit" class="btn btn-secondary" value="審核主廚菜色"> 
-									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}">
-									<input type="hidden" name="action" value="getAllByChefIDWhereChefDishNotCheck"> 
 								</form>
 							</th>
 						</tr>

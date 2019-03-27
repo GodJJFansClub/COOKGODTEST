@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
+<jsp:useBean id="chefSvc" scope="page" class="com.chef.model.ChefService" />
 <html>
 <head>
 <title></title>
@@ -23,20 +24,18 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-			<div class="container justify-content-center">
+			<div class="container-fliud justify-content-center">
 				<div class="row">
 					<div class="col-12">
 		
-						<div class="alert alert-success" role="alert">查詢主廚</div>
-						<jsp:useBean id="chefSvc" scope="page"
-							class="com.chef.model.ChefService" />
-		
-		
+						<div class="alert alert-secondary text-center" role="alert" ><font style="font-weight:bold;font-size:26px;">查詢主廚</font></div>
+						<hr class="border:0;height: 1px;background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));"/>
+						
 						<form method="post"
 							action="<%=request.getContextPath()%>/back-end/chef/listOneByChefID.jsp">
 							<div class="input-group">
 								<select size="1" name="chef_ID" class="form-control">
-									<option value="請選擇主廚編號">請選擇主廚
+									<option value="請選擇主廚姓名">請選擇主廚姓名
 										<c:forEach var="chefVO" items="${chefSvc.all}">
 											<option value="${chefVO.chef_ID}">${custSvc.getOneCust(chefVO.chef_ID).cust_name}
 										</c:forEach>
@@ -51,10 +50,10 @@
 							<div class="input-group">
 								<select size="1" name="chef_area" class="form-control">
 									<option value="請選擇服務地區">請選擇服務地區
-									<option value="0">北</option>
-									<option value="1">中</option>
-									<option value="2">南</option>
-									<option value="3">東</option>
+									<option value="0">北部</option>
+									<option value="1">中部</option>
+									<option value="2">南部</option>
+									<option value="3">東部</option>
 								</select>
 								<div class="input-group-append">
 									<input type="submit" class="btn btn-outline-secondary" value="送出">
@@ -65,7 +64,7 @@
 							<div class="input-group">
 								<jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
 								<select size="1" name="menu_ID" class="form-control">
-									<option value="請選擇套餐編號">請選擇套餐</option>
+									<option value="請選擇套餐名稱">請選擇套餐名稱</option>
 									<c:forEach var="menuVO" items="${menuSvc.all}">
 										<option value="${menuVO.menu_ID}">${menuVO.menu_name}</option>
 									</c:forEach>
