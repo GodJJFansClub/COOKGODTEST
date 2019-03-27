@@ -11,11 +11,12 @@
 	<style type="text/css">
 		#foodFestShopCart{
 			position: fixed; 
-		    right: 0px;
-		    bottom: 45%;
-		    width: 100px;
-		    height: 120px;
+		    right: 6px;
+		    top:105px;
+		    width: 90px;
+		    height: 90px;
 		    z-index: 9999;
+		    cursor:pointer;
 		}
 		#collapseShoppingCart{
 			height: 100hv;
@@ -35,7 +36,7 @@
 <body>
 	<div id="foodFestShopCart">
 	 <img data-toggle="collapse" data-target="#collapseShoppingCart" aria-expanded="false"
-		aria-controls="collapseShoppingCart" src="<%=request.getContextPath()%>/images/shopcart.png" >
+		aria-controls="collapseShoppingCart" src="<%=request.getContextPath()%>/images/shopcart2.png" >
 	</div>
 	<div class="collapse" id="collapseShoppingCart">
 		<div class="card card-body">

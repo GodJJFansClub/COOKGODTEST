@@ -30,6 +30,10 @@
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
+	
+<!-- Font-family -->	
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou">
+
 <style type="text/css">
 	*{
 		font-family:Microsoft JhengHei;
@@ -57,8 +61,6 @@
 			<div></div>
 		</div>
 	</div>
-
-
 <br>
 <br>
 <br>
@@ -95,12 +97,11 @@
 							<!-- Nav Start -->
 							<div class="classynav">
 								<ul>
-
-									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp" style="font-weight: bold;">首頁</a></li>
-
+									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp" style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;首頁&nbsp;</a></li>
 
 
-									<li><a href="#" style="font-weight: bold">食神來了</a>
+
+									<li><a href="#" style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;食神來了&nbsp;</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/chef/listAllChef.jsp">瀏覽主廚</a></li>
@@ -108,7 +109,7 @@
 												href="<%=request.getContextPath()%>/front-end/menu/menu.jsp">嚴選套餐</a></li>
 										</ul></li>
 
-									<li><a href="#" style="font-weight: bold">食神配送</a>
+									<li><a href="#" style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;食神配送&nbsp;</a>
 										<ul class="dropdown">
 											<li><a
 												href="<%=request.getContextPath()%>/front-end/festMenu/listFestMall.jsp">節慶主題</a></li>
@@ -117,7 +118,7 @@
 										</ul></li>
 
 									<c:if test="${not empty chefVO.chef_ID}">
-										<li><a href="#" style="font-weight: bold">主廚專區</a>
+										<li><a href="#" style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;主厨專區&nbsp;</a>
 											<ul class="dropdown">
 												<li><a href="<%=request.getContextPath()%>/front-end/chef/updateChefResume.jsp">主廚資料管理</a></li>
 												<li><a href="<%=request.getContextPath()%>/front-end/festMenu/addFestMenu.jsp">節慶料理管理</a></li>
@@ -134,7 +135,7 @@
 										</li>
 									</c:if>
 									<c:if test="${not empty foodSupVO.food_sup_ID}">
-										<li><a href="#" style="font-weight: bold">食材供應商專區</a>
+										<li><a href="#" style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;食材供應商專區&nbsp;</a>
 											<ul class="dropdown">
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/foodSup/addFoodMall.jsp">新增食材商品</a></li>
@@ -150,7 +151,7 @@
 											</ul></li>
 									</c:if>
 									<c:if test="${not empty custVO.cust_ID}">
-										<li><a style="font-weight: bold">會員專區</a>
+										<li><a style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;會員專區&nbsp;</a>
 											<ul class="dropdown">
 												<c:choose>
 													<c:when
@@ -203,11 +204,11 @@
 												<li><FORM id="frontLogOutBTN" METHOD="get"
 														action="<%=request.getContextPath()%>/front-end/logout.do">
 														<button type="button" class="btn btn-danger"
-															id="alertLogOutBTN">登出</button>
+															id="alertLogOutBTN" style="font-size:20px;font-family:'ZCOOL QingKe HuangYou';">Logout</button>
 													</FORM></li>
 									</c:if>
 									<c:if test="${empty custVO.cust_ID}">
-										<li><a style="font-weight: bold">加入我們</a>
+										<li><a style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;加入我們&nbsp;</a>
 											<ul class="dropdown">
 												<li><a
 													href="<%=request.getContextPath()%>/front-end/login/addCust.jsp">成為顧客</a></li>
@@ -217,7 +218,7 @@
 													href="<%=request.getContextPath()%>/front-end/login/addFoodSup.jsp">成為食材供應商</a></li>
 											</ul></li>
 										<li><a
-											href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp" style="font-weight: bold">請登入</a></li>
+											href="<%=request.getContextPath()%>/front-end/loginFrontEnd.jsp" style="font-size:28px;font-family:'ZCOOL QingKe HuangYou';">&nbsp;Login</a></li>
 									</c:if>
 								</ul>
 

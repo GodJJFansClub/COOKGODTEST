@@ -28,6 +28,10 @@
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
+
+<!-- Font-family -->	
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou">
+
 <style>
 
 /* :: 12.0 Blog Area CSS */
@@ -59,8 +63,7 @@
     text-align: center; }
     .breadcrumb-area1 .breadcrumb-content h2 {
       color: #ffffff;
-      font-size: 60px;
-      font-weight: 600;
+      font-size: 72px;
       text-transform: capitalize;
       margin-bottom: 0;
       display: inline-block; }
@@ -85,7 +88,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold;font-family: Microsoft JhengHei;">主廚專區</h2>
+                        <h2 style="font-family:'ZCOOL QingKe HuangYou';">主&nbsp;厨&nbsp;專&nbsp;區</h2>
                     </div>
                 </div>
             </div>
