@@ -159,10 +159,12 @@
 				    						tempBtnA.setAttribute("id","fORCheck");
 				    						tempBtnA.setAttribute("type","button");
 				    						tempBtnA.setAttribute("class","btn btn-primary");
+				    						tempBtnA.setAttribute("data-dismiss","modal");
 				    						tempBtnA.innerText = "送出貨物";
-				    						tempBtnA.click(function(){
-								    			$("#changeOrHid").submit();	
-								    		});
+				    						tempBtnA.addEventListener(
+				    							"click",function(){
+				    								$("#changeOrHid").submit();
+				    							}, false);
 				    						$("#btnDivPos").html(tempBtnA);
 				    					}
 				    				},

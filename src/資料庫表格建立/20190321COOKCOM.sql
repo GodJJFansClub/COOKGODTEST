@@ -359,7 +359,7 @@ commit;
 CREATE TABLE CHEF_SCH (
  
  CHEF_ID                  VARCHAR2(6)    NOT NULL,
- CHEF_SCH_DATE            DATE           NOT NULL,
+ CHEF_SCH_DATE            DATE           ,
  CHEF_SCH_STATUS          VARCHAR2(2)      NOT NULL,
  FOREIGN KEY (CHEF_ID) REFERENCES CUST (CUST_ID),
  PRIMARY KEY (CHEF_SCH_DATE,CHEF_ID)
@@ -1622,7 +1622,7 @@ CREATE TABLE AD (
  AD_TYPE                  VARCHAR2(2)      NOT NULL,
  AD_TITLE                 VARCHAR2(300)    NOT NULL,
  AD_PIC					  BLOB,
- AD_CON                   VARCHAR2(300)    NOT NULL,
+ AD_CON                   VARCHAR2(300)   ,
  FOOD_SUP_ID              VARCHAR2(6),
  FOREIGN KEY (FOOD_SUP_ID) REFERENCES FOOD_SUP (FOOD_SUP_ID),
  PRIMARY KEY (AD_ID) 
@@ -1865,7 +1865,7 @@ CREATE TABLE CHEF_ORDER (
  CHEF_OR_ID                 VARCHAR2(17)  NOT NULL,
  CHEF_OR_STATUS             VARCHAR2(2)   NOT NULL,
  CHEF_OR_START              DATE          NOT NULL,
- CHEF_OR_SEND               DATE          NOT NULL,
+ CHEF_OR_SEND               DATE          ,
  CHEF_OR_RCV                DATE,
  CHEF_OR_END                DATE,
  CHEF_OR_NAME               VARCHAR2(100)  NOT NULL,

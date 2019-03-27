@@ -361,7 +361,7 @@
                 <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" alt="">
                 <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall3.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         <h3 style="color:white" >不幸的雞</h3>
                     </div>
                 </div>
@@ -372,7 +372,7 @@
                 <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" alt="">
                 <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall2.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         <h3 style="color:white" >威靈頓牛 </h3>
                     </div>
                 </div>
@@ -383,7 +383,7 @@
                 <img src="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" alt="">
                 <div class="hover-content1 text-center1 d-flex align-items-center justify-content-center">
                     <div class="hover-text">
-                        <a href="<%=request.getContextPath()%>/froTempl/temp/img/bg-img/foodMall1.jpg" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="<%=request.getContextPath()%>/front-end/foodMall/listFoodMall.jsp" class="zoom-img"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         <h3 style="color:white">嗆辣紅椒</h3>
                     </div>
                 </div>
