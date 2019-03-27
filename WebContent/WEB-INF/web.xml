@@ -64,7 +64,7 @@
 		<url-pattern>/front-end/cust/update_cust_input.jsp</url-pattern>
 		<url-pattern>/front-end/cust/logininStatus.jsp</url-pattern>
 		<url-pattern>/front-end/ad/*</url-pattern>
-		
+		<url-pattern>/front-end/menu/orderMenu.jsp</url-pattern>		
 		<url-pattern>/front-end/chefSch/*</url-pattern>
 		<url-pattern>/front-end/dish/*</url-pattern>
 		<url-pattern>/front-end/dishFood/*</url-pattern>
