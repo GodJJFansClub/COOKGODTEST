@@ -10,10 +10,7 @@
 		data-layout="vertical" data-sidebartype="full"
 		data-boxed-layout="full">
 		<jsp:include page="/back-endTemplate/header.jsp" flush="true" />
-		<aside class="left-sidebar" data-sidebarbg="skin5">
-			<%--==============<jsp:include page="/back-end/XXXX/sidebar.jsp" flush="true" />=================================--%>
-
-		</aside>
+		<jsp:include page="/back-end/sideBar/custMana.jsp" flush="true" />
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<%--=================================工作區================================================--%>
@@ -46,8 +43,8 @@
 										%>
 									<div class="form-group">
 										<label>訂單狀態</label> <select size="1" name="menu_od_status" class="form-control">
-											<c:forEach var="mydata" items="${mystatus}">
-												<option value="${mydata}" ${(menuOrderVO.menu_od_status==mydata)? 'selected':'' }>${mydata}
+											<c:forEach var="mydata" items="${menuOrStaMap}">
+												<option value="${mydata.key}" ${(menuOrderVO.menu_od_status==mydata.key)? 'selected':'' }>${mydata.value}
 											</c:forEach>
 										</select>
 									</div>

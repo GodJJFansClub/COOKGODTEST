@@ -7,14 +7,7 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
-	
 	<section class="contact-area section-padding-100">
-        <div class="container">
-            
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
-                   
 	<%-- 錯誤列表 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -28,7 +21,7 @@
 			<div class="col-12">
 				<div class="card card-body">
 					<h4 class="card-title">付款</h4>
-					<form id="endOrder" class="form-horizontal m-t-30" name="form1" method="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
+					<form id="endOrder" class="form-horizontal m-t-30" method="post" action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
 						<div class="form-group">
 						<label>收件人姓名</label>
 						<input type="text" class="form-control" name="food_or_name"
@@ -58,8 +51,6 @@
 							<input type="number" name="credNum" class="form-control"
 									value="${empty credName ? '':credName}">
 						</div>
-							<img src="<%=request.getContextPath()%>/images/x.png"
-									height="20" width="20" onClick="idwrite(this)">
 							<input type="hidden" name="cust_ID" value="${custVO.cust_ID}">
 							<input type="hidden" name="action" value="insertOrODs">
 							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
@@ -68,13 +59,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-			</div>
-			</div>
-		</div>
-		
 	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 	<style>
@@ -86,23 +70,6 @@
 			height: 151px; /* height:  151px; */
 		}
 	</style>
-	
-	
-	<script>
-      function idwrite(name){
-    	  form1.food_or_name.value="動保協會"
-    	  form1.partAddr.value="1號"
-    	  form1.food_or_tel.value="0912345678"
-    	  form1.credNum.value="77889900"
-    	  form1.cust_sex.value="M"
-    	  form1.cust_brd.value="2018-12-01"
-    	  form1.cust_tel.value="0907077543"
-    	  form1.cust_addr.value="桃園市中壢區中大路1號"
-    	  form1.cust_mail.value="ca106g3@hotmail.com"
-    	  form1.cust_niname.value="資策會小小書童" 
-    	 
-      }
-</script>
 
 <script>
 		$(document).ready(function(){
@@ -123,51 +90,56 @@
 				}
 			});
 			
-			$("#twCityName").change(function(){
-				$.ajax({
-					type: "POST",
-					url:"<%=request.getContextPath()%>/food/AddrSelect.do",
-					data: {"action":"twCityName","twCityName":$('#twCityName option:selected').val()},
-					dataType: "json",
-					success: function(result){
-						
-						 $("#CityAreaName").empty();
-						
-						 $("#CityAreaName").append("<option value='-1'>--請選擇區域--</option>")
-						 for(var i=0; i<result.length; i++){
-						 	$("#CityAreaName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
-						 }
-					 },
-			         error: function(){
-			        	 alert("AJAX-grade發生錯誤囉!");
-					}
-				});
+			$("#twCityName").change(function(event){
+				
+				if(event.target.value != "-1"){				
+					$.ajax({
+						type: "POST",
+						url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+						data: {"action":"twCityName","twCityName":$('#twCityName option:selected').val()},
+						dataType: "json",
+						success: function(result){
+							
+							 $("#CityAreaName").empty();
+							
+							 $("#CityAreaName").append("<option value='-1'>--請選擇區域--</option>")
+							 for(var i=0; i<result.length; i++){
+							 	$("#CityAreaName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+							 }
+						 },
+				         error: function(){
+				        	 alert("AJAX-grade發生錯誤囉!");
+						}
+					});
+				}
 			});
 			
 			
 			$("#CityAreaName").change(function(){
-				$.ajax({
-					 type: "POST",
-					 url: "<%=request.getContextPath()%>/food/AddrSelect.do",
-					 data: {"action":"CityAreaName",
-						 	"twCityName":$('#twCityName option:selected').val(),
-						 	"CityAreaName":$('#CityAreaName option:selected').val()},
-					 dataType: "json",
-					 success: function(result){
-						 console.log(result);
-						 $("#AreaRoadName").empty();
-						 $("#zipCode").val(result.ZipCode);
-						 $("#AreaRoadName").append('<option value="-1">--請選擇區域--</option>');
-						 console.log(result.roadName);
-						 for(var i=0; i<result.roadName.length; i++){
-						 	$("#AreaRoadName").append('<option value="'+result.roadName[i]+'">'+result.roadName[i]+'</option>');
-						 }
-					 },
-			         error: function(result){
-			        	 console.log(result);
-			        	 alert("AJAX-grade發生錯誤囉!");
-			         }
-			    });
+				if(event.target.value != "-1"){
+					$.ajax({
+						 type: "POST",
+						 url: "<%=request.getContextPath()%>/food/AddrSelect.do",
+						 data: {"action":"CityAreaName",
+							 	"twCityName":$('#twCityName option:selected').val(),
+							 	"CityAreaName":$('#CityAreaName option:selected').val()},
+						 dataType: "json",
+						 success: function(result){
+							 console.log(result);
+							 $("#AreaRoadName").empty();
+							 $("#zipCode").val(result.ZipCode);
+							 $("#AreaRoadName").append('<option value="-1">--請選擇區域--</option>');
+							 console.log(result.roadName);
+							 for(var i=0; i<result.roadName.length; i++){
+							 	$("#AreaRoadName").append('<option value="'+result.roadName[i]+'">'+result.roadName[i]+'</option>');
+							 }
+						 },
+				         error: function(result){
+				        	 console.log(result);
+				        	 alert("AJAX-grade發生錯誤囉!");
+				         }
+				    });
+				}
 			});
 			
 		});
