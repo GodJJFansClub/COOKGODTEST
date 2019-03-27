@@ -69,6 +69,7 @@ public class BroadcastSocket {
 		List<String> list = gson.fromJson(message, stringType);
 		String type = list.get(0);
 		if ("menu_order".equals(type)) {
+			String newMenu_ID="";
 			MenuOrderVO menuOrderVO = gson.fromJson(list.get(1), MenuOrderVO.class);
 			MenuOrderService menuOrderService = new MenuOrderService();
 			BroadcastService broadcastService = new BroadcastService();
@@ -88,8 +89,10 @@ public class BroadcastSocket {
 			receiver = menuOrderVO.getCust_ID();
 			String broadcastJsonIn=gson.toJson(broadcastVO);
 			List<String> sentList=new ArrayList<>();
+			newMenu_ID=menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getMenu_ID();
 			sentList.add(type);
 			sentList.add(broadcastJsonIn);
+			sentList.add(newMenu_ID);
 			sentMessage = gson.toJson(sentList);
 
 		}else if("location".equals(type)) {
