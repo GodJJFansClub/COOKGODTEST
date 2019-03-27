@@ -75,12 +75,7 @@
   <li><a href='addDishFood.jsp'>Add</a> a new ForunArt.</li>
 </ul>
 
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
-			</div>
-		</div>
-	</div>
+
 	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </body>
 </html>

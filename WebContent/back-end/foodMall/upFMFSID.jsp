@@ -77,9 +77,7 @@
 					<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">
 					<input type="hidden" name="action" value="backUpByFS">
 				</form>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
+
 			</div>
 		</div>
 	</div>

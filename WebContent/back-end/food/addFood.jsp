@@ -54,9 +54,7 @@
 					<input type="hidden" name="action" value="insert">
 					<input type="submit" value="送出新增">
 				</FORM>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
+
 			</div>
 		</div>
 	</div>

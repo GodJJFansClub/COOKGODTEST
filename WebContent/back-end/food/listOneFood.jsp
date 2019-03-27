@@ -47,8 +47,7 @@
 						<td>${foodTypeMap[foodVO.food_type_ID]}</td>
 					</tr>
 				</table>
-<%--=================================工作區================================================--%>
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
+
 			</div>
 		</div>
 	</div>

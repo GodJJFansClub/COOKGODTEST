@@ -91,9 +91,7 @@
 		<li><a href='<%=request.getContextPath()%>/back-end/auth/addAuth.jsp'>新增管理員</a></li>
 	</ul>
 
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
+
 			</div>
 		</div>
 	</div>

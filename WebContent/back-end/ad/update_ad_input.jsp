@@ -102,9 +102,7 @@
 					<input type="hidden" name="ad_ID" value="<%=adVO.getAd_ID()%>">
 					<input type="submit" value="送出修改">
 				</FORM>
-				<%--=================================工作區================================================--%>
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-				<%--=================================jQuery===============================================--%>
+				
 			</div>
 		</div>
 	</div>

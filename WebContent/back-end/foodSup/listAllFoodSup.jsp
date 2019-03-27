@@ -77,9 +77,7 @@
 				<%if (request.getAttribute("listFoodMalls_ByFood_sup_ID") != null ) {%>
 					<jsp:include page="/back-end/foodSup/listFoodMalls_ByFood_sup_ID.jsp" flush="true" />
 				<%}%>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
+
 			</div>
 		</div>
 	</div>

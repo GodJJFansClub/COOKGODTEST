@@ -180,12 +180,10 @@
 			    		</script>
 						</c:if>
 
-						<%--=================================工作區================================================--%>
-						<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-						<%--=================================jQuery===============================================--%>
+					
 					</div>
 				</div>
-			</div>
+		
 	<script>
 		$(document).ready(function(){
 			$(".foodOrder").click(function(evt){

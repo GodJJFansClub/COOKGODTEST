@@ -8,7 +8,7 @@
 
 	
     
-		<jsp:include page="/back-endTemplate/footer.jsp" flush="true"/>
+		
 	</div>
 </body>
 </html>
