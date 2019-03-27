@@ -17,6 +17,14 @@
 <link
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"
 	rel="stylesheet">
+	
+	<style type="text/css">
+		*{
+			font-family:Microsoft JhengHei;
+			font-size:20px;
+		}
+	</style>
+	
 </head>
 <body>
     <!-- All Jquery -->

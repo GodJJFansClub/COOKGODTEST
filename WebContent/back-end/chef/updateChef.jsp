@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.chef.model.*"%>
+<jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <% //String chef_ID = request.getParameter(chef_ID); %>
 
 <html>
@@ -46,6 +47,10 @@
 						<label>主廚編號</label> 
 						<input type="text" readonly class="form-control" name="chef_ID" value="${chefVO.chef_ID}" />
 					</div>
+					<div class="form-group">
+						<label>主廚名稱</label> 
+						<input type="text" readonly class="form-control" name="chef_ID" value="${custSvc.getOneCust(chefVO.chef_ID).cust_name}" />
+					</div>
 
 					<div class="form-group">
 						<label>主廚簡介</label>
@@ -64,9 +69,9 @@
 					<div class="form-group">
 						<label>主廚狀態</label> <select size="1" name="chef_status"
 							class="form-control">
-							<c:forEach var="mydata" items="${mystatus}">
-								<option value="${mydata}"
-									${(chefVO.chef_status==mydata)? 'selected':'' }>${mydata}
+							<c:forEach var="mydata" items="${chefStatusMap}">
+								<option value="${mydata.key}"
+									${(chefVO.chef_status==mydata.key)? 'selected':'' }>${mydata.value}
 							</c:forEach>
 						</select>
 					</div>

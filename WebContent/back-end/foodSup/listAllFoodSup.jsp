@@ -4,7 +4,6 @@
 <jsp:useBean id="custSvc" class="com.cust.model.CustService"/>
 <html>
 <head>
-<link href="../../dist/css/style.min.css" rel="stylesheet">
 </head>
 <body>
 	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"

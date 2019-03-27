@@ -104,6 +104,12 @@ public class BroadcastWebSocket implements ServletContextListener{
 		chefLocal.put("2", "南");
 		chefLocal.put("3", "東");
 		
+		Map<String, String> chefStatusMap = new LinkedHashMap<String, String>();
+		chefStatusMap.put("b0", "未審核");
+		chefStatusMap.put("b1", "審核通過");
+		chefStatusMap.put("b2", "審核不過");
+		chefStatusMap.put("b3", "停權");
+		
 		servletContext.setAttribute("foodTypeMap", foodTypeMap);
 		servletContext.setAttribute("mallStatusMap", mallStatusMap);
 		servletContext.setAttribute("mallOrStatusMap", mallOrStatusMap);
@@ -116,6 +122,7 @@ public class BroadcastWebSocket implements ServletContextListener{
 		servletContext.setAttribute("reportStatusMap", reportStatusMap);
 		servletContext.setAttribute("adTypeMap", adTypeMap);
 		servletContext.setAttribute("chefLocal", chefLocal);
+		servletContext.setAttribute("chefStatusMap", chefStatusMap);
 		
 	}
 	
