@@ -94,8 +94,7 @@
 	
 	<tr>
 		<td>菜色內容:</td>
-		<td><textarea rows="20" cols="40" name="dish_resume" >
-		</textarea><br></td>
+		<td><textarea rows="20" cols="40" name="dish_resume" ></textarea><br></td>
 	</tr>
 	<tr>
 		<td>菜色價格:</td>
