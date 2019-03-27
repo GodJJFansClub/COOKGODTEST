@@ -85,7 +85,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold">食材供應商專區</h2>
+                        <h2 style="font-weight:bold;font-family: Microsoft JhengHei;">食材供應商專區</h2>
                     </div>
                 </div>
             </div>

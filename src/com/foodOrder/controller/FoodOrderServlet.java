@@ -252,10 +252,6 @@ public class FoodOrderServlet extends HttpServlet {
 				errorMsgs.add("信用卡號請輸入數字");
 			}
 			
-			
-			
-			
-			
 			String food_or_addr = req.getParameter("zipCode") + cityName + areaName + roadName + partAddr;
 			HttpSession session = req.getSession();
 			@SuppressWarnings("unchecked")

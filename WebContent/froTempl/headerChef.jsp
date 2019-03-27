@@ -35,7 +35,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 280px;
+  height: 380px;
   padding: 0 35px; }
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .breadcrumb-area1 {
@@ -80,12 +80,12 @@
 <body>
  <br>
 	  
-	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/headChef.jpg);">
+	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/F4_2.png);">
         <div class="container-fluid h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold">主廚專區</h2>
+                        <h2 style="font-weight:bold;font-family: Microsoft JhengHei;">主廚專區</h2>
                     </div>
                 </div>
             </div>

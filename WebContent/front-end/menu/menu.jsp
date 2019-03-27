@@ -20,7 +20,7 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
-
+	<jsp:include page="/froTempl/headerCookGod.jsp" flush="true" />
 	 <!-- ##### Contact Area Start #####-->
     <section class="contact-area section-padding-100">
     	<div class="container-fliud">

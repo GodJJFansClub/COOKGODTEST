@@ -80,12 +80,12 @@
 <body>
  <br>
 	  
-	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/head.jpg);">
+	 <section class="breadcrumb-area1 bg-img bg-overlay jarallax" style="background-image: url(<%=request.getContextPath()%>/froTempl/temp/img/bg-img/menu_top.jpg);">
         <div class="container-fluid h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold;font-family: Microsoft JhengHei;">會員專區</h2>
+                        <h2 style="font-weight:bold;font-family: Microsoft JhengHei;">食神來了</h2>
                     </div>
                 </div>
             </div>

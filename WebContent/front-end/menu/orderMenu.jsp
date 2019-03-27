@@ -14,6 +14,7 @@
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerCookGod.jsp" flush="true" />
 	<section class="contact-area section-padding-100">
 	<!-- ##### Contact Area Start #####-->
     	<%--Error Message--%>

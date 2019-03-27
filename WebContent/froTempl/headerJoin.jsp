@@ -85,7 +85,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 style="font-weight:bold">加入我們</h2>
+                        <h2 style="font-weight:bold;font-family: Microsoft JhengHei;">加入我們</h2>
                     </div>
                 </div>
             </div>

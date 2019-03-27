@@ -38,14 +38,14 @@ padding:100px;
 <body>
 	<div class="padding-all">
 		<div class="header">
-			<h1>食神來了</h1>
+			<font style="color:white;font-weight:bold;font-family: Microsoft JhengHei;font-size:80px;">食神來了</font>
 		</div>
 
 		<div class="design-w3l">
 			<div class="mail-form-agile">
 				<form  action="<%=request.getContextPath()%>/back-end/login.do" method="post" >
-					<input type="text" name="account" placeholder="請輸入帳號"  style="font-weight:bold; font-size:25px" required="" autocomplete="off"/>
-					<input type="password"  name="password" class="padding" style="font-weight:bold; font-size:25px" placeholder="請輸入密碼" required=""/>
+					<input type="text" name="account" placeholder="請輸入帳號"  style="font-family: Microsoft JhengHei;font-weight:bold; font-size:25px" required="" autocomplete="off"/>
+					<input type="password"  name="password" class="padding" style="font-family: Microsoft JhengHei;font-weight:bold; font-size:25px" placeholder="請輸入密碼" required=""/>
 					<input type="submit" value="登入">
 				</form>
 			</div>
