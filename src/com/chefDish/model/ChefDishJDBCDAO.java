@@ -361,4 +361,10 @@ public class ChefDishJDBCDAO implements ChefDishDAO_Interface{
 		}
 		return listAllChefDish;
 	}
+
+	@Override
+	public List<ChefDishVO> getAllNotCheck(String chef_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

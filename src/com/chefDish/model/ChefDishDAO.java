@@ -38,7 +38,9 @@ public class ChefDishDAO implements ChefDishDAO_Interface{
 			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.DISH_ID = ?";
 	private static final String Get_All_Stmt = 
 			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID";
-
+	private static final String Get_All_Not_Check_By_Chef_ID = 
+			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.CHEF_ID = ? AND CD.CHEF_DISH_STATUS = 'd0' ORDER BY CD.DISH_ID DESC";
+	
 	@Override
 	public void insert(ChefDishVO chefDishVO) {
 		Connection con = null;
@@ -192,7 +194,7 @@ public class ChefDishDAO implements ChefDishDAO_Interface{
 		}
 		return chefDishVO;
 	}
-
+	
 	@Override
 	public List<ChefDishVO> getAllByChefID(String chef_ID) {
 		List<ChefDishVO> listAllByChefID = new ArrayList<ChefDishVO>();
@@ -346,5 +348,57 @@ public class ChefDishDAO implements ChefDishDAO_Interface{
 			}
 		}
 		return listAllChefDish;
+	}
+
+	@Override
+	public List<ChefDishVO> getAllNotCheck(String chef_ID) {
+		List<ChefDishVO> listAllByChefID = new ArrayList<ChefDishVO>();
+		ChefDishVO chefDishVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Get_All_Not_Check_By_Chef_ID);
+			pstmt.setString(1, chef_ID);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				chefDishVO = new ChefDishVO();
+				chefDishVO.setChef_ID(rs.getString("CHEF_ID"));
+				chefDishVO.setChef_name(rs.getString("CUST_NAME"));
+				chefDishVO.setDish_ID(rs.getString("DISH_ID"));
+				chefDishVO.setDish_name(rs.getString("DISH_NAME"));
+				chefDishVO.setChef_dish_status(rs.getString("CHEF_DISH_STATUS"));
+				listAllByChefID.add(chefDishVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("Database Error : " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return listAllByChefID;
 	}
 }

@@ -22,13 +22,11 @@
 <title>主廚資料</title>
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-	data-layout="vertical" data-sidebartype="full"
-	data-boxed-layout="full">
-	<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-	<jsp:include page="/back-end/sideBar/foodSupMana.jsp" flush="true"/>
-	<div class="page-wrapper">
-	<div class="page-breadcrumb">
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/foodSupMana.jsp" flush="true"/>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
 	<%--Error Message--%>
@@ -40,68 +38,45 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	
-	
-	<div class="col">
-					<div class="card">
-
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">主廚編號</th>
-										<th scope="col">主廚姓名</th>
-										<th scope="col">主廚狀態</th>
-										<th scope="col">主廚服務地區</th>
-										<th scope="col">審核主廚</th>
-										<th scope="col">審核主廚菜色</th>
-									</tr>
-								</thead>
-	
-	
-					<%@ include file="page1.file"%>
-					<c:forEach var="chefVO" items="${list}" begin="<%=pageIndex %>"
-						end="<%=pageIndex+rowsPerPage-1 %>">
+		<div class="col">
+			<div class="card">
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">主廚編號</th>
+								<th scope="col">主廚姓名</th>
+								<th scope="col">主廚狀態</th>
+								<th scope="col">主廚服務地區</th>
+								<th scope="col">審核主廚</th>
+								<th scope="col">審核主廚菜色</th>
+							</tr>
+						</thead>
+							<%@ include file="page1.file"%>
+							<c:forEach var="chefVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
 						<tr>
 							<th scope="row">${chefVO.chef_ID}</th>
 							<th scope="row">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</th>
 							<th scope="row">
-								<c:if test="${chefVO.chef_status=='b0'}">
-									<span class="label label-danger label-rounded">
-										未審核
-									</span>	
-								</c:if>
-								<c:if test="${chefVO.chef_status=='b1'}">
-									<span class="label label-success label-rounded">
-										審核通過
-									</span>
-								</c:if>
-								<c:if test="${chefVO.chef_status=='b2'}">
-									<span class="label label-success label-rounded">
-										審核不過
-									</span>
-								</c:if>
-								<c:if test="${chefVO.chef_status=='b3'}">
-									<span class="label label-success label-rounded">
-										停權
-									</span>
-								</c:if>
+								<c:if test="${chefVO.chef_status=='b0'}">未審核</c:if>
+								<c:if test="${chefVO.chef_status=='b1'}">審核通過</c:if>
+								<c:if test="${chefVO.chef_status=='b2'}">審核不過</c:if>
+								<c:if test="${chefVO.chef_status=='b3'}">停權</c:if>
 							</th>
 							<th scope="row">${chefLocal[chefVO.chef_area]}</th>
 							
 							<th>
-								<form method="post"
-									action="<%=request.getContextPath()%>/chef/chef.do">
-									<input type="submit" class="btn btn-secondary" value="編輯"> 
+								<form method="post" action="<%=request.getContextPath()%>/chef/chef.do">
+									<input type="submit" value="編輯"> 
 									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}"> 
 									<input type="hidden" name="action" value="getOneForDisplay">
 								</form>
 							</th>
 							<th>
 								<form method="post" action="<%=request.getContextPath()%>/chefDish/chefDish.do">
-									<input type="submit" class="btn btn-secondary" value="審核主廚菜色"> 
+									<input type="submit" value="審核主廚菜色"> 
 									<input type="hidden" name="chef_ID" value="${chefVO.chef_ID}">
-									<input type="hidden" name="action" value="getAllByChefID"> 
+									<input type="hidden" name="action" value="getAllByChefIDWhereChefDishNotCheck"> 
 								</form>
 							</th>
 						</tr>
@@ -111,8 +86,7 @@
 			</div>
 		</div>
 	</div>
-
-
+<%--=================================jQuery===============================================--%>
 			</div>
 		</div>
 	</div>

@@ -33,6 +33,9 @@ private ChefDishDAO_Interface dao;
 	public ChefDishVO getOneChefDish(String chef_ID, String dish_ID) {
 		return dao.findByPrimaryKey(chef_ID, dish_ID);
 	}
+	public List<ChefDishVO> getAllNotCheckByChefID(String chef_ID) {
+		return dao.getAllNotCheck(chef_ID);
+	}
 	public List<ChefDishVO> getAllByChefID(String chef_ID) {
 		return dao.getAllByChefID(chef_ID);
 	}

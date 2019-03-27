@@ -30,13 +30,11 @@
 </style>
 </head>
 <body>
-	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light"
-	data-layout="vertical" data-sidebartype="full"
-	data-boxed-layout="full">
-	<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
-	<jsp:include page="/back-end/sideBar/foodSupMana.jsp" flush="true"/>
-	<div class="page-wrapper">
-	<div class="page-breadcrumb">
+	<div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full" data-boxed-layout="full">
+		<jsp:include page="/back-endTemplate/header.jsp" flush="true"/>
+		<jsp:include page="/back-end/sideBar/foodSupMana.jsp" flush="true"/>
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
 <%--=================================¤u§@°Ï================================================--%>
 <%--Error Message--%>
 <c:if test = "${not empty errorMsgs} }">
@@ -61,7 +59,6 @@
 					</tr>
 					<%@ include file="page1.file" %>
 					<c:forEach var="chefDishVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
-						<c:if test="${chefDishVO.chef_dish_status=='d0'}">
 							<tr>
 								<td>${chefDishVO.chef_ID}</td>
 								<td>${chefDishVO.chef_name}</td>
@@ -95,14 +92,13 @@
 								</c:if>
 								</td>
 							</tr>	
-						</c:if>
 					</c:forEach>
 				</table>
 				<%@ include file="page2.file" %>
   			</div>
   		</div>
   	</div>
-
+<%--=================================jQuery===============================================--%>
 			</div>
 		</div>
 	</div>
