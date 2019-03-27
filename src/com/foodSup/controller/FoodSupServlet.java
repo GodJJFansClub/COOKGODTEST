@@ -158,7 +158,7 @@ public class FoodSupServlet extends HttpServlet{
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("foodSupVO", foodSupVO); // 含有輸入格式錯誤的FoodSupVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/foodSup/update_foodSup_input.jsp");
+							.getRequestDispatcher("/front-end/foodSup/update_foodSup_input.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -171,7 +171,7 @@ public class FoodSupServlet extends HttpServlet{
 				
 				
 				req.setAttribute("foodSupVO", foodSupVO); // 資料庫update成功後,正確的的FoodSupVO物件,存入req
-				String url = "/back-end/foodSup/listOneFoodSup.jsp";
+				String url = "/front-end/foodSup/foodSupInfo.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -179,7 +179,7 @@ public class FoodSupServlet extends HttpServlet{
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/foodSup/update_foodSup_input.jsp");
+						.getRequestDispatcher("/front-end/foodSup/update_foodSup_input.jsp");
 				failureView.forward(req, res);
 			}
 		}

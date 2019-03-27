@@ -126,7 +126,7 @@
 									<p class="marginall" style="color:white; font-size:25px; font-weight:bolder">
 									 價格:<a style="color:#ffd306; font-size:25px; font-weight:bolder">${foodMallVO.food_m_price}</a>									</p>
 									<form action="<%=request.getContextPath()%>/mall/mall.do" method="POST" >
-									 <button type="button" style="font-size:25px " name="foodMBtn" class="btn btn-info">加入購物車</button>
+									 <button type="button" style="font-size:25px " name="foodMBtn" class="btn pixel-btn btn-3 m-2">加入購物車</button>
 										<input type="hidden" name="food_ID" value="${foodMallVO.food_ID}">
 										<input type="hidden" name="food_sup_ID" value="${foodMallVO.food_sup_ID}">	
 										<input type="number" style="font-size:25px; font-weight:bolder"  name="food_od_qty" min="1" max="20" size="3" value="1">
