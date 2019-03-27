@@ -29,7 +29,7 @@ public class ChefDAO implements ChefDAO_Interface{
 	private static final String Get_One_Chef_From_Emp = 
 			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID WHERE CHEF_ID = ?";
 	private static final String Get_All_Chef_From_Emp = 
-			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID";
+			"SELECT C.CHEF_ID, CUST_NAME, CUST_ADDR, CUST_TEL FROM CHEF C JOIN CUST ON C.CHEF_ID=CUST_ID ORDER BY C.CHEF_ID";
 	
 	@Override
 	public void insert(ChefVO chefVO) {

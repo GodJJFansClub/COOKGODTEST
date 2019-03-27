@@ -28,6 +28,12 @@
                                 <span class="hide-menu">查詢主廚</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<%=request.getContextPath()%>/back-end/chefDish/listAllChefDishNotCheck.jsp" aria-expanded="false">
+                                <i class="mdi mdi-account-network"></i>
+                                <span class="hide-menu">主廚新菜色申請</span>
+                            </a>
+                        </li>
                          
                     </ul>
                 </nav>

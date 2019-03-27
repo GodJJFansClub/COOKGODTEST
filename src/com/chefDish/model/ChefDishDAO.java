@@ -33,13 +33,13 @@ public class ChefDishDAO implements ChefDishDAO_Interface{
 	private static final String Get_One_Stmt = 
 			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.CHEF_ID = ? AND CD.DISH_ID = ?";
 	private static final String Get_All_Stmt_By_Chef_ID = 
-			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.CHEF_ID = ? ORDER BY CD.DISH_ID DESC";
+			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.CHEF_ID = ? ORDER BY CD.CHEF_DISH_STATUS";
 	private static final String Get_All_Stmt_By_Dish_ID =
 			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.DISH_ID = ?";
 	private static final String Get_All_Stmt = 
 			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID";
-	private static final String Get_All_Not_Check_By_Chef_ID = 
-			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.CHEF_ID = ? AND CD.CHEF_DISH_STATUS = 'd0' ORDER BY CD.DISH_ID DESC";
+	private static final String Get_All_Not_Check = 
+			"SELECT CD.CHEF_ID, C.CUST_NAME, CD.DISH_ID, D.DISH_NAME, CD.CHEF_DISH_STATUS FROM CHEF_DISH CD JOIN CUST C ON CD.CHEF_ID = C.CUST_ID JOIN DISH D ON CD.DISH_ID = D.DISH_ID WHERE CD.CHEF_DISH_STATUS = 'd0'";
 	
 	@Override
 	public void insert(ChefDishVO chefDishVO) {
@@ -351,7 +351,7 @@ public class ChefDishDAO implements ChefDishDAO_Interface{
 	}
 
 	@Override
-	public List<ChefDishVO> getAllNotCheck(String chef_ID) {
+	public List<ChefDishVO> getAllNotCheck() {
 		List<ChefDishVO> listAllByChefID = new ArrayList<ChefDishVO>();
 		ChefDishVO chefDishVO = null;
 		
@@ -361,8 +361,7 @@ public class ChefDishDAO implements ChefDishDAO_Interface{
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(Get_All_Not_Check_By_Chef_ID);
-			pstmt.setString(1, chef_ID);
+			pstmt = con.prepareStatement(Get_All_Not_Check);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

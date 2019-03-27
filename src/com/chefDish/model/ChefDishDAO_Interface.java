@@ -10,7 +10,7 @@ public interface ChefDishDAO_Interface {
 	public ChefDishVO findByPrimaryKey(String chef_ID, String dish_ID);
 	public List<ChefDishVO> getAllByChefID(String chef_ID);
 	public List<ChefDishVO> getAllByDishID(String dish_ID);
-	public List<ChefDishVO> getAllNotCheck(String chef_ID);
+	public List<ChefDishVO> getAllNotCheck();
 	public List<ChefDishVO> getAll();
 //  萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<ChefSchVO> getAll(Map<String, String[]> map);
