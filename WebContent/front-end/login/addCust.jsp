@@ -225,7 +225,7 @@ th, td {
 </style>
 <script>
       function idwrite(name){
-    	  form1.cust_acc.value="ca106g3"
+    	  
     	  form1.cust_pwd.value="123456"
     	  form1.cust_name.value="杜先生"
     	  form1.cust_pid.value="H123456789"

@@ -75,11 +75,7 @@ th, td {
 							data-wow-delay="100ms">
 
 							<h2 style="font-weight: bold">新增廣告</h2>
-							<img
-								src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png"
-								alt="">
-
-
+							<img src="<%=request.getContextPath()%>/froTempl/temp/img/core-img/x.png" alt="">
 
 							<%-- 錯誤表列 --%>
 							<c:if test="${not empty errorMsgs}">
@@ -103,21 +99,21 @@ th, td {
 
 												<tr>
 													<td>廣告標題:</td>
-													<td><input type="TEXT" name="ad_title" size="45"
-														value="<%=(adVO == null) ? "teddy" : adVO.getAd_title()%>" /></td>
+													<td><input type="TEXT" name="ad_title" size="45" class="form-control"
+														value="<%=(adVO == null) ? "請輸入標題" : adVO.getAd_title()%>" /></td>
 												</tr>
 
 
 												<tr>
 													<td>廣告上架日期:</td>
-													<td><input type="TEXT" name="ad_start" id="f_date1"
+													<td><input type="TEXT" name="ad_start" id="f_date1" class="form-control"
 														size="45" /></td>
 												</tr>
 
 
 												<tr>
 													<td>廣告下架日期:</td>
-													<td><input type="TEXT" name="ad_end" id="f_date2"
+													<td><input type="TEXT" name="ad_end" id="f_date2" class="form-control"
 														size="45" /></td>
 												</tr>
 
@@ -128,14 +124,14 @@ th, td {
 													<td>廣告圖片:</td>
 													<td>
 													
-													<input type="file" class="form-control-file" name="ad_pic" size="1"
+													<input type="file" class="form-control-file" name="ad_pic" size="1" class="form-control"
 														id="doc" onchange="javascript:setImagePreview();" /></td>
 												</tr>
 
 												<tr>
 													<td>廣告內文:</td>
-													<td><input type="TEXT" name="ad_con" size="45"
-														value="<%=(adVO == null) ? "555" : adVO.getAd_con()%>" /></td>
+													<td><textarea type="message" name="ad_con" size="45" class="form-control"
+														value="<%=(adVO == null) ? "請輸入內文" : adVO.getAd_con()%>" ></textarea></td>
 												</tr>
 
 
@@ -152,6 +148,8 @@ th, td {
 											<input type="hidden" name="food_sup_ID" size="45"
 												value="<%=foodSupVO.getFood_sup_ID()%>" />
 											</td>
+											<img src="<%=request.getContextPath()%>/images/x.png"
+									height="20" width="20" onClick="idwrite(this)">
 											<button type="submit" class="btn pixel-btn wow fadeInUp"
 												data-wow-delay="300ms">送出</button>
 										</form>
@@ -168,7 +166,16 @@ th, td {
 	</section>
 	<jsp:include page="/froTempl/footer.jsp" flush="true" />
 </body>
-
+<script>
+      function idwrite(name){
+    	  
+    	  form1.ad_title.value="南極真的有烏魚子嗎?"
+    	  form1.ad_end.value="2019-12-12 10:10:10"
+    	  form1.ad_con.value="在南極的深海底下有一個大鳳梨，也有很多的帝王蟹，但是只有一支是老闆。蟹老闆每賣出一個烏魚子，就會有一隻企鵝沒辦法游泳。沒有買賣就不會有傷害!!"
+    	  
+    	 
+      }
+</script>
 
 <script>
 	$.datetimepicker.setLocale('zh');

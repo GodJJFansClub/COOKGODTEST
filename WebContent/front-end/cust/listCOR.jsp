@@ -62,7 +62,7 @@
 			  <td scope="col">${foodOrderVO.food_or_tel}</td>
 			  <td scope="col">
 			  	<form action="<%=request.getContextPath()%>/foodOrder/foodOrder.do" method="post">
-			  		<button type="submit">查看詳情</button>
+			  		<button type="submit" class="btn btn-info">查看詳情</button>
 			  		<input type="hidden" name="action" value="frontGetOneDisplay">
 			  		<input type="hidden" name="food_or_ID" value="${foodOrderVO.food_or_ID}">
 			  	</form>

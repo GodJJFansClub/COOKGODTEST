@@ -49,7 +49,7 @@
 							<form action="<%=request.getContextPath()%>/mall/mall.do"
 								method="POST">
 								<input type="hidden" name="action" value="CHECKOUTFOODMALL">
-								<input type="submit" value="查看購物車" class="btn btn-dark">
+								<input type="submit" value="查看購物車" class="btn btn-info">
 								<input type="hidden" name="prePageURL" value="<%=request.getServletPath()%>">
 							</form>
 						</th>

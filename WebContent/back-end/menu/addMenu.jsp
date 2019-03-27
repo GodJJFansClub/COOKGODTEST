@@ -61,10 +61,10 @@
 								<div class="form-group">
 									<label class="col-md-12">套餐簡介:</label>
 									<div class="col-md-12">
-										<input type="textarea" name="menu_resume"
-											value="${menuVO==null? '':menuVO.menu_resume}"
-											placeholder="請輸入簡介">
-										<script>CKEDITOR.replace('menu_resume');</script>
+									
+										<textarea rows="10" cols="60" name="menu_resume">
+       									 </textarea>
+											
 									</div>
 								</div>
 								<div class="form-group">
@@ -120,7 +120,8 @@ function readURL(input){
 				<script>
       function idwrite(name){
           form1.menu_name.value="六六六大順"
-          form1.menu_price.value="6666"          
+          form1.menu_price.value="6666"  
+          form1.menu_resume.value="  包含鮑魚干貝火烔燉雞湯 、富貴牛腩筋、花雕貴妃蝦 、香煎羊小排、金華元蹄、麒麟深海石斑和臘味櫻花蝦米糕。 "
       }
 </script>
 

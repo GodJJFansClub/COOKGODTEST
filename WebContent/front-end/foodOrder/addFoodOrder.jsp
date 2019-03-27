@@ -90,51 +90,56 @@
 				}
 			});
 			
-			$("#twCityName").change(function(){
-				$.ajax({
-					type: "POST",
-					url:"<%=request.getContextPath()%>/food/AddrSelect.do",
-					data: {"action":"twCityName","twCityName":$('#twCityName option:selected').val()},
-					dataType: "json",
-					success: function(result){
-						
-						 $("#CityAreaName").empty();
-						
-						 $("#CityAreaName").append("<option value='-1'>--請選擇區域--</option>")
-						 for(var i=0; i<result.length; i++){
-						 	$("#CityAreaName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
-						 }
-					 },
-			         error: function(){
-			        	 alert("AJAX-grade發生錯誤囉!");
-					}
-				});
+			$("#twCityName").change(function(event){
+				
+				if(event.target.value != "-1"){				
+					$.ajax({
+						type: "POST",
+						url:"<%=request.getContextPath()%>/food/AddrSelect.do",
+						data: {"action":"twCityName","twCityName":$('#twCityName option:selected').val()},
+						dataType: "json",
+						success: function(result){
+							
+							 $("#CityAreaName").empty();
+							
+							 $("#CityAreaName").append("<option value='-1'>--請選擇區域--</option>")
+							 for(var i=0; i<result.length; i++){
+							 	$("#CityAreaName").append('<option value="'+result[i]+'">'+result[i]+'</option>');
+							 }
+						 },
+				         error: function(){
+				        	 alert("AJAX-grade發生錯誤囉!");
+						}
+					});
+				}
 			});
 			
 			
 			$("#CityAreaName").change(function(){
-				$.ajax({
-					 type: "POST",
-					 url: "<%=request.getContextPath()%>/food/AddrSelect.do",
-					 data: {"action":"CityAreaName",
-						 	"twCityName":$('#twCityName option:selected').val(),
-						 	"CityAreaName":$('#CityAreaName option:selected').val()},
-					 dataType: "json",
-					 success: function(result){
-						 console.log(result);
-						 $("#AreaRoadName").empty();
-						 $("#zipCode").val(result.ZipCode);
-						 $("#AreaRoadName").append('<option value="-1">--請選擇區域--</option>');
-						 console.log(result.roadName);
-						 for(var i=0; i<result.roadName.length; i++){
-						 	$("#AreaRoadName").append('<option value="'+result.roadName[i]+'">'+result.roadName[i]+'</option>');
-						 }
-					 },
-			         error: function(result){
-			        	 console.log(result);
-			        	 alert("AJAX-grade發生錯誤囉!");
-			         }
-			    });
+				if(event.target.value != "-1"){
+					$.ajax({
+						 type: "POST",
+						 url: "<%=request.getContextPath()%>/food/AddrSelect.do",
+						 data: {"action":"CityAreaName",
+							 	"twCityName":$('#twCityName option:selected').val(),
+							 	"CityAreaName":$('#CityAreaName option:selected').val()},
+						 dataType: "json",
+						 success: function(result){
+							 console.log(result);
+							 $("#AreaRoadName").empty();
+							 $("#zipCode").val(result.ZipCode);
+							 $("#AreaRoadName").append('<option value="-1">--請選擇區域--</option>');
+							 console.log(result.roadName);
+							 for(var i=0; i<result.roadName.length; i++){
+							 	$("#AreaRoadName").append('<option value="'+result.roadName[i]+'">'+result.roadName[i]+'</option>');
+							 }
+						 },
+				         error: function(result){
+				        	 console.log(result);
+				        	 alert("AJAX-grade發生錯誤囉!");
+				         }
+				    });
+				}
 			});
 			
 		});

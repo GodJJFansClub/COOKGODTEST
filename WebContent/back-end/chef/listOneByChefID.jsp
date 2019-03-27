@@ -64,7 +64,7 @@
 									<th scope="row">
 										<form method="post"
 											action="<%=request.getContextPath()%>/chef/chef.do">
-											<input type="submit" value="編輯"> <input type="hidden"
+											<input type="submit" class="btn btn-secondary" value="編輯"> <input type="hidden"
 												name="chef_ID" value="${chefVO.chef_ID}"> <input
 												type="hidden" name="action" value="getOneForDisplay">
 										</form>

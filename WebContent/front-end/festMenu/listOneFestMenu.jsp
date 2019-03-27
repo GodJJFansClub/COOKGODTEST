@@ -13,6 +13,7 @@
 
 <style>
 table#table-1 {
+    
 	background-color: #CCCCFF;
 	border: 2px solid black;
 	text-align: center;
@@ -32,6 +33,7 @@ h4 {
 
 <style>
 table {
+	
 	width: 600px;
 	background-color: white;
 	margin-top: 5px;
@@ -51,8 +53,21 @@ th, td {
 </head>
 <body>
 	<jsp:include page="/froTempl/header.jsp" flush="true" />
+	<jsp:include page="/froTempl/headerMall.jsp" flush="true" />
+	
+	
+	
+	
+	    <!-- ##### Contact Area Start #####-->
+  
+           
+          
+               
+    <!-- ##### Contact Area End #####-->
 	<!-- ##### Contact Area Start #####-->
 	<section class="contact-area section-padding-100">
+	  <section class="contact-area section-padding-100">
+        <div class="container">
 		<jsp:include page="/front-end/foodMall/shoppingcartIn.jsp" />
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>
@@ -82,7 +97,7 @@ th, td {
 
 		<table>
 			<tr>
-				<th>節慶料理編號</th>
+				
 				<th>節慶主題料理名稱</th>
 				<th>數量</th>
 				<th>開始預購日期</th>
@@ -97,7 +112,7 @@ th, td {
 
 			</tr>
 			<tr>
-				<td>${festMenuVO.fest_m_ID}</td>
+				
 				<td>${festMenuVO.fest_m_name}</td>
 				<td>${festMenuVO.fest_m_qty}</td>
 				<td>${festMenuVO.fest_m_start}</td>
@@ -117,8 +132,12 @@ th, td {
 
 			</tr>
 
-			</section>
+			
 			<jsp:include page="/froTempl/footer.jsp" flush="true" />
 		</table>
+		
+		 </div>
+           </section>
+           </section>
 </body>
 </html>
