@@ -53,8 +53,7 @@
 								<th>訂單評價留言</th>
 								<th>訂單數量</th>
 								<th>訂單小計</th>
-								<th>修改</th>
-								<th>刪除</th>
+
 							</tr>
 </thead>
 							<c:forEach var="festOrderDetailVO"
@@ -66,31 +65,7 @@
 									<td>${festOrderDetailVO.fest_or_msg}</td>
 									<td>${festOrderDetailVO.fest_or_qty}</td>
 									<td>${festOrderDetailVO.fest_or_stotal}</td>
-									<td>
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do"
-											style="margin-bottom: 0px;">
-											<input type="submit" value="修改"> <input type="hidden"
-												name="fest_or_ID" value="${festOrderDetailVO.fest_or_ID}">
-											<input type="hidden" name="requestURL"
-												value="<%=request.getServletPath()%>">
-											<!--送出本網頁的路徑給Controller-->
-											<!-- 目前尚未用到  -->
-											<input type="hidden" name="action" value="getOne_For_Update">
-										</FORM>
-									</td>
-									<td>
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/festOrderDetail/festOrderDetail.do"
-											style="margin-bottom: 0px;">
-											<input type="submit" value="刪除"> <input type="hidden"
-												name="fest_or_ID" value="${festOrderDetailVO.fest_or_ID}">
-											<input type="hidden" name="requestURL"
-												value="<%=request.getServletPath()%>">
-											<!--送出本網頁的路徑給Controller-->
-											<input type="hidden" name="action" value="delete">
-										</FORM>
-									</td>
+									
 								</tr>
 							</c:forEach>
 						</table>

@@ -32,7 +32,7 @@ public class CustDAO implements CustDAO_interface {
 	private static final String INSERT_STMT =
 			"INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) VALUES ('C'||LPAD((CUST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT * FROM CUST order by CUST_ID";
+			"SELECT * FROM CUST order by CUST_ID desc";
 	private static final String GET_ONE_STMT = 
 			"SELECT * FROM CUST where CUST_ID = ?";
 	private static final String GET_ONE_STMT_CUST_ACC = 

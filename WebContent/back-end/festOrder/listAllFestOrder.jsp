@@ -53,7 +53,6 @@
 										<th scope="col">會員編號</th>
 										<th scope="col">修改</th>
 										<th scope="col">送出查詢</th>
-										<th scope="col">審核:</th>
                                         </tr>
                                     </thead>
 		

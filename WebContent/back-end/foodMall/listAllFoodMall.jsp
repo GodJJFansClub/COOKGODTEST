@@ -45,8 +45,8 @@
                                     </thead>
                 
 				
-					
-					<c:forEach var="foodMallVO" items="${list}" >
+
+					<c:forEach var="foodMallVO" items="${list}">
 						<tr>
 							<th scope="row">${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}</th>
 							<th scope="row">${foodSvc.getOneFood(foodMallVO.food_ID).food_name}</th>
@@ -79,6 +79,7 @@
 							</th>
 						</tr>
 					</c:forEach>
+					
 				</table>
 			</div>
            </div>

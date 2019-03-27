@@ -46,11 +46,9 @@
 										<th scope="col">開始預購日期</th>
 										<th scope="col">結束預購日期</th>
 										<th scope="col">照片</th>
-										<th scope="col">介紹</th>
 										<th scope="col">出貨日期</th>
 										<th scope="col">價格</th>
 										<th scope="col">主廚</th>
-										<th scope="col">修改</th>
 									</tr>
 								</thead>
 									<%@ include file="page1.file"%>
@@ -68,19 +66,9 @@
 					<c:if test="${empty festMenuVO.fest_m_pic}">
 						<img src="<%=request.getContextPath()%>/images/null2.jpg" style="width:300px;height:200px;">
 					</c:if></th>
-				<th scope="row">${festMenuVO.fest_m_resume}</th>
 				<th scope="row">${festMenuVO.fest_m_send}</th>
 				<th scope="row">${festMenuVO.fest_m_price}</th>
 				<th scope="row">${custSvc.getOneCust(festMenuVO.chef_ID).cust_name}</th>
-				<th scope="row">
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/festMenu/festMenu.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="fest_m_ID" value="${festMenuVO.fest_m_ID}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</th>
 			</tr>
 		</c:forEach>
 	</table>

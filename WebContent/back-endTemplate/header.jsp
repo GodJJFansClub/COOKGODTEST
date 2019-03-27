@@ -21,7 +21,7 @@
 	<style type="text/css">
 		*{
 			font-family:Microsoft JhengHei;
-			font-size:20px;
+			font-size:16px;
 		}
 	</style>
 	

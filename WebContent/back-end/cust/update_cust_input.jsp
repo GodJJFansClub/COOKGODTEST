@@ -22,19 +22,7 @@
 			<div class="page-breadcrumb">
 <%--=================================工作區================================================--%>
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>顧客資料修改 - update_cust_input.jsp</h3>
-				<h4>
-					<a
-						href="<%=request.getContextPath()%>/back-end/cust/listAllCust.jsp">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
-
-	<h3>資料修改:</h3>
+	<h3>顧客資料修改:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">

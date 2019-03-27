@@ -97,7 +97,7 @@
 												<FORM METHOD="post"
 													ACTION="<%=request.getContextPath()%>/cust/cust.do"
 													style="margin-bottom: 0px;">
-													<input type="submit" value="修改"> <input
+													<input type="submit" class="btn btn-secondary" value="修改"> <input
 														type="hidden" name="cust_ID" value="${custVO.cust_ID}">
 													<input type="hidden" name="action"
 														value="getOne_For_UpdateBack">

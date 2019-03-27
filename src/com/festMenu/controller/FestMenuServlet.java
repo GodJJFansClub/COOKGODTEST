@@ -512,6 +512,38 @@ public class FestMenuServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if("bkGetOneForUpdate".equals(action)) {
+				System.out.println(" " + "檢查點2");
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				req.setAttribute("errorMsgs", errorMsgs);
+
+				try {
+
+					/*************************** 1.接收請求參數 ***************************************/
+					String fest_m_ID = req.getParameter("fest_m_ID");
+					System.out.println("getOne_For_Update" + fest_m_ID);
+					/*************************** 2.開始查詢資料 ***************************************/
+					FestMenuService festMenuSvc = new FestMenuService();
+					FestMenuVO festMenuVO = festMenuSvc.getOneFestMenu(fest_m_ID);
+
+					/*************************** 3.查詢完成，準備轉交(Send the Success view) ********/
+					req.setAttribute("festMenuVO", festMenuVO); // 資料庫取得的reportVO物件，存入req
+					String url = "/back-end/festMenu/update_festMenu_input.jsp";
+					System.out.println("  " + "檢查點4");
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+					System.out.println("  " + "檢查點5");
+
+				} catch (Exception e) {
+					System.out.println("  " + "檢查點6");
+					errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/festMenu/listAllFestMenu.jsp");
+					failureView.forward(req, res);
+				}
+		}
 	}
 
 }

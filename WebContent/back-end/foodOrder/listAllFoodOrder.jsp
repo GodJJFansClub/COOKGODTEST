@@ -43,15 +43,12 @@
 								<thead>
 									<tr>
 										<th scope="col">訂單編號</th>
-										<th scope="col">顧客姓名</th>
 										<th scope="col">收件人姓名</th>
 										<th scope="col">訂單狀態</th>
 										<th scope="col">下訂日期</th>
 										<th scope="col">出貨日期</th>
 										<th scope="col">到貨日期</th>
 										<th scope="col">完成日期</th>
-										<th scope="col">收件地址</th>
-										<th scope="col">收件人電話</th>
 										<th scope="col">總計</th>
 									</tr>
 								</thead>
@@ -64,15 +61,12 @@
 									<tr class="foodOrder"
 										${(foodORVO.food_or_ID==foodOrderVO.food_or_ID) ? 'bgcolor=#CCCCFF':''}>
 										 <th scope="row">${foodORVO.food_or_ID}</th>
-										 <th scope="row">${custSvc.getOneCust(foodORVO.cust_ID).cust_name}</th>
 										<th scope="row">${foodORVO.food_or_name}</th>
 										<th scope="row">${mallOrStatusMap[foodORVO.food_or_status]}</th>
 										<th scope="row">${foodORVO.food_or_start}</th>
 										<th scope="row">${foodORVO.food_or_send}</th>
 										<th scope="row">${foodORVO.food_or_rcv}</th>
 										<th scope="row">${foodORVO.food_or_end}</th>
-										<th scope="row">${foodORVO.food_or_addr}</th>
-										<th scope="row">${foodORVO.food_or_tel}</th>
 										<th scope="row"><c:set var="total" value="0" /> <c:forEach
 												var="foodOrDetailVO"
 												items="${foodOrderSvc.getFoodOrDetailsByFood_or_ID(foodORVO.food_or_ID)}">
@@ -82,7 +76,7 @@
 										<th scope="row">
 											<FORM METHOD="post"
 												action="<%=request.getContextPath()%>/foodOrder/foodOrder.do">
-												<button id="update" type="button">更新訂單狀態</button>
+												<button class="btn btn-secondary" id="update" type="button">更新訂單狀態</button>
 												<input type="hidden" id="food_or_ID" name="food_or_ID"
 													value="${foodORVO.food_or_ID}"> <input
 													type="hidden" name="whichPage" value="<%=whichPage%>">
