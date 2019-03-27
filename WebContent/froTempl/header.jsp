@@ -98,8 +98,6 @@
 
 									<li><a href="<%=request.getContextPath()%>/front-end/index.jsp" style="font-weight: bold;">首頁</a></li>
 
-									<li><a
-										href="<%=request.getContextPath()%>/front-end/index.jsp"  style="font-weight: bold">首頁</a></li>
 
 
 									<li><a href="#" style="font-weight: bold">食神來了</a>

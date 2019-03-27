@@ -47,8 +47,7 @@
 		<div class="col">
 			<table>
 				<tr>
-						<th>帳號</th>
-						<th>密碼</th>
+
 						<th>聯絡人姓名</th>
 						<th>聯絡人性別</th>
 						<th>聯絡人電話</th>
@@ -61,9 +60,6 @@
 						<th>暱稱</th>
 					</tr>
 					<tr>
-						<td><%=custVO.getCust_ID()%></td>
-						<td><%=custVO.getCust_acc()%></td>
-						<td><%=custVO.getCust_pwd()%></td>
 						<td><%=custVO.getCust_name()%></td>
 						<c:if test="${custVO.cust_sex.equals('M')}" var="true" scope="request">
 							<td>男生</td>

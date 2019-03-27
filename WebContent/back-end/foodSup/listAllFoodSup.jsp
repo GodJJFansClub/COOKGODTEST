@@ -62,7 +62,7 @@
 						</th>
 							<th scope="row">
 							<form method="post" action="<%=request.getContextPath()%>/foodSup/foodSup.do">
-								<button id="update">修改</button>
+								<button id="update" class="btn btn-secondary">更改狀態</button>
 								<input type="hidden" id="food_sup_ID" name="food_sup_ID" value="${foodSupVO.food_sup_ID}">
 								<input type="hidden" id="action" name="action">
 								<input type="hidden" id="requestURL" name="requestURL" value="<%=request.getServletPath()%>">

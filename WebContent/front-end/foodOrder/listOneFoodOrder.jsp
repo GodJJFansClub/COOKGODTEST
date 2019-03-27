@@ -88,7 +88,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">訂單狀態</label>                                       
                                         <div class="col-sm-12">
-                                        	<h4>${mallOrStatusMap[foodOrderVO.food_or_status]}</h4>
+                                        	<h4>${mallOrStatusMap[foodOrderVO.food_or_status]}</h4>                                 	
                                         </div>
                                     </div>
 

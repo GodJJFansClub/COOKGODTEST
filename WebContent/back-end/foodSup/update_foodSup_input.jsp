@@ -49,8 +49,10 @@
 						<td>
 						<select size="1" name="food_sup_status">
 							<c:forEach var="foodSupStatus" items="${foodSupStatusMap}">
-								<option value="${foodSupStatus.key}"
+								<c:if test="${foodSupStatus.key != 's0'}">
+									<option value="${foodSupStatus.key}"
 									${(foodSupVO.food_sup_status == foodSupStatus.key)?'selected':''}>${foodSupStatus.value}
+								</c:if>
 							</c:forEach>
 						</select>
 						</td>
@@ -69,24 +71,22 @@
 			
 			<div class="container-fluid">
 			<div class="card-body">
-				 <center class="m-t-30"> 
-				<c:if test="${not empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}" width="150"></c:if>
-				<c:if test="${empty custVO.cust_pic}">
-					<img src="<%=request.getContextPath()%>/images/null2.jpg" width="150"></c:if></td>
-                      
-                        <h4 class="card-title m-t-10">Hanna Gover</h4>
-                      <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
-                      <div class="row text-center justify-content-md-center">
-                     <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
-                     <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
+				<center class="m-t-30"> 
+					<c:if test="${not empty custVO.cust_pic}"><img src="<%=request.getContextPath()%>/cust/cust.do?cust_ID=${custVO.cust_ID}" width="150"></c:if>
+					<c:if test="${empty custVO.cust_pic}">
+						<img src="<%=request.getContextPath()%>/images/null2.jpg" width="150"></c:if></td>
+	                      
+	                     <h4 class="card-title m-t-10">Hanna Gover</h4>
+	                      <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+	                      <div class="row text-center justify-content-md-center">
+	                     <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
+	                     <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
                   </div>
                </center>
           	</div>
           	</div>
           	<table>
 		<tr>
-			<th>帳號</th>
-			<th>密碼</th>
 			<th>聯絡人姓名</th>
 			<th>聯絡人性別</th>
 			<th>聯絡人電話</th>
@@ -99,9 +99,6 @@
 			<th>暱稱</th>
 		</tr>
 		<tr>
-				<td><%=custVO.getCust_ID()%></td>
-				<td><%=custVO.getCust_acc()%></td>
-				<td><%=custVO.getCust_pwd()%></td>
 				<td><%=custVO.getCust_name()%></td>
 				<c:if test="${custVO.cust_sex.equals('M')}" var="true" scope="request">
 					<td>男生</td>
@@ -121,9 +118,7 @@
 	
 			</tr>
 		</table>
-<%--=================================工作區================================================--%>			
-				<jsp:include page="/back-endTemplate/footer.jsp" flush="true" />
-<%--=================================jQuery===============================================--%>
+
 			</div>
 		</div>
 	</div>

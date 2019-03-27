@@ -1,55 +1,18 @@
+<%@page import="com.foodOrDetail.model.FoodOrDetailVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="foodOrderSvc" class="com.foodOrder.model.FoodOrderService"/>
 <jsp:useBean id="foodSupSvc" class="com.foodSup.model.FoodSupService"/>
 <jsp:useBean id="foodSvc" class="com.food.model.FoodService"/>
 <jsp:useBean id="foodMallSvc" class="com.foodMall.model.FoodMallService"/>
+<jsp:useBean id="foodODVOset" scope="request" type="java.util.Set<com.foodOrDetail.model.FoodOrDetailVO>"/>
 <html>
 <head>
 <title></title>
-	<style type="text/css">
-		*{
-	    margin: 0;
-	    padding: 0;
-		}
-		.rate {
-		    float: left;
-		    height: 46px;
-		    padding: 0 10px;
-		}
-		.rate:not(:checked) > input {
-		    position:absolute;
-		    top:-9999px;
-		}
-		.rate:not(:checked) > label {
-		    float:right;
-		    width:1em;
-		    overflow:hidden;
-		    white-space:nowrap;
-		    cursor:pointer;
-		    font-size:30px;
-		    color:#ccc;
-		}
-		.rate:not(:checked) > label:before {
-		    content: '★ ';
-		}
-		.rate > input:checked ~ label {
-		    color: #ffc700;    
-		}
-		.rate:not(:checked) > label:hover,
-		.rate:not(:checked) > label:hover ~ label {
-		    color: #deb217;  
-		}
-		.rate > input:checked + label:hover,
-		.rate > input:checked + label:hover ~ label,
-		.rate > input:checked ~ label:hover,
-		.rate > input:checked ~ label:hover ~ label,
-		.rate > label:hover ~ input:checked ~ label {
-		    color: #c59b08;
-		}
-	</style>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/publibrary/jQueryRate/jquery.rateyo.min.css">
 </head>
 <body>
+	<script src="<%=request.getContextPath()%>/publibrary/jQueryRate/jquery.rateyo.min.js"></script>
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -67,7 +30,6 @@
 			<th>數量</th>
 			<th>小計</th>
 			<th>評價</th>
-			<th>留言</th>
 			<th></th>
 		</tr>
 		
@@ -80,32 +42,26 @@
 					<td>${foodOrDetailVO.food_od_qty}</td>
 					<td>${foodOrDetailVO.food_od_stotal}</td>
 					<td>
-						<div class="rate">
-						<% for(int i = 1; i <= 5; i++){ %>
-							<input type="radio" id="star${i}" name="food_od_rate" value="${i}"
-								${(foodOrDetailVO.food_od_rate == i)?'checked':''}/>
-							<label for="star${i}" title="text">${i} stars</label>				
-						<% } %>
+						<div class="container">
+							<div class="row">
+							<c:choose>
+								<c:when test="${foodOrderVO.food_or_status == 'o4'}">
+								<form action="<%=request.getContextPath()%>/foodOrDetail/foodOrDetail.do" method="POST">
+									<div class="col-sm" id="odRate${x.index}"></div>
+									<button class="col-sm btnUpStaClass" id="btnUpSta${x.index}" type="button">送出評價</button>
+									<input type="hidden" name="food_od_rate" value="${foodOrDetailVO.food_od_status}">
+									<input type="hidden" name="food_or_ID" value="${foodOrDetailVO.food_or_ID}">
+									<input type="hidden" name="food_ID" value="${foodOrDetailVO.food_ID}">
+									<input type="hidden" name="food_sup_ID" value="${foodOrDetailVO.food_sup_ID}">
+									<input type="hidden" name="action" value="custUpODRateS">	
+								</form>
+								</c:when>
+								<c:otherwise>
+									訂單尚未完成無法評價
+								</c:otherwise>
+							</c:choose>
+							</div>
 						</div>
-					</td>
-					<td>
-						<textarea id="odMessage${x.index}" name="food_od_msgs" rows="4" cols="50">${foodOrDetailVO.food_od_msg}</textarea>
-					</td>
-					<td>
-						<c:choose>
-							<c:when test="${foodOrderVO.food_or_status == 'o4'}">
-							<form method="<%=request.getContextPath()%>/foodOrDetail/foodOrDetail.do" method="POST">
-								<button class="btnUpStaClass" id="btnUpSta${x.index}" type="button">送出評價及留言</button>
-								<input type="hidden" name="food_or_ID" value="${foodOrDetailVO.food_or_ID}">
-								<input type="hidden" name="food_ID" value="${foodOrDetailVO.food_ID}">
-								<input type="hidden" name="food_sup_ID" value="${foodOrDetailVO.food_sup_ID}">
-								<input type="hidden" name="action" value="custUpODRateS">
-							</form>
-							</c:when>
-							<c:otherwise>
-								訂單尚未完成無法評價及留言
-							</c:otherwise>
-						</c:choose>	
 					</td>
 				</tr>
 			
@@ -114,11 +70,22 @@
 	</table>
 	<script >
 		$(document).ready(function(){
+			<%	int count = 0;
+				for(FoodOrDetailVO foodODVO:foodODVOset){%>
+				$("#odRate<%=count%>").rateYo({
+					
+					rating:<%=foodODVO.getFood_od_rate()%>,
+					fullStar: true,
+					
+				});
+				<%count++;%>
+			<% } %>
 			
-			$(".btnUpStaClass").click(function(){
-				
+			$(".btnUpStaClass").click(function(event){
+				$(this).next().val($(this).prev().rateYo("rating"));
+				console.log($(this).next().val());
+				$(this).parent("form").submit();
 			});
-			
 		});
 	</script>
 </body>

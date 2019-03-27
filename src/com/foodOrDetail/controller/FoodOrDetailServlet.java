@@ -176,47 +176,55 @@ public class FoodOrDetailServlet extends HttpServlet {
 		out.close();
 	}
 	private void custUpODRateS(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<String> errorMsgs = new LinkedList<>();
-		
+		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
+		System.out.println("test20");
 		try {
 			
 			String food_or_ID = req.getParameter("food_or_ID");
 			String food_ID = req.getParameter("food_ID");
 			String food_sup_ID = req.getParameter("food_sup_ID");
-			String food_od_msg = req.getParameter("food_od_msg");
 			String rate = req.getParameter("food_od_rate");
+			System.out.println("test");
 			Integer food_od_rate = 0;
-			if(null != rate) {
+			if(null == rate || rate.trim().length() == 0) {
+				errorMsgs.add("請輸入評價分數後再送出");
+			} else {
 				try {
 					food_od_rate = Integer.valueOf(rate);
-				}catch (Exception e) {
-					errorMsgs.add("請輸入數字" + e.getMessage());
+				}catch(RuntimeException e) {
+					errorMsgs.add("請輸入數字");
 				}
 			}
-			
-			if(errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
-				failureView.forward(req, res);
-			}
-			
-			FoodOrderService foodOrSvc = new FoodOrderService();
-			FoodOrderVO foodOrderVO = foodOrSvc.getOneFoodOrder(food_or_ID);
+			System.out.println("test9");
+			FoodOrderService foodOrderSvc = new FoodOrderService();
 			FoodOrDetailService foodOrDetailService = new FoodOrDetailService();
 			FoodOrDetailVO foodODVO = foodOrDetailService.getOneFoodOrDetail(food_or_ID, food_sup_ID, food_ID);
+			System.out.println(food_od_rate);
+			foodOrDetailService.updateFoodOrDetail(food_or_ID, food_sup_ID, food_ID, foodODVO.getFood_od_qty(), foodODVO.getFood_od_stotal(), food_od_rate, foodODVO.getFood_od_msg(), foodODVO.getFood_od_status());
+			System.out.println("test");
+			if(!errorMsgs.isEmpty()) {
+				FoodOrderVO foodOrderVO = foodOrderSvc.getOneFoodOrder(food_or_ID); 
+				Set<FoodOrDetailVO> foodODVOset = foodOrderSvc.getFoodOrDetailsByFood_or_ID(food_or_ID);
+				System.out.println("test2");
+				req.setAttribute("foodOrderVO", foodOrderVO); // 資料庫取出的list物件,存入request
+				req.setAttribute("foodODVOset", foodODVOset);
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
+				failureView.forward(req, res);
+			}
+			System.out.println("test1");
+			FoodOrderVO foodOrderVO = foodOrderSvc.getOneFoodOrder(food_or_ID); 
+			Set<FoodOrDetailVO> foodODVOset = foodOrderSvc.getFoodOrDetailsByFood_or_ID(food_or_ID);
+			System.out.println("test2");
+			req.setAttribute("foodOrderVO", foodOrderVO); // 資料庫取出的list物件,存入request
+			req.setAttribute("foodODVOset", foodODVOset);
+			RequestDispatcher successView = req.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+			successView.forward(req, res);
 			
-			FoodOrDetailVO foodOrDVO = foodOrDetailService.updateFoodOrDetail(food_or_ID, food_sup_ID, food_ID, 
-					foodODVO.getFood_od_qty(), foodODVO.getFood_od_stotal(), food_od_rate, food_od_msg, foodODVO.getFood_od_status());
-			Set<FoodOrDetailVO> foodOrDetailVOs = foodOrSvc.getFoodOrDetailsByFood_or_ID(food_or_ID);
-			req.setAttribute("foodOrderVO", foodOrderVO);
-			req.setAttribute("foodOrODs", foodOrDetailVOs);
-			RequestDispatcher failureView = req
-					.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
+			
 		} catch(Exception e) {
-			errorMsgs.add("無法取得資料" + e.getMessage());
-			RequestDispatcher failureView = req
-					.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
+			errorMsgs.add("無法取得資料:" + e.getMessage());
+			RequestDispatcher failureView = req.getRequestDispatcher("/front-end/foodOrder/listOneFoodOrder.jsp");
 			failureView.forward(req, res);
 		}
 	}

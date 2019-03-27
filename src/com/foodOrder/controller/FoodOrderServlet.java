@@ -197,7 +197,7 @@ public class FoodOrderServlet extends HttpServlet {
 			frontGetOneDisplay(req, res);
 		} else if("frontChaStatus".equals(action)) { // 客戶完成訂單
 			frontChaStatus(req,res);
-		}
+		} 
 
 	}
 	
@@ -509,5 +509,8 @@ public class FoodOrderServlet extends HttpServlet {
 			RequestDispatcher failureView = req.getRequestDispatcher("/front-end/cust/listCOR.jsp");
 			failureView.forward(req, res);
 		}
+			
 	}
+	
+	
 }
