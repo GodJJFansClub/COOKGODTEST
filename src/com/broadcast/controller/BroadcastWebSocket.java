@@ -169,6 +169,7 @@ public class BroadcastWebSocket implements ServletContextListener{
 		servletContext.removeAttribute("foodODStatusMap");
 		servletContext.removeAttribute("dishStatusMap");
 		servletContext.removeAttribute("bcSessionMap");
+		
 		ServletContextListener.super.contextDestroyed(sce);
 	}
 	

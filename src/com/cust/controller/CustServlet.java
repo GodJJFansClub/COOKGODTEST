@@ -190,7 +190,7 @@ public class CustServlet extends HttpServlet {
 				String subject = "會員驗證";
 
 				String ch_name = cust_name;
-				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
+				String passRandom =  req.getScheme()+"://"+ req.getServerName()+":" + req.getServerPort() + req.getContextPath()+"/front-end/cust/loginStatus.jsp";
 				String messageText = "Hello! " + ch_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
 
 				
@@ -348,7 +348,7 @@ public class CustServlet extends HttpServlet {
 				String subject = "會員驗證";
 
 				String ch_name = cust_name;
-				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
+				String passRandom = req.getScheme()+"://"+ req.getServerName()+":" + req.getServerPort() + req.getContextPath()+"/front-end/cust/loginStatus.jsp";
 				String messageText = "Hello! " + ch_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
 
 				SendEmail mailService = new SendEmail();

@@ -62,7 +62,7 @@
 		var s = document.getElementById('timer');
 		s.innerHTML = s.innerHTML - 1;
 		if (s.innerHTML == 0)
-			window.location = 'http://localhost:8081/CA106G3/front-end/index.jsp';
+			window.location = '<%=request.getContextPath()%>/front-end/index.jsp';
 		else
 			setTimeout('countdown()', 1000);
 	}

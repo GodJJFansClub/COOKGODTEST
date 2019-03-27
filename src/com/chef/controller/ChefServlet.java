@@ -193,7 +193,7 @@ public class ChefServlet extends HttpServlet {
 				chefVO = chefSvc.insertChef(cust_acc, cust_pwd, cust_name, cust_sex, cust_tel, cust_addr, cust_pid, cust_mail, cust_brd, cust_reg, cust_pic, cust_status, cust_niname, chef_area, chef_resume);
 				
 				String subject = "主廚驗證";
-				String passRandom = "http://localhost:8081/CA106G3/front-end/cust/loginStatus.jsp";
+				String passRandom = request.getScheme()+"://"+ request.getServerName()+":" + request.getServerPort() + request.getContextPath() + "/front-end/cust/loginStatus.jsp";
 				String messageText = "Hello! " + cust_name + " 請點此連結登入: " + passRandom + "\n" + " (已經啟用)";
 
 				SendEmail mailService = new SendEmail();

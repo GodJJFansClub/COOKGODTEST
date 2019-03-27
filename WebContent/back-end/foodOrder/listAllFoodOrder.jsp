@@ -158,6 +158,7 @@
 				    						let tempBtnA = document.createElement("button");
 				    						tempBtnA.setAttribute("id","fORCheck");
 				    						tempBtnA.setAttribute("type","button");
+				    						tempBtnA.setAttribute("class","btn btn-primary");
 				    						tempBtnA.innerText = "送出貨物";
 				    						tempBtnA.click(function(){
 								    			$("#changeOrHid").submit();	

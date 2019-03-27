@@ -10,6 +10,7 @@
 	 <!-- ##### Contact Area Start #####-->
     <section class="contact-area section-padding-100">
     <jsp:include page="/front-end/foodMall/shoppingcartIn.jsp"/>
+    	
     	<div id="mallItem" class="container foodMCard">
 	    	<div class="col">
 	    		食材供應商 : ${foodSupSvc.getOneFoodSup(foodMallVO.food_sup_ID).food_sup_name}

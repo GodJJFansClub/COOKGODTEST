@@ -158,7 +158,7 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 //			String total = jsonObject.get("total").getAsString();
 			menuOrderService.updateMenuOrderStatus(menu_od_ID, menu_od_status);
 		 	Send se = new Send();
-		 	String[] tel ={"0921514217"};
+		 	String[] tel ={"0932187849"};
 		 	String message = "您已於食神來了網站消費總額：$"+menuVO.getMenu_price()+"元，該消費帳單會於當月月底前寄出！";
 		 	se.sendMessage(tel , message);
 		}
