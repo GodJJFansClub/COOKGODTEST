@@ -12,6 +12,9 @@
 
 <html>
 <head>
+<!-- Font-family -->	
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Serif+TC">
+
 <title>瀏覽所有主廚</title>
 </head>
 <body>
@@ -52,7 +55,7 @@
 											<img class="card-img"src="<%=request.getContextPath()%>/images/noimage.jpg">
 										</c:if>
 										<div class="card-img-overlay">
-											<h5 class="card-title"><font style="font-size:22px;font-family: Microsoft JhengHei;font-weight:bolder;color:white;">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</font></h5>
+											<font class="card-title" style="font-size:24px;font-weight:bold;font-family:'Noto Serif TC';color:white;">${custSvc.getOneCust(chefVO.chef_ID).cust_name}</font>
 										</div>
 									</div>
 								</a>

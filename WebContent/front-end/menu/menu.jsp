@@ -11,6 +11,9 @@
 
 <html>
 <head>
+<!-- Font-family -->	
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Serif+TC">
+
 <title>The God of Cooking is Coming!</title>
 <style type="text/css">
 .col-4 {
@@ -44,7 +47,7 @@
 											style="width: 100%; height: 250px;">
 									</c:if>
 									<div class="card-body">
-										<h5 class="card-title">${menuVO.menu_name}</h5>
+										<font class="card-title" style="font-size:24px;font-weight:bold;font-family:'Noto Serif TC'">${menuVO.menu_name}</font>
 										<p class="card-text text-right">$${menuVO.menu_price}</p>
 									</div>
 									<input type="hidden" name="menu_ID" value="${menuVO.menu_ID}">

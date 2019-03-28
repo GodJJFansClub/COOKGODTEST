@@ -33,7 +33,6 @@
 	
 <!-- Font-family -->	
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou">
-
 <style type="text/css">
 	*{
 		font-family:Microsoft JhengHei;
